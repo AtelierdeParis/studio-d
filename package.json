@@ -1,0 +1,18 @@
+{
+  "name": "studio-d",
+  "scripts": {
+    "install": "yarn install:front && yarn install:back",
+    "install:front": "cd wev && yarn",
+    "install:back": "cd back && yarn",
+    "client:dev": "cd web && yarn dev",
+    "server:dev": "cd back && yarn develop",
+    "export:web": "cd web && yarn next export",
+    "reset-modules": "rm -rf node_modules/ core/node_modules web/node_modules mobile/node_modules",
+    "reset-yarn": "yarn cache clean",
+    "reset-rn": "watchman watch-del-all; rm -fr $TMPDIR/react-*; rm -rf $TMPDIR/haste-map-react-native-packager-*",
+    "reset-cache": "yarn reset-yarn && yarn reset-rn",
+    "reset": "yarn reset-modules && yarn reset-cache",
+    "lint": "yarn workspaces run lint",
+    "start:all": "yarn run-p dev:*"
+  }
+}

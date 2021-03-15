@@ -1,0 +1,15 @@
+{
+  "extends": "./configbase.json",
+  "include": ["./web", "./core", "./mobile"],
+  "references": [
+    { "path": "./core" },
+    { "path": "./web" },
+    { "path": "./mobile" }
+  ],
+  "compilerOptions": {
+    "paths": {
+      "@studio-d/*": ["*/src"]
+    },
+    "lib": ["dom", "esnext"]
+  }
+}
