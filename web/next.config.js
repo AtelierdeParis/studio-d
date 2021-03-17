@@ -1,32 +1,46 @@
-const withPlugins = require("next-compose-plugins");
-const withTM = require("next-transpile-modules")([
-  "@studio-d/core",
-  "react-native",
-]);
-const path = require("path");
+const { i18n } = require('./next-i18next.config')
 
-module.exports = withPlugins([withTM], {
-  webpack: (config, { defaultLoaders }) => {
-    // Alias all `react-native` imports to `react-native-web`
-    config.resolve.alias["react-native"] = path.resolve(
-      __dirname,
-      "node_modules/react-native-web"
-    );
+const env = process.env.NODE_ENV || 'development'
 
-    config.resolve.extensions = [
-      ".web.ts",
-      ".web.tsx",
-      ".ts",
-      ".tsx",
-      ".web.js",
-      ".web.jsx",
-      ".js",
-      ".jsx",
-      ...config.resolve.extensions,
-    ];
+let envVars = {}
 
-    return config;
+if (env !== 'development') {
+  const {
+    DB_URL,
+    EMAIL_SERVER,
+    NEXTAUTH_URL,
+    NEXT_PUBLIC_BACK_URL,
+    JWT_TOKEN_SECRET,
+    NEXT_PUBLIC_RECAPTCHA_KEY,
+  } = process.env
+  envVars = {
+    DB_URL,
+    EMAIL_SERVER,
+    NEXTAUTH_URL,
+    NEXT_PUBLIC_BACK_URL,
+    JWT_TOKEN_SECRET,
+    NEXT_PUBLIC_RECAPTCHA_KEY,
+  }
+}
+
+module.exports = {
+  i18n,
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: [{ removeViewBox: false }],
+            },
+          },
+        },
+      ],
+    })
+
+    return config
   },
-
-  target: "serverless",
-});
+  env: envVars,
+}

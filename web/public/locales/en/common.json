@@ -1,3 +1,11 @@
 {
-  "hello": "Hello"
+  "nav": {
+    "places": "Les espaces",
+    "project": "Le projet",
+    "news": "Actualités",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "signup": "Inscription",
+    "signin": "Connexion"
+  }
 }

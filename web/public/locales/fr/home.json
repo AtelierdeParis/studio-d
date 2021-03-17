@@ -1,0 +1,22 @@
+{
+    "title": "Plateforme solidaire de mise\nà disposition de studios de danse",
+    "search": {
+        "where": {
+            "label": "Où cherchez-vous ?",
+            "placeholder": "Renseignez une ville..."
+        },
+        "when": {
+            "label": "Sur quelle période ?",
+            "placeholder": "Cliquer pour choisir des dates"
+        },
+        "btn": "Rechercher"
+    },
+    "places": {
+        "title": "Prochains créneaux disponibles",
+        "btn": "Parcourir tous les espaces"
+    },
+    "news": {
+        "title": "Les actus de la communauté",
+        "btn": "Toutes les actus"
+    }
+}

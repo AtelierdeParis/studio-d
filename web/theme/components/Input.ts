@@ -3,7 +3,16 @@ const Input = {
   variants: {
     outline: {
       field: {
-        borderColor: 'black',
+        border: '1px solid',
+        borderColor: 'gray.100',
+        borderRadius: 'xs',
+      },
+    },
+  },
+  sizes: {
+    md: {
+      field: {
+        h: '45px',
       },
     },
   },

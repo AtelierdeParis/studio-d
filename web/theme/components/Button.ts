@@ -1,31 +1,16 @@
 const Button = {
   baseStyle: {
     fontWeight: '500',
-    borderRadius: 'base',
+    borderRadius: 'md',
+    lineHeight: 1,
     _hover: {
       textDecoration: 'none',
     },
   },
   defaultProps: {
-    colorScheme: 'white',
+    colorScheme: 'orange',
   },
   variants: {
-    solid: (props) => {
-      const style = {
-        _hover: {
-          opacity: 0.8,
-        },
-      }
-      if (props.colorScheme === 'white') {
-        style['color'] = 'black'
-        style['bg'] = 'white'
-      }
-      if (props.colorScheme === 'black') {
-        style['color'] = 'white'
-        style['bg'] = 'black'
-      }
-      return style
-    },
     outline: (props) => {
       const style = {
         border: '1px solid',
@@ -41,15 +26,14 @@ const Button = {
   },
   sizes: {
     md: {
-      fontSize: '14px',
-      letterSpacing: '.5px',
+      fontSize: 'md',
+      px: 4,
+      h: '30px',
     },
-    sm: {
-      fontWeight: '400',
-      borderRadius: 'sm',
-      fontSize: '12px',
-      px: '16px',
-      letterSpacing: '.4px',
+    lg: {
+      fontSize: 'md',
+      px: 4,
+      h: '34px',
     },
   },
 }

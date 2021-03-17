@@ -6,7 +6,9 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "config:dump": "strapi config:dump --file config.json -p",
+    "config:restore": "strapi configuration:restore -f config.json"
   },
   "devDependencies": {},
   "dependencies": {

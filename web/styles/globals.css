@@ -1,7 +1,25 @@
+@font-face {
+  font-family: 'mabry italic';
+  src: url('/assets/fonts/Mabry Pro Italic.otf');
+}
+@font-face {
+  font-family: 'mabry';
+  src: url('/assets/fonts/Mabry Pro.otf');
+}
+@font-face {
+  font-family: 'mabry medium';
+  src: url('/assets/fonts/Mabry Pro Medium.otf');
+}
+@font-face {
+  font-family: 'mabry medium italic';
+  src: url('/assets/fonts/Mabry Pro Medium Italic.otf');
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  font-size: 15px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
@@ -13,38 +31,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-.sliderImages .awssld__content > img {
-  object-fit: contain;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  height: auto;
-}
-
-.sliderImages .awssld__content {
-  background-color: transparent;
-}
-.sliderImages .awssld__bullets {
-  bottom: 32px;
-  z-index: 4;
-}
-
-.sliderImages .awssld__bullets .awssld__bullets--active {
-  transform: scale(1);
-  background-color: white;
-}
-
-.sliderImages .awssld__bullets button {
-  border: 1px solid white;
-  background-color: transparent;
-  width: 12px;
-  height: 12px;
-}
-
-.theme-slider .rec-slider-container {
-  margin-left: 0;
-  margin-right: 0;
 }

@@ -1,0 +1,80 @@
+{
+    "title": "Inscription",
+    "step": "Étape {{step}} sur 3",
+    "compagnie": "• Compagnie",
+    "lieu": "• Lieu",
+    "about": {
+        "description": "StudioD’ est une plateforme web créée par l’Atelier de Paris, accessible gratuitement après inscription.\n\nElle a pour vocation de mettre en relation des établissements culturels, artistiques ou socioculturels (les « Lieux ») avec des compagnies de danse professionnelles (vous) pour leur permettre d’échanger des informations sur la disponibilité d’espaces de travail, en vue de leur réservation.\n\nPrenez connaissance de ces quelques points clés de la plateforme :",
+        "free": {
+            "title": "Gratuité du service",
+            "text": "L'utilisation de la plateforme est réservée à des fins exclusivement professionnelles mais non commerciales. Les services de réservation s’effectuent à titre gratuit."
+        },
+        "reservation": {
+            "title": "Réservation des créneaux",
+            "text": "Chaque créneau demandé vous engage, aussi vous ne pourrez déposer qu’une seule demande pour un créneau donné."
+        },
+        "message": {
+            "title": "Échanges avec les espaces",
+            "text": "Nous mettons à votre disposition une messagerie sécurisée avec les espaces auprès desquels vous déposerez des réservations. Ce mode d’échange privilégié vous permettra de pouvoir suivre de près toutes vos réservations."
+        },
+        "confidentiality": {
+            "title": "Confidentialité des informations",
+            "text": "La plupart des informations renseignées concernent votre structure (nom, statut, adresse etc.) et seront accessibles aux Lieux inscrits sur Studio D. En revanche, les données dites personnelles (nom, prénom, e-mail, éventuel téléphone d’une personne physique référente), ne seront accessibles que par l’Atelier de Paris, éditeur et modérateur de la plateforme, et resteront masquées pour les autres utilisateurs inscrits."
+        },
+        "condition": "Phrase à rédiger expliquant au futur inscrit que son inscription l’engage à être en accord avec les principes évoqués ci-dessus et qu’il peut maintenant continuer son inscription.",
+        "btn": "Poursuivre"
+    },
+    "form": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "email": {
+            "label": "Adresse email",
+            "placeholder": "contact@example.fr",
+            "info": "Cette adresse sera utilisée comme identifiant de connexion"
+        },
+        "password": {
+            "label": "Mot de passe",
+            "placeholder": "Saisir un mot de passe",
+            "info": "Choisissez un mot de passe de minimum 10 caractères"
+        },
+        "structure": "Nom de la structure",
+        "socialReason": {
+            "label": "Raison sociale",
+            "info": "Si différente du nom d’usage de la structure. Sinon, laissez vide."
+        },
+        "street": "Numéro et rue",
+        "zipCode": "Code postal",
+        "city": "Ville",
+        "address": "Adresse",
+        "country": {
+            "label": "Pays",
+            "info": "Le service n’est actuellement disponible qu’en France"
+        },
+        "compagnieInfo": "Informations sur la compagnie",
+        "lieuInfo": "Informations sur le lieu",
+        "siret": "Numéro de Siret",
+        "ape": "Code APE",
+        "referent": "Numéro de téléphone du contact référent",
+        "license":{
+            "label": "Licence(s) d'entrepreneur du spectacle",
+            "info": "Si vous disposez de plusieurs numéros de license, séparez-les par une virgule."
+        },
+        "website": "Lien vers votre site web",
+        "legalRepresentative": "Nom du· de la représentant·e légal·e",
+        "qualityRepresentative": "Qualité du·de la représentant·e légal·e",
+        "choreographer": "Nom du·de la chorégraphe",
+        "insuranceName": "Nom de la police d’assurance",
+        "insuranceNumber": "Numéro de la police d’assurance",
+        "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.\n\nAprès inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
+        "btn": "Poursuivre",
+        "error": {
+            "default": "Impossible de procéder à l'inscription",
+            "emailTaken": "Cet email est déjà utilisé"
+        }
+    },
+    "completed": {
+        "title": "Merci pour votre inscription !",
+        "text": "Vous recevrez sous peu un email de confirmation. Votre compte est actuellement en attente de validation par StudioD, nécessaire afin de pouvoir déposer votre première demande de réservation. Vous recevrez un email dès que cette activation sera effective.",
+        "btn": "Retour à l’accueil"
+    }
+}

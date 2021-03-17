@@ -1,0 +1,7 @@
+export const ROUTE_PLACES = '/espaces'
+export const ROUTE_PROJECT = '/projet'
+export const ROUTE_NEWS = '/news'
+export const ROUTE_FAQ = '/faq'
+export const ROUTE_CONTACT = '/contact'
+export const ROUTE_SIGNUP = '/inscription'
+export const ROUTE_CGV = '/conditions-generales'

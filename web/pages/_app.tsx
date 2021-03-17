@@ -10,16 +10,15 @@ import '../styles/globals.css'
 import theme from '~theme'
 
 const App = ({ Component, pageProps }: AppProps) => {
+  console.log(theme)
   const content = (
-    <Provider session={pageProps.session}>
-      <QueryClientProvider client={client}>
-        <ChakraProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ChakraProvider>
-      </QueryClientProvider>
-    </Provider>
+    <QueryClientProvider client={client}>
+      <ChakraProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ChakraProvider>
+    </QueryClientProvider>
   )
 
   return content

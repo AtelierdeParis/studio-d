@@ -1,7 +1,7 @@
 const Container = {
   baseStyle: {
-    px: 6,
-    maxW: '100vw',
+    px: 4,
+    maxW: 'container.xl',
   },
 }
 

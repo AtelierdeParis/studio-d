@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "companies",
+  "info": {
+    "name": "Company",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "choreographer": {
+      "type": "string",
+      "required": true
+    },
+    "insuranceName": {
+      "type": "string",
+      "required": true
+    },
+    "insuranceNumber": {
+      "type": "string",
+      "required": true
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    }
+  }
+}

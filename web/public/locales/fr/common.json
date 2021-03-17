@@ -1,3 +1,23 @@
 {
-  "hello": "Hello"
+  "nav": {
+    "places": "Les espaces",
+    "project": "Le projet",
+    "news": "Actualités",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "signup": "Inscription",
+    "signin": "Connexion"
+  },
+  "signup": {
+    "place": {
+      "title": "Vous êtes un lieu ?",
+      "description": "StudioD existe grâce à la solidarité de structures partenaires, qui proposent des créneaux horaires dans leurs espaces. En cliquant sur le bouton ci-dessous, vous arez la possibilité de vous inscrire sur la plateforme et de proposer des espaces pour accueillir des compagnies.",
+      "btn": "Inscrire un lieu"
+    },
+    "company": {
+      "title": "Vous êtes une compagnie ?",
+      "description": "Depuis son lancement, vous êtes nombreuses à rejoindre la plateforme. En raison de la crise sanitaire, StudioD est prioritairement dédié aux compagnies dont les répétitions ont été annulées ces derniers mois. Vous pourrez commencer à déposer des demandes dès validation de votre compte.",
+      "btn": "Inscrire une compagnie"
+    }
+  }
 }
