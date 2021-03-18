@@ -1,7 +1,9 @@
 const Textarea = {
   variants: {
     outline: {
-      borderColor: 'black',
+      border: '1px solid',
+      borderColor: 'gray.100',
+      borderRadius: 'xs',
     },
   },
 }

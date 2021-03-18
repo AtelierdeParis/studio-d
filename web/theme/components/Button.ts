@@ -35,6 +35,10 @@ const Button = {
       px: 4,
       h: '34px',
     },
+    xl: {
+      px: 6,
+      h: '40px',
+    },
   },
 }
 
