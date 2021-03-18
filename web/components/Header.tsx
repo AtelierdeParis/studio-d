@@ -10,7 +10,25 @@ import {
   ROUTE_NEWS,
   ROUTE_FAQ,
 } from '~constants'
+import { useRouter } from 'next/router'
 
+const MenuItem = ({ href, text }) => {
+  const router = useRouter()
+  return (
+    <Link
+      href={href}
+      borderBottom="1px solid"
+      borderBottomColor={
+        router.pathname === href ? 'orange.500' : 'transparent'
+      }
+      _hover={{
+        borderColor: 'orange.500',
+      }}
+    >
+      <Text>{text}</Text>
+    </Link>
+  )
+}
 interface IHeader {
   colorMode: 'white' | 'black'
 }
@@ -39,24 +57,14 @@ const Header = ({ colorMode }: IHeader) => {
         />
       </Link>
       <HStack spacing={6} whiteSpace="nowrap" color={colorMode}>
-        <Link href={ROUTE_PLACES}>
-          <Text>{t('nav.places')}</Text>
-        </Link>
+        <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
         <Divider orientation="vertical" opacity={0.6} />
-        <Link href={ROUTE_PROJECT}>
-          <Text>{t('nav.project')}</Text>
-        </Link>
-        <Link href={ROUTE_NEWS}>
-          <Text>{t('nav.news')}</Text>
-        </Link>
-        <Link href={ROUTE_FAQ}>
-          <Text>{t('nav.faq')}</Text>
-        </Link>
-        <Link href={ROUTE_CONTACT}>
-          <Text>{t('nav.contact')}</Text>
-        </Link>
+        <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
+        <MenuItem href={ROUTE_NEWS} text={t('nav.news')} />
+        <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
+        <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
         <Divider orientation="vertical" opacity={0.6} />
-        <AuthMenu />
+        <AuthMenu colorMode={colorMode} />
       </HStack>
     </Container>
   )

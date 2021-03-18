@@ -52,7 +52,10 @@
     },
     "username": {
       "type": "string",
-      "minLength": 3
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
     },
     "firstname": {
       "type": "string",

@@ -1,38 +1,77 @@
 "use strict";
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
+const { sanitizeEntity } = require("strapi-utils");
+const sanitizeUser = (user) =>
+  sanitizeEntity(user, {
+    model: strapi.query("user", "users-permissions").model,
+  });
 
 module.exports = {
-  create: async (ctx) => {
-    const { company, place, ...user } = ctx.request.body;
+  async updateMe(ctx) {
+    const advancedConfigs = await strapi
+      .store({
+        environment: "",
+        type: "plugin",
+        name: "users-permissions",
+        key: "advanced",
+      })
+      .get();
 
-    if (!company && !place) throw new Error("Undefined user type");
-    const type = Boolean(company) ? "company" : "place";
+    const { id } = ctx.state.user;
+    const { email, password } = ctx.request.body;
 
-    try {
+    const user = await strapi.plugins["users-permissions"].services.user.fetch({
+      id,
+    });
+
+    if (ctx.request.body.hasOwnProperty("email") && !email) {
+      return ctx.badRequest("email.notNull");
+    }
+
+    if (
+      ctx.request.body.hasOwnProperty("password") &&
+      !password &&
+      user.provider === "local"
+    ) {
+      return ctx.badRequest("password.notNull");
+    }
+
+    if (
+      ctx.request.body.hasOwnProperty("email") &&
+      advancedConfigs.unique_email
+    ) {
       const userWithSameEmail = await strapi
         .query("user", "users-permissions")
-        .findOne({ email: user.email.toLowerCase() });
+        .findOne({ email: email.toLowerCase() });
 
-      if (userWithSameEmail)
-        return ctx.badRequest({
-          field: "email",
-          text: "signup:form.error.emailTaken",
-        });
-
-      const createdUser = await strapi.plugins[
-        "users-permissions"
-      ].services.user.add({ ...user, confirmed: false, blocked: false });
-
-      return strapi.services[type].create({
-        ...ctx.request.body[type],
-        user: createdUser.id,
-      });
-    } catch (error) {
-      ctx.badRequest(error);
+      if (userWithSameEmail && userWithSameEmail.id != id) {
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: "Auth.form.error.email.taken",
+            message: "Email already taken",
+            field: ["email"],
+          })
+        );
+      }
+      ctx.request.body.email = ctx.request.body.email.toLowerCase();
     }
+
+    let updateData = {
+      ...ctx.request.body,
+    };
+
+    if (
+      ctx.request.body.hasOwnProperty("password") &&
+      password === user.password
+    ) {
+      delete updateData.password;
+    }
+
+    const data = await strapi.plugins["users-permissions"].services.user.edit(
+      { id },
+      updateData
+    );
+
+    ctx.send(sanitizeUser(data));
   },
 };

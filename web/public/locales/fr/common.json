@@ -19,5 +19,19 @@
       "description": "Depuis son lancement, vous êtes nombreuses à rejoindre la plateforme. En raison de la crise sanitaire, StudioD est prioritairement dédié aux compagnies dont les répétitions ont été annulées ces derniers mois. Vous pourrez commencer à déposer des demandes dès validation de votre compte.",
       "btn": "Inscrire une compagnie"
     }
+  },
+  "signin": {
+    "title": "Connexion",
+    "submit": "Connexion",
+    "signup": "Inscription",
+    "email": {
+      "label": "Email",
+      "placeholder": "mail@exemple.fr"
+    },
+    "password": {
+      "label": "Mot de passe"
+    },
+    "forgottenPassword": "mot de passe oublié ?",
+    "error": "Authentification échouée, l'identifiant ou le mot de passe est incorrect"
   }
 }

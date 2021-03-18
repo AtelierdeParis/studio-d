@@ -1,5 +1,5 @@
 import React from 'react'
-import { Loader } from 'components'
+import Loader from '~components/Loader'
 import { BoxProps } from '@chakra-ui/react'
 
 interface ILoading extends BoxProps {

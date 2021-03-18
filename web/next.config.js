@@ -11,7 +11,6 @@ if (env !== 'development') {
     NEXTAUTH_URL,
     NEXT_PUBLIC_BACK_URL,
     JWT_TOKEN_SECRET,
-    NEXT_PUBLIC_RECAPTCHA_KEY,
   } = process.env
   envVars = {
     DB_URL,
@@ -19,7 +18,6 @@ if (env !== 'development') {
     NEXTAUTH_URL,
     NEXT_PUBLIC_BACK_URL,
     JWT_TOKEN_SECRET,
-    NEXT_PUBLIC_RECAPTCHA_KEY,
   }
 }
 
@@ -28,16 +26,7 @@ module.exports = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          options: {
-            svgoConfig: {
-              plugins: [{ removeViewBox: false }],
-            },
-          },
-        },
-      ],
+      use: ['@svgr/webpack'],
     })
 
     return config

@@ -1,34 +1,57 @@
-import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
+import { NextApiRequest, NextApiResponse } from 'next'
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+import { login } from '~api/auth'
 
-const options = {
-  // Configure one or more authentication providers
-  providers: [
-    // OAuth authentication providers
-    Providers.Twitter({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
-    }),
-    Providers.GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    }),
-    // Sign in with email
-    Providers.Email({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-      tls: { rejectUnauthorized: false },
-    }),
-  ],
-  // SQL or MongoDB database (or leave empty)
-  database: {
-    type: "postgres",
-    host: process.env.POSTGRESQL_ADDON_HOST,
-    port: process.env.POSTGRESQL_ADDON_PORT,
-    username: process.env.POSTGRESQL_ADDON_USER,
-    password: process.env.POSTGRESQL_ADDON_PASSWORD,
-    database: process.env.POSTGRESQL_ADDON_DB,
-  },
-};
+export default (req: NextApiRequest, res: NextApiResponse) =>
+  NextAuth(req, res, {
+    providers: [
+      Providers.Credentials({
+        name: 'credentials',
+        authorize: async (credentials: {
+          username: string
+          password: string
+        }) => {
+          try {
+            const response = await login({
+              identifier: credentials.username,
+              password: credentials.password,
+            })
 
-export default (req, res) => NextAuth(req, res, options);
+            if (response.data.user) {
+              return response.data
+            }
+
+            return Promise.reject('/?error=signin_error_wrong_credentials')
+          } catch (e) {
+            return Promise.reject('/?error=signin_error_default')
+          }
+        },
+      }),
+    ],
+    database: process.env.DB_URL,
+    session: {
+      jwt: true,
+    },
+    jwt: {
+      secret: process.env.JWT_TOKEN_SECRET,
+    },
+    callbacks: {
+      jwt: async (token, data) => {
+        const isSignIn = data ? true : false
+        const userId = isSignIn ? data.user.id : token.id
+
+        if (isSignIn) {
+          token.auth_time = Math.floor(Date.now() / 1000)
+          token.id = userId
+          token.jwt = data.jwt
+          token.name = data.user.structureName
+        }
+
+        return Promise.resolve(token)
+      },
+      session: async (session, user) => {
+        return Promise.resolve({ ...session, user })
+      },
+    },
+  })

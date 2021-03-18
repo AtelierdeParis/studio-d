@@ -5,8 +5,4 @@
  * to customize this service
  */
 
-module.exports = {
-  //   add: async (values) => {
-  //     return strapi.services.company.create(values);
-  //   },
-};
+module.exports = {};

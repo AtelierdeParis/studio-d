@@ -51,8 +51,8 @@ const theme = extendTheme({
     },
     blue: {
       '50': '#f2f3f8',
-      '100': '#C8CEEE',
-      '200': '#A5AEE4',
+      '100': '#F4F5F9',
+      '200': '#E9EAF2',
       '300': '#828ED9',
       '400': '#5F6FCE',
       '500': '#283583',
@@ -96,6 +96,17 @@ const theme = extendTheme({
       fontWeight: '500',
       mb: '1.2rem',
       lineHeight: '1.1',
+    },
+    groupLabel: {
+      fontWeight: 500,
+      pl: 2.5,
+      w: '100%',
+      color: 'gray.400',
+      fontSize: 'xl',
+      pb: 2.5,
+      mb: 7,
+      borderBottom: '1px solid',
+      borderBottomColor: 'gray.100',
     },
   },
   space: {

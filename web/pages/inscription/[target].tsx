@@ -28,7 +28,7 @@ const Home: NextPage = () => {
     }
   }, [router.query.target])
 
-  if (true) return <SignupCompleted />
+  if (isCompleted) return <SignupCompleted />
 
   return (
     <Box>

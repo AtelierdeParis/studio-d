@@ -12,18 +12,19 @@ import {
   Checkbox,
   InputRightElement,
   InputGroup,
-  Image,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import FormField from '~components/Signup/FormField'
+import FormField from '~components/FormField'
+import InputPassword from '~components/InputPassword'
 import Link from '~components/Link'
 import { ROUTE_CGV } from '~constants'
 import { Target } from '~pages/inscription/[target]'
 import useToast from '~hooks/useToast'
-import axios from 'axios'
-
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { signup } from '~api/auth'
+import Letter from 'public/assets/img/letter.svg'
+import Lock from 'public/assets/img/lock.svg'
 
 const getSchema = (target: Target) => {
   const schema = {
@@ -65,7 +66,6 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
   const { t } = useTranslation('signup')
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
-  const [passwordVisible, setVisible] = useState(false)
   const { register, errors, handleSubmit, setError } = useForm({
     mode: 'onBlur',
     resolver: yupResolver(getSchema(target)),
@@ -75,14 +75,12 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
     const { acceptCondition, ...user } = data
     setLoading(true)
 
-    axios
-      .post('http://localhost:1337/users', {
-        ...user,
-        username: user.email,
-      })
+    signup({
+      ...user,
+      username: user.email,
+    })
       .then(onSuccess)
       .catch((err) => {
-        console.log(err.response.data.message.field)
         if (err.response?.data?.message?.field) {
           setError(err.response.data.message.field, {
             type: 'manual',
@@ -127,11 +125,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                   ref={register}
                   placeholder={t('form.email.placeholder')}
                 />
-                <InputRightElement
-                  children={
-                    <Image boxSize="16px" src="/assets/img/letter.png" />
-                  }
-                />
+                <InputRightElement children={<Letter />} />
               </InputGroup>
             </FormField>
             <FormField
@@ -140,19 +134,10 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               info={t('form.password.info')}
               isRequired
             >
-              <InputGroup>
-                <Input
-                  name="password"
-                  type={passwordVisible ? 'text' : 'password'}
-                  ref={register}
-                  placeholder={t('form.password.placeholder')}
-                />
-                <InputRightElement
-                  cursor="pointer"
-                  onClick={() => setVisible(!passwordVisible)}
-                  children={<Image boxSize="16px" src="/assets/img/key.png" />}
-                />
-              </InputGroup>
+              <InputPassword
+                register={register}
+                placeholder={t('form.password.placeholder')}
+              />
             </FormField>
             <FormField
               label={t('form.structure')}
@@ -194,9 +179,11 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             </HStack>
             <FormField
               label={
-                <Flex as="span">
-                  {t('form.country.label')}{' '}
-                  <Image ml={2} boxSize="16px" src="/assets/img/lock.png" />
+                <Flex as="span" alignItems="center">
+                  <Text as="span" mr={2}>
+                    {t('form.country.label')}
+                  </Text>
+                  <Lock />
                 </Flex>
               }
               info={t('form.country.info')}

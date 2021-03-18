@@ -1,0 +1,41 @@
+{
+    "myAccount": "Mon compte",
+    "dashboard": "Tableau de bord",
+    "info": "Mes informations",
+    "logout": "Déconnexion",
+    "charte": "Charte d'utilisation",
+    "pending": "En attente",
+    "pendingText": "Votre compte est actuellement en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
+    "backWebsite": "Retour à l’accueil du site",
+    "welcome": "Bienvenue !",
+    "welcomeText": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les lieux par messagerie. Commencez par faire un tour des espaces disponibles, ou jetez un oeil <a>à notre charte d’utilisation</a>.",
+    "seePlaces": "Voir les espaces",
+    "information": {
+        "username": "Identifiants",
+        "email": {
+            "label": "Votre adresse email"
+        },
+        "password": {
+            "label": "Mot de passe",
+            "placeholder": "Choisir un nouveau mot de passe",
+            "info": "Minimum de 10 caractères"
+        },
+        "address": {
+            "title": "Adresse",
+            "label": "Numéro et rue"
+        },
+        "zipCode": {
+            "label": "Code postal"
+        },
+        "city": {
+            "label": "Ville"
+        },
+        "contact": "Contact",
+        "phone": {
+            "label": "Numéro de téléphone"
+        },
+        "submit": "Enregistrer les modifications",
+        "success": "Les informations ont bien été mise à jour",
+        "error": "Impossible de mettre à jour les informations"
+    }
+}
