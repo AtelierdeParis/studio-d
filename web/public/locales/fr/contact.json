@@ -14,5 +14,10 @@
         "placeholder": "Renseignez votre message"
     },
     "submit": "Envoyer",
-    "success": "Votre message a bien été envoyé, nous vous répondrons dans les plus brefs délais"
+    "error": "Une erreur est survenue empêchant l'envoie de votre message",
+    "sent": {
+        "title": "Message envoyé !",
+        "text": "Nous avons bien reçu votre demande, nous vous répondrons dans les plus brefs délais",
+        "btn": "Retour à l’accueil"
+    }
 }

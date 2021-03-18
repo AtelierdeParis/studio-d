@@ -17,6 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import FormField from '~components/FormField'
+import MessageSent from '~components/MessageSent'
 import useToast from '~hooks/useToast'
 import { createMessage } from '~api/api'
 
@@ -27,22 +28,23 @@ const schema = yup.object().shape({
 })
 
 const Contact: NextPage = () => {
-  const { errorToast, successToast } = useToast()
+  const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
+  const [isSent, setSent] = useState(false)
   const { t } = useTranslation('contact')
 
   const { handleSubmit, register, errors } = useForm({
     resolver: yupResolver(schema),
   })
 
+  if (isSent) return <MessageSent />
+
   const onSubmit = (data) => {
     setLoading(true)
     createMessage(data)
-      .then(() => successToast(t('success')))
+      .then(() => setSent(true))
       .catch(() => errorToast(t('error')))
-      .finally(() => {
-        setLoading(false)
-      })
+      .finally(() => setLoading(false))
   }
   return (
     <Container maxW="container.sm">
@@ -52,14 +54,14 @@ const Contact: NextPage = () => {
       <Text mb={10}>{t('description')}</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={6} mb={10}>
-          <FormField label={t('name.label')} errors={errors.name}>
+          <FormField label={t('name.label')} errors={errors.name} isRequired>
             <Input
               name="name"
               ref={register}
               placeholder={t('name.placeholder')}
             />
           </FormField>
-          <FormField label={t('email.label')} errors={errors.email}>
+          <FormField label={t('email.label')} errors={errors.email} isRequired>
             <Input
               type="email"
               name="from"
@@ -67,7 +69,7 @@ const Contact: NextPage = () => {
               ref={register}
             />
           </FormField>
-          <FormField label={t('message.label')}>
+          <FormField label={t('message.label')} isRequired>
             <Textarea
               resize="none"
               name="message"
