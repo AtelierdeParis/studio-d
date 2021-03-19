@@ -3,6 +3,18 @@
     "dashboard": "Tableau de bord",
     "info": "Mes informations",
     "logout": "Déconnexion",
+    "place":{
+        "home": "Mes espaces",
+        "question": "Demandes",
+        "calendar": "Réservations",
+        "message": "Messagerie"
+    },
+    "company":{
+        "question": "Mes demandes",
+        "calendar": "Mes réservations",
+        "message": "Messagerie"
+    },
+    "home": "Mes espaces",
     "charte": "Charte d'utilisation",
     "pending": "En attente",
     "pendingText": "Votre compte est actuellement en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
@@ -37,5 +49,34 @@
         "submit": "Enregistrer les modifications",
         "success": "Les informations ont bien été mise à jour",
         "error": "Impossible de mettre à jour les informations"
+    },
+    "message": {
+        "info": {
+            "title": "Aucun message",
+            "text": "Vous n’avez aucune discussion pour le moment.",
+            "link": "Voir les espaces"
+        }
+    },
+    "places": {
+        "info": {
+            "title": "Aucun espace",
+            "text": "Vous n’avez aucun espace inscrit pour le moment.",
+            "link": "Ajouter un espace"
+        }
+    },
+    "requests": {
+        "info": {
+            "title": "Aucune demande",
+            "text": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
+            "link": "Voir les espaces"
+        }
+    },
+    "bookings": {
+        "info": {
+            "title": "Aucune réservation",
+            "text": "Vous n’avez aucune réservation confirmée pour le moment.",
+            "link1": "Voir mes demandes",
+            "link2": "Voir les espaces"
+        }
     }
 }

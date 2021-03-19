@@ -9,7 +9,7 @@ const AccountLayout = (props) => {
 
   return (
     <Flex>
-      <AccountMenu />
+      <AccountMenu user={user} />
       <Container position="relative">
         <Loading isLoading={isLoading} isCentered>
           {React.cloneElement(props.children, { user })}

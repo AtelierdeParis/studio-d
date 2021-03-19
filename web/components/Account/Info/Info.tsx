@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Flex, HStack, Image, Text } from '@chakra-ui/react'
 import Link from '~components/Link'
 
 interface ILink {
@@ -29,16 +29,18 @@ const InfoLogo = ({ img, title, children, links }: IInfoLogo) => {
           {children}
         </Text>
         <Flex justifyContent="center">
-          {arrayLinks.map(({ text, url }) => (
-            <Link
-              href={url}
-              color="blue.500"
-              textDecoration="underline"
-              key={url}
-            >
-              {text}
-            </Link>
-          ))}
+          <HStack spacing={5}>
+            {arrayLinks.map(({ text, url }) => (
+              <Link
+                href={url}
+                color="blue.500"
+                textDecoration="underline"
+                key={url}
+              >
+                {text}
+              </Link>
+            ))}
+          </HStack>
         </Flex>
       </Box>
     </Flex>

@@ -204,7 +204,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
           <Text textStyle="titleFieldGroup">{t(`form.${target}Info`)}</Text>
           <Divider opacity={0.5} mb={5} />
           <VStack spacing={5} mb={20}>
-            <HStack spacing={5} w="100%">
+            <HStack spacing={5} w="100%" alignItems="flex-start">
               <FormField
                 label={t('form.siret')}
                 errors={errors.siret}

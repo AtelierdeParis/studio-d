@@ -13,7 +13,7 @@ const Layout = (props: ILayout) => {
   const router = useRouter()
   const isHome = useMemo(() => router.pathname === '/', [router.pathname])
 
-  if (router.pathname.startsWith('/account')) {
+  if (router.pathname.startsWith('/compte')) {
     return <AccountLayout>{props.children}</AccountLayout>
   }
 

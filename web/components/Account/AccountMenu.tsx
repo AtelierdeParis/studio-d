@@ -1,24 +1,33 @@
 import React from 'react'
-import { Box, Image, Flex, Link, Text } from '@chakra-ui/react'
+import { Box, Image, Flex, Link, Text, VStack } from '@chakra-ui/react'
 import {
   ROUTE_ACCOUNT,
   ROUTE_USE_POLICY,
   ROUTE_ACCOUNT_INFORMATION,
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_ACCOUNT_BOOKING,
+  ROUTE_ACCOUNT_MESSAGE,
+  ROUTE_ACCOUNT_PLACES,
 } from '~constants'
 import NextLink from '~components/Link'
 import Back from 'public/assets/img/back.svg'
-import User from 'public/assets/img/user.svg'
+import Profile from 'public/assets/img/user.svg'
 import Charte from 'public/assets/img/charte.svg'
 import Logout from 'public/assets/img/logout.svg'
+import Home from 'public/assets/img/home.svg'
+import Calendar from 'public/assets/img/calendar.svg'
+import Message from 'public/assets/img/message.svg'
+import Question from 'public/assets/img/question.svg'
 import { useTranslation } from 'next-i18next'
 import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import { User } from '~@types/user'
 
-const myAccount = {
+const accountItems = {
   title: 'myAccount',
   items: [
     {
-      icon: <User />,
+      icon: <Profile />,
       label: 'info',
       url: ROUTE_ACCOUNT_INFORMATION,
     },
@@ -30,18 +39,65 @@ const myAccount = {
   ],
 }
 
+const placeItems = {
+  title: 'dashboard',
+  items: [
+    {
+      icon: <Home />,
+      label: 'place.home',
+      url: ROUTE_ACCOUNT_PLACES,
+    },
+    {
+      icon: <Question />,
+      label: 'place.question',
+      url: ROUTE_ACCOUNT_REQUEST,
+    },
+    {
+      icon: <Calendar />,
+      label: 'place.calendar',
+      url: ROUTE_ACCOUNT_BOOKING,
+    },
+    {
+      icon: <Message />,
+      label: 'place.message',
+      url: ROUTE_ACCOUNT_MESSAGE,
+    },
+  ],
+}
+
+const companyItems = {
+  title: 'dashboard',
+  items: [
+    {
+      icon: <Question />,
+      label: 'company.question',
+      url: ROUTE_ACCOUNT_REQUEST,
+    },
+    {
+      icon: <Calendar />,
+      label: 'company.calendar',
+      url: ROUTE_ACCOUNT_BOOKING,
+    },
+    {
+      icon: <Message />,
+      label: 'company.message',
+      url: ROUTE_ACCOUNT_MESSAGE,
+    },
+  ],
+}
+
 const styleActive = {
   backgroundColor: 'blue.200',
   color: 'blue.500',
 }
 
-const AccountMenu = () => {
+const AccountMenu = ({ user }: { user: User }) => {
   const { t } = useTranslation('account')
   const router = useRouter()
 
   const displayMenu = ({ title, items }) => {
     return (
-      <Box>
+      <Box w="100%">
         <Text
           px={5}
           textTransform="uppercase"
@@ -84,7 +140,12 @@ const AccountMenu = () => {
             <Image ml={3} src="/assets/img/logo-studio-d.png" w="100px" />
           </Link>
         </Flex>
-        {displayMenu(myAccount)}
+        <VStack spacing={12}>
+          {/* TODO: handle good user type */}
+          {user?.confirmed &&
+            displayMenu(user.company ? companyItems : placeItems)}
+          {displayMenu(accountItems)}
+        </VStack>
       </Box>
       <Flex backgroundColor="blue.200" p={5}>
         {/* TODO: create this page */}
