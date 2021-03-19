@@ -1,13 +1,17 @@
 {
   "nav": {
+    "home": "Accueil",
     "places": "Les espaces",
     "project": "Le projet",
     "news": "Actualités",
     "faq": "FAQ",
     "contact": "Contact",
     "signup": "Inscription",
-    "signin": "Connexion"
+    "signin": "Connexion",
+    "cgu": "Conditions générales d'utilisation",
+    "policy": "Chartes StudioD"
   },
+  "error": "Une erreur est survenue",
   "signup": {
     "place": {
       "title": "Vous êtes un lieu ?",
@@ -33,5 +37,24 @@
     },
     "forgottenPassword": "mot de passe oublié ?",
     "error": "Authentification échouée, l'identifiant ou le mot de passe est incorrect"
+  },
+  "reset": {
+    "title": "Mot de passe oublié",
+    "text": "Renseignez votre adresse email ci-dessous, nous vous enverrons un lien pour réinitialiser votre mot de passe. ",
+    "email": {
+      "label": "Email",
+      "placeholder": "mail@exemple.fr"
+    },
+    "success": "Un lien pour créer un nouveau mot de passe vous a été envoyé",
+    "submit": "Envoyer",
+    "emailNotFound": "Aucun compte n'est relié à cet email",
+    "validEmail": "Format de l'email incorrect"
+  },
+  "footer": {
+    "title": "StudioD · Plateforme solidaire de mise à disposition de studios de danse",
+    "subtitle": "Un projet conçu et porté par l'Atelier de Paris / CDCN avec le soutien de ses partenaires :",
+    "plan": "Plan du site",
+    "social": "Suivez-nous sur les réseaux sociaux",
+    "license": "Plateforme diffusée sous license XXX, droits des textes et photographies réservés"
   }
 }

@@ -56,7 +56,12 @@ const Header = ({ colorMode }: IHeader) => {
           alt="Logo Studio D"
         />
       </Link>
-      <HStack spacing={6} whiteSpace="nowrap" color={colorMode}>
+      <HStack
+        spacing={6}
+        whiteSpace="nowrap"
+        color={colorMode}
+        textShadow={colorMode === 'white' ? '1px 1px #797979' : ''}
+      >
         <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
         <Divider orientation="vertical" opacity={0.6} />
         <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />

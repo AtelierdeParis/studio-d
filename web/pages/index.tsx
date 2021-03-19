@@ -1,8 +1,9 @@
-import { Box, Flex, Heading } from '@chakra-ui/react'
+import { Box, Flex, Heading, Container } from '@chakra-ui/react'
 import React from 'react'
 import { SSRConfig, useTranslation } from 'next-i18next'
 import { GetServerSideProps, NextPage } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import PlaceOrCompany from '~components/Signup/PlaceOrCompany'
 
 const Home: NextPage = () => {
   const { t } = useTranslation('home')
@@ -12,6 +13,8 @@ const Home: NextPage = () => {
         backgroundColor="mainBackground"
         backgroundImage="url(/assets/img/home-background.jpg)"
         direction="column"
+        backgroundPosition="center"
+        backgroundSize="cover"
         justifyContent="flex-end"
         alignItems="center"
         h="45vh"
@@ -20,6 +23,9 @@ const Home: NextPage = () => {
           {t('title')}
         </Heading>
       </Flex>
+      <Container>
+        <PlaceOrCompany />
+      </Container>
     </Box>
   )
 }

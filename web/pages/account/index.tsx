@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoLogo from '~components/Account/InfoLogo'
 import Link from '~components/Link'
-import { ROUTE_CGV } from '~constants'
+import { ROUTE_CGU } from '~constants'
 import { useTranslation, Trans } from 'next-i18next'
 import { User } from '~@types/user.d'
 
@@ -28,7 +28,7 @@ const AccountDashboard = ({ user }: IAccountDashboard) => {
         <Trans
           i18nKey="account:welcomeText"
           components={{
-            a: <Link href={ROUTE_CGV} textDecoration="underline" />,
+            a: <Link href={ROUTE_CGU} textDecoration="underline" />,
           }}
         />
       </InfoLogo>

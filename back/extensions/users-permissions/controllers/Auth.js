@@ -209,14 +209,7 @@ module.exports = {
         .query("user", "users-permissions")
         .update({ id: user.id }, { resetPasswordToken: null, password });
 
-      ctx.send({
-        jwt: strapi.plugins["users-permissions"].services.jwt.issue({
-          id: user.id,
-        }),
-        user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
-          model: strapi.query("user", "users-permissions").model,
-        }),
-      });
+      return ctx.send({ ok: true });
     } else if (
       params.password &&
       params.passwordConfirmation &&
@@ -285,7 +278,7 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.email.format",
+          id: "common;reset.validEmail",
           message: "Please provide valid email address.",
         })
       );
@@ -307,7 +300,7 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.user.not-exist",
+          id: "common:reset.emailNotFound",
           message: "This email does not exist.",
         })
       );

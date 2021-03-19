@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form'
 import FormField from '~components/FormField'
 import InputPassword from '~components/InputPassword'
 import Link from '~components/Link'
-import { ROUTE_CGV } from '~constants'
+import { ROUTE_CGU } from '~constants'
 import { Target } from '~pages/inscription/[target]'
 import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -313,7 +313,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               <Trans
                 i18nKey="signup:form.condition"
                 components={{
-                  a: <Link href={ROUTE_CGV} textDecoration="underline" />,
+                  a: <Link href={ROUTE_CGU} textDecoration="underline" />,
                 }}
               />
             </Box>

@@ -15,7 +15,6 @@ import { useMemo } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ROUTE_RESET_PASSWORD } from '~constants'
 import { signIn } from 'next-auth/client'
 import Link from 'components/Link'
 import InputPassword from '~components/InputPassword'
@@ -24,12 +23,13 @@ import Letter from 'public/assets/img/letter.svg'
 
 interface SignInFormProps {
   onClose: () => void
+  onOpenReset: () => void
 }
-
 interface FormData {
   email: string
   password: string
 }
+
 const SignInForm = (props: SignInFormProps) => {
   const { t } = useTranslation('common')
   const { errorToast } = useToast()
@@ -84,14 +84,18 @@ const SignInForm = (props: SignInFormProps) => {
             {formState.errors.password?.message}
           </FormErrorMessage>
           <Box textAlign="right" pt={1.5}>
-            <Link
-              href={ROUTE_RESET_PASSWORD}
-              onClick={props.onClose}
+            <Box
+              as="span"
+              onClick={() => {
+                props.onClose()
+                props.onOpenReset()
+              }}
               textDecoration="underline"
               fontSize="sm"
+              cursor="pointer"
             >
               {t('signin.forgottenPassword')}
-            </Link>
+            </Box>
           </Box>
         </FormControl>
         <Flex align="center" justify="center" mt={8}>

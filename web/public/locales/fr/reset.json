@@ -1,0 +1,15 @@
+{
+    "title": "Nouveau mot de passe",
+    "password": {
+        "label": "Mot de passe",
+        "placeholder": "Saisir un mot de passe",
+        "info": "Choisissez un mot de passe de minimum 10 caractères"
+    },
+    "passwordConfirmation": {
+        "label": "Confirmation du mot de passe",
+        "placeholder": "Saisir à nouveau le mot de passe"
+    },
+    "submit": "Créer",
+    "success": "Votre nouveau mot de passe a bien été créé, vous pouvez désormais vous authentifier",
+    "errorDifferent": "Les mots de passe ne sont pas identiques"
+}
