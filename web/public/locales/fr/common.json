@@ -12,6 +12,7 @@
     "policy": "Chartes StudioD"
   },
   "error": "Une erreur est survenue",
+  "success": "Enregistrement réussi",
   "signup": {
     "place": {
       "title": "Vous êtes un lieu ?",

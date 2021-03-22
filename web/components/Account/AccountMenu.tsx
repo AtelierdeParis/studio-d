@@ -117,7 +117,7 @@ const AccountMenu = ({ user }: { user: User }) => {
               py={2.5}
               w="100%"
               onClick={onClick}
-              {...(router.pathname === url ? styleActive : {})}
+              {...(router.pathname.startsWith(url) ? styleActive : {})}
             >
               {icon}
               <Text pl={4} lineHeight={1}>

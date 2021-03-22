@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
-import { SimpleGrid, CloseButton, Image, Flex } from '@chakra-ui/react'
+import React, { useState, useMemo } from 'react'
+import { SimpleGrid, CloseButton, Image, Flex, Button } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
+import { Place } from '~@types/place.d'
+import { addImages, deleteImage } from '~api/api'
+import useToast from '~hooks/useToast'
+import { useTranslation } from 'next-i18next'
+interface IPlaceImage {
+  place: Place
+}
 
-const PlaceImage = () => {
-  const [files, setFiles] = useState([])
+const PlaceImage = ({ place }: IPlaceImage) => {
+  const { t } = useTranslation('place')
+  const [files, setFiles] = useState<any>(place.images || [])
+  const newFiles = useMemo(() => files.filter((file) => !file.id), [files])
+  const { errorToast, successToast } = useToast()
+  const [isLoading, setLoading] = useState(false)
+  const [removed, setRemoved] = useState([])
   const onDrop = (acceptedFiles) => {
     setFiles([
       ...files,
@@ -15,10 +27,50 @@ const PlaceImage = () => {
     ])
   }
 
-  const onRemove = (index: number) => {
+  const onRemove = (index: number, id?: number) => {
     const cloneArray = [...files]
     cloneArray.splice(index, 1)
     setFiles(cloneArray)
+    if (id) setRemoved([...removed, id])
+  }
+
+  const onSubmit = async () => {
+    setLoading(true)
+
+    if (removed.length > 0) {
+      await Promise.all(removed.map((id) => deleteImage(id))).then(() => {
+        if (newFiles.length === 0) successToast(t('successImg'))
+      })
+      setRemoved([])
+    }
+
+    if (newFiles.length > 0) {
+      const formData = new FormData()
+      formData.append('ref', 'espace')
+      formData.append('refId', place.id.toString())
+      formData.append('field', 'images')
+
+      newFiles.map((file) => {
+        formData.append('files', file)
+      })
+
+      await addImages(formData)
+        .then((res) => {
+          setFiles(
+            files.map((file) => {
+              if (file.id) return file
+              const createdFiled = res.data.find(
+                (createdFile) => createdFile.name === file.name,
+              )
+              if (createdFiled) return createdFiled
+              return file
+            }),
+          )
+          successToast(t('successImg'))
+        })
+        .catch(() => errorToast(t('common:error')))
+    }
+    setLoading(false)
   }
 
   return (
@@ -27,7 +79,7 @@ const PlaceImage = () => {
         <SimpleGrid columns={4} mb={2} columnGap={6} rowGap={6}>
           {files.map((file, index) => (
             <Flex
-              key={file.name}
+              key={file?.id || file.name}
               backgroundColor="blue.100"
               justifyContent="center"
               alignItems="center"
@@ -36,7 +88,7 @@ const PlaceImage = () => {
               role="group"
             >
               <CloseButton
-                onClick={() => onRemove(index)}
+                onClick={() => onRemove(index, file?.id || null)}
                 pos="absolute"
                 top={1}
                 right={1}
@@ -52,12 +104,30 @@ const PlaceImage = () => {
                   opacity: 1,
                 }}
               />
-              <Image src={file.preview} />
+              <Image
+                src={
+                  file?.preview
+                    ? file.preview
+                    : process.env.NEXT_PUBLIC_BACK_URL + file.url
+                }
+              />
             </Flex>
           ))}
         </SimpleGrid>
       )}
       <Dropzone onDrop={onDrop} nbFiles={files.length} />
+      <Flex justifyContent="center" mt={18}>
+        <Button
+          colorScheme="blue"
+          size="lg"
+          mt={6}
+          onClick={onSubmit}
+          isLoading={isLoading}
+          isDisabled={newFiles.length === 0 && removed.length === 0}
+        >
+          {t(`save`)}
+        </Button>
+      </Flex>
     </>
   )
 }

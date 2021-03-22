@@ -117,6 +117,11 @@ const theme = extendTheme({
       borderBottom: '1px solid',
       borderColor: 'gray.50',
     },
+    accountTitle: {
+      fontSize: '2xl',
+      color: 'blue.500',
+      fontFamily: 'mabry medium',
+    },
   },
   space: {
     full: '-1.5rem',

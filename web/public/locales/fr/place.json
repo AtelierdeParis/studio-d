@@ -3,6 +3,7 @@
     "cancel": "Annuler les changements",
     "save": "Enregistrer",
     "addImg": "Ajouter une image",
+    "successImg": "Vos images ont été ajouté avec succès",
     "dropzone": {
         "placeholder": "Déposez ou cliquer pour ajouter des fichiers",
         "subtitle": "Seulement .jpg et .png",

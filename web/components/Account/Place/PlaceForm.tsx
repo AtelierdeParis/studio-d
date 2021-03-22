@@ -73,19 +73,9 @@ const PlaceForm = ({ onSuccess, user }: IPlaceForm) => {
     const { form, data } = Object.keys(values).reduce(
       (total, key) => {
         if (key === 'files') {
-          console.log(
-            Array.from(values[key]).map((file: any, index) => {
-              return file?.display_name
-                ? Object.defineProperty(file, 'name', {
-                    value: file.display_name,
-                    writable: true,
-                  })
-                : file
-            }),
-          )
           Array.from(values[key]).map((file: any, index) =>
             total.form.append(
-              `files[${index}]`,
+              `files.files`,
               file?.display_name
                 ? new File([file], file.display_name, { type: file.type })
                 : file,
