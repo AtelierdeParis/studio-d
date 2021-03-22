@@ -1,0 +1,107 @@
+{
+  "kind": "collectionType",
+  "collectionName": "place",
+  "info": {
+    "name": "Espace",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "surface": {
+      "type": "integer",
+      "required": true
+    },
+    "roomLength": {
+      "type": "integer",
+      "required": true
+    },
+    "width": {
+      "type": "integer",
+      "required": true
+    },
+    "height": {
+      "type": "integer",
+      "required": true
+    },
+    "mirror": {
+      "type": "boolean",
+      "required": true
+    },
+    "danceBar": {
+      "type": "boolean",
+      "required": true
+    },
+    "accomodation": {
+      "type": "boolean",
+      "required": true
+    },
+    "technicalStaff": {
+      "type": "boolean",
+      "required": true
+    },
+    "floor": {
+      "type": "enumeration",
+      "enum": [
+        "floor",
+        "carpet",
+        "other"
+      ],
+      "required": true
+    },
+    "otherFloor": {
+      "type": "string"
+    },
+    "about": {
+      "type": "text",
+      "required": false
+    },
+    "details": {
+      "type": "text"
+    },
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "latitude": {
+      "type": "string",
+      "required": true
+    },
+    "longitude": {
+      "type": "string",
+      "required": true
+    },
+    "files": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "users_permissions_user": {
+      "columnName": "placeId",
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "espace"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

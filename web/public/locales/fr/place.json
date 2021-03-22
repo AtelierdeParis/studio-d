@@ -1,0 +1,91 @@
+{
+    "noSlot": "Aucun créneau disponible, l’espace n’est actuellement pas visible",
+    "cancel": "Annuler les changements",
+    "save": "Enregistrer",
+    "addImg": "Ajouter une image",
+    "dropzone": {
+        "placeholder": "Déposez ou cliquer pour ajouter des fichiers",
+        "subtitle": "Seulement .jpg et .png",
+        "rejected": {
+            "file-invalid-type": "Type de fichier non accepté",
+            "too-many-files": "Vous ne pouvez pas uploader plus de {{nb}} fichiers"
+        }
+    },
+    "info": {
+        "title": "Aucun espace",
+        "text": "Vous n’avez aucun espace inscrit pour le moment.",
+        "link": "Ajouter un espace"
+    },
+    "tabs": {
+        "info": "Informations",
+        "image": "Images",
+        "slot": "Disponibilités ({{nb}})"
+    },
+    "form": {
+        "yes": "Oui",
+        "no": "Non",
+        "choose": "Choisir",
+        "detailsLabel": "Détails du lieu",
+        "textsLabel": "Textes",
+        "filesLabel": "Fichiers joints",
+        "location": "Localisation",
+        "submit": "Enregistrer et ajouter des images",
+        "name": {
+            "label": "Nom de l'espace"
+        },
+        "surface": {
+            "label": "Surface (m²)"
+        },
+        "length": {
+            "label": "Longueur de la salle (m)"
+        },
+        "width": {
+            "label": "Largeur de la salle (m)"
+        },
+        "height": {
+            "label": "Hauteur sous plafond (m)"
+        },
+        "mirror": {
+            "label": "Miroir"
+        },
+        "danceBar": {
+            "label": "Bar de danse"
+        },
+        "accomodation": {
+            "label": "Hébergement possible"
+        },
+        "technicalStaff": {
+            "label": "Personnel technique possible"
+        },
+        "floor": {
+            "label": "Type de sol",
+            "floor": "Plancher",
+            "carpet": "Tapis de danse",
+            "other": "Autre"
+        },
+        "otherFloor": {
+            "label": "Renseignez votre type de sol"
+        },
+        "about": {
+            "label": "À propos de l’espace"
+        },
+        "details": {
+            "label": "Détails techniques"
+        },
+        "files": {
+            "noFile": "Aucun fichier à afficher",
+            "name": "Nom de fichier",
+            "displayName": "Nom affiché sur la page",
+            "add": "Ajouter",
+            "delete": "Supprimer"
+        },
+        "geolocation": {
+            "label": "Géolocalisation",
+            "placeholder": "Géolocalisez votre espace…"
+        },
+        "address": {
+            "label": "Adresse écrite",
+            "placeholder": "Renseignez votre adresse…"
+        }
+    }
+}

@@ -18,7 +18,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
 }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['account'])),
+      ...(await serverSideTranslations(locale, ['account', 'place'])),
     },
   }
 }

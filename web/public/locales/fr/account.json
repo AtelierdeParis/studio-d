@@ -57,13 +57,6 @@
             "link": "Voir les espaces"
         }
     },
-    "places": {
-        "info": {
-            "title": "Aucun espace",
-            "text": "Vous n’avez aucun espace inscrit pour le moment.",
-            "link": "Ajouter un espace"
-        }
-    },
     "requests": {
         "info": {
             "title": "Aucune demande",

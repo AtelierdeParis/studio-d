@@ -4,17 +4,17 @@ import { useTranslation } from 'next-i18next'
 import { ROUTE_ACCOUNT_ADD_PLACES } from '~constants'
 
 const InfoPlace = () => {
-  const { t } = useTranslation('account')
+  const { t } = useTranslation('place')
   return (
     <Info
       img="/assets/img/places.png"
-      title={t('places.info.title')}
+      title={t('info.title')}
       links={{
         url: ROUTE_ACCOUNT_ADD_PLACES,
-        text: t('places.info.link'),
+        text: t('info.link'),
       }}
     >
-      {t('places.info.text')}
+      {t('info.text')}
     </Info>
   )
 }

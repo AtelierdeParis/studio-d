@@ -108,6 +108,15 @@ const theme = extendTheme({
       borderBottom: '1px solid',
       borderBottomColor: 'gray.100',
     },
+    infoLabel: {
+      fontFamily: 'mabry medium',
+      color: 'blue.500',
+      pb: 1.5,
+      pl: 2.5,
+      mb: 6,
+      borderBottom: '1px solid',
+      borderColor: 'gray.50',
+    },
   },
   space: {
     full: '-1.5rem',

@@ -3,19 +3,17 @@ const Select = {
   variants: {
     outline: {
       field: {
-        fontSize: 'sm',
-        color: 'black',
         border: '1px solid',
-        borderColor: 'black',
-        borderRadius: 'md',
-        _hover: {
-          borderColor: '1px solid #b5b5b5',
+        borderColor: 'gray.100',
+        borderRadius: 'xs',
+        h: '45px',
+        _focus: {
+          borderColor: 'blue.500',
+          boxShadow: '0 0 0 2px rgb(95 105 162 / 27%)',
         },
-      },
-      icon: {
-        color: 'black',
-        w: 8,
-        fontSize: '32px',
+        _invalid: {
+          boxShadow: '0 0 0 2px rgb(229 62 62 / 20%)',
+        },
       },
     },
   },

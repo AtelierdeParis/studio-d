@@ -36,14 +36,6 @@
       "configurable": false,
       "private": true
     },
-    "confirmed": {
-      "type": "boolean",
-      "default": false
-    },
-    "blocked": {
-      "type": "boolean",
-      "default": false
-    },
     "role": {
       "model": "role",
       "via": "users",
@@ -56,6 +48,14 @@
       "unique": true,
       "configurable": false,
       "required": true
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false
     },
     "firstname": {
       "type": "string",
@@ -105,6 +105,26 @@
     },
     "website": {
       "type": "string"
+    },
+    "legalRepresentative": {
+      "type": "string"
+    },
+    "statusRepresentative": {
+      "type": "string"
+    },
+    "insuranceNumber": {
+      "type": "string"
+    },
+    "insuranceName": {
+      "type": "string"
+    },
+    "choreographer": {
+      "type": "string"
+    },
+    "espace": {
+      "via": "users_permissions_user",
+      "columnName": "userId",
+      "model": "espace"
     }
   }
 }
