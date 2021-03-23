@@ -1,0 +1,26 @@
+{
+    "mixed": {
+        "notType" : "La valeur du champ {{ path }} doit être de type {{ type }}",
+        "default": "{{ path }} est invalide",
+        "required": "Champs requis",
+        "oneOf": "{{ path }} doit correspondre à une des valeurs suivantes ({{ values }})",
+        "notOneOf": "{{ path }} ne doit pas correspondre à une des valeurs suivantes ({{ values }})"
+    },
+    "string": {
+        "email": "Le champ email est invalide",
+        "url": "Url invalide",
+        "min": "La taille minimale doit être de {{ min }}",
+        "max": "La taille maximale doit être de {{ max }}",
+        "matches": "La saisi doit correspondre à la règle suivante {{ matches }}",
+        "isFormat": "Le valeur du champ {{ path }} doit correspondre au format {{- format }}"
+    },
+    "number": {
+        "min": "La valeur doit être supérieur ou égale à {{ min }}",
+        "max": "La valeur doit être inférieur ou égale à {{ max }}",
+        "lessThan": "La valeur doit être inférieur à {{ lessThan }}",
+        "moreThan": "La valeur doit être supérieur à {{ moreThan }}",
+        "positive": "La valeur doit être un nombre positif",
+        "negative": "La valeur doit être un nombre négatif",
+        "integer": "La valeur doit être un nombre entier"
+    }
+}

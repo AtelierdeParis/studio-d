@@ -80,7 +80,12 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   return {
     props: {
       placeId: query.placeId,
-      ...(await serverSideTranslations(locale, ['account', 'place', 'common'])),
+      ...(await serverSideTranslations(locale, [
+        'account',
+        'place',
+        'common',
+        'yup',
+      ])),
     },
   }
 }

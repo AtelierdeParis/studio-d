@@ -16,7 +16,6 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { signIn } from 'next-auth/client'
-import Link from 'components/Link'
 import InputPassword from '~components/InputPassword'
 import useToast from '~hooks/useToast'
 import Letter from 'public/assets/img/letter.svg'
@@ -30,20 +29,14 @@ interface FormData {
   password: string
 }
 
+const schema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+})
+
 const SignInForm = (props: SignInFormProps) => {
   const { t } = useTranslation('common')
   const { errorToast } = useToast()
-  const schema = useMemo(
-    () =>
-      yup.object({
-        email: yup
-          .string()
-          .email(t('email.format'))
-          .required(t('email.required')),
-        password: yup.string().required(t('password.required')),
-      }),
-    [t],
-  )
   const { register, formState, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: 'onBlur',

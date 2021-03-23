@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'next-auth/client'
 import NextApp, { AppProps } from 'next/app'
@@ -8,8 +8,12 @@ import { QueryClientProvider } from 'react-query'
 import { appWithTranslation } from 'next-i18next'
 import '../styles/globals.css'
 import theme from '~theme'
+import { initYupLocale } from '~initYupLocale'
 
 const App = ({ Component, pageProps }: AppProps) => {
+  useEffect(() => {
+    initYupLocale()
+  }, [])
   const content = (
     <Provider session={pageProps.session}>
       <QueryClientProvider client={client}>

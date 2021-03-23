@@ -141,7 +141,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             </FormField>
             <FormField
               label={t('form.structure')}
-              errors={errors.structure}
+              errors={errors.structureName}
               isRequired
             >
               <Input name="structureName" ref={register} />
@@ -159,7 +159,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
           <VStack spacing={5} mb={18}>
             <FormField
               label={t('form.street')}
-              errors={errors.street}
+              errors={errors.address}
               isRequired
             >
               <Input name="address" ref={register} />

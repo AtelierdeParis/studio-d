@@ -1,0 +1,27 @@
+{
+    "mixed": {
+      "notType": "Field value {{ path }} must be a {{ type }}",
+      "default": "{{ path }} is invalid",
+      "required": "Field {{ path }} is required",
+      "oneOf": "{{ path }} must be one of the following values ({{ values }})",
+      "notOneOf":
+        "{{ path }} must not be one of the following values ({{ values }})"
+    },
+    "string": {
+      "email": "Invalid email",
+      "url": "Invalid url",
+      "min": "The size must be at least {{ min }} characters",
+      "max": "The size must be at most {{ max }} characters",
+      "matches": "The value must match the following rule {{ matches }}",
+      "isFormat": "Field's value {{ path }} must match tis format {{- format }}"
+    },
+    "number": {
+      "min": "The value must be greater than or equal to {{ min }}",
+      "max": "The value must be less than or equal to {{ max }}",
+      "lessThan": "The value must be less than {{ lessThan }}",
+      "moreThan": "The value must be more than {{ moreThan }}",
+      "positive": "The value must be a positive number",
+      "negative": "The value must be a negative number",
+      "integer": "The value must be an integer"
+    }
+  }

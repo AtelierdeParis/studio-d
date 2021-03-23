@@ -62,10 +62,12 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
 
-  const { register, errors, handleSubmit, watch, control } = useForm({
-    resolver: yupResolver(getSchema(place)),
-    defaultValues: getDefaultValues(place),
-  })
+  const { register, errors, handleSubmit, watch, control, formState } = useForm(
+    {
+      resolver: yupResolver(getSchema(place)),
+      defaultValues: getDefaultValues(place),
+    },
+  )
 
   const { floor, latitude, longitude, address } = watch([
     'floor',
@@ -221,6 +223,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             mt={6}
             type="submit"
             isLoading={isLoading}
+            isDisabled={Object.keys(formState.dirtyFields).length === 0}
             rightIcon={<Arrow />}
           >
             {t(`form.submit`)}
