@@ -121,10 +121,10 @@
     "choreographer": {
       "type": "string"
     },
-    "espace": {
-      "via": "users_permissions_user",
+    "espaces": {
       "columnName": "userId",
-      "model": "espace"
+      "collection": "espace",
+      "via": "users_permissions_user"
     }
   }
 }

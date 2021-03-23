@@ -78,6 +78,7 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     name,
     control,
   })
+
   const { field: latitude } = useController({
     name: 'latitude',
     control,
@@ -119,7 +120,7 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
       classNamePrefix="select"
       styles={getStyle(theme)}
       loadOptions={loadOptions}
-      defaultValue={field.value}
+      defaultInputValue={field.value}
       isClearable
       onChange={onChange}
       noOptionsMessage={() => null}

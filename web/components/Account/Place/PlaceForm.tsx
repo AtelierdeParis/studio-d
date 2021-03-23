@@ -18,18 +18,16 @@ import FormField from '~components/FormField'
 import InputNumber from '~components/InputNumber'
 import InputLocation from '~components/InputLocation'
 import InputFile from '~components/InputFile'
-import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { createNewPlace } from '~api/api'
-import { User } from '~@types/user.d'
+import { Place } from '~@types/place.d'
 import Arrow from 'public/assets/img/arrow-right.svg'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
-const getSchema = () => {
+const getSchema = (place) => {
   return yup.object().shape({
-    name: yup.string().required(),
+    name: !place ? yup.string().required() : null,
     surface: yup.number().required(),
     roomLength: yup.number().required(),
     width: yup.number().required(),
@@ -50,17 +48,25 @@ const getSchema = () => {
 }
 
 interface IPlaceForm {
-  onSuccess: (any) => void
-  user: User
+  place?: Place
+  onSubmit: (data: any) => Promise<any>
 }
 
-const PlaceForm = ({ onSuccess, user }: IPlaceForm) => {
+const getDefaultValues = (place) => {
+  if (!place) return {}
+  const { files, name, ...placeAttributes } = place
+  return placeAttributes
+}
+
+const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   const { t } = useTranslation('place')
-  const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
+
   const { register, errors, handleSubmit, watch, control } = useForm({
-    resolver: yupResolver(getSchema()),
+    resolver: yupResolver(getSchema(place)),
+    defaultValues: getDefaultValues(place),
   })
+
   const { floor, latitude, longitude, address } = watch([
     'floor',
     'address',
@@ -68,42 +74,20 @@ const PlaceForm = ({ onSuccess, user }: IPlaceForm) => {
     'longitude',
   ])
 
-  const onSubmit = (values) => {
+  const submitForm = (values) => {
     setLoading(true)
-    const { form, data } = Object.keys(values).reduce(
-      (total, key) => {
-        if (key === 'files') {
-          Array.from(values[key]).map((file: any, index) =>
-            total.form.append(
-              `files.files`,
-              file?.display_name
-                ? new File([file], file.display_name, { type: file.type })
-                : file,
-            ),
-          )
-        } else {
-          total.data[key] = values[key]
-        }
-        return total
-      },
-      { form: new FormData(), data: { users_permissions_user: user.id } },
-    )
-
-    form.append('data', JSON.stringify(data))
-
-    createNewPlace(form)
-      .then(onSuccess)
-      .catch(() => errorToast(t('common:error')))
-      .finally(() => setLoading(false))
+    onSubmit(values).finally(() => setLoading(false))
   }
 
   return (
     <Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(submitForm)}>
         <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
-        <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
-          <Input name="name" ref={register} />
-        </FormField>
+        {!place && (
+          <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
+            <Input name="name" ref={register} />
+          </FormField>
+        )}
         <SimpleGrid columns={4} columnGap={5} rowGap={6} mb={14}>
           <FormField label={t('form.surface.label')} errors={errors.surface}>
             <InputNumber name="surface" register={register} />
@@ -189,7 +173,7 @@ const PlaceForm = ({ onSuccess, user }: IPlaceForm) => {
             <Textarea name="details" ref={register} resize="none" h="215px" />
           </FormField>
         </HStack>
-        <InputFile register={register} />
+        <InputFile register={register} defaultValue={place?.files} />
         <Text textStyle="infoLabel" mt={16}>
           {t('form.location')}
         </Text>

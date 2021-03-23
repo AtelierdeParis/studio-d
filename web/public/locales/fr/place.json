@@ -88,5 +88,9 @@
             "label": "Adresse écrite",
             "placeholder": "Renseignez votre adresse…"
         }
+    },
+    "list": {
+        "title": "Espaces",
+        "add": "Ajouter"
     }
 }

@@ -88,12 +88,6 @@
       "plugin": "upload",
       "required": false
     },
-    "users_permissions_user": {
-      "columnName": "placeId",
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "espace"
-    },
     "images": {
       "collection": "file",
       "via": "related",
@@ -102,6 +96,12 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "users_permissions_user": {
+      "via": "espaces",
+      "plugin": "users-permissions",
+      "columnName": "placeId",
+      "model": "user"
     }
   }
 }

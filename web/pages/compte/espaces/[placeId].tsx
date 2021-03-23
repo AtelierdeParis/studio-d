@@ -11,13 +11,14 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react'
-import PlaceForm from '~components/Account/Place/PlaceForm'
+import PlaceEdit from '~components/Account/Place/PlaceEdit'
 import PlaceTabList from '~components/Account/Place/PlaceTabList'
 import { User } from '~@types/user.d'
 import { usePlace } from '~hooks/usePlace'
 import PlaceImage from '~components/Account/Place/PlaceImage'
 import Loading from '~components/Loading'
 import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import Check from 'public/assets/img/check.svg'
 
 interface IEditPlace {
@@ -27,6 +28,7 @@ interface IEditPlace {
 
 const EditPlace = ({ placeId }: IEditPlace) => {
   const { t } = useTranslation('place')
+  const { query } = useRouter()
   const { data: place, isLoading } = usePlace(placeId)
 
   return (
@@ -55,14 +57,11 @@ const EditPlace = ({ placeId }: IEditPlace) => {
         <Text pb={6} ml={2.5} textStyle="accountTitle">
           {place?.name}
         </Text>
-        <Tabs isLazy index={1}>
-          <PlaceTabList index={1} />
+        <Tabs isLazy defaultIndex={Number(query?.index) || 0}>
+          <PlaceTabList />
           <TabPanels>
             <TabPanel px={0}>
-              {/* <PlaceForm
-          
-              user={user}
-            /> */}
+              <PlaceEdit place={place} />
             </TabPanel>
             <TabPanel px={0}>
               <PlaceImage place={place} />
@@ -81,7 +80,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   return {
     props: {
       placeId: query.placeId,
-      ...(await serverSideTranslations(locale, ['account', 'place'])),
+      ...(await serverSideTranslations(locale, ['account', 'place', 'common'])),
     },
   }
 }

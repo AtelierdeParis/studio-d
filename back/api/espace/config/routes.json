@@ -2,6 +2,16 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/espaces/me",
+      "handler": "espace.myPlaces",
+      "config": {
+          "policies": [],
+          "prefix": "",
+          "description": "Get places related to current user"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/espaces",
       "handler": "espace.find",
       "config": {

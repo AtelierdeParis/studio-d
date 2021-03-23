@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { SimpleGrid, CloseButton, Image, Flex, Button } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
 import { Place } from '~@types/place.d'
-import { addImages, deleteImage } from '~api/api'
+import { addFiles, deleteImage } from '~api/api'
 import useToast from '~hooks/useToast'
 import { useTranslation } from 'next-i18next'
 interface IPlaceImage {
@@ -11,15 +11,16 @@ interface IPlaceImage {
 
 const PlaceImage = ({ place }: IPlaceImage) => {
   const { t } = useTranslation('place')
-  const [files, setFiles] = useState<any>(place.images || [])
+  const [files, setFiles] = useState<any>(place?.images || [])
   const newFiles = useMemo(() => files.filter((file) => !file.id), [files])
   const { errorToast, successToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [removed, setRemoved] = useState([])
+
   const onDrop = (acceptedFiles) => {
     setFiles([
       ...files,
-      ...acceptedFiles.map((file, index) =>
+      ...acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
         }),
@@ -45,16 +46,11 @@ const PlaceImage = ({ place }: IPlaceImage) => {
     }
 
     if (newFiles.length > 0) {
-      const formData = new FormData()
-      formData.append('ref', 'espace')
-      formData.append('refId', place.id.toString())
-      formData.append('field', 'images')
-
-      newFiles.map((file) => {
-        formData.append('files', file)
+      addFiles(newFiles, {
+        ref: 'espace',
+        refId: place.id.toString(),
+        field: 'images',
       })
-
-      await addImages(formData)
         .then((res) => {
           setFiles(
             files.map((file) => {

@@ -21,15 +21,21 @@ const TabPlace = ({ isDisabled, children }) => {
 }
 
 interface IPriceTabList {
-  index: number
+  disabledIndexes?: number[]
 }
-const PriceTabList = ({ index }: IPriceTabList) => {
+const PriceTabList = ({ disabledIndexes = [] }: IPriceTabList) => {
   const { t } = useTranslation('place')
   return (
     <TabList borderColor="gray.100" borderBottom="1px solid" mb={6}>
-      <TabPlace isDisabled={index !== 0}>{t('tabs.info')}</TabPlace>
-      <TabPlace isDisabled={index !== 1}>{t('tabs.image')}</TabPlace>
-      <TabPlace isDisabled={index !== 2}>{t('tabs.slot', { nb: 0 })}</TabPlace>
+      <TabPlace isDisabled={disabledIndexes.includes(0)}>
+        {t('tabs.info')}
+      </TabPlace>
+      <TabPlace isDisabled={disabledIndexes.includes(1)}>
+        {t('tabs.image')}
+      </TabPlace>
+      <TabPlace isDisabled={disabledIndexes.includes(2)}>
+        {t('tabs.slot', { nb: 0 })}
+      </TabPlace>
     </TabList>
   )
 }

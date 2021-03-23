@@ -7,6 +7,7 @@ import createSlug from 'url-slug'
 
 interface IInputFile {
   register: () => void
+  defaultValue: File[]
 }
 
 const acceptableTypes = [
@@ -17,9 +18,9 @@ const acceptableTypes = [
   'application/pdf',
 ]
 
-const InputFile = ({ register }: IInputFile) => {
+const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
   const { t } = useTranslation('place')
-  const [files, setFiles] = useState<File[]>([])
+  const [files, setFiles] = useState<File[]>(defaultValue)
 
   const onChange = (event) => {
     if (event.target.files) {
