@@ -18,6 +18,7 @@ import { usePlace } from '~hooks/usePlace'
 import PlaceImage from '~components/Account/Place/PlaceImage'
 import Loading from '~components/Loading'
 import { useRouter } from 'next/router'
+import { requireAuth } from '~utils'
 import Check from 'public/assets/img/check.svg'
 
 interface IEditPlace {
@@ -71,21 +72,20 @@ const EditPlace = ({ placeId }: IEditPlace) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-  query,
-}) => {
-  return {
-    props: {
-      placeId: query.placeId,
-      ...(await serverSideTranslations(locale, [
-        'account',
-        'place',
-        'common',
-        'yup',
-      ])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale, query }) => {
+    return {
+      props: {
+        placeId: query.placeId,
+        ...(await serverSideTranslations(locale, [
+          'account',
+          'place',
+          'common',
+          'yup',
+        ])),
+      },
+    }
+  },
+)
 
 export default EditPlace

@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoWelcome from '~components/Account/Info/InfoWelcome'
 import InfoPending from '~components/Account/Info/InfoPending'
 import { User } from '~@types/user.d'
+import { requireAuth } from '~utils'
 
 interface IAccountDashboard {
   user: User
@@ -18,14 +19,14 @@ const AccountDashboard = ({ user }: IAccountDashboard) => {
   return <InfoPending />
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['account'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['account'])),
+      },
+    }
+  },
+)
 
 export default AccountDashboard

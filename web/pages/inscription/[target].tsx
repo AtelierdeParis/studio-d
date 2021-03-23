@@ -8,6 +8,7 @@ import SignupSteps from '~components/Signup/SignupSteps'
 import AboutUs from '~components/Signup/AboutUs'
 import SignupForm from '~components/Signup/SignupForm'
 import SignupCompleted from '~components/Signup/SignupCompleted'
+import { requireAuth } from '~utils'
 
 export type Target = 'compagnie' | 'lieu'
 const availableTargets = ['compagnie', 'lieu']
@@ -48,14 +49,15 @@ const Home: NextPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['signup', 'common', 'yup'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['signup', 'common', 'yup'])),
+      },
+    }
+  },
+  true,
+)
 
 export default Home

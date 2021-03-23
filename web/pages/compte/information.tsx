@@ -23,6 +23,7 @@ import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { User } from '~@types/user.d'
+import { requireAuth } from '~utils'
 
 interface IAccountInformation {
   user: User
@@ -170,14 +171,14 @@ const AccountInformation = ({ user }: IAccountInformation) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['account'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['account'])),
+      },
+    }
+  },
+)
 
 export default AccountInformation

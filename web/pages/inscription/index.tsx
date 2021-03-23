@@ -5,6 +5,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PlaceOrCompany from '~components/Signup/PlaceOrCompany'
 import SignupSteps from '~components/Signup/SignupSteps'
+import { requireAuth } from '~utils'
 
 const Home: NextPage = () => {
   return (
@@ -15,14 +16,15 @@ const Home: NextPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['signup', 'common', 'yup'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['signup', 'common', 'yup'])),
+      },
+    }
+  },
+  true,
+)
 
 export default Home

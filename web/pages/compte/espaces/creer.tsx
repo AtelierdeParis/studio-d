@@ -6,6 +6,7 @@ import { Tabs, TabPanels, TabPanel, Box } from '@chakra-ui/react'
 import PlaceCreate from '~components/Account/Place/PlaceCreate'
 import PlaceTabList from '~components/Account/Place/PlaceTabList'
 import { User } from '~@types/user.d'
+import { requireAuth } from '~utils'
 
 interface ICreatePlace {
   user: User
@@ -26,14 +27,14 @@ const CreatePlace = ({ user }: ICreatePlace) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['account', 'place', 'yup'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['account', 'place', 'yup'])),
+      },
+    }
+  },
+)
 
 export default CreatePlace

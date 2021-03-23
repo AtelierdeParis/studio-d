@@ -7,7 +7,7 @@ import PlaceList from '~components/Account/Place/PlaceList'
 import Loading from '~components/Loading'
 import { useMyPlaces } from '~hooks/useMyPlaces'
 import { User } from '~@types/user.d'
-
+import { requireAuth } from '~utils'
 interface IAccountPlace {
   user: User
 }
@@ -21,14 +21,14 @@ const AccountPlace = ({ user }: IAccountPlace) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
-  locale,
-}) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['account', 'place'])),
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
+  async ({ locale }) => {
+    return {
+      props: {
+        ...(await serverSideTranslations(locale, ['account', 'place'])),
+      },
+    }
+  },
+)
 
 export default AccountPlace
