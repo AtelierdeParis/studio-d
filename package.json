@@ -2,7 +2,7 @@
   "name": "studio-d",
   "scripts": {
     "install": "yarn install:front && yarn install:back",
-    "install:front": "cd wev && yarn",
+    "install:front": "cd web && yarn",
     "install:back": "cd back && yarn",
     "client:dev": "cd web && yarn dev",
     "server:dev": "cd back && yarn develop",
