@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { InputGroup, Input, InputRightElement, Image } from '@chakra-ui/react'
-import Key from 'public/assets/img/key.svg'
+import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
+import Eye from 'public/assets/img/eye.svg'
+import EyeClosed from 'public/assets/img/eye-closed.svg'
 
 interface IInputPassword {
   register: () => void
@@ -25,7 +26,7 @@ const InputPassword = ({
       <InputRightElement
         cursor="pointer"
         onClick={() => setVisible(!isVisible)}
-        children={<Key />}
+        children={isVisible ? <EyeClosed /> : <Eye />}
       />
     </InputGroup>
   )
