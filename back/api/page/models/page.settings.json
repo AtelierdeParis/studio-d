@@ -19,7 +19,9 @@
     },
     "url": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true,
+      "minLength": 1
     }
   }
 }

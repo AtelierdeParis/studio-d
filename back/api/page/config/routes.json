@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/pages/:id",
+      "path": "/pages/:url",
       "handler": "page.findOne",
       "config": {
         "policies": []

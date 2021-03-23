@@ -1,31 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { SSRConfig } from 'next-i18next'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import {
-  Text,
-  Input,
-  Textarea,
-  Button,
-  Container,
-  Heading,
-  VStack,
-  Flex,
-} from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
-import FormField from '~components/FormField'
+import { Container, Heading } from '@chakra-ui/react'
+import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_PROJECT } from '~constants'
-import useToast from '~hooks/useToast'
+import { Page } from '~@types/page.d'
 import { getPage } from '~api/api'
 
-const Project: NextPage = ({ page }) => {
-  console.log(page)
+interface IProject {
+  page: Page
+}
+
+const Project = ({ page }: IProject) => {
   return (
-    <Container maxW="container.sm">
-      <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
+    <Container>
+      <Heading
+        as="h1"
+        textStyle="h1"
+        mt={16}
+        mb={12}
+        textAlign="center"
+        maxW="container.sm"
+        mx="auto"
+      >
         {page.title}
       </Heading>
-      <Text mb={10}>{marked(page.text)}</Text>
+      <MarkdownRenderer>{page.text}</MarkdownRenderer>
     </Container>
   )
 }
@@ -33,12 +34,12 @@ const Project: NextPage = ({ page }) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await getPage(2).then((res) => res.data)
+  const page = await getPage(ROUTE_PROJECT).then((res) => res.data)
 
   return {
     props: {
       page,
-      ...(await serverSideTranslations(locale, ['common', 'contact'])),
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   }
 }
