@@ -27,12 +27,7 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
   return (
     <ButtonGroup spacing={5}>
       <Button variant="unstyled" fontSize="md">
-        <Link
-          href={ROUTE_SIGNUP}
-          textShadow={colorMode === 'white' ? '1px 1px #797979' : ''}
-        >
-          {t('nav.signup')}
-        </Link>
+        <Link href={ROUTE_SIGNUP}>{t('nav.signup')}</Link>
       </Button>
       <SigninModal>
         <Button>{t('nav.signin')}</Button>

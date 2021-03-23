@@ -1,5 +1,13 @@
 import React from 'react'
-import { Container, Image, HStack, Text, Divider } from '@chakra-ui/react'
+import {
+  Container,
+  Image,
+  HStack,
+  Text,
+  Divider,
+  Box,
+  Flex,
+} from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import AuthMenu from '~components/AuthMenu'
@@ -38,8 +46,6 @@ const Header = ({ colorMode }: IHeader) => {
     <Container
       pos={colorMode === 'white' ? 'absolute' : 'static'}
       as="header"
-      display="flex"
-      justifyContent="space-between"
       px={5}
       py={3}
       maxW="full"
@@ -47,30 +53,37 @@ const Header = ({ colorMode }: IHeader) => {
         colorMode === 'white' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'
       }
     >
-      <Link href="/">
-        <Image
-          src={`/assets/img/logo-studio-d${
-            colorMode === 'white' ? '-white' : ''
-          }.png`}
-          cursor="pointer"
-          alt="Logo Studio D"
+      <Flex pos="relative" zIndex="10" justifyContent="space-between">
+        <Link href="/">
+          <Image
+            src={`/assets/img/logo-studio-d${
+              colorMode === 'white' ? '-white' : ''
+            }.png`}
+            cursor="pointer"
+            alt="Logo Studio D"
+          />
+        </Link>
+        <HStack spacing={6} whiteSpace="nowrap" color={colorMode}>
+          <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
+          <Divider orientation="vertical" opacity={0.6} />
+          <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
+          <MenuItem href={ROUTE_NEWS} text={t('nav.news')} />
+          <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
+          <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
+          <Divider orientation="vertical" opacity={0.6} />
+          <AuthMenu colorMode={colorMode} />
+        </HStack>
+      </Flex>
+      {colorMode === 'white' && (
+        <Box
+          background="linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 98%)"
+          pos="absolute"
+          left="0"
+          right="0"
+          top="0"
+          bottom="0"
         />
-      </Link>
-      <HStack
-        spacing={6}
-        whiteSpace="nowrap"
-        color={colorMode}
-        textShadow={colorMode === 'white' ? '1px 1px #797979' : ''}
-      >
-        <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
-        <Divider orientation="vertical" opacity={0.6} />
-        <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
-        <MenuItem href={ROUTE_NEWS} text={t('nav.news')} />
-        <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
-        <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
-        <Divider orientation="vertical" opacity={0.6} />
-        <AuthMenu colorMode={colorMode} />
-      </HStack>
+      )}
     </Container>
   )
 }
