@@ -122,9 +122,8 @@
       "type": "string"
     },
     "espaces": {
-      "columnName": "userId",
-      "collection": "espace",
-      "via": "users_permissions_user"
+      "via": "users_permissions_user",
+      "collection": "espace"
     }
   }
 }

@@ -98,10 +98,9 @@
       "required": false
     },
     "users_permissions_user": {
-      "via": "espaces",
       "plugin": "users-permissions",
-      "columnName": "placeId",
-      "model": "user"
+      "model": "user",
+      "via": "espaces"
     }
   }
 }
