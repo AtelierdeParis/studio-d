@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { SimpleGrid, CloseButton, Image, Flex, Button } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
 import { Place } from '~@types/place.d'
-import { addFiles, deleteImage } from '~api/api'
+import { addFiles, deleteFile } from '~api/api'
 import useToast from '~hooks/useToast'
 import { useTranslation } from 'next-i18next'
 interface IPlaceImage {
@@ -39,7 +39,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
     setLoading(true)
 
     if (removed.length > 0) {
-      await Promise.all(removed.map((id) => deleteImage(id))).then(() => {
+      await Promise.all(removed.map((id) => deleteFile(id))).then(() => {
         if (newFiles.length === 0) successToast(t('successImg'))
       })
       setRemoved([])

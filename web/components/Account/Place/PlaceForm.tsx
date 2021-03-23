@@ -62,12 +62,18 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
 
-  const { register, errors, handleSubmit, watch, control, formState } = useForm(
-    {
-      resolver: yupResolver(getSchema(place)),
-      defaultValues: getDefaultValues(place),
-    },
-  )
+  const {
+    register,
+    errors,
+    handleSubmit,
+    watch,
+    control,
+    formState,
+    reset,
+  } = useForm({
+    resolver: yupResolver(getSchema(place)),
+    defaultValues: getDefaultValues(place),
+  })
 
   const { floor, latitude, longitude, address } = watch([
     'floor',
@@ -78,7 +84,14 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
 
   const submitForm = (values) => {
     setLoading(true)
-    onSubmit(values).finally(() => setLoading(false))
+    onSubmit(values)
+      .then((res) => {
+        reset({
+          ...res,
+          removedFiles: [],
+        })
+      })
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -175,7 +188,11 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             <Textarea name="details" ref={register} resize="none" h="215px" />
           </FormField>
         </HStack>
-        <InputFile register={register} defaultValue={place?.files} />
+        <InputFile
+          register={register}
+          defaultValue={place?.files}
+          control={control}
+        />
         <Text textStyle="infoLabel" mt={16}>
           {t('form.location')}
         </Text>

@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Flex, Text, Button, Input, Box } from '@chakra-ui/react'
 import Add from 'public/assets/img/add.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
 import createSlug from 'url-slug'
+import { Control, useController } from 'react-hook-form'
 
 interface IInputFile {
+  control: Control
   register: () => void
   defaultValue: File[]
 }
@@ -18,23 +20,35 @@ const acceptableTypes = [
   'application/pdf',
 ]
 
-const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
+const InputFile = ({ control, defaultValue = [] }: IInputFile) => {
   const { t } = useTranslation('place')
-  const [files, setFiles] = useState<File[]>(defaultValue)
+
+  const { field: removeField } = useController({
+    name: 'removedFiles',
+    control,
+    defaultValue: [],
+  })
+
+  const { field } = useController({
+    name: 'files',
+    control,
+    defaultValue,
+  })
 
   const onChange = (event) => {
     if (event.target.files) {
       const newFiles = (Array.from(
         event.target.files,
       ) as File[]).filter((file) => acceptableTypes.includes(file.type))
-      if (newFiles.length > 0) setFiles([...files, ...newFiles])
+      if (newFiles.length > 0) field.onChange([...field.value, ...newFiles])
     }
   }
 
-  const deleteFile = (index) => {
-    const cloneArray = [...files]
+  const deleteFile = (index, id?: number) => {
+    const cloneArray = [...field.value]
     cloneArray.splice(index, 1)
-    setFiles(cloneArray)
+    field.onChange(cloneArray)
+    if (id) removeField.onChange([...removeField.value, id])
   }
 
   const getExtension = (filename) =>
@@ -42,12 +56,14 @@ const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
     filename
 
   const updateName = (value, index) => {
-    const list = [...files]
+    const list = [...field.value]
 
     Object.assign(list[index], {
-      display_name: `${createSlug(value)}.${getExtension(files[index].name)}`,
+      display_name: `${createSlug(value)}.${getExtension(
+        field.value[index].name,
+      )}`,
     })
-    setFiles(list)
+    field.onChange(list)
   }
 
   return (
@@ -67,18 +83,15 @@ const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
             right="0"
             w="280px"
             cursor="pointer"
-            id="inputFile"
             type="file"
-            name="files"
             multiple
             accept={acceptableTypes.join(',')}
             onChange={onChange}
-            ref={register}
             opacity={0}
           />
         </Box>
       </Flex>
-      {files.length > 0 ? (
+      {field.value.length > 0 ? (
         <Box>
           <Flex
             backgroundColor="blue.200"
@@ -100,7 +113,7 @@ const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
               {t('form.files.displayName')}
             </Text>
           </Flex>
-          {files.map((file, index) => (
+          {field.value.map((file, index) => (
             <Flex
               key={file?.name}
               py={2.5}
@@ -132,7 +145,7 @@ const InputFile = ({ register, defaultValue = [] }: IInputFile) => {
                   variant="outline"
                   color="grayText.1"
                   borderColor="grayText.1"
-                  onClick={() => deleteFile(index)}
+                  onClick={() => deleteFile(index, file?.id)}
                 >
                   {t('form.files.delete')}
                 </Button>

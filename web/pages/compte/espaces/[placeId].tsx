@@ -17,7 +17,6 @@ import { User } from '~@types/user.d'
 import { usePlace } from '~hooks/usePlace'
 import PlaceImage from '~components/Account/Place/PlaceImage'
 import Loading from '~components/Loading'
-import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import Check from 'public/assets/img/check.svg'
 
@@ -27,7 +26,6 @@ interface IEditPlace {
 }
 
 const EditPlace = ({ placeId }: IEditPlace) => {
-  const { t } = useTranslation('place')
   const { query } = useRouter()
   const { data: place, isLoading } = usePlace(placeId)
 

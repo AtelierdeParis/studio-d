@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { SSRConfig } from 'next-i18next'
-import { GetServerSideProps, NextPage } from 'next'
+import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {
   Text,
@@ -20,6 +20,9 @@ import FormField from '~components/FormField'
 import MessageSent from '~components/MessageSent'
 import useToast from '~hooks/useToast'
 import { createMessage } from '~api/api'
+import { ROUTE_CONTACT } from '~constants'
+import { Page } from '~@types/page.d'
+import { getPage } from '~api/api'
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -27,7 +30,7 @@ const schema = yup.object().shape({
   from: yup.string().email().required(),
 })
 
-const Contact: NextPage = () => {
+const Contact = ({ page }: { page: Page }) => {
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [isSent, setSent] = useState(false)
@@ -49,9 +52,9 @@ const Contact: NextPage = () => {
   return (
     <Container maxW="container.sm">
       <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
-        {t('title')}
+        {page.title}
       </Heading>
-      <Text mb={10}>{t('description')}</Text>
+      <Text mb={10}>{page.text}</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={6} mb={10}>
           <FormField label={t('name.label')} errors={errors.name} isRequired>
@@ -97,8 +100,10 @@ const Contact: NextPage = () => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
+  const page = await getPage(ROUTE_CONTACT).then((res) => res.data)
   return {
     props: {
+      page,
       ...(await serverSideTranslations(locale, ['common', 'contact'])),
     },
   }

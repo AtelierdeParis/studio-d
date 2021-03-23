@@ -30,4 +30,4 @@ export const addFiles = (files, options: FileOptions) => {
   return client.post('/upload', formData)
 }
 
-export const deleteImage = (id) => client.delete(`/upload/files/${id}`)
+export const deleteFile = (id) => client.delete(`/upload/files/${id}`)
