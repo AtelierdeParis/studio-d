@@ -143,7 +143,7 @@ const AccountMenu = ({ user }: { user: User }) => {
         <VStack spacing={12}>
           {/* TODO: handle good user type */}
           {user?.confirmed &&
-            displayMenu(user.company ? companyItems : placeItems)}
+            displayMenu(user.type === 'company' ? companyItems : placeItems)}
           {displayMenu(accountItems)}
         </VStack>
       </Box>

@@ -92,5 +92,38 @@
     "list": {
         "title": "Espaces",
         "add": "Ajouter"
+    },
+    "schedule": {
+        "addSlot": {
+            "label": "Ajouter une disponibilité :",
+            "placeholder": "Choisir le type de disponibilité",
+            "day": "Créneau ponctuel",
+            "period": "Période continue"
+        },
+        "slotType": "Matin / Après-midi",
+        "morning": "Matin",
+        "afternoon": "Après-midi",
+        "both": "Matin et après-midi",
+        "date": "Date du créneau",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "repeat": "Répéter",
+        "repeatNb": "Répéter les",
+        "repeatType": "Prochain.e.s",
+        "cancel": "retour",
+        "add": "Ajouter un créneau",
+        "slotsFilled": "créneaux renseignés",
+        "filledUntil": "Renseignés jusqu'au",
+        "available": "{{nb}} disponibles",
+        "bookings": "Réservations",
+        "requests": "Demandes",
+        "see": "voir",
+        "nbPending": "{{nb}} en attente",
+        "pending": "En attente",
+        "nbComing": "{{nb}} à venir",
+        "coming": "À venir",
+        "nbPassed": "{{nb}} passées",
+        "passed": "Passée",
+        "canceled": "Annulée"
     }
 }

@@ -185,4 +185,5 @@ const theme = extendTheme({
   },
 })
 
+// @ts-ignore
 export default extendTheme(theme)

@@ -10,20 +10,6 @@ const Button = {
   defaultProps: {
     colorScheme: 'orange',
   },
-  variants: {
-    outline: (props) => {
-      const style = {
-        border: '1px solid',
-      }
-      if (props.colorScheme === 'white') {
-        style['color'] = 'white'
-        style['_hover'] = {
-          bg: '#696969',
-        }
-      }
-      return style
-    },
-  },
   sizes: {
     md: {
       fontSize: 'md',

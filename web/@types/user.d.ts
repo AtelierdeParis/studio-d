@@ -6,6 +6,7 @@ export interface User {
   blocked: boolean
   confirmed: boolean
   email: string
+  type: 'company' | 'place'
   firstname: string
   lastname: string
   license: string
