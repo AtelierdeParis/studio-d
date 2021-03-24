@@ -11,6 +11,9 @@ module.exports = ({ env }) => {
           database: env("POSTGRESQL_ADDON_DB", "strapi"),
           username: env("POSTGRESQL_ADDON_USER", "strapi"),
           password: env("POSTGRESQL_ADDON_PASSWORD", "strapi"),
+          ssl: {
+            rejectUnauthorized: env.bool("POSTGRESQL_ADDON_SSL_SELF", false),
+          },
         },
         options: {
           autoMigration: true,
