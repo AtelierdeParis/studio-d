@@ -7,23 +7,27 @@ import {
   NumberDecrementStepper,
   NumberInputProps,
 } from '@chakra-ui/react'
+import { useController, Control } from 'react-hook-form'
 
 interface IInputNumber extends NumberInputProps {
-  register: () => void
+  control: Control
 }
 
-const InputNumber = ({ register, name, ...rest }: IInputNumber) => {
+const InputNumber = ({ control, name, ...rest }: IInputNumber) => {
+  const { field } = useController({
+    name,
+    control,
+  })
+
   return (
     <NumberInput
-      //   inputMode="decimal"
-      name={name}
       min={0.1}
       max={100}
       step={1}
       {...rest}
+      onChange={field.onChange}
     >
       <NumberInputField
-        ref={register}
         borderRadius="xs"
         border="1px solid"
         borderColor="gray.100"

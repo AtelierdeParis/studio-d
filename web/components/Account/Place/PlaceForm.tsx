@@ -105,16 +105,16 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
         )}
         <SimpleGrid columns={4} columnGap={5} rowGap={6} mb={14}>
           <FormField label={t('form.surface.label')} errors={errors.surface}>
-            <InputNumber name="surface" register={register} />
+            <InputNumber name="surface" control={control} />
           </FormField>
           <FormField label={t('form.length.label')} errors={errors.roomLength}>
-            <InputNumber name="roomLength" register={register} />
+            <InputNumber name="roomLength" control={control} />
           </FormField>
           <FormField label={t('form.width.label')} errors={errors.width}>
-            <InputNumber name="width" register={register} />
+            <InputNumber name="width" control={control} />
           </FormField>
           <FormField label={t('form.height.label')} errors={errors.height}>
-            <InputNumber name="height" register={register} />
+            <InputNumber name="height" control={control} />
           </FormField>
           <FormField label={t('form.mirror.label')} errors={errors.mirror}>
             <Select name="mirror" ref={register} placeholder={t('form.choose')}>
@@ -189,7 +189,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           </FormField>
         </HStack>
         <InputFile
-          register={register}
+          control={control}
           defaultValue={place?.files}
           control={control}
         />

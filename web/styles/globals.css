@@ -125,3 +125,14 @@ a {
 #calendar .fc-day-disabled {
   opacity: 0;
 }
+
+#calendar .fc-highlight {
+  border: 2px solid #283583;
+  border-radius: 8px;
+  background-color: #f4f5f9;
+}
+
+#calendar .fc-daygrid-event {
+  height: 100%;
+  padding: 0;
+}

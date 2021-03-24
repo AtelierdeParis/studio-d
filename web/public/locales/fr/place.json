@@ -100,7 +100,10 @@
             "day": "Créneau ponctuel",
             "period": "Période continue"
         },
-        "slotType": "Matin / Après-midi",
+        "slotType":{
+            "label": "Matin / Après-midi",
+            "placeholder": "Choisir une période"
+        },
         "morning": "Matin",
         "afternoon": "Après-midi",
         "both": "Matin et après-midi",
@@ -109,7 +112,13 @@
         "endDate": "Date de fin",
         "repeat": "Répéter",
         "repeatNb": "Répéter les",
-        "repeatType": "Prochain.e.s",
+        "repeatType": {
+            "label": "Prochain.e.s",
+            "placeholder": "Choisir une fréquence de répétition",
+            "day": "jours",
+            "week": "semaines",
+            "month": "mois"
+        },
         "cancel": "retour",
         "add": "Ajouter un créneau",
         "slotsFilled": "créneaux renseignés",

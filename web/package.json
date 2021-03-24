@@ -24,6 +24,7 @@
     "@svgr/webpack": "^5.5.0",
     "axios": "^0.21.1",
     "babel-plugin-transform-require-ignore": "^0.1.1",
+    "date-fns": "^2.19.0",
     "framer-motion": "^3.10.3",
     "handlebars": "^4.7.6",
     "leaflet": "^1.7.1",

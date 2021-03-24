@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Flex, Box } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import { useForm, FormProvider } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import ScheduleSlot from '~components/Account/Place/ScheduleSlot'
-import ScheduleForm from '~components/Account/Place/ScheduleForm'
+import ScheduleForm, { schema } from '~components/Account/Place/ScheduleForm'
+import { createScheduleEvents } from '~utils'
 
 const view = createPlugin({
   views: {
     custom: {
       type: 'dayGridMonth',
       eventContent: ({ event }) => {
-        return <ScheduleSlot type={event._def.extendedProps.type} />
+        // @ts-ignore
+        return <ScheduleSlot {...event._def.extendedProps} />
       },
     },
   },
@@ -21,59 +24,52 @@ const view = createPlugin({
 interface IPlaceSchedule {}
 
 const PlaceSchedule = ({}: IPlaceSchedule) => {
-  const { t } = useTranslation('place')
+  const form = useForm({
+    resolver: yupResolver(schema),
+  })
+  const formValues = form.watch()
+  const scheduleEvents = useMemo(() => createScheduleEvents(formValues), [
+    formValues,
+  ])
 
   const handleDateClick = (val) => {
     console.log(val)
   }
 
   return (
-    <Flex>
-      <Flex
-        w="600px"
-        backgroundColor="blue.100"
-        borderRadius="sm"
-        px={4}
-        id="calendar"
-      >
-        <FullCalendar
-          plugins={[dayGridPlugin, interactionPlugin, view]}
-          initialView="custom"
-          headerToolbar={{
-            start: 'prev',
-            center: 'title',
-            end: 'next',
-          }}
-          height="700px"
-          showNonCurrentDates={false}
-          dateClick={handleDateClick}
-          fixedWeekCount={false}
-          events={[
-            {
-              title: 'event 1',
-              date: '2021-03-01',
-              extendedProps: {
-                type: 'morning',
-              },
-            },
-            {
-              title: 'event 2',
-              date: '2021-03-02',
-              extendedProps: {
-                type: 'afternoon',
-              },
-            },
-            {
-              title: 'event 2',
-              date: '2021-03-03',
-            },
-          ]}
-        />
+    <FormProvider {...form}>
+      <Flex>
+        <Flex
+          w="600px"
+          backgroundColor="blue.100"
+          borderRadius="sm"
+          px={4}
+          id="calendar"
+        >
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin, view]}
+            initialView="custom"
+            headerToolbar={{
+              start: 'prev',
+              center: 'title',
+              end: 'next',
+            }}
+            selectable
+            height="700px"
+            dayCellContent={(day) => {
+              return <Box>{day.dayNumberText}</Box>
+            }}
+            showNonCurrentDates={false}
+            dateClick={handleDateClick}
+            fixedWeekCount={false}
+            events={scheduleEvents}
+          />
+        </Flex>
+        <Box flex={1} pl={8}>
+          <ScheduleForm />
+        </Box>
       </Flex>
-      <Box flex={1} pl={8}>
-        <ScheduleForm />
-      </Box>
-    </Flex>
+    </FormProvider>
   )
 }
 

@@ -7,23 +7,34 @@ enum SlotType {
   DAY = 'day',
 }
 
-const Event = ({ isBooked = false }) => {
+const styleSelected = {
+  borderColor: 'blue.500',
+  bgColor: 'blue.100',
+}
+
+const styleDefault = {
+  borderColor: 'transparent',
+  bgColor: '#e5e7ed',
+}
+
+const Event = ({ isSelected = false }) => {
   return (
     <Box
       h="100%"
-      bgColor={isBooked ? 'white' : '#e5e7ed'}
+      border="2px solid"
       w="100%"
       borderRadius="md"
+      {...(isSelected ? styleSelected : styleDefault)}
     />
   )
 }
 
-const getSlot = (type) => {
+const getSlot = ({ type, isSelected = false }: IScheduleSlot) => {
   switch (type) {
     case SlotType.MORNING:
       return (
         <>
-          <Event isBooked />
+          <Event isSelected={isSelected} />
           <Event />
         </>
       )
@@ -31,23 +42,24 @@ const getSlot = (type) => {
       return (
         <>
           <Event />
-          <Event isBooked />
+          <Event isSelected />
         </>
       )
 
     default:
-      return <Event isBooked />
+      return <Event isSelected />
   }
 }
 
 interface IScheduleSlot {
   type: SlotType
+  isSelected?: boolean
 }
 
-const ScheduleSlot = ({ type }: IScheduleSlot) => {
+const ScheduleSlot = (props: IScheduleSlot) => {
   return (
-    <VStack spacing={1} h="100%" bgColor="blue.100">
-      {getSlot(type)}
+    <VStack spacing={1} h="100%" bgColor="blue.100" w="100%">
+      {getSlot(props)}
     </VStack>
   )
 }
