@@ -9,13 +9,14 @@ import {
   FormControlProps,
 } from '@chakra-ui/react'
 
-interface IFormField extends FormControlProps {
+interface IFormField extends Omit<FormControlProps, 'label'> {
   label?: string | JSX.Element
   isRequired?: boolean
   info?: string
   children: React.ReactNode
   errors?: FieldError | null
 }
+
 const FormField = ({
   label = '',
   children,
