@@ -13,6 +13,7 @@ import {
 import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import SigninModal from '~components/Signin/SigninModal'
+import { useSession } from 'next-auth/client'
 
 const MenuItem = ({ href, text }) => {
   // const router = useRouter()
@@ -33,6 +34,7 @@ const MenuItem = ({ href, text }) => {
 }
 
 const FooterMenu = () => {
+  const [session, loading] = useSession()
   const { t } = useTranslation()
   return (
     <Box>
@@ -45,12 +47,14 @@ const FooterMenu = () => {
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
         </Box>
-        <Box pl={14}>
-          <MenuItem href={ROUTE_SIGNUP} text={t('nav.signup')} />
-          <SigninModal>
-            <ChakraLink textShadow="none">{t('nav.signin')}</ChakraLink>
-          </SigninModal>
-        </Box>
+        {!loading && !session && (
+          <Box pl={14}>
+            <MenuItem href={ROUTE_SIGNUP} text={t('nav.signup')} />
+            <SigninModal>
+              <ChakraLink textShadow="none">{t('nav.signin')}</ChakraLink>
+            </SigninModal>
+          </Box>
+        )}
       </Flex>
       <Divider my={5} opacity={0.5} />
       <Box>
