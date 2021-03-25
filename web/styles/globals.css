@@ -83,7 +83,6 @@ a {
 #calendar .fc-daygrid-day-frame {
   background-color: #e5e7ed;
   border-radius: 8px;
-  overflow: hidden;
   padding-top: 100%;
 }
 

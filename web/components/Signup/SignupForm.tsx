@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation, Trans } from 'next-i18next'
 import {
   VStack,
@@ -81,6 +81,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
     })
       .then(onSuccess)
       .catch((err) => {
+        console.log(err.response)
         if (err.response?.data?.message?.field) {
           setError(err.response.data.message.field, {
             type: 'manual',

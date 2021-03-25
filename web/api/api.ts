@@ -31,3 +31,6 @@ export const addFiles = (files, options: FileOptions) => {
 }
 
 export const deleteFile = (id) => client.delete(`/upload/files/${id}`)
+
+export const createDisponibility = (data) =>
+  client.post(`/disponibilities`, data)

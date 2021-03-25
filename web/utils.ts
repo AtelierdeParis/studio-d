@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/client'
+import { ScheduleEvent } from '~@types/schedule-event.d'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import addMonths from 'date-fns/addMonths'
 import addDays from 'date-fns/addDays'
@@ -16,18 +17,27 @@ export const requireAuth = (inner, opposite: boolean = false) => {
   }
 }
 
-const formatEvent = (date, type) => {
+const formatEvent = (start, type, end = null, status = 'selected') => {
   return {
-    date,
+    date: start,
+    end: end,
     extendedProps: {
       type,
-      isSelected: true,
+      status,
     },
   }
 }
 
-export const createScheduleEvents = (form) => {
-  const events = []
+export const createScheduleEvents = (
+  form,
+  disponibilities = [],
+): ScheduleEvent[] => {
+  const events = [
+    ...disponibilities.map((dispo) =>
+      formatEvent(dispo.start, dispo.type, dispo.end, 'available'),
+    ),
+  ]
+
   if (form.slot === 'day' && form.start !== '' && form.slotType) {
     const start = new Date(form.start)
     if (
@@ -51,7 +61,6 @@ export const createScheduleEvents = (form) => {
           break
         case 'month':
           const array = Array.from(Array(Number(form.repeatNb) + 1).keys())
-          console.log(array)
           range = array.map((nb) => addMonths(start, nb))
           break
       }

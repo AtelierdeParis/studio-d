@@ -3,25 +3,18 @@ const Tag = {
     subtle: {
       container: {
         backgroundColor: 'transparent',
-        border: '1px solid',
-        borderColor: 'black',
-        fontSize: 'xxs',
-        px: 4,
+        fontSize: 'md',
+        px: 1.5,
+        py: 1,
+        whiteSpace: 'pre',
+        lineHeight: 1,
       },
     },
   },
   sizes: {
-    sm: {
-      container: {
-        borderRadius: 0,
-        lineHeight: 1.9,
-      },
-    },
     md: {
       container: {
-        py: 2,
-        letterSpacing: 'wide',
-        borderRadius: 'sm',
+        borderRadius: 'xs',
       },
     },
   },

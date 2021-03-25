@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { Flex, Box } from '@chakra-ui/react'
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -7,8 +7,10 @@ import frLocale from '@fullcalendar/core/locales/fr'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ScheduleSlot from '~components/Account/Place/ScheduleSlot'
+import ScheduleInfo from '~components/Account/Place/ScheduleInfo'
 import ScheduleForm, { schema } from '~components/Account/Place/ScheduleForm'
 import { createScheduleEvents } from '~utils'
+import { Place } from '~@types/place.d'
 
 const view = createPlugin({
   views: {
@@ -22,21 +24,21 @@ const view = createPlugin({
   },
 })
 
-interface IPlaceSchedule {}
+interface IPlaceSchedule {
+  place: Place
+}
 
-const PlaceSchedule = ({}: IPlaceSchedule) => {
+const PlaceSchedule = ({ place }: IPlaceSchedule) => {
+  const [showForm, setShowForm] = useState(false)
   const form = useForm({
     resolver: yupResolver(schema),
   })
   const formValues = form.watch()
-  const scheduleEvents = useMemo(() => createScheduleEvents(formValues), [
-    formValues,
-  ])
-
-  const handleDateClick = (val) => {
-    console.log(val)
-  }
-
+  const scheduleEvents = useMemo(
+    () => createScheduleEvents(formValues, place?.disponibilities),
+    [formValues, place?.disponibilities],
+  )
+  console.log(scheduleEvents)
   return (
     <FormProvider {...form}>
       <Flex>
@@ -55,20 +57,29 @@ const PlaceSchedule = ({}: IPlaceSchedule) => {
               center: 'title',
               end: 'next',
             }}
-            selectable
             height="700px"
             dayCellContent={(day) => {
               return <Box>{day.dayNumberText}</Box>
             }}
             showNonCurrentDates={false}
-            dateClick={handleDateClick}
             fixedWeekCount={false}
             events={scheduleEvents}
             locale={frLocale}
           />
         </Flex>
         <Box flex={1} pl={8}>
-          <ScheduleForm />
+          {showForm ? (
+            <ScheduleForm
+              scheduleEvents={scheduleEvents}
+              place={place}
+              hideForm={() => setShowForm(false)}
+            />
+          ) : (
+            <ScheduleInfo
+              placeId={place?.id}
+              showForm={() => setShowForm(true)}
+            />
+          )}
         </Box>
       </Flex>
     </FormProvider>

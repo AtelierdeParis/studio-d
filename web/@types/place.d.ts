@@ -1,3 +1,11 @@
+import { ScheduleEventType } from './schedule-event'
+export interface Disponibility {
+  id: number
+  type: ScheduleEventType
+  start: Date
+  end: Date
+}
+
 export interface Place {
   id: number
   name: string
@@ -18,7 +26,9 @@ export interface Place {
   latitude: string
   longitude: string
   mirror: boolean
+  scheduleDetails: string
   users_permissions_user: number
   created_at: Date
   updated_at: Date
+  disponibilities: Disponibility[]
 }

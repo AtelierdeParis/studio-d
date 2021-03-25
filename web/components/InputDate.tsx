@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const CustomInput = forwardRef(({ value, onClick }, ref) => (
   <Input
+    autoComplete="none"
     onClick={onClick}
     onChange={() => null}
     ref={ref}
@@ -28,6 +29,7 @@ const InputDate = ({ name, control }: IInputDate) => {
   return (
     <Box w="100" className="studiod-date">
       <DatePicker
+        dateFormat="dd/MM/yyyy"
         style={{ width: '100%' }}
         selected={field.value}
         onChange={(date) => field.onChange(date)}

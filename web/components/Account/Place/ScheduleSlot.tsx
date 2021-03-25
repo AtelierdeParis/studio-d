@@ -1,15 +1,15 @@
 import React from 'react'
 import { Box, VStack } from '@chakra-ui/react'
-
-enum SlotType {
-  MORNING = 'morning',
-  AFTERNOON = 'afternoon',
-  DAY = 'day',
-}
+import { ScheduleEventType } from '~@types/schedule-event.d'
 
 const styleSelected = {
   borderColor: 'blue.500',
   bgColor: 'blue.100',
+}
+
+const styleAvailable = {
+  borderColor: 'white',
+  bgColor: 'white',
 }
 
 const styleDefault = {
@@ -17,43 +17,54 @@ const styleDefault = {
   bgColor: '#e5e7ed',
 }
 
-const Event = ({ isSelected = false }) => {
+const getStyle = (status) => {
+  switch (status) {
+    case 'selected':
+      return styleSelected
+    case 'available':
+      return styleAvailable
+    default:
+      return styleDefault
+  }
+}
+
+const Event = ({ status = null }) => {
   return (
     <Box
       h="100%"
       border="2px solid"
       w="100%"
       borderRadius="md"
-      {...(isSelected ? styleSelected : styleDefault)}
+      {...getStyle(status)}
     />
   )
 }
 
-const getSlot = ({ type, isSelected = false }: IScheduleSlot) => {
+const getSlot = ({ type, status }: IScheduleSlot) => {
   switch (type) {
-    case SlotType.MORNING:
+    case ScheduleEventType.MORNING:
       return (
         <>
-          <Event isSelected={isSelected} />
+          <Event status={status} />
           <Event />
         </>
       )
-    case SlotType.AFTERNOON:
+    case ScheduleEventType.AFTERNOON:
       return (
         <>
           <Event />
-          <Event isSelected />
+          <Event status={status} />
         </>
       )
 
     default:
-      return <Event isSelected />
+      return <Event status={status} />
   }
 }
 
 interface IScheduleSlot {
-  type: SlotType
-  isSelected?: boolean
+  type: ScheduleEventType
+  status?: 'selected' | 'available'
 }
 
 const ScheduleSlot = (props: IScheduleSlot) => {

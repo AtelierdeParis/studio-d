@@ -3,7 +3,6 @@ import { useTranslation } from 'next-i18next'
 import {
   HStack,
   Box,
-  Input,
   VStack,
   Button,
   Flex,
@@ -16,7 +15,10 @@ import InputDate from '~components/InputDate'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
+import { ScheduleEvent, ScheduleEventType } from '~@types/schedule-event.d'
 import { Place } from '~@types/place.d'
+import { createDisponibility } from '~api/api'
+import useToast from '~hooks/useToast'
 
 export const schema = yup.object().shape({
   slot: yup.string().required(),
@@ -40,27 +42,63 @@ export const schema = yup.object().shape({
   }),
 })
 
-interface IScheduleForm {}
+interface IScheduleForm {
+  scheduleEvents?: ScheduleEvent[]
+  place: Place
+  hideForm: () => void
+}
 
-const ScheduleForm = ({}: IScheduleForm) => {
+const ScheduleForm = ({
+  scheduleEvents = [],
+  place,
+  hideForm,
+}: IScheduleForm) => {
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
-
+  const { errorToast, successToast } = useToast()
   const { register, errors, handleSubmit, watch, control } = useFormContext()
-
   const { slot, repeat } = watch(['slot', 'repeat'])
-  console.log(errors)
-  const submitForm = (values) => {
-    console.log(values)
-    // setLoading(true)
-    // onSubmit(values)
-    //   .then((res) => {
-    //     reset({
-    //       ...res,
-    //       removedFiles: [],
-    //     })
-    //   })
-    //   .finally(() => setLoading(false))
+
+  const submitForm = async (data) => {
+    if (scheduleEvents.length === 0) return
+
+    const events = []
+    const defaultEvent = {
+      type: data.slotType || ScheduleEventType.FULL,
+      start: data.start,
+      end: data.end || data.start,
+    }
+    const lastEvent = scheduleEvents[scheduleEvents.length - 1]
+
+    if (data.slot === 'day' && data.repeat) {
+      if (data.repeatType === 'day') {
+        defaultEvent.end = lastEvent.date
+        events.push(defaultEvent)
+      } else if (data.repeatType === 'week' || data.repeatType === 'month') {
+        scheduleEvents.map((event) => {
+          events.push({
+            type: data.slotType,
+            start: event.date,
+            end: event.date,
+          })
+        })
+      }
+    } else {
+      events.push(defaultEvent)
+    }
+
+    setLoading(true)
+    Promise.all(
+      events.map((event) =>
+        createDisponibility({ ...event, espace: place.id }),
+      ),
+    )
+      .then(() => {
+        successToast(t('schedule.success'))
+        hideForm()
+      })
+      .catch(() => errorToast(t('schedule.error')))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -88,9 +126,15 @@ const ScheduleForm = ({}: IScheduleForm) => {
                   ref={register}
                   placeholder={t('schedule.slotType.placeholder')}
                 >
-                  <option value="morning">{t('schedule.morning')}</option>
-                  <option value="afternoon">{t('schedule.afternoon')}</option>
-                  <option value="both">{t('schedule.both')}</option>
+                  <option value={ScheduleEventType.MORNING}>
+                    {t('schedule.morning')}
+                  </option>
+                  <option value={ScheduleEventType.AFTERNOON}>
+                    {t('schedule.afternoon')}
+                  </option>
+                  <option value={ScheduleEventType.FULL}>
+                    {t('schedule.both')}
+                  </option>
                 </Select>
               </FormField>
             )}
@@ -119,9 +163,10 @@ const ScheduleForm = ({}: IScheduleForm) => {
                   name="repeat"
                   ref={register}
                   size="lg"
+                  id="repeat"
                   borderColor="grayText.1"
                 />
-                <FormLabel m={0} pl={3}>
+                <FormLabel m={0} pl={3} htmlFor="repeat">
                   {t(`schedule.repeat`)}
                 </FormLabel>
               </Flex>
@@ -155,26 +200,21 @@ const ScheduleForm = ({}: IScheduleForm) => {
                   </FormField>
                 </HStack>
               )}
-              <Flex
-                justifyContent="flex-end"
-                mt={18}
-                alignItems="center"
-                w="100%"
-              >
-                <Button variant="unstyled" mr={5} color="gray.500">
-                  {t(`schedule.cancel`)}
-                </Button>
-                <Button
-                  size="lg"
-                  type="submit"
-                  isLoading={isLoading}
-                  // isDisabled={Object.keys(formState.dirtyFields).length === 0}
-                >
-                  {t(`list.add`)}
-                </Button>
-              </Flex>
             </>
           )}
+          <Flex justifyContent="flex-end" mt={18} alignItems="center" w="100%">
+            <Button
+              variant="unstyled"
+              mr={5}
+              color="gray.500"
+              onClick={hideForm}
+            >
+              {t(`schedule.cancel`)}
+            </Button>
+            <Button size="lg" type="submit" isLoading={isLoading}>
+              {t(`list.add`)}
+            </Button>
+          </Flex>
         </VStack>
       </form>
     </Box>
