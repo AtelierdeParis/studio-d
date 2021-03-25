@@ -33,6 +33,22 @@ a {
   box-sizing: border-box;
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+.react-datepicker .react-datepicker__header {
+  background-color: #f4f5f9;
+  border-bottom: 1px solid #dfe1ed;
+}
+.react-datepicker .react-datepicker__day--selected,
+.react-datepicker .react-datepicker__day--keyboard-selected,
+.react-datepicker .react-datepicker__day--keyboard-selected:hover,
+.react-datepicker .react-datepicker__day--selected:hover {
+  background-color: #e84e10;
+}
+.react-datepicker .react-datepicker__triangle {
+  display: none;
+}
 .fc,
 .fc-col-header,
 .fc-daygrid-body,

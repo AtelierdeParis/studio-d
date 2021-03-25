@@ -3,6 +3,7 @@ import { Flex, Box } from '@chakra-ui/react'
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import frLocale from '@fullcalendar/core/locales/fr'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import ScheduleSlot from '~components/Account/Place/ScheduleSlot'
@@ -63,6 +64,7 @@ const PlaceSchedule = ({}: IPlaceSchedule) => {
             dateClick={handleDateClick}
             fixedWeekCount={false}
             events={scheduleEvents}
+            locale={frLocale}
           />
         </Flex>
         <Box flex={1} pl={8}>

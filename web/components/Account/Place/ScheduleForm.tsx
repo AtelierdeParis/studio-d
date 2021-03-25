@@ -12,38 +12,35 @@ import {
   Checkbox,
 } from '@chakra-ui/react'
 import InputNumber from '~components/InputNumber'
+import InputDate from '~components/InputDate'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
 import { Place } from '~@types/place.d'
 
 export const schema = yup.object().shape({
-  // name: !place ? yup.string().required() : null,
-  surface: yup.number().required(),
-  // roomLength: yup.number().required(),
-  // width: yup.number().required(),
-  // height: yup.number().required(),
-  // mirror: yup.string().required(),
-  // danceBar: yup.string().required(),
-  // accomodation: yup.string().required(),
-  // technicalStaff: yup.string().required(),
-  // floor: yup.string().required(),
-  // address: yup.string().required(),
-  // latitude: yup.string().required(),
-  // longitude: yup.string().required(),
-  // otherFloor: yup.string().when('floor', {
-  //   is: 'other',
-  //   then: yup.string().required(),
-  // }),
+  slot: yup.string().required(),
+  slotType: yup.string().when('slot', {
+    is: 'day',
+    then: yup.string().required(),
+  }),
+  start: yup.date().required(),
+  end: yup.date().when('slot', {
+    is: 'period',
+    then: yup.date().required(),
+  }),
+  repeat: yup.boolean(),
+  repeatNb: yup.number().when('repeat', {
+    is: true,
+    then: yup.number().required(),
+  }),
+  repeatType: yup.string().when('repeat', {
+    is: true,
+    then: yup.string().required(),
+  }),
 })
 
 interface IScheduleForm {}
-
-const getDefaultValues = (place) => {
-  if (!place) return {}
-  const { files, name, ...placeAttributes } = place
-  return placeAttributes
-}
 
 const ScheduleForm = ({}: IScheduleForm) => {
   const { t } = useTranslation('place')
@@ -52,8 +49,9 @@ const ScheduleForm = ({}: IScheduleForm) => {
   const { register, errors, handleSubmit, watch, control } = useFormContext()
 
   const { slot, repeat } = watch(['slot', 'repeat'])
-
+  console.log(errors)
   const submitForm = (values) => {
+    console.log(values)
     // setLoading(true)
     // onSubmit(values)
     //   .then((res) => {
@@ -69,7 +67,7 @@ const ScheduleForm = ({}: IScheduleForm) => {
     <Box>
       <form onSubmit={handleSubmit(submitForm)}>
         <VStack spacing={5} alignItems="flex-start">
-          <HStack spacing={5} w="100%">
+          <HStack spacing={5} w="100%" alignItems="flex-start">
             <FormField label={t('schedule.addSlot.label')} errors={errors.slot}>
               <Select
                 name="slot"
@@ -99,9 +97,23 @@ const ScheduleForm = ({}: IScheduleForm) => {
           </HStack>
           {Boolean(slot) && (
             <>
-              <FormField label={t('schedule.date')} errors={errors.date}>
-                <Input type="text" name="date" ref={register} />
-              </FormField>
+              <HStack spacing={5} w="100%" alignItems="flex-start">
+                <FormField
+                  label={
+                    slot === 'period'
+                      ? t('schedule.startDate')
+                      : t('schedule.date')
+                  }
+                  errors={errors.start}
+                >
+                  <InputDate name="start" control={control} />
+                </FormField>
+                {slot === 'period' && (
+                  <FormField label={t('schedule.endDate')} errors={errors.end}>
+                    <InputDate name="end" control={control} />
+                  </FormField>
+                )}
+              </HStack>
               <Flex alignItems="center">
                 <Checkbox
                   name="repeat"
@@ -114,7 +126,7 @@ const ScheduleForm = ({}: IScheduleForm) => {
                 </FormLabel>
               </Flex>
               {repeat && (
-                <HStack spacing={5} w="100%">
+                <HStack spacing={5} w="100%" alignItems="flex-start">
                   <FormField
                     label={t('schedule.repeatNb')}
                     errors={errors.repeatNb}

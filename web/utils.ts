@@ -28,8 +28,8 @@ const formatEvent = (date, type) => {
 
 export const createScheduleEvents = (form) => {
   const events = []
-  if (form.slot === 'day' && form.date !== '' && form.slotType) {
-    const start = new Date(form.date)
+  if (form.slot === 'day' && form.start !== '' && form.slotType) {
+    const start = new Date(form.start)
     if (
       form.repeat &&
       form.repeatNb &&
@@ -57,8 +57,21 @@ export const createScheduleEvents = (form) => {
       }
       range.map((date) => events.push(formatEvent(date, form.slotType)))
     } else {
-      events.push(formatEvent(form.date, form.slotType))
+      events.push(formatEvent(start, form.slotType))
     }
+  } else if (
+    form.slot === 'period' &&
+    Boolean(form.start) &&
+    Boolean(form.end)
+  ) {
+    let range = []
+    const start = new Date(form.start)
+    const end = new Date(form.end)
+    range = eachDayOfInterval({
+      start,
+      end,
+    })
+    range.map((date) => events.push(formatEvent(date, form.slotType)))
   }
 
   return events

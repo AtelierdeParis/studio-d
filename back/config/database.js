@@ -1,4 +1,5 @@
 module.exports = ({ env }) => {
+  const SSL = env.bool("POSTGRESQL_ADDON_SSL_SELF", false);
   return {
     defaultConnection: "default",
     connections: {
@@ -11,8 +12,8 @@ module.exports = ({ env }) => {
           database: env("POSTGRESQL_ADDON_DB", "strapi"),
           username: env("POSTGRESQL_ADDON_USER", "strapi"),
           password: env("POSTGRESQL_ADDON_PASSWORD", "strapi"),
-          ssl: {
-            rejectUnauthorized: env.bool("POSTGRESQL_ADDON_SSL_SELF", false),
+          ssl: SSL && {
+            rejectUnauthorized: SSL,
           },
         },
         options: {
