@@ -496,29 +496,39 @@ module.exports = {
 
     try {
       if (!settings.email_confirmation) {
-        params.confirmed = true;
+        params.confirmed = false;
       }
 
-      const { company, place, ...userProps } = params;
-      if (!company && !place)
+      if (
+        params.type === "place" &&
+        (!Boolean(params.legalRepresentative) ||
+          !Boolean(params.statusRepresentative))
+      )
         return ctx.badRequest(
           null,
           formatError({
-            id: "Auth.form.error.user.type",
-            message: "User type is not provided",
+            id: "Auth.form.error.user.place",
+            message: "Missing place field",
           })
         );
-      const type = Boolean(company) ? "company" : "place";
+
+      if (
+        params.type === "company" &&
+        (!Boolean(params.choreographer) ||
+          !Boolean(params.insuranceNumber) ||
+          !Boolean(params.insuranceName))
+      )
+        return ctx.badRequest(
+          null,
+          formatError({
+            id: "Auth.form.error.user.place",
+            message: "Missing company field",
+          })
+        );
 
       const user = await strapi
         .query("user", "users-permissions")
-        .create(userProps);
-
-      // Company or Place
-      const userType = strapi.services[type].create({
-        ...ctx.request.body[type],
-        user: user.id,
-      });
+        .create(params);
 
       const sanitizedUser = sanitizeEntity(user, {
         model: strapi.query("user", "users-permissions").model,
