@@ -1,13 +1,19 @@
-export enum ScheduleEventType {
+export enum ScheduleEventWhen {
   MORNING = 'morning',
-  AFTERNOON = 'morning',
+  AFTERNOON = 'afternoon',
   FULL = 'full',
+}
+
+export enum ScheduleEventType {
+  PUNCTUAL = 'punctual',
+  DAY = 'day',
+  PERIOD = 'period',
 }
 
 export interface ScheduleEvent {
   date: Date
   extendedProps: {
-    type: ScheduleEventType
+    type: ScheduleEventWhen
     isSelected?: boolean
   }
 }

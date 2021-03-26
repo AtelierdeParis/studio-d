@@ -75,7 +75,7 @@ const EditPlace = ({ placeId }: IEditPlace) => {
               <PlaceImage place={place} />
             </TabPanel>
             <TabPanel px={0}>
-              <PlaceSchedule place={place} />
+              <PlaceSchedule placeId={placeId} />
             </TabPanel>
           </TabPanels>
         </Tabs>

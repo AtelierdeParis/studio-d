@@ -5,23 +5,33 @@ import fr from 'date-fns/locale/fr'
 import { useController, Control } from 'react-hook-form'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const CustomInput = forwardRef(({ value, onClick }, ref) => (
-  <Input
-    autoComplete="none"
-    onClick={onClick}
-    onChange={() => null}
-    ref={ref}
-    value={value}
-    w="100%"
-  />
-))
+const CustomInput = forwardRef(({ value, onClick, isDisabled }, ref) => {
+  return (
+    <Input
+      isDisabled={isDisabled}
+      autoComplete="none"
+      onClick={onClick}
+      onChange={() => null}
+      ref={ref}
+      value={value}
+      w="100%"
+    />
+  )
+})
 
 interface IInputDate {
   name: string
   control: Control
+  minDate?: Date
+  isDisabled?: boolean
 }
 
-const InputDate = ({ name, control }: IInputDate) => {
+const InputDate = ({
+  name,
+  control,
+  minDate = null,
+  isDisabled = false,
+}: IInputDate) => {
   const { field } = useController({
     name,
     control,
@@ -33,8 +43,10 @@ const InputDate = ({ name, control }: IInputDate) => {
         style={{ width: '100%' }}
         selected={field.value}
         onChange={(date) => field.onChange(date)}
-        customInput={<CustomInput />}
+        customInput={<CustomInput isDisabled={isDisabled} />}
         locale={fr}
+        minDate={minDate}
+        disabled={isDisabled}
       />
     </Box>
   )

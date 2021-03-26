@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/bulk/disponibilities",
+      "handler": "disponibility.createMany",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/disponibilities/:id",
       "handler": "disponibility.update",

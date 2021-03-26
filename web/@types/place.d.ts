@@ -1,10 +1,5 @@
-import { ScheduleEventType } from './schedule-event'
-export interface Disponibility {
-  id: number
-  type: ScheduleEventType
-  start: Date
-  end: Date
-}
+import { ScheduleEventWhen } from './schedule-event'
+import { Disponibility } from './disponibility'
 
 export interface Place {
   id: number

@@ -62,6 +62,12 @@ a {
   font-family: 'mabry medium';
 }
 
+#calendar .fc .fc-button-primary {
+  background-color: transparent;
+  border-color: transparent;
+  color: black;
+}
+
 #calendar .fc-header-toolbar {
   border-bottom: 1px solid rgba(40, 53, 131, 0.1);
   padding: 15px 0;
@@ -75,6 +81,7 @@ a {
   border: none;
   padding: 4px;
   position: relative;
+  height: 65px;
 }
 #calendar .fc-scrollgrid-sync-table {
   height: auto !important;
@@ -116,6 +123,8 @@ a {
   left: 0;
   bottom: 0;
   margin-top: 0;
+  display: flex;
+  flex-direction: column;
 }
 #calendar .fc-daygrid-day-number {
   position: absolute;
@@ -130,9 +139,11 @@ a {
   border: 0px solid transparent;
   height: 100%;
 }
-#calendar .fc-event-main,
-#calendar .fc-daygrid-event-harness {
+#calendar .fc-event-main {
   height: 100%;
+}
+#calendar .fc-daygrid-event-harness {
+  flex: 1;
 }
 #calendar .fc-day-today {
   background-color: transparent;

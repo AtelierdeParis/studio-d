@@ -96,13 +96,14 @@
     "schedule": {
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
         "success": "Une nouvelle disponibilité a été ajouté",
-        "addSlot": {
+        "type": {
             "label": "Ajouter une disponibilité :",
             "placeholder": "Choisir le type de disponibilité",
-            "day": "Créneau ponctuel",
+            "punctual": "Créneau ponctuel",
+            "day": "Journée entière",
             "period": "Période continue"
         },
-        "slotType":{
+        "when":{
             "label": "Matin / Après-midi",
             "placeholder": "Choisir une période"
         },

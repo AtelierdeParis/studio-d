@@ -1,4 +1,5 @@
 import { client } from './client-api'
+import { Disponibility } from '~@types/disponibility'
 
 export const createMessage = (data) => client.post('/messages', data)
 
@@ -32,5 +33,5 @@ export const addFiles = (files, options: FileOptions) => {
 
 export const deleteFile = (id) => client.delete(`/upload/files/${id}`)
 
-export const createDisponibility = (data) =>
-  client.post(`/disponibilities`, data)
+export const createManyDisponibilities = (data: Disponibility[]) =>
+  client.post<Disponibility[]>(`/bulk/disponibilities`, data)

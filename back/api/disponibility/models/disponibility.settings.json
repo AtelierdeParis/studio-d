@@ -11,14 +11,14 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "type": {
+    "when": {
       "type": "enumeration",
       "enum": [
         "morning",
         "afternoon",
         "full"
       ],
-      "required": true
+      "required": false
     },
     "start": {
       "type": "date",
@@ -29,8 +29,17 @@
       "required": true
     },
     "espace": {
-      "via": "disponibilities",
-      "model": "espace"
+      "model": "espace",
+      "via": "disponibilities"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "punctual",
+        "day",
+        "period"
+      ],
+      "required": true
     }
   }
 }

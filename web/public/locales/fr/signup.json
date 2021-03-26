@@ -65,7 +65,8 @@
         "choreographer": "Nom du·de la chorégraphe",
         "insuranceName": "Nom de la police d’assurance",
         "insuranceNumber": "Numéro de la police d’assurance",
-        "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.\n\nAprès inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
+        "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.",
+        "condition2": "Après inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
         "btn": "Poursuivre",
         "error": {
             "default": "Impossible de procéder à l'inscription"

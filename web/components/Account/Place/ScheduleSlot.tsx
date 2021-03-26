@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, VStack } from '@chakra-ui/react'
-import { ScheduleEventType } from '~@types/schedule-event.d'
+import { ScheduleEventWhen } from '~@types/schedule-event.d'
 
 const styleSelected = {
   borderColor: 'blue.500',
@@ -28,43 +28,46 @@ const getStyle = (status) => {
   }
 }
 
-const Event = ({ status = null }) => {
+const Event = ({ status = null, when = null }) => {
   return (
     <Box
-      h="100%"
+      flex={1}
       border="2px solid"
       w="100%"
       borderRadius="md"
+      mb={when === ScheduleEventWhen.MORNING ? 0.5 : 0}
+      mt={when === ScheduleEventWhen.AFTERNOON ? 0.5 : 0}
       {...getStyle(status)}
     />
   )
 }
 
-const getSlot = ({ type, status }: IScheduleSlot) => {
-  switch (type) {
-    case ScheduleEventType.MORNING:
+const getSlot = ({ when, status, hasEventSameDay }: IScheduleSlot) => {
+  switch (when) {
+    case ScheduleEventWhen.MORNING:
       return (
         <>
-          <Event status={status} />
-          <Event />
+          <Event status={status} when={when} />
+          {!hasEventSameDay && <Event />}
         </>
       )
-    case ScheduleEventType.AFTERNOON:
+    case ScheduleEventWhen.AFTERNOON:
       return (
         <>
-          <Event />
-          <Event status={status} />
+          {!hasEventSameDay && <Event />}
+          <Event status={status} when={when} />
         </>
       )
 
     default:
-      return <Event status={status} />
+      return <Event status={status} when={when} />
   }
 }
 
 interface IScheduleSlot {
-  type: ScheduleEventType
+  when: ScheduleEventWhen
   status?: 'selected' | 'available'
+  hasEventSameDay?: boolean
 }
 
 const ScheduleSlot = (props: IScheduleSlot) => {

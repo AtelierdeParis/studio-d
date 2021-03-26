@@ -1,14 +1,17 @@
 import React from 'react'
 import { updatePlace } from '~api/api'
-import { usePlace } from '~hooks/usePlace'
 import { useQueryClient } from 'react-query'
 import { Box, Textarea } from '@chakra-ui/react'
 import FormField from '~components/FormField'
 import { useTranslation } from 'next-i18next'
+import { Place } from '~@types/place'
 
-const ScheduleAbout = ({ placeId }) => {
+interface IScheduleAbout {
+  place: Place
+}
+
+const ScheduleAbout = ({ place }: IScheduleAbout) => {
   const { t } = useTranslation('place')
-  const { data: place } = usePlace(placeId)
   const queryClient = useQueryClient()
 
   const saveDetails = (event) => {
@@ -28,6 +31,7 @@ const ScheduleAbout = ({ placeId }) => {
           mt={1}
           maxH="300px"
           minH="110px"
+          defaultValue={place?.scheduleDetails}
           placeholder={t('schedule.scheduleDetails.placeholder')}
           onBlur={saveDetails}
         />

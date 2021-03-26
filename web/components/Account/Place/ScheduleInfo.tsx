@@ -14,26 +14,24 @@ import Link from '~components/Link'
 import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
 import { useTranslation } from 'next-i18next'
 import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
-import { usePlace } from '~hooks/usePlace'
+import { Place } from '~@types/place'
 import max from 'date-fns/max'
 import format from 'date-fns/format'
 
 interface IScheduleInfo {
-  placeId: number
+  place: Place
   showForm: () => void
 }
 
-const ScheduleInfo = ({ placeId, showForm }: IScheduleInfo) => {
+const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
   const { t } = useTranslation('place')
-  const { data: place } = usePlace(placeId)
 
-  const nbDispo = useMemo(
-    () =>
-      place?.disponibilities && place.disponibilities.length > 0
-        ? place.disponibilities.length
-        : 0,
-    [place?.disponibilities],
-  )
+  const { nbDispo } = useMemo(() => {
+    return {
+      nbDispo: place?.disponibilities?.length || 0,
+      nbAvailable: 0,
+    }
+  }, [place?.disponibilities])
 
   const filledUntil = useMemo(() => {
     if (!place?.disponibilities || place.disponibilities.length === 0)
@@ -101,7 +99,7 @@ const ScheduleInfo = ({ placeId, showForm }: IScheduleInfo) => {
           </Box>
         </VStack>
       </Flex>
-      <ScheduleAbout placeId={placeId} />
+      <ScheduleAbout place={place} />
     </Box>
   )
 }
