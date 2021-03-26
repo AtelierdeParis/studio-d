@@ -145,6 +145,9 @@ a {
 #calendar .fc-daygrid-event-harness {
   flex: 1;
 }
+#calendar .fc-daygrid-event-harness-abs {
+  height: 100%;
+}
 #calendar .fc-day-today {
   background-color: transparent;
 }

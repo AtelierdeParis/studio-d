@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'next-i18next'
-import {
-  HStack,
-  Box,
-  VStack,
-  Button,
-  Flex,
-  FormLabel,
-  Select,
-  Checkbox,
-} from '@chakra-ui/react'
-import InputNumber from '~components/InputNumber'
+import { HStack, Box, VStack, Button, Flex, Select } from '@chakra-ui/react'
 import ScheduleDates from '~components/Account/Place/ScheduleDates'
+import ScheduleRepeat from '~components/Account/Place/ScheduleRepeat'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
@@ -66,16 +57,20 @@ const ScheduleForm = ({ newEvents = [], place, hideForm }: IScheduleForm) => {
     if (newEvents.length === 0) return
     const events = []
 
-    if ([ScheduleEventType.PUNCTUAL, ScheduleEventType.DAY].includes(type)) {
+    if (
+      [
+        ScheduleEventType.PUNCTUAL,
+        ScheduleEventType.DAY,
+        ScheduleEventType.PERIOD,
+      ].includes(type)
+    ) {
       if (repeat) {
         newEvents.map((event) => {
-          events.push(createDbEvent(type, event.date, when))
+          events.push(createDbEvent(type, event.start, when, event.end))
         })
       } else {
-        events.push(createDbEvent(type, start, when))
+        events.push(createDbEvent(type, start, when, end))
       }
-    } else if (type === ScheduleEventType.PERIOD) {
-      events.push(createDbEvent(type, start, null, end))
     }
 
     if (events.flat().length === 0) return
@@ -144,48 +139,7 @@ const ScheduleForm = ({ newEvents = [], place, hideForm }: IScheduleForm) => {
           {Boolean(type) && (
             <>
               <ScheduleDates control={control} />
-              <Flex alignItems="center">
-                <Checkbox
-                  name="repeat"
-                  ref={register}
-                  size="lg"
-                  id="repeat"
-                  borderColor="grayText.1"
-                />
-                <FormLabel m={0} pl={3} htmlFor="repeat">
-                  {t(`schedule.repeat`)}
-                </FormLabel>
-              </Flex>
-              {repeat && (
-                <HStack spacing={5} w="100%" alignItems="flex-start">
-                  <FormField
-                    label={t('schedule.repeatNb')}
-                    errors={errors.repeatNb}
-                  >
-                    <InputNumber name="repeatNb" control={control} />
-                  </FormField>
-                  <FormField
-                    label={t('schedule.repeatType.label')}
-                    errors={errors.repeatType}
-                  >
-                    <Select
-                      name="repeatType"
-                      ref={register}
-                      placeholder={t('schedule.repeatType.placeholder')}
-                    >
-                      <option value="day">
-                        {t('schedule.repeatType.day')}
-                      </option>
-                      <option value="week">
-                        {t('schedule.repeatType.week')}
-                      </option>
-                      <option value="month">
-                        {t('schedule.repeatType.month')}
-                      </option>
-                    </Select>
-                  </FormField>
-                </HStack>
-              )}
+              <ScheduleRepeat control={control} />
             </>
           )}
           <Flex justifyContent="flex-end" mt={18} alignItems="center" w="100%">

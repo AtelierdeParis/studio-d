@@ -48,8 +48,7 @@ const Schedule = ({ events }: ISchedule) => {
           const hasEventSameDay = events.some(({ start, extendedProps }) => {
             return (
               extendedProps.when !== event.extendedProps.when &&
-              // @ts-ignore
-              isSameDay(new Date(start), new Date(event.start))
+              isSameDay(new Date(start), new Date(event.start as string))
             )
           })
           return {
@@ -62,6 +61,7 @@ const Schedule = ({ events }: ISchedule) => {
         }}
         showNonCurrentDates={false}
         fixedWeekCount={false}
+        nextDayThreshold="00:00"
         events={events}
         locale={frLocale}
       />

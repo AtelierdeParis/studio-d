@@ -5,6 +5,7 @@ import addMonths from 'date-fns/addMonths'
 import addDays from 'date-fns/addDays'
 import addWeeks from 'date-fns/addWeeks'
 import isBefore from 'date-fns/isBefore'
+import setHours from 'date-fns/setHours'
 
 export const requireAuth = (inner, opposite: boolean = false) => {
   return async (context) => {
@@ -25,8 +26,8 @@ export const createScheduleEventObj = (
   status = 'selected',
 ) => {
   return {
-    start,
-    end,
+    start: new Date(start),
+    end: end ? setHours(new Date(end), 12) : null,
     extendedProps: {
       when,
       status,
@@ -34,7 +35,7 @@ export const createScheduleEventObj = (
   }
 }
 
-const repeatEvent = (start, repeatNb, repeatType) => {
+const repeatDailyEvent = (start, repeatNb, repeatType) => {
   let range = []
 
   switch (repeatType) {
@@ -58,45 +59,72 @@ const repeatEvent = (start, repeatNb, repeatType) => {
   return range
 }
 
+const repeatPeriodEvent = (start, end, repeatNb, repeatType) => {
+  let range = []
+  const arrayRepetition = Array.from(Array(Number(repeatNb) + 1).keys())
+
+  switch (repeatType) {
+    case 'week':
+      range = arrayRepetition.map((nb) => ({
+        start: addWeeks(start, nb),
+        end: addWeeks(end, nb),
+      }))
+      break
+    case 'month':
+      range = arrayRepetition.map((nb) => ({
+        start: addMonths(start, nb),
+        end: addMonths(end, nb),
+      }))
+      break
+  }
+  return range
+}
+
 export const createScheduleEvents = (form) => {
   const events = []
-
   if (!form.start || form.start === '') return events
-  const start = new Date(form.start)
+  const start = form.start
+  const end = form.end || null
 
   const isRepeatable =
     form.repeat &&
     form.repeatNb &&
     ['day', 'week', 'month'].includes(form.repeatType)
 
-  if (form.type === ScheduleEventType.PUNCTUAL && form.when) {
+  if (
+    (form.type === ScheduleEventType.PUNCTUAL && form.when) ||
+    form.type === ScheduleEventType.DAY
+  ) {
     if (isRepeatable) {
-      const repeatedEvents = repeatEvent(start, form.repeatNb, form.repeatType)
+      const repeatedEvents = repeatDailyEvent(
+        start,
+        form.repeatNb,
+        form.repeatType,
+      )
       repeatedEvents.map((date) =>
         events.push(createScheduleEventObj(date, form.when)),
       )
     } else {
       events.push(createScheduleEventObj(start, form.when))
     }
-  } else if (form.type === ScheduleEventType.DAY) {
-    if (isRepeatable) {
-      const repeatedEvents = repeatEvent(start, form.repeatNb, form.repeatType)
-      repeatedEvents.map((date) => events.push(createScheduleEventObj(date)))
-    } else {
-      events.push(createScheduleEventObj(start))
-    }
   } else if (
     form.type === ScheduleEventType.PERIOD &&
-    Boolean(form.end) &&
-    isBefore(start, new Date(form.end))
+    end &&
+    isBefore(start, end)
   ) {
-    let range = []
-    range = eachDayOfInterval({
-      start,
-      end: new Date(form.end),
-    })
-
-    range.map((date) => events.push(createScheduleEventObj(date, form.when)))
+    if (isRepeatable) {
+      const repeatedEvents = repeatPeriodEvent(
+        start,
+        end,
+        form.repeatNb,
+        form.repeatType,
+      )
+      repeatedEvents.map(({ start, end }) =>
+        events.push(createScheduleEventObj(start, null, end)),
+      )
+    } else {
+      events.push(createScheduleEventObj(start, null, end))
+    }
   }
   return events
 }

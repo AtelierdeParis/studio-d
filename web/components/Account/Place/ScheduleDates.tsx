@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next'
 import { ScheduleEventType } from '~@types/schedule-event.d'
 import { useFormContext } from 'react-hook-form'
 import isAfter from 'date-fns/isAfter'
+import isSameDay from 'date-fns/isSameDay'
 
 const ScheduleDates = ({ control }) => {
   const { t } = useTranslation('place')
@@ -14,10 +15,12 @@ const ScheduleDates = ({ control }) => {
   const { type, start, end } = watch(['type', 'start', 'end'])
 
   useEffect(() => {
-    if (isAfter(new Date(start), new Date(end))) {
+    const startDate = new Date(start)
+    const endDate = new Date(end)
+    if (isAfter(startDate, endDate) || isSameDay(startDate, endDate)) {
       setValue('end', '')
     }
-  }, [start])
+  }, [start, end])
 
   return (
     <HStack spacing={5} w="100%" alignItems="flex-start">

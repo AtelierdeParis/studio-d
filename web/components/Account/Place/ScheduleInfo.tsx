@@ -49,7 +49,7 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
           <Text>{t(`schedule.slotsFilled${nbDispo > 1 ? 's' : ''}`)}</Text>
           {/* TODO: Display calcul from bookings */}
           <Text color="gray.400">
-            {t(`schedule.available${nbDispo > 1 ? 's' : ''}`, { nb: 0 })}
+            {t(`schedule.available${nbDispo > 1 ? 's' : ''}`, { nb: nbDispo })}
           </Text>
           <Button size="lg" mt={6} onClick={showForm}>
             {t(`schedule.add`)}

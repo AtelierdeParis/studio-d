@@ -11,7 +11,8 @@ export enum ScheduleEventType {
 }
 
 export interface ScheduleEvent {
-  date: Date
+  start: Date
+  end?: Date
   extendedProps: {
     type: ScheduleEventWhen
     isSelected?: boolean
