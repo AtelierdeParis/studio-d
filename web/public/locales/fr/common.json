@@ -57,5 +57,7 @@
     "plan": "Plan du site",
     "social": "Suivez-nous sur les réseaux sociaux",
     "license": "Plateforme diffusée sous license XXX, droits des textes et photographies réservés"
-  }
+  },
+  "compagnie":"company",
+  "lieu":"place"
 }

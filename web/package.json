@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
     "console": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\": \"commonjs\"}' backend/console.ts",
     "console:dev": "NODE_ENV=development yarn console",
     "fixtures": "yarn console:dev fixtures"

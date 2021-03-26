@@ -71,7 +71,7 @@
     },
     "socialReason": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "address": {
       "type": "string",
@@ -122,8 +122,16 @@
       "type": "string"
     },
     "espaces": {
-      "via": "users_permissions_user",
-      "collection": "espace"
+      "collection": "espace",
+      "via": "users_permissions_user"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "company",
+        "place"
+      ],
+      "required": true
     }
   }
 }

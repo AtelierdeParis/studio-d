@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation, Trans } from 'next-i18next'
 import {
   VStack,
@@ -42,16 +42,12 @@ const getSchema = (target: Target) => {
   }
 
   if (target === 'compagnie') {
-    schema['company'] = yup.object().shape({
-      choreographer: yup.string().required(),
-      insuranceName: yup.string().required(),
-      insuranceNumber: yup.string().required(),
-    })
+    schema['choreographer'] = yup.string().required()
+    schema['insuranceName'] = yup.string().required()
+    schema['insuranceNumber'] = yup.string().required()
   } else {
-    schema['place'] = yup.object().shape({
-      legalRepresentative: yup.string().required(),
-      statusRepresentative: yup.string().required(),
-    })
+    schema['legalRepresentative'] = yup.string().required()
+    schema['statusRepresentative'] = yup.string().required()
   }
 
   return yup.object().shape(schema)
@@ -77,27 +73,27 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
 
     signup({
       ...user,
+      type: target === 'compagnie' ? 'company' : 'place',
       username: user.email,
     })
       .then(onSuccess)
       .catch((err) => {
-        console.log(err.response)
         if (err.response?.data?.message?.field) {
+          errorToast(t(`${err.response.data.message.id}`))
           setError(err.response.data.message.field, {
             type: 'manual',
-            message: t(`${err.response.data.message.text}`),
+            message: t(`${err.response.data.message.id}`),
           })
         } else errorToast(t('signup:form.error.default'))
       })
       .finally(() => setLoading(false))
   }
-
   return (
     <Box maxW="40rem" m="0 auto">
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box px={8}>
           <VStack spacing={5} mb={18}>
-            <HStack spacing={5} w="100%">
+            <HStack spacing={5} w="100%" alignItems="flex-start">
               <FormField
                 label={t('form.firstname')}
                 errors={errors.firstname}
@@ -165,7 +161,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             >
               <Input name="address" ref={register} />
             </FormField>
-            <HStack spacing={5} w="100%">
+            <HStack spacing={5} w="100%" alignItems="flex-start">
               <FormField
                 label={t('form.zipCode')}
                 errors={errors.zipCode}
@@ -238,20 +234,20 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                   isRequired
                 >
                   <Input
-                    name="company.choreographer"
+                    name="choreographer"
                     ref={register({
                       required: true,
                     })}
                   />
                 </FormField>
-                <HStack spacing={5} w="100%">
+                <HStack spacing={5} w="100%" alignItems="flex-start">
                   <FormField
                     label={t('form.insuranceName')}
                     errors={errors.insuranceName}
                     isRequired
                   >
                     <Input
-                      name="company.insuranceName"
+                      name="insuranceName"
                       ref={register({
                         required: true,
                       })}
@@ -263,7 +259,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                     isRequired
                   >
                     <Input
-                      name="company.insuranceNumber"
+                      name="insuranceNumber"
                       ref={register({
                         required: true,
                       })}
@@ -279,7 +275,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                   isRequired
                 >
                   <Input
-                    name="place.legalRepresentative"
+                    name="legalRepresentative"
                     ref={register({
                       required: true,
                     })}
@@ -291,7 +287,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                   isRequired
                 >
                   <Input
-                    name="place.statusRepresentative"
+                    name="statusRepresentative"
                     ref={register({
                       required: true,
                     })}

@@ -68,13 +68,23 @@
         "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.\n\nAprès inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
         "btn": "Poursuivre",
         "error": {
-            "default": "Impossible de procéder à l'inscription",
-            "emailTaken": "Cet email est déjà utilisé"
+            "default": "Impossible de procéder à l'inscription"
         }
     },
     "completed": {
         "title": "Merci pour votre inscription !",
         "text": "Vous recevrez sous peu un email de confirmation. Votre compte est actuellement en attente de validation par StudioD, nécessaire afin de pouvoir déposer votre première demande de réservation. Vous recevrez un email dès que cette activation sera effective.",
         "btn": "Retour à l’accueil"
+    },
+    "error": {
+        "emailTaken": "Cet email est déjà utilisé",
+        "passwordProvide": "Vous devez renseigner un mot de passe",
+        "emailProvide": "Vous devez renseigner un email",
+        "passwordFormat": "Votre mot de passe ne peut pas contenir plus de 3 fois le caractère `$`",
+        "roleNotFound": "Impossible de procéder à l'inscription",
+        "emailFormat": "Le format de votre adresse email n'est pas valide",
+        "userPlace": "Impossible de procéder à l'inscription",
+        "userCompany": "Impossible de procéder à l'inscription",
+        "usernameTaken": "Impossible de procéder à l'inscription"
     }
 }
