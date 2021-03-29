@@ -99,7 +99,7 @@
         "type": {
             "label": "Ajouter une disponibilité :",
             "placeholder": "Choisir le type de disponibilité",
-            "punctual": "Créneau ponctuel",
+            "punctual": "Demi-journée",
             "day": "Journée entière",
             "period": "Période continue"
         },
@@ -114,6 +114,7 @@
         "startDate": "Date de début",
         "endDate": "Date de fin",
         "repeat": "Répéter",
+        "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
         "repeatNb": "Répéter les",
         "repeatType": {
             "label": "Prochain.e.s",

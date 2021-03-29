@@ -125,6 +125,7 @@ a {
   margin-top: 0;
   display: flex;
   flex-direction: column;
+  padding-bottom: 0px !important;
 }
 #calendar .fc-daygrid-day-number {
   position: absolute;
@@ -147,6 +148,7 @@ a {
 }
 #calendar .fc-daygrid-event-harness-abs {
   height: 100%;
+  z-index: 11;
 }
 #calendar .fc-day-today {
   background-color: transparent;
@@ -164,4 +166,44 @@ a {
 #calendar .fc-daygrid-event {
   height: 100%;
   padding: 0;
+}
+#calendar .fc-day-other .fc-daygrid-day-top {
+  opacity: 1;
+}
+
+#calendar .fc-day-other .fc-daygrid-day-number {
+  opacity: 0.5;
+}
+
+#calendar .fc-day-other .fc-daygrid-day-frame {
+  background-color: rgb(229 231 237 / 42%);
+}
+#calendar
+  .fc-day-other
+  .fc-daygrid-event-harness:not(.fc-daygrid-event-harness-abs)
+  .scheduleEvent {
+  /* background-color: rgb(255 255 255 / 60%);
+  border-color: transparent; */
+  opacity: 0.5;
+}
+
+.fc-event.fc-event-end:not(.fc-event-start) .scheduleEvent {
+  border-left: transparent;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.fc-event.fc-event-start:not(.fc-event-end) .scheduleEvent {
+  border-right: transparent;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.fc-event:not(.fc-event-start):not(.fc-event-end) .scheduleEvent {
+  border-right: transparent;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left: transparent;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }

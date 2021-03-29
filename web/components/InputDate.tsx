@@ -23,14 +23,18 @@ interface IInputDate {
   name: string
   control: Control
   minDate?: Date
+  maxDate?: Date
   isDisabled?: boolean
+  excludeDates?: Date[]
 }
 
 const InputDate = ({
   name,
   control,
   minDate = null,
+  maxDate = null,
   isDisabled = false,
+  excludeDates = [],
 }: IInputDate) => {
   const { field } = useController({
     name,
@@ -46,7 +50,9 @@ const InputDate = ({
         customInput={<CustomInput isDisabled={isDisabled} />}
         locale={fr}
         minDate={minDate}
+        maxDate={maxDate}
         disabled={isDisabled}
+        excludeDates={excludeDates}
       />
     </Box>
   )

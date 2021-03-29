@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useTranslation } from 'next-i18next'
 import { HStack, Box, VStack, Button, Flex, Select } from '@chakra-ui/react'
 import ScheduleDates from '~components/Account/Place/ScheduleDates'
@@ -6,16 +6,13 @@ import ScheduleRepeat from '~components/Account/Place/ScheduleRepeat'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
-import {
-  ScheduleEvent,
-  ScheduleEventWhen,
-  ScheduleEventType,
-} from '~@types/schedule-event.d'
+import { ScheduleEventWhen, ScheduleEventType } from '~@types/schedule-event.d'
 import { Place } from '~@types/place.d'
 import { createManyDisponibilities } from '~api/api'
 import { createDbEvent } from '~utils'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
+import ScheduleContext from '~components/Account/Place/ScheduleContext'
 
 export const schema = yup.object().shape({
   type: yup.string().required(),
@@ -40,12 +37,12 @@ export const schema = yup.object().shape({
 })
 
 interface IScheduleForm {
-  newEvents?: ScheduleEvent[]
   place: Place
   hideForm: () => void
 }
 
-const ScheduleForm = ({ newEvents = [], place, hideForm }: IScheduleForm) => {
+const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
+  const { newEvents } = useContext(ScheduleContext)
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
   const { errorToast, successToast } = useToast()
@@ -151,7 +148,12 @@ const ScheduleForm = ({ newEvents = [], place, hideForm }: IScheduleForm) => {
             >
               {t(`schedule.cancel`)}
             </Button>
-            <Button size="lg" type="submit" isLoading={isLoading}>
+            <Button
+              size="lg"
+              type="submit"
+              isLoading={isLoading}
+              isDisabled={Object.keys(errors).length > 0}
+            >
               {t(`list.add`)}
             </Button>
           </Flex>

@@ -1,29 +1,55 @@
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React from 'react'
+import React, { useRef, useEffect, useContext, useMemo } from 'react'
 import ScheduleSlot from '~components/Account/Place/ScheduleSlot'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
 import { Box, Flex } from '@chakra-ui/react'
-import isSameDay from 'date-fns/isSameDay'
+import ScheduleContext from '~components/Account/Place/ScheduleContext'
+import { useFormContext } from 'react-hook-form'
 
 const view = createPlugin({
   views: {
     custom: {
       type: 'dayGridMonth',
       eventContent: ({ event }) => {
-        // @ts-ignore
-        return <ScheduleSlot {...event._def.extendedProps} />
+        return (
+          // @ts-ignore
+          <ScheduleSlot
+            {...event._def.extendedProps}
+            range={event._instance.range}
+          />
+        )
       },
     },
   },
 })
 
-interface ISchedule {
-  events: Record<string, any>
-}
+interface ISchedule {}
 
-const Schedule = ({ events }: ISchedule) => {
+const Schedule = (props: ISchedule) => {
+  const { watch } = useFormContext()
+  const { start } = watch(['start'])
+  const { oldEvents, newEvents } = useContext(ScheduleContext)
+  const scheduleRef = useRef(null)
+
+  useEffect(() => {
+    if (!scheduleRef || !start) return
+    const calendarApi = scheduleRef.current.getApi()
+    calendarApi.gotoDate(new Date(start))
+  }, [start, scheduleRef])
+
+  const events = useMemo(
+    () =>
+      oldEvents.concat(newEvents).filter((event) => {
+        return !(
+          event.extendedProps.hasEventSameDay &&
+          event.extendedProps.status === 'error'
+        )
+      }),
+    [oldEvents, newEvents],
+  )
+
   return (
     <Flex
       w="600px"
@@ -33,6 +59,7 @@ const Schedule = ({ events }: ISchedule) => {
       id="calendar"
     >
       <FullCalendar
+        ref={scheduleRef}
         plugins={[dayGridPlugin, interactionPlugin, view]}
         initialView="custom"
         headerToolbar={{
@@ -44,22 +71,9 @@ const Schedule = ({ events }: ISchedule) => {
         dayCellContent={(day) => {
           return <Box>{day.dayNumberText}</Box>
         }}
-        eventDataTransform={(event) => {
-          const hasEventSameDay = events.some(({ start, extendedProps }) => {
-            return (
-              extendedProps.when !== event.extendedProps.when &&
-              isSameDay(new Date(start), new Date(event.start as string))
-            )
-          })
-          return {
-            ...event,
-            extendedProps: {
-              ...event.extendedProps,
-              hasEventSameDay,
-            },
-          }
-        }}
-        showNonCurrentDates={false}
+        // eventClick={(event) => {
+        // }}
+        // showNonCurrentDates={false}
         fixedWeekCount={false}
         nextDayThreshold="00:00"
         events={events}

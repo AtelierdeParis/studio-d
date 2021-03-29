@@ -6,6 +6,7 @@ import addDays from 'date-fns/addDays'
 import addWeeks from 'date-fns/addWeeks'
 import isBefore from 'date-fns/isBefore'
 import setHours from 'date-fns/setHours'
+import isSameDay from 'date-fns/isSameDay'
 
 export const requireAuth = (inner, opposite: boolean = false) => {
   return async (context) => {
@@ -19,15 +20,15 @@ export const requireAuth = (inner, opposite: boolean = false) => {
   }
 }
 
-export const createScheduleEventObj = (
+export const createScheduleEventObj = ({
   start,
   when = null,
   end = null,
   status = 'selected',
-) => {
+}) => {
   return {
     start: new Date(start),
-    end: end ? setHours(new Date(end), 12) : null,
+    end: end ? setHours(new Date(end), 12) : start,
     extendedProps: {
       when,
       status,
@@ -80,7 +81,11 @@ const repeatPeriodEvent = (start, end, repeatNb, repeatType) => {
   return range
 }
 
-export const createScheduleEvents = (form) => {
+export const createScheduleEvents = (
+  form,
+  oldEventsDate = [],
+  isError = false,
+) => {
   const events = []
   if (!form.start || form.start === '') return events
   const start = form.start
@@ -101,11 +106,16 @@ export const createScheduleEvents = (form) => {
         form.repeatNb,
         form.repeatType,
       )
-      repeatedEvents.map((date) =>
-        events.push(createScheduleEventObj(date, form.when)),
+      repeatedEvents.map((start) =>
+        events.push(createScheduleEventObj({ start, when: form.when })),
       )
     } else {
-      events.push(createScheduleEventObj(start, form.when))
+      events.push(
+        createScheduleEventObj({
+          start,
+          when: form.when,
+        }),
+      )
     }
   } else if (
     form.type === ScheduleEventType.PERIOD &&
@@ -120,13 +130,44 @@ export const createScheduleEvents = (form) => {
         form.repeatType,
       )
       repeatedEvents.map(({ start, end }) =>
-        events.push(createScheduleEventObj(start, null, end)),
+        events.push(createScheduleEventObj({ start, end })),
       )
     } else {
-      events.push(createScheduleEventObj(start, null, end))
+      events.push(
+        createScheduleEventObj({
+          start,
+          end,
+        }),
+      )
     }
   }
-  return events
+
+  return events.map((event) => {
+    let hasEventSameDay
+    if (form.type === ScheduleEventType.PERIOD) {
+      const periodDays = eachDayOfInterval({
+        start: event.start,
+        end: event.end,
+      })
+      hasEventSameDay = periodDays.some((date) => {
+        return oldEventsDate.some((oldEventDate) => {
+          return isSameDay(oldEventDate, date)
+        })
+      })
+    } else {
+      hasEventSameDay = oldEventsDate.some((oldEventDate) => {
+        return isSameDay(oldEventDate, new Date(event.start))
+      })
+    }
+    return {
+      ...event,
+      extendedProps: {
+        ...event.extendedProps,
+        hasEventSameDay,
+        status: isError ? 'error' : 'selected',
+      },
+    }
+  })
 }
 
 export const createDbEvent = (type, start, when = null, end = null) => {

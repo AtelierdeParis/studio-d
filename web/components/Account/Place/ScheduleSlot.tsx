@@ -1,14 +1,22 @@
-import React from 'react'
-import { Box, VStack } from '@chakra-ui/react'
+import React, { useMemo } from 'react'
+import { Box, VStack, Text } from '@chakra-ui/react'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
+import isSameDay from 'date-fns/isSameDay'
+import getDate from 'date-fns/getDate'
+import differenceInDays from 'date-fns/differenceInDays'
 
 const styleSelected = {
   borderColor: 'blue.500',
-  bgColor: 'blue.100',
+  bgColor: 'white',
 }
 
 const styleAvailable = {
   borderColor: 'white',
+  bgColor: 'white',
+}
+
+const styleError = {
+  borderColor: 'red.500',
   bgColor: 'white',
 }
 
@@ -23,14 +31,22 @@ const getStyle = (status) => {
       return styleSelected
     case 'available':
       return styleAvailable
+    case 'error':
+      return styleError
     default:
       return styleDefault
   }
 }
 
-const Event = ({ status = null, when = null }) => {
+const Event = ({ status = null, when = null, range = null }) => {
+  const isPeriod = useMemo(() => {
+    if (!range) return null
+    return !isSameDay(range.start, range.end)
+  }, [range])
+
   return (
     <Box
+      className="scheduleEvent"
       flex={1}
       border="2px solid"
       w="100%"
@@ -38,16 +54,40 @@ const Event = ({ status = null, when = null }) => {
       mb={when === ScheduleEventWhen.MORNING ? 0.5 : 0}
       mt={when === ScheduleEventWhen.AFTERNOON ? 0.5 : 0}
       {...getStyle(status)}
-    />
+    >
+      {isPeriod && (
+        <Text
+          alignItems="center"
+          justifyContent="flex-end"
+          px={1}
+          pt={1}
+          fontSize="sm"
+          display="flex"
+          isTruncated
+        >
+          <Box as="span" color={status === 'selected' ? 'blue.500' : 'black'}>
+            {`
+              ${getDate(range.start)} - 
+              ${getDate(range.end)}
+              `}
+          </Box>
+          <Box
+            pl={1.5}
+            color={status === 'selected' ? 'blue.500' : 'grayText.1'}
+            as="span"
+          >{`(${differenceInDays(range.end, range.start) + 1} jours)`}</Box>
+        </Text>
+      )}
+    </Box>
   )
 }
 
-const getSlot = ({ when, status, hasEventSameDay }: IScheduleSlot) => {
-  switch (when) {
+const getSlot = ({ hasEventSameDay, ...props }: IScheduleSlot) => {
+  switch (props.when) {
     case ScheduleEventWhen.MORNING:
       return (
         <>
-          <Event status={status} when={when} />
+          <Event {...props} />
           {!hasEventSameDay && <Event />}
         </>
       )
@@ -55,12 +95,18 @@ const getSlot = ({ when, status, hasEventSameDay }: IScheduleSlot) => {
       return (
         <>
           {!hasEventSameDay && <Event />}
-          <Event status={status} when={when} />
+          <Event {...props} range={props.range} />
         </>
       )
-
+    case ScheduleEventWhen.FULL:
+      return (
+        <>
+          <Event {...props} range={props.range} />
+          <Event {...props} range={props.range} />
+        </>
+      )
     default:
-      return <Event status={status} when={when} />
+      return <Event {...props} />
   }
 }
 
@@ -68,6 +114,7 @@ interface IScheduleSlot {
   when: ScheduleEventWhen
   status?: 'selected' | 'available'
   hasEventSameDay?: boolean
+  range: { start: Date; end: Date }
 }
 
 const ScheduleSlot = (props: IScheduleSlot) => {

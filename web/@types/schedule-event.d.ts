@@ -14,7 +14,8 @@ export interface ScheduleEvent {
   start: Date
   end?: Date
   extendedProps: {
-    type: ScheduleEventWhen
-    isSelected?: boolean
+    when: ScheduleEventWhen
+    status: string
+    hasEventSameDay?: boolean
   }
 }
