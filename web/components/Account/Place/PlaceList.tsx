@@ -22,6 +22,7 @@ const PlaceList = ({ places }: IPlaceList) => {
       <VStack>
         {places.map((place) => (
           <Flex key={place.id}>
+            <Text>{place.id}</Text>
             <Text>{place.name}</Text>
           </Flex>
         ))}

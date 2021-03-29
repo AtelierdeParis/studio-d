@@ -10,7 +10,14 @@ const Link = (props: ILink) => {
   const { children, href, shallow = false, ...rest } = props
   return (
     <NextLink passHref href={href} shallow={shallow}>
-      <ChakraLink {...rest}>{children}</ChakraLink>
+      <ChakraLink
+        {...rest}
+        _focus={{
+          outline: 'none',
+        }}
+      >
+        {children}
+      </ChakraLink>
     </NextLink>
   )
 }

@@ -65,6 +65,12 @@ const theme = extendTheme({
       '1': '#626782',
       '2': '#6EAE7F',
     },
+    tag: {
+      green: '#D3E6D8',
+      yellow: '#F5E5C1',
+      red: '#F2D8D8',
+      grey: '#E0E0E0',
+    },
   },
   radii: {
     xs: '4px',

@@ -69,7 +69,10 @@ const AboutUs = ({ onClick }: IAboutUs) => {
           <Text color="grayText.1">{t(`about.condition`)}</Text>
         </Box>
         <Button
-          onClick={() => onClick(true)}
+          onClick={() => {
+            window.scrollTo(0, 0)
+            onClick(true)
+          }}
           colorScheme="blue"
           size="lg"
           alignSelf="center"

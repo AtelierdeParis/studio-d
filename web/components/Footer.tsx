@@ -30,6 +30,10 @@ const Footer = () => {
               columnGap={5}
               rowGap={3}
               alignItems="center"
+              filter="grayscale(1)"
+              style={{
+                mixBlendMode: 'multiply',
+              }}
             >
               <Image src="/assets/img/partners/ministere-culture.png" />
               <Image src="/assets/img/partners/logo-drac.png" />

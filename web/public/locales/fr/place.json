@@ -92,5 +92,58 @@
     "list": {
         "title": "Espaces",
         "add": "Ajouter"
+    },
+    "schedule": {
+        "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
+        "success": "Une nouvelle disponibilité a été ajouté",
+        "type": {
+            "label": "Ajouter une disponibilité :",
+            "placeholder": "Choisir le type de disponibilité",
+            "punctual": "Demi-journée",
+            "day": "Journée entière",
+            "period": "Période continue"
+        },
+        "when":{
+            "label": "Matin / Après-midi",
+            "placeholder": "Choisir une période"
+        },
+        "morning": "Matin",
+        "afternoon": "Après-midi",
+        "both": "Matin et après-midi",
+        "date": "Date du créneau",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "repeat": "Répéter",
+        "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
+        "repeatNb": "Répéter les",
+        "repeatType": {
+            "label": "Prochain.e.s",
+            "placeholder": "Choisir une fréquence de répétition",
+            "day": "jours",
+            "week": "semaines",
+            "month": "mois"
+        },
+        "cancel": "retour",
+        "add": "Ajouter un créneau",
+        "slotsFilled": "créneau renseigné",
+        "slotsFilleds": "créneaux renseignés",
+        "filledUntil": "Renseignés jusqu'au",
+        "available": "{{nb}} disponible",
+        "availables": "{{nb}} disponibles",
+        "bookings": "Réservations",
+        "requests": "Demandes",
+        "see": "voir",
+        "nbPending": "{{nb}} en attente",
+        "pending": "En attente",
+        "nbComing": "{{nb}} à venir",
+        "coming": "À venir",
+        "nbPassed": "{{nb}} passées",
+        "passed": "Passée",
+        "canceled": "Annulée",
+        "scheduleDetails": {
+            "label": "Précisions sur les horaires de l’espace",
+            "placeholder": "Renseignez votre texte",
+            "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
+        }
     }
 }

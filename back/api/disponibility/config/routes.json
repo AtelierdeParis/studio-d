@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/disponibilities",
+      "handler": "disponibility.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/disponibilities/count",
+      "handler": "disponibility.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/disponibilities/:id",
+      "handler": "disponibility.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/disponibilities",
+      "handler": "disponibility.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/bulk/disponibilities",
+      "handler": "disponibility.createMany",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/disponibilities/:id",
+      "handler": "disponibility.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/disponibilities/:id",
+      "handler": "disponibility.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

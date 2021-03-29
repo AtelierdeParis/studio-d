@@ -101,6 +101,13 @@
       "via": "espaces",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "disponibilities": {
+      "via": "espace",
+      "collection": "disponibility"
+    },
+    "scheduleDetails": {
+      "type": "text"
     }
   }
 }

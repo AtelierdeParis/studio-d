@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "disponibilities",
+  "info": {
+    "name": "disponibility",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "when": {
+      "type": "enumeration",
+      "enum": [
+        "morning",
+        "afternoon",
+        "full"
+      ],
+      "required": false
+    },
+    "start": {
+      "type": "date",
+      "required": true
+    },
+    "end": {
+      "type": "date",
+      "required": true
+    },
+    "espace": {
+      "model": "espace",
+      "via": "disponibilities"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "punctual",
+        "day",
+        "period"
+      ],
+      "required": true
+    }
+  }
+}

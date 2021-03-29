@@ -13,10 +13,11 @@ const grant = require("grant-koa");
 const { sanitizeEntity } = require("strapi-utils");
 
 const emailRegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const formatError = (error) => [
-  { messages: [{ id: error.id, message: error.message, field: error.field }] },
-];
-
+const formatError = (error) => ({
+  id: error.id,
+  message: error.message,
+  field: error.field,
+});
 module.exports = {
   async callback(ctx) {
     const provider = ctx.params.provider || "local";
@@ -401,8 +402,9 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.password.provide",
+          id: "error.passwordProvide",
           message: "Please provide your password.",
+          field: "password",
         })
       );
     }
@@ -412,8 +414,9 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.email.provide",
+          id: "error.emailProvide",
           message: "Please provide your email.",
+          field: "email",
         })
       );
     }
@@ -428,9 +431,10 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.password.format",
+          id: "error.passwordFormat",
           message:
             "Your password cannot contain more than three times the symbol `$`.",
+          field: "password",
         })
       );
     }
@@ -443,7 +447,7 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.role.notFound",
+          id: "error.roleNotFound",
           message: "Impossible to find the default role.",
         })
       );
@@ -458,8 +462,9 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.email.format",
+          id: "error.emailFormat",
           message: "Please provide valid email address.",
+          field: "email",
         })
       );
     }
@@ -478,8 +483,9 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.email.taken",
+          id: "error.emailTaken",
           message: "Email is already taken.",
+          field: "email",
         })
       );
     }
@@ -488,8 +494,9 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "Auth.form.error.email.taken",
+          id: "error.emailTaken",
           message: "Email is already taken.",
+          field: "email",
         })
       );
     }
@@ -507,7 +514,7 @@ module.exports = {
         return ctx.badRequest(
           null,
           formatError({
-            id: "Auth.form.error.user.place",
+            id: "error.userPlace",
             message: "Missing place field",
           })
         );
@@ -521,7 +528,7 @@ module.exports = {
         return ctx.badRequest(
           null,
           formatError({
-            id: "Auth.form.error.user.place",
+            id: "error.userCompany",
             message: "Missing company field",
           })
         );
@@ -557,10 +564,14 @@ module.exports = {
     } catch (err) {
       const adminError = _.includes(err.message, "username")
         ? {
-            id: "Auth.form.error.username.takendfndskfjlsdjfksdfl",
+            id: "error.usernameTaken",
             message: "Username already taken",
           }
-        : { id: "Auth.form.error.email.taken", message: "Email already taken" };
+        : {
+            id: "error.emailTaken",
+            message: "Email already taken",
+            field: "email",
+          };
 
       ctx.badRequest(null, formatError(adminError));
     }

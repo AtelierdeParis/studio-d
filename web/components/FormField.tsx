@@ -28,7 +28,7 @@ const FormField = ({
   return (
     <FormControl isInvalid={Boolean(errors)} w="100%" display="flex" {...rest}>
       <FormLabel fontWeight="400" fontSize="xxs" mb={0} mr={0} w="100%">
-        <Text fontWeight="500" mb={1}>
+        <Text fontWeight="500" mb={1} fontFamily="mabry medium">
           {label}
           {isRequired && (
             <Box as="span" color="blue.500">

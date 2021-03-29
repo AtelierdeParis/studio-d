@@ -6,9 +6,11 @@ import { client } from '~api/client-react-query'
 import Layout from '~components/Layout'
 import { QueryClientProvider } from 'react-query'
 import { appWithTranslation } from 'next-i18next'
-import '../styles/globals.css'
 import theme from '~theme'
 import { initYupLocale } from '~initYupLocale'
+import '../styles/globals.css'
+import '@fullcalendar/common/main.css'
+import '@fullcalendar/daygrid/main.css'
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {

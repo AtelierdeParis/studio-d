@@ -12,6 +12,7 @@ import {
   Checkbox,
   InputRightElement,
   InputGroup,
+  FormLabel,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import FormField from '~components/FormField'
@@ -79,9 +80,10 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
       .then(onSuccess)
       .catch((err) => {
         if (err.response?.data?.message?.field) {
+          errorToast(t(`${err.response.data.message.id}`))
           setError(err.response.data.message.field, {
             type: 'manual',
-            message: t(`${err.response.data.message.text}`),
+            message: t(`${err.response.data.message.id}`),
           })
         } else errorToast(t('signup:form.error.default'))
       })
@@ -299,19 +301,22 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
         <Box layerStyle="blueBox" p={10} color="grayText.1">
           <Flex alignItems="flex-start">
             <Checkbox
-              mt={1}
+              id="condition"
               name="acceptCondition"
               ref={register}
               size="lg"
               borderColor="grayText.1"
             />
             <Box whiteSpace="pre-line" pl={5}>
-              <Trans
-                i18nKey="signup:form.condition"
-                components={{
-                  a: <Link href={ROUTE_CGU} textDecoration="underline" />,
-                }}
-              />
+              <FormLabel htmlFor="condition" m="0">
+                <Trans
+                  i18nKey="signup:form.condition"
+                  components={{
+                    a: <Link href={ROUTE_CGU} textDecoration="underline" />,
+                  }}
+                />
+              </FormLabel>
+              <Text mt={4}>{t('form.condition2')}</Text>
             </Box>
           </Flex>
           <Flex justifyContent="center">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, Flex, Link, Text, VStack } from '@chakra-ui/react'
+import { Box, Image, Flex, Text, VStack } from '@chakra-ui/react'
 import {
   ROUTE_ACCOUNT,
   ROUTE_USE_POLICY,
@@ -9,7 +9,7 @@ import {
   ROUTE_ACCOUNT_MESSAGE,
   ROUTE_ACCOUNT_PLACES,
 } from '~constants'
-import NextLink from '~components/Link'
+import Link from '~components/Link'
 import Back from 'public/assets/img/back.svg'
 import Profile from 'public/assets/img/user.svg'
 import Charte from 'public/assets/img/charte.svg'
@@ -107,8 +107,13 @@ const AccountMenu = ({ user }: { user: User }) => {
         >
           {t(title)}
         </Text>
-        {items.map(({ icon, label, url = null, onClick = null }) => (
-          <Link href={url} _hover={{ textDecoration: 'none' }} key={label}>
+        {items.map(({ icon, label, url = '#', onClick = null }) => (
+          <Link
+            href={url}
+            _hover={{ textDecoration: 'none' }}
+            key={label}
+            display="block"
+          >
             <Flex
               alignItems="center"
               _hover={styleActive}
@@ -133,9 +138,9 @@ const AccountMenu = ({ user }: { user: User }) => {
     <Flex direction="column" color="grayText.1" w="20rem" h="100vh">
       <Box backgroundColor="blue.100" flexGrow={1}>
         <Flex pb={14} px={5} pt={4}>
-          <NextLink href="/">
+          <Link href="/">
             <Back />
-          </NextLink>
+          </Link>
           <Link href={ROUTE_ACCOUNT}>
             <Image ml={3} src="/assets/img/logo-studio-d.png" w="100px" />
           </Link>
@@ -149,10 +154,10 @@ const AccountMenu = ({ user }: { user: User }) => {
       </Box>
       <Flex backgroundColor="blue.200" p={5}>
         {/* TODO: create this page */}
-        <NextLink href={ROUTE_USE_POLICY} display="flex" alignItems="center">
+        <Link href={ROUTE_USE_POLICY} display="flex" alignItems="center">
           <Charte />
           <Text pl={3}>{t('charte')}</Text>
-        </NextLink>
+        </Link>
       </Flex>
     </Flex>
   )
