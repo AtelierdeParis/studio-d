@@ -9,7 +9,7 @@ const CustomInput = forwardRef(({ value, onClick, isDisabled }, ref) => {
   return (
     <Input
       isDisabled={isDisabled}
-      autoComplete="none"
+      autoComplete="off"
       onClick={onClick}
       onChange={() => null}
       ref={ref}
