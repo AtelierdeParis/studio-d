@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import { Place } from '~@types/place.d'
@@ -12,17 +12,18 @@ interface IScheduleProvider {
 
 const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   const { watch, errors } = useFormContext()
+  const [eventsIdToDelete, setToDelete] = useState<number[]>([])
 
   const formValues = watch()
-
   const oldEvents = useMemo(
     () =>
       place?.disponibilities.map((dispo) => {
         return createScheduleEventObj({
+          id: dispo.id,
           start: dispo.start,
           end: dispo.end,
           when: dispo.when,
-          status: 'available',
+          status: dispo.status,
         })
       }),
     [place],
@@ -53,9 +54,12 @@ const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   return (
     <ScheduleContext.Provider
       value={{
+        place,
         oldEvents,
         newEvents,
         oldEventsDate,
+        eventsIdToDelete,
+        setToDelete,
       }}
     >
       {children}

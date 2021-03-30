@@ -1,9 +1,10 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useContext } from 'react'
 import { Box, VStack, Text } from '@chakra-ui/react'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import getDate from 'date-fns/getDate'
 import differenceInDays from 'date-fns/differenceInDays'
+import ScheduleContext from '~components/Account/Place/ScheduleContext'
 
 const styleSelected = {
   borderColor: 'blue.500',
@@ -11,8 +12,15 @@ const styleSelected = {
 }
 
 const styleAvailable = {
-  borderColor: 'white',
   bgColor: 'white',
+}
+
+const styleBooked = {
+  bgColor: 'tag.green',
+}
+
+const stylePending = {
+  bgColor: 'tag.yellow',
 }
 
 const styleError = {
@@ -21,7 +29,6 @@ const styleError = {
 }
 
 const styleDefault = {
-  borderColor: 'transparent',
   bgColor: '#e5e7ed',
 }
 
@@ -31,6 +38,10 @@ const getStyle = (status) => {
       return styleSelected
     case 'available':
       return styleAvailable
+    case 'pending':
+      return stylePending
+    case 'booked':
+      return styleBooked
     case 'error':
       return styleError
     default:
@@ -38,11 +49,17 @@ const getStyle = (status) => {
   }
 }
 
-const Event = ({ status = null, when = null, range = null }) => {
+const Event = ({ status = null, when = null, range = null, id = null }) => {
+  const { setToDelete, eventsIdToDelete } = useContext(ScheduleContext)
   const isPeriod = useMemo(() => {
     if (!range) return null
     return !isSameDay(range.start, range.end)
   }, [range])
+
+  const isSelected = useMemo(() => eventsIdToDelete.includes(id), [
+    eventsIdToDelete,
+    id,
+  ])
 
   return (
     <Box
@@ -53,6 +70,16 @@ const Event = ({ status = null, when = null, range = null }) => {
       borderRadius="md"
       mb={when === ScheduleEventWhen.MORNING ? 0.5 : 0}
       mt={when === ScheduleEventWhen.AFTERNOON ? 0.5 : 0}
+      cursor={id && 'pointer'}
+      onClick={() => {
+        if (!id) return setToDelete([])
+        if (isSelected) {
+          setToDelete(eventsIdToDelete.filter((eventId) => eventId !== id))
+        } else {
+          setToDelete([...eventsIdToDelete, id])
+        }
+      }}
+      borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
     >
       {isPeriod && (
@@ -111,6 +138,7 @@ const getSlot = ({ hasEventSameDay, ...props }: IScheduleSlot) => {
 }
 
 interface IScheduleSlot {
+  id?: number
   when: ScheduleEventWhen
   status?: 'selected' | 'available'
   hasEventSameDay?: boolean

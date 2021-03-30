@@ -25,11 +25,13 @@ export const createScheduleEventObj = ({
   when = null,
   end = null,
   status = 'selected',
+  id = null,
 }) => {
   return {
     start: new Date(start),
     end: end ? setHours(new Date(end), 12) : start,
     extendedProps: {
+      id,
       when,
       status,
     },
