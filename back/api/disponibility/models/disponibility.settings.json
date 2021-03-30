@@ -29,8 +29,8 @@
       "required": true
     },
     "espace": {
-      "via": "disponibilities",
-      "model": "espace"
+      "model": "espace",
+      "via": "disponibilities"
     },
     "type": {
       "type": "enumeration",
@@ -46,7 +46,8 @@
       "enum": [
         "available",
         "booked",
-        "pending"
+        "pending",
+        "past"
       ],
       "default": "available",
       "required": true
