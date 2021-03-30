@@ -188,11 +188,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             <Textarea name="details" ref={register} resize="none" h="215px" />
           </FormField>
         </HStack>
-        <InputFile
-          control={control}
-          defaultValue={place?.files}
-          control={control}
-        />
+        <InputFile control={control} defaultValue={place?.files} />
         <Text textStyle="infoLabel" mt={16}>
           {t('form.location')}
         </Text>

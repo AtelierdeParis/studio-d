@@ -8,7 +8,6 @@ import { Control, useController } from 'react-hook-form'
 
 interface IInputFile {
   control: Control
-  register: () => void
   defaultValue: File[]
 }
 

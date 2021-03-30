@@ -5,19 +5,28 @@ import fr from 'date-fns/locale/fr'
 import { useController, Control } from 'react-hook-form'
 import 'react-datepicker/dist/react-datepicker.css'
 
-const CustomInput = forwardRef(({ value, onClick, isDisabled }, ref) => {
-  return (
-    <Input
-      isDisabled={isDisabled}
-      autoComplete="off"
-      onClick={onClick}
-      onChange={() => null}
-      ref={ref}
-      value={value}
-      w="100%"
-    />
-  )
-})
+interface ICustomInput {
+  value?: string
+  onClick?: () => void
+  isDisabled?: boolean
+}
+
+const CustomInput = forwardRef(
+  ({ value, onClick, isDisabled }: ICustomInput, ref) => {
+    return (
+      <Input
+        isDisabled={isDisabled}
+        autoComplete="off"
+        onClick={onClick}
+        onChange={() => null}
+        // @ts-ignore
+        ref={ref}
+        value={value}
+        w="100%"
+      />
+    )
+  },
+)
 
 interface IInputDate {
   name: string
