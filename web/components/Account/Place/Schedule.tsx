@@ -31,7 +31,9 @@ interface ISchedule {}
 const Schedule = (props: ISchedule) => {
   const { watch } = useFormContext()
   const { start } = watch(['start'])
-  const { oldEvents, newEvents, setToDelete } = useContext(ScheduleContext)
+  const { oldEvents, newEvents, setToDelete, eventsIdToDelete } = useContext(
+    ScheduleContext,
+  )
   const scheduleRef = useRef(null)
 
   useEffect(() => {
@@ -76,7 +78,7 @@ const Schedule = (props: ISchedule) => {
           return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
         }}
         dateClick={(date) => {
-          setToDelete([])
+          if (eventsIdToDelete.length > 0) setToDelete([])
         }}
         // showNonCurrentDates={false}
         fixedWeekCount={false}

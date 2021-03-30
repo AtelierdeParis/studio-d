@@ -40,6 +40,16 @@
         "period"
       ],
       "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "available",
+        "booked",
+        "pending"
+      ],
+      "default": "available",
+      "required": true
     }
   }
 }

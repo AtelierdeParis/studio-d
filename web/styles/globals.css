@@ -115,7 +115,6 @@ a {
 #calendar .fc-daygrid-event {
   margin: 0 !important;
 }
-
 #calendar .fc-daygrid-day-events {
   position: absolute;
   right: 0;
@@ -127,12 +126,21 @@ a {
   flex-direction: column;
   padding-bottom: 0px !important;
 }
+#calendar .fc-daygrid-day-events {
+  display: grid;
+  row-gap: 4px;
+}
+#calendar .fc-daygrid-day-events:before,
+#calendar .fc-daygrid-day-events:after {
+  display: none;
+}
 #calendar .fc-daygrid-day-number {
   position: absolute;
   color: rgba(98, 103, 130, 0.6);
   z-index: 9;
   right: 3px;
   top: 0;
+  pointer-events: none;
 }
 
 #calendar .fc-h-event {
@@ -145,6 +153,14 @@ a {
 }
 #calendar .fc-daygrid-event-harness {
   flex: 1;
+}
+#calendar .fc-daygrid-event-harness:nth-child(2):before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  background-color: #f4f5f9;
+  height: 20px;
+  width: 100%;
 }
 #calendar .fc-daygrid-event-harness-abs {
   height: 100%;
@@ -182,8 +198,6 @@ a {
   .fc-day-other
   .fc-daygrid-event-harness:not(.fc-daygrid-event-harness-abs)
   .scheduleEvent {
-  /* background-color: rgb(255 255 255 / 60%);
-  border-color: transparent; */
   opacity: 0.5;
 }
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useContext } from 'react'
-import { Box, VStack, Text } from '@chakra-ui/react'
+import { Box, VStack, Text, Flex } from '@chakra-ui/react'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import getDate from 'date-fns/getDate'
@@ -68,8 +68,6 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       border="2px solid"
       w="100%"
       borderRadius="md"
-      mb={when === ScheduleEventWhen.MORNING ? 0.5 : 0}
-      mt={when === ScheduleEventWhen.AFTERNOON ? 0.5 : 0}
       cursor={id && 'pointer'}
       onClick={() => {
         if (!id) return setToDelete([])
@@ -147,7 +145,7 @@ interface IScheduleSlot {
 
 const ScheduleSlot = (props: IScheduleSlot) => {
   return (
-    <VStack spacing={1} h="100%" bgColor="blue.100" w="100%">
+    <VStack spacing="4px" h="100%" bgColor="blue.100" w="100%">
       {getSlot(props)}
     </VStack>
   )
