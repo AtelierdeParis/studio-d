@@ -26,4 +26,6 @@ export interface Place {
   created_at: Date
   updated_at: Date
   disponibilities: Disponibility[]
+  scheduleDetails?: string
+  filledUntil?: Date
 }

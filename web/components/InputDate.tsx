@@ -7,18 +7,20 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 interface ICustomInput {
   value?: string
+  placeholder?: string
   onClick?: () => void
   isDisabled?: boolean
 }
 
 const CustomInput = forwardRef(
-  ({ value, onClick, isDisabled }: ICustomInput, ref) => {
+  ({ value, onClick, isDisabled, placeholder }: ICustomInput, ref) => {
     return (
       <Input
         isDisabled={isDisabled}
         autoComplete="off"
         onClick={onClick}
         onChange={() => null}
+        placeholder={placeholder}
         // @ts-ignore
         ref={ref}
         value={value}
@@ -30,11 +32,14 @@ const CustomInput = forwardRef(
 
 interface IInputDate {
   name: string
-  control: Control
+  placeholder?: string
+  control?: Control
   minDate?: Date
   maxDate?: Date
   isDisabled?: boolean
   excludeDates?: Date[]
+  defaultValue?: Date
+  onChange?: (date: Date) => void
 }
 
 const InputDate = ({
@@ -44,18 +49,27 @@ const InputDate = ({
   maxDate = null,
   isDisabled = false,
   excludeDates = [],
+  placeholder,
+  defaultValue,
+  onChange = null,
 }: IInputDate) => {
   const { field } = useController({
     name,
     control,
+    defaultValue,
   })
+
   return (
     <Box w="100" className="studiod-date">
       <DatePicker
         dateFormat="dd/MM/yyyy"
         style={{ width: '100%' }}
         selected={field.value}
-        onChange={(date) => field.onChange(date)}
+        onChange={(date) => {
+          field.onChange(date)
+          if (onChange) onChange(date)
+        }}
+        placeholderText={placeholder}
         customInput={<CustomInput isDisabled={isDisabled} />}
         locale={fr}
         minDate={minDate}

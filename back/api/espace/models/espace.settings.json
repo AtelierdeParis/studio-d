@@ -98,16 +98,19 @@
       "required": false
     },
     "users_permissions_user": {
-      "via": "espaces",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "espaces"
     },
     "disponibilities": {
-      "via": "espace",
-      "collection": "disponibility"
+      "collection": "disponibility",
+      "via": "espace"
     },
     "scheduleDetails": {
       "type": "text"
+    },
+    "filledUntil": {
+      "type": "date"
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react'
+import React, { useMemo, useContext, useState } from 'react'
 import { Flex, Box, Text, Circle, VStack, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Disponibility, DisponibilityStatus } from '~@types/disponibility.d'
@@ -16,6 +16,7 @@ interface IScheduleDelete {
 }
 
 const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
+  const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('place')
   const { successToast, errorToast } = useToast()
   const { place, setToDelete } = useContext(ScheduleContext)
@@ -47,6 +48,7 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
   ])
 
   const onDelete = () => {
+    setLoading(true)
     Promise.all(available.map((dispo) => deleteDisponibility(dispo.id)))
       .then((res) => {
         setToDelete([])
@@ -61,6 +63,7 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
         })
       })
       .catch(() => errorToast(t('schedule.delete.error')))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -105,6 +108,7 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
             leftIcon={<Delete />}
             mt={5}
             onClick={onDelete}
+            isLoading={isLoading}
           >
             <Text ml={2}>
               {t(`schedule.delete.delete${isAvailablePlural}`)}

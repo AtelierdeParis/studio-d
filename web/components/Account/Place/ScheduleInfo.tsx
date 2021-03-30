@@ -1,22 +1,11 @@
 import React, { useMemo } from 'react'
-import {
-  Flex,
-  Box,
-  Text,
-  Button,
-  Input,
-  VStack,
-  Tag,
-  HStack,
-} from '@chakra-ui/react'
-import FormField from '~components/FormField'
+import { Flex, Box, Text, Button, VStack, Tag, HStack } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
 import { useTranslation } from 'next-i18next'
 import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
+import ScheduleFilledUntil from '~components/Account/Place/ScheduleFilledUntil'
 import { Place } from '~@types/place'
-import max from 'date-fns/max'
-import format from 'date-fns/format'
 
 interface IScheduleInfo {
   place: Place
@@ -31,12 +20,6 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
       nbDispo: place?.disponibilities?.length || 0,
       nbAvailable: 0,
     }
-  }, [place?.disponibilities])
-
-  const filledUntil = useMemo(() => {
-    if (!place?.disponibilities || place.disponibilities.length === 0)
-      return null
-    return max(place?.disponibilities.map(({ end }) => new Date(end), null))
   }, [place?.disponibilities])
 
   return (
@@ -55,13 +38,8 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
             {t(`schedule.add`)}
           </Button>
         </Box>
-        <VStack pl={20} spacing={8} flex={1} alignItems="flex-start">
-          <FormField label={t('schedule.filledUntil')}>
-            <Input
-              readOnly
-              value={filledUntil ? format(filledUntil, 'dd/MM/yyyy') : ''}
-            />
-          </FormField>
+        <VStack pl={4} spacing={8} flex={1} alignItems="flex-start">
+          <ScheduleFilledUntil place={place} />
           <Box>
             <Flex pb={1.5}>
               <Text color="gray.400" mr={1.5}>
