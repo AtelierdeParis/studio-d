@@ -16,7 +16,6 @@ import PlaceTabList from '~components/Account/Place/PlaceTabList'
 import { User } from '~@types/user.d'
 import { usePlace } from '~hooks/usePlace'
 import PlaceImage from '~components/Account/Place/PlaceImage'
-// import PlaceSchedule from '~components/Account/Place/PlaceSchedule'
 import Loading from '~components/Loading'
 import { useRouter } from 'next/router'
 import { requireAuth } from '~utils'
@@ -66,7 +65,7 @@ const EditPlace = ({ placeId }: IEditPlace) => {
           {place?.name}
         </Text>
         <Tabs isLazy defaultIndex={Number(query?.index) || 0}>
-          <PlaceTabList />
+          <PlaceTabList place={place} />
           <TabPanels>
             <TabPanel px={0}>
               <PlaceEdit place={place} />

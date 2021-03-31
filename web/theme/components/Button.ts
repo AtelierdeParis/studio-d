@@ -10,6 +10,12 @@ const Button = {
   defaultProps: {
     colorScheme: 'orange',
   },
+  variants: {
+    delete: {
+      bgColor: 'tag.red',
+      h: '40px',
+    },
+  },
   sizes: {
     md: {
       fontSize: 'md',

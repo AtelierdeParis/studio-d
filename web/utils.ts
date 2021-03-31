@@ -1,5 +1,6 @@
 import { getSession } from 'next-auth/client'
 import { ScheduleEventType, ScheduleEventWhen } from '~@types/schedule-event.d'
+import { Disponibility } from '~@types/disponibility'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import addMonths from 'date-fns/addMonths'
 import addDays from 'date-fns/addDays'
@@ -25,13 +26,17 @@ export const createScheduleEventObj = ({
   when = null,
   end = null,
   status = 'selected',
+  id = null,
+  hasEventSameDay = false,
 }) => {
   return {
     start: new Date(start),
     end: end ? setHours(new Date(end), 12) : start,
     extendedProps: {
+      id,
       when,
       status,
+      hasEventSameDay,
     },
   }
 }
@@ -81,11 +86,26 @@ const repeatPeriodEvent = (start, end, repeatNb, repeatType) => {
   return range
 }
 
-export const createScheduleEvents = (
-  form,
-  oldEventsDate = [],
-  isError = false,
-) => {
+const checkIfEventSameDay = (disponibility, sources = []): boolean => {
+  return sources.some(
+    ({ start, id }) => disponibility.id !== id && disponibility.start === start,
+  )
+}
+
+export const createOldEvents = (disponibilities: Disponibility[] = []) => {
+  return disponibilities.map((dispo) => {
+    return createScheduleEventObj({
+      id: dispo.id,
+      start: dispo.start,
+      end: dispo.end,
+      when: dispo.when,
+      status: dispo.status,
+      hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
+    })
+  })
+}
+
+export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
   const events = []
   if (!form.start || form.start === '') return events
   const start = form.start

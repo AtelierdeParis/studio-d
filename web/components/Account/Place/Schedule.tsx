@@ -7,6 +7,7 @@ import frLocale from '@fullcalendar/core/locales/fr'
 import { Box, Flex } from '@chakra-ui/react'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useFormContext } from 'react-hook-form'
+import isSameDay from 'date-fns/isSameDay'
 
 const view = createPlugin({
   views: {
@@ -30,7 +31,9 @@ interface ISchedule {}
 const Schedule = (props: ISchedule) => {
   const { watch } = useFormContext()
   const { start } = watch(['start'])
-  const { oldEvents, newEvents } = useContext(ScheduleContext)
+  const { oldEvents, newEvents, setToDelete, eventsIdToDelete } = useContext(
+    ScheduleContext,
+  )
   const scheduleRef = useRef(null)
 
   useEffect(() => {
@@ -69,10 +72,14 @@ const Schedule = (props: ISchedule) => {
         }}
         height="700px"
         dayCellContent={(day) => {
-          return <Box>{day.dayNumberText}</Box>
+          const hasEvent = events.some((event) =>
+            isSameDay(event.start, day.date),
+          )
+          return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
         }}
-        // eventClick={(event) => {
-        // }}
+        dateClick={(date) => {
+          if (eventsIdToDelete.length > 0) setToDelete([])
+        }}
         // showNonCurrentDates={false}
         fixedWeekCount={false}
         nextDayThreshold="00:00"

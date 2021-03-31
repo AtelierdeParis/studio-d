@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import { Place } from '~@types/place.d'
-import { createScheduleEvents, createScheduleEventObj } from '~utils'
+import { createNewEvents, createOldEvents } from '~utils'
 import { useFormContext } from 'react-hook-form'
 
 interface IScheduleProvider {
@@ -12,21 +12,13 @@ interface IScheduleProvider {
 
 const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   const { watch, errors } = useFormContext()
+  const [eventsIdToDelete, setToDelete] = useState<number[]>([])
 
   const formValues = watch()
 
-  const oldEvents = useMemo(
-    () =>
-      place?.disponibilities.map((dispo) => {
-        return createScheduleEventObj({
-          start: dispo.start,
-          end: dispo.end,
-          when: dispo.when,
-          status: 'available',
-        })
-      }),
-    [place],
-  )
+  const oldEvents = useMemo(() => createOldEvents(place?.disponibilities), [
+    place?.disponibilities,
+  ])
 
   const oldEventsDate = useMemo(() => {
     return oldEvents
@@ -42,7 +34,7 @@ const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
 
   const newEvents = useMemo(
     () =>
-      createScheduleEvents(
+      createNewEvents(
         formValues,
         oldEventsDate,
         errors?.repeatType || errors?.repeatNb,
@@ -53,9 +45,12 @@ const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   return (
     <ScheduleContext.Provider
       value={{
+        place,
         oldEvents,
         newEvents,
         oldEventsDate,
+        eventsIdToDelete,
+        setToDelete,
       }}
     >
       {children}

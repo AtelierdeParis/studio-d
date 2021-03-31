@@ -127,7 +127,10 @@
         "add": "Ajouter un créneau",
         "slotsFilled": "créneau renseigné",
         "slotsFilleds": "créneaux renseignés",
-        "filledUntil": "Renseignés jusqu'au",
+        "filledUntil": "Les créneaux sont renseignés jusqu’au :",
+        "filledText": "Les visiteurs seront informés que vous avez rempli le calendrier des disponibilités jusqu’au {{date}}.",
+        "notFilledText": "Le dernier créneau renseigné est le {{date}}. Les visiteurs seront informés que vous n’avez pas encore rempli le calendrier des disponibilités ultérieures.",
+        "modifyDate": "Modifier cette date",
         "available": "{{nb}} disponible",
         "availables": "{{nb}} disponibles",
         "bookings": "Réservations",
@@ -144,6 +147,25 @@
             "label": "Précisions sur les horaires de l’espace",
             "placeholder": "Renseignez votre texte",
             "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
+        },
+        "delete": {
+            "error": "Une erreur est survenue pendant la suppression",
+            "success": "Les créneaux sélectionnés ont été supprimé",
+            "title": "Vous avez sélectionné {{nb}} créneau.",
+            "titles": "Vous avez sélectionné {{nb}} créneaux.",
+            "slotAvailable" : "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
+            "slotAvailables" : "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
+            "slotNotAvailable" : "Ce créneau ne peut pas être supprimé :",
+            "slotNotAvailables" : "{{nb}} créneaux ne peuvent pas être supprimés :",
+            "delete": "Supprimer le créneau disponible",
+            "deletes": "Supprimer les créneaux disponibles",
+            "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",
+            "notBooked": "Le créneau ne fait l’objet d’aucune demande ou réservation.",
+            "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
+            "see": {
+                "pending": "Voir la demande.",
+                "booked": "Voir la réservation."
+            }
         }
     }
 }

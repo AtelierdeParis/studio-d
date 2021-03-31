@@ -14,6 +14,7 @@ export interface ScheduleEvent {
   start: Date
   end?: Date
   extendedProps: {
+    id: number
     when: ScheduleEventWhen
     status: string
     hasEventSameDay?: boolean

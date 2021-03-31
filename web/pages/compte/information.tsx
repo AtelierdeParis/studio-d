@@ -79,9 +79,9 @@ const AccountInformation = ({ user }: IAccountInformation) => {
     updateCurrentUser(filteredData)
       .then(() => {
         reset(filteredData, { dirtyFields: false })
-        successToast(t('information.error'))
+        successToast(t('information.success'))
       })
-      .catch(() => errorToast(t('information.success')))
+      .catch(() => errorToast(t('information.error')))
       .finally(() => setLoading(false))
   }
 
