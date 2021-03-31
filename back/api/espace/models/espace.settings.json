@@ -103,14 +103,18 @@
       "via": "espaces"
     },
     "disponibilities": {
-      "via": "espace",
-      "collection": "disponibility"
+      "collection": "disponibility",
+      "via": "espace"
     },
     "scheduleDetails": {
       "type": "text"
     },
     "filledUntil": {
       "type": "date"
+    },
+    "published": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

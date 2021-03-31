@@ -1,6 +1,6 @@
 import React from 'react'
 import { Flex, Text, Button, Input, Box } from '@chakra-ui/react'
-import Add from 'public/assets/img/add.svg'
+import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
 import createSlug from 'url-slug'

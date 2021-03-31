@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link as ChakraLink, LinkProps } from '@chakra-ui/react'
-import NextLink from 'next/link'
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
-interface ILink extends LinkProps {
+interface ILink extends Omit<LinkProps, 'href'>, Pick<NextLinkProps, 'href'> {
   shallow?: boolean
 }
 

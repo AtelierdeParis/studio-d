@@ -28,4 +28,6 @@ export interface Place {
   disponibilities: Disponibility[]
   scheduleDetails?: string
   filledUntil?: Date
+  published: boolean
+  requests: any[]
 }

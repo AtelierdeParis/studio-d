@@ -15,7 +15,7 @@ interface IAccountPlace {
 const AccountPlace = ({ user }: IAccountPlace) => {
   const { data: places, isLoading } = useMyPlaces()
   return (
-    <Loading isLoading={isLoading}>
+    <Loading isLoading={isLoading} isCentered>
       {places?.length === 0 ? <InfoPlace /> : <PlaceList places={places} />}
     </Loading>
   )
@@ -25,7 +25,11 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
   async ({ locale }) => {
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['account', 'place'])),
+        ...(await serverSideTranslations(locale, [
+          'account',
+          'place',
+          'modal',
+        ])),
       },
     }
   },

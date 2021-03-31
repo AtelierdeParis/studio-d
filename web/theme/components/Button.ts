@@ -15,6 +15,14 @@ const Button = {
       bgColor: 'tag.red',
       h: '40px',
     },
+    line: {
+      borderBottom: '1px solid black',
+      px: 0,
+      pb: 0.5,
+      h: 'auto',
+      borderRadius: 0,
+      minW: 0,
+    },
   },
   sizes: {
     md: {

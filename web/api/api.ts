@@ -12,6 +12,8 @@ export const getPage = (url) => client.get(`/pages${url}`)
 export const updatePlace = (id: number, data) =>
   client.put(`/espaces/${id}`, data)
 
+export const deletePlace = (id: number) => client.delete(`/espaces/${id}`)
+
 interface FileOptions {
   ref: string
   refId: string

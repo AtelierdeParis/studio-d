@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react'
-import { SimpleGrid, CloseButton, Image, Flex, Button } from '@chakra-ui/react'
+import { SimpleGrid, CloseButton, Flex, Button } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
 import { Place } from '~@types/place.d'
 import { addFiles, deleteFile } from '~api/api'
 import useToast from '~hooks/useToast'
+import Image from '~components/Image'
 import { useTranslation } from 'next-i18next'
 interface IPlaceImage {
   place: Place
@@ -100,13 +101,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
                   opacity: 1,
                 }}
               />
-              <Image
-                src={
-                  file?.preview
-                    ? file.preview
-                    : process.env.NEXT_PUBLIC_BACK_URL + file.url
-                }
-              />
+              <Image src={file?.preview ? file.preview : file.url} />
             </Flex>
           ))}
         </SimpleGrid>
