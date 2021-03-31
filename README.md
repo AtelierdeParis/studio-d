@@ -7,16 +7,12 @@ This project goal is to have a setup of yarn workspaces with the following proje
 
 ## QuickStart
 
-Start infrastructure :
 
 ```bash
+# Start infrastructure
 docker-compose up
-```
 
-### Web project
-Install all dependencies
-
-``` bash
+# Install all dependencies
 yarn install
 ```
 
