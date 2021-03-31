@@ -1,76 +1,50 @@
-# Project template
+# Studio D
 
 This project goal is to have a setup of yarn workspaces with the following projects
 
-- web : a Next.js (front) + Nest.js (api) + react-admin (admin) 
-- mobile : a React Native app
-- core : shared code with Redux stack and components
+- web : Next.js 
+- back : Strapi
 
 ## QuickStart
-
-requirements : pipenv
 
 Start infrastructure :
 
 ```bash
-pipenv shell
-yarn
 docker-compose up
 ```
 
 ### Web project
+Install all dependencies
+
+``` bash
+yarn install
+```
+
+### Back
 
 Start the project
 
+``` bash
+# Development
+yarn client:dev
+
+# Production
+yarn client:build
+yarn client:start
 ```
-cd web && yarn dev
-```
+Default url: [http://localhost:1337](http://localhost:1337)
 
-Create fake users and projects
+### Front
 
-```
-yarn console:dev fixtures
-```
+Start the project
 
-### Mobile project
+``` bash
+# Development
+yarn server:dev
 
-The web and mobile apps are set up to use the shared code from [core](core/src) folder
-
-Run from the [root](/) folder to install both mobile's and web app's dependencies
-
-```sh
-yarn install
-cd mobile/ios && pod install
-```
-
-Launch mobile app (React Native)
-
-```sh
-yarn ios|android
+# Production
+yarn server:build
+yarn server:start
 ```
 
-Run e2e test
-
-```sh
-cd mobile && detox build
-detox test
-```
-
-## Library used by those projects
-
-- Next.js https://nextjs.org/docs/getting-started
-- React-hook-form https://react-hook-form.com/
-- SWR (HTTP client) https://swr.vercel.app/
-- Rematch (Redux stack) https://github.com/rematch/rematch
-- [Restyle](https://github.com/Shopify/restyle)
-- react-native-web (sharing views between web & mobile)
-- swagger-typescript-api (generate TS typing from Swagger documentation)
-- Nest.js with TypeORM https://nestjs.com
-- nestjs-crud for the REST API https://github.com/nestjsx/crud
-- react-admin https://github.com/marmelab/react-admin
-
-## Deployement
-
-TODO Heroku
-
-TODO Appcenter
+Default url: [http://localhost:3000](http://localhost:3000)
