@@ -26,6 +26,7 @@ const InputNumber = ({ control, name, ...rest }: IInputNumber) => {
       step={1}
       {...rest}
       onChange={field.onChange}
+      value={field.value}
     >
       <NumberInputField
         border="1px solid"

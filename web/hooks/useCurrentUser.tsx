@@ -3,6 +3,6 @@ import { client } from '~api/client-api'
 
 export const useCurrentUser = (params = {}) => {
   return useQuery(['me'], () =>
-    client.get('users/me?include=espace').then((res) => res.data),
+    client.users.getUsers().then((res) => res.data),
   )
 }

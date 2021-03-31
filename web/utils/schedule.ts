@@ -1,6 +1,5 @@
-import { getSession } from 'next-auth/client'
 import { ScheduleEventType, ScheduleEventWhen } from '~@types/schedule-event.d'
-import { Disponibility } from '~@types/disponibility'
+import { Disponibility } from '~typings/api'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import addMonths from 'date-fns/addMonths'
 import addDays from 'date-fns/addDays'
@@ -8,18 +7,6 @@ import addWeeks from 'date-fns/addWeeks'
 import isBefore from 'date-fns/isBefore'
 import setHours from 'date-fns/setHours'
 import isSameDay from 'date-fns/isSameDay'
-
-export const requireAuth = (inner, opposite: boolean = false) => {
-  return async (context) => {
-    const session = await getSession(context)
-
-    if ((opposite && session) || (!opposite && !session)) {
-      return { redirect: { destination: '/', permanent: false } }
-    }
-
-    return inner ? inner(context) : { props: { session } }
-  }
-}
 
 export const createScheduleEventObj = ({
   start,
@@ -92,7 +79,7 @@ const checkIfEventSameDay = (disponibility, sources = []): boolean => {
   )
 }
 
-export const createOldEvents = (disponibilities: Disponibility[] = []) => {
+export const createOldEvents = (disponibilities: Omit<Disponibility, 'espace'>[] = []) => {
   return disponibilities.map((dispo) => {
     return createScheduleEventObj({
       id: dispo.id,

@@ -13,12 +13,12 @@ import {
 } from '@chakra-ui/react'
 import PlaceEdit from '~components/Account/Place/PlaceEdit'
 import PlaceTabList from '~components/Account/Place/PlaceTabList'
-import { User } from '~@types/user.d'
+import { UsersPermissionsUser } from '~typings/api'
 import { usePlace } from '~hooks/usePlace'
 import PlaceImage from '~components/Account/Place/PlaceImage'
 import Loading from '~components/Loading'
 import { useRouter } from 'next/router'
-import { requireAuth } from '~utils'
+import { requireAuth } from '~utils/auth'
 import Check from 'public/assets/img/check.svg'
 import dynamic from 'next/dynamic'
 
@@ -30,8 +30,8 @@ const PlaceSchedule = dynamic(
 )
 
 interface IEditPlace {
-  user: User
-  placeId: number
+  user: UsersPermissionsUser
+  placeId: string
 }
 
 const EditPlace = ({ placeId }: IEditPlace) => {

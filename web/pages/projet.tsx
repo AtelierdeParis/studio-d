@@ -5,8 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Heading } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_PROJECT } from '~constants'
-import { Page } from '~@types/page.d'
-import { getPage } from '~api/api'
+import { client } from '~api/client-api'
+import { Page } from '~typings/api'
 
 interface IProject {
   page: Page
@@ -34,7 +34,7 @@ const Project = ({ page }: IProject) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await getPage(ROUTE_PROJECT).then((res) => res.data)
+  const page = await client.pages.pagesDetail(ROUTE_PROJECT).then((res) => res.data)
 
   return {
     props: {

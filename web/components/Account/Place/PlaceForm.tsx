@@ -20,7 +20,7 @@ import InputLocation from '~components/InputLocation'
 import InputFile from '~components/InputFile'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { Place } from '~@types/place.d'
+import { Espace } from '~typings/api'
 import Arrow from 'public/assets/img/arrow-right.svg'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
@@ -48,7 +48,7 @@ const getSchema = (place) => {
 }
 
 interface IPlaceForm {
-  place?: Place
+  place?: Espace
   onSubmit: (data: any) => Promise<any>
 }
 
@@ -61,7 +61,6 @@ const getDefaultValues = (place) => {
 const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
-
   const {
     register,
     errors,

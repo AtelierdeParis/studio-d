@@ -5,7 +5,7 @@ import { GetServerSideProps, NextPage } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PlaceOrCompany from '~components/Signup/PlaceOrCompany'
 import SignupSteps from '~components/Signup/SignupSteps'
-import { requireAuth } from '~utils'
+import { requireAuth } from '~utils/auth'
 
 const Home: NextPage = () => {
   return (

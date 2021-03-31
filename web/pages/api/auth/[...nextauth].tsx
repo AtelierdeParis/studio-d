@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
-import { login } from '~api/auth'
+import { client } from '~api/client-api'
 
 export default (req: NextApiRequest, res: NextApiResponse) =>
   NextAuth(req, res, {
@@ -13,7 +13,7 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
           password: string
         }) => {
           try {
-            const response = await login({
+            const response = await client.auth.login({
               identifier: credentials.username,
               password: credentials.password,
             })

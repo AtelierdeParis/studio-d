@@ -19,10 +19,9 @@ import { useForm } from 'react-hook-form'
 import FormField from '~components/FormField'
 import MessageSent from '~components/MessageSent'
 import useToast from '~hooks/useToast'
-import { createMessage } from '~api/api'
 import { ROUTE_CONTACT } from '~constants'
-import { Page } from '~@types/page.d'
-import { getPage } from '~api/api'
+import { Page } from '~typings/api'
+import { client } from '~api/client-api'
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -44,7 +43,7 @@ const Contact = ({ page }: { page: Page }) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    createMessage(data)
+    client.messages.messagesCreate(data)
       .then(() => setSent(true))
       .catch(() => errorToast(t('error')))
       .finally(() => setLoading(false))
@@ -100,7 +99,7 @@ const Contact = ({ page }: { page: Page }) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await getPage(ROUTE_CONTACT).then((res) => res.data)
+  const page = await client.pages.pagesDetail(ROUTE_CONTACT).then((res) => res.data)
   return {
     props: {
       page,

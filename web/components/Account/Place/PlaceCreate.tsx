@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import { User } from '~@types/user.d'
-import { createNewPlace } from '~api/api'
+import { client } from '~api/client-api'
+import { UsersPermissionsUser } from '~typings/api'
 import useToast from '~hooks/useToast'
 import { useTranslation } from 'next-i18next'
 import PlaceForm from '~components/Account/Place/PlaceForm'
@@ -9,13 +9,13 @@ import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import { useRouter } from 'next/router'
 
 interface IPlaceCreate {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const PlaceCreate = ({ user }: IPlaceCreate) => {
   const router = useRouter()
   const { t } = useTranslation()
-  const { errorToast, successToast } = useToast()
+  const { errorToast } = useToast()
 
   const onSubmit = (values): Promise<any> => {
     const { form, data } = Object.keys(values).reduce(
@@ -39,7 +39,7 @@ const PlaceCreate = ({ user }: IPlaceCreate) => {
 
     form.append('data', JSON.stringify(data))
 
-    return createNewPlace(form)
+    return client.espaces.espacesCreate(form)
       .then((res) => {
         router.push({
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,

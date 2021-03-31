@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import FormField from '~components/FormField'
 import InputPassword from '~components/InputPassword'
 import useToast from '~hooks/useToast'
-import { resetPassword } from '~api/auth'
+import { client } from '~api/client-api'
 
 interface ICreatePassword {
   code: string
@@ -39,7 +39,7 @@ const CreatePassword = ({ code }: ICreatePassword) => {
       })
     }
     setLoading(true)
-    resetPassword({
+    client.auth.resetPassword({
       ...data,
       code,
     })

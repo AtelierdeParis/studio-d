@@ -8,7 +8,7 @@ import SignupSteps from '~components/Signup/SignupSteps'
 import AboutUs from '~components/Signup/AboutUs'
 import SignupForm from '~components/Signup/SignupForm'
 import SignupCompleted from '~components/Signup/SignupCompleted'
-import { requireAuth } from '~utils'
+import { requireAuth } from '~utils/auth'
 
 export type Target = 'compagnie' | 'lieu'
 const availableTargets = ['compagnie', 'lieu']

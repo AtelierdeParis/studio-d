@@ -5,7 +5,7 @@ import { DisponibilityStatus } from '~@types/disponibility'
 
 interface ITag extends TagProps {
   status: DisponibilityStatus
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
 const Tag = ({ status, children, ...rest }: ITag) => {

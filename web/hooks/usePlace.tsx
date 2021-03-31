@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query'
 import { client } from '~api/client-api'
 
-export const usePlace = (id: number) => {
+export const usePlace = (id: string) => {
   return useQuery(['place', Number(id)], () =>
-    client.get(`espaces/${id}`).then((res) => res.data),
+    client.espaces.espacesDetail(id).then((res) => res.data),
   )
 }

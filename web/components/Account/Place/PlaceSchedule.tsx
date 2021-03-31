@@ -9,7 +9,7 @@ import ScheduleRightContent from '~components/Account/Place/ScheduleRightContent
 import { usePlace } from '~hooks/usePlace'
 
 interface IPlaceSchedule {
-  placeId: number
+  placeId: string
 }
 
 const PlaceSchedule = ({ placeId }: IPlaceSchedule) => {

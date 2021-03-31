@@ -5,11 +5,11 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Tabs, TabPanels, TabPanel, Box } from '@chakra-ui/react'
 import PlaceCreate from '~components/Account/Place/PlaceCreate'
 import PlaceTabList from '~components/Account/Place/PlaceTabList'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 
 interface ICreatePlace {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const CreatePlace = ({ user }: ICreatePlace) => {

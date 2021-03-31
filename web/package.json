@@ -8,6 +8,7 @@
     "start": "next start -H 0.0.0.0 -p ${PORT:-8080}",
     "console": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\": \"commonjs\"}' backend/console.ts",
     "console:dev": "NODE_ENV=development yarn console",
+    "get-types": "swagger-typescript-api -p ../back/extensions/documentation/documentation/1.0.0/full_documentation.json -o ./typings -n api.ts --route-types --module-name-index 0 --axios",
     "fixtures": "yarn console:dev fixtures"
   },
   "dependencies": {
@@ -47,6 +48,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.0",
+    "swagger-typescript-api": "^7.0.1",
     "tsconfig-paths": "^3.9.0",
     "url-slug": "^3.0.1",
     "yup": "^0.32.9"

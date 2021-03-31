@@ -4,15 +4,15 @@ import format from 'date-fns/format'
 import { Text, Box, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import max from 'date-fns/max'
-import { Place } from '~@types/place'
 import InputDate from '~components/InputDate'
-import { updatePlace } from '~api/api'
+import { client } from '~api/client-api'
+import { Espace } from '~typings/api'
 import { useQueryClient } from 'react-query'
 import isSameDay from 'date-fns/isSameDay'
 import isAfter from 'date-fns/isAfter'
 
 interface IScheduleFilledUntil {
-  place: Place
+  place: Espace
 }
 
 const ScheduleFilledUntil = ({ place }: IScheduleFilledUntil) => {
@@ -41,7 +41,7 @@ const ScheduleFilledUntil = ({ place }: IScheduleFilledUntil) => {
 
   const onChange = (date: Date) => {
     if (place?.filledUntil && isSameDay(date, filledUntil)) return null
-    updatePlace(place.id, { filledUntil: date }).then((res) => {
+    client.espaces.espacesUpdate(place.id, { filledUntil: date }).then((res) => {
       setVisible(false)
       queryClient.setQueryData(['place', place.id], res.data)
     })

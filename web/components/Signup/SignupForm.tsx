@@ -23,7 +23,7 @@ import { Target } from '~pages/inscription/[target]'
 import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { signup } from '~api/auth'
+import { client } from '~api/client-api'
 import Letter from 'public/assets/img/letter.svg'
 import Lock from 'public/assets/img/lock.svg'
 
@@ -72,7 +72,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
     const { acceptCondition, ...user } = data
     setLoading(true)
 
-    signup({
+    client.auth.signup({
       ...user,
       type: target === 'compagnie' ? 'company' : 'place',
       username: user.email,

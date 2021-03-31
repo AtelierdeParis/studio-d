@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react'
-import { SimpleGrid, CloseButton, Flex, Button } from '@chakra-ui/react'
+import { SimpleGrid, CloseButton, Flex, Button, Image } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
-import { Place } from '~@types/place.d'
-import { addFiles, deleteFile } from '~api/api'
+import { client } from '~api/client-api'
+import { addFiles } from '~utils/file'
+import { Espace } from '~typings/api'
 import useToast from '~hooks/useToast'
-import Image from '~components/Image'
 import { useTranslation } from 'next-i18next'
 interface IPlaceImage {
-  place: Place
+  place: Espace
 }
 
 const PlaceImage = ({ place }: IPlaceImage) => {
@@ -40,7 +40,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
     setLoading(true)
 
     if (removed.length > 0) {
-      await Promise.all(removed.map((id) => deleteFile(id))).then(() => {
+      await Promise.all(removed.map((id) => client.upload.filesDelete(id))).then(() => {
         if (newFiles.length === 0) successToast(t('successImg'))
       })
       setRemoved([])
@@ -101,7 +101,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
                   opacity: 1,
                 }}
               />
-              <Image src={file?.preview ? file.preview : file.url} />
+              <Image src={file?.preview ? file.preview : process.env.NEXT_PUBLIC_BACK_URL+file.url} />
             </Flex>
           ))}
         </SimpleGrid>

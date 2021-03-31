@@ -4,11 +4,11 @@ import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoWelcome from '~components/Account/Info/InfoWelcome'
 import InfoPending from '~components/Account/Info/InfoPending'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 
 interface IAccountDashboard {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const AccountDashboard = ({ user }: IAccountDashboard) => {

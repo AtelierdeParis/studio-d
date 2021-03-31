@@ -1,18 +1,18 @@
 import React, { useMemo, useState } from 'react'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
-import { Place } from '~@types/place.d'
-import { createNewEvents, createOldEvents } from '~utils'
+import { Espace } from '~typings/api'
+import { createNewEvents, createOldEvents } from '~utils/schedule'
 import { useFormContext } from 'react-hook-form'
 
 interface IScheduleProvider {
-  place: Place
+  place: Espace
   children: React.ReactNode
 }
 
 const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   const { watch, errors } = useFormContext()
-  const [eventsIdToDelete, setToDelete] = useState<number[]>([])
+  const [eventsIdToDelete, setToDelete] = useState<string[]>([])
 
   const formValues = watch()
 

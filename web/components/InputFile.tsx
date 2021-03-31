@@ -4,11 +4,12 @@ import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
 import createSlug from 'url-slug'
+import { UploadFile } from 'typings/api'
 import { Control, useController } from 'react-hook-form'
 
 interface IInputFile {
   control: Control
-  defaultValue: File[]
+  defaultValue: UploadFile[]
 }
 
 const acceptableTypes = [

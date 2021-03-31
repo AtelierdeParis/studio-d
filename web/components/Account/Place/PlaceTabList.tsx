@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Tab, TabList } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Place } from '~@types/place'
+import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 
 const TabPlace = ({ isDisabled, children }) => {
@@ -24,7 +24,7 @@ const TabPlace = ({ isDisabled, children }) => {
 
 interface IPriceTabList {
   disabledIndexes?: number[]
-  place?: Place
+  place?: Espace
 }
 const PriceTabList = ({
   disabledIndexes = [],

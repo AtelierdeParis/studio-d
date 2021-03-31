@@ -3,10 +3,10 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoBooking from '~components/Account/Info/InfoBooking'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 interface IAccountBooking {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const AccountBooking = ({ user }: IAccountBooking) => {

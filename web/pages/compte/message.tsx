@@ -3,10 +3,10 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoMessage from '~components/Account/Info/InfoMessage'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 interface IAccountMessage {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const AccountMessage = ({ user }: IAccountMessage) => {

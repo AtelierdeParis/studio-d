@@ -6,10 +6,10 @@ import InfoPlace from '~components/Account/Info/InfoPlace'
 import PlaceList from '~components/Account/Place/PlaceList'
 import Loading from '~components/Loading'
 import { useMyPlaces } from '~hooks/useMyPlaces'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 interface IAccountPlace {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const AccountPlace = ({ user }: IAccountPlace) => {

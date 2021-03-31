@@ -1,5 +1,5 @@
 import React from 'react'
-import { Place } from '~@types/place.d'
+import { Espace } from '~typings/api'
 import { ROUTE_ACCOUNT_ADD_PLACES } from '~constants'
 import Link from '~components/Link'
 import { Box, Button, Text, Flex, VStack } from '@chakra-ui/react'
@@ -8,7 +8,7 @@ import Add from 'public/assets/img/add.svg'
 import PlaceListItem from '~components/Account/Place/PlaceListItem'
 
 interface IPlaceList {
-  places: Place[]
+  places: Espace[]
 }
 
 const PlaceList = ({ places }: IPlaceList) => {

@@ -5,8 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Heading } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_USE_POLICY } from '~constants'
-import { Page } from '~@types/page.d'
-import { getPage } from '~api/api'
+import { client } from '~api/client-api'
+import { Page } from '~typings/api'
 
 interface ICharte {
   page: Page
@@ -34,7 +34,7 @@ const Charte = ({ page }: ICharte) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await getPage(ROUTE_USE_POLICY).then((res) => res.data)
+  const page = await client.pages.pagesDetail(ROUTE_USE_POLICY).then((res) => res.data)
 
   return {
     props: {

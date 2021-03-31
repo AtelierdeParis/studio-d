@@ -5,11 +5,11 @@ import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
 import { useTranslation } from 'next-i18next'
 import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
 import ScheduleFilledUntil from '~components/Account/Place/ScheduleFilledUntil'
-import { Place } from '~@types/place'
+import { Espace } from '~typings/api'
 import useNbDisponibility from '~hooks/useNbDisponibility'
 
 interface IScheduleInfo {
-  place: Place
+  place: Espace
   showForm: () => void
 }
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import Modal from '~components/Modal'
-import { deletePlace } from '~api/api'
+import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
 
 interface IDeletePlaceModal {
-  placeId: number
+  placeId: string
 }
 
 const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
@@ -15,7 +15,7 @@ const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
   const { t } = useTranslation('place')
   const { errorToast, successToast } = useToast()
   const onConfirm = (): Promise<any> => {
-    return deletePlace(placeId)
+    return client.espaces.espacesDelete(placeId)
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successDelete'))

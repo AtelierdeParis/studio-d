@@ -7,9 +7,9 @@ import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
 import { ScheduleEventWhen, ScheduleEventType } from '~@types/schedule-event.d'
-import { Place } from '~@types/place.d'
-import { createManyDisponibilities } from '~api/api'
-import { createDbEvent } from '~utils'
+import { client } from '~api/client-api'
+import { Espace } from '~typings/api'
+import { createDbEvent } from '~utils/schedule'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
@@ -37,7 +37,7 @@ export const schema = yup.object().shape({
 })
 
 interface IScheduleForm {
-  place: Place
+  place: Espace
   hideForm: () => void
 }
 
@@ -73,7 +73,7 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
     if (events.flat().length === 0) return
 
     setLoading(true)
-    createManyDisponibilities(
+    client.bulk.disponibilitiesCreate(
       events.flat().map((event) => ({
         ...event,
         espace: place.id,

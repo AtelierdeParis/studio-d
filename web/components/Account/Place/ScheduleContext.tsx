@@ -1,14 +1,14 @@
 import React from 'react'
 import { ScheduleEvent } from '~@types/schedule-event.d'
-import { Place } from '~@types/place.d'
+import { Espace } from '~typings/api'
 
 interface IScheduleContext {
   newEvents?: ScheduleEvent[]
   oldEvents?: ScheduleEvent[]
   oldEventsDate?: Date[]
-  eventsIdToDelete?: number[]
-  setToDelete: (events: number[]) => void
-  place: Place
+  eventsIdToDelete?: string[]
+  setToDelete: (events: string[]) => void
+  place: Espace
 }
 
 const ScheduleContext = React.createContext<IScheduleContext>({

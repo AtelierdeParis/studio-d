@@ -1,13 +1,13 @@
 import React from 'react'
-import { updatePlace } from '~api/api'
 import { useQueryClient } from 'react-query'
 import { Box, Textarea } from '@chakra-ui/react'
 import FormField from '~components/FormField'
 import { useTranslation } from 'next-i18next'
-import { Place } from '~@types/place'
+import { client } from '~api/client-api'
+import { Espace } from '~typings/api'
 
 interface IScheduleAbout {
-  place: Place
+  place: Espace
 }
 
 const ScheduleAbout = ({ place }: IScheduleAbout) => {
@@ -17,7 +17,7 @@ const ScheduleAbout = ({ place }: IScheduleAbout) => {
   const saveDetails = (event) => {
     const value = event.currentTarget.value
     if (value === place.scheduleDetails) return
-    updatePlace(place.id, { scheduleDetails: value }).then((res) => {
+    client.espaces.espacesUpdate(place.id, { scheduleDetails: value }).then((res) => {
       queryClient.setQueryData(['place', place.id], res.data)
     })
   }

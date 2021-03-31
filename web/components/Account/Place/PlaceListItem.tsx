@@ -15,7 +15,7 @@ import {
   LinkBox,
   LinkOverlay,
 } from '@chakra-ui/react'
-import { Place } from '~@types/place.d'
+import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 import useNbDisponibility from '~hooks/useNbDisponibility'
 import useIsOccupied from '~hooks/useIsOccupied'
@@ -28,7 +28,7 @@ import NextLink from 'next/link'
 import format from 'date-fns/format'
 
 interface IPlaceListItem {
-  place: Place
+  place: Espace
 }
 
 const PlaceListItem = ({ place }: IPlaceListItem) => {

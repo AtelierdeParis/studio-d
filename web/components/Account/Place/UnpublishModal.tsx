@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from '~components/Modal'
-import { updatePlace } from '~api/api'
+import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { Flex, Button } from '@chakra-ui/react'
 import Arrow from 'public/assets/img/circle-arrow.svg'
@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
 
 interface IUnpublishModal {
-  placeId: number
+  placeId: string
 }
 
 const UnpublishModal = ({ placeId }: IUnpublishModal) => {
@@ -17,7 +17,7 @@ const UnpublishModal = ({ placeId }: IUnpublishModal) => {
   const { errorToast, successToast } = useToast()
 
   const onConfirm = (): Promise<any> => {
-    return updatePlace(placeId, { published: false })
+    return client.espaces.espacesUpdate(placeId, { published: false })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successUnpublish'))

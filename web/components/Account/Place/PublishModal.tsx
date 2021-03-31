@@ -1,13 +1,13 @@
 import React from 'react'
 import Modal from '~components/Modal'
-import { updatePlace } from '~api/api'
+import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
 
 interface IPublishModal {
-  placeId: number
+  placeId: string
 }
 
 const PublishModal = ({ placeId }: IPublishModal) => {
@@ -15,7 +15,7 @@ const PublishModal = ({ placeId }: IPublishModal) => {
   const { t } = useTranslation('place')
   const { errorToast, successToast } = useToast()
   const onConfirm = (): Promise<any> => {
-    return updatePlace(placeId, { published: true })
+    return client.espaces.espacesUpdate(placeId, { published: true })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successPublish'))

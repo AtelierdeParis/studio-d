@@ -14,7 +14,7 @@ import { useTranslation } from 'next-i18next'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { forgotPassword } from '~api/auth'
+import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import Letter from 'public/assets/img/letter.svg'
 
@@ -37,7 +37,7 @@ const ResetPasswordForm = ({ onClose }: ResetPasswordFormProps) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    forgotPassword(data.email)
+    client.auth.forgotPassword(data.email)
       .then(() => {
         successToast(t('reset.success'))
         onClose()

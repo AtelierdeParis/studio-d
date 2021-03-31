@@ -18,18 +18,18 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import Letter from 'public/assets/img/letter.svg'
-import { updateCurrentUser } from '~api/account'
+import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 
 interface IAccountInformation {
-  user: User
+  user: UsersPermissionsUser
 }
 interface FormInformation
-  extends Pick<User, 'email' | 'address' | 'city' | 'zipCode' | 'phone'> {
+  extends Pick<UsersPermissionsUser, 'email' | 'address' | 'city' | 'zipCode' | 'phone'> {
   password: string
 }
 
@@ -76,7 +76,7 @@ const AccountInformation = ({ user }: IAccountInformation) => {
     }, {})
     setLoading(true)
 
-    updateCurrentUser(filteredData)
+    client.users.putUsers(filteredData)
       .then(() => {
         reset(filteredData, { dirtyFields: false })
         successToast(t('information.success'))

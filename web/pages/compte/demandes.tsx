@@ -3,10 +3,10 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoRequest from '~components/Account/Info/InfoRequest'
-import { User } from '~@types/user.d'
-import { requireAuth } from '~utils'
+import { UsersPermissionsUser } from '~typings/api'
+import { requireAuth } from '~utils/auth'
 interface IAccountRequest {
-  user: User
+  user: UsersPermissionsUser
 }
 
 const AccountRequest = ({ user }: IAccountRequest) => {

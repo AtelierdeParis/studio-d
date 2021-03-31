@@ -21,7 +21,7 @@ import Question from 'public/assets/img/question.svg'
 import { useTranslation } from 'next-i18next'
 import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
-import { User } from '~@types/user'
+import { UsersPermissionsUser } from '~typings/api'
 
 const accountItems = {
   title: 'myAccount',
@@ -91,7 +91,7 @@ const styleActive = {
   color: 'blue.500',
 }
 
-const AccountMenu = ({ user }: { user: User }) => {
+const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const { t } = useTranslation('account')
   const router = useRouter()
 

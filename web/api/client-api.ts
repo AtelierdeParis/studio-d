@@ -1,23 +1,17 @@
-import axios from 'axios'
 import { getSession } from 'next-auth/client'
+import { Api } from '~typings/api'
 
-export const client = axios.create({
+export const client = new Api({
   baseURL: process.env.NEXT_PUBLIC_BACK_URL,
-})
-
-client.interceptors.request.use(
-  async (config) => {
+  securityWorker: async () => {
     const session = await getSession()
-    if (!session) return config
+    if (!session) return {}
 
     return {
-      ...config,
       headers: {
         Authorization: `Bearer ${session.user.jwt}`,
       },
     }
-  },
-  (error) => {
-    return Promise.reject(error)
-  },
-)
+  }
+})
+

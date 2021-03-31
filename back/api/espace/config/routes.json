@@ -6,7 +6,7 @@
       "handler": "espace.myPlaces",
       "config": {
           "policies": [],
-          "prefix": "",
+          "operationId": "myPlaces",
           "description": "Get places related to current user"
       }
     },

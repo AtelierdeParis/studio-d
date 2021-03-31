@@ -1,18 +1,19 @@
 import React, { useMemo, useContext, useState } from 'react'
 import { Flex, Box, Text, Circle, VStack, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Disponibility, DisponibilityStatus } from '~@types/disponibility.d'
+import { DisponibilityStatus } from '~@types/disponibility.d'
 import format from 'date-fns/format'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
 import useToast from '~hooks/useToast'
-import { deleteDisponibility } from '~api/api'
+import { client } from '~api/client-api'
+import { Disponibility } from '~typings/api'
 import Delete from 'public/assets/img/delete.svg'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useQueryClient } from 'react-query'
 
 interface IScheduleDelete {
-  disponibilities: Disponibility[]
+  disponibilities: Omit<Disponibility, 'espace'>[]
 }
 
 const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
@@ -49,7 +50,7 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
 
   const onDelete = () => {
     setLoading(true)
-    Promise.all(available.map((dispo) => deleteDisponibility(dispo.id)))
+    Promise.all(available.map((dispo) => client.disponibilities.disponibilitiesDelete(dispo.id)))
       .then((res) => {
         setToDelete([])
         successToast(t('schedule.delete.success'))
