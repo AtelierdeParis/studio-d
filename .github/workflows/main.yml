@@ -1,0 +1,76 @@
+name: Studio D CI
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      CI: true
+      POSTGRESQL_ADDON_USER: studiod-admin
+      POSTGRESQL_ADDON_PASSWORD: studiod-password
+      POSTGRESQL_ADDON_DB: studiod
+      POSTGRESQL_ADDON_HOST: localhost
+      POSTGRESQL_ADDON_PORT: 5432
+      JWT_TOKEN_SECRET: secret_key
+      SMTP_HOST: localhost
+      SMTP_PORT: 25
+      NEXTAUTH_URL: http://localhost:3000
+      FRONT_URL: http://localhost:3000
+      API_URL: http://localhost:1337
+      TLS_POLICY: ignore
+
+    services:
+      # Label used to access the service container
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: studiod-admin
+          POSTGRES_PASSWORD: studiod-password
+          POSTGRES_DB: studiod
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+      maildev:
+        image: djfarrelly/maildev
+        ports:
+          - "1080:80"
+          - "25:25"
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        env:
+          REACT_APP_CI: true
+        run: yarn install
+      - name: Check Types
+        run: cd web && yarn tsc
