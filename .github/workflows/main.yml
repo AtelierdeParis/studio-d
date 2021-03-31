@@ -22,7 +22,7 @@ jobs:
       SMTP_PORT: 25
       NEXTAUTH_URL: http://localhost:3000
       FRONT_URL: http://localhost:3000
-      API_URL: http://localhost:3001
+      API_URL: http://localhost:1337
       TLS_POLICY: ignore
 
     services:
@@ -73,4 +73,4 @@ jobs:
           REACT_APP_CI: true
         run: yarn install
       - name: Check Types
-        run: cd front && yarn tsc
+        run: cd web && yarn tsc
