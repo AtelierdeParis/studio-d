@@ -26,6 +26,7 @@ const theme = extendTheme({
   },
   colors: {
     gray: {
+      hover: '#fbfbfb',
       '50': '#F2F2F2',
       '100': '#E5E5E5',
       '200': '#C4C4C4',

@@ -2,328 +2,87 @@
   "paths": {
     "/users-permissions/search/{id}": {
       "get": {
-        "deprecated": false,
-        "description": "Search for users",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UsersPermissionsUser"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "summary": "Retrieve a list of users by searching for their username or email",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "",
+            "description": "A string matching a user's email or username",
             "deprecated": false,
             "required": true,
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "_limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of results possible",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_sort",
-            "in": "query",
-            "required": false,
-            "description": "Sort according to a specific field.",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_start",
-            "in": "query",
-            "required": false,
-            "description": "Skip a specific number of entries (especially useful for pagination)",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "=",
-            "in": "query",
-            "required": false,
-            "description": "Get entries that matches exactly your input",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_ne",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are not equals to something",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lt",
-            "in": "query",
-            "required": false,
-            "description": "Get record that are lower than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are lower than or equal to a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gt",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than  or equal a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_contains",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_containss",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains (case sensitive) a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_in",
-            "in": "query",
-            "required": false,
-            "description": "Get records that matches any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_nin",
-            "in": "query",
-            "required": false,
-            "description": "Get records that doesn't match any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
           }
         ]
       }
     },
     "/connect/*": {
       "get": {
-        "deprecated": false,
-        "description": "Connect a provider",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
+        "summary": "Authenticate your user with a custom provider",
+        "tags": ["Authentication"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "deprecated": false,
+            "description": "The name of the provider you want to use",
+            "schema": {
+              "type": "string"
             }
           }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
         ],
-        "parameters": []
+        "externalDocs": {
+          "description": "Find out more about the authentication flow in the strapi documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#setting-up-the-provider-examples"
+        },
+        "responses": {
+          "200": {
+            "description": "Your user is redirected"
+          }
+        }
       }
     },
     "/auth/local": {
       "post": {
-        "deprecated": false,
-        "description": "Login a user using the identifiers email and password",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
+        "externalDocs": {
+          "description": "Find out more in the strapi's documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#login"
+        },
+        "tags": ["Authentication"],
+        "security": [],
+        "operationId": "login",
+        "requestBody": {
+          "description": "The identifier param can either be an email or a username",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["identifier", "password"],
+                "properties": {
+                  "identifier": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
                   }
                 }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+              },
+              "example": {
+                "identifier": "hi@strapi.io",
+                "password": "superSecure123"
               }
             }
           }
         },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
+        "responses": {
+          "200": {
+            "description": "Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-PermissionsRegisterResponse"
                 }
               }
             }
@@ -333,269 +92,44 @@
     },
     "/auth/local/register": {
       "post": {
-        "deprecated": false,
-        "description": "Register a new user with the default role",
+        "tags": ["Authentication"],
+        "security": [],
+        "operationId": "signup",
+        "externalDocs": {
+          "description": "Find out more in the strapi's documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#registration"
+        },
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Successfully register a user",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UsersPermissionsUser"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/Users-PermissionsRegisterResponse"
                 }
               }
             }
           }
         },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewUsersPermissionsUser"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/{provider}/callback": {
-      "get": {
-        "deprecated": false,
-        "description": "Successfull redirection after approving a provider",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "parameters": [
-          {
-            "name": "provider",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/auth/forgot-password": {
-      "post": {
-        "deprecated": false,
-        "description": "Send the reset password email link",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
+                "required": ["username", "email", "password"],
                 "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/reset-password": {
-      "post": {
-        "deprecated": false,
-        "description": "Reset user password with a code (resetToken)",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
+                  "username": {
+                    "type": "string",
+                    "minLength": 3
+                  },
+                  "email": {
+                    "type": "string",
+                    "minLength": 6
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6
                   }
                 }
               }
@@ -606,115 +140,53 @@
     },
     "/auth/email-confirmation": {
       "get": {
-        "deprecated": false,
-        "description": "Validate a user account",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
-        "parameters": []
+        "tags": ["Authentication"],
+        "security": []
       }
     },
-    "/auth/send-email-confirmation": {
-      "post": {
-        "deprecated": false,
-        "description": "Send a confirmation email to user",
+    "/auth/{provider}/callback": {
+      "get": {
+        "tags": ["Authentication"],
+        "externalDocs": {
+          "description": "Find out more in the strapi's documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#setting-up-the-provider-examples"
+        },
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "description": "The provider used to authenticate your user",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Successfull redirection after approving a provider",
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/Users-PermissionsRegisterResponse"
                 }
               }
             }
           }
+        }
+      }
+    },
+    "/auth/forgot-password": {
+      "post": {
+        "tags": ["Authentication"],
+        "security": [],
+        "operationId": "forgotPassword",
+        "summary": "Send an email to reset your password",
+        "externalDocs": {
+          "description": "Find out more in the strapi's documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#forgotten-reset-password"
         },
-        "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -722,8 +194,102 @@
             "application/json": {
               "schema": {
                 "properties": {
-                  "foo": {
+                  "email": {
                     "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "hi@strapi.io",
+                "url": "http://mon-site.com/rest-password"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email sent"
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "tags": ["Authentication"],
+        "operationId": "resetPassword",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Users-PermissionsRegisterResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["code", "password", "passwordConfirmation"],
+                "properties": {
+                  "code": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "passwordConfirmation": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/send-email-confirmation": {
+      "post": {
+        "security": [],
+        "externalDocs": {
+          "description": "Find out more in the strapi's documentation",
+          "url": "https://strapi.io/documentation/developer-docs/latest/development/plugins/users-permissions.html#email-validation"
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully sent email",
+            "content": {
+              "application/json": {
+                "email": {
+                  "type": "string"
+                },
+                "sent": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": ["email"],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "minLength": 6
                   }
                 }
               }

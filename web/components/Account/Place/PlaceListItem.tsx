@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from '~components/Link'
+import LinkOverlay from '~components/LinkOverlay'
 import Tag from '~components/Tag'
 import Image from '~components/Image'
 import FallbackImage from '~components/FallbackImage'
@@ -13,7 +14,6 @@ import {
   Circle,
   ButtonGroup,
   LinkBox,
-  LinkOverlay,
 } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
@@ -24,8 +24,7 @@ import { useTranslation } from 'next-i18next'
 import UnpublishModal from '~components/Account/Place/UnpublishModal'
 import PublishModal from '~components/Account/Place/PublishModal'
 import DeletePlaceModal from '~components/Account/Place/DeletePlaceModal'
-import NextLink from 'next/link'
-import format from 'date-fns/format'
+import { format } from '~utils/date'
 
 interface IPlaceListItem {
   place: Espace
@@ -39,7 +38,6 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
   )
 
   const isOccupied = useIsOccupied(booked)
-
   return (
     <LinkBox w="100%">
       <Flex
@@ -49,7 +47,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
         borderBottom="1px solid"
         borderColor="gray.100"
         _hover={{
-          bgColor: '#fbfbfb',
+          bgColor: 'gray.hover',
         }}
       >
         <Flex
@@ -70,19 +68,16 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
         <Flex direction="column" justifyContent="space-between" flex={1}>
           <Flex justifyContent="space-between">
             <Box>
-              <NextLink
+              <LinkOverlay
                 href={{
                   pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
                   query: { id: place.id },
                 }}
-                passHref
               >
-                <LinkOverlay>
-                  <Text fontSize="lg" fontFamily="mabry medium">
-                    {place.name}
-                  </Text>
-                </LinkOverlay>
-              </NextLink>
+                <Text fontSize="lg" fontFamily="mabry medium">
+                  {place.name}
+                </Text>
+              </LinkOverlay>
               <Flex>
                 <Text>{place.address}</Text>
                 {isOccupied && (
@@ -132,10 +127,9 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                         { nb: available.length },
                       )}
                     </Text>
-                    {/* TODO: handle filled until */}
                     <Text>
                       {t(`list.filledUntil`, {
-                        date: format(new Date(place.filledUntil), 'dd/MM/yyyy'),
+                        date: format(place.filledUntil),
                       })}
                     </Text>
                   </Box>

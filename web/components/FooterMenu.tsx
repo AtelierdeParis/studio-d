@@ -4,7 +4,7 @@ import {
   ROUTE_PLACES,
   ROUTE_PROJECT,
   ROUTE_CONTACT,
-  ROUTE_NEWS,
+  ROUTE_ACTU,
   ROUTE_FAQ,
   ROUTE_SIGNUP,
   ROUTE_CGU,
@@ -43,7 +43,7 @@ const FooterMenu = () => {
           <MenuItem href="/" text={t('nav.home')} />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
-          <MenuItem href={ROUTE_NEWS} text={t('nav.news')} />
+          <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
         </Box>

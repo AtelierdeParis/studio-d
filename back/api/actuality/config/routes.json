@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/actualities",
+      "handler": "actuality.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/actualities/count",
+      "handler": "actuality.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/actualities/:id",
+      "handler": "actuality.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/actualities",
+      "handler": "actuality.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/actualities/:id",
+      "handler": "actuality.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/actualities/:id",
+      "handler": "actuality.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

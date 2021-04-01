@@ -4,16 +4,16 @@
       "get": {
         "deprecated": false,
         "description": "Get places related to current user",
-        "operationId": "myPlaces",
         "responses": {
           "200": {
             "description": "response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Espace"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -302,9 +302,9 @@
           "description": "",
           "required": true,
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/NewEspace"
               }
             }
           }
@@ -486,7 +486,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/NewEspace"
               }
             }
           }
@@ -704,10 +704,7 @@
                   "type": "object"
                 },
                 "related": {
-                  "type": "array",
-                  "items": {
-                    "type":"string"
-                  }
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -777,10 +774,7 @@
                   "type": "object"
                 },
                 "related": {
-                  "type": "array",
-                  "items": {
-                    "type":"string"
-                  }
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"

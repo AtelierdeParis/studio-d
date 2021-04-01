@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/disponibilities": {
+    "/actualities": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Disponibility"
+                    "$ref": "#/components/schemas/Actuality"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Actuality"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "$ref": "#/components/schemas/NewActuality"
               }
             }
           }
         }
       }
     },
-    "/disponibilities/count": {
+    "/actualities/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "parameters": []
       }
     },
-    "/disponibilities/{id}": {
+    "/actualities/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Actuality"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Actuality"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "$ref": "#/components/schemas/NewActuality"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Actuality"
         ],
         "parameters": [
           {
@@ -510,125 +510,36 @@
           }
         ]
       }
-    },
-    "/bulk/disponibilities": {
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "Disponibility": {
+      "Actuality": {
         "required": [
           "id",
-          "start",
-          "end",
-          "type",
-          "status"
+          "title",
+          "content",
+          "image"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
+          "title": {
+            "type": "string"
           },
-          "start": {
-            "type": "string",
-            "format": "date"
+          "content": {
+            "type": "string"
           },
-          "end": {
-            "type": "string",
-            "format": "date"
-          },
-          "espace": {
+          "image": {
             "required": [
               "id",
               "name",
-              "surface",
-              "roomLength",
-              "width",
-              "height",
-              "mirror",
-              "danceBar",
-              "accomodation",
-              "technicalStaff",
-              "floor",
-              "address",
-              "latitude",
-              "longitude"
+              "hash",
+              "mime",
+              "size",
+              "url",
+              "provider"
             ],
             "properties": {
               "id": {
@@ -637,11 +548,11 @@
               "name": {
                 "type": "string"
               },
-              "surface": {
-                "type": "integer"
+              "alternativeText": {
+                "type": "string"
               },
-              "roomLength": {
-                "type": "integer"
+              "caption": {
+                "type": "string"
               },
               "width": {
                 "type": "integer"
@@ -649,73 +560,35 @@
               "height": {
                 "type": "integer"
               },
-              "mirror": {
-                "type": "boolean"
+              "formats": {
+                "type": "object"
               },
-              "danceBar": {
-                "type": "boolean"
-              },
-              "accomodation": {
-                "type": "boolean"
-              },
-              "technicalStaff": {
-                "type": "boolean"
-              },
-              "floor": {
-                "type": "string",
-                "enum": [
-                  "floor",
-                  "carpet",
-                  "other"
-                ]
-              },
-              "otherFloor": {
+              "hash": {
                 "type": "string"
               },
-              "about": {
+              "ext": {
                 "type": "string"
               },
-              "details": {
+              "mime": {
                 "type": "string"
               },
-              "address": {
+              "size": {
+                "type": "number"
+              },
+              "url": {
                 "type": "string"
               },
-              "latitude": {
+              "previewUrl": {
                 "type": "string"
               },
-              "longitude": {
+              "provider": {
                 "type": "string"
               },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "provider_metadata": {
+                "type": "object"
               },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users_permissions_user": {
+              "related": {
                 "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "scheduleDetails": {
-                "type": "string"
-              },
-              "filledUntil": {
-                "type": "string"
-              },
-              "published": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -724,79 +597,20 @@
                 "type": "string"
               }
             }
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
-            ]
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
-      "NewDisponibility": {
+      "NewActuality": {
         "required": [
-          "start",
-          "end",
-          "type",
-          "status"
+          "title",
+          "content"
         ],
         "properties": {
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
-          },
-          "start": {
-            "type": "string",
-            "format": "date"
-          },
-          "end": {
-            "type": "string",
-            "format": "date"
-          },
-          "espace": {
+          "title": {
             "type": "string"
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
-            ]
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
+          "content": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
@@ -810,7 +624,7 @@
   },
   "tags": [
     {
-      "name": "Disponibility"
+      "name": "Actuality"
     }
   ]
 }

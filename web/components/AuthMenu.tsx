@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonGroup, Button, Text, Flex } from '@chakra-ui/react'
+import { ButtonGroup, Button, Text, Flex, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import SigninModal from '~components/Signin/SigninModal'
@@ -17,9 +17,11 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
     return (
       <Flex as={Link} href={ROUTE_ACCOUNT} alignItems="center">
         <Squares stroke={colorMode} />
-        <Text pl={3} fontWeight="500" lineHeight={1}>
-          {session.user.name}
-        </Text>
+        <Box maxW="15rem">
+          <Text pl={3} fontWeight="500" lineHeight={1} isTruncated>
+            {session.user.name}
+          </Text>
+        </Box>
       </Flex>
     )
   }

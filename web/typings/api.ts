@@ -9,6 +9,40 @@
  * ---------------------------------------------------------------
  */
 
+export interface Actuality {
+  id: string;
+  title: string;
+  content: string;
+  created_at: string;
+  image: {
+    id: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: object;
+    hash: string;
+    ext?: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    provider_metadata?: object;
+    related?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+}
+
+export interface NewActuality {
+  title: string;
+  content: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface Disponibility {
   id: string;
   when?: "morning" | "afternoon" | "full";
@@ -422,6 +456,107 @@ export interface Error {
   /** @format int32 */
   code: number;
   message: string;
+}
+
+export namespace Actualities {
+  /**
+   * No description
+   * @tags Actuality
+   * @name ActualitiesList
+   * @request GET:/actualities
+   * @secure
+   */
+  export namespace ActualitiesList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Actuality[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Actuality
+   * @name ActualitiesCreate
+   * @request POST:/actualities
+   * @secure
+   */
+  export namespace ActualitiesCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewActuality;
+    export type RequestHeaders = {};
+    export type ResponseBody = Actuality;
+  }
+  /**
+   * No description
+   * @tags Actuality
+   * @name CountList
+   * @request GET:/actualities/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Actuality
+   * @name ActualitiesDetail
+   * @request GET:/actualities/{id}
+   * @secure
+   */
+  export namespace ActualitiesDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Actuality;
+  }
+  /**
+   * @description Update a record
+   * @tags Actuality
+   * @name ActualitiesUpdate
+   * @request PUT:/actualities/{id}
+   * @secure
+   */
+  export namespace ActualitiesUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewActuality;
+    export type RequestHeaders = {};
+    export type ResponseBody = Actuality;
+  }
+  /**
+   * @description Delete a record
+   * @tags Actuality
+   * @name ActualitiesDelete
+   * @request DELETE:/actualities/{id}
+   * @secure
+   */
+  export namespace ActualitiesDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
 }
 
 export namespace Disponibilities {
@@ -930,7 +1065,8 @@ export namespace Upload {
     }[];
   }
   /**
-   * No description
+   * @description Retrieve the total number of uploaded files
+   * @tags Upload - File
    * @name FilesCountList
    * @request GET:/upload/files/count
    * @secure
@@ -943,7 +1079,8 @@ export namespace Upload {
     export type ResponseBody = { count?: number };
   }
   /**
-   * No description
+   * @description Retrieve all file documents
+   * @tags Upload - File
    * @name FilesList
    * @request GET:/upload/files
    * @secure
@@ -956,20 +1093,8 @@ export namespace Upload {
     export type ResponseBody = UploadFile[];
   }
   /**
-   * No description
-   * @name SearchDetail
-   * @request GET:/upload/search/{id}
-   * @secure
-   */
-  export namespace SearchDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UploadFile[];
-  }
-  /**
-   * No description
+   * @description Retrieve a single file depending on its id
+   * @tags Upload - File
    * @name FilesDetail
    * @request GET:/upload/files/{id}
    * @secure
@@ -982,7 +1107,8 @@ export namespace Upload {
     export type ResponseBody = UploadFile;
   }
   /**
-   * No description
+   * @description Delete an uploaded file
+   * @tags Upload - File
    * @name FilesDelete
    * @request DELETE:/upload/files/{id}
    * @secure
@@ -993,6 +1119,20 @@ export namespace Upload {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = void;
+  }
+  /**
+   * @description Search for an uploaded file
+   * @tags Upload - File
+   * @name SearchDetail
+   * @request GET:/upload/search/{id}
+   * @secure
+   */
+  export namespace SearchDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = UploadFile[];
   }
 }
 
@@ -1183,7 +1323,8 @@ export namespace UsersPermissions {
     export type ResponseBody = { foo?: string };
   }
   /**
-   * No description
+   * @description Search for users
+   * @tags UsersPermissions - User
    * @name SearchDetail
    * @summary Retrieve a list of users by searching for their username or email
    * @request GET:/users-permissions/search/{id}
@@ -1194,13 +1335,13 @@ export namespace UsersPermissions {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = any;
+    export type ResponseBody = UsersPermissionsUser[];
   }
 }
 
 export namespace Connect {
   /**
-   * No description
+   * @description Connect a provider
    * @tags Authentication
    * @name GetConnect
    * @summary Authenticate your user with a custom provider
@@ -1218,7 +1359,7 @@ export namespace Connect {
 
 export namespace Auth {
   /**
-   * No description
+   * @description Login a user using the identifiers email and password
    * @tags Authentication
    * @name Login
    * @request POST:/auth/local
@@ -1232,7 +1373,7 @@ export namespace Auth {
     export type ResponseBody = any;
   }
   /**
-   * No description
+   * @description Register a new user with the default role
    * @tags Authentication
    * @name Signup
    * @request POST:/auth/local/register
@@ -1246,21 +1387,7 @@ export namespace Auth {
     export type ResponseBody = any;
   }
   /**
-   * No description
-   * @tags Authentication
-   * @name EmailConfirmationList
-   * @request GET:/auth/email-confirmation
-   * @secure
-   */
-  export namespace EmailConfirmationList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = any;
-  }
-  /**
-   * No description
+   * @description Successfull redirection after approving a provider
    * @tags Authentication
    * @name CallbackDetail
    * @request GET:/auth/{provider}/callback
@@ -1274,7 +1401,7 @@ export namespace Auth {
     export type ResponseBody = any;
   }
   /**
-   * No description
+   * @description Send the reset password email link
    * @tags Authentication
    * @name ForgotPassword
    * @summary Send an email to reset your password
@@ -1289,7 +1416,7 @@ export namespace Auth {
     export type ResponseBody = void;
   }
   /**
-   * No description
+   * @description Reset user password with a code (resetToken)
    * @tags Authentication
    * @name ResetPassword
    * @request POST:/auth/reset-password
@@ -1303,7 +1430,22 @@ export namespace Auth {
     export type ResponseBody = any;
   }
   /**
-   * No description
+   * @description Validate a user account
+   * @tags Authentication
+   * @name EmailConfirmationList
+   * @request GET:/auth/email-confirmation
+   * @secure
+   */
+  export namespace EmailConfirmationList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Send a confirmation email to user
+   * @tags UsersPermissions - User
    * @name SendEmailConfirmationCreate
    * @request POST:/auth/send-email-confirmation
    * @secure
@@ -1420,6 +1562,131 @@ export class HttpClient<SecurityDataType = unknown> {
  * @contact TEAM <contact-email@something.io> (mywebsite.io)
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  actualities = {
+    /**
+     * No description
+     *
+     * @tags Actuality
+     * @name ActualitiesList
+     * @request GET:/actualities
+     * @secure
+     */
+    actualitiesList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Actuality[], Error>({
+        path: `/actualities`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Actuality
+     * @name ActualitiesCreate
+     * @request POST:/actualities
+     * @secure
+     */
+    actualitiesCreate: (data: NewActuality, params: RequestParams = {}) =>
+      this.request<Actuality, Error>({
+        path: `/actualities`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Actuality
+     * @name CountList
+     * @request GET:/actualities/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/actualities/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Actuality
+     * @name ActualitiesDetail
+     * @request GET:/actualities/{id}
+     * @secure
+     */
+    actualitiesDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Actuality, Error>({
+        path: `/actualities/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Actuality
+     * @name ActualitiesUpdate
+     * @request PUT:/actualities/{id}
+     * @secure
+     */
+    actualitiesUpdate: (id: string, data: NewActuality, params: RequestParams = {}) =>
+      this.request<Actuality, Error>({
+        path: `/actualities/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Actuality
+     * @name ActualitiesDelete
+     * @request DELETE:/actualities/{id}
+     * @secure
+     */
+    actualitiesDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/actualities/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   disponibilities = {
     /**
      * No description
@@ -2035,7 +2302,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
           provider?: string;
           related?: string[];
         }[],
-        any
+        Error
       >({
         path: `/upload/`,
         method: "POST",
@@ -2047,14 +2314,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Retrieve the total number of uploaded files
      *
+     * @tags Upload - File
      * @name FilesCountList
      * @request GET:/upload/files/count
      * @secure
      */
     filesCountList: (params: RequestParams = {}) =>
-      this.request<{ count?: number }, any>({
+      this.request<{ count?: number }, Error>({
         path: `/upload/files/count`,
         method: "GET",
         secure: true,
@@ -2063,14 +2331,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Retrieve all file documents
      *
+     * @tags Upload - File
      * @name FilesList
      * @request GET:/upload/files
      * @secure
      */
     filesList: (params: RequestParams = {}) =>
-      this.request<UploadFile[], any>({
+      this.request<UploadFile[], Error>({
         path: `/upload/files`,
         method: "GET",
         secure: true,
@@ -2079,30 +2348,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Retrieve a single file depending on its id
      *
-     * @name SearchDetail
-     * @request GET:/upload/search/{id}
-     * @secure
-     */
-    searchDetail: (id: string, params: RequestParams = {}) =>
-      this.request<UploadFile[], any>({
-        path: `/upload/search/${id}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
+     * @tags Upload - File
      * @name FilesDetail
      * @request GET:/upload/files/{id}
      * @secure
      */
     filesDetail: (id: string, params: RequestParams = {}) =>
-      this.request<UploadFile, any>({
+      this.request<UploadFile, Error>({
         path: `/upload/files/${id}`,
         method: "GET",
         secure: true,
@@ -2111,17 +2365,35 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Delete an uploaded file
      *
+     * @tags Upload - File
      * @name FilesDelete
      * @request DELETE:/upload/files/{id}
      * @secure
      */
     filesDelete: (id: string, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<void, Error>({
         path: `/upload/files/${id}`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Search for an uploaded file
+     *
+     * @tags Upload - File
+     * @name SearchDetail
+     * @request GET:/upload/search/{id}
+     * @secure
+     */
+    searchDetail: (id: string, params: RequestParams = {}) =>
+      this.request<UploadFile[], Error>({
+        path: `/upload/search/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
         ...params,
       }),
   };
@@ -2359,24 +2631,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Search for users
      *
+     * @tags UsersPermissions - User
      * @name SearchDetail
      * @summary Retrieve a list of users by searching for their username or email
      * @request GET:/users-permissions/search/{id}
      * @secure
      */
     searchDetail: (id: string, params: RequestParams = {}) =>
-      this.request<any, any>({
+      this.request<UsersPermissionsUser[], Error>({
         path: `/users-permissions/search/${id}`,
         method: "GET",
         secure: true,
+        format: "json",
         ...params,
       }),
   };
   connect = {
     /**
-     * No description
+     * @description Connect a provider
      *
      * @tags Authentication
      * @name GetConnect
@@ -2385,7 +2659,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getConnect: (provider: string, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<void, Error>({
         path: `/connect/*`,
         method: "GET",
         secure: true,
@@ -2394,7 +2668,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   };
   auth = {
     /**
-     * No description
+     * @description Login a user using the identifiers email and password
      *
      * @tags Authentication
      * @name Login
@@ -2402,7 +2676,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     login: (data: { identifier: string; password: string }, params: RequestParams = {}) =>
-      this.request<any, any>({
+      this.request<any, Error>({
         path: `/auth/local`,
         method: "POST",
         body: data,
@@ -2413,7 +2687,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Register a new user with the default role
      *
      * @tags Authentication
      * @name Signup
@@ -2421,7 +2695,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     signup: (data: { username: string; email: string; password: string }, params: RequestParams = {}) =>
-      this.request<any, any>({
+      this.request<any, Error>({
         path: `/auth/local/register`,
         method: "POST",
         body: data,
@@ -2432,23 +2706,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
-     *
-     * @tags Authentication
-     * @name EmailConfirmationList
-     * @request GET:/auth/email-confirmation
-     * @secure
-     */
-    emailConfirmationList: (params: RequestParams = {}) =>
-      this.request<any, any>({
-        path: `/auth/email-confirmation`,
-        method: "GET",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * No description
+     * @description Successfull redirection after approving a provider
      *
      * @tags Authentication
      * @name CallbackDetail
@@ -2456,7 +2714,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     callbackDetail: (provider: string, params: RequestParams = {}) =>
-      this.request<any, any>({
+      this.request<any, Error>({
         path: `/auth/${provider}/callback`,
         method: "GET",
         secure: true,
@@ -2465,7 +2723,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Send the reset password email link
      *
      * @tags Authentication
      * @name ForgotPassword
@@ -2474,7 +2732,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     forgotPassword: (data: { email?: string; url?: string }, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<void, Error>({
         path: `/auth/forgot-password`,
         method: "POST",
         body: data,
@@ -2484,7 +2742,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Reset user password with a code (resetToken)
      *
      * @tags Authentication
      * @name ResetPassword
@@ -2495,7 +2753,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       data: { code: string; password: string; passwordConfirmation: string },
       params: RequestParams = {},
     ) =>
-      this.request<any, any>({
+      this.request<any, Error>({
         path: `/auth/reset-password`,
         method: "POST",
         body: data,
@@ -2506,14 +2764,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * No description
+     * @description Validate a user account
      *
+     * @tags Authentication
+     * @name EmailConfirmationList
+     * @request GET:/auth/email-confirmation
+     * @secure
+     */
+    emailConfirmationList: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/auth/email-confirmation`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Send a confirmation email to user
+     *
+     * @tags UsersPermissions - User
      * @name SendEmailConfirmationCreate
      * @request POST:/auth/send-email-confirmation
      * @secure
      */
     sendEmailConfirmationCreate: (data: { email: string }, params: RequestParams = {}) =>
-      this.request<void, any>({
+      this.request<void, Error>({
         path: `/auth/send-email-confirmation`,
         method: "POST",
         body: data,

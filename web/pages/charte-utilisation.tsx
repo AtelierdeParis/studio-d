@@ -34,7 +34,9 @@ const Charte = ({ page }: ICharte) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages.pagesDetail(ROUTE_USE_POLICY).then((res) => res.data)
+  const page = await client.pages
+    .pagesDetail(ROUTE_USE_POLICY.replace('/', ''))
+    .then((res) => res.data)
 
   return {
     props: {

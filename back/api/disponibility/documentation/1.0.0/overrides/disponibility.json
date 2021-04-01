@@ -456,8 +456,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int64"
+                  "$ref": "#/components/schemas/Disponibility"
                 }
               }
             }
@@ -521,10 +520,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Disponibility"
                   }
                 }
               }
@@ -571,10 +569,9 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Disponibility"
                 }
               }
             }

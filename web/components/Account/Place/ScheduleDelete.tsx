@@ -2,7 +2,7 @@ import React, { useMemo, useContext, useState } from 'react'
 import { Flex, Box, Text, Circle, VStack, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { DisponibilityStatus } from '~@types/disponibility.d'
-import format from 'date-fns/format'
+import { format } from '~utils/date'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
 import useToast from '~hooks/useToast'
@@ -50,7 +50,11 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
 
   const onDelete = () => {
     setLoading(true)
-    Promise.all(available.map((dispo) => client.disponibilities.disponibilitiesDelete(dispo.id)))
+    Promise.all(
+      available.map((dispo) =>
+        client.disponibilities.disponibilitiesDelete(dispo.id),
+      ),
+    )
       .then((res) => {
         setToDelete([])
         successToast(t('schedule.delete.success'))
@@ -85,11 +89,11 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
                 <Flex alignItems="center">
                   <Circle size="6px" mb={0.5} bgColor="gray.200" />
                   <Flex pl={3} alignItems="center">
-                    <Text>{format(new Date(dispo.start), 'dd/MM/yyyy')}</Text>
+                    <Text>{format(dispo.start)}</Text>
                     {dispo.end !== dispo.start && (
                       <Text pl={1.5}>
                         {' - '}
-                        {format(new Date(dispo.end), 'dd/MM/yyyy')}
+                        {format(dispo.end)}
                       </Text>
                     )}
                     <Text textTransform="lowercase" pl={1.5}>
@@ -131,7 +135,7 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
                   <Circle size="6px" mb={0.5} bgColor="gray.200" />
 
                   <Flex pl={3} alignItems="center">
-                    <Text>{format(new Date(dispo.start), 'dd/MM/yyyy')}</Text>
+                    <Text>{format(dispo.start)}</Text>
                     <Text textTransform="lowercase" px={1.5}>
                       {`(${
                         dispo.when

@@ -1,9 +1,10 @@
 {
   "paths": {
-    "/disponibilities": {
+    "/espaces/me": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Get places related to current user",
+        "operationId": "myPlaces",
         "responses": {
           "200": {
             "description": "response",
@@ -12,7 +13,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Disponibility"
+                    "$ref": "#/components/schemas/Espace"
                   }
                 }
               }
@@ -51,7 +52,63 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
+        ],
+        "parameters": []
+      }
+    },
+    "/espaces": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Espace"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Espace"
         ],
         "parameters": [
           {
@@ -201,7 +258,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Espace"
                 }
               }
             }
@@ -239,22 +296,22 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
         ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "type": "object"
               }
             }
           }
         }
       }
     },
-    "/disponibilities/count": {
+    "/espaces/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +363,12 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
         ],
         "parameters": []
       }
     },
-    "/disponibilities/{id}": {
+    "/espaces/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +378,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Espace"
                 }
               }
             }
@@ -359,7 +416,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
         ],
         "parameters": [
           {
@@ -383,7 +440,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Espace"
                 }
               }
             }
@@ -421,7 +478,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +486,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "type": "object"
               }
             }
           }
@@ -495,7 +552,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Espace"
         ],
         "parameters": [
           {
@@ -510,212 +567,342 @@
           }
         ]
       }
-    },
-    "/bulk/disponibilities": {
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "Disponibility": {
+      "Espace": {
         "required": [
           "id",
-          "start",
-          "end",
-          "type",
-          "status"
+          "name",
+          "surface",
+          "roomLength",
+          "width",
+          "height",
+          "mirror",
+          "danceBar",
+          "accomodation",
+          "technicalStaff",
+          "floor",
+          "address",
+          "latitude",
+          "longitude"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "when": {
+          "name": {
+            "type": "string"
+          },
+          "surface": {
+            "type": "integer"
+          },
+          "roomLength": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "mirror": {
+            "type": "boolean"
+          },
+          "danceBar": {
+            "type": "boolean"
+          },
+          "accomodation": {
+            "type": "boolean"
+          },
+          "technicalStaff": {
+            "type": "boolean"
+          },
+          "floor": {
             "type": "string",
             "enum": [
-              "morning",
-              "afternoon",
-              "full"
+              "floor",
+              "carpet",
+              "other"
             ]
           },
-          "start": {
-            "type": "string",
-            "format": "date"
+          "otherFloor": {
+            "type": "string"
           },
-          "end": {
-            "type": "string",
-            "format": "date"
+          "about": {
+            "type": "string"
           },
-          "espace": {
+          "details": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "array",
+                  "items": {
+                    "type":"string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "array",
+                  "items": {
+                    "type":"string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "users_permissions_user": {
             "required": [
               "id",
-              "name",
-              "surface",
-              "roomLength",
-              "width",
-              "height",
-              "mirror",
-              "danceBar",
-              "accomodation",
-              "technicalStaff",
-              "floor",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
               "address",
-              "latitude",
-              "longitude"
+              "zipCode",
+              "city",
+              "siret",
+              "ape",
+              "type"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "name": {
+              "email": {
                 "type": "string"
               },
-              "surface": {
-                "type": "integer"
-              },
-              "roomLength": {
-                "type": "integer"
-              },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "mirror": {
-                "type": "boolean"
-              },
-              "danceBar": {
-                "type": "boolean"
-              },
-              "accomodation": {
-                "type": "boolean"
-              },
-              "technicalStaff": {
-                "type": "boolean"
-              },
-              "floor": {
-                "type": "string",
-                "enum": [
-                  "floor",
-                  "carpet",
-                  "other"
-                ]
-              },
-              "otherFloor": {
+              "provider": {
                 "type": "string"
               },
-              "about": {
+              "password": {
                 "type": "string"
               },
-              "details": {
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
                 "type": "string"
               },
               "address": {
                 "type": "string"
               },
-              "latitude": {
+              "zipCode": {
                 "type": "string"
               },
-              "longitude": {
+              "city": {
                 "type": "string"
               },
-              "files": {
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "scheduleDetails": {
-                "type": "string"
-              },
-              "filledUntil": {
-                "type": "string"
-              },
-              "published": {
-                "type": "boolean"
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
               },
               "created_by": {
                 "type": "string"
@@ -725,78 +912,168 @@
               }
             }
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "when": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
+                },
+                "start": {
+                  "type": "string"
+                },
+                "end": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "available",
+                    "booked",
+                    "pending",
+                    "past"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
-            ]
+          "scheduleDetails": {
+            "type": "string"
           },
-          "published_at": {
+          "filledUntil": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
           }
         }
       },
-      "NewDisponibility": {
+      "NewEspace": {
         "required": [
-          "start",
-          "end",
-          "type",
-          "status"
+          "name",
+          "surface",
+          "roomLength",
+          "width",
+          "height",
+          "mirror",
+          "danceBar",
+          "accomodation",
+          "technicalStaff",
+          "floor",
+          "address",
+          "latitude",
+          "longitude"
         ],
         "properties": {
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
-          },
-          "start": {
-            "type": "string",
-            "format": "date"
-          },
-          "end": {
-            "type": "string",
-            "format": "date"
-          },
-          "espace": {
+          "name": {
             "type": "string"
           },
-          "type": {
+          "surface": {
+            "type": "integer"
+          },
+          "roomLength": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "mirror": {
+            "type": "boolean"
+          },
+          "danceBar": {
+            "type": "boolean"
+          },
+          "accomodation": {
+            "type": "boolean"
+          },
+          "technicalStaff": {
+            "type": "boolean"
+          },
+          "floor": {
             "type": "string",
             "enum": [
-              "punctual",
-              "day",
-              "period"
+              "floor",
+              "carpet",
+              "other"
             ]
           },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
-            ]
+          "otherFloor": {
+            "type": "string"
           },
-          "published_at": {
+          "about": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "users_permissions_user": {
+            "type": "string"
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "scheduleDetails": {
+            "type": "string"
+          },
+          "filledUntil": {
             "type": "string",
-            "format": "date-time"
+            "format": "date"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
           },
           "created_by": {
             "type": "string"
@@ -810,7 +1087,7 @@
   },
   "tags": [
     {
-      "name": "Disponibility"
+      "name": "Espace"
     }
   ]
 }

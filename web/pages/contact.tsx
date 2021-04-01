@@ -43,7 +43,8 @@ const Contact = ({ page }: { page: Page }) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    client.messages.messagesCreate(data)
+    client.messages
+      .messagesCreate(data)
       .then(() => setSent(true))
       .catch(() => errorToast(t('error')))
       .finally(() => setLoading(false))
@@ -99,7 +100,9 @@ const Contact = ({ page }: { page: Page }) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages.pagesDetail(ROUTE_CONTACT).then((res) => res.data)
+  const page = await client.pages
+    .pagesDetail(ROUTE_CONTACT.replace('/', ''))
+    .then((res) => res.data)
   return {
     props: {
       page,

@@ -15,7 +15,7 @@ import {
   ROUTE_PLACES,
   ROUTE_PROJECT,
   ROUTE_CONTACT,
-  ROUTE_NEWS,
+  ROUTE_ACTU,
   ROUTE_FAQ,
 } from '~constants'
 import { useRouter } from 'next/router'
@@ -67,7 +67,7 @@ const Header = ({ colorMode }: IHeader) => {
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
           <Divider orientation="vertical" opacity={0.6} />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
-          <MenuItem href={ROUTE_NEWS} text={t('nav.news')} />
+          <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
           <Divider orientation="vertical" opacity={0.6} />
