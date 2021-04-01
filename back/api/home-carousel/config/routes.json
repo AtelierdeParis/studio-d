@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/home-carousel",
+      "handler": "home-carousel.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/home-carousel",
+      "handler": "home-carousel.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/home-carousel",
+      "handler": "home-carousel.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

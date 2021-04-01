@@ -49,6 +49,7 @@ const Header = ({ colorMode }: IHeader) => {
       px={5}
       py={3}
       maxW="full"
+      zIndex={10}
       borderBottom={
         colorMode === 'white' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'
       }
@@ -74,16 +75,6 @@ const Header = ({ colorMode }: IHeader) => {
           <AuthMenu colorMode={colorMode} />
         </HStack>
       </Flex>
-      {colorMode === 'white' && (
-        <Box
-          background="linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 98%)"
-          pos="absolute"
-          left="0"
-          right="0"
-          top="0"
-          bottom="0"
-        />
-      )}
     </Container>
   )
 }

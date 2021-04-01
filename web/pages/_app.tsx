@@ -9,6 +9,7 @@ import { appWithTranslation } from 'next-i18next'
 import theme from '~theme'
 import { initYupLocale } from '~initYupLocale'
 import '../styles/globals.css'
+import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
 

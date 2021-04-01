@@ -189,6 +189,13 @@ const theme = extendTheme({
       borderRadius: 'lg',
       backgroundColor: 'blue.50',
     },
+    absoluteFull: {
+      pos: 'absolute',
+      top: 0,
+      left: 0,
+      bottom: 0,
+      right: 0,
+    },
   },
 })
 
