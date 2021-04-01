@@ -28,7 +28,7 @@ const Loader = ({ text, isCentered, size = 'xl', ...rest }: ILoader) => {
           thickness="3px"
           speed="0.65s"
           emptyColor="gray.200"
-          color="blue.500"
+          color="gray.500"
           size={size}
         />
       </Flex>

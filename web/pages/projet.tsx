@@ -34,7 +34,9 @@ const Project = ({ page }: IProject) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages.pagesDetail(ROUTE_PROJECT).then((res) => res.data)
+  const page = await client.pages
+    .pagesDetail(ROUTE_PROJECT.replace('/', ''))
+    .then((res) => res.data)
 
   return {
     props: {

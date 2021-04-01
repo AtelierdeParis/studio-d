@@ -1,4 +1,6 @@
 "use strict";
+const isAfter = require("date-fns/isAfter");
+const max = require("date-fns/max");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
@@ -16,10 +18,19 @@ module.exports = {
         })
       );
 
-    return Promise.all(
+    const newDispo = await Promise.all(
       ctx.request.body.map((dispo) =>
         strapi.query("disponibility").create(dispo)
       )
     );
+
+    const maxDate = max(newDispo.map((dispo) => new Date(dispo.end)));
+    const place = newDispo[0].espace;
+
+    if (!place.filledUntil && isAfter(maxDate, new Date(place.filledUntil))) {
+      strapi.query("espace").update({ id: place.id }, { filledUntil: maxDate });
+    }
+
+    return newDispo;
   },
 };
