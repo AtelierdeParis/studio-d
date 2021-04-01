@@ -244,6 +244,35 @@ export interface NewEspace {
   updated_by?: string;
 }
 
+export interface HomeCarousel {
+  id: string;
+  images: {
+    id: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: object;
+    hash: string;
+    ext?: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    provider_metadata?: object;
+    related?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+}
+
+export interface NewHomeCarousel {
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface Message {
   id: string;
   name: string;
@@ -785,6 +814,65 @@ export namespace Espaces {
    */
   export namespace EspacesDelete {
     export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace HomeCarousel {
+  /**
+   * @description Find all the home-carousel's records
+   * @tags Home-carousel
+   * @name HomeCarouselList
+   * @request GET:/home-carousel
+   * @secure
+   */
+  export namespace HomeCarouselList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = HomeCarousel;
+  }
+  /**
+   * @description Update a single home-carousel record
+   * @tags Home-carousel
+   * @name HomeCarouselUpdate
+   * @request PUT:/home-carousel
+   * @secure
+   */
+  export namespace HomeCarouselUpdate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewHomeCarousel;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Delete a single home-carousel record
+   * @tags Home-carousel
+   * @name HomeCarouselDelete
+   * @request DELETE:/home-carousel
+   * @secure
+   */
+  export namespace HomeCarouselDelete {
+    export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
@@ -1968,6 +2056,78 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/espaces/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  homeCarousel = {
+    /**
+     * @description Find all the home-carousel's records
+     *
+     * @tags Home-carousel
+     * @name HomeCarouselList
+     * @request GET:/home-carousel
+     * @secure
+     */
+    homeCarouselList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<HomeCarousel, Error>({
+        path: `/home-carousel`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a single home-carousel record
+     *
+     * @tags Home-carousel
+     * @name HomeCarouselUpdate
+     * @request PUT:/home-carousel
+     * @secure
+     */
+    homeCarouselUpdate: (data: NewHomeCarousel, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/home-carousel`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a single home-carousel record
+     *
+     * @tags Home-carousel
+     * @name HomeCarouselDelete
+     * @request DELETE:/home-carousel
+     * @secure
+     */
+    homeCarouselDelete: (params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/home-carousel`,
         method: "DELETE",
         secure: true,
         format: "json",

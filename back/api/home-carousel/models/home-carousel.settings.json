@@ -1,0 +1,23 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_carousels",
+  "info": {
+    "name": "home-carousel"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
+    }
+  }
+}
