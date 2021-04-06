@@ -75,11 +75,15 @@ const repeatPeriodEvent = (start, end, repeatNb, repeatType) => {
 
 const checkIfEventSameDay = (disponibility, sources = []): boolean => {
   return sources.some(
-    ({ start, id }) => disponibility.id !== id && disponibility.start === start,
+    ({ start, id }) =>
+      disponibility.id !== id &&
+      isSameDay(new Date(disponibility.start), new Date(start)),
   )
 }
 
-export const createOldEvents = (disponibilities: Omit<Disponibility, 'espace'>[] = []) => {
+export const createOldEvents = (
+  disponibilities: Omit<Disponibility, 'espace'>[] = [],
+) => {
   return disponibilities.map((dispo) => {
     return createScheduleEventObj({
       id: dispo.id,
@@ -188,9 +192,16 @@ export const createDbEvent = (type, start, when = null, end = null) => {
   }
 }
 
-export const createDbEventObj = (type, start, when = null, end = null) => ({
-  type,
-  start,
-  end: end || start,
-  when,
-})
+export const createDbEventObj = (type, start, when = null, end = null) => {
+  const transformedStart =
+    type === ScheduleEventType.PUNCTUAL && when === ScheduleEventWhen.AFTERNOON
+      ? setHours(start, 13)
+      : setHours(start, 6)
+
+  return {
+    type,
+    start: transformedStart,
+    end: end || transformedStart,
+    when,
+  }
+}

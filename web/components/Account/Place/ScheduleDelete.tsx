@@ -14,9 +14,10 @@ import { useQueryClient } from 'react-query'
 
 interface IScheduleDelete {
   disponibilities: Omit<Disponibility, 'espace'>[]
+  onClose: () => void
 }
 
-const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
+const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('place')
   const { successToast, errorToast } = useToast()
@@ -108,17 +109,26 @@ const ScheduleDelete = ({ disponibilities = [] }: IScheduleDelete) => {
               </Box>
             ))}
           </VStack>
-          <Button
-            variant="delete"
-            leftIcon={<Delete />}
-            mt={5}
-            onClick={onDelete}
-            isLoading={isLoading}
-          >
-            <Text ml={2}>
-              {t(`schedule.delete.delete${isAvailablePlural}`)}
-            </Text>
-          </Button>
+          <Flex alignItems="center" mt={5}>
+            <Button
+              variant="delete"
+              leftIcon={<Delete />}
+              onClick={onDelete}
+              isLoading={isLoading}
+            >
+              <Text ml={2}>
+                {t(`schedule.delete.delete${isAvailablePlural}`)}
+              </Text>
+            </Button>
+            <Button
+              variant="unstyled"
+              color="gray.500"
+              ml={4}
+              onClick={onClose}
+            >
+              {t(`schedule.cancel`)}
+            </Button>
+          </Flex>
         </>
       )}
       {booked.length > 0 && (

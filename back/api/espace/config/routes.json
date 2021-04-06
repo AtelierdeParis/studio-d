@@ -12,6 +12,16 @@
     },
     {
       "method": "GET",
+      "path": "/espaces/cities",
+      "handler": "espace.getCities",
+      "config": {
+          "policies": [],
+          "operationId": "getCities",
+          "description": "Get list of cities"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/espaces",
       "handler": "espace.find",
       "config": {

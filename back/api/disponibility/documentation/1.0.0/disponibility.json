@@ -607,11 +607,11 @@
           },
           "start": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "end": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "espace": {
             "required": [
@@ -628,7 +628,9 @@
               "floor",
               "address",
               "latitude",
-              "longitude"
+              "longitude",
+              "city",
+              "danceCarpet"
             ],
             "properties": {
               "id": {
@@ -664,8 +666,8 @@
               "floor": {
                 "type": "string",
                 "enum": [
-                  "floor",
-                  "carpet",
+                  "plancherDanse",
+                  "parquetTraditionnel",
                   "other"
                 ]
               },
@@ -715,6 +717,12 @@
                 "type": "string"
               },
               "published": {
+                "type": "boolean"
+              },
+              "city": {
+                "type": "string"
+              },
+              "danceCarpet": {
                 "type": "boolean"
               },
               "created_by": {
@@ -767,11 +775,11 @@
           },
           "start": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "end": {
             "type": "string",
-            "format": "date"
+            "format": "date-time"
           },
           "espace": {
             "type": "string"

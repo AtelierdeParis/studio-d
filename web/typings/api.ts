@@ -116,7 +116,7 @@ export interface Espace {
   danceBar: boolean;
   accomodation: boolean;
   technicalStaff: boolean;
-  floor: "floor" | "carpet" | "other";
+  floor: "plancherDanse" | "parquetTraditionnel" | "other";
   otherFloor?: string;
   about?: string;
   details?: string;
@@ -139,7 +139,7 @@ export interface Espace {
     previewUrl?: string;
     provider: string;
     provider_metadata?: object;
-    related?: string[];
+    related?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -159,7 +159,7 @@ export interface Espace {
     previewUrl?: string;
     provider: string;
     provider_metadata?: object;
-    related?: string[];
+    related?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -214,6 +214,8 @@ export interface Espace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
+  city: string;
+  danceCarpet: boolean;
 }
 
 export interface NewEspace {
@@ -226,7 +228,7 @@ export interface NewEspace {
   danceBar: boolean;
   accomodation: boolean;
   technicalStaff: boolean;
-  floor: "floor" | "carpet" | "other";
+  floor: "plancherDanse" | "parquetTraditionnel" | "other";
   otherFloor?: string;
   about?: string;
   details?: string;
@@ -240,6 +242,8 @@ export interface NewEspace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
+  city: string;
+  danceCarpet: boolean;
   created_by?: string;
   updated_by?: string;
 }
@@ -720,6 +724,20 @@ export namespace Espaces {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Espace[];
+  }
+  /**
+   * @description Get list of cities
+   * @tags Espace
+   * @name CitiesList
+   * @request GET:/espaces/cities
+   * @secure
+   */
+  export namespace CitiesList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
   }
   /**
    * No description
@@ -1932,6 +1950,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     myPlaces: (params: RequestParams = {}) =>
       this.request<Espace[], Error>({
         path: `/espaces/me`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Get list of cities
+     *
+     * @tags Espace
+     * @name CitiesList
+     * @request GET:/espaces/cities
+     * @secure
+     */
+    citiesList: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/espaces/cities`,
         method: "GET",
         secure: true,
         format: "json",
