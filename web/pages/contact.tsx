@@ -22,6 +22,7 @@ import useToast from '~hooks/useToast'
 import { ROUTE_CONTACT } from '~constants'
 import { Page } from '~typings/api'
 import { client } from '~api/client-api'
+import { getPage } from '~utils/page'
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -29,7 +30,7 @@ const schema = yup.object().shape({
   from: yup.string().email().required(),
 })
 
-const Contact = ({ page }: { page: Page }) => {
+const Contact = ({ page }: { page?: Page }) => {
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [isSent, setSent] = useState(false)
@@ -52,9 +53,9 @@ const Contact = ({ page }: { page: Page }) => {
   return (
     <Container maxW="container.sm">
       <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
-        {page.title}
+        {page?.title || t('title')}
       </Heading>
-      <Text mb={10}>{page.text}</Text>
+      {page?.text && <Text mb={10}>{page.text}</Text>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={6} mb={10}>
           <FormField label={t('name.label')} errors={errors.name} isRequired>
@@ -100,9 +101,8 @@ const Contact = ({ page }: { page: Page }) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages
-    .pagesDetail(ROUTE_CONTACT.replace('/', ''))
-    .then((res) => res.data)
+  const page = await getPage(ROUTE_CONTACT)
+
   return {
     props: {
       page,

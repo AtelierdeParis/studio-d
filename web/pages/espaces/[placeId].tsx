@@ -20,6 +20,7 @@ import { usePlace } from '~hooks/usePlace'
 import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
 import OtherPlaces from '~components/Place/OtherPlaces'
 import PlaceAttributesGrid from '~components/Place/PlaceAttributesGrid'
+import BookingScheduleContainer from '~components/Place/BookingScheduleContainer'
 import Loading from '~components/Loading'
 import Pin from 'public/assets/img/pin-outline.svg'
 import Calendar from 'public/assets/img/calendar.svg'
@@ -34,7 +35,7 @@ interface IPlaceDetail {
 const PlaceDetail = ({ placeId }: IPlaceDetail) => {
   const { t } = useTranslation('place')
   const { data: place, isLoading } = usePlace(placeId)
-  console.log(place)
+
   return (
     <Container pt={12}>
       <Loading isLoading={isLoading}>
@@ -88,15 +89,15 @@ const PlaceDetail = ({ placeId }: IPlaceDetail) => {
           </Box>
         </Stack>
         <Flex alignItems="flex-start">
-          <Box w="18px">
+          <Box w="18px" mt={0.5}>
             <Calendar stroke="black" />
           </Box>
           <Text textStyle="h2" mb={8} pl={5}>
             {t('detail.calendar')}
           </Text>
         </Flex>
-        {/* <BookingSchedule /> */}
-        <Flex justifyContent="space-between">
+        <BookingScheduleContainer place={place} />
+        <Flex justifyContent="space-between" pt={18}>
           <Box pl={10}>
             <Text textStyle="h2" mb={8}>
               {t('detail.about')}

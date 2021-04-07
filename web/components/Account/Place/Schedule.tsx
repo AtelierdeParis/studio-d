@@ -60,6 +60,7 @@ const Schedule = (props: ISchedule) => {
       borderRadius="sm"
       px={4}
       id="calendar"
+      className="account-schedule"
     >
       <FullCalendar
         ref={scheduleRef}

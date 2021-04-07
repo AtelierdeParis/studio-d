@@ -179,7 +179,8 @@
         "city": "Ville",
         "surface": "Surface",
         "dim": "Dim.",
-        "noDispo": "Aucun créneau disponible"
+        "noDispo": "Aucun créneau disponible",
+        "thisWeek": "{{nb}} créneaux cette semaine"
     },
     "schedule": {
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
@@ -282,6 +283,12 @@
         "month": "Mois",
         "parquetTraditionnel": "Parquet traditionnel",
         "plancherDanse": "Plancher de danse",
-        "other": "Autre"
+        "other": "Autre",
+        "dispo": {
+            "morning": "Matin",
+            "afternoon": "Après-midi",
+            "day": "Journée"
+        },
+        "tooltip": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace {{name}}. <a>Voir la demande</a>"
     }
 }
