@@ -11,6 +11,7 @@ export const useScrollBottom = (
       const scrollBottom =
         window.innerHeight + document.documentElement.scrollTop
       const gridBottom = ref.current.offsetTop + ref.current.offsetHeight
+
       if (scrollBottom > gridBottom) {
         onScrollBottom()
       }

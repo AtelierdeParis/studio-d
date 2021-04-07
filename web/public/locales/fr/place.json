@@ -23,6 +23,7 @@
         "slot": "Disponibilités ({{nb}})"
     },
     "form": {
+        "error": "Une erreur est survenue en lors de l'enregistrement",
         "yes": "Oui",
         "no": "Non",
         "choose": "Choisir",
@@ -122,7 +123,11 @@
         "nbPassed": "{{nb}} passées"
     },
     "search": {
-        "noResult": "Aucun résultat trouvé",
+        "noResult": {
+            "title": "0 espace disponible",
+            "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
+            "btn": "Réinitialiser les filtres"
+        },
         "nbPlaces": "{{nb}} espaces inscrits",
         "where": {
             "label": "Où cherchez-vous ?",
@@ -250,5 +255,33 @@
                 "booked": "Voir la réservation."
             }
         }
+    },
+    "detail": {
+        "seeMap": "Voir sur la carte",
+        "precise": "* précisez vos besoins lors de la réservation",
+        "surface": "Superficie",
+        "dimension": "Dimensions",
+        "height": "Hauteur sous plafond",
+        "floor": "Type de sol",
+        "danceCarpet": "Tapis de danse",
+        "mirror": "Mirroir",
+        "danceBar": "Barre de danse",
+        "technicalStaff": "Personnel technique",
+        "accomodation": "Hébergement",
+        "yes": "Oui",
+        "no": "Non",
+        "available": "Possible *",
+        "calendar": "Calendrier des disponibilités",
+        "about": "À propos de l’espace",
+        "details": "Détails techniques",
+        "howToGo": "Comment s’y rendre ?",
+        "located": "L’espace se situe au {{address}}.",
+        "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
+        "otherPlaces": "Autres espaces de {{name}}",
+        "week": "Semaine",
+        "month": "Mois",
+        "parquetTraditionnel": "Parquet traditionnel",
+        "plancherDanse": "Plancher de danse",
+        "other": "Autre"
     }
 }

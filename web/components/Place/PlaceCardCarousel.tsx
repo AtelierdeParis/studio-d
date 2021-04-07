@@ -6,7 +6,7 @@ import { Text } from '@chakra-ui/react'
 
 SwiperCore.use([Navigation])
 
-const PlaceCardCarousel = ({ images = [] }) => {
+const PlaceCardCarousel = ({ images = [], showNumber = false }) => {
   const [currentSlide, setCurrentSlide] = useState(1)
   return (
     <>
@@ -14,7 +14,7 @@ const PlaceCardCarousel = ({ images = [] }) => {
         slidesPerView="auto"
         observer
         parallax
-        navigation
+        navigation={images.length > 1}
         onSlideChangeTransitionEnd={({ activeIndex }) =>
           setCurrentSlide(activeIndex + 1)
         }
@@ -25,7 +25,7 @@ const PlaceCardCarousel = ({ images = [] }) => {
           </SwiperSlide>
         ))}
         <Text
-          opacity={0}
+          opacity={showNumber ? 1 : 0}
           _groupHover={{
             opacity: 1,
           }}

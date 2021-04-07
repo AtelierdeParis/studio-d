@@ -22,6 +22,7 @@ import { useTranslation } from 'next-i18next'
 import { FormProvider, useForm } from 'react-hook-form'
 import { SortOptions } from '~utils/search'
 import { useQueryClient } from 'react-query'
+import NoResult from '~components/Place/NoResult'
 
 const styleSelected = {
   color: 'blue.500',
@@ -64,92 +65,90 @@ const Places = () => {
     <Container>
       <FormProvider {...form}>
         <PlaceSearch />
-        <Flex justifyContent="space-between" pb={4} alignItems="center">
-          <Flex alignItems="center">
-            {!countLoading && (
-              <>
-                <Arrow />
-                <Text
-                  fontSize="xl"
-                  fontFamily="mabry medium"
-                  fontWeight="500"
-                  pl={4}
-                >
-                  {nbPlace > 0
-                    ? t('search.nbPlaces', { nb: nbPlace })
-                    : t('search.noResult')}
-                </Text>
-              </>
-            )}
-          </Flex>
-          <ButtonGroup
-            spacing={4}
-            alignItems="center"
-            justifyContent="flex-end"
-          >
-            <Button
-              variant="line"
-              color="gray.500"
-              borderBottomColor="transparent"
-              {...(isGridView ? styleSelected : {})}
-              onClick={() => setGridView(true)}
-            >
-              {t('search.grid')}
-            </Button>
-            <Button
-              variant="line"
-              color="gray.500"
-              borderBottomColor="transparent"
-              {...(!isGridView ? styleSelected : {})}
-              onClick={() => setGridView(false)}
-            >
-              {t('search.list')}
-            </Button>
-            <Flex pl={10} alignItems="center">
-              <Text color="gray.500" whiteSpace="nowrap" pr={3}>
-                {t('search.filterBy.label')}
-              </Text>
-              <Select
-                variant="unstyled"
-                ref={form.register}
-                name="sortBy"
-                onChange={() => {
-                  queryClient.refetchQueries(['places'], { active: true })
-                }}
+        {!countLoading && nbPlace === 0 ? (
+          <NoResult />
+        ) : (
+          <>
+            <Flex justifyContent="space-between" pb={4} alignItems="center">
+              <Flex alignItems="center">
+                {nbPlace > 0 && (
+                  <>
+                    <Arrow />
+                    <Text textStyle="h2" pl={4}>
+                      {t('search.nbPlaces', { nb: nbPlace })}
+                    </Text>
+                  </>
+                )}
+              </Flex>
+              <ButtonGroup
+                spacing={4}
+                alignItems="center"
+                justifyContent="flex-end"
               >
-                <option value={SortOptions.DISPO_ASC}>
-                  {t('search.filterBy.dispo')}
-                </option>
-                <option value={SortOptions.NB_DISPO_DESC}>
-                  {t('search.filterBy.nbDispo')}
-                </option>
-                <option value={SortOptions.SURFACE_ASC}>
-                  {t('search.filterBy.surfaceAsc')}
-                </option>
-                <option value={SortOptions.SURFACE_DESC}>
-                  {t('search.filterBy.surfaceDesc')}
-                </option>
-              </Select>
+                <Button
+                  variant="line"
+                  color="gray.500"
+                  borderBottomColor="transparent"
+                  {...(isGridView ? styleSelected : {})}
+                  onClick={() => setGridView(true)}
+                >
+                  {t('search.grid')}
+                </Button>
+                <Button
+                  variant="line"
+                  color="gray.500"
+                  borderBottomColor="transparent"
+                  {...(!isGridView ? styleSelected : {})}
+                  onClick={() => setGridView(false)}
+                >
+                  {t('search.list')}
+                </Button>
+                <Flex pl={10} alignItems="center">
+                  <Text color="gray.500" whiteSpace="nowrap" pr={3}>
+                    {t('search.filterBy.label')}
+                  </Text>
+                  <Select
+                    variant="unstyled"
+                    ref={form.register}
+                    name="sortBy"
+                    onChange={() => {
+                      queryClient.refetchQueries(['places'], { active: true })
+                    }}
+                  >
+                    <option value={SortOptions.DISPO_ASC}>
+                      {t('search.filterBy.dispo')}
+                    </option>
+                    <option value={SortOptions.NB_DISPO_DESC}>
+                      {t('search.filterBy.nbDispo')}
+                    </option>
+                    <option value={SortOptions.SURFACE_ASC}>
+                      {t('search.filterBy.surfaceAsc')}
+                    </option>
+                    <option value={SortOptions.SURFACE_DESC}>
+                      {t('search.filterBy.surfaceDesc')}
+                    </option>
+                  </Select>
+                </Flex>
+              </ButtonGroup>
             </Flex>
-          </ButtonGroup>
-        </Flex>
+            {isGridView ? (
+              <PlaceGrid
+                places={places?.pages?.flat()}
+                isFetching={isFetching}
+                isLoading={isLoading}
+                gridRef={ref}
+              />
+            ) : (
+              <PlaceList
+                places={places?.pages?.flat()}
+                isFetching={isFetching}
+                isLoading={isLoading}
+                listRef={ref}
+              />
+            )}
+          </>
+        )}
       </FormProvider>
-
-      {isGridView ? (
-        <PlaceGrid
-          places={places?.pages?.flat()}
-          isFetching={isFetching}
-          isLoading={isLoading}
-          gridRef={ref}
-        />
-      ) : (
-        <PlaceList
-          places={places?.pages?.flat()}
-          isFetching={isFetching}
-          isLoading={isLoading}
-          listRef={ref}
-        />
-      )}
     </Container>
   )
 }

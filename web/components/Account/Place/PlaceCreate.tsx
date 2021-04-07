@@ -24,8 +24,8 @@ const PlaceCreate = ({ user }: IPlaceCreate) => {
           Array.from(values[key]).map((file: any, index) =>
             total.form.append(
               `files.files`,
-              file?.display_name
-                ? new File([file], file.display_name, { type: file.type })
+              file?.caption
+                ? new File([file], file.caption, { type: file.type })
                 : file,
             ),
           )
@@ -39,7 +39,8 @@ const PlaceCreate = ({ user }: IPlaceCreate) => {
 
     form.append('data', JSON.stringify(data))
 
-    return client.espaces.espacesCreate(form)
+    return client.espaces
+      .espacesCreate(form)
       .then((res) => {
         router.push({
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,

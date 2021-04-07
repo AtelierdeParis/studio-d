@@ -19,6 +19,7 @@ import InputNumber from '~components/InputNumber'
 import InputLocation from '~components/InputLocation'
 import InputFile from '~components/InputFile'
 import { yupResolver } from '@hookform/resolvers/yup'
+import useToast from '~hooks/useToast'
 import * as yup from 'yup'
 import { Espace } from '~typings/api'
 import Arrow from 'public/assets/img/arrow-right.svg'
@@ -59,6 +60,7 @@ const getDefaultValues = (place) => {
 }
 
 const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
+  const { errorToast } = useToast()
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
   const {
@@ -90,6 +92,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           removedFiles: [],
         })
       })
+      .catch(() => errorToast(t('form.error')))
       .finally(() => setLoading(false))
   }
 
@@ -204,7 +207,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             <Textarea name="details" ref={register} resize="none" h="215px" />
           </FormField>
         </HStack>
-        <InputFile control={control} defaultValue={place?.files} />
+        <InputFile control={control} place={place} />
         <Text textStyle="infoLabel" mt={16}>
           {t('form.location')}
         </Text>

@@ -1,4 +1,5 @@
 "use strict";
+const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 const min = require("date-fns/min");
 const isPast = require("date-fns/isPast");
 
@@ -24,7 +25,7 @@ module.exports = {
     const places = await strapi.services.espace
       .find({
         ...query,
-        ...(!isSortOnDisponibility ? { _sort } : {}),
+        ...(_sort && !isSortOnDisponibility ? { _sort } : {}),
       })
       .then((res) => {
         return res.map((place) => ({
@@ -56,5 +57,30 @@ module.exports = {
       }
     }
     return places;
+  },
+  async update(ctx) {
+    const { id } = ctx.params;
+
+    let entity;
+    if (ctx.is("multipart")) {
+      const { data, files } = parseMultipartData(ctx);
+      entity = await strapi.services.espace.update({ id }, data, {
+        files,
+      });
+    } else {
+      const { files, ...body } = ctx.request.body;
+      if (files && files.length > 0) {
+        await Promise.all(
+          files.map((file) => {
+            strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
+              caption: file.caption,
+            });
+          })
+        );
+      }
+      entity = await strapi.services.espace.update({ id }, body);
+    }
+
+    return sanitizeEntity(entity, { model: strapi.models.espace });
   },
 };

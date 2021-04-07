@@ -737,7 +737,7 @@ export namespace Espaces {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type ResponseBody = string[];
   }
   /**
    * No description
@@ -1979,7 +1979,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     citiesList: (params: RequestParams = {}) =>
-      this.request<{ foo?: string }, Error>({
+      this.request<string[], Error>({
         path: `/espaces/cities`,
         method: "GET",
         secure: true,

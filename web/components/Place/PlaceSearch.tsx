@@ -6,6 +6,7 @@ import {
   Box,
   ButtonGroup,
   Button,
+  useTheme,
 } from '@chakra-ui/react'
 import Calendar from 'public/assets/img/calendar.svg'
 import FormField from '~components/FormField'
@@ -24,6 +25,7 @@ const selectProps = {
 }
 
 const PlaceSearch = () => {
+  const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
   const [hasMoreFilters, setMoreFilter] = useState(false)
   const { t } = useTranslation('place')
@@ -46,7 +48,11 @@ const PlaceSearch = () => {
         <SimpleGrid columns={4} w="100%">
           <Flex alignItems="flex-start">
             <Flex w="100%" pt={1}>
-              <Pin />
+              <Pin
+                stroke={theme.colors.blue['500']}
+                width="22px"
+                height="22px"
+              />
               <Box pl={3.5} flex={1}>
                 <FormField label={t('search.where.label')}>
                   <InputCity
@@ -61,7 +67,7 @@ const PlaceSearch = () => {
           </Flex>
           <Flex alignItems="flex-start" pt={1} pos="relative">
             <Flex w="100%" pt={1}>
-              <Calendar />
+              <Calendar stroke={theme.colors.blue['500']} />
               <Box pl={3.5} flex={1}>
                 <InputDateRange
                   control={form.control}

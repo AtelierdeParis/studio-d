@@ -53,7 +53,11 @@ const getStyle = (theme) => {
       ...styles,
       paddingTop: 0,
       paddingBottom: 0,
+      opacity: '1!important',
     }),
+    singleValue: (provided, state) => {
+      return { ...provided, opacity: 1 }
+    },
   }
 }
 
@@ -102,7 +106,7 @@ const InputCity = ({ name, control, placeholder }: Props) => {
       className="basic-multi-select"
       classNamePrefix="select"
       styles={getStyle(theme)}
-      defaultInputValue={field.value}
+      value={field.value && { label: field.value, value: field.value }}
       isClearable
       onChange={onChange}
       noOptionsMessage={() => null}

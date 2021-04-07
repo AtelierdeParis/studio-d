@@ -5,7 +5,12 @@ import Loader from '~components/Loader'
 import PlaceGridCard from '~components/Place/PlaceGridCard'
 import PlaceGridCardSkeleton from '~components/Place/PlaceGridCardSkeleton'
 
-const PlaceGrid = ({ places = [], isFetching, isLoading, gridRef }) => {
+const PlaceGrid = ({
+  places = [],
+  isLoading = null,
+  isFetching = false,
+  gridRef = null,
+}) => {
   return (
     <Box>
       <SimpleGrid columns={4} columnGap={5} rowGap={8} ref={gridRef}>

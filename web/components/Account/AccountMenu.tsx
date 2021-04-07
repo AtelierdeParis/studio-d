@@ -53,7 +53,7 @@ const placeItems = {
       url: ROUTE_ACCOUNT_REQUEST,
     },
     {
-      icon: <Calendar />,
+      icon: <Calendar stroke="#283583" />,
       label: 'place.calendar',
       url: ROUTE_ACCOUNT_BOOKING,
     },
@@ -74,7 +74,7 @@ const companyItems = {
       url: ROUTE_ACCOUNT_REQUEST,
     },
     {
-      icon: <Calendar />,
+      icon: <Calendar stroke="#283583" />,
       label: 'company.calendar',
       url: ROUTE_ACCOUNT_BOOKING,
     },
