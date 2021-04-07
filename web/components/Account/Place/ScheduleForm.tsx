@@ -73,12 +73,13 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
     if (events.flat().length === 0) return
 
     setLoading(true)
-    client.bulk.disponibilitiesCreate(
-      events.flat().map((event) => ({
-        ...event,
-        espace: place.id,
-      })),
-    )
+    client.bulk
+      .disponibilitiesCreate(
+        events.flat().map((event) => ({
+          ...event,
+          espace: place.id,
+        })),
+      )
       .then((res) => {
         queryClient.setQueryData(['place', place.id], {
           ...place,

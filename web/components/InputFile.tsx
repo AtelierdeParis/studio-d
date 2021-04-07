@@ -3,13 +3,12 @@ import { Flex, Text, Button, Input, Box } from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
-import createSlug from 'url-slug'
-import { UploadFile } from 'typings/api'
+import { Espace } from 'typings/api'
 import { Control, useController } from 'react-hook-form'
 
 interface IInputFile {
   control: Control
-  defaultValue: UploadFile[]
+  place: Espace
 }
 
 const acceptableTypes = [
@@ -20,7 +19,7 @@ const acceptableTypes = [
   'application/pdf',
 ]
 
-const InputFile = ({ control, defaultValue = [] }: IInputFile) => {
+const InputFile = ({ control, place }: IInputFile) => {
   const { t } = useTranslation('place')
 
   const { field: removeField } = useController({
@@ -32,7 +31,7 @@ const InputFile = ({ control, defaultValue = [] }: IInputFile) => {
   const { field } = useController({
     name: 'files',
     control,
-    defaultValue,
+    defaultValue: place?.files || [],
   })
 
   const onChange = (event) => {
@@ -51,17 +50,11 @@ const InputFile = ({ control, defaultValue = [] }: IInputFile) => {
     if (id) removeField.onChange([...removeField.value, id])
   }
 
-  const getExtension = (filename) =>
-    filename.substring(filename.lastIndexOf('.') + 1, filename.length) ||
-    filename
-
   const updateName = (value, index) => {
     const list = [...field.value]
 
     Object.assign(list[index], {
-      display_name: `${createSlug(value)}.${getExtension(
-        field.value[index].name,
-      )}`,
+      caption: value,
     })
     field.onChange(list)
   }
@@ -135,6 +128,7 @@ const InputFile = ({ control, defaultValue = [] }: IInputFile) => {
                 <Box>
                   <Input
                     name={`files.name[${index}]`}
+                    value={file.caption || ''}
                     onChange={(e) => updateName(e.currentTarget.value, index)}
                     size="sm"
                     w="20rem"

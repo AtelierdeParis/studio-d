@@ -50,8 +50,8 @@
     "floor": {
       "type": "enumeration",
       "enum": [
-        "floor",
-        "carpet",
+        "plancherDanse",
+        "parquetTraditionnel",
         "other"
       ],
       "required": true
@@ -103,8 +103,8 @@
       "via": "espaces"
     },
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "espace"
+      "via": "espace",
+      "collection": "disponibility"
     },
     "scheduleDetails": {
       "type": "text"
@@ -115,6 +115,14 @@
     "published": {
       "type": "boolean",
       "default": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "danceCarpet": {
+      "type": "boolean",
+      "required": true
     }
   }
 }

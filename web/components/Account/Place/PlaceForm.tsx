@@ -19,6 +19,7 @@ import InputNumber from '~components/InputNumber'
 import InputLocation from '~components/InputLocation'
 import InputFile from '~components/InputFile'
 import { yupResolver } from '@hookform/resolvers/yup'
+import useToast from '~hooks/useToast'
 import * as yup from 'yup'
 import { Espace } from '~typings/api'
 import Arrow from 'public/assets/img/arrow-right.svg'
@@ -59,6 +60,7 @@ const getDefaultValues = (place) => {
 }
 
 const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
+  const { errorToast } = useToast()
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
   const {
@@ -90,6 +92,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           removedFiles: [],
         })
       })
+      .catch(() => errorToast(t('form.error')))
       .finally(() => setLoading(false))
   }
 
@@ -102,7 +105,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             <Input name="name" ref={register} />
           </FormField>
         )}
-        <SimpleGrid columns={4} columnGap={5} rowGap={6} mb={14}>
+        <SimpleGrid columns={4} columnGap={5} rowGap={6}>
           <FormField label={t('form.surface.label')} errors={errors.surface}>
             <InputNumber name="surface" control={control} />
           </FormField>
@@ -117,6 +120,19 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           </FormField>
           <FormField label={t('form.mirror.label')} errors={errors.mirror}>
             <Select name="mirror" ref={register} placeholder={t('form.choose')}>
+              <option value="true">{t('form.yes')}</option>
+              <option value="false">{t('form.no')}</option>
+            </Select>
+          </FormField>
+          <FormField
+            label={t('form.danceCarpet.label')}
+            errors={errors.danceCarpet}
+          >
+            <Select
+              name="danceCarpet"
+              ref={register}
+              placeholder={t('form.choose')}
+            >
               <option value="true">{t('form.yes')}</option>
               <option value="false">{t('form.no')}</option>
             </Select>
@@ -159,11 +175,15 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           </FormField>
           <FormField label={t('form.floor.label')} errors={errors.floor}>
             <Select name="floor" ref={register} placeholder={t('form.choose')}>
-              <option value="floor">{t('form.floor.floor')}</option>
-              <option value="carpet">{t('form.floor.carpet')}</option>
+              <option value="parquetTraditionnel">
+                {t('form.floor.traditional')}
+              </option>
+              <option value="plancherDanse">{t('form.floor.dance')}</option>
               <option value="other">{t('form.floor.other')}</option>
             </Select>
           </FormField>
+        </SimpleGrid>
+        <Flex mb={14} mt={6} alignItems="center">
           {floor === 'other' && (
             <FormField
               label={t('form.otherFloor.label')}
@@ -177,7 +197,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
               />
             </FormField>
           )}
-        </SimpleGrid>
+        </Flex>
         <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
         <HStack spacing={5} mb={10}>
           <FormField label={t('form.about.label')} errors={errors.about}>
@@ -187,7 +207,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             <Textarea name="details" ref={register} resize="none" h="215px" />
           </FormField>
         </HStack>
-        <InputFile control={control} defaultValue={place?.files} />
+        <InputFile control={control} place={place} />
         <Text textStyle="infoLabel" mt={16}>
           {t('form.location')}
         </Text>
@@ -206,12 +226,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           {Boolean(latitude) && Boolean(longitude) ? (
             <FormField label={t('form.geolocation.label')} flex={1}>
               <Box>
-                <Map
-                  flex={1}
-                  h="250px"
-                  latitude={latitude}
-                  longitude={longitude}
-                />
+                <Map flex={1} h="250px" markers={[{ latitude, longitude }]} />
                 <Text
                   px={3.5}
                   py={2.5}

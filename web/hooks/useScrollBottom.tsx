@@ -4,6 +4,7 @@ import throttle from 'lodash.throttle'
 export const useScrollBottom = (
   ref: RefObject<HTMLElement>,
   onScrollBottom: () => void,
+  useWindow = false,
 ): void => {
   const onScroll = useCallback(
     throttle(() => {
@@ -20,9 +21,10 @@ export const useScrollBottom = (
 
   useEffect(() => {
     if (ref.current) {
-      window.addEventListener('scroll', onScroll)
-      return () => window.removeEventListener('scroll', onScroll)
+      const target = useWindow ? window : ref.current
+      target.addEventListener('scroll', onScroll)
+      return () => target.removeEventListener('scroll', onScroll)
     }
     return () => {}
-  }, [ref, onScroll])
+  }, [ref, onScroll, useWindow])
 }

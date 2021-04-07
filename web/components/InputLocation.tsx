@@ -30,39 +30,6 @@ const getStyle = (theme) => {
     loadingIndicator: () => ({
       display: 'none',
     }),
-    multiValue: (styles) => ({
-      ...styles,
-      backgroundColor: 'white',
-      margin: theme.space['1'],
-      border: '1px solid',
-      borderColor: theme.colors.gray['100'],
-      borderRadius: theme.radii.md,
-      paddingTop: theme.space['1'],
-      paddingBottom: theme.space['1'],
-      paddingLeft: theme.space['4'],
-      paddingRight: theme.space['4'],
-    }),
-    multiValueLabel: (styles) => ({
-      ...styles,
-      paddingLeft: 0,
-      paddingRight: 0,
-      fontSize: theme.fontSizes['xs'],
-      letterSpacing: theme.letterSpacings['wide'],
-    }),
-    multiValueRemove: (styles) => ({
-      ...styles,
-      fontSize: '12px',
-      marginLeft: theme.space['1.5'],
-      padding: 0,
-      '> svg': {
-        height: '18px',
-        width: '18px',
-      },
-      cursor: 'pointer',
-      ':hover': {
-        color: theme.colors.gray['600'],
-      },
-    }),
   }
 }
 
@@ -87,6 +54,10 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     name: 'longitude',
     control,
   })
+  const { field: city } = useController({
+    name: 'city',
+    control,
+  })
 
   const onChange = (value) => {
     field.onChange(value?.label || '')
@@ -94,9 +65,11 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     if (value?.item?.geometry?.coordinates) {
       latitude.onChange(value?.item.geometry.coordinates[0])
       longitude.onChange(value?.item.geometry.coordinates[1])
+      city.onChange(value?.item.properties.city)
     } else {
       latitude.onChange(null)
       longitude.onChange(null)
+      city.onChange(null)
     }
   }
 

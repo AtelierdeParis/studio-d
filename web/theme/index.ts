@@ -97,6 +97,11 @@ const theme = extendTheme({
       fontWeight: '500',
       lineHeight: 'base',
     },
+    h2: {
+      fontSize: 'xl',
+      fontFamily: 'mabry medium',
+      fontWeight: '500',
+    },
     titleFieldGroup: {
       color: 'blue.500',
       fontSize: 'xl',

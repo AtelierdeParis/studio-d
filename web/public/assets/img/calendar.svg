@@ -1,9 +1,9 @@
 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0)">
-<path d="M1.25 7.08333H19.5833" stroke="#283583" stroke-miterlimit="10" stroke-linecap="square"/>
-<path d="M17.9167 2.91667H2.91667C1.99619 2.91667 1.25 3.66286 1.25 4.58334V17.0833C1.25 18.0038 1.99619 18.75 2.91667 18.75H17.9167C18.8371 18.75 19.5833 18.0038 19.5833 17.0833V4.58334C19.5833 3.66286 18.8371 2.91667 17.9167 2.91667Z" stroke="#283583" stroke-miterlimit="10" stroke-linecap="square"/>
-<path d="M5.41602 1.25V3.75" stroke="#283583" stroke-miterlimit="10" stroke-linecap="square"/>
-<path d="M15.416 1.25V3.75" stroke="#283583" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M1.25 7.08333H19.5833" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M17.9167 2.91667H2.91667C1.99619 2.91667 1.25 3.66286 1.25 4.58334V17.0833C1.25 18.0038 1.99619 18.75 2.91667 18.75H17.9167C18.8371 18.75 19.5833 18.0038 19.5833 17.0833V4.58334C19.5833 3.66286 18.8371 2.91667 17.9167 2.91667Z" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M5.41602 1.25V3.75" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M15.416 1.25V3.75" stroke-miterlimit="10" stroke-linecap="square"/>
 </g>
 <defs>
 <clipPath id="clip0">

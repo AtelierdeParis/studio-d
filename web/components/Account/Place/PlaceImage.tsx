@@ -40,7 +40,9 @@ const PlaceImage = ({ place }: IPlaceImage) => {
     setLoading(true)
 
     if (removed.length > 0) {
-      await Promise.all(removed.map((id) => client.upload.filesDelete(id))).then(() => {
+      await Promise.all(
+        removed.map((id) => client.upload.filesDelete(id)),
+      ).then(() => {
         if (newFiles.length === 0) successToast(t('successImg'))
       })
       setRemoved([])
@@ -101,7 +103,13 @@ const PlaceImage = ({ place }: IPlaceImage) => {
                   opacity: 1,
                 }}
               />
-              <Image src={file?.preview ? file.preview : process.env.NEXT_PUBLIC_BACK_URL+file.url} />
+              <Image
+                src={
+                  file?.preview
+                    ? file.preview
+                    : process.env.NEXT_PUBLIC_BACK_URL + file.url
+                }
+              />
             </Flex>
           ))}
         </SimpleGrid>
