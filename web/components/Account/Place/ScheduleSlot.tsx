@@ -1,5 +1,5 @@
 import React, { useMemo, useContext } from 'react'
-import { Box, VStack, Text, Flex } from '@chakra-ui/react'
+import { Box, VStack, Text } from '@chakra-ui/react'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import getDate from 'date-fns/getDate'

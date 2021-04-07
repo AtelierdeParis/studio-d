@@ -7,6 +7,7 @@ import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_USE_POLICY } from '~constants'
 import { client } from '~api/client-api'
 import { Page } from '~typings/api'
+import { getPage } from '~utils/page'
 
 interface ICharte {
   page: Page
@@ -34,9 +35,8 @@ const Charte = ({ page }: ICharte) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages
-    .pagesDetail(ROUTE_USE_POLICY.replace('/', ''))
-    .then((res) => res.data)
+  const page = await getPage(ROUTE_USE_POLICY)
+  if (!page) return { redirect: { destination: '/', permanent: false } }
 
   return {
     props: {

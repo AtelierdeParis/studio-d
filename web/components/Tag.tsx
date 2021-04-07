@@ -12,6 +12,7 @@ const Tag = ({ status, children, ...rest }: ITag) => {
   const { t } = useTranslation('account')
   switch (status) {
     case 'booked':
+    case 'available':
       return (
         <ChakraTag bgColor="tag.green" {...rest}>
           {children || t('tag.booked')}

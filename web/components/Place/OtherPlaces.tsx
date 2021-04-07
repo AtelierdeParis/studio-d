@@ -5,11 +5,11 @@ import Arrow from 'public/assets/img/arrow-bottom.svg'
 import { useUser } from '~hooks/useUser'
 import PlaceGrid from '~components/Place/PlaceGrid'
 
-interface OtherPlacesProps {
+interface Props {
   userId: string
 }
 
-const OtherPlaces = ({ userId }: OtherPlacesProps) => {
+const OtherPlaces = ({ userId }: Props) => {
   const { t } = useTranslation('place')
   const { data: user } = useUser(userId)
 

@@ -26,6 +26,7 @@ const PlaceCardCarousel = ({ images = [], showNumber = false }) => {
         ))}
         <Text
           opacity={showNumber ? 1 : 0}
+          display={images.length === 1 && 'none'}
           _groupHover={{
             opacity: 1,
           }}
