@@ -126,7 +126,7 @@ a {
   flex-direction: column;
   padding-bottom: 0px !important;
 }
-#calendar .fc-daygrid-day-events {
+#calendar.account-schedule .fc-daygrid-day-events {
   display: grid;
   row-gap: 4px;
 }
@@ -179,7 +179,7 @@ a {
   background-color: #f4f5f9;
 }
 
-#calendar .fc-daygrid-event {
+#calendar.account-schedule .fc-daygrid-event {
   height: 100%;
   padding: 0;
 }
@@ -248,4 +248,41 @@ a {
 .swiper-button-prev {
   color: white !important;
   text-shadow: 0 0 1px #000000;
+}
+.swiper-slide {
+  min-height: 100%;
+  height: auto !important;
+}
+
+#calendar.booking-calendar .fc-daygrid-day-frame {
+  background-color: transparent;
+}
+
+.booking-calendar#calendar .fc-daygrid-day-top,
+.booking-calendar#calendar .fc-daygrid-day-number,
+.booking-calendar#calendar .fc-daygrid-event {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.booking-calendar#calendar .fc-header-toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10px;
+  z-index: 10;
+}
+
+.booking-calendar#calendar .fc-daygrid-body {
+  padding-top: 40px;
+}
+#calendar .fc-daygrid-day-events {
+  z-index: 12;
+}
+.booking-calendar#calendar .fc-daygrid-day-events {
+  display: grid;
+  row-gap: 13px;
 }

@@ -32,7 +32,7 @@ const styleSelected = {
 const Places = () => {
   const { t } = useTranslation('place')
   const ref = useRef(null)
-  const [isGridView, setGridView] = useState<boolean>(false)
+  const [isGridView, setGridView] = useState<boolean>(true)
   const form = useForm()
   const queryClient = useQueryClient()
   const searchQuery = useMemo(() => formatSearch(form.getValues()), [

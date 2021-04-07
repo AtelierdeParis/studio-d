@@ -12,7 +12,7 @@ import Staff from 'public/assets/img/staff.svg'
 import Bed from 'public/assets/img/accomodation.svg'
 import { useTranslation } from 'next-i18next'
 
-interface IPlaceAttributesGrid {
+interface Props {
   place: Espace
 }
 
@@ -29,7 +29,7 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
   </Flex>
 )
 
-const PlaceAttributesGrid = ({ place }: IPlaceAttributesGrid) => {
+const PlaceAttributesGrid = ({ place }: Props) => {
   const { t } = useTranslation('place')
 
   return (
@@ -47,7 +47,7 @@ const PlaceAttributesGrid = ({ place }: IPlaceAttributesGrid) => {
       />
       <GridItem
         withDivider
-        label={t('detail.floor')}
+        label={t('detail.danceBar')}
         icon={<DanceBar />}
         text={place.danceBar ? t('detail.yes') : t('detail.no')}
       />

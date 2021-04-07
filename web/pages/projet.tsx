@@ -5,8 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Heading } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_PROJECT } from '~constants'
-import { client } from '~api/client-api'
 import { Page } from '~typings/api'
+import { getPage } from '~utils/page'
 
 interface IProject {
   page: Page
@@ -34,9 +34,9 @@ const Project = ({ page }: IProject) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await client.pages
-    .pagesDetail(ROUTE_PROJECT.replace('/', ''))
-    .then((res) => res.data)
+  const page = await getPage(ROUTE_PROJECT)
+
+  if (!page) return { redirect: { destination: '/', permanent: false } }
 
   return {
     props: {
