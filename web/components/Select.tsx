@@ -1,0 +1,48 @@
+import React from 'react'
+import { Select, SelectProps, Box } from '@chakra-ui/react'
+import { useController, Control } from 'react-hook-form'
+import Remove from 'public/assets/img/remove.svg'
+
+interface ISearchSelect extends SelectProps {
+  control: Control
+  children: React.ReactNode
+}
+
+const SearchSelect = ({ control, children, name, ...rest }: ISearchSelect) => {
+  const { field } = useController({ name, control })
+
+  const handleChange = (value) => {
+    field.onChange(value)
+  }
+
+  return (
+    <Box pos="relative">
+      <Select
+        value={field.value}
+        name={name}
+        {...rest}
+        color="gray.500"
+        {...(Boolean(field.value) && {
+          icon: <Remove />,
+          color: 'blue.500',
+        })}
+        onChange={(event) => handleChange(event.target.value)}
+      >
+        {children}
+      </Select>
+      {Boolean(field.value) && (
+        <Box
+          pos="absolute"
+          right="0"
+          top="0"
+          bottom="0"
+          w="30px"
+          cursor="pointer"
+          onClick={() => handleChange('')}
+        />
+      )}
+    </Box>
+  )
+}
+
+export default SearchSelect

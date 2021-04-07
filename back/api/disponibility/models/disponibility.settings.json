@@ -21,16 +21,16 @@
       "required": false
     },
     "start": {
-      "type": "date",
+      "type": "datetime",
       "required": true
     },
     "end": {
-      "type": "date",
+      "type": "datetime",
       "required": true
     },
     "espace": {
-      "via": "disponibilities",
-      "model": "espace"
+      "model": "espace",
+      "via": "disponibilities"
     },
     "type": {
       "type": "enumeration",

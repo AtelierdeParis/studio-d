@@ -23,6 +23,7 @@
         "slot": "Disponibilités ({{nb}})"
     },
     "form": {
+        "error": "Une erreur est survenue en lors de l'enregistrement",
         "yes": "Oui",
         "no": "Non",
         "choose": "Choisir",
@@ -49,8 +50,11 @@
         "mirror": {
             "label": "Miroir"
         },
+        "danceCarpet": {
+            "label": "Tapis de danse"
+        },
         "danceBar": {
-            "label": "Bar de danse"
+            "label": "Barre de danse"
         },
         "accomodation": {
             "label": "Hébergement possible"
@@ -60,12 +64,12 @@
         },
         "floor": {
             "label": "Type de sol",
-            "floor": "Plancher",
-            "carpet": "Tapis de danse",
+            "traditional": "Parquet traditionnel",
+            "dance": "Plancher de danse",
             "other": "Autre"
         },
         "otherFloor": {
-            "label": "Renseignez votre type de sol"
+            "label": "Renseignez votre type de sol (Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton)"
         },
         "about": {
             "label": "À propos de l’espace"
@@ -117,6 +121,65 @@
         "nbPending": "{{nb}} en attente",
         "nbBooking": "{{nb}} à venir",
         "nbPassed": "{{nb}} passées"
+    },
+    "search": {
+        "noResult": {
+            "title": "0 espace disponible",
+            "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
+            "btn": "Réinitialiser les filtres"
+        },
+        "nbPlaces": "{{nb}} espaces inscrits",
+        "where": {
+            "label": "Où cherchez-vous ?",
+            "placeholder": "Renseignez une ville…"
+        },
+        "when": {
+            "label": "Sur quelle période ?",
+            "placeholder": "Cliquer pour choisir des dates"
+        },
+        "surface": "Superficie",
+        "surfaceBetween": "Entre {{min}} et {{max}} m²",
+        "heightBetween": "Entre {{min}} et {{max}} mètres",
+        "floorType": "Type de sol",
+        "height": "Hauteur sous plafond",
+        "accomodation": {
+            "placeholder": "Hébergement",
+            "yes": "Hébergement possible",
+            "no": "Pas d'hébergement"
+        },
+        "mirror": {
+            "placeholder": "Miroir",
+            "yes": "Avec mirroir",
+            "no": "Sans mirroir"
+        },
+        "danceBar": {
+            "placeholder": "Barre de danse",
+            "yes": "Avec barre de danse",
+            "no": "Sans barre de danse"
+        },
+        "technicalStaff": {
+            "placeholder": "Personnel technique",
+            "yes": "Avec personnel technique",
+            "no": "Sans personnel technique"
+        },
+        "more": "+ de filtres",
+        "less": "- de filtres",
+        "submit": "Rechercher",
+        "grid": "Grille",
+        "list": "Liste",
+        "filterBy": {
+            "label": "Trier par",
+            "dispo": "Prochaine disponibilité",
+            "nbDispo": "Nombre de créneaux",
+            "surfaceAsc": "Surface (ordre croissant)",
+            "surfaceDesc": "Surface (ordre décroissant)"
+        }
+    },
+    "card": {
+        "city": "Ville",
+        "surface": "Surface",
+        "dim": "Dim.",
+        "noDispo": "Aucun créneau disponible"
     },
     "schedule": {
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
@@ -192,5 +255,33 @@
                 "booked": "Voir la réservation."
             }
         }
+    },
+    "detail": {
+        "seeMap": "Voir sur la carte",
+        "precise": "* précisez vos besoins lors de la réservation",
+        "surface": "Superficie",
+        "dimension": "Dimensions",
+        "height": "Hauteur sous plafond",
+        "floor": "Type de sol",
+        "danceCarpet": "Tapis de danse",
+        "mirror": "Mirroir",
+        "danceBar": "Barre de danse",
+        "technicalStaff": "Personnel technique",
+        "accomodation": "Hébergement",
+        "yes": "Oui",
+        "no": "Non",
+        "available": "Possible *",
+        "calendar": "Calendrier des disponibilités",
+        "about": "À propos de l’espace",
+        "details": "Détails techniques",
+        "howToGo": "Comment s’y rendre ?",
+        "located": "L’espace se situe au {{address}}.",
+        "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
+        "otherPlaces": "Autres espaces de {{name}}",
+        "week": "Semaine",
+        "month": "Mois",
+        "parquetTraditionnel": "Parquet traditionnel",
+        "plancherDanse": "Plancher de danse",
+        "other": "Autre"
     }
 }

@@ -80,7 +80,6 @@ const Schedule = (props: ISchedule) => {
         dateClick={(date) => {
           if (eventsIdToDelete.length > 0) setToDelete([])
         }}
-        // showNonCurrentDates={false}
         fixedWeekCount={false}
         nextDayThreshold="00:00"
         events={events}

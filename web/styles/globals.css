@@ -225,3 +225,27 @@ a {
 .swiper-container {
   width: 100%;
 }
+
+.placeCard .swiper-button-next,
+.placeCard .swiper-button-prev,
+.placeCard .swiper-button-next.swiper-button-disabled,
+.placeCard .swiper-button-prev.swiper-button-disabled {
+  opacity: 0;
+}
+.placeCard:hover .swiper-button-next.swiper-button-disabled,
+.placeCard:hover .swiper-button-prev.swiper-button-disabled {
+  opacity: 0.35;
+}
+.placeCard:hover .swiper-button-next,
+.placeCard:hover .swiper-button-prev {
+  opacity: 1;
+}
+.placeListCard .swiper-button-next:after,
+.placeListCard .swiper-button-prev:after {
+  font-size: 22px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  text-shadow: 0 0 1px #000000;
+}

@@ -116,7 +116,7 @@ export interface Espace {
   danceBar: boolean;
   accomodation: boolean;
   technicalStaff: boolean;
-  floor: "floor" | "carpet" | "other";
+  floor: "plancherDanse" | "parquetTraditionnel" | "other";
   otherFloor?: string;
   about?: string;
   details?: string;
@@ -139,7 +139,7 @@ export interface Espace {
     previewUrl?: string;
     provider: string;
     provider_metadata?: object;
-    related?: string[];
+    related?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -159,7 +159,7 @@ export interface Espace {
     previewUrl?: string;
     provider: string;
     provider_metadata?: object;
-    related?: string[];
+    related?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -214,6 +214,8 @@ export interface Espace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
+  city: string;
+  danceCarpet: boolean;
 }
 
 export interface NewEspace {
@@ -226,7 +228,7 @@ export interface NewEspace {
   danceBar: boolean;
   accomodation: boolean;
   technicalStaff: boolean;
-  floor: "floor" | "carpet" | "other";
+  floor: "plancherDanse" | "parquetTraditionnel" | "other";
   otherFloor?: string;
   about?: string;
   details?: string;
@@ -240,6 +242,8 @@ export interface NewEspace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
+  city: string;
+  danceCarpet: boolean;
   created_by?: string;
   updated_by?: string;
 }
@@ -722,6 +726,20 @@ export namespace Espaces {
     export type ResponseBody = Espace[];
   }
   /**
+   * @description Get list of cities
+   * @tags Espace
+   * @name CitiesList
+   * @request GET:/espaces/cities
+   * @secure
+   */
+  export namespace CitiesList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = string[];
+  }
+  /**
    * No description
    * @tags Espace
    * @name EspacesList
@@ -772,7 +790,21 @@ export namespace Espaces {
    */
   export namespace CountList {
     export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = { count?: number };
@@ -1939,6 +1971,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description Get list of cities
+     *
+     * @tags Espace
+     * @name CitiesList
+     * @request GET:/espaces/cities
+     * @secure
+     */
+    citiesList: (params: RequestParams = {}) =>
+      this.request<string[], Error>({
+        path: `/espaces/cities`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * No description
      *
      * @tags Espace
@@ -2000,10 +2049,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/espaces/count
      * @secure
      */
-    countList: (params: RequestParams = {}) =>
+    countList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<{ count?: number }, Error>({
         path: `/espaces/count`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

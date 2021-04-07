@@ -1,4 +1,5 @@
 export const ROUTE_PLACES = '/espaces'
+export const ROUTE_PLACE_DETAIL = '/espaces/[id]'
 export const ROUTE_PROJECT = '/projet'
 export const ROUTE_ACTU = '/actualites'
 export const ROUTE_ACTU_DETAIL = '/actualites/[id]'

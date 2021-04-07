@@ -4,6 +4,7 @@ import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import { Espace } from '~typings/api'
 import { createNewEvents, createOldEvents } from '~utils/schedule'
 import { useFormContext } from 'react-hook-form'
+import isSameDay from 'date-fns/isSameDay'
 
 interface IScheduleProvider {
   place: Espace
@@ -23,7 +24,8 @@ const ScheduleProvider = ({ place, children }: IScheduleProvider) => {
   const oldEventsDate = useMemo(() => {
     return oldEvents
       .map((event) => {
-        if (event.start === event.end) return event.start
+        if (isSameDay(event.start, event.end)) return event.start
+
         return eachDayOfInterval({
           start: event.start,
           end: event.end,

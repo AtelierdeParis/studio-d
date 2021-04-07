@@ -6,7 +6,7 @@ import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 
 const ScheduleRightContent = () => {
   const [showForm, setShowForm] = useState(false)
-  const { place, eventsIdToDelete } = useContext(ScheduleContext)
+  const { place, eventsIdToDelete, setToDelete } = useContext(ScheduleContext)
 
   const dispoToDelete = useMemo(
     () =>
@@ -20,7 +20,12 @@ const ScheduleRightContent = () => {
   )
 
   if (dispoToDelete.length > 0)
-    return <ScheduleDelete disponibilities={dispoToDelete} />
+    return (
+      <ScheduleDelete
+        disponibilities={dispoToDelete}
+        onClose={() => setToDelete([])}
+      />
+    )
 
   return (
     <>
