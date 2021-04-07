@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
 import { Box, Flex, Text, SimpleGrid } from '@chakra-ui/react'
-import { Disponibility } from '~typings/api'
+import { Espace } from '~typings/api'
 import { format } from '~utils/date'
 import { createOldEvents } from '~utils/schedule'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
@@ -27,14 +27,13 @@ const view = createPlugin({
 })
 
 interface Props {
-  disponibilities: Disponibility[]
+  place: Espace
 }
 
-const BookingSchedule = ({ disponibilities = [] }: Props) => {
-  const events = useMemo(() => createOldEvents(disponibilities), [
-    disponibilities,
+const BookingSchedule = ({ place }: Props) => {
+  const events = useMemo(() => createOldEvents(place?.disponibilities), [
+    place?.disponibilities,
   ])
-  console.log(events)
 
   return (
     <Flex

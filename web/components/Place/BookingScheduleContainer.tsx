@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Flex, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Espace } from '~typings/api'
+import { Espace, Disponibility } from '~typings/api'
 import BookingSchedule from '~components/Place/BookingSchedule'
 
 const styleSelected = {
@@ -43,7 +43,7 @@ const BookingScheduleContainer = ({ place }: Props) => {
           </Button>
         </Flex>
       </Flex>
-      <BookingSchedule disponibilities={place?.disponibilities} />
+      <BookingSchedule place={place} />
     </Box>
   )
 }
