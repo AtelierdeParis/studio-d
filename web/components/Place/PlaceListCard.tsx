@@ -54,7 +54,7 @@ const PlaceCard = ({ place, setFocus }: IPlaceCard) => {
             )}
           </AspectRatio>
         </Flex>
-        <Box pl={5} flex={1} direction="column">
+        <Box pl={5} flex={1}>
           <LinkOverlay
             href={{
               pathname: ROUTE_PLACE_DETAIL,

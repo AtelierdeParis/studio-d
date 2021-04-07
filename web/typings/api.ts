@@ -790,7 +790,21 @@ export namespace Espaces {
    */
   export namespace CountList {
     export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = { count?: number };
@@ -2035,10 +2049,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/espaces/count
      * @secure
      */
-    countList: (params: RequestParams = {}) =>
+    countList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<{ count?: number }, Error>({
         path: `/espaces/count`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

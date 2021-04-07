@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useMemo } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -31,10 +31,13 @@ const styleSelected = {
 const Places = () => {
   const { t } = useTranslation('place')
   const ref = useRef(null)
-  const [isGridView, setGridView] = useState<boolean>(true)
-  const { data: nbPlace } = useNbPlace()
+  const [isGridView, setGridView] = useState<boolean>(false)
   const form = useForm()
   const queryClient = useQueryClient()
+  const searchQuery = useMemo(() => formatSearch(form.getValues()), [
+    form.getValues(),
+  ])
+  const { data: nbPlace, isLoading: countLoading } = useNbPlace(searchQuery)
 
   const {
     data: places,
@@ -44,14 +47,18 @@ const Places = () => {
     isFetching,
   } = usePlaces(nbPlace, {
     _limit: isGridView ? 12 : 6,
-    ...formatSearch(form.getValues()),
+    ...searchQuery,
   })
 
-  useScrollBottom(ref, () => {
-    if (hasNextPage && !isFetching) {
-      fetchNextPage()
-    }
-  })
+  useScrollBottom(
+    ref,
+    () => {
+      if (hasNextPage && !isFetching) {
+        fetchNextPage()
+      }
+    },
+    isGridView,
+  )
 
   return (
     <Container>
@@ -59,15 +66,21 @@ const Places = () => {
         <PlaceSearch />
         <Flex justifyContent="space-between" pb={4} alignItems="center">
           <Flex alignItems="center">
-            <Arrow />
-            <Text
-              fontSize="xl"
-              fontFamily="mabry medium"
-              fontWeight="500"
-              pl={4}
-            >
-              {t('search.nbPlaces', { nb: nbPlace })}
-            </Text>
+            {!countLoading && (
+              <>
+                <Arrow />
+                <Text
+                  fontSize="xl"
+                  fontFamily="mabry medium"
+                  fontWeight="500"
+                  pl={4}
+                >
+                  {nbPlace > 0
+                    ? t('search.nbPlaces', { nb: nbPlace })
+                    : t('search.noResult')}
+                </Text>
+              </>
+            )}
           </Flex>
           <ButtonGroup
             spacing={4}
@@ -121,28 +134,21 @@ const Places = () => {
           </ButtonGroup>
         </Flex>
       </FormProvider>
-      {!isLoading && places?.pages?.flat().length === 0 ? (
-        <Text fontSize="xl" textAlign="center" pt={10}>
-          {t('search.noResult')}
-        </Text>
+
+      {isGridView ? (
+        <PlaceGrid
+          places={places?.pages?.flat()}
+          isFetching={isFetching}
+          isLoading={isLoading}
+          gridRef={ref}
+        />
       ) : (
-        <>
-          {isGridView ? (
-            <PlaceGrid
-              places={places?.pages?.flat()}
-              isFetching={isFetching}
-              isLoading={isLoading}
-              gridRef={ref}
-            />
-          ) : (
-            <PlaceList
-              places={places?.pages?.flat()}
-              isFetching={isFetching}
-              isLoading={isLoading}
-              listRef={ref}
-            />
-          )}
-        </>
+        <PlaceList
+          places={places?.pages?.flat()}
+          isFetching={isFetching}
+          isLoading={isLoading}
+          listRef={ref}
+        />
       )}
     </Container>
   )

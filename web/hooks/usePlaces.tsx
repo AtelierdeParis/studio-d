@@ -18,7 +18,6 @@ export const usePlaces = (
     },
     {
       enabled: Boolean(nbPlaces),
-      keepPreviousData: true,
       getNextPageParam: (lastPage, pages) => {
         if (pages.flat().length < nbPlaces) return pages.length
       },

@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query'
 import { client } from '~api/client-api'
 
-export const useNbPlace = () => {
-  return useQuery('nbPlace', () =>
-    client.espaces.countList().then((res) => res.data),
+export const useNbPlace = (query) => {
+  return useQuery(['nbPlace', query], () =>
+    client.espaces.countList(query).then((res) => res.data),
   )
 }

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import Loading from '~components/Loading'
 import Loader from '~components/Loader'
 import PlaceListCard from '~components/Place/PlaceListCard'
-// import PlaceListCardSkeleton from '~components/Place/PlaceListCardSkeleton'
+import PlaceListCardSkeleton from '~components/Place/PlaceListCardSkeleton'
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
 const PlaceList = ({ places = [], isFetching, isLoading, listRef }) => {
@@ -22,9 +22,9 @@ const PlaceList = ({ places = [], isFetching, isLoading, listRef }) => {
   return (
     <Box>
       <Flex>
-        <Box pr={8} w="45%" h="80vh" overflow="auto">
-          <VStack spacing={7} ref={listRef} alignItems="flex-start">
-            <Loading isLoading={isLoading}>
+        <Box pr={8} w="45%" h="80vh" overflow="auto" ref={listRef}>
+          <VStack spacing={7} alignItems="flex-start">
+            <Loading isLoading={isLoading} skeleton={<PlaceListCardSkeleton />}>
               {places.map((place) => (
                 <PlaceListCard
                   place={place}
