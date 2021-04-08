@@ -18,5 +18,6 @@ export interface ScheduleEvent {
     when: ScheduleEventWhen
     status: string
     hasEventSameDay?: boolean
+    type: ScheduleEventType
   }
 }

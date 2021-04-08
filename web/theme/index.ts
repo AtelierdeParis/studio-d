@@ -64,8 +64,8 @@ const theme = extendTheme({
     },
     grayText: {
       '1': '#626782',
-      '2': '#6EAE7F',
     },
+    confirm: '#6EAE7F',
     tag: {
       green: '#D3E6D8',
       yellow: '#F5E5C1',

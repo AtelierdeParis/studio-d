@@ -12,6 +12,7 @@ export const createScheduleEventObj = ({
   start,
   when = null,
   end = null,
+  type = null,
   status = 'selected',
   id = null,
   hasEventSameDay = false,
@@ -23,6 +24,7 @@ export const createScheduleEventObj = ({
       id,
       when,
       status,
+      type,
       hasEventSameDay,
     },
   }
@@ -91,6 +93,7 @@ export const createOldEvents = (
       end: dispo.end,
       when: dispo.when,
       status: dispo.status,
+      type: dispo.type,
       hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
     })
   })
