@@ -74,6 +74,8 @@
     },
     "tag": {
         "pending": "En attente",
-        "booked": "A venir"
+        "booked": "A venir",
+        "canceled": "Annulée",
+        "past": "Passée"
     }
 }

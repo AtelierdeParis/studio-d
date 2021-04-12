@@ -125,9 +125,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
               {...(router.pathname.startsWith(url) ? styleActive : {})}
             >
               {icon}
-              <Text pl={4} lineHeight={1}>
+              <Box pl={4} lineHeight={1}>
                 {t(label)}
-              </Text>
+              </Box>
             </Flex>
           </Link>
         ))}

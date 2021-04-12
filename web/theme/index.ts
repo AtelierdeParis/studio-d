@@ -67,6 +67,7 @@ const theme = extendTheme({
     },
     confirm: '#6EAE7F',
     tag: {
+      blue: '#f2f3f8',
       green: '#D3E6D8',
       yellow: '#F5E5C1',
       red: '#F2D8D8',

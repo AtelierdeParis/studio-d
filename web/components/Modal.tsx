@@ -11,10 +11,11 @@ import {
   ModalFooter,
   Divider,
   Box,
+  BoxProps,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 
-interface IModal {
+interface Props extends BoxProps {
   children: React.ReactNode
   title: string
   closeText?: string
@@ -30,7 +31,8 @@ const Modal = ({
   onConfirm,
   closeText = null,
   confirmText = null,
-}: IModal) => {
+  ...rest
+}: Props) => {
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('modal')
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -45,13 +47,19 @@ const Modal = ({
 
   return (
     <>
-      <Box onClick={onOpen} alignSelf="center">
+      <Box onClick={onOpen} alignSelf="center" {...rest}>
         {button}
       </Box>
       <ChakraModal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent pt={6} overflow="hidden">
-          <ModalHeader py={0} fontSize="lg" textAlign="center" fontWeight="500">
+          <ModalHeader
+            py={0}
+            fontSize="lg"
+            textAlign="center"
+            fontWeight="500"
+            fontFamily="mabry medium"
+          >
             {title}
             <Divider my={6} />
           </ModalHeader>

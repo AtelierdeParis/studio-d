@@ -15,14 +15,16 @@
       "type": "text",
       "required": true
     },
-    "users_permissions_user": {
+    "place": {
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "messages"
+      "model": "user"
+    },
+    "company": {
+      "plugin": "users-permissions",
+      "model": "user"
     },
     "booking": {
-      "model": "booking",
-      "via": "messages"
+      "model": "booking"
     }
   }
 }

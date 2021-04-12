@@ -46,70 +46,18 @@ export interface NewActuality {
 export interface Booking {
   id: string;
   status?: "canceled" | "past" | "accepted" | "pending";
-  disponibilities?: {
-    id: string;
-    when?: "morning" | "afternoon" | "full";
-    start: string;
-    end: string;
-    espace?: string;
-    type: "punctual" | "day" | "period";
-    status: "available" | "booked" | "pending" | "past";
-    booking?: string;
-    published_at?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
-  users_permissions_user?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country?: string;
-    siret: string;
-    ape: string;
-    phone?: string;
-    license?: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    booking?: string;
-    messages?: string;
-    created_by?: string;
-    updated_by?: string;
-  };
-  messages?: {
-    id: string;
-    message: string;
-    users_permissions_user?: string;
-    booking?: string;
-    created_by?: string;
-    updated_by?: string;
-  };
+  disponibilities?: Disponibility[];
+  place?: UsersPermissionsUser;
+  company?: UsersPermissionsUser;
+  histories?: History[];
 }
 
 export interface NewBooking {
   status?: "canceled" | "past" | "accepted" | "pending";
   disponibilities?: string[];
-  users_permissions_user?: string;
-  messages?: string;
+  place?: string;
+  company?: string;
+  histories?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -174,8 +122,9 @@ export interface Disponibility {
     id: string;
     status?: "canceled" | "past" | "accepted" | "pending";
     disponibilities?: string[];
-    users_permissions_user?: string;
-    messages?: string;
+    place?: string;
+    company?: string;
+    histories?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -264,6 +213,28 @@ export interface NewEspace {
   updated_by?: string;
 }
 
+export interface History {
+  id: string;
+  status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
+  booking?: {
+    id: string;
+    status?: "canceled" | "past" | "accepted" | "pending";
+    disponibilities?: string[];
+    place?: string;
+    company?: string;
+    histories?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
+}
+
+export interface NewHistory {
+  status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
+  booking?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface HomeCarousel {
   id: string;
   images: {
@@ -296,7 +267,7 @@ export interface NewHomeCarousel {
 export interface Message {
   id: string;
   message: string;
-  users_permissions_user?: {
+  place?: {
     id: string;
     email: string;
     provider?: string;
@@ -327,8 +298,40 @@ export interface Message {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
-    booking?: string;
-    messages?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+  company?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country?: string;
+    siret: string;
+    ape: string;
+    phone?: string;
+    license?: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
     created_by?: string;
     updated_by?: string;
   };
@@ -336,8 +339,9 @@ export interface Message {
     id: string;
     status?: "canceled" | "past" | "accepted" | "pending";
     disponibilities?: string[];
-    users_permissions_user?: string;
-    messages?: string;
+    place?: string;
+    company?: string;
+    histories?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -345,7 +349,8 @@ export interface Message {
 
 export interface NewMessage {
   message: string;
-  users_permissions_user?: string;
+  place?: string;
+  company?: string;
   booking?: string;
   created_by?: string;
   updated_by?: string;
@@ -429,8 +434,6 @@ export interface UsersPermissionsRole {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
-    booking?: string;
-    messages?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -629,6 +632,34 @@ export namespace Actualities {
 }
 
 export namespace Bookings {
+  /**
+   * @description Get requests related to current user
+   * @tags Booking
+   * @name RequestsMeList
+   * @request GET:/bookings/requests/me
+   * @secure
+   */
+  export namespace RequestsMeList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking[];
+  }
+  /**
+   * @description Get bookings related to current user
+   * @tags Booking
+   * @name GetMyBookings
+   * @request GET:/bookings/me
+   * @secure
+   */
+  export namespace GetMyBookings {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking[];
+  }
   /**
    * No description
    * @tags Booking
@@ -1083,6 +1114,107 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace Histories {
+  /**
+   * No description
+   * @tags History
+   * @name HistoriesList
+   * @request GET:/histories
+   * @secure
+   */
+  export namespace HistoriesList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = History[];
+  }
+  /**
+   * @description Create a new record
+   * @tags History
+   * @name HistoriesCreate
+   * @request POST:/histories
+   * @secure
+   */
+  export namespace HistoriesCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewHistory;
+    export type RequestHeaders = {};
+    export type ResponseBody = History;
+  }
+  /**
+   * No description
+   * @tags History
+   * @name CountList
+   * @request GET:/histories/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags History
+   * @name HistoriesDetail
+   * @request GET:/histories/{id}
+   * @secure
+   */
+  export namespace HistoriesDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = History;
+  }
+  /**
+   * @description Update a record
+   * @tags History
+   * @name HistoriesUpdate
+   * @request PUT:/histories/{id}
+   * @secure
+   */
+  export namespace HistoriesUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewHistory;
+    export type RequestHeaders = {};
+    export type ResponseBody = History;
+  }
+  /**
+   * @description Delete a record
+   * @tags History
+   * @name HistoriesDelete
+   * @request DELETE:/histories/{id}
+   * @secure
+   */
+  export namespace HistoriesDelete {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
     export type RequestBody = never;
@@ -2047,6 +2179,40 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   };
   bookings = {
     /**
+     * @description Get requests related to current user
+     *
+     * @tags Booking
+     * @name RequestsMeList
+     * @request GET:/bookings/requests/me
+     * @secure
+     */
+    requestsMeList: (params: RequestParams = {}) =>
+      this.request<Booking[], Error>({
+        path: `/bookings/requests/me`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Get bookings related to current user
+     *
+     * @tags Booking
+     * @name GetMyBookings
+     * @request GET:/bookings/me
+     * @secure
+     */
+    getMyBookings: (params: RequestParams = {}) =>
+      this.request<Booking[], Error>({
+        path: `/bookings/me`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * No description
      *
      * @tags Booking
@@ -2612,6 +2778,131 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/espaces/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  histories = {
+    /**
+     * No description
+     *
+     * @tags History
+     * @name HistoriesList
+     * @request GET:/histories
+     * @secure
+     */
+    historiesList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<History[], Error>({
+        path: `/histories`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags History
+     * @name HistoriesCreate
+     * @request POST:/histories
+     * @secure
+     */
+    historiesCreate: (data: NewHistory, params: RequestParams = {}) =>
+      this.request<History, Error>({
+        path: `/histories`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags History
+     * @name CountList
+     * @request GET:/histories/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/histories/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags History
+     * @name HistoriesDetail
+     * @request GET:/histories/{id}
+     * @secure
+     */
+    historiesDetail: (id: string, params: RequestParams = {}) =>
+      this.request<History, Error>({
+        path: `/histories/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags History
+     * @name HistoriesUpdate
+     * @request PUT:/histories/{id}
+     * @secure
+     */
+    historiesUpdate: (id: string, data: NewHistory, params: RequestParams = {}) =>
+      this.request<History, Error>({
+        path: `/histories/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags History
+     * @name HistoriesDelete
+     * @request DELETE:/histories/{id}
+     * @secure
+     */
+    historiesDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/histories/${id}`,
         method: "DELETE",
         secure: true,
         format: "json",

@@ -2,9 +2,10 @@ import React from 'react'
 import { Tag as ChakraTag, TagProps } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { DisponibilityStatus } from '~@types/disponibility'
+import { BookingStatus } from '~@types/booking'
 
 interface ITag extends TagProps {
-  status: DisponibilityStatus
+  status: DisponibilityStatus | BookingStatus
   children?: React.ReactNode
 }
 
@@ -13,6 +14,7 @@ const Tag = ({ status, children, ...rest }: ITag) => {
   switch (status) {
     case 'booked':
     case 'available':
+    case 'accepted':
       return (
         <ChakraTag bgColor="tag.green" {...rest}>
           {children || t('tag.booked')}
@@ -28,6 +30,12 @@ const Tag = ({ status, children, ...rest }: ITag) => {
       return (
         <ChakraTag bgColor="tag.gray" {...rest}>
           {children || t('tag.past')}
+        </ChakraTag>
+      )
+    case 'canceled':
+      return (
+        <ChakraTag bgColor="tag.red" {...rest}>
+          {children || t('tag.canceled')}
         </ChakraTag>
       )
     default:

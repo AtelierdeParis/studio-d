@@ -19,7 +19,6 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
 
   const { nbDispo, available } = useNbDisponibility(place?.disponibilities)
   const { coming, past, pending } = useNbBooking(place?.disponibilities)
-  console.log(place?.disponibilities)
 
   return (
     <Box w="100%">

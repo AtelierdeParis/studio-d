@@ -1,0 +1,43 @@
+{
+    "request": {
+        "title": "Demandes"
+    },
+    "booking": {
+        "title": "Réservations"
+    },
+    "search": "Recherche",
+    "nb": "No.",
+    "status": "Statut",
+    "place": "Espace",
+    "structure": "Lieu",
+    "date": "Date(s)",
+    "activity": "Activité",
+    "detail": "Détails",
+    "requestNb": "Demande n°{{nb}}",
+    "message": "Échanger avec le lieu",
+    "cancel":  "Annuler la demande",
+    "address": "Adresse de l'espace",
+    "tel": "Tél. :",
+    "email": "Email :",
+    "placeDetail": "voir la fiche",
+    "morning": "matin",
+    "afternoon": "après-midi",
+    "modal": {
+        "cancel": {
+            "text": "Vous êtes sur le point d’annuler votre demande de réservation. Voulez-vous continuer ?",
+            "confirm": "Confirmer l’annulation",
+            "back": "Non, fermer"
+        }
+    },
+    "history": {
+        "askcancel": "Vous avez demandé l’annulation. <a>Voir le message.</a>",
+        "accepted": "Le lieu a accepté votre demande de réservation.",
+        "canceledByYou": "Vous avez annulé votre demande de réservation.",
+        "canceledByPlace": "Le lieu a annulé votre réservation.",
+        "created": {
+            "period": "Vous avez envoyé une demande de réservation de l’espace du {{start}} au {{end}}. <a>Voir le message.</a>",
+            "day": "Vous avez envoyé une demande de réservation de l’espace pour le {{date}}. <a>Voir le message.</a>",
+            "many": "Vous avez envoyé une demande de réservation de l’espace pour plusieurs dates. <a>Voir le message.</a>"
+        }
+    }
+}

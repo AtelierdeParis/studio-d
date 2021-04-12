@@ -1443,69 +1443,6 @@
               "company",
               "place"
             ]
-          },
-          "booking": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "messages": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "messages": {
-            "required": [
-              "id",
-              "message"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "message": {
-                "type": "string"
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "booking": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
           }
         }
       },
@@ -1623,12 +1560,6 @@
               "company",
               "place"
             ]
-          },
-          "booking": {
-            "type": "string"
-          },
-          "messages": {
-            "type": "string"
           },
           "created_by": {
             "type": "string"

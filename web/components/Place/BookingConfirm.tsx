@@ -54,13 +54,15 @@ const BookingConfirm = ({ events, place, back }: Props) => {
         disponibilities: events.map((event) =>
           event.extendedProps.id.toString(),
         ),
-        users_permissions_user: session.user.id,
+        company: session.user.id,
+        place: place.users_permissions_user.id,
       })
       .then((res) => {
         if (message !== '') {
           return client.messages.messagesCreate({
             booking: res.data.id,
-            users_permissions_user: session.user.id,
+            company: session.user.id,
+            place: place.users_permissions_user.id,
             message,
           })
         }

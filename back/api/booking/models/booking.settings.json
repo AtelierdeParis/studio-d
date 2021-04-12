@@ -26,14 +26,17 @@
       "collection": "disponibility",
       "via": "booking"
     },
-    "users_permissions_user": {
+    "place": {
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "booking"
+      "model": "user"
     },
-    "messages": {
+    "company": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "histories": {
       "via": "booking",
-      "model": "message"
+      "collection": "history"
     }
   }
 }

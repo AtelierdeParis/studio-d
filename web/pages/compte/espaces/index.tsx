@@ -14,7 +14,6 @@ interface IAccountPlace {
 
 const AccountPlace = ({ user }: IAccountPlace) => {
   const { data: places, isLoading } = useMyPlaces()
-  console.log(places)
   return (
     <Loading isLoading={isLoading} isCentered>
       {places?.length === 0 ? <InfoPlace /> : <PlaceList places={places} />}

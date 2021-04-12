@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "histories",
+  "info": {
+    "name": "history",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "accepted",
+        "created",
+        "canceled",
+        "canceledbyplace",
+        "askcancel"
+      ]
+    },
+    "booking": {
+      "model": "booking",
+      "via": "histories"
+    }
+  }
+}

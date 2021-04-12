@@ -15,6 +15,11 @@ const Button = {
       bgColor: 'tag.red',
       h: '40px',
     },
+    message: {
+      bgColor: 'tag.blue',
+      color: 'blue.500',
+      h: '40px',
+    },
     line: {
       borderBottom: '1px solid black',
       px: 0,

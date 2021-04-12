@@ -1,5 +1,119 @@
 {
   "paths": {
+    "/bookings/requests/me": {
+      "get": {
+        "deprecated": false,
+        "description": "Get requests related to current user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": []
+      }
+    },
+    "/bookings/me": {
+      "get": {
+        "deprecated": false,
+        "description": "Get bookings related to current user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": []
+      }
+    },
     "/bookings": {
       "get": {
         "deprecated": false,
@@ -595,7 +709,7 @@
               }
             }
           },
-          "users_permissions_user": {
+          "place": {
             "required": [
               "id",
               "email",
@@ -708,11 +822,126 @@
                   "place"
                 ]
               },
-              "booking": {
+              "created_by": {
                 "type": "string"
               },
-              "messages": {
+              "updated_by": {
                 "type": "string"
+              }
+            }
+          },
+          "company": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "siret",
+              "ape",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
               },
               "created_by": {
                 "type": "string"
@@ -722,29 +951,35 @@
               }
             }
           },
-          "messages": {
-            "required": [
-              "id",
-              "message"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "message": {
-                "type": "string"
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "booking": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "histories": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "accepted",
+                    "created",
+                    "canceled",
+                    "canceledbyplace",
+                    "askcancel"
+                  ]
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           }
@@ -768,11 +1003,17 @@
               "type": "string"
             }
           },
-          "users_permissions_user": {
+          "place": {
             "type": "string"
           },
-          "messages": {
+          "company": {
             "type": "string"
+          },
+          "histories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

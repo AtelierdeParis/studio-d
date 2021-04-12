@@ -774,11 +774,17 @@
                   "type": "string"
                 }
               },
-              "users_permissions_user": {
+              "place": {
                 "type": "string"
               },
-              "messages": {
+              "company": {
                 "type": "string"
+              },
+              "histories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"

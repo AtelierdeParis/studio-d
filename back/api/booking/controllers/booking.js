@@ -12,7 +12,37 @@ const formatError = (error) => ({
  * to customize this controller
  */
 
+const populate = [
+  "disponibilities",
+  "disponibilities.espace",
+  "company",
+  "place",
+  "histories",
+];
+
 module.exports = {
+  async myBookings(ctx) {
+    const { id, type } = ctx.state.user;
+    const query = type === "place" ? { place: id } : { company: id };
+    return strapi.query("booking").find(
+      {
+        ...query,
+        status_in: ["past", "accepted"],
+      },
+      populate
+    );
+  },
+  async myRequests(ctx) {
+    const { id, type } = ctx.state.user;
+    const query = type === "place" ? { place: id } : { company: id };
+    return strapi.query("booking").find(
+      {
+        ...query,
+        status_in: ["pending", "canceled"],
+      },
+      populate
+    );
+  },
   async create(ctx) {
     const { disponibilities, users_permissions_user } = ctx.request.body;
 
