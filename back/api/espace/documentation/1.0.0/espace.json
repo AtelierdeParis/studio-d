@@ -957,6 +957,12 @@
                   "place"
                 ]
               },
+              "booking": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1012,6 +1018,9 @@
                     "pending",
                     "past"
                   ]
+                },
+                "booking": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"

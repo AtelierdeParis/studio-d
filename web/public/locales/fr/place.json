@@ -69,7 +69,8 @@
             "other": "Autre"
         },
         "otherFloor": {
-            "label": "Renseignez votre type de sol (Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton)"
+            "label": "Renseignez votre type de sol",
+            "info": "Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton"
         },
         "about": {
             "label": "À propos de l’espace"
@@ -180,7 +181,12 @@
         "surface": "Surface",
         "dim": "Dim.",
         "noDispo": "Aucun créneau disponible",
-        "thisWeek": "{{nb}} créneaux cette semaine"
+        "searchDispo": "{{nb}} créneau correpondant",
+        "searchDispos": "{{nb}} créneaux correpondants",
+        "thisWeek": "{{nb}} créneau cette semaine",
+        "thisWeeks": "{{nb}} créneaux cette semaine",
+        "nextWeek": "{{nb}} créneau la semaine prochaine",
+        "nextWeeks": "{{nb}} créneaux la semaine prochaine"
     },
     "schedule": {
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
@@ -302,6 +308,7 @@
         }
     },
     "confirm": {
+        "error": "Une erreur empêchant la création de votre demande de réservation",
        "title": "Demande de réservation",
        "message": {
            "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
@@ -314,5 +321,10 @@
         "change": "Changer",
         "recap": "Vous demandez le créneau suivant :",
         "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :"
+    },
+    "confirmed": {
+        "title": "Votre demande est enregistrée !",
+        "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{name}}. Vous recevrez un email lorsque votre réservation sera validée.",
+        "back": "Retour à l’accueil"
     }
 }

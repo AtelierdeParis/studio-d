@@ -7,6 +7,7 @@ import differenceInDays from 'date-fns/differenceInDays'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 
 const styleSelected = {
+  border: '1px dashed',
   borderColor: 'blue.500',
   bgColor: 'white',
 }

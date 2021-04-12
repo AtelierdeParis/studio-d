@@ -18,6 +18,7 @@ import {
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 import useNbDisponibility from '~hooks/useNbDisponibility'
+import useNbBooking from '~hooks/useNbBooking'
 import useIsOccupied from '~hooks/useIsOccupied'
 import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
@@ -32,12 +33,10 @@ interface IPlaceListItem {
 
 const PlaceListItem = ({ place }: IPlaceListItem) => {
   const { t } = useTranslation('place')
-
-  const { available, past, booked, pending } = useNbDisponibility(
-    place.disponibilities,
-  )
-
+  const { available, booked } = useNbDisponibility(place.disponibilities)
+  const { coming, past, pending } = useNbBooking(place.disponibilities)
   const isOccupied = useIsOccupied(booked)
+
   return (
     <LinkBox w="100%">
       <Flex
@@ -173,11 +172,11 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 </Button>
               </Flex>
               <Box pt={2}>
-                {booked.length > 0 || past.length > 0 ? (
+                {coming.length > 0 || past.length > 0 ? (
                   <HStack spacing={2.5}>
-                    {booked.length > 0 && (
+                    {coming.length > 0 && (
                       <Tag status={DisponibilityStatus.BOOKED}>
-                        {t('list.nbBooking', { nb: booked.length })}
+                        {t('list.nbBooking', { nb: coming.length })}
                       </Tag>
                     )}
                     {past.length && (

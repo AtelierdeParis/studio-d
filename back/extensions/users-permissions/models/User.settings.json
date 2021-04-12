@@ -132,6 +132,14 @@
         "place"
       ],
       "required": true
+    },
+    "booking": {
+      "via": "users_permissions_user",
+      "model": "booking"
+    },
+    "messages": {
+      "via": "users_permissions_user",
+      "model": "message"
     }
   }
 }

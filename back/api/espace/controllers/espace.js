@@ -1,17 +1,29 @@
 "use strict";
 const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 const min = require("date-fns/min");
-const isPast = require("date-fns/isPast");
+const isFuture = require("date-fns/isFuture");
+const isToday = require("date-fns/isToday");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
  * to customize this controller
  */
 
+const populate = [
+  "disponibilities",
+  "disponibilities.booking",
+  "disponibilities.booking.users_permissions_user",
+  "images",
+  "files",
+  "users_permissions_user",
+];
+
 module.exports = {
   async myPlaces(ctx) {
     const { id } = ctx.state.user;
-    return strapi.query("espace").find({ users_permissions_user: id });
+    return strapi
+      .query("espace")
+      .find({ users_permissions_user: id }, populate);
   },
   async getCities() {
     const knex = strapi.connections.default;
@@ -31,7 +43,10 @@ module.exports = {
         return res.map((place) => ({
           ...place,
           disponibilities: place.disponibilities.filter(
-            (dispo) => !isPast(new Date(dispo.start))
+            (dispo) =>
+              dispo.status === "available" &&
+              (isToday(new Date(dispo.start)) ||
+                isFuture(new Date(dispo.start)))
           ),
         }));
       });
@@ -81,6 +96,25 @@ module.exports = {
       entity = await strapi.services.espace.update({ id }, body);
     }
 
+    return sanitizeEntity(entity, { model: strapi.models.espace });
+  },
+  async findOne(ctx) {
+    const { id } = ctx.params;
+    const { availableOnly } = ctx.query;
+
+    const entity = await strapi.services.espace
+      .findOne({ id }, populate)
+      .then((res) => {
+        if (availableOnly) {
+          return {
+            ...res,
+            disponibilities: res.disponibilities.filter(
+              (dispo) => dispo.status === "available"
+            ),
+          };
+        }
+        return res;
+      });
     return sanitizeEntity(entity, { model: strapi.models.espace });
   },
 };

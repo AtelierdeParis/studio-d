@@ -44,8 +44,8 @@ const Contact = ({ page }: { page?: Page }) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    client.messages
-      .messagesCreate(data)
+    client.contacts
+      .contactsCreate(data)
       .then(() => setSent(true))
       .catch(() => errorToast(t('error')))
       .finally(() => setLoading(false))

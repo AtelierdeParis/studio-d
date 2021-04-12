@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/07/2021 5:17:00 PM"
+    "x-generation-date": "04/12/2021 9:38:44 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -541,6 +541,1028 @@
         "summary": "",
         "tags": [
           "Actuality"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/bookings": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Booking"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Booking"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": []
+      }
+    },
+    "/bookings/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Booking"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Booking"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewBooking"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/contacts": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contact"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
+        ],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContact"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contacts/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
+        ],
+        "parameters": []
+      }
+    },
+    "/contacts/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contact"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewContact"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Contact"
         ],
         "parameters": [
           {
@@ -1756,6 +2778,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "availableOnly",
+            "in": "query",
+            "required": false,
+            "description": "Return place with only available disponibilities",
+            "schema": {
+              "type": "boolean"
+            },
+            "deprecated": false
           }
         ]
       },
@@ -5575,432 +6607,76 @@
           }
         }
       },
-      "Disponibility": {
+      "Booking": {
         "required": [
-          "id",
-          "start",
-          "end",
-          "type",
-          "status"
+          "id"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
-          },
-          "start": {
-            "type": "string",
-            "format": "date"
-          },
-          "end": {
-            "type": "string",
-            "format": "date"
-          },
-          "espace": {
-            "required": [
-              "id",
-              "name",
-              "surface",
-              "roomLength",
-              "width",
-              "height",
-              "mirror",
-              "danceBar",
-              "accomodation",
-              "technicalStaff",
-              "floor",
-              "address",
-              "latitude",
-              "longitude"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "surface": {
-                "type": "integer"
-              },
-              "roomLength": {
-                "type": "integer"
-              },
-              "width": {
-                "type": "integer"
-              },
-              "height": {
-                "type": "integer"
-              },
-              "mirror": {
-                "type": "boolean"
-              },
-              "danceBar": {
-                "type": "boolean"
-              },
-              "accomodation": {
-                "type": "boolean"
-              },
-              "technicalStaff": {
-                "type": "boolean"
-              },
-              "floor": {
-                "type": "string",
-                "enum": [
-                  "floor",
-                  "carpet",
-                  "other"
-                ]
-              },
-              "otherFloor": {
-                "type": "string"
-              },
-              "about": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "string"
-              },
-              "longitude": {
-                "type": "string"
-              },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "scheduleDetails": {
-                "type": "string"
-              },
-              "filledUntil": {
-                "type": "string"
-              },
-              "published": {
-                "type": "boolean"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
-          },
           "status": {
             "type": "string",
-            "default": "available",
+            "default": "pending",
             "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
+              "canceled",
+              "past",
+              "accepted",
+              "pending"
             ]
           },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "NewDisponibility": {
-        "required": [
-          "start",
-          "end",
-          "type",
-          "status"
-        ],
-        "properties": {
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
-          },
-          "start": {
-            "type": "string",
-            "format": "date"
-          },
-          "end": {
-            "type": "string",
-            "format": "date"
-          },
-          "espace": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
-          },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past"
-            ]
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "created_by": {
-            "type": "string"
-          },
-          "updated_by": {
-            "type": "string"
-          }
-        }
-      },
-      "Espace": {
-        "required": [
-          "id",
-          "name",
-          "surface",
-          "roomLength",
-          "width",
-          "height",
-          "mirror",
-          "danceBar",
-          "accomodation",
-          "technicalStaff",
-          "floor",
-          "address",
-          "latitude",
-          "longitude",
-          "city",
-          "danceCarpet"
-        ],
-        "properties": {
-          "id": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "surface": {
-            "type": "integer"
-          },
-          "roomLength": {
-            "type": "integer"
-          },
-          "width": {
-            "type": "integer"
-          },
-          "height": {
-            "type": "integer"
-          },
-          "mirror": {
-            "type": "boolean"
-          },
-          "danceBar": {
-            "type": "boolean"
-          },
-          "accomodation": {
-            "type": "boolean"
-          },
-          "technicalStaff": {
-            "type": "boolean"
-          },
-          "floor": {
-            "type": "string",
-            "enum": [
-              "plancherDanse",
-              "parquetTraditionnel",
-              "other"
-            ]
-          },
-          "otherFloor": {
-            "type": "string"
-          },
-          "about": {
-            "type": "string"
-          },
-          "details": {
-            "type": "string"
-          },
-          "address": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
-            "type": "string"
-          },
-          "files": {
+          "disponibilities": {
             "type": "array",
             "items": {
               "required": [
                 "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
+                "start",
+                "end",
+                "type",
+                "status"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "name": {
+                "when": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
+                },
+                "start": {
                   "type": "string"
                 },
-                "alternativeText": {
+                "end": {
                   "type": "string"
                 },
-                "caption": {
+                "espace": {
                   "type": "string"
                 },
-                "width": {
-                  "type": "integer"
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
                 },
-                "height": {
-                  "type": "integer"
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "available",
+                    "booked",
+                    "pending",
+                    "past"
+                  ]
                 },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
+                "booking": {
                   "type": "string"
                 },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "images": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id",
-                "name",
-                "hash",
-                "mime",
-                "size",
-                "url",
-                "provider"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "alternativeText": {
-                  "type": "string"
-                },
-                "caption": {
-                  "type": "string"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "formats": {
-                  "type": "object"
-                },
-                "hash": {
-                  "type": "string"
-                },
-                "ext": {
-                  "type": "string"
-                },
-                "mime": {
-                  "type": "string"
-                },
-                "size": {
-                  "type": "number"
-                },
-                "url": {
-                  "type": "string"
-                },
-                "previewUrl": {
-                  "type": "string"
-                },
-                "provider": {
-                  "type": "string"
-                },
-                "provider_metadata": {
-                  "type": "object"
-                },
-                "related": {
+                "published_at": {
                   "type": "string"
                 },
                 "created_by": {
@@ -6125,6 +6801,12 @@
                   "place"
                 ]
               },
+              "booking": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -6133,64 +6815,476 @@
               }
             }
           },
+          "messages": {
+            "required": [
+              "id",
+              "message"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "booking": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "NewBooking": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "default": "pending",
+            "enum": [
+              "canceled",
+              "past",
+              "accepted",
+              "pending"
+            ]
+          },
           "disponibilities": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "start",
-                "end",
-                "type",
-                "status"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "when": {
-                  "type": "string",
-                  "enum": [
-                    "morning",
-                    "afternoon",
-                    "full"
-                  ]
-                },
-                "start": {
-                  "type": "string"
-                },
-                "end": {
-                  "type": "string"
-                },
-                "espace": {
-                  "type": "string"
-                },
-                "type": {
-                  "type": "string",
-                  "enum": [
-                    "punctual",
-                    "day",
-                    "period"
-                  ]
-                },
-                "status": {
-                  "type": "string",
-                  "enum": [
-                    "available",
-                    "booked",
-                    "pending",
-                    "past"
-                  ]
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+              "type": "string"
+            }
+          },
+          "users_permissions_user": {
+            "type": "string"
+          },
+          "messages": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Contact": {
+        "required": [
+          "id",
+          "name",
+          "message",
+          "from"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          }
+        }
+      },
+      "NewContact": {
+        "required": [
+          "name",
+          "message",
+          "from"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Disponibility": {
+        "required": [
+          "id",
+          "start",
+          "end",
+          "type",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "when": {
+            "type": "string",
+            "enum": [
+              "morning",
+              "afternoon",
+              "full"
+            ]
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "espace": {
+            "required": [
+              "id",
+              "name",
+              "surface",
+              "roomLength",
+              "width",
+              "height",
+              "mirror",
+              "danceBar",
+              "accomodation",
+              "technicalStaff",
+              "floor",
+              "address",
+              "latitude",
+              "longitude",
+              "city",
+              "danceCarpet"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "surface": {
+                "type": "integer"
+              },
+              "roomLength": {
+                "type": "integer"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "mirror": {
+                "type": "boolean"
+              },
+              "danceBar": {
+                "type": "boolean"
+              },
+              "accomodation": {
+                "type": "boolean"
+              },
+              "technicalStaff": {
+                "type": "boolean"
+              },
+              "floor": {
+                "type": "string",
+                "enum": [
+                  "plancherDanse",
+                  "parquetTraditionnel",
+                  "other"
+                ]
+              },
+              "otherFloor": {
+                "type": "string"
+              },
+              "about": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "string"
+              },
+              "longitude": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scheduleDetails": {
+                "type": "string"
+              },
+              "filledUntil": {
+                "type": "string"
+              },
+              "published": {
+                "type": "boolean"
+              },
+              "city": {
+                "type": "string"
+              },
+              "danceCarpet": {
+                "type": "boolean"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
+            }
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "punctual",
+              "day",
+              "period"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "default": "available",
+            "enum": [
+              "available",
+              "booked",
+              "pending",
+              "past"
+            ]
+          },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewDisponibility": {
+        "required": [
+          "start",
+          "end",
+          "type",
+          "status"
+        ],
+        "properties": {
+          "when": {
+            "type": "string",
+            "enum": [
+              "morning",
+              "afternoon",
+              "full"
+            ]
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "espace": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "punctual",
+              "day",
+              "period"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "default": "available",
+            "enum": [
+              "available",
+              "booked",
+              "pending",
+              "past"
+            ]
+          },
+          "booking": {
+            "type": "string"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Espace": {
+        "required": [
+          "id",
+          "name",
+          "surface",
+          "roomLength",
+          "width",
+          "height",
+          "mirror",
+          "danceBar",
+          "accomodation",
+          "technicalStaff",
+          "floor",
+          "address",
+          "latitude",
+          "longitude",
+          "city",
+          "danceCarpet"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surface": {
+            "type": "integer"
+          },
+          "roomLength": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "mirror": {
+            "type": "boolean"
+          },
+          "danceBar": {
+            "type": "boolean"
+          },
+          "accomodation": {
+            "type": "boolean"
+          },
+          "technicalStaff": {
+            "type": "boolean"
+          },
+          "floor": {
+            "type": "string",
+            "enum": [
+              "plancherDanse",
+              "parquetTraditionnel",
+              "other"
+            ]
+          },
+          "otherFloor": {
+            "type": "string"
+          },
+          "about": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadFile"
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadFile"
+            }
+          },
+          "users_permissions_user": {
+            "$ref": "#/components/schemas/UsersPermissionsUser"
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disponibility"
             }
           },
           "scheduleDetails": {
@@ -6412,39 +7506,193 @@
       "Message": {
         "required": [
           "id",
-          "name",
-          "from",
           "message"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "from": {
-            "type": "string"
-          },
           "message": {
             "type": "string"
+          },
+          "users_permissions_user": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "siret",
+              "ape",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "booking": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewMessage": {
         "required": [
-          "name",
-          "from",
           "message"
         ],
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "from": {
-            "type": "string"
-          },
           "message": {
+            "type": "string"
+          },
+          "users_permissions_user": {
+            "type": "string"
+          },
+          "booking": {
             "type": "string"
           },
           "created_by": {
@@ -6501,6 +7749,12 @@
       },
       "UploadFile": {
         "properties": {
+          "id": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
@@ -6714,6 +7968,12 @@
                     "place"
                   ]
                 },
+                "booking": {
+                  "type": "string"
+                },
+                "messages": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -6893,116 +8153,7 @@
           "espaces": {
             "type": "array",
             "items": {
-              "required": [
-                "id",
-                "name",
-                "surface",
-                "roomLength",
-                "width",
-                "height",
-                "mirror",
-                "danceBar",
-                "accomodation",
-                "technicalStaff",
-                "floor",
-                "address",
-                "latitude",
-                "longitude"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "surface": {
-                  "type": "integer"
-                },
-                "roomLength": {
-                  "type": "integer"
-                },
-                "width": {
-                  "type": "integer"
-                },
-                "height": {
-                  "type": "integer"
-                },
-                "mirror": {
-                  "type": "boolean"
-                },
-                "danceBar": {
-                  "type": "boolean"
-                },
-                "accomodation": {
-                  "type": "boolean"
-                },
-                "technicalStaff": {
-                  "type": "boolean"
-                },
-                "floor": {
-                  "type": "string",
-                  "enum": [
-                    "floor",
-                    "carpet",
-                    "other"
-                  ]
-                },
-                "otherFloor": {
-                  "type": "string"
-                },
-                "about": {
-                  "type": "string"
-                },
-                "details": {
-                  "type": "string"
-                },
-                "address": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "string"
-                },
-                "longitude": {
-                  "type": "string"
-                },
-                "files": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "images": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "users_permissions_user": {
-                  "type": "string"
-                },
-                "disponibilities": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "scheduleDetails": {
-                  "type": "string"
-                },
-                "filledUntil": {
-                  "type": "string"
-                },
-                "published": {
-                  "type": "boolean"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
+              "$ref": "#/components/schemas/Espace"
             }
           },
           "type": {
@@ -7164,6 +8315,12 @@
   "tags": [
     {
       "name": "Actuality"
+    },
+    {
+      "name": "Booking"
+    },
+    {
+      "name": "Contact"
     },
     {
       "name": "Disponibility"

@@ -1,14 +1,7 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'next-i18next'
-import {
-  HStack,
-  Box,
-  Text,
-  Button,
-  Image,
-  Flex,
-  Divider,
-} from '@chakra-ui/react'
+import { Box, Text, Button, Image, Flex, Divider } from '@chakra-ui/react'
+import { Target } from '~pages/inscription/[target]'
 
 const list = [
   {
@@ -31,9 +24,10 @@ const list = [
 
 interface IAboutUs {
   onClick: (skip: boolean) => void
+  target: Target
 }
 
-const AboutUs = ({ onClick }: IAboutUs) => {
+const AboutUs = ({ onClick, target }: IAboutUs) => {
   const { t } = useTranslation('signup')
   return (
     <Flex maxW="46rem" direction="column" m="0 auto">

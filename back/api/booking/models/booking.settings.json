@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bookings",
+  "info": {
+    "name": "booking",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "canceled",
+        "past",
+        "accepted",
+        "pending"
+      ],
+      "default": "pending",
+      "required": false
+    },
+    "disponibilities": {
+      "collection": "disponibility",
+      "via": "booking"
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "booking"
+    },
+    "messages": {
+      "via": "booking",
+      "model": "message"
+    }
+  }
+}

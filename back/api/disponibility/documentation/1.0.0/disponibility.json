@@ -751,6 +751,43 @@
               "past"
             ]
           },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "messages": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -801,6 +838,9 @@
               "pending",
               "past"
             ]
+          },
+          "booking": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

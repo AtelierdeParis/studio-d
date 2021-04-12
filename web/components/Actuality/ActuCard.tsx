@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Box, Button, AspectRatio, LinkBox } from '@chakra-ui/react'
+import { Text, Box, Flex, Button, AspectRatio, LinkBox } from '@chakra-ui/react'
 import LinkOverlay from '~components/LinkOverlay'
 import Image from '~components/Image'
 import { format } from '~utils/date'
@@ -18,6 +18,8 @@ const ActuCard = ({ actu }: IActuCard) => {
   return (
     <LinkBox
       role="group"
+      display="flex"
+      flexDirection="column"
       _hover={{
         bgColor: 'gray.hover',
       }}
@@ -30,29 +32,38 @@ const ActuCard = ({ actu }: IActuCard) => {
           _groupHover={{ transform: 'scale(1.05)' }}
         />
       </AspectRatio>
-      <Box px={4} py={4}>
-        <LinkOverlay
-          href={{
-            pathname: ROUTE_ACTU_DETAIL,
-            query: { id: actu.id },
-          }}
-        >
-          <Text fontFamily="mabry medium" fontSize="lg">
-            {actu.title}
+      <Flex
+        px={4}
+        py={4}
+        direction="column"
+        justifyContent="space-between"
+        alignItems="flex-start"
+        flex={1}
+      >
+        <Box>
+          <LinkOverlay
+            href={{
+              pathname: ROUTE_ACTU_DETAIL,
+              query: { id: actu.id },
+            }}
+          >
+            <Text fontFamily="mabry medium" fontSize="lg">
+              {actu.title}
+            </Text>
+          </LinkOverlay>
+          <Text color="gray.600">
+            {t('date', {
+              date: format(actu.created_at, 'd MMMM yyyy'),
+            })}
           </Text>
-        </LinkOverlay>
-        <Text color="gray.600">
-          {t('date', {
-            date: format(actu.created_at, 'd MMMM yyyy'),
-          })}
-        </Text>
-        <Text fontSize="sm" color="gray.600" mt={5} noOfLines={4}>
-          {removeMd(actu.content)}
-        </Text>
+          <Text fontSize="sm" color="gray.600" mt={5} noOfLines={4}>
+            {removeMd(actu.content)}
+          </Text>
+        </Box>
         <Button variant="line" fontSize="sm" mt={5}>
           {t('more')}
         </Button>
-      </Box>
+      </Flex>
     </LinkBox>
   )
 }

@@ -40,13 +40,13 @@ const PlaceDetail = ({ place }: Props) => {
             {place?.name}
           </Text>
           <Text fontSize="xl" color="gray.500" pt={1}>
-            {place?.users_permissions_user.structureName}
+            {place?.users_permissions_user?.structureName}
           </Text>
 
-          {place?.users_permissions_user.website && (
+          {place?.users_permissions_user?.website && (
             <Text pt={2}>
               <Link
-                href={place?.users_permissions_user.website}
+                href={place?.users_permissions_user?.website}
                 isExternal
                 color="gray.500"
                 textDecoration="underline"
@@ -96,7 +96,7 @@ const PlaceDetail = ({ place }: Props) => {
           </Text>
           <VStack spacing={7} alignItems="flex-start">
             {place?.about && <Text whiteSpace="pre-line">{place?.about}</Text>}
-            {place?.files.length > 0 && (
+            {place?.files?.length > 0 && (
               <Flex flexWrap="wrap">
                 {place?.files.map((file) => (
                   <Button
@@ -168,7 +168,9 @@ const PlaceDetail = ({ place }: Props) => {
           },
         ]}
       />
-      <OtherPlaces userId={place?.users_permissions_user.id} />
+      {place?.users_permissions_user?.id && (
+        <OtherPlaces userId={place?.users_permissions_user?.id} />
+      )}
     </Box>
   )
 }

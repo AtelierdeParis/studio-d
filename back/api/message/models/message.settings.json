@@ -2,24 +2,27 @@
   "kind": "collectionType",
   "collectionName": "messages",
   "info": {
-    "name": "Message"
+    "name": "Message",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "from": {
-      "type": "email",
-      "required": true
-    },
     "message": {
       "type": "text",
       "required": true
+    },
+    "users_permissions_user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "messages"
+    },
+    "booking": {
+      "model": "booking",
+      "via": "messages"
     }
   }
 }

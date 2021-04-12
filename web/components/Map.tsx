@@ -50,7 +50,7 @@ const Marker = ({ latitude, longitude, id, isFocus }: IMarker) => {
   )
 }
 
-const MapContent = ({ children }) => {
+const MapContent = ({ children, markers }) => {
   const map = useMap()
   const groupRef = useRef(null)
 
@@ -58,7 +58,7 @@ const MapContent = ({ children }) => {
     if (groupRef.current) {
       map.fitBounds(groupRef.current.getBounds())
     }
-  }, [groupRef])
+  }, [groupRef, markers])
 
   return <FeatureGroup ref={groupRef}>{children}</FeatureGroup>
 }
@@ -85,7 +85,7 @@ const Map = ({ markers = [], focusedPlace, ...rest }: IMap) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
         />
-        <MapContent>
+        <MapContent markers={markers}>
           {markers.map(({ latitude, longitude, id = '' }) => (
             <Marker
               id={id}

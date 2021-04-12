@@ -38,6 +38,7 @@ const Places = () => {
   const searchQuery = useMemo(() => formatSearch(form.getValues()), [
     form.getValues(),
   ])
+
   const { data: nbPlace, isLoading: countLoading } = useNbPlace(searchQuery)
 
   const {
@@ -75,7 +76,11 @@ const Places = () => {
                   <>
                     <Arrow />
                     <Text textStyle="h2" pl={4}>
-                      {t('search.nbPlaces', { nb: nbPlace })}
+                      {t('search.nbPlaces', {
+                        nb: searchQuery?.['disponibilities.start_gte']
+                          ? places?.pages?.flat().length
+                          : nbPlace,
+                      })}
                     </Text>
                   </>
                 )}
@@ -133,6 +138,7 @@ const Places = () => {
             </Flex>
             {isGridView ? (
               <PlaceGrid
+                searchQuery={searchQuery}
                 places={places?.pages?.flat()}
                 isFetching={isFetching}
                 isLoading={isLoading}

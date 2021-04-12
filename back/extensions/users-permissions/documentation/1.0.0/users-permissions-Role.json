@@ -637,6 +637,12 @@
                     "place"
                   ]
                 },
+                "booking": {
+                  "type": "string"
+                },
+                "messages": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

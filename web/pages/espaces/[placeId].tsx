@@ -30,7 +30,7 @@ interface Props {
 }
 
 const PlacePage = ({ placeId }: Props) => {
-  const { data: place, isLoading } = usePlace(placeId)
+  const { data: place, isLoading } = usePlace(placeId, { availableOnly: true })
 
   return (
     <Container pt={12}>

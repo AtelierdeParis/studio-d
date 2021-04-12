@@ -17,7 +17,28 @@ export enum SortOptions {
   SURFACE_DESC = 'surfaceDesc',
 }
 
-export const formatSearch = (formData) => {
+export interface SearchQuery {
+  surface_lt?: number
+  surface_gt?: number
+  surface_gte?: number
+  surface_lte?: number
+  height_lt?: number
+  height_gt?: number
+  height_gte?: number
+  height_lte?: number
+  city_eq?: string
+  accomodation_eq?: boolean
+  mirror_eq?: boolean
+  danceBar_eq?: boolean
+  technicalStaff_eq?: boolean
+  _sort?: string
+  floor_eq?: boolean
+  published_eq: boolean
+  'disponibilities.start_gte'?: Date
+  'disponibilities.end_gte'?: Date
+}
+
+export const formatSearch = (formData): SearchQuery => {
   const query = {}
   const data = Object.fromEntries(
     Object.entries(formData).map(([key, value]) => {

@@ -13,12 +13,16 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'next-i18next'
 import BookingSelection from '~components/Place/BookingSelection'
+import BookingConfirmed from '~components/Place/BookingConfirmed'
 import FormField from '~components/FormField'
 import Link from '~components/Link'
 import Image from '~components/Image'
 import { ROUTE_USE_POLICY } from '~constants'
+import useToast from '~hooks/useToast'
 import { Espace } from '~typings/api'
+import { client } from '~api/client-api'
 import Pin from 'public/assets/img/pin-outline.svg'
+import { useSession } from 'next-auth/client'
 
 interface Props {
   events: ScheduleEvent[]
@@ -27,11 +31,44 @@ interface Props {
 }
 
 const BookingConfirm = ({ events, place, back }: Props) => {
+  const [session] = useSession()
+  const { errorToast } = useToast()
+  const [isLoading, setLoading] = useState(false)
+  const [isConfirmed, setConfirmed] = useState(false)
   const { t } = useTranslation('place')
   const [message, setMessage] = useState('')
   const isPlural = useMemo(() => (events.length > 1 ? 's' : ''), [events])
 
-  const onSubmit = () => {}
+  if (isConfirmed)
+    return (
+      <BookingConfirmed
+        structureName={place.users_permissions_user.structureName}
+      />
+    )
+
+  const onSubmit = () => {
+    setLoading(true)
+    client.bookings
+      .bookingsCreate({
+        status: 'pending',
+        disponibilities: events.map((event) =>
+          event.extendedProps.id.toString(),
+        ),
+        users_permissions_user: session.user.id,
+      })
+      .then((res) => {
+        if (message !== '') {
+          return client.messages.messagesCreate({
+            booking: res.data.id,
+            users_permissions_user: session.user.id,
+            message,
+          })
+        }
+      })
+      .then(() => setConfirmed(true))
+      .catch(() => errorToast(t('confirm.error')))
+      .finally(() => setLoading(false))
+  }
 
   return (
     <Box maxW="container.lg" m="0 auto">
@@ -83,7 +120,12 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                 }}
               />
             </Text>
-            <ButtonGroup spacing={5} alignSelf="center" pt={6}>
+            <ButtonGroup
+              spacing={5}
+              alignSelf="center"
+              alignItems="center"
+              pt={6}
+            >
               <Button
                 variant="unstyled"
                 color="grayText.1"
@@ -91,7 +133,12 @@ const BookingConfirm = ({ events, place, back }: Props) => {
               >
                 {t('confirm.back')}
               </Button>
-              <Button type="submit" colorScheme="blue">
+              <Button
+                size="lg"
+                onClick={onSubmit}
+                colorScheme="blue"
+                isLoading={isLoading}
+              >
                 {t('confirm.submit')}
               </Button>
             </ButtonGroup>

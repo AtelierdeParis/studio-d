@@ -43,123 +43,19 @@ export interface NewActuality {
   updated_by?: string;
 }
 
-export interface Disponibility {
+export interface Booking {
   id: string;
-  when?: "morning" | "afternoon" | "full";
-
-  /** @format date */
-  start: string;
-
-  /** @format date */
-  end: string;
-  espace?: {
+  status?: "canceled" | "past" | "accepted" | "pending";
+  disponibilities?: {
     id: string;
-    name: string;
-    surface: number;
-    roomLength: number;
-    width: number;
-    height: number;
-    mirror: boolean;
-    danceBar: boolean;
-    accomodation: boolean;
-    technicalStaff: boolean;
-    floor: "floor" | "carpet" | "other";
-    otherFloor?: string;
-    about?: string;
-    details?: string;
-    address: string;
-    latitude: string;
-    longitude: string;
-    files?: string[];
-    images?: string[];
-    users_permissions_user?: string;
-    disponibilities?: string[];
-    scheduleDetails?: string;
-    filledUntil?: string;
-    published?: boolean;
-    created_by?: string;
-    updated_by?: string;
-  };
-  type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past";
-
-  /** @format date-time */
-  published_at?: string;
-}
-
-export interface NewDisponibility {
-  when?: "morning" | "afternoon" | "full";
-
-  /** @format date */
-  start: string;
-
-  /** @format date */
-  end: string;
-  espace?: string;
-  type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past";
-
-  /** @format date-time */
-  published_at?: string;
-  created_by?: string;
-  updated_by?: string;
-}
-
-export interface Espace {
-  id: string;
-  name: string;
-  surface: number;
-  roomLength: number;
-  width: number;
-  height: number;
-  mirror: boolean;
-  danceBar: boolean;
-  accomodation: boolean;
-  technicalStaff: boolean;
-  floor: "plancherDanse" | "parquetTraditionnel" | "other";
-  otherFloor?: string;
-  about?: string;
-  details?: string;
-  address: string;
-  latitude: string;
-  longitude: string;
-  files?: {
-    id: string;
-    name: string;
-    alternativeText?: string;
-    caption?: string;
-    width?: number;
-    height?: number;
-    formats?: object;
-    hash: string;
-    ext?: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl?: string;
-    provider: string;
-    provider_metadata?: object;
-    related?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
-  images?: {
-    id: string;
-    name: string;
-    alternativeText?: string;
-    caption?: string;
-    width?: number;
-    height?: number;
-    formats?: object;
-    hash: string;
-    ext?: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl?: string;
-    provider: string;
-    provider_metadata?: object;
-    related?: string;
+    when?: "morning" | "afternoon" | "full";
+    start: string;
+    end: string;
+    espace?: string;
+    type: "punctual" | "day" | "period";
+    status: "available" | "booked" | "pending" | "past";
+    booking?: string;
+    published_at?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -194,21 +90,141 @@ export interface Espace {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
+    booking?: string;
+    messages?: string;
     created_by?: string;
     updated_by?: string;
   };
-  disponibilities?: {
+  messages?: {
     id: string;
-    when?: "morning" | "afternoon" | "full";
-    start: string;
-    end: string;
-    espace?: string;
-    type: "punctual" | "day" | "period";
-    status: "available" | "booked" | "pending" | "past";
-    published_at?: string;
+    message: string;
+    users_permissions_user?: string;
+    booking?: string;
     created_by?: string;
     updated_by?: string;
-  }[];
+  };
+}
+
+export interface NewBooking {
+  status?: "canceled" | "past" | "accepted" | "pending";
+  disponibilities?: string[];
+  users_permissions_user?: string;
+  messages?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface Contact {
+  id: string;
+  name: string;
+  message: string;
+  from: string;
+}
+
+export interface NewContact {
+  name: string;
+  message: string;
+  from: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface Disponibility {
+  id: string;
+  when?: "morning" | "afternoon" | "full";
+
+  /** @format date-time */
+  start: string;
+
+  /** @format date-time */
+  end: string;
+  espace?: {
+    id: string;
+    name: string;
+    surface: number;
+    roomLength: number;
+    width: number;
+    height: number;
+    mirror: boolean;
+    danceBar: boolean;
+    accomodation: boolean;
+    technicalStaff: boolean;
+    floor: "plancherDanse" | "parquetTraditionnel" | "other";
+    otherFloor?: string;
+    about?: string;
+    details?: string;
+    address: string;
+    latitude: string;
+    longitude: string;
+    files?: string[];
+    images?: string[];
+    users_permissions_user?: string;
+    disponibilities?: string[];
+    scheduleDetails?: string;
+    filledUntil?: string;
+    published?: boolean;
+    city: string;
+    danceCarpet: boolean;
+    created_by?: string;
+    updated_by?: string;
+  };
+  type: "punctual" | "day" | "period";
+  status: "available" | "booked" | "pending" | "past";
+  booking?: {
+    id: string;
+    status?: "canceled" | "past" | "accepted" | "pending";
+    disponibilities?: string[];
+    users_permissions_user?: string;
+    messages?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+
+  /** @format date-time */
+  published_at?: string;
+}
+
+export interface NewDisponibility {
+  when?: "morning" | "afternoon" | "full";
+
+  /** @format date-time */
+  start: string;
+
+  /** @format date-time */
+  end: string;
+  espace?: string;
+  type: "punctual" | "day" | "period";
+  status: "available" | "booked" | "pending" | "past";
+  booking?: string;
+
+  /** @format date-time */
+  published_at?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface Espace {
+  id: string;
+  name: string;
+  surface: number;
+  roomLength: number;
+  width: number;
+  height: number;
+  mirror: boolean;
+  danceBar: boolean;
+  accomodation: boolean;
+  technicalStaff: boolean;
+  floor: "plancherDanse" | "parquetTraditionnel" | "other";
+  otherFloor?: string;
+  about?: string;
+  details?: string;
+  address: string;
+  latitude: string;
+  longitude: string;
+  files?: UploadFile[];
+  images?: UploadFile[];
+  users_permissions_user?: UsersPermissionsUser;
+  disponibilities?: Disponibility[];
   scheduleDetails?: string;
 
   /** @format date */
@@ -279,15 +295,58 @@ export interface NewHomeCarousel {
 
 export interface Message {
   id: string;
-  name: string;
-  from: string;
   message: string;
+  users_permissions_user?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country?: string;
+    siret: string;
+    ape: string;
+    phone?: string;
+    license?: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    booking?: string;
+    messages?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+  booking?: {
+    id: string;
+    status?: "canceled" | "past" | "accepted" | "pending";
+    disponibilities?: string[];
+    users_permissions_user?: string;
+    messages?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
 }
 
 export interface NewMessage {
-  name: string;
-  from: string;
   message: string;
+  users_permissions_user?: string;
+  booking?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -308,6 +367,8 @@ export interface NewPage {
 }
 
 export interface UploadFile {
+  id?: string;
+  caption?: string;
   name?: string;
   sha256?: string;
   hash?: string;
@@ -368,6 +429,8 @@ export interface UsersPermissionsRole {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
+    booking?: string;
+    messages?: string;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -418,34 +481,7 @@ export interface UsersPermissionsUser {
   insuranceNumber?: string;
   insuranceName?: string;
   choreographer?: string;
-  espaces?: {
-    id: string;
-    name: string;
-    surface: number;
-    roomLength: number;
-    width: number;
-    height: number;
-    mirror: boolean;
-    danceBar: boolean;
-    accomodation: boolean;
-    technicalStaff: boolean;
-    floor: "floor" | "carpet" | "other";
-    otherFloor?: string;
-    about?: string;
-    details?: string;
-    address: string;
-    latitude: string;
-    longitude: string;
-    files?: string[];
-    images?: string[];
-    users_permissions_user?: string;
-    disponibilities?: string[];
-    scheduleDetails?: string;
-    filledUntil?: string;
-    published?: boolean;
-    created_by?: string;
-    updated_by?: string;
-  }[];
+  espaces?: Espace[];
   type: "company" | "place";
 }
 
@@ -584,6 +620,208 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace Bookings {
+  /**
+   * No description
+   * @tags Booking
+   * @name BookingsList
+   * @request GET:/bookings
+   * @secure
+   */
+  export namespace BookingsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Booking
+   * @name BookingsCreate
+   * @request POST:/bookings
+   * @secure
+   */
+  export namespace BookingsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewBooking;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking;
+  }
+  /**
+   * No description
+   * @tags Booking
+   * @name CountList
+   * @request GET:/bookings/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Booking
+   * @name BookingsDetail
+   * @request GET:/bookings/{id}
+   * @secure
+   */
+  export namespace BookingsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking;
+  }
+  /**
+   * @description Update a record
+   * @tags Booking
+   * @name BookingsUpdate
+   * @request PUT:/bookings/{id}
+   * @secure
+   */
+  export namespace BookingsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewBooking;
+    export type RequestHeaders = {};
+    export type ResponseBody = Booking;
+  }
+  /**
+   * @description Delete a record
+   * @tags Booking
+   * @name BookingsDelete
+   * @request DELETE:/bookings/{id}
+   * @secure
+   */
+  export namespace BookingsDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace Contacts {
+  /**
+   * No description
+   * @tags Contact
+   * @name ContactsList
+   * @request GET:/contacts
+   * @secure
+   */
+  export namespace ContactsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Contact[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Contact
+   * @name ContactsCreate
+   * @request POST:/contacts
+   * @secure
+   */
+  export namespace ContactsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewContact;
+    export type RequestHeaders = {};
+    export type ResponseBody = Contact;
+  }
+  /**
+   * No description
+   * @tags Contact
+   * @name CountList
+   * @request GET:/contacts/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Contact
+   * @name ContactsDetail
+   * @request GET:/contacts/{id}
+   * @secure
+   */
+  export namespace ContactsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Contact;
+  }
+  /**
+   * @description Update a record
+   * @tags Contact
+   * @name ContactsUpdate
+   * @request PUT:/contacts/{id}
+   * @secure
+   */
+  export namespace ContactsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewContact;
+    export type RequestHeaders = {};
+    export type ResponseBody = Contact;
+  }
+  /**
+   * @description Delete a record
+   * @tags Contact
+   * @name ContactsDelete
+   * @request DELETE:/contacts/{id}
+   * @secure
+   */
+  export namespace ContactsDelete {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
     export type RequestBody = never;
@@ -818,7 +1056,7 @@ export namespace Espaces {
    */
   export namespace EspacesDetail {
     export type RequestParams = { id: string };
-    export type RequestQuery = {};
+    export type RequestQuery = { availableOnly?: boolean };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Espace;
@@ -1807,6 +2045,256 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
+  bookings = {
+    /**
+     * No description
+     *
+     * @tags Booking
+     * @name BookingsList
+     * @request GET:/bookings
+     * @secure
+     */
+    bookingsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Booking[], Error>({
+        path: `/bookings`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Booking
+     * @name BookingsCreate
+     * @request POST:/bookings
+     * @secure
+     */
+    bookingsCreate: (data: NewBooking, params: RequestParams = {}) =>
+      this.request<Booking, Error>({
+        path: `/bookings`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Booking
+     * @name CountList
+     * @request GET:/bookings/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/bookings/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Booking
+     * @name BookingsDetail
+     * @request GET:/bookings/{id}
+     * @secure
+     */
+    bookingsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Booking, Error>({
+        path: `/bookings/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Booking
+     * @name BookingsUpdate
+     * @request PUT:/bookings/{id}
+     * @secure
+     */
+    bookingsUpdate: (id: string, data: NewBooking, params: RequestParams = {}) =>
+      this.request<Booking, Error>({
+        path: `/bookings/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Booking
+     * @name BookingsDelete
+     * @request DELETE:/bookings/{id}
+     * @secure
+     */
+    bookingsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/bookings/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  contacts = {
+    /**
+     * No description
+     *
+     * @tags Contact
+     * @name ContactsList
+     * @request GET:/contacts
+     * @secure
+     */
+    contactsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Contact[], Error>({
+        path: `/contacts`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Contact
+     * @name ContactsCreate
+     * @request POST:/contacts
+     * @secure
+     */
+    contactsCreate: (data: NewContact, params: RequestParams = {}) =>
+      this.request<Contact, Error>({
+        path: `/contacts`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Contact
+     * @name CountList
+     * @request GET:/contacts/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/contacts/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Contact
+     * @name ContactsDetail
+     * @request GET:/contacts/{id}
+     * @secure
+     */
+    contactsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Contact, Error>({
+        path: `/contacts/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Contact
+     * @name ContactsUpdate
+     * @request PUT:/contacts/{id}
+     * @secure
+     */
+    contactsUpdate: (id: string, data: NewContact, params: RequestParams = {}) =>
+      this.request<Contact, Error>({
+        path: `/contacts/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Contact
+     * @name ContactsDelete
+     * @request DELETE:/contacts/{id}
+     * @secure
+     */
+    contactsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/contacts/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   disponibilities = {
     /**
      * No description
@@ -2084,10 +2572,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/espaces/{id}
      * @secure
      */
-    espacesDetail: (id: string, params: RequestParams = {}) =>
+    espacesDetail: (id: string, query?: { availableOnly?: boolean }, params: RequestParams = {}) =>
       this.request<Espace, Error>({
         path: `/espaces/${id}`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,
