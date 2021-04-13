@@ -10,7 +10,7 @@ module.exports = {
     async afterCreate(created) {
       await strapi.services.history.create({
         status: "created",
-        booking: entity.id,
+        booking: created.id,
       });
     },
     async afterUpdate(updated, params, body) {
@@ -22,8 +22,23 @@ module.exports = {
               booking: updated.id,
             });
             break;
-
-          default:
+          case "canceledbyplace":
+            strapi.services.history.create({
+              status: "canceledbyplace",
+              booking: updated.id,
+            });
+            break;
+          case "askcancel":
+            strapi.services.history.create({
+              status: "askcancel",
+              booking: updated.id,
+            });
+            break;
+          case "accepted":
+            strapi.services.history.create({
+              status: "accepted",
+              booking: updated.id,
+            });
             break;
         }
       }

@@ -636,16 +636,6 @@
           "id": {
             "type": "string"
           },
-          "status": {
-            "type": "string",
-            "default": "pending",
-            "enum": [
-              "canceled",
-              "past",
-              "accepted",
-              "pending"
-            ]
-          },
           "disponibilities": {
             "type": "array",
             "items": {
@@ -982,21 +972,22 @@
                 }
               }
             }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "canceled",
+              "canceledbyplace",
+              "askcancel",
+              "past",
+              "accepted",
+              "pending"
+            ]
           }
         }
       },
       "NewBooking": {
         "properties": {
-          "status": {
-            "type": "string",
-            "default": "pending",
-            "enum": [
-              "canceled",
-              "past",
-              "accepted",
-              "pending"
-            ]
-          },
           "disponibilities": {
             "type": "array",
             "items": {
@@ -1014,6 +1005,17 @@
             "items": {
               "type": "string"
             }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "canceled",
+              "canceledbyplace",
+              "askcancel",
+              "past",
+              "accepted",
+              "pending"
+            ]
           },
           "created_by": {
             "type": "string"

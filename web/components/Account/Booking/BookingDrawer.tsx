@@ -21,17 +21,33 @@ import { ROUTE_PLACE_DETAIL, ROUTE_ACCOUNT_MESSAGE_DETAIL } from '~constants'
 import { format } from '~utils/date'
 import differenceInDays from 'date-fns/differenceInDays'
 import { DisponibilityStatus } from '~@types/disponibility'
+import { BookingStatus } from '~@types/booking.d'
 import BookingHistory from '~components/Account/Booking/BookingHistory'
 import CancelModal from '~components/Account/Booking/CancelModal'
+import AskCancelModal from '~components/Account/Booking/AskCancelModal'
+import ConfirmModal from '~components/Account/Booking/ConfirmModal'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface Props {
   booking: Booking
   setSelected: (booking: Booking) => void
 }
 
-const BookingDrawer = ({ booking, setSelected }: Props) => {
-  const { t } = useTranslation('booking')
+const PlaceInfo = ({ label, value }) => {
+  if (!value) return null
+  return (
+    <Flex flexWrap="wrap">
+      <Text fontFamily="mabry medium" fontWeight="500" whiteSpace="nowrap">
+        {label}
+      </Text>
+      <Text pl={1}>{value}</Text>
+    </Flex>
+  )
+}
 
+const BookingDrawer = ({ booking, setSelected }: Props) => {
+  const { data: user } = useCurrentUser()
+  const { t } = useTranslation('booking')
   const place = useMemo(
     () =>
       booking &&
@@ -68,7 +84,6 @@ const BookingDrawer = ({ booking, setSelected }: Props) => {
               />
             </Flex>
           </DrawerHeader>
-
           <DrawerBody display="flex" flexDirection="column">
             <Flex pb={5}>
               <Box flex={1}>
@@ -112,27 +127,36 @@ const BookingDrawer = ({ booking, setSelected }: Props) => {
               <Box>
                 <Divider orientation="vertical" mx={5} h="100%" opacity="0.3" />
               </Box>
-              <Box flex={1}>
-                <Text fontFamily="mabry medium" fontWeight="500">
-                  {t('place')}
-                </Text>
-                <Text>
-                  {place?.name}
-                  <Link
-                    href={{
-                      pathname: ROUTE_PLACE_DETAIL,
-                      query: { id: place?.id },
-                    }}
-                    textDecoration="underline"
-                    ml={2}
-                  >{`(${t('placeDetail')})`}</Link>
-                </Text>
-              </Box>
+              {user.type === 'company' ? (
+                <Box flex={1}>
+                  <Text fontFamily="mabry medium" fontWeight="500">
+                    {t('place')}
+                  </Text>
+                  <Text>
+                    {place?.name}
+                    <Link
+                      href={{
+                        pathname: ROUTE_PLACE_DETAIL,
+                        query: { id: place?.id },
+                      }}
+                      textDecoration="underline"
+                      ml={2}
+                    >{`(${t('placeDetail')})`}</Link>
+                  </Text>
+                </Box>
+              ) : (
+                <Box flex={1}>
+                  <Text fontFamily="mabry medium" fontWeight="500">
+                    {t('company')}
+                  </Text>
+                  <Text>{booking?.company?.structureName}</Text>
+                </Box>
+              )}
             </Flex>
             <Divider opacity="0.3" />
             <Flex justifyContent="space-between" mt={5} flex={1}>
               <Box>
-                <BookingHistory booking={booking} />
+                <BookingHistory booking={booking} type={user?.type} />
               </Box>
               {booking?.status !== 'canceled' && (
                 <Flex>
@@ -142,7 +166,7 @@ const BookingDrawer = ({ booking, setSelected }: Props) => {
                     h="100%"
                     opacity="0.3"
                   />
-                  <Flex direction="column">
+                  <Flex direction="column" minW="250px">
                     {/* TODO: handle notification message */}
                     <Button
                       as={Link}
@@ -153,42 +177,57 @@ const BookingDrawer = ({ booking, setSelected }: Props) => {
                       variant="message"
                       leftIcon={<Message />}
                     >
-                      <Text ml={2}>{t(`message`)}</Text>
+                      <Text ml={2}>
+                        {t(
+                          user.type === 'company'
+                            ? `message`
+                            : 'messageCompany',
+                        )}
+                      </Text>
                     </Button>
-                    {!['canceled', 'askcancel'].includes(booking?.status) && (
+                    {booking?.status === BookingStatus.PENDING &&
+                      user.type === 'place' && (
+                        <ConfirmModal
+                          bookingId={booking?.id}
+                          setSelected={setSelected}
+                        />
+                      )}
+                    {booking?.status === BookingStatus.ACCEPTED &&
+                      user.type === 'company' && (
+                        <AskCancelModal
+                          booking={booking}
+                          setSelected={setSelected}
+                        />
+                      )}
+                    {![
+                      'canceled',
+                      'canceledbyplace',
+                      'past',
+                      'occupied',
+                    ].includes(booking?.status) && (
                       <CancelModal
-                        bookingId={booking?.id}
+                        booking={booking}
                         setSelected={setSelected}
                       />
                     )}
                     <Divider opacity="0.3" my={5} />
                     <Box>
                       <Text fontFamily="mabry medium" fontWeight="500">
-                        {t('address')}
+                        {user.type === 'company'
+                          ? t('address')
+                          : booking?.company?.structureName}
                       </Text>
                       <Text>{place?.address}</Text>
                     </Box>
                     <Box pt={5}>
-                      <Flex flexWrap="wrap">
-                        <Text
-                          fontFamily="mabry medium"
-                          fontWeight="500"
-                          whiteSpace="nowrap"
-                        >
-                          {t('tel')}
-                        </Text>
-                        <Text pl={1}>{booking?.place?.phone}</Text>
-                      </Flex>
-                      <Flex flexWrap="wrap">
-                        <Text
-                          fontFamily="mabry medium"
-                          fontWeight="500"
-                          whiteSpace="nowrap"
-                        >
-                          {t('email')}
-                        </Text>
-                        <Text pl={1}>{booking?.place?.email}</Text>
-                      </Flex>
+                      <PlaceInfo
+                        label={t('tel')}
+                        value={booking?.place?.phone}
+                      />
+                      <PlaceInfo
+                        label={t('email')}
+                        value={booking?.place?.email}
+                      />
                       {booking?.place?.website && (
                         <Link href={booking?.place?.website}>
                           <Text textDecoration="underline" color="gray.300">
@@ -197,6 +236,30 @@ const BookingDrawer = ({ booking, setSelected }: Props) => {
                         </Link>
                       )}
                     </Box>
+                    {user.type === 'place' && (
+                      <Box pt={5}>
+                        <PlaceInfo
+                          label={t('siret')}
+                          value={booking?.place?.siret}
+                        />
+                        <PlaceInfo
+                          label={t('ape')}
+                          value={booking?.place?.ape}
+                        />
+                        <PlaceInfo
+                          label={t('insurance')}
+                          value={booking?.place?.insuranceName}
+                        />
+                        <PlaceInfo
+                          label={t('insuranceNb')}
+                          value={booking?.place?.insuranceNumber}
+                        />
+                        <PlaceInfo
+                          label={t('licence')}
+                          value={booking?.place?.license}
+                        />
+                      </Box>
+                    )}
                   </Flex>
                 </Flex>
               )}

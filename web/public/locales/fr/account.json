@@ -76,6 +76,7 @@
         "pending": "En attente",
         "booked": "A venir",
         "canceled": "Annulée",
-        "past": "Passée"
+        "past": "Passée",
+        "occupied": "En cours"
     }
 }

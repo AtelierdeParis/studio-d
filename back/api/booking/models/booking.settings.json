@@ -11,17 +11,6 @@
     "draftAndPublish": false
   },
   "attributes": {
-    "status": {
-      "type": "enumeration",
-      "enum": [
-        "canceled",
-        "past",
-        "accepted",
-        "pending"
-      ],
-      "default": "pending",
-      "required": false
-    },
     "disponibilities": {
       "collection": "disponibility",
       "via": "booking"
@@ -35,8 +24,19 @@
       "model": "user"
     },
     "histories": {
-      "via": "booking",
-      "collection": "history"
+      "collection": "history",
+      "via": "booking"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "canceled",
+        "canceledbyplace",
+        "askcancel",
+        "past",
+        "accepted",
+        "pending"
+      ]
     }
   }
 }

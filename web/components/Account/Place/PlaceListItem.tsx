@@ -78,12 +78,9 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 </Text>
               </LinkOverlay>
               <Flex>
-                <Text>{place.address}</Text>
+                <Text mr={2}>{place.address}</Text>
                 {isOccupied && (
-                  <Tag status={DisponibilityStatus.BOOKED} ml={2}>
-                    <Circle size="6px" bgColor="green.500" ml={1} />
-                    <Text ml={2}>{t('list.occupied')}</Text>
-                  </Tag>
+                  <Tag status="occupied">{t('list.occupied')}</Tag>
                 )}
               </Flex>
             </Box>

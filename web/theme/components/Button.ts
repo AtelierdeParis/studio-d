@@ -3,6 +3,9 @@ const Button = {
     fontWeight: '500',
     borderRadius: 'md',
     lineHeight: 1,
+    _focus: {
+      boxShadow: 'none',
+    },
     _hover: {
       textDecoration: 'none',
     },
@@ -12,10 +15,17 @@ const Button = {
   },
   variants: {
     delete: {
+      justifyContent: 'flex-start',
       bgColor: 'tag.red',
       h: '40px',
     },
+    confirm: {
+      justifyContent: 'flex-start',
+      bgColor: 'tag.green',
+      h: '40px',
+    },
     message: {
+      justifyContent: 'flex-start',
       bgColor: 'tag.blue',
       color: 'blue.500',
       h: '40px',

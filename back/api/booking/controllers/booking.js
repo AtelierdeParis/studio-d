@@ -27,7 +27,8 @@ module.exports = {
     return strapi.query("booking").find(
       {
         ...query,
-        status_in: ["past", "accepted"],
+        status_in: ["past", "accepted", "canceledbyplace", "askcancel"],
+        _sort: "disponibilities.start:desc",
       },
       populate
     );
@@ -80,7 +81,7 @@ module.exports = {
       })
     )
       .then((res) => {
-        res.map((dispoId) => {
+        return res.map((dispoId) => {
           strapi
             .query("disponibility")
             .update({ id: dispoId }, { status: "pending" });

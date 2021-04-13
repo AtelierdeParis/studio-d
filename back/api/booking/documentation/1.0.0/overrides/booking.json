@@ -129,6 +129,8 @@
               "default": "pending",
               "enum": [
                 "canceled",
+                "canceledbyplace",
+                "askcancel",
                 "past",
                 "accepted",
                 "pending"

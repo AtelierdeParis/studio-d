@@ -22,8 +22,8 @@
       ]
     },
     "booking": {
-      "model": "booking",
-      "via": "histories"
+      "via": "histories",
+      "model": "booking"
     }
   }
 }

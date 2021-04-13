@@ -9,16 +9,25 @@
     "nb": "No.",
     "status": "Statut",
     "place": "Espace",
+    "company": "Compagnie",
     "structure": "Lieu",
     "date": "Date(s)",
     "activity": "Activité",
     "detail": "Détails",
     "requestNb": "Demande n°{{nb}}",
     "message": "Échanger avec le lieu",
+    "messageCompany": "Échanger avec la compagnie",
     "cancel":  "Annuler la demande",
+    "askcancel":  "Demander une annulation",
+    "confirm": "Valider la demande",
     "address": "Adresse de l'espace",
     "tel": "Tél. :",
     "email": "Email :",
+    "siret": "SIRET :",
+    "ape": "APE :",
+    "insurance": "Assurance :",
+    "insuranceNb": "N° assurance :",
+    "licence": "Licence(s) :",
     "placeDetail": "voir la fiche",
     "morning": "matin",
     "afternoon": "après-midi",
@@ -27,17 +36,46 @@
             "text": "Vous êtes sur le point d’annuler votre demande de réservation. Voulez-vous continuer ?",
             "confirm": "Confirmer l’annulation",
             "back": "Non, fermer"
+        },
+        "askcancel": {
+            "title": "Demander l'annulation",
+            "text": "Indiquez au lieu la raison pour laquelle vous devez annuler cette réservation. Vous recevrez une notification mail lorsqu’il procèdera à l’annulation.",
+            "back": "Fermer",
+            "confirm": "Envoyer",
+            "message": {
+                "label": "Votre message",
+                "placeholder": "Renseignez votre message"
+            }
+        },
+        "confirm": {
+            "title": "Accepter la demande",
+            "text": "Vous êtes sur le point d'accepter la demande de réservation. Voulez-vous continuer ?",
+            "back": "Non, fermer",
+            "confirm": "Confirmer la demande"
         }
     },
     "history": {
-        "askcancel": "Vous avez demandé l’annulation. <a>Voir le message.</a>",
-        "accepted": "Le lieu a accepté votre demande de réservation.",
-        "canceledByYou": "Vous avez annulé votre demande de réservation.",
-        "canceledByPlace": "Le lieu a annulé votre réservation.",
-        "created": {
-            "period": "Vous avez envoyé une demande de réservation de l’espace du {{start}} au {{end}}. <a>Voir le message.</a>",
-            "day": "Vous avez envoyé une demande de réservation de l’espace pour le {{date}}. <a>Voir le message.</a>",
-            "many": "Vous avez envoyé une demande de réservation de l’espace pour plusieurs dates. <a>Voir le message.</a>"
+        "company": {
+            "askcancel": "Vous avez demandé l’annulation. <a>Voir le message.</a>",
+            "accepted": "Le lieu a accepté votre demande de réservation.",
+            "canceledByYou": "Vous avez annulé votre demande de réservation.",
+            "canceledByPlace": "Le lieu a annulé votre réservation.",
+            "created": {
+                "period": "Vous avez envoyé une demande de réservation de l’espace du {{start}} au {{end}}. <a>Voir le message.</a>",
+                "day": "Vous avez envoyé une demande de réservation de l’espace pour le {{date}}. <a>Voir le message.</a>",
+                "many": "Vous avez envoyé une demande de réservation de l’espace pour plusieurs dates. <a>Voir le message.</a>"
+            }
+        },
+        "place": {
+            "askcancel": "La compagnie a demandé l'annulation. <a>Voir le message.</a>",
+            "accepted": "Vous avez accepté la demande de réservation.",
+            "canceledByYou": "La compagnie a annulé la demande de réservation.",
+            "canceledByPlace": "Vous avez annulé la réservation.",
+            "created": {
+                "period": "Vous avez une demande de réservation du {{start}} au {{end}}. <a>Voir le message.</a>",
+                "day": "Vous avez une demande de réservation pour le {{date}}. <a>Voir le message.</a>",
+                "many": "Vous avez une demande de réservation pour plusieurs dates. <a>Voir le message.</a>"
+            }
         }
     }
 }

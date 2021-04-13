@@ -45,7 +45,7 @@ export interface NewActuality {
 
 export interface Booking {
   id: string;
-  status?: "canceled" | "past" | "accepted" | "pending";
+  status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   disponibilities?: Disponibility[];
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
@@ -53,11 +53,11 @@ export interface Booking {
 }
 
 export interface NewBooking {
-  status?: "canceled" | "past" | "accepted" | "pending";
   disponibilities?: string[];
   place?: string;
   company?: string;
   histories?: string[];
+  status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   created_by?: string;
   updated_by?: string;
 }
@@ -120,11 +120,11 @@ export interface Disponibility {
   status: "available" | "booked" | "pending" | "past";
   booking?: {
     id: string;
-    status?: "canceled" | "past" | "accepted" | "pending";
     disponibilities?: string[];
     place?: string;
     company?: string;
     histories?: string[];
+    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     created_by?: string;
     updated_by?: string;
   };
@@ -218,11 +218,11 @@ export interface History {
   status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
   booking?: {
     id: string;
-    status?: "canceled" | "past" | "accepted" | "pending";
     disponibilities?: string[];
     place?: string;
     company?: string;
     histories?: string[];
+    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     created_by?: string;
     updated_by?: string;
   };
@@ -337,11 +337,11 @@ export interface Message {
   };
   booking?: {
     id: string;
-    status?: "canceled" | "past" | "accepted" | "pending";
     disponibilities?: string[];
     place?: string;
     company?: string;
     histories?: string[];
+    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     created_by?: string;
     updated_by?: string;
   };

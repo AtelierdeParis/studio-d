@@ -759,15 +759,6 @@
               "id": {
                 "type": "string"
               },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
               "disponibilities": {
                 "type": "array",
                 "items": {
@@ -785,6 +776,17 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
               },
               "created_by": {
                 "type": "string"

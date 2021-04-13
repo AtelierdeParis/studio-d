@@ -19,6 +19,7 @@ interface Props extends BoxProps {
   children: React.ReactNode
   title: string
   closeText?: string
+  size?: string
   confirmText?: string
   button: JSX.Element
   onConfirm: () => Promise<any>
@@ -31,6 +32,7 @@ const Modal = ({
   onConfirm,
   closeText = null,
   confirmText = null,
+  size = 'md',
   ...rest
 }: Props) => {
   const [isLoading, setLoading] = useState(false)
@@ -50,7 +52,7 @@ const Modal = ({
       <Box onClick={onOpen} alignSelf="center" {...rest}>
         {button}
       </Box>
-      <ChakraModal isOpen={isOpen} onClose={onClose} isCentered>
+      <ChakraModal isOpen={isOpen} onClose={onClose} isCentered size={size}>
         <ModalOverlay />
         <ModalContent pt={6} overflow="hidden">
           <ModalHeader

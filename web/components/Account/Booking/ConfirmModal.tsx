@@ -5,36 +5,28 @@ import { Booking } from '~typings/api'
 import { Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
-import Delete from 'public/assets/img/delete.svg'
-import { useCurrentUser } from '~hooks/useCurrentUser'
+import Check from 'public/assets/img/check-circle.svg'
 
-interface ICancelModal {
-  booking: Booking
+interface IConfirmModal {
+  bookingId: string
   setSelected: (booking: Booking) => void
 }
 
-const CancelModal = ({ booking, setSelected }: ICancelModal) => {
+const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
   const queryClient = useQueryClient()
-  const { data: user } = useCurrentUser()
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('booking')
 
   const onConfirm = () => {
-    const isPlace = user.type === 'place'
     setLoading(true)
     return client.bookings
-      .bookingsUpdate(booking?.id, {
-        status: isPlace ? 'canceledbyplace' : 'canceled',
-      })
+      .bookingsUpdate(bookingId, { status: 'accepted' })
       .then(() => {
-        queryClient.refetchQueries(isPlace ? 'myBookings' : 'myRequests')
+        queryClient.refetchQueries('myRequests')
         setSelected(null)
       })
       .finally(() => setLoading(false))
   }
-
-  if (!user || (user.type === 'company' && booking?.status !== 'pending'))
-    return null
 
   return (
     <Modal
@@ -42,22 +34,22 @@ const CancelModal = ({ booking, setSelected }: ICancelModal) => {
       button={
         <Button
           w="100%"
-          variant="delete"
-          leftIcon={<Delete />}
+          variant="confirm"
+          leftIcon={<Check />}
           mt={2.5}
           isLoading={isLoading}
         >
-          <Text ml={2}>{t(`cancel`)}</Text>
+          <Text ml={2}>{t(`confirm`)}</Text>
         </Button>
       }
-      title={t('cancel')}
+      title={t('modal.confirm.title')}
       onConfirm={onConfirm}
-      confirmText={t('modal.cancel.confirm')}
-      closeText={t('modal.cancel.back')}
+      confirmText={t('modal.confirm.confirm')}
+      closeText={t('modal.confirm.back')}
     >
-      {t('modal.cancel.text')}
+      {t('modal.confirm.text')}
     </Modal>
   )
 }
 
-export default CancelModal
+export default ConfirmModal

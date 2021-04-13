@@ -9,9 +9,10 @@ import isSameDay from 'date-fns/isSameDay'
 
 interface Props {
   booking: Booking
+  type: 'company' | 'place'
 }
 
-const getCreatedText = (booking) => {
+const getCreatedText = (booking, type) => {
   const { disponibilities: dispos } = booking
   const components = {
     a: (
@@ -27,13 +28,16 @@ const getCreatedText = (booking) => {
 
   if (dispos.length > 1) {
     return (
-      <Trans i18nKey="booking:history.created.many" components={components} />
+      <Trans
+        i18nKey={`booking:history.${type}.created.many`}
+        components={components}
+      />
     )
   }
   if (isSameDay(new Date(dispos[0].start), new Date(dispos[0].end))) {
     return (
       <Trans
-        i18nKey="booking:history.created.day"
+        i18nKey={`booking:history.${type}.created.day`}
         components={components}
         values={{
           date: format(dispos[0].start, 'd MMMM yyyy'),
@@ -44,7 +48,7 @@ const getCreatedText = (booking) => {
 
   return (
     <Trans
-      i18nKey="booking:history.created.day"
+      i18nKey={`booking:history.${type}.created.period`}
       components={components}
       values={{
         start: format(dispos[0].start, 'd MMMM yyyy'),
@@ -54,21 +58,21 @@ const getCreatedText = (booking) => {
   )
 }
 
-const getHistoryInfo = (status, booking) => {
+const getHistoryInfo = (status, booking, type) => {
   switch (status) {
     case 'accepted':
       return {
         color: 'green.500',
-        text: <Trans i18nKey="booking:history.accepted" />,
+        text: <Trans i18nKey={`booking:history.${type}.accepted`} />,
       }
     case 'created':
-      return { color: 'gray.300', text: getCreatedText(booking) }
+      return { color: 'gray.300', text: getCreatedText(booking, type) }
     case 'askcancel':
       return {
         color: 'red.600',
         text: (
           <Trans
-            i18nKey="booking:history.askcancel"
+            i18nKey={`booking:history.${type}.askcancel`}
             components={{
               a: (
                 <Link
@@ -86,23 +90,23 @@ const getHistoryInfo = (status, booking) => {
     case 'canceled':
       return {
         color: 'red.600',
-        text: <Trans i18nKey="booking:history.canceledByYou" />,
+        text: <Trans i18nKey={`booking:history.${type}.canceledByYou`} />,
       }
     case 'canceledbyplace':
       return {
         color: 'red.600',
-        text: <Trans i18nKey="booking:history.canceledByPlace" />,
+        text: <Trans i18nKey={`booking:history.${type}.canceledByPlace`} />,
       }
   }
 }
 
-const BookingHistory = ({ booking }: Props) => {
+const BookingHistory = ({ booking, type }: Props) => {
   return (
     <VStack spacing={5} alignItems="flex-start">
       {booking?.histories
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .map(({ id, status, created_at }) => {
-          const { color, text } = getHistoryInfo(status, booking)
+          const { color, text } = getHistoryInfo(status, booking, type)
           return (
             <Flex key={id} alignItems="flex-start">
               <Circle size="6px" bgColor={color} mt={1.5} />

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/12/2021 7:14:52 PM"
+    "x-generation-date": "04/13/2021 12:09:27 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -7244,6 +7244,8 @@
             "default": "pending",
             "enum": [
               "canceled",
+              "canceledbyplace",
+              "askcancel",
               "past",
               "accepted",
               "pending"
@@ -7271,16 +7273,6 @@
       },
       "NewBooking": {
         "properties": {
-          "status": {
-            "type": "string",
-            "default": "pending",
-            "enum": [
-              "canceled",
-              "past",
-              "accepted",
-              "pending"
-            ]
-          },
           "disponibilities": {
             "type": "array",
             "items": {
@@ -7298,6 +7290,17 @@
             "items": {
               "type": "string"
             }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "canceled",
+              "canceledbyplace",
+              "askcancel",
+              "past",
+              "accepted",
+              "pending"
+            ]
           },
           "created_by": {
             "type": "string"
@@ -7527,15 +7530,6 @@
               "id": {
                 "type": "string"
               },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
               "disponibilities": {
                 "type": "array",
                 "items": {
@@ -7553,6 +7547,17 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
               },
               "created_by": {
                 "type": "string"
@@ -7876,15 +7881,6 @@
               "id": {
                 "type": "string"
               },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
               "disponibilities": {
                 "type": "array",
                 "items": {
@@ -7902,6 +7898,17 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
               },
               "created_by": {
                 "type": "string"
@@ -8289,15 +8296,6 @@
               "id": {
                 "type": "string"
               },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
               "disponibilities": {
                 "type": "array",
                 "items": {
@@ -8315,6 +8313,17 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
               },
               "created_by": {
                 "type": "string"
