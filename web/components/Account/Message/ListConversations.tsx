@@ -70,7 +70,7 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
             key={user.id}
             id={user.id}
             name={user.structureName}
-            isSelected={selected === user.id}
+            isSelected={selected?.toString() === user.id.toString()}
             setSelected={setSelected}
           />
         ))}

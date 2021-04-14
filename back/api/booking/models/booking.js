@@ -8,36 +8,49 @@
 module.exports = {
   lifecycles: {
     async afterCreate(created) {
-      await strapi.services.history.create({
+      await strapi.services.message.create({
+        author: "company",
         status: "created",
         booking: created.id,
+        place: created.place.id,
+        company: created.company.id,
       });
     },
     async afterUpdate(updated, params, body) {
+      const rel = {
+        booking: updated.id,
+        place: updated.place.id,
+        company: updated.company.id,
+      };
+
       if (body.status) {
         switch (body.status) {
           case "canceled":
-            strapi.services.history.create({
+            strapi.services.message.create({
+              author: "company",
               status: "canceled",
-              booking: updated.id,
+              ...rel,
             });
             break;
           case "canceledbyplace":
-            strapi.services.history.create({
+            strapi.services.message.create({
+              author: "place",
               status: "canceledbyplace",
-              booking: updated.id,
+              ...rel,
             });
             break;
           case "askcancel":
-            strapi.services.history.create({
+            strapi.services.message.create({
+              author: "company",
               status: "askcancel",
-              booking: updated.id,
+              ...rel,
             });
             break;
           case "accepted":
-            strapi.services.history.create({
+            strapi.services.message.create({
+              author: "place",
               status: "accepted",
-              booking: updated.id,
+              ...rel,
             });
             break;
         }

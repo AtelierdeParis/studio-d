@@ -148,10 +148,10 @@
             "company": {
               "$ref": "#/components/schemas/UsersPermissionsUser"
             },
-            "histories": {
+            "messages": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/History"
+                "$ref": "#/components/schemas/Message"
               }
             }
           }

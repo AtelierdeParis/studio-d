@@ -259,7 +259,7 @@
             "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
             "see": {
                 "pending": "Voir la demande.",
-                "booked": "Voir la réservation."
+                "accepted": "Voir la réservation."
             }
         }
     },

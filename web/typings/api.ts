@@ -49,7 +49,7 @@ export interface Booking {
   disponibilities?: Disponibility[];
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
-  histories?: History[];
+  messages?: Message[];
 }
 
 export interface NewBooking {
@@ -58,6 +58,7 @@ export interface NewBooking {
   company?: string;
   histories?: string[];
   status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
+  messages?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -125,6 +126,7 @@ export interface Disponibility {
     company?: string;
     histories?: string[];
     status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
+    messages?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -267,20 +269,22 @@ export interface NewHomeCarousel {
 
 export interface Message {
   id: string;
-  message: string;
+  message?: string;
   created_at?: string;
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
   booking?: Booking;
+  status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
   author?: "company" | "place";
 }
 
 export interface NewMessage {
-  message: string;
+  message?: string;
   place?: string;
   company?: string;
-  booking?: string;
   author?: "company" | "place";
+  status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
+  booking?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -1336,7 +1340,21 @@ export namespace Conversation {
    */
   export namespace ConversationDetail {
     export type RequestParams = { id: string };
-    export type RequestQuery = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Message[];
@@ -3092,10 +3110,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/conversation/{id}
      * @secure
      */
-    conversationDetail: (id: string, params: RequestParams = {}) =>
+    conversationDetail: (
+      id: string,
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Message[], Error>({
         path: `/conversation/${id}`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

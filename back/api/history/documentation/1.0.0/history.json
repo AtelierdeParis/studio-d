@@ -569,8 +569,11 @@
                   "pending"
                 ]
               },
-              "created_at": {
-                "type": "date-time"
+              "messages": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"

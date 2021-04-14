@@ -61,8 +61,8 @@ const BookingConfirm = ({ events, place, back }: Props) => {
         if (message !== '') {
           return client.messages.messagesCreate({
             author: 'company',
+            status: 'message',
             booking: res.data.id,
-            company: session.user.id,
             place: place.users_permissions_user.id,
             message,
           })

@@ -983,6 +983,56 @@
               "accepted",
               "pending"
             ]
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "place": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string",
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "accepted",
+                    "created",
+                    "canceled",
+                    "canceledbyplace",
+                    "askcancel",
+                    "message"
+                  ]
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1016,6 +1066,12 @@
               "accepted",
               "pending"
             ]
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

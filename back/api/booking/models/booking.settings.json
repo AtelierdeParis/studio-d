@@ -37,6 +37,10 @@
         "accepted",
         "pending"
       ]
+    },
+    "messages": {
+      "via": "booking",
+      "collection": "message"
     }
   }
 }

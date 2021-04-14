@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Flex,
   Text,
@@ -13,6 +13,7 @@ import Chevron from 'public/assets/img/chevron-down.svg'
 import BookingDrawer from '~components/Account/Booking/BookingDrawer'
 import BookingListItem from '~components/Account/Booking/BookingListItem'
 import Cell from '~components/Account/Booking/Cell'
+import { useRouter } from 'next/router'
 
 interface Props {
   bookings: Booking[]
@@ -22,14 +23,22 @@ interface Props {
 const Divider = () => <ChakraDivider orientation="vertical" h="24px" mr={2.5} />
 
 const BookingList = ({ bookings, type }: Props) => {
+  const router = useRouter()
   const { t } = useTranslation('booking')
-  const [selected, setSelected] = useState<Booking>(null)
-  const [list, setList] = useState<Booking[]>(bookings)
+  const [selected, setSelected] = useState<string>(
+    (router?.query?.id as string) || null,
+  )
+  const [list, setList] = useState<Booking[]>([])
   const [isDesc, setDesc] = useState<boolean>(true)
 
-  const onSelect = (booking) => {
-    if (!selected || selected.id !== booking.id) {
-      setSelected(booking)
+  useEffect(() => {
+    setList(bookings)
+    setDesc(true)
+  }, [bookings])
+
+  const onSelect = (bookingId) => {
+    if (!selected || selected !== bookingId) {
+      setSelected(bookingId)
     }
   }
 
@@ -40,7 +49,9 @@ const BookingList = ({ bookings, type }: Props) => {
 
   return (
     <Box>
-      <BookingDrawer booking={selected} setSelected={setSelected} />
+      {selected && (
+        <BookingDrawer bookingId={selected} setSelected={setSelected} />
+      )}
       <Flex alignItems="center" pt={8} pb={4} justifyContent="space-between">
         <Text textStyle="accountTitle" pl={4}>
           {t(`${type}.title`)}

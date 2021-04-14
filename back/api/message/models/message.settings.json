@@ -13,7 +13,7 @@
   "attributes": {
     "message": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "place": {
       "plugin": "users-permissions",
@@ -23,15 +23,29 @@
       "plugin": "users-permissions",
       "model": "user"
     },
-    "booking": {
-      "model": "booking"
-    },
     "author": {
       "type": "enumeration",
       "enum": [
         "company",
         "place"
-      ]
+      ],
+      "required": false
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "accepted",
+        "created",
+        "canceled",
+        "canceledbyplace",
+        "askcancel",
+        "message"
+      ],
+      "required": true
+    },
+    "booking": {
+      "model": "booking",
+      "via": "messages"
     }
   }
 }

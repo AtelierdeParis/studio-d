@@ -8,18 +8,18 @@ import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
 import max from 'date-fns/max'
 import isPast from 'date-fns/isPast'
+import isSameDay from 'date-fns/isSameDay'
 import useIsOccupied from '~hooks/useIsOccupied'
 
 interface Props {
   booking: Booking
-  onSelect: (booking: Booking) => void
+  onSelect: (bookingId: string) => void
 }
 
 const BookingListItem = ({ booking, onSelect }: Props) => {
   const { t } = useTranslation('booking')
   const { id, disponibilities, place } = booking
-
-  const isOccupied = useIsOccupied(booking.disponibilities)
+  const isOccupied = useIsOccupied(booking?.disponibilities, booking?.status)
 
   const status = useMemo(() => {
     if (isOccupied) return 'occupied'
@@ -57,7 +57,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
               key={dispo.id}
             >
               <Text>{format(dispo.start, 'd MMM yyyy')}</Text>
-              {dispo.end !== dispo.start && (
+              {!isSameDay(new Date(dispo.end), new Date(dispo.start)) && (
                 <Text pl={1.5}>
                   {' - '}
                   {format(dispo.end, 'd MMM yyyy')}
@@ -83,7 +83,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
           borderRadius="sm"
           fontSize="md"
           //   @ts-ignore
-          onClick={() => onSelect({ ...booking, status })}
+          onClick={() => onSelect(booking.id)}
         >
           {t('detail')}
         </Button>

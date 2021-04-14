@@ -17,7 +17,7 @@ const populate = [
   "disponibilities.espace",
   "company",
   "place",
-  "histories",
+  "messages",
 ];
 
 module.exports = {
@@ -73,10 +73,9 @@ module.exports = {
           );
         }
 
-        // TODO: uncomment
-        // if (entity.espace.users_permissions_user === users_permissions_user) {
-        //   throw new Error(`You can not create a booking for yourself`);
-        // }
+        if (entity.espace.users_permissions_user === users_permissions_user) {
+          throw new Error(`You can not create a booking for yourself`);
+        }
         return dispoId;
       })
     )

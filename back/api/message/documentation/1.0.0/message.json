@@ -642,7 +642,7 @@
       "Message": {
         "required": [
           "id",
-          "message"
+          "status"
         ],
         "properties": {
           "id": {
@@ -893,6 +893,24 @@
               }
             }
           },
+          "author": {
+            "type": "string",
+            "enum": [
+              "company",
+              "place"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "created",
+              "canceled",
+              "canceledbyplace",
+              "askcancel",
+              "message"
+            ]
+          },
           "booking": {
             "required": [
               "id"
@@ -930,6 +948,12 @@
                   "pending"
                 ]
               },
+              "messages": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -937,19 +961,12 @@
                 "type": "string"
               }
             }
-          },
-          "author": {
-            "type": "string",
-            "enum": [
-              "company",
-              "place"
-            ]
           }
         }
       },
       "NewMessage": {
         "required": [
-          "message"
+          "status"
         ],
         "properties": {
           "message": {
@@ -961,15 +978,26 @@
           "company": {
             "type": "string"
           },
-          "booking": {
-            "type": "string"
-          },
           "author": {
             "type": "string",
             "enum": [
               "company",
               "place"
             ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "accepted",
+              "created",
+              "canceled",
+              "canceledbyplace",
+              "askcancel",
+              "message"
+            ]
+          },
+          "booking": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

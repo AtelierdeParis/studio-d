@@ -4914,6 +4914,13 @@ next-transpile-modules@^6.3.0:
     enhanced-resolve "^5.7.0"
     escalade "^3.1.1"
 
+next-use-contextual-routing@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/next-use-contextual-routing/-/next-use-contextual-routing-2.0.0.tgz#f81faeb05ec8e9f18f6cd4cce1893b0358813f67"
+  integrity sha512-h8fVes+TGvDDF4aO/6eZtzi99WVLW9Sdlful66dTlkiuFA35gTqXET7fnbrGI2AjyY0jXnAfxDcMemeEIhv7Dg==
+  dependencies:
+    qs-stringify "^1.2.1"
+
 next@10.0.8:
   version "10.0.8"
   resolved "https://registry.yarnpkg.com/next/-/next-10.0.8.tgz#a2232c11ffad974d67f3d572b8db2acaa5ddedd7"
@@ -5623,6 +5630,11 @@ q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
+qs-stringify@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/qs-stringify/-/qs-stringify-1.2.1.tgz#9b39ef6b816bd83309628fc9dad435fc0eccc28b"
+  integrity sha512-2N5xGLGZUxpgAYq1fD1LmBSCbxQVsXYt5JU0nU3FuPWO8PlCnKNFQwXkZgyB6mrTdg7IbexX4wxIR403dJw9pw==
 
 qs@~6.5.2:
   version "6.5.2"

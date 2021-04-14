@@ -12,7 +12,7 @@ const isToday = require("date-fns/isToday");
 const populate = [
   "disponibilities",
   "disponibilities.booking",
-  "disponibilities.booking.users_permissions_user",
+  "disponibilities.booking.company",
   "images",
   "files",
   "users_permissions_user",

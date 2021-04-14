@@ -4,15 +4,14 @@ const { sanitizeEntity } = require("strapi-utils");
 module.exports = {
   async myConversations(ctx) {
     const { id, type } = ctx.state.user;
-    const query = type === "place" ? { place: id } : { company: id };
     const knex = strapi.connections.default;
     const entity = await knex
       .select()
       .from("messages")
-      .where("messages.place", "=", id)
+      .where(`messages.${type}`, "=", id)
       .leftOuterJoin(
         "users-permissions_user",
-        "messages.company",
+        `messages.${type === "place" ? "company" : "place"}`,
         "users-permissions_user.id"
       )
       .distinctOn("messages.company");
@@ -23,16 +22,32 @@ module.exports = {
   },
   async getConversation(ctx) {
     const { id, type } = ctx.state.user;
-    const query =
+    const userType =
       type === "place"
         ? { place: id, company: ctx.params.id }
         : { company: id, place: ctx.params.id };
 
     return sanitizeEntity(
-      await strapi.query("message").find({ ...query, _sort: "created_at:asc" }),
+      await strapi
+        .query("message")
+        .find({ ...userType, ...ctx.query, _sort: "created_at:desc" }, [
+          "place",
+          "company",
+          "booking",
+          "booking.disponibilities",
+        ]),
       {
         model: strapi.models.message,
       }
     );
+  },
+  async create(ctx) {
+    const { id, type } = ctx.state.user;
+    const relation = type === "place" ? { place: id } : { company: id };
+    const entity = await strapi.services.message.create({
+      ...ctx.request.body,
+      ...relation,
+    });
+    return sanitizeEntity(entity, { model: strapi.models.message });
   },
 };

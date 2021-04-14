@@ -6,6 +6,7 @@ import { format } from '~utils/date'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
 import useToast from '~hooks/useToast'
+import { ROUTE_ACCOUNT_BOOKING, ROUTE_ACCOUNT_REQUEST } from '~constants'
 import { client } from '~api/client-api'
 import { Disponibility } from '~typings/api'
 import Delete from 'public/assets/img/delete.svg'
@@ -71,8 +72,6 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
       .catch(() => errorToast(t('schedule.delete.error')))
       .finally(() => setLoading(false))
   }
-
-  console.log(disponibilities)
 
   return (
     <Box w="100%">
@@ -140,40 +139,44 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
               nb: booked.length,
             })}
           </Text>
-          <VStack spacing={1} alignItems="flex-start">
-            {booked.map((dispo) => (
-              <Box key={dispo.id}>
-                <Flex alignItems="center">
-                  <Circle size="6px" mb={0.5} bgColor="gray.200" />
-
-                  <Flex pl={3} alignItems="center">
-                    <Text>{format(dispo.start)}</Text>
-                    <Text textTransform="lowercase" px={1.5}>
-                      {`(${
-                        dispo.when
-                          ? t(`schedule.${dispo.when}`)
-                          : t(`schedule.type.${dispo.type}`)
-                      })`}
-                    </Text>
-                    <Tag status={dispo.status} />
+          <VStack spacing={4} alignItems="flex-start">
+            {booked.map((dispo) => {
+              const route = ['pending', 'canceled'].includes(dispo.status)
+                ? ROUTE_ACCOUNT_REQUEST
+                : ROUTE_ACCOUNT_BOOKING
+              return (
+                <Box key={dispo.id}>
+                  <Flex alignItems="center">
+                    <Circle size="6px" mb={0.5} bgColor="gray.200" />
+                    <Flex pl={3} alignItems="center">
+                      <Text>{format(dispo.start)}</Text>
+                      <Text textTransform="lowercase" px={1.5}>
+                        {`(${
+                          dispo.when
+                            ? t(`schedule.${dispo.when}`)
+                            : t(`schedule.type.${dispo.type}`)
+                        })`}
+                      </Text>
+                      <Tag status={dispo.status} />
+                    </Flex>
                   </Flex>
-                </Flex>
-                <Text pt={1}>
-                  {t('schedule.delete.booked', {
-                    name: dispo?.booking.users_permissions_user.structureName,
-                  })}
-                  {/* TODO: handle link */}
-                  <Link
-                    href="#"
-                    textDecoration="underline"
-                    ml={1.5}
-                    whiteSpace="pre"
-                  >
-                    {t(`schedule.delete.see.${dispo.status}`)}
-                  </Link>
-                </Text>
-              </Box>
-            ))}
+                  <Text pt={1}>
+                    {t('schedule.delete.booked', {
+                      name: dispo?.booking?.company?.structureName,
+                    })}
+                    <Link
+                      textDecoration="underline"
+                      ml={1.5}
+                      whiteSpace="pre"
+                      href={`${route}?id=${dispo?.booking?.id}`}
+                      as={`${route}/${dispo?.booking?.id}`}
+                    >
+                      {t(`schedule.delete.see.${dispo.status}`)}
+                    </Link>
+                  </Text>
+                </Box>
+              )
+            })}
           </VStack>
         </>
       )}
