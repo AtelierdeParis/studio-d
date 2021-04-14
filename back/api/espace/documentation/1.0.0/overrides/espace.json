@@ -621,6 +621,16 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "availableOnly",
+            "in": "query",
+            "required": false,
+            "description": "Return place with only available disponibilities",
+            "schema": {
+              "type": "boolean"
+            },
+            "deprecated": false
           }
         ]
       },
@@ -759,6 +769,126 @@
             }
           }
         ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Espace": {
+        "required": [
+          "id",
+          "name",
+          "surface",
+          "roomLength",
+          "width",
+          "height",
+          "mirror",
+          "danceBar",
+          "accomodation",
+          "technicalStaff",
+          "floor",
+          "address",
+          "latitude",
+          "longitude",
+          "city",
+          "danceCarpet"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "surface": {
+            "type": "integer"
+          },
+          "roomLength": {
+            "type": "integer"
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "mirror": {
+            "type": "boolean"
+          },
+          "danceBar": {
+            "type": "boolean"
+          },
+          "accomodation": {
+            "type": "boolean"
+          },
+          "technicalStaff": {
+            "type": "boolean"
+          },
+          "floor": {
+            "type": "string",
+            "enum": [
+              "plancherDanse",
+              "parquetTraditionnel",
+              "other"
+            ]
+          },
+          "otherFloor": {
+            "type": "string"
+          },
+          "about": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "latitude": {
+            "type": "string"
+          },
+          "longitude": {
+            "type": "string"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadFile"
+            }
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadFile"
+            }
+          },
+          "users_permissions_user": {
+            "$ref": "#/components/schemas/UsersPermissionsUser"
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disponibility"
+            }
+          },
+          "scheduleDetails": {
+            "type": "string"
+          },
+          "filledUntil": {
+            "type": "string",
+            "format": "date"
+          },
+          "published": {
+            "type": "boolean",
+            "default": true
+          },
+          "city": {
+            "type": "string"
+          },
+          "danceCarpet": {
+            "type": "boolean"
+          }
+        }
       }
     }
   }

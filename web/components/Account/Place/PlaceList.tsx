@@ -34,7 +34,7 @@ const PlaceList = ({ places }: IPlaceList) => {
           {t('list.add')}
         </Button>
       </Flex>
-      <VStack alignItems="flex-start">
+      <VStack alignItems="flex-start" spacing={0}>
         {places.map((place) => (
           <PlaceListItem place={place} key={place.id} />
         ))}

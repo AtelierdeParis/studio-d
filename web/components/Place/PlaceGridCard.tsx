@@ -15,21 +15,32 @@ import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
 import Tag from '~components/Tag'
 import { DisponibilityStatus } from '~@types/disponibility.d'
-import isThisWeek from 'date-fns/isThisWeek'
+import addWeeks from 'date-fns/addWeeks'
+import { SearchQuery } from '~utils/search'
+import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
+import useDispoInRange from '~hooks/useDispoInRange'
 
 interface Props {
   place: Espace
+  searchQuery?: SearchQuery
 }
 
-const PlaceGridCard = ({ place }: Props) => {
+const PlaceGridCard = ({ place, searchQuery }: Props) => {
   const { t } = useTranslation('place')
 
-  const disposThisWeek = useMemo(
-    () =>
-      place?.disponibilities?.filter((dispo) =>
-        isThisWeek(new Date(dispo.start)),
-      ),
-    [],
+  const disposInRange = useDispoInRange(
+    place?.disponibilities,
+    searchQuery?.['disponibilities.start_gte'],
+    searchQuery?.['disponibilities.end_lte'],
+  )
+
+  const disposThisWeek = useNbDispoPerWeek(
+    new Date(),
+    disposInRange || place?.disponibilities,
+  )
+  const disposNextWeek = useNbDispoPerWeek(
+    addWeeks(new Date(), 1),
+    disposInRange || place?.disponibilities,
   )
 
   return (
@@ -93,7 +104,30 @@ const PlaceGridCard = ({ place }: Props) => {
                 alignSelf="flex-start"
                 mt={0.5}
               >
-                {t('card.thisWeek', { nb: disposThisWeek.length })}
+                {t(
+                  `card.${disposInRange ? 'searchDispo' : 'thisWeek'}${
+                    disposThisWeek?.length > 1 ? 's' : ''
+                  }`,
+                  {
+                    nb: disposThisWeek.length,
+                  },
+                )}
+              </Tag>
+            )}
+            {disposThisWeek?.length === 0 && disposNextWeek?.length > 0 && (
+              <Tag
+                status={DisponibilityStatus.PENDING}
+                alignSelf="flex-start"
+                mt={0.5}
+              >
+                {t(
+                  `card.${disposInRange ? 'searchDispo' : 'nextWeek'}${
+                    disposNextWeek?.length > 1 ? 's' : ''
+                  }`,
+                  {
+                    nb: disposNextWeek.length,
+                  },
+                )}
               </Tag>
             )}
             <Box fontSize="sm" pt={6}>

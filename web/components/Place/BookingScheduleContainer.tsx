@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Box, Flex, Button } from '@chakra-ui/react'
+import { Box, Flex, Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Espace, Disponibility } from '~typings/api'
+import { Espace } from '~typings/api'
 import BookingSchedule from '~components/Place/BookingSchedule'
+import BookingRecap from '~components/Place/BookingRecap'
 
 const styleSelected = {
   color: 'blue.500',
@@ -19,8 +20,22 @@ const BookingScheduleContainer = ({ place }: Props) => {
 
   return (
     <Box bgColor="blue.100" p={6} borderRadius="sm">
-      <Flex justifyContent="space-between" pb={14}>
-        <Flex></Flex>
+      <Flex justifyContent="space-between" pb={14} alignItems="flex-start">
+        <Flex>
+          {place?.scheduleDetails && (
+            <Box maxW="600px">
+              <Text
+                fontWeight="500"
+                fontFamily="mabry medium"
+                color="blue.500"
+                pb={1}
+              >
+                {t('detail.infoPlace')}
+              </Text>
+              <Text color="grayText.1">{place.scheduleDetails}</Text>
+            </Box>
+          )}
+        </Flex>
         <Flex>
           <Button
             variant="line"
@@ -43,7 +58,9 @@ const BookingScheduleContainer = ({ place }: Props) => {
           </Button>
         </Flex>
       </Flex>
+
       <BookingSchedule place={place} />
+      <BookingRecap />
     </Box>
   )
 }

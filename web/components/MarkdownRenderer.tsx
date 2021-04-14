@@ -31,7 +31,11 @@ const MarkdownRenderer = ({ children }) => {
     <ReactMarkdown
       unwrapDisallowed
       renderers={renderers}
-      transformImageUri={(uri) => process.env.NEXT_PUBLIC_BACK_URL + uri}
+      transformImageUri={(uri) =>
+        uri.includes(process.env.NEXT_PUBLIC_BACK_URL)
+          ? uri
+          : process.env.NEXT_PUBLIC_BACK_URL + uri
+      }
     >
       {children}
     </ReactMarkdown>

@@ -1,20 +1,52 @@
-import React from 'react'
-import { ScheduleEventWhen } from '~@types/schedule-event.d'
-import { Flex, SimpleGrid, Spacer, Text } from '@chakra-ui/react'
+import React, { useContext, useMemo } from 'react'
+import {
+  ScheduleEventType,
+  ScheduleEventWhen,
+  ScheduleEvent,
+} from '~@types/schedule-event.d'
+import { Flex, SimpleGrid, Spacer, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import BookingScheduleContext from '~components/Place/BookingScheduleContext'
+import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
+import { format } from '~utils/date'
+import Confirm from 'public/assets/img/confirm.svg'
+import differenceInDays from 'date-fns/differenceInDays'
 
-interface Props {
-  id?: number
-  when: ScheduleEventWhen
-  status: string
-  hasEventSameDay?: boolean
-  range: { start: Date; end: Date }
+const styleSelected = {
+  borderColor: 'confirm',
+  _hover: {
+    borderColor: 'confirm',
+  },
 }
 
-const BookingScheduleSlot = ({ when, hasEventSameDay }: Props) => {
+const styleAnotherBooking = {
+  bgColor: '#e5e7ed',
+  cursor: 'auto',
+  _hover: {
+    borderColor: 'transparent',
+  },
+}
+
+const BookingScheduleSlot = (props: ScheduleEvent) => {
+  const {
+    extendedProps: { when, hasEventSameDay, id, type },
+    start,
+    end,
+  } = props
+  const { selected, setSelected } = useContext(BookingScheduleContext)
   const { t } = useTranslation('place')
-  const Event = (
+  const isSelected = useMemo(
+    () => selected.some((dispo) => dispo.extendedProps.id === id),
+    [selected, id],
+  )
+
+  // TODO: handle value
+  const hasAnotherBooking = false
+
+  let Event = (
     <Flex
+      className="scheduleEvent"
+      pos="relative"
       bgColor="white"
       justifyContent="center"
       alignItems="center"
@@ -22,10 +54,56 @@ const BookingScheduleSlot = ({ when, hasEventSameDay }: Props) => {
       w="100%"
       h="100%"
       cursor="pointer"
+      border="2px solid"
+      borderColor="transparent"
+      _hover={{
+        borderColor: '#cbcfe1',
+      }}
+      {...(isSelected && styleSelected)}
+      {...(hasAnotherBooking && styleAnotherBooking)}
+      onClick={() => {
+        if (hasAnotherBooking) return null
+        if (!isSelected) {
+          setSelected([...selected, props])
+        } else {
+          setSelected(selected.filter((el) => el.extendedProps.id !== id))
+        }
+      }}
     >
-      <Text fontSize="sm">{t(`detail.dispo.${when || 'day'}`)}</Text>
+      {isSelected && (
+        <Box pos="absolute" right={2} top={2}>
+          <Confirm />
+        </Box>
+      )}
+      {type === ScheduleEventType.PERIOD ? (
+        <Flex
+          pos="absolute"
+          top={6}
+          right={3}
+          alignItems="flex-end"
+          flexDirection="column"
+          fontSize="sm"
+          display="flex"
+        >
+          <Box color={status === 'selected' ? 'blue.500' : 'black'}>
+            {`
+              ${format(start, 'd MMM')} - 
+              ${format(end, 'd MMM')}
+              `}
+          </Box>
+          <Box color="grayText.1">{`(${
+            differenceInDays(end, start) + 1
+          } jours)`}</Box>
+        </Flex>
+      ) : (
+        <Text fontSize="sm">{t(`detail.dispo.${when || 'day'}`)}</Text>
+      )}
     </Flex>
   )
+
+  if (hasAnotherBooking) {
+    Event = <PopoverOtherBooking>{Event}</PopoverOtherBooking>
+  }
 
   if (!hasEventSameDay) {
     return (

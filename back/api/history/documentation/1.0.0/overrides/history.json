@@ -1,0 +1,74 @@
+{
+    "components": {
+        "schemas": {
+          "History": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "accepted",
+                  "created",
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel"
+                ]
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "booking": {
+                "required": [
+                  "id"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "disponibilities": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "place": {
+                    "type": "string"
+                  },
+                  "company": {
+                    "type": "string"
+                  },
+                  "histories": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "canceled",
+                      "canceledbyplace",
+                      "askcancel",
+                      "past",
+                      "accepted",
+                      "pending"
+                    ]
+                  },
+                  "created_by": {
+                    "type": "string"
+                  },
+                  "updated_by": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+}

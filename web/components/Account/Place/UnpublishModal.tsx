@@ -17,7 +17,8 @@ const UnpublishModal = ({ placeId }: IUnpublishModal) => {
   const { errorToast, successToast } = useToast()
 
   const onConfirm = (): Promise<any> => {
-    return client.espaces.espacesUpdate(placeId, { published: false })
+    return client.espaces
+      .espacesUpdate(placeId, { published: false })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successUnpublish'))

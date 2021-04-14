@@ -266,6 +266,7 @@ a {
   right: 0;
   bottom: 0;
   top: 0;
+  z-index: 9;
 }
 
 .booking-calendar#calendar .fc-header-toolbar {
@@ -279,10 +280,20 @@ a {
 .booking-calendar#calendar .fc-daygrid-body {
   padding-top: 40px;
 }
-#calendar .fc-daygrid-day-events {
-  z-index: 12;
-}
 .booking-calendar#calendar .fc-daygrid-day-events {
   display: grid;
   row-gap: 13px;
+  padding: 0 12px;
+}
+.booking-calendar#calendar .fc-daygrid-dot-event:hover {
+  background-color: transparent;
+}
+.booking-calendar#calendar .fc-daygrid-event-harness-abs {
+  left: 12px;
+  right: 12px;
+}
+
+.chakra-portal [data-popper-placement='top'] {
+  max-width: none;
+  width: fit-content;
 }

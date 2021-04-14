@@ -24,11 +24,15 @@ const Actuality = () => {
     isFetching,
   } = useActualities(nbActu)
 
-  useScrollBottom(ref, () => {
-    if (hasNextPage && !isFetching) {
-      fetchNextPage()
-    }
-  })
+  useScrollBottom(
+    ref,
+    () => {
+      if (hasNextPage && !isFetching) {
+        fetchNextPage()
+      }
+    },
+    true,
+  )
 
   return (
     <Container>

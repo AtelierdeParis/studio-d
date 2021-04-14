@@ -6,12 +6,3 @@ export enum DisponibilityStatus {
   BOOKED = 'booked',
   PAST = 'past',
 }
-
-export interface Disponibility {
-  id: number
-  type: ScheduleEventType
-  when: ScheduleEventWhen | null
-  status: DisponibilityStatus
-  start: Date
-  end: Date
-}

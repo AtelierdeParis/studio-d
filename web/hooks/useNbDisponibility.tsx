@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { Disponibility } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 
-const useNbDisponibility = (disponibilities: Omit<Disponibility, 'espace'>[] = []) => {
+const useNbDisponibility = (disponibilities: Disponibility[] = []) => {
   return useMemo(
     () =>
       disponibilities.reduce(

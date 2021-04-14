@@ -125,9 +125,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
               {...(router.pathname.startsWith(url) ? styleActive : {})}
             >
               {icon}
-              <Text pl={4} lineHeight={1}>
+              <Box pl={4} lineHeight={1}>
                 {t(label)}
-              </Text>
+              </Box>
             </Flex>
           </Link>
         ))}
@@ -142,7 +142,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
             <Back />
           </Link>
           <Link href={ROUTE_ACCOUNT}>
-            <Image ml={3} src="/assets/img/logo-studio-d.png" w="100px" />
+            <Image ml={3} src="/assets/img/logo-studio-d.svg" w="100px" />
           </Link>
         </Flex>
         <VStack spacing={12}>

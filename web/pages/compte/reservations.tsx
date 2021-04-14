@@ -3,21 +3,30 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoBooking from '~components/Account/Info/InfoBooking'
-import { UsersPermissionsUser } from '~typings/api'
+import BookingList from '~components/Account/Booking/BookingList'
 import { requireAuth } from '~utils/auth'
-interface IAccountBooking {
-  user: UsersPermissionsUser
-}
+import Loading from '~components/Loading'
+import { useMyBookings } from '~hooks/useMyBookings'
 
-const AccountBooking = ({ user }: IAccountBooking) => {
-  return <InfoBooking />
+const AccountBooking = () => {
+  const { data: requests, isLoading } = useMyBookings()
+
+  return (
+    <Loading isLoading={isLoading} isCentered>
+      {requests?.length === 0 ? (
+        <InfoBooking />
+      ) : (
+        <BookingList bookings={requests} type="booking" />
+      )}
+    </Loading>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
   async ({ locale }) => {
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['account'])),
+        ...(await serverSideTranslations(locale, ['account', 'booking'])),
       },
     }
   },

@@ -12,6 +12,7 @@ export const createScheduleEventObj = ({
   start,
   when = null,
   end = null,
+  type = null,
   status = 'selected',
   id = null,
   hasEventSameDay = false,
@@ -23,6 +24,7 @@ export const createScheduleEventObj = ({
       id,
       when,
       status,
+      type,
       hasEventSameDay,
     },
   }
@@ -81,9 +83,7 @@ const checkIfEventSameDay = (disponibility, sources = []): boolean => {
   )
 }
 
-export const createOldEvents = (
-  disponibilities: Omit<Disponibility, 'espace'>[] = [],
-) => {
+export const createOldEvents = (disponibilities: Disponibility[] = []) => {
   return disponibilities.map((dispo) => {
     return createScheduleEventObj({
       id: dispo.id,
@@ -91,6 +91,7 @@ export const createOldEvents = (
       end: dispo.end,
       when: dispo.when,
       status: dispo.status,
+      type: dispo.type,
       hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
     })
   })

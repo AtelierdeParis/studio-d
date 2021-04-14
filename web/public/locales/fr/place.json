@@ -69,7 +69,8 @@
             "other": "Autre"
         },
         "otherFloor": {
-            "label": "Renseignez votre type de sol (Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton)"
+            "label": "Renseignez votre type de sol",
+            "info": "Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton"
         },
         "about": {
             "label": "À propos de l’espace"
@@ -180,7 +181,12 @@
         "surface": "Surface",
         "dim": "Dim.",
         "noDispo": "Aucun créneau disponible",
-        "thisWeek": "{{nb}} créneaux cette semaine"
+        "searchDispo": "{{nb}} créneau correpondant",
+        "searchDispos": "{{nb}} créneaux correpondants",
+        "thisWeek": "{{nb}} créneau cette semaine",
+        "thisWeeks": "{{nb}} créneaux cette semaine",
+        "nextWeek": "{{nb}} créneau la semaine prochaine",
+        "nextWeeks": "{{nb}} créneaux la semaine prochaine"
     },
     "schedule": {
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
@@ -289,6 +295,36 @@
             "afternoon": "Après-midi",
             "day": "Journée"
         },
-        "tooltip": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace {{name}}. <a>Voir la demande</a>"
+        "tooltip": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
+        "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+        "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+        "nbSelected": "Vous avez sélectionné 1 créneau :",
+        "nbSelecteds": "Vous avez sélectionné {{nb}} créneaux :",
+        "submit": "Déposer une demande",
+        "infoPlace": "Information sur les horaires de l’espace :",
+        "filledUntil": {
+            "title": "L’espace n’a plus de créneaux disponibles jusqu'au {{date}}",
+            "text": "Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
+        }
+    },
+    "confirm": {
+        "error": "Une erreur empêchant la création de votre demande de réservation",
+       "title": "Demande de réservation",
+       "message": {
+           "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
+           "placeholder": "Saisissez votre demande…"
+        },
+        "textCharte": "Nous vous invitons à vous référer à la <a>charte d’utilisation</a> si vous n’en avez pas encore pris connaissance.",
+        "textConfirm": "<div>{{name}}</div> sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre réservation.",
+        "back": "Retour",
+        "submit": "Poursuivre",
+        "change": "Changer",
+        "recap": "Vous demandez le créneau suivant :",
+        "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :"
+    },
+    "confirmed": {
+        "title": "Votre demande est enregistrée !",
+        "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{name}}. Vous recevrez un email lorsque votre réservation sera validée.",
+        "back": "Retour à l’accueil"
     }
 }

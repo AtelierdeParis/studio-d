@@ -43,7 +43,7 @@ const Home: NextPage = () => {
           onSuccess={onSuccess}
         />
       ) : (
-        <AboutUs onClick={setSkip} />
+        <AboutUs onClick={setSkip} target={router.query.target as Target} />
       )}
     </Box>
   )

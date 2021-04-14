@@ -7,7 +7,7 @@ const InfoBooking = () => {
   const { t } = useTranslation('account')
   return (
     <Info
-      img="/assets/img/booking.png"
+      img="/assets/img/booking.svg"
       title={t('bookings.info.title')}
       links={[
         {

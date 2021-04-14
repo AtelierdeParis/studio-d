@@ -1,39 +1,33 @@
 import React, { Fragment } from 'react'
 import { useTranslation } from 'next-i18next'
-import {
-  HStack,
-  Box,
-  Text,
-  Button,
-  Image,
-  Flex,
-  Divider,
-} from '@chakra-ui/react'
+import { Box, Text, Button, Image, Flex, Divider } from '@chakra-ui/react'
+import { Target } from '~pages/inscription/[target]'
 
 const list = [
   {
-    img: '/assets/img/signup-icon1.png',
+    img: '/assets/img/signup-icon1.svg',
     name: 'free',
   },
   {
-    img: '/assets/img/signup-icon2.png',
+    img: '/assets/img/signup-icon2.svg',
     name: 'reservation',
   },
   {
-    img: '/assets/img/signup-icon3.png',
+    img: '/assets/img/signup-icon3.svg',
     name: 'message',
   },
   {
-    img: '/assets/img/signup-icon4.png',
+    img: '/assets/img/signup-icon4.svg',
     name: 'confidentiality',
   },
 ]
 
 interface IAboutUs {
   onClick: (skip: boolean) => void
+  target: Target
 }
 
-const AboutUs = ({ onClick }: IAboutUs) => {
+const AboutUs = ({ onClick, target }: IAboutUs) => {
   const { t } = useTranslation('signup')
   return (
     <Flex maxW="46rem" direction="column" m="0 auto">

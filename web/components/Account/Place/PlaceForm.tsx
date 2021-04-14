@@ -187,6 +187,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           {floor === 'other' && (
             <FormField
               label={t('form.otherFloor.label')}
+              info={t('form.otherFloor.info')}
               errors={errors.otherFloor}
             >
               <Input

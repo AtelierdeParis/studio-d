@@ -1,5 +1,5 @@
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
@@ -8,6 +8,7 @@ import { Espace } from '~typings/api'
 import { format } from '~utils/date'
 import { createOldEvents } from '~utils/schedule'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
+import BookingFilledUntil from '~components/Place/BookingFilledUntil'
 
 const view = createPlugin({
   views: {
@@ -15,10 +16,11 @@ const view = createPlugin({
       type: 'dayGridWeek',
       eventContent: ({ event }) => {
         return (
-          // @ts-ignore
           <BookingScheduleSlot
-            {...event._def.extendedProps}
-            range={event._instance.range}
+            // @ts-ignore
+            extendedProps={event._def.extendedProps}
+            start={event._instance.range.start}
+            end={event._instance.range.end}
           />
         )
       },
@@ -31,6 +33,8 @@ interface Props {
 }
 
 const BookingSchedule = ({ place }: Props) => {
+  const scheduleRef = useRef(null)
+  const [dateRange, setDateRange] = useState({ start: null, end: null })
   const events = useMemo(() => createOldEvents(place?.disponibilities), [
     place?.disponibilities,
   ])
@@ -38,16 +42,19 @@ const BookingSchedule = ({ place }: Props) => {
   return (
     <Flex
       w="100%"
-      backgroundColor="blue.100"
-      borderRadius="sm"
+      layerStyle="bluebox"
       px={4}
       id="calendar"
       className="booking-calendar"
       pos="relative"
     >
       <FullCalendar
+        ref={scheduleRef}
         plugins={[dayGridPlugin, interactionPlugin, view]}
         initialView="custom"
+        datesSet={({ start, end }) => {
+          setDateRange({ start, end })
+        }}
         headerToolbar={{
           start: 'prev',
           center: '',
@@ -74,13 +81,13 @@ const BookingSchedule = ({ place }: Props) => {
             </Box>
           )
         }}
-        height="400px"
-        // dateClick={(date) => {
-        //   if (eventsIdToDelete.length > 0) setToDelete([])
-        // }}
-
+        height="300px"
         events={events}
         locale={frLocale}
+      />
+      <BookingFilledUntil
+        start={dateRange.start}
+        filledUntil={place?.filledUntil}
       />
     </Flex>
   )

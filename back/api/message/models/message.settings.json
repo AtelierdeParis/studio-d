@@ -2,24 +2,36 @@
   "kind": "collectionType",
   "collectionName": "messages",
   "info": {
-    "name": "Message"
+    "name": "Message",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "from": {
-      "type": "email",
-      "required": true
-    },
     "message": {
       "type": "text",
       "required": true
+    },
+    "place": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "company": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "booking": {
+      "model": "booking"
+    },
+    "author": {
+      "type": "enumeration",
+      "enum": [
+        "company",
+        "place"
+      ]
     }
   }
 }

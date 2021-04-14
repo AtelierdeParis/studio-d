@@ -16,6 +16,7 @@ const TabPlace = ({ isDisabled, children }) => {
         fontFamily: 'mabry medium',
         borderBottomColor: 'blue.500',
       }}
+      _focus={{ boxShadow: 'none' }}
     >
       {children}
     </Tab>

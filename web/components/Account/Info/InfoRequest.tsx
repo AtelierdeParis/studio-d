@@ -7,7 +7,7 @@ const InfoRequest = () => {
   const { t } = useTranslation('account')
   return (
     <Info
-      img="/assets/img/requests.png"
+      img="/assets/img/requests.svg"
       title={t('requests.info.title')}
       links={{
         url: ROUTE_PLACES,

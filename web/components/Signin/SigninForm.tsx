@@ -39,7 +39,6 @@ const SignInForm = (props: SignInFormProps) => {
   const { errorToast } = useToast()
   const { register, formState, handleSubmit } = useForm<FormData>({
     resolver: yupResolver(schema),
-    mode: 'onBlur',
   })
 
   const onSubmit = async (values: FormData) => {

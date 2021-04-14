@@ -7,6 +7,7 @@ import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
 import ScheduleFilledUntil from '~components/Account/Place/ScheduleFilledUntil'
 import { Espace } from '~typings/api'
 import useNbDisponibility from '~hooks/useNbDisponibility'
+import useNbBooking from '~hooks/useNbBooking'
 
 interface IScheduleInfo {
   place: Espace
@@ -16,9 +17,8 @@ interface IScheduleInfo {
 const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
   const { t } = useTranslation('place')
 
-  const { nbDispo, available, booked, pending, past } = useNbDisponibility(
-    place?.disponibilities,
-  )
+  const { nbDispo, available } = useNbDisponibility(place?.disponibilities)
+  const { coming, past, pending } = useNbBooking(place?.disponibilities)
 
   return (
     <Box w="100%">
@@ -71,7 +71,7 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
             </Flex>
             <HStack alignItems="center" spacing={2.5}>
               <Tag bgColor="tag.green">
-                {t('schedule.nbComing', { nb: booked.length })}
+                {t('schedule.nbComing', { nb: coming.length })}
               </Tag>
               <Tag bgColor="tag.grey">
                 {t('schedule.nbPassed', { nb: past.length })}

@@ -35,12 +35,12 @@ const Footer = () => {
                 mixBlendMode: 'multiply',
               }}
             >
-              <Image src="/assets/img/partners/ministere-culture.png" />
-              <Image src="/assets/img/partners/logo-drac.png" />
-              <Image src="/assets/img/partners/logo-paris.png" />
-              <Image src="/assets/img/partners/acdcn.jpeg" />
-              <Image src="/assets/img/partners/accn.jpg" />
-              <Image src="/assets/img/partners/logo-atelier-de-paris.jpg" />
+              <Image src="/assets/img/partners/ministere-culture.svg" />
+              <Image src="/assets/img/partners/logo-drac.svg" />
+              <Image src="/assets/img/partners/logo-paris.svg" />
+              <Image src="/assets/img/partners/acdcn.svg" />
+              <Image src="/assets/img/partners/accn.svg" />
+              <Image src="/assets/img/partners/logo-atelier-de-paris.svg" />
             </SimpleGrid>
           </Box>
           <Flex>

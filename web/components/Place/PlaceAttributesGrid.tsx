@@ -37,53 +37,53 @@ const PlaceAttributesGrid = ({ place }: Props) => {
       <GridItem
         label={t('detail.surface')}
         icon={<Surface />}
-        text={`${place.surface}m²`}
+        text={`${place?.surface}m²`}
       />
       <GridItem
         withDivider
         label={t('detail.floor')}
         icon={<Floor />}
-        text={t(`detail.${place.floor}`)}
+        text={t(`detail.${place?.floor}`)}
       />
       <GridItem
         withDivider
         label={t('detail.danceBar')}
         icon={<DanceBar />}
-        text={place.danceBar ? t('detail.yes') : t('detail.no')}
+        text={place?.danceBar ? t('detail.yes') : t('detail.no')}
       />
       <GridItem
         label={t('detail.dimension')}
         icon={<Dimension />}
-        text={`${place.roomLength} x ${place.width} m`}
+        text={`${place?.roomLength} x ${place?.width} m`}
       />
       <GridItem
         withDivider
         label={t('detail.danceCarpet')}
         icon={<Carpet />}
-        text={place.danceCarpet ? t('detail.available') : t('detail.no')}
+        text={place?.danceCarpet ? t('detail.available') : t('detail.no')}
       />
       <GridItem
         withDivider
         label={t('detail.technicalStaff')}
         icon={<Staff />}
-        text={place.technicalStaff ? t('detail.available') : t('detail.no')}
+        text={place?.technicalStaff ? t('detail.available') : t('detail.no')}
       />
       <GridItem
         label={t('detail.height')}
         icon={<Height />}
-        text={`${place.height}m`}
+        text={`${place?.height}m`}
       />
       <GridItem
         withDivider
         label={t('detail.mirror')}
         icon={<Mirror />}
-        text={place.mirror ? t('detail.yes') : t('detail.no')}
+        text={place?.mirror ? t('detail.yes') : t('detail.no')}
       />
       <GridItem
         withDivider
         label={t('detail.accomodation')}
         icon={<Bed />}
-        text={place.accomodation ? t('detail.available') : t('detail.no')}
+        text={place?.accomodation ? t('detail.available') : t('detail.no')}
       />
     </SimpleGrid>
   )

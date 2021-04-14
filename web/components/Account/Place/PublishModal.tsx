@@ -15,7 +15,8 @@ const PublishModal = ({ placeId }: IPublishModal) => {
   const { t } = useTranslation('place')
   const { errorToast, successToast } = useToast()
   const onConfirm = (): Promise<any> => {
-    return client.espaces.espacesUpdate(placeId, { published: true })
+    return client.espaces
+      .espacesUpdate(placeId, { published: true })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successPublish'))

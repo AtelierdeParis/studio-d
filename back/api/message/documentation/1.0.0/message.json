@@ -1,5 +1,130 @@
 {
   "paths": {
+    "/messages/me": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Message"
+        ],
+        "parameters": []
+      }
+    },
+    "/conversation/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Message"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/messages": {
       "get": {
         "deprecated": false,
@@ -517,40 +642,334 @@
       "Message": {
         "required": [
           "id",
-          "name",
-          "from",
           "message"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "from": {
-            "type": "string"
-          },
           "message": {
             "type": "string"
+          },
+          "place": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "siret",
+              "ape",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "company": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "siret",
+              "ape",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "place": {
+                "type": "string"
+              },
+              "company": {
+                "type": "string"
+              },
+              "histories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "canceled",
+                  "canceledbyplace",
+                  "askcancel",
+                  "past",
+                  "accepted",
+                  "pending"
+                ]
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "company",
+              "place"
+            ]
           }
         }
       },
       "NewMessage": {
         "required": [
-          "name",
-          "from",
           "message"
         ],
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "from": {
-            "type": "string"
-          },
           "message": {
             "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "booking": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string",
+            "enum": [
+              "company",
+              "place"
+            ]
           },
           "created_by": {
             "type": "string"

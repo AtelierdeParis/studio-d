@@ -13,7 +13,7 @@ import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useQueryClient } from 'react-query'
 
 interface IScheduleDelete {
-  disponibilities: Omit<Disponibility, 'espace'>[]
+  disponibilities: Disponibility[]
   onClose: () => void
 }
 
@@ -71,6 +71,8 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
       .catch(() => errorToast(t('schedule.delete.error')))
       .finally(() => setLoading(false))
   }
+
+  console.log(disponibilities)
 
   return (
     <Box w="100%">
@@ -157,7 +159,9 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
                   </Flex>
                 </Flex>
                 <Text pt={1}>
-                  {t('schedule.delete.booked', { name: 'XXXXX' })}
+                  {t('schedule.delete.booked', {
+                    name: dispo?.booking.users_permissions_user.structureName,
+                  })}
                   {/* TODO: handle link */}
                   <Link
                     href="#"
@@ -165,7 +169,6 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
                     ml={1.5}
                     whiteSpace="pre"
                   >
-                    {/* TODO: handle company name */}
                     {t(`schedule.delete.see.${dispo.status}`)}
                   </Link>
                 </Text>

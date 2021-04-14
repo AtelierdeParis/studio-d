@@ -11,6 +11,7 @@ import {
   Flex,
   Divider,
   HStack,
+  AspectRatio,
   Circle,
   ButtonGroup,
   LinkBox,
@@ -18,6 +19,7 @@ import {
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 import useNbDisponibility from '~hooks/useNbDisponibility'
+import useNbBooking from '~hooks/useNbBooking'
 import useIsOccupied from '~hooks/useIsOccupied'
 import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
@@ -32,12 +34,10 @@ interface IPlaceListItem {
 
 const PlaceListItem = ({ place }: IPlaceListItem) => {
   const { t } = useTranslation('place')
-
-  const { available, past, booked, pending } = useNbDisponibility(
-    place.disponibilities,
-  )
-
+  const { available, booked } = useNbDisponibility(place.disponibilities)
+  const { coming, past, pending } = useNbBooking(place.disponibilities)
   const isOccupied = useIsOccupied(booked)
+
   return (
     <LinkBox w="100%">
       <Flex
@@ -50,10 +50,10 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           bgColor: 'gray.hover',
         }}
       >
-        <Flex
-          w="210px"
-          h="150px"
-          pr={8}
+        <AspectRatio
+          w="230px"
+          ratio={4 / 3}
+          mr={8}
           alignItems="center"
           {...(!place.published
             ? { filter: 'grayscale(1)', opacity: 0.5 }
@@ -64,7 +64,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           ) : (
             <FallbackImage />
           )}
-        </Flex>
+        </AspectRatio>
         <Flex direction="column" justifyContent="space-between" flex={1}>
           <Flex justifyContent="space-between">
             <Box>
@@ -79,12 +79,9 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 </Text>
               </LinkOverlay>
               <Flex>
-                <Text>{place.address}</Text>
+                <Text mr={2}>{place.address}</Text>
                 {isOccupied && (
-                  <Tag status={DisponibilityStatus.BOOKED} ml={2}>
-                    <Circle size="6px" bgColor="green.500" ml={1} />
-                    <Text ml={2}>{t('list.occupied')}</Text>
-                  </Tag>
+                  <Tag status="occupied">{t('list.occupied')}</Tag>
                 )}
               </Flex>
             </Box>
@@ -173,11 +170,11 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 </Button>
               </Flex>
               <Box pt={2}>
-                {booked.length > 0 || past.length > 0 ? (
+                {coming.length > 0 || past.length > 0 ? (
                   <HStack spacing={2.5}>
-                    {booked.length > 0 && (
+                    {coming.length > 0 && (
                       <Tag status={DisponibilityStatus.BOOKED}>
-                        {t('list.nbBooking', { nb: booked.length })}
+                        {t('list.nbBooking', { nb: coming.length })}
                       </Tag>
                     )}
                     {past.length && (

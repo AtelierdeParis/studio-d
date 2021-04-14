@@ -196,6 +196,12 @@
     "schemas": {
       "UploadFile": {
         "properties": {
+          "id": {
+            "type": "string"
+          },
+          "caption": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },

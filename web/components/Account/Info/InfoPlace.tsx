@@ -7,7 +7,7 @@ const InfoPlace = () => {
   const { t } = useTranslation('place')
   return (
     <Info
-      img="/assets/img/places.png"
+      img="/assets/img/places.svg"
       title={t('info.title')}
       links={{
         url: ROUTE_ACCOUNT_ADD_PLACES,

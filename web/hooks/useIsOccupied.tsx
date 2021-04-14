@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Disponibility } from '~@types/disponibility.d'
+import { Disponibility } from '~typings/api'
 import isToday from 'date-fns/isToday'
 import isWithinInterval from 'date-fns/isWithinInterval'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
@@ -19,7 +19,7 @@ const useIsOccupied = (disponibilities: Disponibility[] = []) => {
         if (isToday(date)) {
           if (
             [ScheduleEventWhen.AFTERNOON, ScheduleEventWhen.MORNING].includes(
-              dispo.when,
+              dispo.when as ScheduleEventWhen,
             )
           ) {
             const isMorning = isWithinInterval(new Date(), {

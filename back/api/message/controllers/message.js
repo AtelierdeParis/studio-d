@@ -1,39 +1,38 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
-
-const template = {
-  subject: `Nouveau message - Studio D`,
-  text: "Nouveau message",
-  html: `
-  <h1>Bonjour,</h1>
-  
-  <p>Vous avez reçu un nouveau message de la part de <%= name %></p>
-  <p>Contenu du message:</p>
-  <p><%= message %></p>
-  `,
-};
 
 module.exports = {
-  create: async (ctx) => {
-    const created = await strapi.services.message.create(ctx.request.body);
-    const entity = sanitizeEntity(created, { model: strapi.models.message });
+  async myConversations(ctx) {
+    const { id, type } = ctx.state.user;
+    const query = type === "place" ? { place: id } : { company: id };
+    const knex = strapi.connections.default;
+    const entity = await knex
+      .select()
+      .from("messages")
+      .where("messages.place", "=", id)
+      .leftOuterJoin(
+        "users-permissions_user",
+        "messages.company",
+        "users-permissions_user.id"
+      )
+      .distinctOn("messages.company");
 
-    await strapi.plugins["email"].services.email.sendTemplatedEmail(
+    return sanitizeEntity(entity, {
+      model: strapi.query("user", "users-permissions").model,
+    });
+  },
+  async getConversation(ctx) {
+    const { id, type } = ctx.state.user;
+    const query =
+      type === "place"
+        ? { place: id, company: ctx.params.id }
+        : { company: id, place: ctx.params.id };
+
+    return sanitizeEntity(
+      await strapi.query("message").find({ ...query, _sort: "created_at:asc" }),
       {
-        to: "gesnault@premieroctet.com",
-        from: entity.from,
-      },
-      template,
-      {
-        message: entity.message,
-        name: entity.name,
+        model: strapi.models.message,
       }
     );
-
-    return entity;
   },
 };
