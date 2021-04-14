@@ -77,5 +77,10 @@
                 "many": "Vous avez une demande de réservation pour plusieurs dates. <a>Voir le message.</a>"
             }
         }
+    },
+    "messages": {
+        "title": "Mes échanges",
+        "write": "Saisir votre message",
+        "submit": "Envoyer"
     }
 }

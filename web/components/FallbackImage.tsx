@@ -10,7 +10,7 @@ const FallbackImage = () => {
       w="100%"
       bgColor="gray.100"
     >
-      <Image src="/assets/img/logo-studio-d-white.png" />
+      <Image src="/assets/img/logo-studio-d-white.svg" />
     </Flex>
   )
 }

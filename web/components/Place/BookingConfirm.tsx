@@ -60,6 +60,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
       .then((res) => {
         if (message !== '') {
           return client.messages.messagesCreate({
+            author: 'company',
             booking: res.data.id,
             company: session.user.id,
             place: place.users_permissions_user.id,

@@ -45,7 +45,7 @@ const BookingList = ({ bookings, type }: Props) => {
         <Text textStyle="accountTitle" pl={4}>
           {t(`${type}.title`)}
         </Text>
-        <BookingSearch bookings={list} setBookings={setList} />
+        <BookingSearch bookings={bookings} setBookings={setList} />
       </Flex>
       <SimpleGrid gridTemplateColumns="fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
         <Cell isHeader>
@@ -83,7 +83,11 @@ const BookingList = ({ bookings, type }: Props) => {
           <Text>{t('activity')}</Text>
         </Cell>
         {list.map((booking) => (
-          <BookingListItem booking={booking} onSelect={onSelect} />
+          <BookingListItem
+            key={booking.id}
+            booking={booking}
+            onSelect={onSelect}
+          />
         ))}
       </SimpleGrid>
     </Box>

@@ -345,6 +345,7 @@ export interface Message {
     created_by?: string;
     updated_by?: string;
   };
+  author?: "company" | "place";
 }
 
 export interface NewMessage {
@@ -352,6 +353,7 @@ export interface NewMessage {
   place?: string;
   company?: string;
   booking?: string;
+  author?: "company" | "place";
   created_by?: string;
   updated_by?: string;
 }
@@ -1286,6 +1288,20 @@ export namespace Messages {
   /**
    * No description
    * @tags Message
+   * @name GetMessages
+   * @request GET:/messages/me
+   * @secure
+   */
+  export namespace GetMessages {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Message
    * @name MessagesList
    * @request GET:/messages
    * @secure
@@ -1380,6 +1396,23 @@ export namespace Messages {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = number;
+  }
+}
+
+export namespace Conversation {
+  /**
+   * No description
+   * @tags Message
+   * @name ConversationDetail
+   * @request GET:/conversation/{id}
+   * @secure
+   */
+  export namespace ConversationDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
   }
 }
 
@@ -2986,6 +3019,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * No description
      *
      * @tags Message
+     * @name GetMessages
+     * @request GET:/messages/me
+     * @secure
+     */
+    getMessages: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/messages/me`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Message
      * @name MessagesList
      * @request GET:/messages
      * @secure
@@ -3101,6 +3151,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<number, Error>({
         path: `/messages/${id}`,
         method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  conversation = {
+    /**
+     * No description
+     *
+     * @tags Message
+     * @name ConversationDetail
+     * @request GET:/conversation/{id}
+     * @secure
+     */
+    conversationDetail: (id: string, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/conversation/${id}`,
+        method: "GET",
         secure: true,
         format: "json",
         ...params,

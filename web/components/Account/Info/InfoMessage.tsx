@@ -7,7 +7,7 @@ const InfoMessage = () => {
   const { t } = useTranslation('account')
   return (
     <Info
-      img="/assets/img/message.png"
+      img="/assets/img/message-info.svg"
       title={t('message.info.title')}
       links={{
         url: ROUTE_PLACES,

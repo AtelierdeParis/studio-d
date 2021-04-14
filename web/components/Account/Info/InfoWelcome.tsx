@@ -8,7 +8,7 @@ const InfoWelcome = () => {
   const { t } = useTranslation('account')
   return (
     <Info
-      img="/assets/img/welcome.png"
+      img="/assets/img/welcome.svg"
       title={t('welcome')}
       links={{
         url: ROUTE_PLACES,

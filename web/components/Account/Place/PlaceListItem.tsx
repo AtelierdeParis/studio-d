@@ -11,6 +11,7 @@ import {
   Flex,
   Divider,
   HStack,
+  AspectRatio,
   Circle,
   ButtonGroup,
   LinkBox,
@@ -49,10 +50,10 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           bgColor: 'gray.hover',
         }}
       >
-        <Flex
-          w="210px"
-          h="150px"
-          pr={8}
+        <AspectRatio
+          w="230px"
+          ratio={4 / 3}
+          mr={8}
           alignItems="center"
           {...(!place.published
             ? { filter: 'grayscale(1)', opacity: 0.5 }
@@ -63,7 +64,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           ) : (
             <FallbackImage />
           )}
-        </Flex>
+        </AspectRatio>
         <Flex direction="column" justifyContent="space-between" flex={1}>
           <Flex justifyContent="space-between">
             <Box>

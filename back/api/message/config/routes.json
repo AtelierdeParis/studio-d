@@ -2,6 +2,22 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/messages/me",
+      "handler": "message.myConversations",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/conversation/:id",
+      "handler": "message.getConversation",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/messages",
       "handler": "message.find",
       "config": {

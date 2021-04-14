@@ -6,7 +6,7 @@ const InfoPending = () => {
   const { t } = useTranslation('account')
   return (
     <Info
-      img="/assets/img/pending.png"
+      img="/assets/img/pending.svg"
       title={t('pending')}
       links={{
         url: '/',

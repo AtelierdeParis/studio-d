@@ -25,6 +25,7 @@ const AskCancelModal = ({ booking, setSelected }: Props) => {
       .bookingsUpdate(booking?.id, { status: 'askcancel' })
       .then(() => {
         return client.messages.messagesCreate({
+          author: 'company',
           booking: booking.id,
           company: booking.company.id,
           place: booking.place.id,

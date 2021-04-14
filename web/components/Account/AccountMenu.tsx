@@ -142,7 +142,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
             <Back />
           </Link>
           <Link href={ROUTE_ACCOUNT}>
-            <Image ml={3} src="/assets/img/logo-studio-d.png" w="100px" />
+            <Image ml={3} src="/assets/img/logo-studio-d.svg" w="100px" />
           </Link>
         </Flex>
         <VStack spacing={12}>

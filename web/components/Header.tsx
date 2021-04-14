@@ -59,7 +59,7 @@ const Header = ({ colorMode }: IHeader) => {
           <Image
             src={`/assets/img/logo-studio-d${
               colorMode === 'white' ? '-white' : ''
-            }.png`}
+            }.svg`}
             cursor="pointer"
             alt="Logo Studio D"
           />

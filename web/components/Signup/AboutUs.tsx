@@ -5,19 +5,19 @@ import { Target } from '~pages/inscription/[target]'
 
 const list = [
   {
-    img: '/assets/img/signup-icon1.png',
+    img: '/assets/img/signup-icon1.svg',
     name: 'free',
   },
   {
-    img: '/assets/img/signup-icon2.png',
+    img: '/assets/img/signup-icon2.svg',
     name: 'reservation',
   },
   {
-    img: '/assets/img/signup-icon3.png',
+    img: '/assets/img/signup-icon3.svg',
     name: 'message',
   },
   {
-    img: '/assets/img/signup-icon4.png',
+    img: '/assets/img/signup-icon4.svg',
     name: 'confidentiality',
   },
 ]

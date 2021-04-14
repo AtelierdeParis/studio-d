@@ -25,6 +25,13 @@
     },
     "booking": {
       "model": "booking"
+    },
+    "author": {
+      "type": "enumeration",
+      "enum": [
+        "company",
+        "place"
+      ]
     }
   }
 }
