@@ -216,6 +216,7 @@ export interface NewEspace {
 export interface History {
   id: string;
   status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
+  created_at?: string;
   booking?: {
     id: string;
     disponibilities?: string[];
@@ -267,84 +268,10 @@ export interface NewHomeCarousel {
 export interface Message {
   id: string;
   message: string;
-  place?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country?: string;
-    siret: string;
-    ape: string;
-    phone?: string;
-    license?: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    created_by?: string;
-    updated_by?: string;
-  };
-  company?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country?: string;
-    siret: string;
-    ape: string;
-    phone?: string;
-    license?: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    created_by?: string;
-    updated_by?: string;
-  };
-  booking?: {
-    id: string;
-    disponibilities?: string[];
-    place?: string;
-    company?: string;
-    histories?: string[];
-    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
-    created_by?: string;
-    updated_by?: string;
-  };
+  created_at?: string;
+  place?: UsersPermissionsUser;
+  company?: UsersPermissionsUser;
+  booking?: Booking;
   author?: "company" | "place";
 }
 
@@ -1297,7 +1224,7 @@ export namespace Messages {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type ResponseBody = UsersPermissionsUser[];
   }
   /**
    * No description
@@ -1412,7 +1339,7 @@ export namespace Conversation {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type ResponseBody = Message[];
   }
 }
 
@@ -3024,7 +2951,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getMessages: (params: RequestParams = {}) =>
-      this.request<{ foo?: string }, Error>({
+      this.request<UsersPermissionsUser[], Error>({
         path: `/messages/me`,
         method: "GET",
         secure: true,
@@ -3166,7 +3093,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     conversationDetail: (id: string, params: RequestParams = {}) =>
-      this.request<{ foo?: string }, Error>({
+      this.request<Message[], Error>({
         path: `/conversation/${id}`,
         method: "GET",
         secure: true,

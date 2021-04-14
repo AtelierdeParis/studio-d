@@ -36,8 +36,7 @@ const Message = ({ message, isAuthor }: Props) => {
     >
       <Flex fontSize="sm" color="gray.300" pb={2}>
         <Text isTruncated maxW="300px">
-          {!isAuthor &&
-            `${name},sdfjssdfklsdjfsdfjlsdfjskdfjsdfjsdlfjsÒdflksdlkfjsdljflskjdlfsldjfld `}
+          {!isAuthor && `${name}, `}
         </Text>
         <Text>{format(message.created_at, "dd/MM à H'h'm")}</Text>
       </Flex>

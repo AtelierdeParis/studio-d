@@ -569,6 +569,9 @@
                   "pending"
                 ]
               },
+              "created_at": {
+                "type": "date-time"
+              },
               "created_by": {
                 "type": "string"
               },

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Booking } from '~typings/api'
 import { format } from '~utils/date'
 import { ROUTE_ACCOUNT_MESSAGE_DETAIL } from '~constants'
@@ -104,6 +104,7 @@ const BookingHistory = ({ booking, type }: Props) => {
   return (
     <VStack spacing={5} alignItems="flex-start">
       {booking?.histories
+        // @ts-ignore
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .map(({ id, status, created_at }) => {
           const { color, text } = getHistoryInfo(status, booking, type)

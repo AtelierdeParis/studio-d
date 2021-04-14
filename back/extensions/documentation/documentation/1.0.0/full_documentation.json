@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/13/2021 5:54:13 PM"
+    "x-generation-date": "04/14/2021 10:22:26 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3870,10 +3870,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UsersPermissionsUser"
                   }
                 }
               }
@@ -3927,10 +3926,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Message"
                   }
                 }
               }
@@ -7998,6 +7996,9 @@
               "askcancel"
             ]
           },
+          "created_at": {
+            "type": "string"
+          },
           "booking": {
             "required": [
               "id"
@@ -8171,292 +8172,17 @@
           "message": {
             "type": "string"
           },
+          "created_at": {
+            "type": "string"
+          },
           "place": {
-            "required": [
-              "id",
-              "email",
-              "username",
-              "firstname",
-              "lastname",
-              "structureName",
-              "address",
-              "zipCode",
-              "city",
-              "siret",
-              "ape",
-              "type"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "role": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "structureName": {
-                "type": "string"
-              },
-              "socialReason": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "zipCode": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "country": {
-                "type": "string"
-              },
-              "siret": {
-                "type": "string"
-              },
-              "ape": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "license": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              },
-              "legalRepresentative": {
-                "type": "string"
-              },
-              "statusRepresentative": {
-                "type": "string"
-              },
-              "insuranceNumber": {
-                "type": "string"
-              },
-              "insuranceName": {
-                "type": "string"
-              },
-              "choreographer": {
-                "type": "string"
-              },
-              "espaces": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "company",
-                  "place"
-                ]
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/UsersPermissionsUser"
           },
           "company": {
-            "required": [
-              "id",
-              "email",
-              "username",
-              "firstname",
-              "lastname",
-              "structureName",
-              "address",
-              "zipCode",
-              "city",
-              "siret",
-              "ape",
-              "type"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "role": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "structureName": {
-                "type": "string"
-              },
-              "socialReason": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "zipCode": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "country": {
-                "type": "string"
-              },
-              "siret": {
-                "type": "string"
-              },
-              "ape": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "license": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              },
-              "legalRepresentative": {
-                "type": "string"
-              },
-              "statusRepresentative": {
-                "type": "string"
-              },
-              "insuranceNumber": {
-                "type": "string"
-              },
-              "insuranceName": {
-                "type": "string"
-              },
-              "choreographer": {
-                "type": "string"
-              },
-              "espaces": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "company",
-                  "place"
-                ]
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/UsersPermissionsUser"
           },
           "booking": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "place": {
-                "type": "string"
-              },
-              "company": {
-                "type": "string"
-              },
-              "histories": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "canceled",
-                  "canceledbyplace",
-                  "askcancel",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+            "$ref": "#/components/schemas/Booking"
           },
           "author": {
             "type": "string",
