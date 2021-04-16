@@ -20,7 +20,7 @@ const HomePlaces = ({}: Props) => {
   if (!places || places.length === 0) return null
 
   return (
-    <Box pt={18}>
+    <Box py={4} w="100%">
       <Flex alignItems="flex-start" pl={2}>
         <Box w="18px">
           <Arrow />

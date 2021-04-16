@@ -248,6 +248,21 @@ export interface NewHomeCarousel {
   updated_by?: string;
 }
 
+export interface HomeMessage {
+  id: string;
+  text: string;
+  isVisible?: boolean;
+  title?: string;
+}
+
+export interface NewHomeMessage {
+  text: string;
+  isVisible?: boolean;
+  title?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface Message {
   id: string;
   message?: string;
@@ -1101,6 +1116,65 @@ export namespace HomeCarousel {
    * @secure
    */
   export namespace HomeCarouselDelete {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace HomeMessage {
+  /**
+   * @description Find all the home-message's records
+   * @tags Home-message
+   * @name GetHomeMessage
+   * @request GET:/home-message
+   * @secure
+   */
+  export namespace GetHomeMessage {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = HomeMessage;
+  }
+  /**
+   * @description Update a single home-message record
+   * @tags Home-message
+   * @name HomeMessageUpdate
+   * @request PUT:/home-message
+   * @secure
+   */
+  export namespace HomeMessageUpdate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewHomeMessage;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Delete a single home-message record
+   * @tags Home-message
+   * @name HomeMessageDelete
+   * @request DELETE:/home-message
+   * @secure
+   */
+  export namespace HomeMessageDelete {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = never;
@@ -2753,6 +2827,78 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     homeCarouselDelete: (params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/home-carousel`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  homeMessage = {
+    /**
+     * @description Find all the home-message's records
+     *
+     * @tags Home-message
+     * @name GetHomeMessage
+     * @request GET:/home-message
+     * @secure
+     */
+    getHomeMessage: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<HomeMessage, Error>({
+        path: `/home-message`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a single home-message record
+     *
+     * @tags Home-message
+     * @name HomeMessageUpdate
+     * @request PUT:/home-message
+     * @secure
+     */
+    homeMessageUpdate: (data: NewHomeMessage, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/home-message`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a single home-message record
+     *
+     * @tags Home-message
+     * @name HomeMessageDelete
+     * @request DELETE:/home-message
+     * @secure
+     */
+    homeMessageDelete: (params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/home-message`,
         method: "DELETE",
         secure: true,
         format: "json",

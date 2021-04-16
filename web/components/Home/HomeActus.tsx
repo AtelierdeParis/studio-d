@@ -19,7 +19,7 @@ const HomeActus = ({}: Props) => {
   if (!actus || actus.length === 0) return null
 
   return (
-    <Box pt={24}>
+    <Box w="100%">
       <Flex alignItems="flex-start" pl={2}>
         <Box w="18px">
           <Arrow />

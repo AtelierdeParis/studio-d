@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_messages",
+  "info": {
+    "name": "home-message",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "text": {
+      "type": "text",
+      "required": true
+    },
+    "isVisible": {
+      "type": "boolean",
+      "default": false
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

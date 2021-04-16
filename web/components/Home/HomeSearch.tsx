@@ -25,7 +25,7 @@ const HomeSearch = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
       <Flex
         bgColor="white"
         px={6}
@@ -36,7 +36,7 @@ const HomeSearch = () => {
         zIndex={99}
         maxW="750px"
         mx="auto"
-        transform="translateY(-50%)"
+        transform="translateY(50%)"
       >
         <Flex alignItems="flex-start" flex={1}>
           <Flex w="100%" pt={1}>
