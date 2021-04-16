@@ -219,6 +219,41 @@ export interface NewEspace {
   updated_by?: string;
 }
 
+export interface FaqCategory {
+  id: string;
+  name: string;
+  faq_questions?: {
+    id: string;
+    question: string;
+    answer: string;
+    faq_category?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+}
+
+export interface NewFaqCategory {
+  name: string;
+  faq_questions?: string[];
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface FaqQuestion {
+  id: string;
+  question: string;
+  answer: string;
+  faq_category?: { id: string; name: string; faq_questions?: string[]; created_by?: string; updated_by?: string };
+}
+
+export interface NewFaqQuestion {
+  question: string;
+  answer: string;
+  faq_category?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface HomeCarousel {
   id: string;
   images: {
@@ -1057,6 +1092,208 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace FaqCategories {
+  /**
+   * No description
+   * @tags Faq-category
+   * @name FaqCategoriesList
+   * @request GET:/faq-categories
+   * @secure
+   */
+  export namespace FaqCategoriesList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = FaqCategory[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Faq-category
+   * @name FaqCategoriesCreate
+   * @request POST:/faq-categories
+   * @secure
+   */
+  export namespace FaqCategoriesCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewFaqCategory;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Faq-category
+   * @name CountList
+   * @request GET:/faq-categories/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Faq-category
+   * @name FaqCategoriesDetail
+   * @request GET:/faq-categories/{id}
+   * @secure
+   */
+  export namespace FaqCategoriesDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Update a record
+   * @tags Faq-category
+   * @name FaqCategoriesUpdate
+   * @request PUT:/faq-categories/{id}
+   * @secure
+   */
+  export namespace FaqCategoriesUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewFaqCategory;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Delete a record
+   * @tags Faq-category
+   * @name FaqCategoriesDelete
+   * @request DELETE:/faq-categories/{id}
+   * @secure
+   */
+  export namespace FaqCategoriesDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace FaqQuestions {
+  /**
+   * No description
+   * @tags Faq-question
+   * @name FaqQuestionsList
+   * @request GET:/faq-questions
+   * @secure
+   */
+  export namespace FaqQuestionsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Create a new record
+   * @tags Faq-question
+   * @name FaqQuestionsCreate
+   * @request POST:/faq-questions
+   * @secure
+   */
+  export namespace FaqQuestionsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewFaqQuestion;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Faq-question
+   * @name CountList
+   * @request GET:/faq-questions/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Faq-question
+   * @name FaqQuestionsDetail
+   * @request GET:/faq-questions/{id}
+   * @secure
+   */
+  export namespace FaqQuestionsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Update a record
+   * @tags Faq-question
+   * @name FaqQuestionsUpdate
+   * @request PUT:/faq-questions/{id}
+   * @secure
+   */
+  export namespace FaqQuestionsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewFaqQuestion;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * @description Delete a record
+   * @tags Faq-question
+   * @name FaqQuestionsDelete
+   * @request DELETE:/faq-questions/{id}
+   * @secure
+   */
+  export namespace FaqQuestionsDelete {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
     export type RequestBody = never;
@@ -2755,6 +2992,256 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/espaces/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  faqCategories = {
+    /**
+     * No description
+     *
+     * @tags Faq-category
+     * @name FaqCategoriesList
+     * @request GET:/faq-categories
+     * @secure
+     */
+    faqCategoriesList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<FaqCategory[], Error>({
+        path: `/faq-categories`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Faq-category
+     * @name FaqCategoriesCreate
+     * @request POST:/faq-categories
+     * @secure
+     */
+    faqCategoriesCreate: (data: NewFaqCategory, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-categories`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Faq-category
+     * @name CountList
+     * @request GET:/faq-categories/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-categories/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Faq-category
+     * @name FaqCategoriesDetail
+     * @request GET:/faq-categories/{id}
+     * @secure
+     */
+    faqCategoriesDetail: (id: string, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-categories/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Faq-category
+     * @name FaqCategoriesUpdate
+     * @request PUT:/faq-categories/{id}
+     * @secure
+     */
+    faqCategoriesUpdate: (id: string, data: NewFaqCategory, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-categories/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Faq-category
+     * @name FaqCategoriesDelete
+     * @request DELETE:/faq-categories/{id}
+     * @secure
+     */
+    faqCategoriesDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/faq-categories/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  faqQuestions = {
+    /**
+     * No description
+     *
+     * @tags Faq-question
+     * @name FaqQuestionsList
+     * @request GET:/faq-questions
+     * @secure
+     */
+    faqQuestionsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-questions`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Faq-question
+     * @name FaqQuestionsCreate
+     * @request POST:/faq-questions
+     * @secure
+     */
+    faqQuestionsCreate: (data: NewFaqQuestion, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-questions`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Faq-question
+     * @name CountList
+     * @request GET:/faq-questions/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-questions/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Faq-question
+     * @name FaqQuestionsDetail
+     * @request GET:/faq-questions/{id}
+     * @secure
+     */
+    faqQuestionsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-questions/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Faq-question
+     * @name FaqQuestionsUpdate
+     * @request PUT:/faq-questions/{id}
+     * @secure
+     */
+    faqQuestionsUpdate: (id: string, data: NewFaqQuestion, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/faq-questions/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Faq-question
+     * @name FaqQuestionsDelete
+     * @request DELETE:/faq-questions/{id}
+     * @secure
+     */
+    faqQuestionsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/faq-questions/${id}`,
         method: "DELETE",
         secure: true,
         format: "json",

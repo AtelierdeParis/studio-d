@@ -8,11 +8,11 @@ import { ROUTE_PROJECT } from '~constants'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
 
-interface IProject {
+interface Props {
   page: Page
 }
 
-const Project = ({ page }: IProject) => {
+const Project = ({ page }: Props) => {
   return (
     <Container>
       <Heading
