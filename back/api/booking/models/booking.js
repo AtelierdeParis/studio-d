@@ -7,6 +7,18 @@
 
 module.exports = {
   lifecycles: {
+    async afterFind(results) {
+      if (results.length > 0) {
+        await Promise.all(
+          results.map(async (booking) => {
+            const { status } = await strapi.services.booking.checkIsPast(
+              booking
+            );
+            booking.status = status;
+          })
+        );
+      }
+    },
     async afterCreate(created) {
       await strapi.services.message.create({
         author: "company",

@@ -21,11 +21,8 @@ const getMybookings = (query, user) => {
     .then((res) => {
       return Promise.all(
         res.map(async (booking) => {
-          const checkedBooking = await strapi.services.booking.checkIsPast(
-            booking
-          );
           return {
-            ...checkedBooking,
+            ...booking,
             notifications: await strapi.services.message.getNbNotifications({
               id: user.id,
               type: user.type,
