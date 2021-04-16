@@ -35,6 +35,27 @@ const getSchema = (target: Target) => {
     password: yup.string().required().min(10),
     structureName: yup.string().required(),
     address: yup.string().required(),
+    phone: yup.string().test({
+      message: 'Le format du téléphone est incorrect',
+      test: (value) => {
+        if (value === '') return true
+        const match = value.match(
+          /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
+        )
+        if (!match) return false
+        return match[0] === value
+      },
+    }),
+    license: yup.string().test({
+      message: 'Les licences doivent être séparés par des virgules',
+      test: (value) => {
+        if (value === '') return true
+        const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
+        if (!match) return false
+        return match[0] === value
+      },
+    }),
+    website: yup.string().url(),
     zipCode: yup.string().required(),
     city: yup.string().required(),
     siret: yup.string().required().min(14).max(14),
@@ -67,16 +88,17 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
     mode: 'onBlur',
     resolver: yupResolver(getSchema(target)),
   })
-
+  console.log(errors)
   const onSubmit = (data) => {
     const { acceptCondition, ...user } = data
     setLoading(true)
 
-    client.auth.signup({
-      ...user,
-      type: target === 'compagnie' ? 'company' : 'place',
-      username: user.email,
-    })
+    client.auth
+      .signup({
+        ...user,
+        type: target === 'compagnie' ? 'company' : 'place',
+        username: user.email,
+      })
       .then(onSuccess)
       .catch((err) => {
         if (err.response?.data?.message?.field) {
@@ -214,7 +236,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                 <Input name="ape" ref={register} />
               </FormField>
             </HStack>
-            <FormField label={t('form.referent')} errors={errors.referent}>
+            <FormField label={t('form.referent')} errors={errors.phone}>
               <Input name="phone" ref={register} />
             </FormField>
             <FormField
@@ -284,7 +306,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                 </FormField>
                 <FormField
                   label={t('form.qualityRepresentative')}
-                  errors={errors.qualityRepresentative}
+                  errors={errors.statusRepresentative}
                   isRequired
                 >
                   <Input

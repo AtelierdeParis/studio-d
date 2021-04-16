@@ -33,6 +33,7 @@ const getSchema = (place) => {
     roomLength: yup.number().required(),
     width: yup.number().required(),
     height: yup.number().required(),
+    danceCarpet: yup.string().required(),
     mirror: yup.string().required(),
     danceBar: yup.string().required(),
     accomodation: yup.string().required(),
@@ -202,10 +203,22 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
         <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
         <HStack spacing={5} mb={10}>
           <FormField label={t('form.about.label')} errors={errors.about}>
-            <Textarea name="about" ref={register} resize="none" h="215px" />
+            <Textarea
+              name="about"
+              ref={register}
+              resize="none"
+              h="215px"
+              placeholder={t('form.about.placeholder')}
+            />
           </FormField>
           <FormField label={t('form.details.label')} errors={errors.details}>
-            <Textarea name="details" ref={register} resize="none" h="215px" />
+            <Textarea
+              name="details"
+              ref={register}
+              resize="none"
+              h="215px"
+              placeholder={t('form.details.placeholder')}
+            />
           </FormField>
         </HStack>
         <InputFile control={control} place={place} />

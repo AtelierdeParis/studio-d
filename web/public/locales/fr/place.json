@@ -73,10 +73,12 @@
             "info": "Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton"
         },
         "about": {
-            "label": "À propos de l’espace"
+            "label": "À propos de l’espace",
+            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
         },
         "details": {
-            "label": "Détails techniques"
+            "label": "Détails techniques",
+            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
         },
         "files": {
             "noFile": "Aucun fichier à afficher",
