@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from 'react-query'
 import { client } from '~api/client-api'
 
-export const useActualities = (nbActu, limit = 9) => {
+export const useInfiniteActualities = (nbActu, limit = 9) => {
   return useInfiniteQuery(
     'actualities',
     ({ pageParam = 0 }) => {

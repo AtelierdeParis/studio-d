@@ -9,9 +9,8 @@ interface IBlock {
   description: string
   btn: string
   url?: string
-  onSelect?: (number) => void
 }
-const Block = ({ title, description, btn, url, onSelect }: IBlock) => {
+const Block = ({ title, description, btn, url }: IBlock) => {
   return (
     <Flex
       flex={1}

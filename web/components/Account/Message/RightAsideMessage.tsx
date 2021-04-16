@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Text, Flex, Box, VStack, Divider, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { useBookings } from '~hooks/useBookings'
+import { Booking } from '~typings/api'
 import { UsersPermissionsUser } from '~typings/api'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
@@ -9,7 +9,7 @@ import { format } from '~utils/date'
 import { ROUTE_ACCOUNT_BOOKING, ROUTE_ACCOUNT_REQUEST } from '~constants'
 
 interface Props {
-  id: string
+  bookings: Booking[]
   user: UsersPermissionsUser
 }
 
@@ -33,21 +33,8 @@ const DateBooking = ({ dispos }) => {
   return <>{t(`slot${dispos.length > 1 ? 's' : ''}`, { nb: dispos.length })}</>
 }
 
-const RightAsideMessage = ({ id, user }: Props) => {
+const RightAsideMessage = ({ bookings, user }: Props) => {
   const { t } = useTranslation('booking')
-
-  const { data: bookings, isLoading } = useBookings({
-    _sort: 'id:desc',
-    ...(user.type === 'place'
-      ? {
-          place: user.id,
-          company: id,
-        }
-      : {
-          place: id,
-          company: user.id,
-        }),
-  })
 
   return (
     <Box borderLeft="1px solid" borderColor="gray.100" w="240px" px={5} py={6}>

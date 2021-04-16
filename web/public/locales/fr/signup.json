@@ -4,24 +4,46 @@
     "compagnie": "• Compagnie",
     "lieu": "• Lieu",
     "about": {
-        "description": "StudioD’ est une plateforme web créée par l’Atelier de Paris, accessible gratuitement après inscription.\n\nElle a pour vocation de mettre en relation des établissements culturels, artistiques ou socioculturels (les « Lieux ») avec des compagnies de danse professionnelles (vous) pour leur permettre d’échanger des informations sur la disponibilité d’espaces de travail, en vue de leur réservation.\n\nPrenez connaissance de ces quelques points clés de la plateforme :",
-        "free": {
-            "title": "Gratuité du service",
-            "text": "L'utilisation de la plateforme est réservée à des fins exclusivement professionnelles mais non commerciales. Les services de réservation s’effectuent à titre gratuit."
+        "compagnie" : {
+            "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (les lieux contributeurs) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles (vous) ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+            "free": {
+                "title": "Gratuité du service",
+                "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits."
+            },
+            "reservation": {
+                "title": "Réservation des espaces",
+                "text": "StudioD vous permet de réserver des espaces de répétition sur des créneaux plus ou moins longs (d’une demi-journée à plusieurs jours) en fonction des disponibilités des lieux. Chaque demande de réservation vousengage et bloque le créneau sélectionné pour toute autre compagnie. Aussi vous ne pourrez pas faire de demande sur un même créneau auprès de plusieurs espaces."
+            },
+            "message": {
+                "title": "Échanges avec les lieux",
+                "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les espaces et suivre de près toutes vos réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux compagnies comme aux lieux de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
+            },
+            "confidentiality": {
+                "title": "Confidentialité",
+                "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations que vous y renseignerez seront réservées à la stricte confidentialité des lieux auprès de qui vous effectuerez des réservations, et de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Vos données ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
+            },
+            "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté!"
         },
-        "reservation": {
-            "title": "Réservation des créneaux",
-            "text": "Chaque créneau demandé vous engage, aussi vous ne pourrez déposer qu’une seule demande pour un créneau donné."
+        "lieu" : {
+            "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (vous) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+            "free": {
+                "title": "Gratuité du service",
+                "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits. Aucune compensation financière se saurait être demandée à une compagnie pour une réservation d’espace effectuée via StudioD."
+            },
+            "reservation": {
+                "title": "Réservation des espaces",
+                "text": "StudioD vous permet de gérer et d’optimiser l’occupation de vos espaces. En tant que lieu contributeur, vous vous engagez à renseigner régulièrement vos créneaux disponibles sur les calendriers de chacun de vos espaces. Pour simplifier considérablement votre gestion des demandes de réservations, vous ne recevrez qu’une demande à la fois surchaque créneau."
+            },
+            "message": {
+                "title": "Échanges avec les compagnies",
+                "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les compagnies et suivre de près toutes leurs réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux lieux comme aux compagnies de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
+            },
+            "confidentiality": {
+                "title": "Confidentialité",
+                "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations qui concernent vos espaces seront accessibles aux utilisateur·rice·s. Vos données personnelles seront réservées à la stricte confidentialité de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Elles ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
+            },
+            "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté !"
         },
-        "message": {
-            "title": "Échanges avec les espaces",
-            "text": "Nous mettons à votre disposition une messagerie sécurisée avec les espaces auprès desquels vous déposerez des réservations. Ce mode d’échange privilégié vous permettra de pouvoir suivre de près toutes vos réservations."
-        },
-        "confidentiality": {
-            "title": "Confidentialité des informations",
-            "text": "La plupart des informations renseignées concernent votre structure (nom, statut, adresse etc.) et seront accessibles aux Lieux inscrits sur Studio D. En revanche, les données dites personnelles (nom, prénom, e-mail, éventuel téléphone d’une personne physique référente), ne seront accessibles que par l’Atelier de Paris, éditeur et modérateur de la plateforme, et resteront masquées pour les autres utilisateurs inscrits."
-        },
-        "condition": "Phrase à rédiger expliquant au futur inscrit que son inscription l’engage à être en accord avec les principes évoqués ci-dessus et qu’il peut maintenant continuer son inscription.",
         "btn": "Poursuivre"
     },
     "form": {

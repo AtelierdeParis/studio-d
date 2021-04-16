@@ -29,10 +29,11 @@ interface IAboutUs {
 
 const AboutUs = ({ onClick, target }: IAboutUs) => {
   const { t } = useTranslation('signup')
+
   return (
     <Flex maxW="46rem" direction="column" m="0 auto">
       <Text whiteSpace="pre-line" pb={18} px={20}>
-        {t('about.description')}
+        {t(`about.${target}.description`)}
       </Text>
       {list.map(({ img, name }) => (
         <Fragment key={name}>
@@ -41,9 +42,9 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
             <Image src={img} alignSelf="flex-start" />
             <Box ml={10}>
               <Text fontSize="lg" fontWeight="500" mb={2}>
-                {t(`about.${name}.title`)}
+                {t(`about.${target}.${name}.title`)}
               </Text>
-              <Text>{t(`about.${name}.text`)}</Text>
+              <Text>{t(`about.${target}.${name}.text`)}</Text>
             </Box>
           </Flex>
         </Fragment>
@@ -59,8 +60,7 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
         mb={30}
       >
         <Box>
-          {/* TODO: Replace with good value */}
-          <Text color="grayText.1">{t(`about.condition`)}</Text>
+          <Text color="grayText.1">{t(`about.${target}.condition`)}</Text>
         </Box>
         <Button
           onClick={() => {

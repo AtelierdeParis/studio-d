@@ -94,10 +94,7 @@ const styleActive: BoxProps = {
 }
 
 const styleNotif: BoxProps = {
-  position: 'absolute',
-  top: '50%',
-  right: 5,
-  transform: 'translateY(-50%)',
+  ml: 2,
 }
 
 const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {

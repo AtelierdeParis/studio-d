@@ -13,11 +13,11 @@ const useDispoInRange = (
     if (disponibilities.length === 0 || (!start && !end)) return null
     return disponibilities?.filter((dispo) => {
       return (
-        isSameDay(start, new Date(dispo.start)) ||
+        isSameDay(new Date(start), new Date(dispo.start)) ||
         (end &&
-          ((isAfter(new Date(dispo.start), start) &&
-            isBefore(new Date(dispo.start), end)) ||
-            isSameDay(end, new Date(dispo.start))))
+          ((isAfter(new Date(dispo.start), new Date(start)) &&
+            isBefore(new Date(dispo.start), new Date(end))) ||
+            isSameDay(new Date(end), new Date(dispo.start))))
       )
     })
   }, [disponibilities, start, end])

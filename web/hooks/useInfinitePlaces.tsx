@@ -2,7 +2,7 @@ import { useInfiniteQuery } from 'react-query'
 import { client } from '~api/client-api'
 import { Espaces } from '~typings/api'
 
-export const usePlaces = (
+export const useInfinitePlaces = (
   nbPlaces,
   params: Espaces.EspacesList.RequestQuery,
 ) => {

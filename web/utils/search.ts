@@ -1,3 +1,6 @@
+import isDate from 'date-fns/isDate'
+import { format } from '~utils/date'
+
 export enum SurfaceOptions {
   LESS_50 = '< 50',
   BETWEEN_50_120 = '50 - 120',
@@ -36,6 +39,17 @@ export interface SearchQuery {
   published_eq: boolean
   'disponibilities.start_gte'?: Date
   'disponibilities.end_gte'?: Date
+}
+
+export const formatSearchToQuery = (data): Record<string, any> => {
+  return Object.fromEntries(
+    Object.entries(data)
+      .map(([_, v]) => {
+        if (isDate(v)) return [_, format(v as Date, 'yyyy-MM-dd')]
+        return [_, v]
+      })
+      .filter(([_, v]) => v !== null && v !== '' && typeof v !== 'undefined'),
+  )
 }
 
 export const formatSearch = (formData): SearchQuery => {

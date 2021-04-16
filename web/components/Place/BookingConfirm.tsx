@@ -31,7 +31,6 @@ interface Props {
 }
 
 const BookingConfirm = ({ events, place, back }: Props) => {
-  console.log(place)
   const [session] = useSession()
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)

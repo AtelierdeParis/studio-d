@@ -9,7 +9,7 @@ import ConversationLine from '~components/Account/Message/ConversationLine'
 import { client } from '~api/client-api'
 import { useQueryClient } from 'react-query'
 import RightAsideMessage from '~components/Account/Message/RightAsideMessage'
-
+import { useBookings } from '~hooks/useBookings'
 interface Props {
   id: string
   user: UsersPermissionsUser
@@ -40,10 +40,18 @@ const Conversation = ({ id, user }: Props) => {
     },
   })
 
-  const booking = useMemo(() => {
-    if (!conversation || conversation.pages.length === 0) return null
-    return conversation.pages[0][0].booking
-  }, [conversation])
+  const { data: bookings } = useBookings({
+    _sort: 'id:desc',
+    ...(user.type === 'place'
+      ? {
+          place: user.id,
+          company: id,
+        }
+      : {
+          place: id,
+          company: user.id,
+        }),
+  })
 
   useEffect(() => {
     if (listRef.current && !hasScrolled) {
@@ -55,19 +63,19 @@ const Conversation = ({ id, user }: Props) => {
   if (!isLoading && !conversation) return null
 
   const sendMessage = (message) => {
+    if (bookings.length === 0) return false
     const target =
       user.type === 'place'
-        ? { company: booking.company }
-        : { place: booking.place }
+        ? { company: bookings[0].company }
+        : { place: bookings[0].place }
 
     return (
       client.messages
         // @ts-ignore
         .messagesCreate({
           status: 'message',
-          message: message,
-          author: user.type,
-          booking: booking.id,
+          message,
+          booking: bookings[0].id,
           ...target,
         })
         .then((res) => {
@@ -131,7 +139,7 @@ const Conversation = ({ id, user }: Props) => {
           <WriteMessage sendMessage={sendMessage} />
         </Flex>
       </Flex>
-      <RightAsideMessage id={id} user={user} />
+      <RightAsideMessage bookings={bookings} user={user} />
     </Loading>
   )
 }

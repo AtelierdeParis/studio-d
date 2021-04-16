@@ -2,6 +2,7 @@
 const { sanitizeEntity } = require("strapi-utils");
 
 const getTarget = (type) => (type === "place" ? "company" : "place");
+
 const mapStatus = (status) => {
   switch (status) {
     case "booking":
@@ -59,6 +60,7 @@ module.exports = {
     const entity = await strapi.services.message.create({
       ...ctx.request.body,
       ...relation,
+      author: type,
     });
     return sanitizeEntity(entity, { model: strapi.models.message });
   },

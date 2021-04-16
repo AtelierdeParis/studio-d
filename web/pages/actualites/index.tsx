@@ -3,7 +3,7 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Container, Heading, SimpleGrid } from '@chakra-ui/react'
-import { useActualities } from '~hooks/useActualities'
+import { useInfiniteActualities } from '~hooks/useInfiniteActualities'
 import { useNbActualities } from '~hooks/useNbActualities'
 import { useScrollBottom } from '~hooks/useScrollBottom'
 import ActuCard from '~components/Actuality/ActuCard'
@@ -22,7 +22,7 @@ const Actuality = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useActualities(nbActu)
+  } = useInfiniteActualities(nbActu)
 
   useScrollBottom(
     ref,

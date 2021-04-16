@@ -131,27 +131,19 @@ module.exports = {
         }
         return dispoId;
       })
-    )
-      .then((res) => {
-        return res.map((dispoId) => {
-          strapi
-            .query("disponibility")
-            .update({ id: dispoId }, { status: "pending" });
-        });
-      })
-      .catch((err) => {
-        console.log("err", err);
+    ).then((res) => {
+      return res.map((dispoId) => {
+        strapi
+          .query("disponibility")
+          .update({ id: dispoId }, { status: "pending" });
       });
+    });
 
-    const entity = await strapi.services.booking
-      .create({
-        ...ctx.request.body,
-        company: id,
-        place: espace.users_permissions_user.id,
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const entity = await strapi.services.booking.create({
+      ...ctx.request.body,
+      company: id,
+      place: espace.users_permissions_user.id,
+    });
     return sanitizeEntity(entity, { model: strapi.models.booking });
   },
 };

@@ -14,6 +14,9 @@ const Button = {
     colorScheme: 'orange',
   },
   variants: {
+    outline: {
+      px: 7,
+    },
     delete: {
       justifyContent: 'flex-start',
       bgColor: 'tag.red',
