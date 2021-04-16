@@ -36,8 +36,9 @@ const DateBooking = ({ dispos }) => {
 const RightAsideMessage = ({ id, user }: Props) => {
   const { t } = useTranslation('booking')
 
-  const { data: bookings, isLoading } = useBookings(
-    user.type === 'place'
+  const { data: bookings, isLoading } = useBookings({
+    _sort: 'id:desc',
+    ...(user.type === 'place'
       ? {
           place: user.id,
           company: id,
@@ -45,8 +46,8 @@ const RightAsideMessage = ({ id, user }: Props) => {
       : {
           place: id,
           company: user.id,
-        },
-  )
+        }),
+  })
 
   return (
     <Box borderLeft="1px solid" borderColor="gray.100" w="240px" px={5} py={6}>

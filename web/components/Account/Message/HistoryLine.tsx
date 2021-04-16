@@ -24,7 +24,7 @@ const HistoryLine = ({ message, isAuthor, type }: Props) => {
     >
       {!isAuthor && <Circle size="6px" bgColor={colorCircle} mt={1.5} mr={2} />}
 
-      <Text fontSize="sm" color={color}>
+      <Text fontSize="sm" color={color} textAlign={isAuthor ? 'right' : 'left'}>
         {text}
       </Text>
 

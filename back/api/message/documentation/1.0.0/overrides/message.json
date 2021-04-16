@@ -1,6 +1,138 @@
 {
     "paths": {
-        "/messages/me": {
+      "/notifications/toggle": {
+        "post": {
+          "deprecated": false,
+          "operationId": "toggleNotif",
+          "description": "Create a new record",
+          "responses": {
+            "200": {
+              "description": "response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "foo": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "",
+          "tags": [
+            "Message"
+          ],
+          "requestBody": {
+            "description": "",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadNotif"
+                }
+              }
+            }
+          }
+        }
+      },
+      "/notifications/me": {
+        "get": {
+          "deprecated": false,
+          "description": "",
+          "operationId": "myNotifications",
+          "responses": {
+            "200": {
+              "description": "response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                      "$ref": "#/components/schemas/NotifCount"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            },
+            "default": {
+              "description": "unexpected error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Error"
+                  }
+                }
+              }
+            }
+          },
+          "summary": "",
+          "tags": [
+            "Message"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "query",
+              "description": "",
+              "deprecated": false,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ]
+        }
+      },
+        "/conversation/me": {
           "get": {
             "deprecated": false,
             "description": "",
@@ -303,6 +435,40 @@
                 "company",
                 "place"
               ]
+            }
+          }
+        },
+        "ReadNotif": {
+          "required": [
+            "status"
+          ],
+          "properties": {
+            "bookingId": {
+              "type": "string"
+            },
+            "targetId": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "message",
+                "request",
+                "booking"
+              ]
+            }
+          }
+        },
+        "NotifCount": {
+          "properties": {
+            "request": {
+              "type": "number"
+            },
+            "booking": {
+              "type": "number"
+            },
+            "message": {
+              "type": "number"
             }
           }
         }

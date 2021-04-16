@@ -1,6 +1,134 @@
 {
   "paths": {
-    "/messages/me": {
+    "/conversation/me": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Message"
+        ],
+        "parameters": []
+      }
+    },
+    "/notifications/toggle": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Message"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/me": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -764,6 +892,12 @@
                   "place"
                 ]
               },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -885,6 +1019,12 @@
                   "place"
                 ]
               },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -925,17 +1065,8 @@
                   "type": "string"
                 }
               },
-              "place": {
-                "type": "string"
-              },
               "company": {
                 "type": "string"
-              },
-              "histories": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "status": {
                 "type": "string",
@@ -954,6 +1085,12 @@
                   "type": "string"
                 }
               },
+              "espace": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -961,6 +1098,10 @@
                 "type": "string"
               }
             }
+          },
+          "hasbeenread": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -998,6 +1139,10 @@
           },
           "booking": {
             "type": "string"
+          },
+          "hasbeenread": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

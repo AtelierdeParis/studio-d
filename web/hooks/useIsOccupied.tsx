@@ -11,11 +11,7 @@ const useIsOccupied = (
   status = null,
 ) => {
   return useMemo(() => {
-    if (
-      status &&
-      ['pending', 'canceled', 'canceledbyplace', 'place'].includes(status)
-    )
-      return false
+    if (status && status !== 'accepted') return false
     const morning = setHours(new Date(), 8)
     const afternoon = setHours(new Date(), 14)
     return disponibilities.some((dispo) => {

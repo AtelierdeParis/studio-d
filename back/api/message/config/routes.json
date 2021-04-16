@@ -2,8 +2,24 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/messages/me",
+      "path": "/conversation/me",
       "handler": "message.myConversations",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/notifications/toggle",
+      "handler": "message.readNotifications",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/notifications/me",
+      "handler": "message.myNotifications",
       "config": {
         "policies": []
       }

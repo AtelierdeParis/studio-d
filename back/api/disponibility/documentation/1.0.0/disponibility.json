@@ -725,6 +725,12 @@
               "danceCarpet": {
                 "type": "boolean"
               },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -765,17 +771,8 @@
                   "type": "string"
                 }
               },
-              "place": {
-                "type": "string"
-              },
               "company": {
                 "type": "string"
-              },
-              "histories": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "status": {
                 "type": "string",
@@ -793,6 +790,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "espace": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"

@@ -47,18 +47,20 @@ export interface Booking {
   id: string;
   status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   disponibilities?: Disponibility[];
-  place?: UsersPermissionsUser;
+  espace?: Espace;
   company?: UsersPermissionsUser;
+  place?: UsersPermissionsUser;
+  notifications?: NotifCount;
   messages?: Message[];
 }
 
 export interface NewBooking {
   disponibilities?: string[];
-  place?: string;
   company?: string;
-  histories?: string[];
   status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   messages?: string[];
+  espace?: string;
+  place?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -114,6 +116,7 @@ export interface Disponibility {
     published?: boolean;
     city: string;
     danceCarpet: boolean;
+    bookings?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -122,11 +125,11 @@ export interface Disponibility {
   booking?: {
     id: string;
     disponibilities?: string[];
-    place?: string;
     company?: string;
-    histories?: string[];
     status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     messages?: string[];
+    espace?: string;
+    place?: string;
     created_by?: string;
     updated_by?: string;
   };
@@ -211,29 +214,7 @@ export interface NewEspace {
   published?: boolean;
   city: string;
   danceCarpet: boolean;
-  created_by?: string;
-  updated_by?: string;
-}
-
-export interface History {
-  id: string;
-  status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
-  created_at?: string;
-  booking?: {
-    id: string;
-    disponibilities?: string[];
-    place?: string;
-    company?: string;
-    histories?: string[];
-    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
-    created_by?: string;
-    updated_by?: string;
-  };
-}
-
-export interface NewHistory {
-  status?: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel";
-  booking?: string;
+  bookings?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -285,8 +266,21 @@ export interface NewMessage {
   author?: "company" | "place";
   status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
   booking?: string;
+  hasbeenread?: boolean;
   created_by?: string;
   updated_by?: string;
+}
+
+export interface ReadNotif {
+  bookingId?: string;
+  targetId?: string;
+  status: "message" | "request" | "booking";
+}
+
+export interface NotifCount {
+  request?: number;
+  booking?: number;
+  message?: number;
 }
 
 export interface Page {
@@ -367,6 +361,7 @@ export interface UsersPermissionsRole {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
+    bookings?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -1055,107 +1050,6 @@ export namespace Espaces {
   }
 }
 
-export namespace Histories {
-  /**
-   * No description
-   * @tags History
-   * @name HistoriesList
-   * @request GET:/histories
-   * @secure
-   */
-  export namespace HistoriesList {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = History[];
-  }
-  /**
-   * @description Create a new record
-   * @tags History
-   * @name HistoriesCreate
-   * @request POST:/histories
-   * @secure
-   */
-  export namespace HistoriesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewHistory;
-    export type RequestHeaders = {};
-    export type ResponseBody = History;
-  }
-  /**
-   * No description
-   * @tags History
-   * @name CountList
-   * @request GET:/histories/count
-   * @secure
-   */
-  export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
-  }
-  /**
-   * No description
-   * @tags History
-   * @name HistoriesDetail
-   * @request GET:/histories/{id}
-   * @secure
-   */
-  export namespace HistoriesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = History;
-  }
-  /**
-   * @description Update a record
-   * @tags History
-   * @name HistoriesUpdate
-   * @request PUT:/histories/{id}
-   * @secure
-   */
-  export namespace HistoriesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewHistory;
-    export type RequestHeaders = {};
-    export type ResponseBody = History;
-  }
-  /**
-   * @description Delete a record
-   * @tags History
-   * @name HistoriesDelete
-   * @request DELETE:/histories/{id}
-   * @secure
-   */
-  export namespace HistoriesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
-  }
-}
-
 export namespace HomeCarousel {
   /**
    * @description Find all the home-carousel's records
@@ -1215,21 +1109,83 @@ export namespace HomeCarousel {
   }
 }
 
-export namespace Messages {
+export namespace Conversation {
   /**
    * No description
    * @tags Message
-   * @name GetMessages
-   * @request GET:/messages/me
+   * @name GetConversation
+   * @request GET:/conversation/me
    * @secure
    */
-  export namespace GetMessages {
+  export namespace GetConversation {
     export type RequestParams = {};
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = UsersPermissionsUser[];
   }
+  /**
+   * No description
+   * @tags Message
+   * @name ConversationDetail
+   * @request GET:/conversation/{id}
+   * @secure
+   */
+  export namespace ConversationDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Message[];
+  }
+}
+
+export namespace Notifications {
+  /**
+   * @description Create a new record
+   * @tags Message
+   * @name ToggleNotif
+   * @request POST:/notifications/toggle
+   * @secure
+   */
+  export namespace ToggleNotif {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = ReadNotif;
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
+  }
+  /**
+   * No description
+   * @tags Message
+   * @name MyNotifications
+   * @request GET:/notifications/me
+   * @secure
+   */
+  export namespace MyNotifications {
+    export type RequestParams = {};
+    export type RequestQuery = { id?: string };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = NotifCount;
+  }
+}
+
+export namespace Messages {
   /**
    * No description
    * @tags Message
@@ -1327,37 +1283,6 @@ export namespace Messages {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = number;
-  }
-}
-
-export namespace Conversation {
-  /**
-   * No description
-   * @tags Message
-   * @name ConversationDetail
-   * @request GET:/conversation/{id}
-   * @secure
-   */
-  export namespace ConversationDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message[];
   }
 }
 
@@ -2762,131 +2687,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
-  histories = {
-    /**
-     * No description
-     *
-     * @tags History
-     * @name HistoriesList
-     * @request GET:/histories
-     * @secure
-     */
-    historiesList: (
-      query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<History[], Error>({
-        path: `/histories`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Create a new record
-     *
-     * @tags History
-     * @name HistoriesCreate
-     * @request POST:/histories
-     * @secure
-     */
-    historiesCreate: (data: NewHistory, params: RequestParams = {}) =>
-      this.request<History, Error>({
-        path: `/histories`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags History
-     * @name CountList
-     * @request GET:/histories/count
-     * @secure
-     */
-    countList: (params: RequestParams = {}) =>
-      this.request<{ count?: number }, Error>({
-        path: `/histories/count`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags History
-     * @name HistoriesDetail
-     * @request GET:/histories/{id}
-     * @secure
-     */
-    historiesDetail: (id: string, params: RequestParams = {}) =>
-      this.request<History, Error>({
-        path: `/histories/${id}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Update a record
-     *
-     * @tags History
-     * @name HistoriesUpdate
-     * @request PUT:/histories/{id}
-     * @secure
-     */
-    historiesUpdate: (id: string, data: NewHistory, params: RequestParams = {}) =>
-      this.request<History, Error>({
-        path: `/histories/${id}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Delete a record
-     *
-     * @tags History
-     * @name HistoriesDelete
-     * @request DELETE:/histories/{id}
-     * @secure
-     */
-    historiesDelete: (id: string, params: RequestParams = {}) =>
-      this.request<number, Error>({
-        path: `/histories/${id}`,
-        method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-  };
   homeCarousel = {
     /**
      * @description Find all the home-carousel's records
@@ -2959,24 +2759,99 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
-  messages = {
+  conversation = {
     /**
      * No description
      *
      * @tags Message
-     * @name GetMessages
-     * @request GET:/messages/me
+     * @name GetConversation
+     * @request GET:/conversation/me
      * @secure
      */
-    getMessages: (params: RequestParams = {}) =>
+    getConversation: (params: RequestParams = {}) =>
       this.request<UsersPermissionsUser[], Error>({
-        path: `/messages/me`,
+        path: `/conversation/me`,
         method: "GET",
         secure: true,
         format: "json",
         ...params,
       }),
 
+    /**
+     * No description
+     *
+     * @tags Message
+     * @name ConversationDetail
+     * @request GET:/conversation/{id}
+     * @secure
+     */
+    conversationDetail: (
+      id: string,
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Message[], Error>({
+        path: `/conversation/${id}`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  notifications = {
+    /**
+     * @description Create a new record
+     *
+     * @tags Message
+     * @name ToggleNotif
+     * @request POST:/notifications/toggle
+     * @secure
+     */
+    toggleNotif: (data: ReadNotif, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/notifications/toggle`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Message
+     * @name MyNotifications
+     * @request GET:/notifications/me
+     * @secure
+     */
+    myNotifications: (query?: { id?: string }, params: RequestParams = {}) =>
+      this.request<NotifCount, Error>({
+        path: `/notifications/me`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  messages = {
     /**
      * No description
      *
@@ -3096,43 +2971,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<number, Error>({
         path: `/messages/${id}`,
         method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-  };
-  conversation = {
-    /**
-     * No description
-     *
-     * @tags Message
-     * @name ConversationDetail
-     * @request GET:/conversation/{id}
-     * @secure
-     */
-    conversationDetail: (
-      id: string,
-      query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Message[], Error>({
-        path: `/conversation/${id}`,
-        method: "GET",
-        query: query,
         secure: true,
         format: "json",
         ...params,

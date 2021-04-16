@@ -18,6 +18,8 @@ const getCreatedText = (booking, type) => {
     ),
   }
 
+  if (!dispos || dispos.length === 0) return '-'
+
   if (dispos.length > 1) {
     return (
       <Trans

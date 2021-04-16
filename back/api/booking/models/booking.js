@@ -12,7 +12,7 @@ module.exports = {
         author: "company",
         status: "created",
         booking: created.id,
-        place: created.place.id,
+        place: created.espace.users_permissions_user,
         company: created.company.id,
       });
     },

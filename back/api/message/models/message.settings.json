@@ -44,8 +44,13 @@
       "required": true
     },
     "booking": {
-      "model": "booking",
-      "via": "messages"
+      "via": "messages",
+      "model": "booking"
+    },
+    "hasbeenread": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }

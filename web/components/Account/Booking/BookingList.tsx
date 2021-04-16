@@ -50,7 +50,11 @@ const BookingList = ({ bookings, type }: Props) => {
   return (
     <Box>
       {selected && (
-        <BookingDrawer bookingId={selected} setSelected={setSelected} />
+        <BookingDrawer
+          bookingId={selected}
+          setSelected={setSelected}
+          type={type}
+        />
       )}
       <Flex alignItems="center" pt={8} pb={4} justifyContent="space-between">
         <Text textStyle="accountTitle" pl={4}>

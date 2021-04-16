@@ -21,6 +21,7 @@ import { format } from '~utils/date'
 import differenceInDays from 'date-fns/differenceInDays'
 import { BookingStatus } from '~@types/booking.d'
 import Loading from '~components/Loading'
+import Notif from '~components/Notif'
 import BookingHistory from '~components/Account/Booking/BookingHistory'
 import CancelModal from '~components/Account/Booking/CancelModal'
 import AskCancelModal from '~components/Account/Booking/AskCancelModal'
@@ -28,13 +29,9 @@ import ConfirmModal from '~components/Account/Booking/ConfirmModal'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useBooking } from '~hooks/useBooking'
 import useIsOccupied from '~hooks/useIsOccupied'
-import max from 'date-fns/max'
-import isPast from 'date-fns/isPast'
-
-interface Props {
-  bookingId: string
-  setSelected: (bookingId: string) => void
-}
+import { client } from '~api/client-api'
+import { useQueryClient } from 'react-query'
+import { useMyNotifications } from '~hooks/useMyNotifications'
 
 const PlaceInfo = ({ label, value }) => {
   if (!value) return null
@@ -48,26 +45,34 @@ const PlaceInfo = ({ label, value }) => {
   )
 }
 
-const BookingDrawer = ({ bookingId, setSelected }: Props) => {
-  const { data: user } = useCurrentUser()
-  const { data: booking, isLoading } = useBooking(bookingId)
-  const { t } = useTranslation('booking')
-  const place = useMemo(
-    () =>
-      booking &&
-      booking?.disponibilities.length > 0 &&
-      booking?.disponibilities[0].espace,
-    [booking],
-  )
+interface Props {
+  bookingId: string
+  setSelected: (bookingId: string) => void
+  type: 'request' | 'booking'
+}
 
+const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
+  const queryClient = useQueryClient()
+  const { data: user } = useCurrentUser()
+  const { data: booking, isLoading } = useBooking(bookingId, {
+    onSuccess: ({ id }) => {
+      client.notifications
+        .toggleNotif({ status: type, bookingId: id })
+        .then(() => {
+          queryClient.refetchQueries(['myNotifications'])
+          queryClient.refetchQueries(
+            type === 'booking' ? 'myBookings' : 'myRequests',
+          )
+        })
+    },
+  })
+  const { t } = useTranslation('booking')
+  const target =
+    user?.type === 'place' ? booking?.company?.id : booking?.place?.id
+  const { data: notifs } = useMyNotifications({ target })
   const isOccupied = useIsOccupied(booking?.disponibilities, booking?.status)
   const status = useMemo(() => {
     if (isOccupied) return 'occupied'
-    if (
-      isPast(max(booking?.disponibilities.map((dispo) => new Date(dispo.end))))
-    ) {
-      return 'past'
-    }
     return booking?.status
   }, [booking, isOccupied])
 
@@ -151,11 +156,11 @@ const BookingDrawer = ({ bookingId, setSelected }: Props) => {
                       {t('place')}
                     </Text>
                     <Text>
-                      {place?.name}
+                      {booking?.espace?.name}
                       <Link
                         href={{
                           pathname: ROUTE_PLACE_DETAIL,
-                          query: { id: place?.id },
+                          query: { id: booking?.espace?.id },
                         }}
                         textDecoration="underline"
                         ml={2}
@@ -185,23 +190,35 @@ const BookingDrawer = ({ bookingId, setSelected }: Props) => {
                       opacity="0.3"
                     />
                     <Flex direction="column" minW="250px">
-                      {/* TODO: handle notification message */}
-                      <Button
-                        as={Link}
-                        href={{
-                          pathname: `${ROUTE_ACCOUNT_MESSAGE}?conversation=${booking?.id}`,
-                        }}
-                        variant="message"
-                        leftIcon={<Message />}
+                      <Link
+                        href={`${ROUTE_ACCOUNT_MESSAGE}?conversation=${target}`}
+                        as={`${ROUTE_ACCOUNT_MESSAGE}/${target}`}
+                        _hover={{ textDecoration: 'none' }}
+                        w="100%"
                       >
-                        <Text ml={2}>
-                          {t(
-                            user.type === 'company'
-                              ? `message`
-                              : 'messageCompany',
+                        <Button
+                          variant="message"
+                          leftIcon={<Message />}
+                          w="100%"
+                        >
+                          <Text ml={2}>
+                            {t(
+                              user.type === 'company'
+                                ? `message`
+                                : 'messageCompany',
+                            )}
+                          </Text>
+                          {notifs && notifs.message > 0 && (
+                            <Notif
+                              nb={notifs.message}
+                              pos="absolute"
+                              right={3}
+                              top="50%"
+                              transform="translateY(-50%)"
+                            />
                           )}
-                        </Text>
-                      </Button>
+                        </Button>
+                      </Link>
                       {booking?.status === BookingStatus.PENDING &&
                         user.type === 'place' && (
                           <ConfirmModal
@@ -234,7 +251,7 @@ const BookingDrawer = ({ bookingId, setSelected }: Props) => {
                             ? t('address')
                             : booking?.company?.structureName}
                         </Text>
-                        <Text>{place?.address}</Text>
+                        <Text>{booking?.espace?.address}</Text>
                       </Box>
                       <Box pt={5}>
                         <PlaceInfo

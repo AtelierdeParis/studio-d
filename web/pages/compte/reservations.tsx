@@ -9,14 +9,14 @@ import Loading from '~components/Loading'
 import { useMyBookings } from '~hooks/useMyBookings'
 
 const AccountBooking = () => {
-  const { data: requests, isLoading } = useMyBookings()
+  const { data: bookings, isLoading } = useMyBookings()
 
   return (
     <Loading isLoading={isLoading} isCentered>
-      {requests?.length === 0 ? (
+      {bookings?.length === 0 ? (
         <InfoBooking />
       ) : (
-        <BookingList bookings={requests} type="booking" />
+        <BookingList bookings={bookings} type="booking" />
       )}
     </Loading>
   )

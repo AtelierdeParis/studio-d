@@ -1,6 +1,18 @@
 "use strict";
 const { sanitizeEntity } = require("strapi-utils");
 
+const getTarget = (type) => (type === "place" ? "company" : "place");
+const mapStatus = (status) => {
+  switch (status) {
+    case "booking":
+      return ["past", "accepted", "canceledbyplace", "askcancel"];
+    case "request":
+      return ["canceled", "created"];
+    case "message":
+      return ["message"];
+  }
+};
+
 module.exports = {
   async myConversations(ctx) {
     const { id, type } = ctx.state.user;
@@ -49,5 +61,39 @@ module.exports = {
       ...relation,
     });
     return sanitizeEntity(entity, { model: strapi.models.message });
+  },
+  async myNotifications(ctx) {
+    const { id, type } = ctx.state.user;
+    const { id: targetId } = ctx.query;
+    return strapi.services.message.getNbNotifications({ id, type, targetId });
+  },
+  async readNotifications(ctx) {
+    const { id, type } = ctx.state.user;
+    const { status, targetId, bookingId } = ctx.request.body;
+    const target = getTarget(type);
+    const query = {
+      [type]: id,
+      status_in: mapStatus(status),
+      hasbeenread: false,
+      author: target,
+    };
+
+    if (targetId) {
+      query[target] = targetId;
+    }
+
+    if (bookingId) {
+      query["booking"] = bookingId;
+    }
+
+    const messages = await strapi.services.message.find(query);
+
+    if (!messages || messages.length === 0) return false;
+
+    messages.map(({ id }) => {
+      strapi.query("message").update({ id }, { hasbeenread: true });
+    });
+
+    return true;
   },
 };

@@ -123,6 +123,10 @@
     "danceCarpet": {
       "type": "boolean",
       "required": true
+    },
+    "bookings": {
+      "via": "espace",
+      "collection": "booking"
     }
   }
 }

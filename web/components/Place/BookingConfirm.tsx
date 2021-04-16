@@ -31,6 +31,7 @@ interface Props {
 }
 
 const BookingConfirm = ({ events, place, back }: Props) => {
+  console.log(place)
   const [session] = useSession()
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
@@ -54,8 +55,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
         disponibilities: events.map((event) =>
           event.extendedProps.id.toString(),
         ),
-        company: session.user.id,
-        place: place.users_permissions_user.id,
+        espace: place.id,
       })
       .then((res) => {
         if (message !== '') {

@@ -2,14 +2,15 @@ import React, { Fragment, useMemo } from 'react'
 import { format } from '~utils/date'
 import Message from 'public/assets/img/message.svg'
 import Tag from '~components/Tag'
+import Link from '~components/Link'
 import { Booking } from '~typings/api'
 import { Circle, Text, Flex, Button, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
-import max from 'date-fns/max'
-import isPast from 'date-fns/isPast'
+import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
 import isSameDay from 'date-fns/isSameDay'
 import useIsOccupied from '~hooks/useIsOccupied'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface Props {
   booking: Booking
@@ -17,39 +18,34 @@ interface Props {
 }
 
 const BookingListItem = ({ booking, onSelect }: Props) => {
+  const { data: user } = useCurrentUser()
+  const target =
+    user?.type === 'place' ? booking?.company?.id : booking?.place?.id
   const { t } = useTranslation('booking')
-  const { id, disponibilities, place } = booking
   const isOccupied = useIsOccupied(booking?.disponibilities, booking?.status)
 
   const status = useMemo(() => {
     if (isOccupied) return 'occupied'
-    if (
-      isPast(max(booking.disponibilities.map((dispo) => new Date(dispo.end))))
-    ) {
-      return 'past'
-    }
     return booking.status
   }, [booking, isOccupied])
 
   return (
-    <Fragment key={id}>
+    <Fragment key={booking?.id}>
       <Cell status={status}>
-        <Text>{id}</Text>
+        <Text>{booking?.id}</Text>
       </Cell>
       <Cell status={status} fullOpacity>
         <Tag status={status} />
       </Cell>
       <Cell status={status}>
-        <Text isTruncated>
-          {disponibilities.length > 0 ? disponibilities[0].espace.name : '-'}
-        </Text>
+        <Text isTruncated>{booking?.espace?.name}</Text>
       </Cell>
       <Cell status={status}>
-        <Text isTruncated>{place.structureName}</Text>
+        <Text isTruncated>{booking?.place?.structureName}</Text>
       </Cell>
       <Cell status={status}>
         <Flex direction="column">
-          {disponibilities.map((dispo) => (
+          {booking?.disponibilities.map((dispo) => (
             <Flex
               py={0.5}
               alignItems="center"
@@ -73,35 +69,52 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
         </Flex>
       </Cell>
       <Cell status={status} fullOpacity>
-        <Button
-          px={2}
-          py={1}
-          variant="outline"
-          color="grayText.1"
-          colorScheme="gray"
-          size="sm"
-          borderRadius="sm"
-          fontSize="md"
-          //   @ts-ignore
-          onClick={() => onSelect(booking.id)}
-        >
-          {t('detail')}
-        </Button>
-        <Box
-          pl={3}
-          pos="relative"
-          opacity={['canceled', 'canceledbyplace'].includes(status) ? 0.2 : 1}
-        >
-          {/* TODO: handle notif */}
-          <Circle
-            bgColor="orange.500"
-            size="6px"
-            pos="absolute"
-            top="0"
-            right="0"
-          />
-          <Message />
+        <Box pos="relative">
+          <Button
+            px={2}
+            py={1}
+            variant="outline"
+            color="grayText.1"
+            colorScheme="gray"
+            size="sm"
+            borderRadius="sm"
+            fontSize="md"
+            onClick={() => onSelect(booking.id)}
+          >
+            {t('detail')}
+          </Button>
+          {(booking?.notifications?.booking > 0 ||
+            booking?.notifications?.request > 0) && (
+            <Circle
+              bgColor="orange.500"
+              size="6px"
+              pos="absolute"
+              top="-2px"
+              right="-2px"
+            />
+          )}
         </Box>
+        <Link
+          href={`${ROUTE_ACCOUNT_MESSAGE}?conversation=${target}`}
+          as={`${ROUTE_ACCOUNT_MESSAGE}/${target}`}
+        >
+          <Box
+            pl={3}
+            pos="relative"
+            opacity={['canceled', 'canceledbyplace'].includes(status) ? 0.2 : 1}
+          >
+            {booking?.notifications?.message > 0 && (
+              <Circle
+                bgColor="orange.500"
+                size="6px"
+                pos="absolute"
+                top="0"
+                right="0"
+              />
+            )}
+            <Message />
+          </Box>
+        </Link>
       </Cell>
     </Fragment>
   )

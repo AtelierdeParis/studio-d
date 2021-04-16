@@ -10,7 +10,7 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface ICancelModal {
   booking: Booking
-  setSelected: (booking: Booking) => void
+  setSelected: (bookingId: string) => void
 }
 
 const CancelModal = ({ booking, setSelected }: ICancelModal) => {

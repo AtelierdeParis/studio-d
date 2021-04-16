@@ -18,19 +18,31 @@ interface Props {
 const Conversation = ({ id, user }: Props) => {
   const listRef = useRef(null)
   const [hasScrolled, setScrolled] = useState(false)
+  const queryClient = useQueryClient()
+
   const {
     data: conversation,
     isLoading,
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useConversation(id)
-
-  const queryClient = useQueryClient()
+  } = useConversation(id, {
+    onSuccess: () => {
+      client.notifications
+        .toggleNotif({ status: 'message', targetId: id })
+        .then(() => {
+          queryClient.setQueryData(['myNotifications', { id }], {
+            request: 0,
+            message: 0,
+            booking: 0,
+          })
+        })
+    },
+  })
 
   const booking = useMemo(() => {
     if (!conversation || conversation.pages.length === 0) return null
-    return conversation.pages[0][conversation.pages[0].length - 1].booking
+    return conversation.pages[0][0].booking
   }, [conversation])
 
   useEffect(() => {
@@ -68,7 +80,7 @@ const Conversation = ({ id, user }: Props) => {
   }
 
   return (
-    <Loading isLoading={isLoading} h="100%">
+    <Loading isLoading={isLoading} h="100%" flex={1}>
       <Flex flex={1} direction="column">
         <Flex
           direction="column"

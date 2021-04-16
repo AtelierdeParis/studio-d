@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Image, Flex, Text, VStack } from '@chakra-ui/react'
+import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
 import {
   ROUTE_ACCOUNT,
   ROUTE_USE_POLICY,
@@ -10,6 +10,7 @@ import {
   ROUTE_ACCOUNT_PLACES,
 } from '~constants'
 import Link from '~components/Link'
+import Notif from '~components/Notif'
 import Back from 'public/assets/img/back.svg'
 import Profile from 'public/assets/img/user.svg'
 import Charte from 'public/assets/img/charte.svg'
@@ -22,6 +23,7 @@ import { useTranslation } from 'next-i18next'
 import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { UsersPermissionsUser } from '~typings/api'
+import { useMyNotifications } from '~hooks/useMyNotifications'
 
 const accountItems = {
   title: 'myAccount',
@@ -86,14 +88,23 @@ const companyItems = {
   ],
 }
 
-const styleActive = {
+const styleActive: BoxProps = {
   backgroundColor: 'blue.200',
   color: 'blue.500',
+}
+
+const styleNotif: BoxProps = {
+  position: 'absolute',
+  top: '50%',
+  right: 5,
+  transform: 'translateY(-50%)',
 }
 
 const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const { t } = useTranslation('account')
   const router = useRouter()
+
+  const { data: notifs } = useMyNotifications()
 
   const displayMenu = ({ title, items }) => {
     return (
@@ -115,6 +126,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
             display="block"
           >
             <Flex
+              position="relative"
               alignItems="center"
               _hover={styleActive}
               cursor="pointer"
@@ -128,6 +140,19 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
               <Box pl={4} lineHeight={1}>
                 {t(label)}
               </Box>
+              {!router.pathname.startsWith(url) && (
+                <>
+                  {url === ROUTE_ACCOUNT_MESSAGE && notifs?.message > 0 && (
+                    <Notif nb={notifs?.message} {...styleNotif} />
+                  )}
+                  {url === ROUTE_ACCOUNT_REQUEST && notifs?.request > 0 && (
+                    <Notif nb={notifs?.request} {...styleNotif} />
+                  )}
+                  {url === ROUTE_ACCOUNT_BOOKING && notifs?.booking > 0 && (
+                    <Notif nb={notifs?.booking} {...styleNotif} />
+                  )}
+                </>
+              )}
             </Flex>
           </Link>
         ))}
@@ -146,7 +171,6 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           </Link>
         </Flex>
         <VStack spacing={12}>
-          {/* TODO: handle good user type */}
           {user?.confirmed &&
             displayMenu(user.type === 'company' ? companyItems : placeItems)}
           {displayMenu(accountItems)}

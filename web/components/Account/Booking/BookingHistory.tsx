@@ -6,7 +6,6 @@ import { VStack, Circle, Flex, Text } from '@chakra-ui/react'
 import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
 import Link from '~components/Link'
 import { useTranslation } from 'next-i18next'
-import { useContextualRouting } from 'next-use-contextual-routing'
 
 interface Props {
   booking: Booking
