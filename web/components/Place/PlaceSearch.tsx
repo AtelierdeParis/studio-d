@@ -8,15 +8,18 @@ import {
   Button,
   useTheme,
 } from '@chakra-ui/react'
-import Calendar from 'public/assets/img/calendar.svg'
 import FormField from '~components/FormField'
 import InputCity from '~components/InputCity'
 import InputDateRange from '~components/InputDateRange'
 import Select from '~components/Select'
+import Calendar from 'public/assets/img/calendar.svg'
 import Pin from 'public/assets/img/pin-outline.svg'
 import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import { SurfaceOptions, HeightOptions } from '~utils/search'
+import { formatSearchToQuery } from '~utils/search'
+import { ROUTE_PLACES } from '~constants'
+import { useRouter } from 'next/router'
 
 const selectProps = {
   variant: 'unstyled',
@@ -30,9 +33,17 @@ const PlaceSearch = () => {
   const [hasMoreFilters, setMoreFilter] = useState(false)
   const { t } = useTranslation('place')
   const form = useFormContext()
+  const router = useRouter()
+
+  const onSubmit = ({ sortBy, ...rest }) => {
+    router.push({
+      pathname: ROUTE_PLACES,
+      query: formatSearchToQuery(rest),
+    })
+  }
 
   return (
-    <form onSubmit={form.handleSubmit(() => null)}>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <Flex
         bgColor="blue.100"
         px={5}
@@ -70,6 +81,7 @@ const PlaceSearch = () => {
               <Calendar stroke={theme.colors.blue['500']} />
               <Box pl={3.5} flex={1}>
                 <InputDateRange
+                  label={t('search.when.label')}
                   control={form.control}
                   placeholder={t('search.when.placeholder')}
                 />

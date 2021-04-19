@@ -132,6 +132,10 @@
         "place"
       ],
       "required": true
+    },
+    "bookings": {
+      "via": "place",
+      "collection": "booking"
     }
   }
 }

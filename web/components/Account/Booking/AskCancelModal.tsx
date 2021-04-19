@@ -10,7 +10,7 @@ import { Booking } from '~typings/api'
 
 interface Props {
   booking: Booking
-  setSelected: (booking: Booking) => void
+  setSelected: (booking: string) => void
 }
 
 const AskCancelModal = ({ booking, setSelected }: Props) => {
@@ -26,6 +26,7 @@ const AskCancelModal = ({ booking, setSelected }: Props) => {
       .then(() => {
         return client.messages.messagesCreate({
           author: 'company',
+          status: 'message',
           booking: booking.id,
           company: booking.company.id,
           place: booking.place.id,

@@ -59,5 +59,9 @@
     "license": "Plateforme diffusée sous license XXX, droits des textes et photographies réservés"
   },
   "compagnie":"company",
-  "lieu":"place"
+  "lieu":"place",
+  "faq": {
+    "title": "FAQ",
+    "empty": "La FAQ ne contient actuellement aucun contenu"
+  }
 }

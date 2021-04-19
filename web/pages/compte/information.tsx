@@ -15,6 +15,7 @@ import {
   Flex,
   Spacer,
   Button,
+  VStack,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import Letter from 'public/assets/img/letter.svg'
@@ -25,32 +26,74 @@ import * as yup from 'yup'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 
-interface IAccountInformation {
+interface Props {
   user: UsersPermissionsUser
 }
-interface FormInformation
-  extends Pick<UsersPermissionsUser, 'email' | 'address' | 'city' | 'zipCode' | 'phone'> {
+interface FormInformation extends UsersPermissionsUser {
   password: string
 }
 
-const schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup
-    .string()
-    .test('is-incorrect', '${path} must be at least 10 characters', (value) => {
-      if (value !== '') return value.length >= 10
-      return true
+const getSchema = (target) => {
+  const schema = {
+    firstname: yup.string().required(),
+    lastname: yup.string().required(),
+    email: yup.string().email().required(),
+    password: yup.string().test({
+      message: 'Le mot de passe doit faire au minimum 10 caractères',
+      test: (value) => {
+        if (value !== '') return value.length >= 10
+        return true
+      },
     }),
-  address: yup.string().required(),
-  zipCode: yup.string().required(),
-  city: yup.string().required(),
-  phone: yup.string(),
-})
+    structureName: yup.string().required(),
+    address: yup.string().required(),
+    phone: yup
+      .string()
+      .optional()
+      .test({
+        message: 'Le format du téléphone est incorrect',
+        test: (value) => {
+          if (value === '') return true
+          const match = value.match(
+            /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
+          )
+          if (!match) return false
+          return match[0] === value
+        },
+      }),
+    license: yup.string().test({
+      message: 'Les licences doivent être séparés par des virgules',
+      test: (value) => {
+        if (value === '') return true
+        const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
+        if (!match) return false
+        return match[0] === value
+      },
+    }),
+    website: yup.string().url(),
+    zipCode: yup.string().required(),
+    city: yup.string().required(),
+    siret: yup.string().required().min(14).max(14),
+    ape: yup.string().required().min(5).max(5),
+  }
 
-const AccountInformation = ({ user }: IAccountInformation) => {
+  if (target === 'compagnie') {
+    schema['choreographer'] = yup.string().required()
+    schema['insuranceName'] = yup.string().required()
+    schema['insuranceNumber'] = yup.string().required()
+  } else {
+    schema['legalRepresentative'] = yup.string().required()
+    schema['statusRepresentative'] = yup.string().required()
+  }
+
+  return yup.object().shape(schema)
+}
+
+const AccountInformation = ({ user }: Props) => {
   const { t } = useTranslation('account')
   const { errorToast, successToast } = useToast()
   const [isLoading, setLoading] = useState(false)
+
   const {
     register,
     errors,
@@ -59,14 +102,11 @@ const AccountInformation = ({ user }: IAccountInformation) => {
     reset,
   } = useForm<FormInformation>({
     defaultValues: {
-      email: user.email,
-      address: user.address,
-      zipCode: user.zipCode,
-      city: user.city,
-      phone: user.phone,
+      ...user,
       password: undefined,
     },
-    resolver: yupResolver(schema),
+    // @ts-ignore
+    resolver: yupResolver(getSchema(user.type)),
   })
 
   const onSubmit = (data) => {
@@ -76,7 +116,8 @@ const AccountInformation = ({ user }: IAccountInformation) => {
     }, {})
     setLoading(true)
 
-    client.users.putUsers(filteredData)
+    client.users
+      .putUsers(filteredData)
       .then(() => {
         reset(filteredData, { dirtyFields: false })
         successToast(t('information.success'))
@@ -124,36 +165,150 @@ const AccountInformation = ({ user }: IAccountInformation) => {
             >
               <Input name="address" ref={register} />
             </FormField>
-            <HStack spacing={5} flex={1}>
+            <VStack
+              direction="column"
+              flex={1}
+              alignItems="flex-start"
+              spacing={5}
+            >
+              <HStack spacing={5} w="100%">
+                <FormField
+                  label={t('information.zipCode.label')}
+                  errors={errors.zipCode}
+                  isRequired
+                >
+                  <Input name="zipCode" ref={register} />
+                </FormField>
+                <FormField
+                  label={t('information.city.label')}
+                  errors={errors.city}
+                  isRequired
+                >
+                  <Input name="city" ref={register} />
+                </FormField>
+              </HStack>
               <FormField
-                label={t('information.zipCode.label')}
-                errors={errors.zipCode}
+                label={t('information.country.label')}
+                errors={errors.country}
                 isRequired
               >
-                <Input name="zipCode" ref={register} />
+                <Input name="country" ref={register} />
               </FormField>
-              <FormField
-                label={t('information.city.label')}
-                errors={errors.city}
-                isRequired
-              >
-                <Input name="city" ref={register} />
-              </FormField>
-            </HStack>
+            </VStack>
           </HStack>
         </Box>
         <Box my={14}>
           <Text textStyle="groupLabel">{t('information.contact')}</Text>
-          <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
-            <FormField
-              label={t('information.phone.label')}
-              errors={errors.phone}
-              flex={1}
-            >
-              <Input name="phone" ref={register} />
-            </FormField>
-            <Spacer flex={1} />
-          </HStack>
+          <VStack spacing={5}>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              <FormField
+                label={t('information.firstname')}
+                errors={errors.firstname}
+                flex={1}
+              >
+                <Input name="firstname" ref={register} />
+              </FormField>
+              <FormField
+                label={t('information.lastname')}
+                errors={errors.lastname}
+                flex={1}
+              >
+                <Input name="lastname" ref={register} />
+              </FormField>
+            </HStack>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              <FormField
+                label={t('information.structure')}
+                errors={errors.structureName}
+                flex={1}
+              >
+                <Input name="structureName" ref={register} />
+              </FormField>
+              <FormField
+                label={t('information.socialReason.label')}
+                info={t('information.socialReason.info')}
+                errors={errors.socialReason}
+                flex={1}
+              >
+                <Input name="socialReason" ref={register} />
+              </FormField>
+            </HStack>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              <FormField label={t('information.siret')} errors={errors.siret}>
+                <Input name="siret" ref={register} />
+              </FormField>
+              <FormField label={t('information.ape')} errors={errors.ape}>
+                <Input name="ape" ref={register} />
+              </FormField>
+            </HStack>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              <FormField
+                label={t('information.phone.label')}
+                errors={errors.phone}
+              >
+                <Input name="phone" ref={register} />
+              </FormField>
+              <FormField
+                label={t('information.license.label')}
+                info={t('information.license.info')}
+                errors={errors.license}
+              >
+                <Input name="license" ref={register} />
+              </FormField>
+            </HStack>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              <FormField
+                label={t('information.website')}
+                errors={errors.website}
+              >
+                <Input name="website" ref={register} />
+              </FormField>
+              {user.type === 'company' ? (
+                <FormField
+                  label={t('information.choreographer')}
+                  errors={errors.choreographer}
+                >
+                  <Input name="choreographer" ref={register} />
+                </FormField>
+              ) : (
+                <FormField
+                  label={t('information.legalRepresentative')}
+                  errors={errors.legalRepresentative}
+                >
+                  <Input name="legalRepresentative" ref={register} />
+                </FormField>
+              )}
+            </HStack>
+            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+              {user.type === 'company' ? (
+                <>
+                  <FormField
+                    label={t('information.insuranceName')}
+                    errors={errors.insuranceName}
+                  >
+                    <Input name="insuranceName" ref={register} />
+                  </FormField>
+                  <FormField
+                    label={t('information.insuranceNumber')}
+                    errors={errors.insuranceNumber}
+                  >
+                    <Input name="insuranceNumber" ref={register} />
+                  </FormField>
+                </>
+              ) : (
+                <>
+                  <FormField
+                    flex={1}
+                    label={t('information.qualityRepresentative')}
+                    errors={errors.statusRepresentative}
+                  >
+                    <Input name="statusRepresentative" ref={register} />
+                  </FormField>
+                  <Spacer flex={1} />
+                </>
+              )}
+            </HStack>
+          </VStack>
         </Box>
         <Flex justifyContent="center">
           <Button

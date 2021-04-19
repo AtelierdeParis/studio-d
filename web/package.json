@@ -36,6 +36,7 @@
     "next-compose-plugins": "^2.2.0",
     "next-i18next": "^8.1.1",
     "next-transpile-modules": "^6.3.0",
+    "next-use-contextual-routing": "^2.0.0",
     "pg": "^8.3.0",
     "react": "^17.0.1",
     "react-date-range": "^1.1.3",

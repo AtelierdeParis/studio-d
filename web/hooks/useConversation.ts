@@ -1,8 +1,26 @@
-import { useQuery } from 'react-query'
+import { useInfiniteQuery, UseInfiniteQueryOptions } from 'react-query'
 import { client } from '~api/client-api'
+import { Message } from '~typings/api'
 
-export const useConversation = (id) => {
-  return useQuery(['conversation', id], () =>
-    client.conversation.conversationDetail(id).then((res) => res.data),
+const _limit = 10
+export const useConversation = (
+  id,
+  options?: UseInfiniteQueryOptions<Message[]>,
+) => {
+  return useInfiniteQuery(
+    ['conversation', id],
+    ({ pageParam = 0 }) =>
+      client.conversation
+        .conversationDetail(id, {
+          _start: pageParam * _limit,
+          _limit,
+        })
+        .then((res) => res.data),
+    {
+      ...options,
+      getNextPageParam: (lastPage, pages) => {
+        if (lastPage.length >= _limit) return pages.length
+      },
+    },
   )
 }

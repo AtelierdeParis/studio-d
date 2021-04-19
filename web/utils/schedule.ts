@@ -194,15 +194,21 @@ export const createDbEvent = (type, start, when = null, end = null) => {
 }
 
 export const createDbEventObj = (type, start, when = null, end = null) => {
-  const transformedStart =
-    type === ScheduleEventType.PUNCTUAL && when === ScheduleEventWhen.AFTERNOON
-      ? setHours(start, 13)
-      : setHours(start, 6)
+  let transformedStart = setHours(start, 6)
+  let transformedEnd = setHours(end || start, 19)
+
+  if (type === ScheduleEventType.PUNCTUAL) {
+    if (when === ScheduleEventWhen.AFTERNOON) {
+      transformedStart = setHours(start, 13)
+    } else if (when === ScheduleEventWhen.MORNING) {
+      transformedEnd = setHours(start, 13)
+    }
+  }
 
   return {
     type,
     start: transformedStart,
-    end: end || transformedStart,
+    end: transformedEnd,
     when,
   }
 }

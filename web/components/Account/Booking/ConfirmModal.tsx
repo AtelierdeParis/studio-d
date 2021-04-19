@@ -9,7 +9,7 @@ import Check from 'public/assets/img/check-circle.svg'
 
 interface IConfirmModal {
   bookingId: string
-  setSelected: (booking: Booking) => void
+  setSelected: (bookingId: string) => void
 }
 
 const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {

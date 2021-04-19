@@ -11,7 +11,7 @@ import {
   ButtonGroup,
 } from '@chakra-ui/react'
 import PlaceSearch from '~components/Place/PlaceSearch'
-import { usePlaces } from '~hooks/usePlaces'
+import { useInfinitePlaces } from '~hooks/useInfinitePlaces'
 import { useNbPlace } from '~hooks/useNbPlace'
 import { useScrollBottom } from '~hooks/useScrollBottom'
 import PlaceGrid from '~components/Place/PlaceGrid'
@@ -23,6 +23,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { SortOptions } from '~utils/search'
 import { useQueryClient } from 'react-query'
 import NoResult from '~components/Place/NoResult'
+import { useRouter } from 'next/router'
 
 const styleSelected = {
   color: 'blue.500',
@@ -30,10 +31,14 @@ const styleSelected = {
 }
 
 const Places = () => {
+  const router = useRouter()
+
   const { t } = useTranslation('place')
   const ref = useRef(null)
   const [isGridView, setGridView] = useState<boolean>(true)
-  const form = useForm()
+  const form = useForm({
+    defaultValues: router.query,
+  })
   const queryClient = useQueryClient()
   const searchQuery = useMemo(() => formatSearch(form.getValues()), [
     form.getValues(),
@@ -47,7 +52,7 @@ const Places = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = usePlaces(nbPlace, {
+  } = useInfinitePlaces(nbPlace, {
     _limit: isGridView ? 12 : 6,
     ...searchQuery,
   })

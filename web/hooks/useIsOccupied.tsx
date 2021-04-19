@@ -6,8 +6,12 @@ import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import setHours from 'date-fns/setHours'
 
-const useIsOccupied = (disponibilities: Disponibility[] = []) => {
+const useIsOccupied = (
+  disponibilities: Disponibility[] = [],
+  status = null,
+) => {
   return useMemo(() => {
+    if (status && status !== 'accepted') return false
     const morning = setHours(new Date(), 8)
     const afternoon = setHours(new Date(), 14)
     return disponibilities.some((dispo) => {

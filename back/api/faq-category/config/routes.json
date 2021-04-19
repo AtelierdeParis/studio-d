@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/histories",
-      "handler": "history.find",
+      "path": "/faq-categories",
+      "handler": "faq-category.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/histories/count",
-      "handler": "history.count",
+      "path": "/faq-categories/count",
+      "handler": "faq-category.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/histories/:id",
-      "handler": "history.findOne",
+      "path": "/faq-categories/:id",
+      "handler": "faq-category.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/histories",
-      "handler": "history.create",
+      "path": "/faq-categories",
+      "handler": "faq-category.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/histories/:id",
-      "handler": "history.update",
+      "path": "/faq-categories/:id",
+      "handler": "faq-category.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/histories/:id",
-      "handler": "history.delete",
+      "path": "/faq-categories/:id",
+      "handler": "faq-category.delete",
       "config": {
         "policies": []
       }

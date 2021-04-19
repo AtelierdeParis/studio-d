@@ -142,16 +142,22 @@
                 "$ref": "#/components/schemas/Disponibility"
               }
             },
-            "place": {
-              "$ref": "#/components/schemas/UsersPermissionsUser"
+            "espace": {
+              "$ref": "#/components/schemas/Espace"
             },
             "company": {
               "$ref": "#/components/schemas/UsersPermissionsUser"
             },
-            "histories": {
+            "place": {
+              "$ref": "#/components/schemas/UsersPermissionsUser"
+            },
+            "notifications": {
+              "$ref": "#/components/schemas/NotifCount"
+            },
+            "messages": {
               "type": "array",
               "items": {
-                "$ref": "#/components/schemas/History"
+                "$ref": "#/components/schemas/Message"
               }
             }
           }

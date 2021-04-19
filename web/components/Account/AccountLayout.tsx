@@ -22,6 +22,7 @@ const AccountLayout = (props) => {
         h="100vh"
         overflow="auto"
         p={isMessage && 0}
+        maxW="none"
       >
         <Loading isLoading={isLoading} isCentered>
           {React.cloneElement(props.children, { user })}

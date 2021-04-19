@@ -15,17 +15,9 @@
       "collection": "disponibility",
       "via": "booking"
     },
-    "place": {
-      "plugin": "users-permissions",
-      "model": "user"
-    },
     "company": {
       "plugin": "users-permissions",
       "model": "user"
-    },
-    "histories": {
-      "collection": "history",
-      "via": "booking"
     },
     "status": {
       "type": "enumeration",
@@ -37,6 +29,19 @@
         "accepted",
         "pending"
       ]
+    },
+    "messages": {
+      "collection": "message",
+      "via": "booking"
+    },
+    "espace": {
+      "model": "espace",
+      "via": "bookings"
+    },
+    "place": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "bookings"
     }
   }
 }

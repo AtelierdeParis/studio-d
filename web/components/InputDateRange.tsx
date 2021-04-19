@@ -26,9 +26,10 @@ import Remove from 'public/assets/img/remove.svg'
 interface IInputDateRange {
   control: Control
   placeholder?: string
+  label?: string
 }
 
-const InputDateRange = ({ control, placeholder }: IInputDateRange) => {
+const InputDateRange = ({ control, placeholder, label }: IInputDateRange) => {
   const { t } = useTranslation('place')
   const theme = useTheme()
   const [range, setRange] = useState({
@@ -60,12 +61,15 @@ const InputDateRange = ({ control, placeholder }: IInputDateRange) => {
       <Popover>
         <PopoverTrigger>
           <Flex mt={0.5} cursor="pointer">
-            <FormField label={t('search.when.label')}>
+            <FormField label={label}>
               {fieldStart.value ? (
                 <HStack alignItems="center" spacing={3}>
                   <Text>{format(fieldStart.value)}</Text>
                   {fieldEnd.value &&
-                    !isSameDay(fieldStart.value, fieldEnd.value) && (
+                    !isSameDay(
+                      new Date(fieldStart.value),
+                      new Date(fieldEnd.value),
+                    ) && (
                       <>
                         <Arrow />
                         <Text>{format(fieldEnd.value)}</Text>

@@ -18,17 +18,28 @@ const Button = {
       justifyContent: 'flex-start',
       bgColor: 'tag.red',
       h: '40px',
+      color: 'black',
+      _hover: {
+        bgColor: '#efc8c8',
+      },
     },
     confirm: {
       justifyContent: 'flex-start',
       bgColor: 'tag.green',
       h: '40px',
+      color: 'black',
+      _hover: {
+        bgColor: '#c7ead0',
+      },
     },
     message: {
       justifyContent: 'flex-start',
       bgColor: 'tag.blue',
       color: 'blue.500',
       h: '40px',
+      _hover: {
+        bgColor: '#d9def7',
+      },
     },
     line: {
       borderBottom: '1px solid black',

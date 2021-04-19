@@ -7,7 +7,6 @@ import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 const ScheduleRightContent = () => {
   const [showForm, setShowForm] = useState(false)
   const { place, eventsIdToDelete, setToDelete } = useContext(ScheduleContext)
-
   const dispoToDelete = useMemo(
     () =>
       eventsIdToDelete.map((eventId) => {

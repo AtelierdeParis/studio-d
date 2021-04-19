@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/home-message",
+      "handler": "home-message.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/home-message",
+      "handler": "home-message.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/home-message",
+      "handler": "home-message.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import { useHomeCarousel } from '~hooks/useHomeCarousel'
 import Image from '~components/Image'
 import SwiperCore, { Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import HomeSearch from '~components/Home/HomeSearch'
 
 SwiperCore.use([Autoplay])
 
@@ -40,18 +41,24 @@ const HomeCarousel = () => {
           </Swiper>
         </Flex>
       )}
-      <Heading
-        as="h1"
-        textStyle="h1"
-        color="white"
-        mb={7}
-        whiteSpace="pre"
-        pos="relative"
-        zIndex={10}
-        textShadow="0px 0px 17px #2d2d2d"
-      >
-        {t('title')}
-      </Heading>
+      <Box maxW="700px" w="100%">
+        <Heading
+          as="h1"
+          textStyle="h1"
+          color="white"
+          whiteSpace="pre"
+          pos="relative"
+          zIndex={10}
+          mb={6}
+          pl={5}
+          transform="translateY(50%)"
+          textShadow="0px 0px 17px #2d2d2d"
+          lineHeight={1}
+        >
+          {t('title')}
+        </Heading>
+      </Box>
+      <HomeSearch />
       <Box
         background="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%)"
         pos="absolute"

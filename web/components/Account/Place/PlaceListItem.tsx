@@ -21,7 +21,11 @@ import { DisponibilityStatus } from '~@types/disponibility.d'
 import useNbDisponibility from '~hooks/useNbDisponibility'
 import useNbBooking from '~hooks/useNbBooking'
 import useIsOccupied from '~hooks/useIsOccupied'
-import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
+import {
+  ROUTE_ACCOUNT_PLACE_DETAIL,
+  ROUTE_ACCOUNT_BOOKING,
+  ROUTE_ACCOUNT_REQUEST,
+} from '~constants'
 import { useTranslation } from 'next-i18next'
 import UnpublishModal from '~components/Account/Place/UnpublishModal'
 import PublishModal from '~components/Account/Place/PublishModal'
@@ -143,8 +147,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 <Text color="gray.500" pr={2}>
                   {t('list.requests')}
                 </Text>
-                {/* TODO: handle link */}
-                <Button as={Link} href="#" variant="line">
+                <Button as={Link} href={ROUTE_ACCOUNT_REQUEST} variant="line">
                   {t('list.see')}
                 </Button>
               </Flex>
@@ -164,8 +167,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 <Text color="gray.500" pr={2}>
                   {t('list.bookings')}
                 </Text>
-                {/* TODO: handle link */}
-                <Button as={Link} href="#" variant="line">
+                <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
                   {t('list.see')}
                 </Button>
               </Flex>

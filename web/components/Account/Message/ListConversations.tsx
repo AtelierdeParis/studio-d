@@ -2,8 +2,12 @@ import React from 'react'
 import { UsersPermissionsUser } from '~typings/api'
 import { Avatar, Flex, VStack, Box, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import { useMyNotifications } from '~hooks/useMyNotifications'
+import Notif from '~components/Notif'
 
 const Item = ({ id, name, isSelected, setSelected }) => {
+  const { data: notifs } = useMyNotifications({ id })
+
   return (
     <Flex
       alignItems="center"
@@ -19,7 +23,10 @@ const Item = ({ id, name, isSelected, setSelected }) => {
       })}
       w="100%"
       cursor="pointer"
-      onClick={() => setSelected(isSelected ? null : id)}
+      onClick={() => {
+        setSelected(isSelected ? null : id)
+      }}
+      justifyContent="space-between"
     >
       <Avatar
         name={name[0]}
@@ -30,10 +37,20 @@ const Item = ({ id, name, isSelected, setSelected }) => {
         fontSize="14px"
         size="sm"
       />
-      <Text pl={4} lineHeight={1} color="grayText.1" isTruncated>
-        {name}
-      </Text>
-      {/* TODO: handle notif */}
+      <Flex alignItems="center" flex={1}>
+        <Text
+          pl={4}
+          lineHeight={1}
+          color="grayText.1"
+          isTruncated
+          flex={1}
+          maxW="160px"
+          mr={2}
+        >
+          {name}
+        </Text>
+        {notifs && notifs.message > 0 && <Notif nb={notifs.message} />}
+      </Flex>
     </Flex>
   )
 }
@@ -70,7 +87,7 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
             key={user.id}
             id={user.id}
             name={user.structureName}
-            isSelected={selected === user.id}
+            isSelected={selected?.toString() === user.id.toString()}
             setSelected={setSelected}
           />
         ))}
