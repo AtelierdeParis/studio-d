@@ -47,17 +47,20 @@ const getSchema = (target) => {
     }),
     structureName: yup.string().required(),
     address: yup.string().required(),
-    phone: yup.string().test({
-      message: 'Le format du téléphone est incorrect',
-      test: (value) => {
-        if (value === '') return true
-        const match = value.match(
-          /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
-        )
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
+    phone: yup
+      .string()
+      .optional()
+      .test({
+        message: 'Le format du téléphone est incorrect',
+        test: (value) => {
+          if (value === '') return true
+          const match = value.match(
+            /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
+          )
+          if (!match) return false
+          return match[0] === value
+        },
+      }),
     license: yup.string().test({
       message: 'Les licences doivent être séparés par des virgules',
       test: (value) => {
@@ -102,6 +105,7 @@ const AccountInformation = ({ user }: Props) => {
       ...user,
       password: undefined,
     },
+    // @ts-ignore
     resolver: yupResolver(getSchema(user.type)),
   })
 

@@ -14,13 +14,11 @@ const Button = {
     colorScheme: 'orange',
   },
   variants: {
-    outline: {
-      px: 7,
-    },
     delete: {
       justifyContent: 'flex-start',
       bgColor: 'tag.red',
       h: '40px',
+      color: 'black',
       _hover: {
         bgColor: '#efc8c8',
       },
@@ -29,6 +27,7 @@ const Button = {
       justifyContent: 'flex-start',
       bgColor: 'tag.green',
       h: '40px',
+      color: 'black',
       _hover: {
         bgColor: '#c7ead0',
       },
