@@ -1,4 +1,8 @@
-import { ScheduleEventType, ScheduleEventWhen } from '~@types/schedule-event.d'
+import {
+  ScheduleEventType,
+  ScheduleEventWhen,
+  ScheduleEvent,
+} from '~@types/schedule-event.d'
 import { Disponibility } from '~typings/api'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import addMonths from 'date-fns/addMonths'
@@ -16,7 +20,7 @@ export const createScheduleEventObj = ({
   status = 'selected',
   id = null,
   hasEventSameDay = false,
-}) => {
+}): ScheduleEvent => {
   return {
     start: new Date(start),
     end: end ? setHours(new Date(end), 12) : start,
@@ -83,7 +87,9 @@ const checkIfEventSameDay = (disponibility, sources = []): boolean => {
   )
 }
 
-export const createOldEvents = (disponibilities: Disponibility[] = []) => {
+export const createOldEvents = (
+  disponibilities: Disponibility[] = [],
+): ScheduleEvent[] => {
   return disponibilities.map((dispo) => {
     return createScheduleEventObj({
       id: dispo.id,

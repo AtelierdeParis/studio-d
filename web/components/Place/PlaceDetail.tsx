@@ -43,12 +43,12 @@ const PlaceDetail = ({ place }: Props) => {
           <Text fontSize="xl" color="gray.500" pt={1}>
             {place?.users_permissions_user?.structureName}
           </Text>
-
           {place?.users_permissions_user?.website && (
             <Text pt={2}>
               <Link
                 href={place?.users_permissions_user?.website}
                 isExternal
+                layerStyle="link"
                 color="gray.500"
                 textDecoration="underline"
               >

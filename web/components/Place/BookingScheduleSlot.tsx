@@ -27,11 +27,16 @@ const styleAnotherBooking = {
   },
 }
 
-const BookingScheduleSlot = (props: ScheduleEvent) => {
+interface Props extends ScheduleEvent {
+  isMonth?: boolean
+}
+
+const BookingScheduleSlot = (props: Props) => {
   const {
     extendedProps: { when, hasEventSameDay, id, type },
     start,
     end,
+    isMonth,
   } = props
   const { selected, setSelected } = useContext(BookingScheduleContext)
   const { t } = useTranslation('place')
@@ -70,7 +75,7 @@ const BookingScheduleSlot = (props: ScheduleEvent) => {
         }
       }}
     >
-      {isSelected && (
+      {isSelected && !isMonth && (
         <Box pos="absolute" right={2} top={2}>
           <Confirm />
         </Box>
@@ -96,7 +101,11 @@ const BookingScheduleSlot = (props: ScheduleEvent) => {
           } jours)`}</Box>
         </Flex>
       ) : (
-        <Text fontSize="sm">{t(`detail.dispo.${when || 'day'}`)}</Text>
+        <>
+          {!isMonth && (
+            <Text fontSize="sm">{t(`detail.dispo.${when || 'day'}`)}</Text>
+          )}
+        </>
       )}
     </Flex>
   )

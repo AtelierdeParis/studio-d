@@ -16,14 +16,7 @@ const ActuCard = ({ actu }: IActuCard) => {
   const { t } = useTranslation('actuality')
 
   return (
-    <LinkBox
-      role="group"
-      display="flex"
-      flexDirection="column"
-      _hover={{
-        bgColor: 'gray.hover',
-      }}
-    >
+    <LinkBox role="group" display="flex" flexDirection="column">
       <AspectRatio w="100%" maxH="300px" ratio={16 / 9} overflow="hidden">
         <Image
           src={actu?.image?.url}
@@ -32,14 +25,7 @@ const ActuCard = ({ actu }: IActuCard) => {
           _groupHover={{ transform: 'scale(1.05)' }}
         />
       </AspectRatio>
-      <Flex
-        px={4}
-        py={4}
-        direction="column"
-        justifyContent="space-between"
-        alignItems="flex-start"
-        flex={1}
-      >
+      <Flex px={4} py={4} direction="column" alignItems="flex-start" flex={1}>
         <Box>
           <LinkOverlay
             href={{

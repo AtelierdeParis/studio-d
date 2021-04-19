@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Box, Flex, Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
-import BookingSchedule from '~components/Place/BookingSchedule'
+import BookingScheduleWeek from '~components/Place/BookingScheduleWeek'
+import BookingScheduleMonth from '~components/Place/BookingScheduleMonth'
 import BookingRecap from '~components/Place/BookingRecap'
+import { createOldEvents } from '~utils/schedule'
 
 const styleSelected = {
   color: 'blue.500',
@@ -17,6 +19,9 @@ interface Props {
 const BookingScheduleContainer = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const [isMonthView, setMonthView] = useState<boolean>(false)
+  const events = useMemo(() => createOldEvents(place?.disponibilities), [
+    place?.disponibilities,
+  ])
 
   return (
     <Box bgColor="blue.100" p={6} borderRadius="sm">
@@ -58,8 +63,11 @@ const BookingScheduleContainer = ({ place }: Props) => {
           </Button>
         </Flex>
       </Flex>
-
-      <BookingSchedule place={place} />
+      {isMonthView ? (
+        <BookingScheduleMonth place={place} events={events} />
+      ) : (
+        <BookingScheduleWeek place={place} events={events} />
+      )}
       <BookingRecap />
     </Box>
   )

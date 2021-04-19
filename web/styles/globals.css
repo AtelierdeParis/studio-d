@@ -81,7 +81,6 @@ a {
   border: none;
   padding: 4px;
   position: relative;
-  height: 65px;
 }
 #calendar .fc-scrollgrid-sync-table {
   height: auto !important;
@@ -157,9 +156,9 @@ a {
 #calendar .fc-daygrid-event-harness:nth-child(2):before {
   content: '';
   position: absolute;
-  top: -20px;
+  top: -50%;
   background-color: #f4f5f9;
-  height: 20px;
+  height: 30px;
   width: 100%;
 }
 #calendar .fc-daygrid-event-harness-abs {
@@ -291,12 +290,71 @@ a {
   row-gap: 10px;
   padding: 0 12px;
 }
-.booking-calendar#calendar .fc-daygrid-dot-event:hover {
+#calendar .fc-daygrid-dot-event:hover {
   background-color: transparent;
+}
+.account-schedule.month .fc-view-harness {
+  height: auto !important;
+}
+.account-schedule.month .fc-scroller-liquid-absolute,
+.account-schedule.month .fc-view-harness-active > .fc-view {
+  position: static;
 }
 .booking-calendar#calendar .fc-daygrid-event-harness-abs {
   left: 12px;
   right: 12px;
+}
+
+.fc-customPrev-button,
+.fc-customNext-button {
+  user-select: none;
+  font-family: 'fcicons' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-feature-settings: normal;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 22px !important;
+  line-height: 1;
+  position: absolute;
+  top: 14px;
+}
+.fc-customPrev-button:focus,
+.fc-customNext-button:focus {
+  box-shadow: none !important;
+}
+
+#calendar.account-schedule.month .fc-header-toolbar {
+  border-bottom: transparent;
+  padding: 25px 0;
+}
+.account-schedule.month .fc-header-toolbar:before {
+  content: '';
+  position: absolute;
+  height: 1px;
+  left: 0;
+  right: 0;
+  background-color: rgba(40, 53, 131, 0.05);
+  top: 70px;
+}
+#calendar.account-schedule.month .fc-theme-standard:first-of-type .fc-view {
+  padding: 0 20px 0 0;
+}
+#calendar.account-schedule.month .fc-theme-standard:nth-of-type(2) .fc-view {
+  padding: 0 0 0 20px;
+}
+
+.fc-customPrev-button {
+  left: 0;
+}
+.fc-customNext-button {
+  right: 0;
+}
+.fc-customNext-button:before {
+  content: '\e901';
+}
+.fc-customPrev-button:before {
+  content: '\e900';
 }
 
 .chakra-portal [data-popper-placement='top'] {

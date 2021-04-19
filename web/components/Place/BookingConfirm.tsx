@@ -129,6 +129,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
               pt={6}
             >
               <Button
+                layerStyle="link"
                 variant="unstyled"
                 color="grayText.1"
                 onClick={() => back()}

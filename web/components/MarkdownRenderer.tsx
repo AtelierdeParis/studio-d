@@ -21,7 +21,7 @@ const Title = ({ children, ...rest }: HeadingProps) => (
 const renderers = {
   a: (props) => {
     return (
-      <Link href={props.href} color="orange.500" isExternal>
+      <Link href={props.href} color="blue.500" isExternal>
         {props.children}
       </Link>
     )
