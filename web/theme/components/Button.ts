@@ -42,12 +42,31 @@ const Button = {
       },
     },
     line: {
-      borderBottom: '1px solid black',
+      borderBottom: '1px solid',
+      borderColor: 'black',
       px: 0,
       pb: 0.5,
       h: 'auto',
       borderRadius: 0,
       minW: 0,
+      _hover: {
+        color: 'blue.500',
+        borderColor: 'blue.500',
+      },
+    },
+    lineBlue: {
+      borderBottom: '1px solid',
+      borderColor: 'blue.500',
+      color: 'blue.500',
+      px: 0,
+      pb: 0.5,
+      h: 'auto',
+      borderRadius: 0,
+      minW: 0,
+      _hover: {
+        color: 'black',
+        borderColor: 'black',
+      },
     },
   },
   sizes: {

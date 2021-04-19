@@ -107,7 +107,7 @@ const BookingScheduleSlot = (props: ScheduleEvent) => {
 
   if (!hasEventSameDay) {
     return (
-      <SimpleGrid w="100%" h="100%" gridAutoRows="1fr" rowGap="13px">
+      <SimpleGrid w="100%" h="100%" gridAutoRows="1fr" rowGap={2.5}>
         {when === ScheduleEventWhen.AFTERNOON && <Spacer />}
         {Event}
         {when === ScheduleEventWhen.MORNING && <Spacer />}

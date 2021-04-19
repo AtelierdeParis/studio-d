@@ -247,14 +247,20 @@ a {
 .swiper-button-next,
 .swiper-button-prev {
   color: white !important;
-  text-shadow: 0 0 1px #000000;
+  text-shadow: 0px 1px 4px rgb(0 0 0 / 30%);
 }
 .swiper-slide {
   min-height: 100%;
   height: auto !important;
 }
 
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+  pointer-events: auto;
+}
+
 #calendar.booking-calendar .fc-daygrid-day-frame {
+  padding-top: 80%;
   background-color: transparent;
 }
 
@@ -282,7 +288,7 @@ a {
 }
 .booking-calendar#calendar .fc-daygrid-day-events {
   display: grid;
-  row-gap: 13px;
+  row-gap: 10px;
   padding: 0 12px;
 }
 .booking-calendar#calendar .fc-daygrid-dot-event:hover {

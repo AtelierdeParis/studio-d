@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text, Button, Input, Box } from '@chakra-ui/react'
+import { Flex, Text, Button, Input, Box, Spacer } from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
@@ -64,10 +64,13 @@ const InputFile = ({ control, place }: IInputFile) => {
       <Flex textStyle="infoLabel" justifyContent="space-between" mb={4}>
         <Text>{t('form.filesLabel')}</Text>
         <Box pos="relative" cursor="pointer" overflow="hidden">
-          <Button variant="unstyled" display="flex" alignItems="center">
-            <Box as="span" pr={2} color="black">
-              {t('form.files.add')}
-            </Box>
+          <Button
+            variant="unstyled"
+            display="flex"
+            alignItems="center"
+            color="black"
+          >
+            <Box pr={2}>{t('form.files.add')}</Box>
             <Add />
           </Button>
           <Input
@@ -90,10 +93,10 @@ const InputFile = ({ control, place }: IInputFile) => {
             backgroundColor="blue.200"
             color="grayText.1"
             py={2.5}
-            pl={10}
             alignItems="center"
             lineHeight="1.8"
           >
+            <Spacer w="40px" flex="none" />
             <Text
               borderLeft="1px solid"
               borderColor="gray.200"
@@ -102,7 +105,12 @@ const InputFile = ({ control, place }: IInputFile) => {
             >
               {t('form.files.name')}
             </Text>
-            <Text borderLeft="1px solid" borderColor="gray.200" pl={2.5}>
+            <Text
+              borderLeft="1px solid"
+              borderColor="gray.200"
+              pl={2.5}
+              flex={1}
+            >
               {t('form.files.displayName')}
             </Text>
           </Flex>
@@ -110,20 +118,21 @@ const InputFile = ({ control, place }: IInputFile) => {
             <Flex
               key={file?.name}
               py={2.5}
-              pl={3}
               alignItems="center"
               borderBottom="1px solid"
               borderColor="gray.100"
             >
-              <Attachment />
-              <Text ml={5} w="32%">
+              <Flex w="40px" justifyContent="center">
+                <Attachment />
+              </Flex>
+              <Text pl={2.5} w="35%">
                 {file?.name}
               </Text>
               <Flex
                 justifyContent="space-between"
                 flex={1}
                 alignItems="center"
-                pl={4}
+                pl={2.5}
               >
                 <Box>
                   <Input

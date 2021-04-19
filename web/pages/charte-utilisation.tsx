@@ -2,10 +2,9 @@ import React from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container, Heading } from '@chakra-ui/react'
+import { Container, Heading, Box } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_USE_POLICY } from '~constants'
-import { client } from '~api/client-api'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
 
@@ -27,7 +26,9 @@ const Charte = ({ page }: ICharte) => {
       >
         {page.title}
       </Heading>
-      <MarkdownRenderer>{page.text}</MarkdownRenderer>
+      <Box maxW="container.sm" mx="auto">
+        <MarkdownRenderer>{page.text}</MarkdownRenderer>
+      </Box>
     </Container>
   )
 }

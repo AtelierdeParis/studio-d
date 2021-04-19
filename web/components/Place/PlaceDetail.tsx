@@ -14,6 +14,7 @@ import {
 import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
 import OtherPlaces from '~components/Place/OtherPlaces'
 import PlaceAttributesGrid from '~components/Place/PlaceAttributesGrid'
+import MarkdownRenderer from '~components/MarkdownRenderer'
 import BookingScheduleContainer from '~components/Place/BookingScheduleContainer'
 import Pin from 'public/assets/img/pin-outline.svg'
 import Calendar from 'public/assets/img/calendar.svg'
@@ -90,41 +91,53 @@ const PlaceDetail = ({ place }: Props) => {
       </Flex>
       <BookingScheduleContainer place={place} />
       <Flex justifyContent="space-between" pt={18}>
-        <Box pl={10}>
-          <Text textStyle="h2" mb={8}>
-            {t('detail.about')}
-          </Text>
-          <VStack spacing={7} alignItems="flex-start">
-            {place?.about && <Text whiteSpace="pre-line">{place?.about}</Text>}
-            {place?.files?.length > 0 && (
-              <Flex flexWrap="wrap">
-                {place?.files.map((file) => (
-                  <Button
-                    key={file.id}
-                    mb={4}
-                    mr={4}
-                    leftIcon={<Download />}
-                    colorScheme="gray"
-                    onClick={() => {
-                      saveAs(
-                        process.env.NEXT_PUBLIC_BACK_URL + file.url,
-                        file.name,
-                      )
-                    }}
-                  >
-                    {file.caption ? `${file.caption} (${file.ext})` : file.name}
-                  </Button>
-                ))}
-              </Flex>
-            )}
-          </VStack>
-        </Box>
-        <Box px={20}>
-          <Text textStyle="h2" mb={8}>
-            {t('detail.details')}
-          </Text>
-          <Text whiteSpace="pre-line">{place?.about}</Text>
-        </Box>
+        {(place?.about || place?.files?.length > 0) && (
+          <Box pl={10} flex={1}>
+            <Text textStyle="h2" mb={8}>
+              {t('detail.about')}
+            </Text>
+            <VStack spacing={7} alignItems="flex-start">
+              {place?.about && (
+                <Box overflow="hidden">
+                  <MarkdownRenderer>{place?.about}</MarkdownRenderer>
+                </Box>
+              )}
+              {place?.files?.length > 0 && (
+                <Flex flexWrap="wrap">
+                  {place?.files.map((file) => (
+                    <Button
+                      key={file.id}
+                      mb={4}
+                      mr={4}
+                      leftIcon={<Download />}
+                      colorScheme="gray"
+                      onClick={() => {
+                        saveAs(
+                          process.env.NEXT_PUBLIC_BACK_URL + file.url,
+                          file.name,
+                        )
+                      }}
+                    >
+                      {file.caption
+                        ? `${file.caption} (${file.ext})`
+                        : file.name}
+                    </Button>
+                  ))}
+                </Flex>
+              )}
+            </VStack>
+          </Box>
+        )}
+        {place?.details && (
+          <Box px={20} flex={1}>
+            <Text textStyle="h2" mb={8}>
+              {t('detail.details')}
+            </Text>
+            <Box overflow="hidden">
+              <MarkdownRenderer>{place?.details}</MarkdownRenderer>
+            </Box>
+          </Box>
+        )}
       </Flex>
       <Flex alignItems="flex-start" pt={20} id="map">
         <Box w="18px">

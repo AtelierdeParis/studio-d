@@ -37,7 +37,7 @@ const PlaceCardCarousel = ({ images = [], showNumber = false }) => {
           zIndex={6}
           fontFamily="mabry medium"
           fontWeight="500"
-          textShadow="0px 1px 4px #000"
+          textShadow="0px 1px 4px rgb(0 0 0 / 30%)"
         >{`${currentSlide}/${images.length}`}</Text>
       </Swiper>
     </>

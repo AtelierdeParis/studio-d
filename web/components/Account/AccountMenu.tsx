@@ -125,7 +125,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
             <Flex
               position="relative"
               alignItems="center"
-              _hover={styleActive}
+              _hover={{
+                color: 'blue.500',
+              }}
               cursor="pointer"
               px={5}
               py={2.5}

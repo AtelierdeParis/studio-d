@@ -15,10 +15,27 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
 
   if (session) {
     return (
-      <Flex as={Link} href={ROUTE_ACCOUNT} alignItems="center">
+      <Flex
+        as={Link}
+        href={ROUTE_ACCOUNT}
+        alignItems="center"
+        role="group"
+        _hover={{ textDecoration: 'none' }}
+      >
         <Squares stroke={colorMode} />
         <Box maxW="15rem">
-          <Text pl={3} fontWeight="500" lineHeight={1} isTruncated>
+          <Text
+            ml={3}
+            pt="2px"
+            fontWeight="500"
+            lineHeight={1.2}
+            isTruncated
+            borderBottom="1px solid transparent"
+            _groupHover={{
+              textDecoration: 'none',
+              borderBottom: '1px solid black',
+            }}
+          >
             {session.user.name}
           </Text>
         </Box>

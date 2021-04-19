@@ -76,9 +76,11 @@ const PlaceSearch = () => {
             </Flex>
             <Divider orientation="vertical" mx={3.5} />
           </Flex>
-          <Flex alignItems="flex-start" pt={1} pos="relative">
-            <Flex w="100%" pt={1}>
-              <Calendar stroke={theme.colors.blue['500']} />
+          <Flex alignItems="flex-start" pos="relative">
+            <Flex w="100%">
+              <Box pt={0.5}>
+                <Calendar stroke={theme.colors.blue['500']} />
+              </Box>
               <Box pl={3.5} flex={1}>
                 <InputDateRange
                   label={t('search.when.label')}

@@ -27,8 +27,8 @@ const Loader = ({ text, isCentered, size = 'xl', ...rest }: ILoader) => {
         <Spinner
           thickness="3px"
           speed="0.65s"
-          emptyColor="gray.200"
-          color="gray.500"
+          emptyColor="blue.100"
+          color="blue.500"
           size={size}
         />
       </Flex>
