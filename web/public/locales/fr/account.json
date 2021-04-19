@@ -43,6 +43,10 @@
             "label": "Ville"
         },
         "info": "Mes informations",
+        "desactivate": {
+            "title": "Désactivation",
+            "btn": "Désactiver le compter"
+        },
         "phone": {
             "label": "Numéro de téléphone"
         },
@@ -75,7 +79,22 @@
         "insuranceNumber": "Numéro de la police d’assurance",
         "submit": "Enregistrer les modifications",
         "success": "Les informations ont bien été mise à jour",
-        "error": "Impossible de mettre à jour les informations"
+        "error": "Impossible de mettre à jour les informations",
+        "modal": {
+            "title": "Indiquer votre mot de passe",
+            "text": "Veuillez renseigner votre mot de passe actuel afin de mettre à jour vos informations",
+            "btn": "Confirmer",
+            "back": "Annuler",
+            "error": "Le mot de passe ne correspond pas"
+        }
+    },
+    "desactivate": {
+        "title": "Désactiver le compter",
+        "text": "Vous êtes sur le point de désactiver votre compte, il ne sera plus visible par les autres utilisateurs. Voulez-vous continuer ?",
+        "btn": "Confirmer",
+        "back": "Annuler",
+        "success": "Votre compte a bien été désactivé",
+        "error": "Une erreur est survenue en voulant désactiver votre compte"
     },
     "message": {
         "info": {

@@ -4,6 +4,8 @@ import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FormField from '~components/FormField'
 import InputPassword from '~components/InputPassword'
+import AskPasswordModal from '~components/Account/AskPasswordModal'
+import DesactivateAccountModal from '~components/Account/DesactivateAccountModal'
 import { useTranslation } from 'next-i18next'
 import {
   Box,
@@ -20,6 +22,7 @@ import {
 import { useForm } from 'react-hook-form'
 import Letter from 'public/assets/img/letter.svg'
 import { client } from '~api/client-api'
+import { NewUsersPermissionsUser } from '~typings/api'
 import useToast from '~hooks/useToast'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -93,11 +96,13 @@ const AccountInformation = ({ user }: Props) => {
   const { t } = useTranslation('account')
   const { errorToast, successToast } = useToast()
   const [isLoading, setLoading] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   const {
     register,
     errors,
     handleSubmit,
+    getValues,
     formState,
     reset,
   } = useForm<FormInformation>({
@@ -109,7 +114,7 @@ const AccountInformation = ({ user }: Props) => {
     resolver: yupResolver(getSchema(user.type)),
   })
 
-  const onSubmit = (data) => {
+  const save = (data) => {
     const filteredData = Object.keys(data).reduce((total, current) => {
       if (Boolean(data[current])) total[current] = data[current]
       return total
@@ -117,7 +122,7 @@ const AccountInformation = ({ user }: Props) => {
     setLoading(true)
 
     client.users
-      .putUsers(filteredData)
+      .putUsers(filteredData as NewUsersPermissionsUser)
       .then(() => {
         reset(filteredData, { dirtyFields: false })
         successToast(t('information.success'))
@@ -126,8 +131,22 @@ const AccountInformation = ({ user }: Props) => {
       .finally(() => setLoading(false))
   }
 
+  const onSubmit = (data) => {
+    if (data.email !== user.email || data.password !== '') {
+      setShowModal(true)
+      return
+    }
+    save(data)
+  }
+
   return (
     <Box py={8}>
+      {showModal && (
+        <AskPasswordModal
+          onSuccess={() => save(getValues())}
+          setShowModal={setShowModal}
+        />
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <Text textStyle="groupLabel">{t('information.username')}</Text>
@@ -198,7 +217,7 @@ const AccountInformation = ({ user }: Props) => {
           </HStack>
         </Box>
         <Box my={14}>
-          <Text textStyle="groupLabel">{t('information.contact')}</Text>
+          <Text textStyle="groupLabel">{t('information.info')}</Text>
           <VStack spacing={5}>
             <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
               <FormField
@@ -310,6 +329,14 @@ const AccountInformation = ({ user }: Props) => {
             </HStack>
           </VStack>
         </Box>
+        {user.confirmed && !user.blocked && (
+          <Box my={14}>
+            <Text textStyle="groupLabel">
+              {t('information.desactivate.title')}
+            </Text>
+            <DesactivateAccountModal />
+          </Box>
+        )}
         <Flex justifyContent="center">
           <Button
             colorScheme="blue"
