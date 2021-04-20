@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from '~components/Link'
-import LinkOverlay from '~components/LinkOverlay'
 import Tag from '~components/Tag'
 import Image from '~components/Image'
 import FallbackImage from '~components/FallbackImage'
@@ -12,9 +11,7 @@ import {
   Divider,
   HStack,
   AspectRatio,
-  Circle,
   ButtonGroup,
-  LinkBox,
 } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'

@@ -99,7 +99,7 @@ const theme = extendTheme({
       lineHeight: 'base',
     },
     h2: {
-      fontSize: 'xl',
+      fontSize: '2xl',
       fontFamily: 'mabry medium',
       fontWeight: '500',
     },

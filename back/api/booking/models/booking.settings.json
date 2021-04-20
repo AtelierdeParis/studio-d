@@ -15,10 +15,6 @@
       "collection": "disponibility",
       "via": "booking"
     },
-    "company": {
-      "plugin": "users-permissions",
-      "model": "user"
-    },
     "status": {
       "type": "enumeration",
       "enum": [
@@ -40,8 +36,11 @@
     },
     "place": {
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "bookings"
+      "model": "user"
+    },
+    "company": {
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

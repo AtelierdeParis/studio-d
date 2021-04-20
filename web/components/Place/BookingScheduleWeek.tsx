@@ -83,10 +83,7 @@ const BookingScheduleWeek = ({ place, events }: Props) => {
         events={events}
         locale={frLocale}
       />
-      <BookingFilledUntil
-        start={dateRange.start}
-        filledUntil={place?.filledUntil}
-      />
+      <BookingFilledUntil start={dateRange.start} place={place} />
     </Flex>
   )
 }

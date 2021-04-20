@@ -60,7 +60,7 @@ module.exports = {
     );
   },
   async create(ctx) {
-    const { id, type } = ctx.state.user;
+    const { id, type, confirmed } = ctx.state.user;
     const { disponibilities } = ctx.request.body;
 
     if (disponibilities.length === 0) {
@@ -69,6 +69,16 @@ module.exports = {
         formatError({
           id: "error.noDispo",
           message: "You must provide at least one disponibility",
+        })
+      );
+    }
+
+    if (!confirmed) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: "error.notConfirmed",
+          message: "Only confirmed user can create bookings",
         })
       );
     }
@@ -107,40 +117,44 @@ module.exports = {
       );
     }
 
-    Promise.all(
-      disponibilities.map(async (dispoId) => {
-        const entity = await strapi
-          .query("disponibility")
-          .findOne({ id: dispoId });
-
-        if (!entity) {
-          throw new Error(`Dispo with id ${dispoId} not found`);
-        }
-
-        if (entity.status !== "available") {
-          throw new Error(
-            `Dispo with id ${dispoId} is not available for a booking`
-          );
-        }
-
-        if (entity.espace.users_permissions_user === id) {
-          throw new Error(`You can not create a booking for yourself`);
-        }
-        return dispoId;
+    const entity = await strapi.services.booking
+      .create({
+        ...ctx.request.body,
+        company: id,
+        place: espace.users_permissions_user.id,
       })
-    ).then((res) => {
-      return res.map((dispoId) => {
-        strapi
-          .query("disponibility")
-          .update({ id: dispoId }, { status: "pending" });
-      });
-    });
+      .then(async (res) => {
+        await Promise.all(
+          disponibilities.map(async (dispoId) => {
+            const entity = await strapi
+              .query("disponibility")
+              .findOne({ id: dispoId });
 
-    const entity = await strapi.services.booking.create({
-      ...ctx.request.body,
-      company: id,
-      place: espace.users_permissions_user.id,
-    });
+            if (!entity) {
+              throw new Error(`Dispo with id ${dispoId} not found`);
+            }
+
+            if (entity.status !== "available") {
+              throw new Error(
+                `Dispo with id ${dispoId} is not available for a booking`
+              );
+            }
+
+            if (entity.espace.users_permissions_user === id) {
+              throw new Error(`You can not create a booking for yourself`);
+            }
+            return dispoId;
+          })
+        ).then((res) => {
+          return res.map((dispoId) => {
+            strapi
+              .query("disponibility")
+              .update({ id: dispoId }, { status: "pending" });
+          });
+        });
+        return res;
+      });
+
     return sanitizeEntity(entity, { model: strapi.models.booking });
   },
 };

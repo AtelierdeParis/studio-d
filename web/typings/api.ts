@@ -13,7 +13,7 @@ export interface Actuality {
   id: string;
   title: string;
   content: string;
-  created_at: string;
+  created_at?: string;
   image: {
     id: string;
     name: string;
@@ -34,11 +34,19 @@ export interface Actuality {
     created_by?: string;
     updated_by?: string;
   };
+  slug?: string;
+
+  /** @format date-time */
+  published_at?: string;
 }
 
 export interface NewActuality {
   title: string;
   content: string;
+  slug?: string;
+
+  /** @format date-time */
+  published_at?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -56,11 +64,11 @@ export interface Booking {
 
 export interface NewBooking {
   disponibilities?: string[];
-  company?: string;
   status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   messages?: string[];
   espace?: string;
   place?: string;
+  company?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -125,11 +133,11 @@ export interface Disponibility {
   booking?: {
     id: string;
     disponibilities?: string[];
-    company?: string;
     status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     messages?: string[];
     espace?: string;
     place?: string;
+    company?: string;
     created_by?: string;
     updated_by?: string;
   };
@@ -411,7 +419,6 @@ export interface UsersPermissionsRole {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
-    bookings?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -464,6 +471,7 @@ export interface UsersPermissionsUser {
   choreographer?: string;
   espaces?: Espace[];
   type: "company" | "place";
+  bookings?: Booking[];
 }
 
 export interface NewUsersPermissionsUser {

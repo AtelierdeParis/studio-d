@@ -771,9 +771,6 @@
                   "type": "string"
                 }
               },
-              "company": {
-                "type": "string"
-              },
               "status": {
                 "type": "string",
                 "enum": [
@@ -795,6 +792,9 @@
                 "type": "string"
               },
               "place": {
+                "type": "string"
+              },
+              "company": {
                 "type": "string"
               },
               "created_by": {

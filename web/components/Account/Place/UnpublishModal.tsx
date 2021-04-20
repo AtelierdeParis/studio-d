@@ -6,6 +6,8 @@ import { Flex, Button } from '@chakra-ui/react'
 import Arrow from 'public/assets/img/circle-arrow.svg'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
+import Link from '~components/Link'
+import { ROUTE_PLACE_DETAIL } from '~constants'
 
 interface IUnpublishModal {
   placeId: string
@@ -27,20 +29,27 @@ const UnpublishModal = ({ placeId }: IUnpublishModal) => {
   }
 
   return (
-    <Modal
-      button={
-        <Flex alignItems="center" alignSelf="center">
+    <Flex alignItems="center" alignSelf="center">
+      <Modal
+        button={
           <Button variant="line" display="flex" mr={5}>
             {t('list.unpublish')}
           </Button>
-          <Arrow />
-        </Flex>
-      }
-      title={t('list.unpublish')}
-      onConfirm={onConfirm}
-    >
-      {t('list.unpublishModal')}
-    </Modal>
+        }
+        title={t('list.unpublish')}
+        onConfirm={onConfirm}
+      >
+        {t('list.unpublishModal')}
+      </Modal>
+      <Link
+        href={{
+          pathname: ROUTE_PLACE_DETAIL,
+          query: { id: placeId },
+        }}
+      >
+        <Arrow />
+      </Link>
+    </Flex>
   )
 }
 

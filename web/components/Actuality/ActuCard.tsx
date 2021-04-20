@@ -30,7 +30,7 @@ const ActuCard = ({ actu }: IActuCard) => {
           <LinkOverlay
             href={{
               pathname: ROUTE_ACTU_DETAIL,
-              query: { id: actu.id },
+              query: { id: actu.slug },
             }}
           >
             <Text fontFamily="mabry medium" fontSize="lg">

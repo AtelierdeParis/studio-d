@@ -598,6 +598,9 @@
               }
             }
           },
+          "slug": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -614,6 +617,9 @@
             "type": "string"
           },
           "content": {
+            "type": "string"
+          },
+          "slug": {
             "type": "string"
           },
           "published_at": {

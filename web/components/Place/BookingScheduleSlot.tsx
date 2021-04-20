@@ -7,10 +7,13 @@ import {
 import { Flex, SimpleGrid, Spacer, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import BookingScheduleContext from '~components/Place/BookingScheduleContext'
+import PeriodEvent from '~components/Place/PeriodEvent'
 import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
-import { format } from '~utils/date'
 import Confirm from 'public/assets/img/confirm.svg'
-import differenceInDays from 'date-fns/differenceInDays'
+import { useCurrentUser } from '~hooks/useCurrentUser'
+import { useMyBookings } from '~hooks/useMyBookings'
+import { useMyRequests } from '~hooks/useMyRequests'
+import useConcurrentBookings from '~hooks/useConcurrentBookings'
 
 const styleSelected = {
   borderColor: 'confirm',
@@ -27,11 +30,25 @@ const styleAnotherBooking = {
   },
 }
 
+const styleSelectable = {
+  cursor: 'pointer',
+  _hover: {
+    borderColor: '#cbcfe1',
+  },
+}
 interface Props extends ScheduleEvent {
   isMonth?: boolean
 }
 
+const SpacerEvent = ({ isMonth }) => (
+  <Spacer bgColor={isMonth ? '#e5e7ed' : 'transparent'} borderRadius="lg" />
+)
+
 const BookingScheduleSlot = (props: Props) => {
+  const { t } = useTranslation('place')
+  const { data: user } = useCurrentUser()
+  const { data: bookings = [] } = useMyBookings()
+  const { data: requests = [] } = useMyRequests()
   const {
     extendedProps: { when, hasEventSameDay, id, type },
     start,
@@ -39,14 +56,15 @@ const BookingScheduleSlot = (props: Props) => {
     isMonth,
   } = props
   const { selected, setSelected } = useContext(BookingScheduleContext)
-  const { t } = useTranslation('place')
   const isSelected = useMemo(
     () => selected.some((dispo) => dispo.extendedProps.id === id),
     [selected, id],
   )
 
-  // TODO: handle value
-  const hasAnotherBooking = false
+  const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
+    requests.concat(bookings),
+    props,
+  )
 
   let Event = (
     <Flex
@@ -58,16 +76,13 @@ const BookingScheduleSlot = (props: Props) => {
       borderRadius="lg"
       w="100%"
       h="100%"
-      cursor="pointer"
       border="2px solid"
       borderColor="transparent"
-      _hover={{
-        borderColor: '#cbcfe1',
-      }}
+      {...(user?.type === 'company' && styleSelectable)}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {
-        if (hasAnotherBooking) return null
+        if (hasAnotherBooking || user.type === 'place') return null
         if (!isSelected) {
           setSelected([...selected, props])
         } else {
@@ -81,25 +96,7 @@ const BookingScheduleSlot = (props: Props) => {
         </Box>
       )}
       {type === ScheduleEventType.PERIOD ? (
-        <Flex
-          pos="absolute"
-          top={6}
-          right={3}
-          alignItems="flex-end"
-          flexDirection="column"
-          fontSize="sm"
-          display="flex"
-        >
-          <Box color={status === 'selected' ? 'blue.500' : 'black'}>
-            {`
-              ${format(start, 'd MMM')} - 
-              ${format(end, 'd MMM')}
-              `}
-          </Box>
-          <Box color="grayText.1">{`(${
-            differenceInDays(end, start) + 1
-          } jours)`}</Box>
-        </Flex>
+        <PeriodEvent start={start} end={end} isMonth={isMonth} />
       ) : (
         <>
           {!isMonth && (
@@ -111,15 +108,29 @@ const BookingScheduleSlot = (props: Props) => {
   )
 
   if (hasAnotherBooking) {
-    Event = <PopoverOtherBooking>{Event}</PopoverOtherBooking>
+    Event = (
+      <PopoverOtherBooking isMonth booking={concurrentBooking}>
+        {Event}
+      </PopoverOtherBooking>
+    )
   }
 
   if (!hasEventSameDay) {
     return (
-      <SimpleGrid w="100%" h="100%" gridAutoRows="1fr" rowGap={2.5}>
-        {when === ScheduleEventWhen.AFTERNOON && <Spacer />}
+      <SimpleGrid
+        w="100%"
+        h="100%"
+        gridAutoRows="1fr"
+        rowGap="4px"
+        bgColor={isMonth ? 'blue.50' : 'transparent'}
+      >
+        {when === ScheduleEventWhen.AFTERNOON && (
+          <SpacerEvent isMonth={isMonth} />
+        )}
         {Event}
-        {when === ScheduleEventWhen.MORNING && <Spacer />}
+        {when === ScheduleEventWhen.MORNING && (
+          <SpacerEvent isMonth={isMonth} />
+        )}
       </SimpleGrid>
     )
   }

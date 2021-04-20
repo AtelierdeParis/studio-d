@@ -88,7 +88,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
     mode: 'onBlur',
     resolver: yupResolver(getSchema(target)),
   })
-  console.log(errors)
+
   const onSubmit = (data) => {
     const { acceptCondition, ...user } = data
     setLoading(true)

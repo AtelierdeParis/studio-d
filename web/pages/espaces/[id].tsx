@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container } from '@chakra-ui/react'
 import { usePlace } from '~hooks/usePlace'
 import Loading from '~components/Loading'
 import PlaceDetail from '~components/Place/PlaceDetail'
@@ -33,13 +32,11 @@ const PlacePage = ({ placeId }: Props) => {
   const { data: place, isLoading } = usePlace(placeId, { availableOnly: true })
 
   return (
-    <Container pt={12}>
-      <Loading isLoading={isLoading} pt={20}>
-        <BookingScheduleProvider>
-          <ViewHandler place={place} />
-        </BookingScheduleProvider>
-      </Loading>
-    </Container>
+    <Loading isLoading={isLoading} pt={20}>
+      <BookingScheduleProvider>
+        <ViewHandler place={place} />
+      </BookingScheduleProvider>
+    </Loading>
   )
 }
 
@@ -49,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
 }) => {
   return {
     props: {
-      placeId: query.placeId,
+      placeId: query.id,
       ...(await serverSideTranslations(locale, ['common', 'place'])),
     },
   }

@@ -5,6 +5,7 @@ import isSameDay from 'date-fns/isSameDay'
 import getDate from 'date-fns/getDate'
 import differenceInDays from 'date-fns/differenceInDays'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
+import PeriodEvent from '~components/Place/PeriodEvent'
 
 const styleSelected = {
   border: '1px dashed',
@@ -81,29 +82,7 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
     >
-      {isPeriod && (
-        <Text
-          alignItems="center"
-          justifyContent="flex-end"
-          px={1}
-          pt={1}
-          fontSize="sm"
-          display="flex"
-          isTruncated
-        >
-          <Box as="span" color={status === 'selected' ? 'blue.500' : 'black'}>
-            {`
-              ${getDate(range.start)} - 
-              ${getDate(range.end)}
-              `}
-          </Box>
-          <Box
-            pl={1.5}
-            color={status === 'selected' ? 'blue.500' : 'grayText.1'}
-            as="span"
-          >{`(${differenceInDays(range.end, range.start) + 1} jours)`}</Box>
-        </Text>
-      )}
+      {isPeriod && <PeriodEvent isMonth start={range.start} end={range.end} />}
     </Box>
   )
 }

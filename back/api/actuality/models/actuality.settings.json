@@ -27,6 +27,11 @@
       ],
       "plugin": "upload",
       "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": false,
+      "unique": true
     }
   }
 }

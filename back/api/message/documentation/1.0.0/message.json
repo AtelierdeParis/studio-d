@@ -892,12 +892,6 @@
                   "place"
                 ]
               },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "created_by": {
                 "type": "string"
               },
@@ -1019,12 +1013,6 @@
                   "place"
                 ]
               },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "created_by": {
                 "type": "string"
               },
@@ -1065,9 +1053,6 @@
                   "type": "string"
                 }
               },
-              "company": {
-                "type": "string"
-              },
               "status": {
                 "type": "string",
                 "enum": [
@@ -1089,6 +1074,9 @@
                 "type": "string"
               },
               "place": {
+                "type": "string"
+              },
+              "company": {
                 "type": "string"
               },
               "created_by": {

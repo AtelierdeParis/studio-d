@@ -11,7 +11,6 @@ import {
   InputRightElement,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { useMemo } from 'react'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -23,6 +22,7 @@ import Letter from 'public/assets/img/letter.svg'
 interface SignInFormProps {
   onClose: () => void
   onOpenReset: () => void
+  initialRef: React.Ref<any>
 }
 interface FormData {
   email: string
@@ -30,21 +30,29 @@ interface FormData {
 }
 
 const schema = yup.object({
-  email: yup.string().email().required(),
+  email: yup.string().email(),
   password: yup.string().required(),
 })
 
 const SignInForm = (props: SignInFormProps) => {
   const { t } = useTranslation('common')
   const { errorToast } = useToast()
-  const { register, formState, handleSubmit } = useForm<FormData>({
+  const [email, setEmail] = useState('')
+  const { register, formState, handleSubmit, setError } = useForm<FormData>({
     resolver: yupResolver(schema),
   })
 
   const onSubmit = async (values: FormData) => {
+    if (!email) {
+      setError('email', {
+        type: 'manual',
+        message: t('yup:mixed.required'),
+      })
+      return
+    }
     try {
       await signIn('credentials', {
-        username: values.email,
+        username: email,
         password: values.password,
         redirect: false,
       })
@@ -61,8 +69,9 @@ const SignInForm = (props: SignInFormProps) => {
           <InputGroup>
             <Input
               name="email"
+              ref={props.initialRef}
               type="email"
-              ref={register}
+              onChange={(event) => setEmail(event.target.value)}
               placeholder={t('signin.email.placeholder')}
             />
             <InputRightElement children={<Letter />} />

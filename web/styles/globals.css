@@ -179,7 +179,7 @@ a {
 }
 
 #calendar.account-schedule .fc-daygrid-event {
-  height: 100%;
+  height: calc(100% + 1px);
   padding: 0;
 }
 #calendar .fc-day-other .fc-daygrid-day-top {
@@ -293,12 +293,18 @@ a {
 #calendar .fc-daygrid-dot-event:hover {
   background-color: transparent;
 }
+#calendar .fc-daygrid-block-event:not(.fc-event-start) .periodEvent {
+  display: none;
+}
 .account-schedule.month .fc-view-harness {
   height: auto !important;
 }
 .account-schedule.month .fc-scroller-liquid-absolute,
 .account-schedule.month .fc-view-harness-active > .fc-view {
   position: static;
+}
+.account-schedule .fc-liquid-hack .fc-daygrid-day-frame {
+  position: relative;
 }
 .booking-calendar#calendar .fc-daygrid-event-harness-abs {
   left: 12px;

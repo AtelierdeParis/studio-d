@@ -33,7 +33,7 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
             borderBottom="1px solid transparent"
             _groupHover={{
               textDecoration: 'none',
-              borderBottom: '1px solid black',
+              borderBottom: `1px solid ${colorMode}`,
             }}
           >
             {session.user.name}
