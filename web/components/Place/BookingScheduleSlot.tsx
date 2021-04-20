@@ -7,10 +7,9 @@ import {
 import { Flex, SimpleGrid, Spacer, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import BookingScheduleContext from '~components/Place/BookingScheduleContext'
+import PeriodEvent from '~components/Place/PeriodEvent'
 import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
-import { format } from '~utils/date'
 import Confirm from 'public/assets/img/confirm.svg'
-import differenceInDays from 'date-fns/differenceInDays'
 
 const styleSelected = {
   borderColor: 'confirm',
@@ -26,7 +25,6 @@ const styleAnotherBooking = {
     borderColor: 'transparent',
   },
 }
-
 interface Props extends ScheduleEvent {
   isMonth?: boolean
 }
@@ -81,25 +79,7 @@ const BookingScheduleSlot = (props: Props) => {
         </Box>
       )}
       {type === ScheduleEventType.PERIOD ? (
-        <Flex
-          pos="absolute"
-          top={6}
-          right={3}
-          alignItems="flex-end"
-          flexDirection="column"
-          fontSize="sm"
-          display="flex"
-        >
-          <Box color={status === 'selected' ? 'blue.500' : 'black'}>
-            {`
-              ${format(start, 'd MMM')} - 
-              ${format(end, 'd MMM')}
-              `}
-          </Box>
-          <Box color="grayText.1">{`(${
-            differenceInDays(end, start) + 1
-          } jours)`}</Box>
-        </Flex>
+        <PeriodEvent start={start} end={end} isMonth={isMonth} />
       ) : (
         <>
           {!isMonth && (

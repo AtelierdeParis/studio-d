@@ -191,6 +191,8 @@
         "nextWeeks": "{{nb}} créneaux la semaine prochaine"
     },
     "schedule": {
+        "nbDays" : "{{nb}} jours",
+        "nbDays()" : "({{nb}} jours)",
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
         "success": "Une nouvelle disponibilité a été ajouté",
         "type": {
