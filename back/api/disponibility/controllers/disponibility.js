@@ -27,7 +27,7 @@ module.exports = {
     const maxDate = max(newDispo.map((dispo) => new Date(dispo.end)));
     const place = newDispo[0].espace;
 
-    if (!place.filledUntil && isAfter(maxDate, new Date(place.filledUntil))) {
+    if (!place.filledUntil || isAfter(maxDate, new Date(place.filledUntil))) {
       strapi.query("espace").update({ id: place.id }, { filledUntil: maxDate });
     }
 

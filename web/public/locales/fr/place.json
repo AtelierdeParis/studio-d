@@ -310,8 +310,14 @@
         "submit": "Déposer une demande",
         "infoPlace": "Information sur les horaires de l’espace :",
         "filledUntil": {
-            "title": "L’espace n’a plus de créneaux disponibles jusqu'au {{date}}",
-            "text": "Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
+            "title": {
+                "empty" : "L'espace n'a pas de créneaux disponibles",
+                "default" : "L’espace n’a plus de créneaux disponibles jusqu'au {{date}}"
+            },
+            "text": {
+                "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",
+                "default":"Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
+            }
         }
     },
     "confirm": {

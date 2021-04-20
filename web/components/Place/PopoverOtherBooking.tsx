@@ -11,16 +11,17 @@ import {
 } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { Booking } from '~typings/api'
-import { useTranslation, Trans } from 'next-i18next'
+import { Trans } from 'next-i18next'
 import Help from 'public/assets/img/help.svg'
 import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
 
 interface Props {
   children: React.ReactNode
   booking: Booking
+  isMonth: boolean
 }
 
-const PopoverOtherBooking = ({ children, booking }: Props) => {
+const PopoverOtherBooking = ({ children, booking, isMonth }: Props) => {
   const isAccepted = booking.status === 'accepted'
   const route = isAccepted ? ROUTE_ACCOUNT_BOOKING : ROUTE_ACCOUNT_REQUEST
 
@@ -33,6 +34,10 @@ const PopoverOtherBooking = ({ children, booking }: Props) => {
             right={1.5}
             top={1.5}
             zIndex={10}
+            {...(isMonth && {
+              right: 'auto',
+              left: 1.5,
+            })}
             bgColor="gray.200"
             size="16px"
           >

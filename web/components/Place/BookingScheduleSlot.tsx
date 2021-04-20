@@ -103,7 +103,7 @@ const BookingScheduleSlot = (props: Props) => {
 
   if (hasAnotherBooking) {
     Event = (
-      <PopoverOtherBooking booking={concurrentBooking}>
+      <PopoverOtherBooking isMonth booking={concurrentBooking}>
         {Event}
       </PopoverOtherBooking>
     )
