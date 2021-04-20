@@ -16,16 +16,19 @@ import {
 import { useTranslation } from 'next-i18next'
 
 interface Props extends BoxProps {
+  isOpen?: boolean
+  isLoading?: boolean
   children: React.ReactNode
   title: string
   closeText?: string
   size?: string
   confirmText?: string
-  button: JSX.Element
+  button?: JSX.Element
   onConfirm: () => Promise<any>
 }
 
 const Modal = ({
+  isLoading,
   children,
   title,
   button,
@@ -33,11 +36,12 @@ const Modal = ({
   closeText = null,
   confirmText = null,
   size = 'md',
+  isOpen = null,
   ...rest
 }: Props) => {
-  const [isLoading, setLoading] = useState(false)
+  const [isLoadingInternal, setLoading] = useState(false)
   const { t } = useTranslation('modal')
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenInternal, onOpen, onClose } = useDisclosure()
 
   const onClick = async () => {
     setLoading(true)
@@ -49,10 +53,17 @@ const Modal = ({
 
   return (
     <>
-      <Box onClick={onOpen} alignSelf="center" {...rest}>
-        {button}
-      </Box>
-      <ChakraModal isOpen={isOpen} onClose={onClose} isCentered size={size}>
+      {button && (
+        <Box onClick={onOpen} alignSelf="center" {...rest}>
+          {button}
+        </Box>
+      )}
+      <ChakraModal
+        isOpen={isOpen || isOpenInternal}
+        onClose={onClose}
+        isCentered
+        size={size}
+      >
         <ModalOverlay />
         <ModalContent pt={6} overflow="hidden">
           <ModalHeader
@@ -80,7 +91,11 @@ const Modal = ({
                 {closeText || t(`close`)}
               </Button>
             )}
-            <Button onClick={onClick} size="lg" isLoading={isLoading}>
+            <Button
+              onClick={onClick}
+              size="lg"
+              isLoading={isLoading || isLoadingInternal}
+            >
               {confirmText || t('confirm')}
             </Button>
           </ModalFooter>

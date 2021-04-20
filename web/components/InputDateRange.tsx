@@ -77,7 +77,9 @@ const InputDateRange = ({ control, placeholder, label }: IInputDateRange) => {
                     )}
                 </HStack>
               ) : (
-                <Text color="gray.500">{placeholder}</Text>
+                <Text color="gray.500" mt={1}>
+                  {placeholder}
+                </Text>
               )}
             </FormField>
           </Flex>

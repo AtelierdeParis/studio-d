@@ -40,34 +40,36 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
         <VStack pl={4} spacing={8} flex={1} alignItems="flex-start">
           <ScheduleFilledUntil place={place} />
           <Box>
-            <Flex pb={1.5}>
+            <Flex pb={1.5} alignItems="center">
               <Text color="gray.400" mr={1.5}>
                 {t('schedule.requests')}
               </Text>
-              <Link
+              <Button
+                as={Link}
+                variant="line"
                 href={ROUTE_ACCOUNT_REQUEST}
-                textDecoration="underline"
                 fontFamily="mabry medium"
               >
                 {t('schedule.see')}
-              </Link>
+              </Button>
             </Flex>
             <Tag bgColor="tag.yellow">
               {t('schedule.nbPending', { nb: pending.length })}
             </Tag>
           </Box>
           <Box>
-            <Flex pb={1.5}>
+            <Flex pb={1.5} alignItems="center">
               <Text color="gray.400" mr={1.5}>
                 {t('schedule.bookings')}
               </Text>
-              <Link
+              <Button
+                as={Link}
+                variant="line"
                 href={ROUTE_ACCOUNT_BOOKING}
-                textDecoration="underline"
                 fontFamily="mabry medium"
               >
                 {t('schedule.see')}
-              </Link>
+              </Button>
             </Flex>
             <HStack alignItems="center" spacing={2.5}>
               <Tag bgColor="tag.green">

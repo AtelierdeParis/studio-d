@@ -1,14 +1,14 @@
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
 import { Box, Flex, Text, SimpleGrid } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
-import { createOldEvents } from '~utils/schedule'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
 import BookingFilledUntil from '~components/Place/BookingFilledUntil'
+import { ScheduleEvent } from '~@types/schedule-event.d'
 
 const view = createPlugin({
   views: {
@@ -30,14 +30,12 @@ const view = createPlugin({
 
 interface Props {
   place: Espace
+  events: ScheduleEvent[]
 }
 
-const BookingSchedule = ({ place }: Props) => {
+const BookingScheduleWeek = ({ place, events }: Props) => {
   const scheduleRef = useRef(null)
   const [dateRange, setDateRange] = useState({ start: null, end: null })
-  const events = useMemo(() => createOldEvents(place?.disponibilities), [
-    place?.disponibilities,
-  ])
 
   return (
     <Flex
@@ -93,4 +91,4 @@ const BookingSchedule = ({ place }: Props) => {
   )
 }
 
-export default BookingSchedule
+export default BookingScheduleWeek

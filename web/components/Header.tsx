@@ -25,6 +25,7 @@ const MenuItem = ({ href, text }) => {
   return (
     <Link
       href={href}
+      lineHeight="1.2"
       borderBottom="1px solid"
       borderBottomColor={
         router.pathname === href ? 'orange.500' : 'transparent'

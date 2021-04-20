@@ -195,6 +195,11 @@ const theme = extendTheme({
       borderRadius: 'lg',
       backgroundColor: 'blue.50',
     },
+    link: {
+      _hover: {
+        color: 'blue.500',
+      },
+    },
     absoluteFull: {
       pos: 'absolute',
       top: 0,

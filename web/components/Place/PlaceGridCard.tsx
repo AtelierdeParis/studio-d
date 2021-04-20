@@ -93,7 +93,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
               <Tag
                 status={DisponibilityStatus.PAST}
                 alignSelf="flex-start"
-                mt={0.5}
+                mt={1.5}
               >
                 {t('card.noDispo')}
               </Tag>
@@ -102,7 +102,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
               <Tag
                 status={DisponibilityStatus.AVAILABLE}
                 alignSelf="flex-start"
-                mt={0.5}
+                mt={1.5}
               >
                 {t(
                   `card.${disposInRange ? 'searchDispo' : 'thisWeek'}${
@@ -118,7 +118,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
               <Tag
                 status={DisponibilityStatus.PENDING}
                 alignSelf="flex-start"
-                mt={0.5}
+                mt={1.5}
               >
                 {t(
                   `card.${disposInRange ? 'searchDispo' : 'nextWeek'}${
@@ -137,7 +137,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
                 </Text>
                 <Text isTruncated>{place.city}</Text>
               </Flex>
-              <Divider my={2} />
+              <Divider my={2} borderColor="gray.100" />
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex flex={1}>
                   <Text color="gray.500" pr={3}>
@@ -145,7 +145,11 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
                   </Text>
                   <Text>{`${place.surface}m²`}</Text>
                 </Flex>
-                <Divider orientation="vertical" h="20px" />
+                <Divider
+                  orientation="vertical"
+                  h="20px"
+                  borderColor="gray.100"
+                />
                 <Flex flex={1}>
                   <Text color="gray.500" px={3}>
                     {t('card.dim')}

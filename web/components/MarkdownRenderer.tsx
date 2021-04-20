@@ -1,26 +1,106 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Image, Box } from '@chakra-ui/react'
+import {
+  Image,
+  Box,
+  Heading,
+  HeadingProps,
+  Circle,
+  Flex,
+} from '@chakra-ui/react'
+import Link from 'components/Link'
+import rehypeRaw from 'rehype-raw'
+import gfm from 'remark-gfm'
+
+const Title = ({ children, ...rest }: HeadingProps) => (
+  <Heading {...rest} mb={3} fontFamily="mabry medium" fontWeight="500">
+    {children}
+  </Heading>
+)
 
 const renderers = {
-  image: ({ alt, src, title, node }) => {
+  a: (props) => {
     return (
-      <Image
-        alt={alt}
-        src={src}
-        title={title}
-        mx="auto"
-        py={node.position.start.line > 1 ? 18 : 0}
-        mb={4}
-      />
+      <Link href={props.href} color="blue.500" isExternal>
+        {props.children}
+      </Link>
     )
   },
-  paragraph: ({ node, children }) => {
-    const hasImage = node.children.some((child) => child.type === 'image')
-
+  u: (props) => {
     return (
-      <Box pb={4} maxW={hasImage ? 'container.md' : 'container.sm'} mx="auto">
-        {children}
+      <Box as="span" textDecoration="underline">
+        {props.children}
+      </Box>
+    )
+  },
+  img: ({ node, ...props }) => {
+    return (
+      <Box mx="-5rem">
+        <Image {...props} mx="auto" mb={4} />
+      </Box>
+    )
+  },
+  h1: ({ node, ...props }) => {
+    return (
+      <Title as="h1" fontSize="22px">
+        {props.children}
+      </Title>
+    )
+  },
+  h2: ({ node, ...props }) => {
+    return (
+      <Title as="h2" fontSize="20px">
+        {props.children}
+      </Title>
+    )
+  },
+  h3: ({ node, ...props }) => {
+    return (
+      <Title as="h3" fontSize="18px">
+        {props.children}
+      </Title>
+    )
+  },
+  h4: ({ node, ...props }) => {
+    return (
+      <Title as="h4" fontSize="16px">
+        {props.children}
+      </Title>
+    )
+  },
+  h5: ({ node, ...props }) => {
+    return (
+      <Title as="h5" fontSize="14px">
+        {props.children}
+      </Title>
+    )
+  },
+  h6: ({ node, ...props }) => {
+    return (
+      <Title as="h6" fontSize="12px">
+        {props.children}
+      </Title>
+    )
+  },
+  li: (props) => {
+    return (
+      <Flex alignItems="flex-start">
+        {props.ordered ? (
+          <Box>{props.index + 1} -</Box>
+        ) : (
+          <Circle size="6px" bgColor="gray.200" mt="6px" />
+        )}
+        <Box pl={3}>{props.children}</Box>
+      </Flex>
+    )
+  },
+  p: ({ children }) => {
+    return <Box pb={4}>{children}</Box>
+  },
+  strong: (props) => {
+    return (
+      <Box as="span" fontFamily="mabry medium" fontWeight="500">
+        {props.children}
       </Box>
     )
   },
@@ -30,7 +110,10 @@ const MarkdownRenderer = ({ children }) => {
   return (
     <ReactMarkdown
       unwrapDisallowed
-      renderers={renderers}
+      skipHtml
+      remarkPlugins={[[gfm, { singleTilde: false }]]}
+      rehypePlugins={[rehypeRaw]}
+      components={renderers}
       transformImageUri={(uri) =>
         uri.includes(process.env.NEXT_PUBLIC_BACK_URL)
           ? uri

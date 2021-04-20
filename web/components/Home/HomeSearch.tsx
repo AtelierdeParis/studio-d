@@ -32,7 +32,7 @@ const HomeSearch = () => {
         py={4}
         borderRadius="lg"
         pos="relative"
-        alignItems="center"
+        alignItems="flex-start"
         zIndex={99}
         maxW="750px"
         mx="auto"
@@ -59,8 +59,8 @@ const HomeSearch = () => {
             alignSelf="center"
           />
         </Flex>
-        <Flex alignItems="flex-start" pt={1} pos="relative" flex={1}>
-          <Flex w="100%" pt={1}>
+        <Flex alignItems="flex-start" pos="relative" flex={1}>
+          <Flex w="100%">
             <Calendar stroke={theme.colors.blue['500']} />
             <Box pl={3.5} flex={1}>
               <InputDateRange

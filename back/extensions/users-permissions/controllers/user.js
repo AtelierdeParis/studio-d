@@ -74,4 +74,13 @@ module.exports = {
 
     ctx.send(sanitizeUser(data));
   },
+  checkPassword(ctx) {
+    const params = ctx.request.body;
+    const user = ctx.state.user;
+
+    return strapi.plugins["users-permissions"].services.user.validatePassword(
+      params.password,
+      user.password
+    );
+  },
 };

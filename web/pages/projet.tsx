@@ -2,7 +2,7 @@ import React from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container, Heading } from '@chakra-ui/react'
+import { Container, Heading, Box } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_PROJECT } from '~constants'
 import { Page } from '~typings/api'
@@ -26,7 +26,9 @@ const Project = ({ page }: Props) => {
       >
         {page.title}
       </Heading>
-      <MarkdownRenderer>{page.text}</MarkdownRenderer>
+      <Box maxW="container.sm" mx="auto">
+        <MarkdownRenderer>{page.text}</MarkdownRenderer>
+      </Box>
     </Container>
   )
 }

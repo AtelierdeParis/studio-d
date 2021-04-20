@@ -43,15 +43,20 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
   const isOccupied = useIsOccupied(booked)
 
   return (
-    <LinkBox w="100%">
-      <Flex
-        py={8}
-        w="100%"
-        px={3}
-        borderBottom="1px solid"
-        borderColor="gray.100"
-        _hover={{
-          bgColor: 'gray.hover',
+    <Flex
+      py={8}
+      w="100%"
+      px={3}
+      borderBottom="1px solid"
+      borderColor="gray.100"
+      _hover={{
+        bgColor: 'gray.hover',
+      }}
+    >
+      <Link
+        href={{
+          pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+          query: { id: place.id },
         }}
       >
         <AspectRatio
@@ -69,19 +74,22 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
             <FallbackImage />
           )}
         </AspectRatio>
-        <Flex direction="column" justifyContent="space-between" flex={1}>
-          <Flex justifyContent="space-between">
+      </Link>
+      <Flex direction="column" justifyContent="space-between" flex={1}>
+        <Flex justifyContent="space-between">
+          <Link
+            href={{
+              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+              query: { id: place.id },
+            }}
+            _hover={{
+              textDecoration: 'none',
+            }}
+          >
             <Box>
-              <LinkOverlay
-                href={{
-                  pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-                  query: { id: place.id },
-                }}
-              >
-                <Text fontSize="lg" fontFamily="mabry medium">
-                  {place.name}
-                </Text>
-              </LinkOverlay>
+              <Text fontSize="lg" fontFamily="mabry medium">
+                {place.name}
+              </Text>
               <Flex>
                 <Text mr={2}>{place.address}</Text>
                 {isOccupied && (
@@ -89,111 +97,111 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 )}
               </Flex>
             </Box>
-            {place.published ? (
-              <UnpublishModal placeId={place.id} />
-            ) : (
-              <ButtonGroup spacing={4} alignSelf="center">
-                <PublishModal placeId={place.id} />
-                <DeletePlaceModal placeId={place.id} />
-              </ButtonGroup>
-            )}
-          </Flex>
-          <Flex>
-            <Box flex={1}>
-              <Flex alignItems="center">
-                <Text color="gray.500" pr={2}>
-                  {t('list.disponibility')}
-                </Text>
-                <Button
-                  as={Link}
-                  href={{
-                    pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-                    query: { id: place.id, index: 2 },
-                  }}
-                  variant="line"
-                >
-                  {place?.disponibilities.length > 0
-                    ? t('list.edit')
-                    : t('list.add')}
-                </Button>
-              </Flex>
-              <Box>
-                {place?.disponibilities.length > 0 ? (
-                  <Box>
-                    <Text>
-                      {t(
-                        `list.available${
-                          place?.disponibilities.length > 1 ? 's' : ''
-                        }`,
-                        { nb: available.length },
-                      )}
-                    </Text>
-                    <Text>
-                      {t(`list.filledUntil`, {
-                        date: format(place.filledUntil),
-                      })}
-                    </Text>
-                  </Box>
-                ) : (
-                  <Text color="red.600" pt={2}>
-                    {t('list.noDisponibility')}
+          </Link>
+          {place.published ? (
+            <UnpublishModal placeId={place.id} />
+          ) : (
+            <ButtonGroup spacing={4} alignSelf="flex-start">
+              <PublishModal placeId={place.id} />
+              <DeletePlaceModal placeId={place.id} />
+            </ButtonGroup>
+          )}
+        </Flex>
+        <Flex>
+          <Box flex={1}>
+            <Flex alignItems="center">
+              <Text color="gray.500" pr={2}>
+                {t('list.disponibility')}
+              </Text>
+              <Button
+                as={Link}
+                href={{
+                  pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+                  query: { id: place.id, index: 2 },
+                }}
+                variant="line"
+              >
+                {place?.disponibilities.length > 0
+                  ? t('list.edit')
+                  : t('list.add')}
+              </Button>
+            </Flex>
+            <Box>
+              {place?.disponibilities.length > 0 ? (
+                <Box>
+                  <Text>
+                    {t(
+                      `list.available${
+                        place?.disponibilities.length > 1 ? 's' : ''
+                      }`,
+                      { nb: available.length },
+                    )}
                   </Text>
-                )}
-              </Box>
-            </Box>
-            <Divider orientation="vertical" mx={5} />
-            <Box flex={1}>
-              <Flex alignItems="center">
-                <Text color="gray.500" pr={2}>
-                  {t('list.requests')}
+                  <Text>
+                    {t(`list.filledUntil`, {
+                      date: format(place.filledUntil),
+                    })}
+                  </Text>
+                </Box>
+              ) : (
+                <Text color="red.600" pt={2}>
+                  {t('list.noDisponibility')}
                 </Text>
-                <Button as={Link} href={ROUTE_ACCOUNT_REQUEST} variant="line">
-                  {t('list.see')}
-                </Button>
-              </Flex>
-              <Box pt={2}>
-                {pending.length > 0 ? (
-                  <Tag status={DisponibilityStatus.PENDING}>
-                    {t('list.nbPending', { nb: pending.length })}
-                  </Tag>
-                ) : (
-                  <Divider w="14px" />
-                )}
-              </Box>
+              )}
             </Box>
-            <Divider orientation="vertical" mx={5} />
-            <Box flex={1}>
-              <Flex alignItems="center">
-                <Text color="gray.500" pr={2}>
-                  {t('list.bookings')}
-                </Text>
-                <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
-                  {t('list.see')}
-                </Button>
-              </Flex>
-              <Box pt={2}>
-                {coming.length > 0 || past.length > 0 ? (
-                  <HStack spacing={2.5}>
-                    {coming.length > 0 && (
-                      <Tag status={DisponibilityStatus.BOOKED}>
-                        {t('list.nbBooking', { nb: coming.length })}
-                      </Tag>
-                    )}
-                    {past.length && (
-                      <Tag status={DisponibilityStatus.PAST}>
-                        {t('list.nbPassed', { nb: past.length })}
-                      </Tag>
-                    )}
-                  </HStack>
-                ) : (
-                  <Divider w="14px" />
-                )}
-              </Box>
+          </Box>
+          <Divider orientation="vertical" mx={5} />
+          <Box flex={1}>
+            <Flex alignItems="center">
+              <Text color="gray.500" pr={2}>
+                {t('list.requests')}
+              </Text>
+              <Button as={Link} href={ROUTE_ACCOUNT_REQUEST} variant="line">
+                {t('list.see')}
+              </Button>
+            </Flex>
+            <Box pt={2}>
+              {pending.length > 0 ? (
+                <Tag status={DisponibilityStatus.PENDING}>
+                  {t('list.nbPending', { nb: pending.length })}
+                </Tag>
+              ) : (
+                <Divider w="14px" />
+              )}
             </Box>
-          </Flex>
+          </Box>
+          <Divider orientation="vertical" mx={5} />
+          <Box flex={1}>
+            <Flex alignItems="center">
+              <Text color="gray.500" pr={2}>
+                {t('list.bookings')}
+              </Text>
+              <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
+                {t('list.see')}
+              </Button>
+            </Flex>
+            <Box pt={2}>
+              {coming.length > 0 || past.length > 0 ? (
+                <HStack spacing={2.5}>
+                  {coming.length > 0 && (
+                    <Tag status={DisponibilityStatus.BOOKED}>
+                      {t('list.nbBooking', { nb: coming.length })}
+                    </Tag>
+                  )}
+                  {past.length && (
+                    <Tag status={DisponibilityStatus.PAST}>
+                      {t('list.nbPassed', { nb: past.length })}
+                    </Tag>
+                  )}
+                </HStack>
+              ) : (
+                <Divider w="14px" />
+              )}
+            </Box>
+          </Box>
         </Flex>
       </Flex>
-    </LinkBox>
+    </Flex>
   )
 }
 

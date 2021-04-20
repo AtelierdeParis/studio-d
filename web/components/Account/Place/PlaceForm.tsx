@@ -98,180 +98,199 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   }
 
   return (
-    <Box>
-      <form onSubmit={handleSubmit(submitForm)}>
-        <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
-        {!place && (
-          <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
-            <Input name="name" ref={register} />
-          </FormField>
-        )}
-        <SimpleGrid columns={4} columnGap={5} rowGap={6}>
-          <FormField label={t('form.surface.label')} errors={errors.surface}>
-            <InputNumber name="surface" control={control} />
-          </FormField>
-          <FormField label={t('form.length.label')} errors={errors.roomLength}>
-            <InputNumber name="roomLength" control={control} />
-          </FormField>
-          <FormField label={t('form.width.label')} errors={errors.width}>
-            <InputNumber name="width" control={control} />
-          </FormField>
-          <FormField label={t('form.height.label')} errors={errors.height}>
-            <InputNumber name="height" control={control} />
-          </FormField>
-          <FormField label={t('form.mirror.label')} errors={errors.mirror}>
-            <Select name="mirror" ref={register} placeholder={t('form.choose')}>
-              <option value="true">{t('form.yes')}</option>
-              <option value="false">{t('form.no')}</option>
-            </Select>
-          </FormField>
-          <FormField
-            label={t('form.danceCarpet.label')}
-            errors={errors.danceCarpet}
-          >
-            <Select
-              name="danceCarpet"
-              ref={register}
-              placeholder={t('form.choose')}
-            >
-              <option value="true">{t('form.yes')}</option>
-              <option value="false">{t('form.no')}</option>
-            </Select>
-          </FormField>
-          <FormField label={t('form.danceBar.label')} errors={errors.danceBar}>
-            <Select
-              name="danceBar"
-              ref={register}
-              placeholder={t('form.choose')}
-            >
-              <option value="true">{t('form.yes')}</option>
-              <option value="false">{t('form.no')}</option>
-            </Select>
-          </FormField>
-          <FormField
-            label={t('form.accomodation.label')}
-            errors={errors.accomodation}
-          >
-            <Select
-              name="accomodation"
-              ref={register}
-              placeholder={t('form.choose')}
-            >
-              <option value="true">{t('form.yes')}</option>
-              <option value="false">{t('form.no')}</option>
-            </Select>
-          </FormField>
-          <FormField
-            label={t('form.technicalStaff.label')}
-            errors={errors.technicalStaff}
-          >
-            <Select
-              name="technicalStaff"
-              ref={register}
-              placeholder={t('form.choose')}
-            >
-              <option value="true">{t('form.yes')}</option>
-              <option value="false">{t('form.no')}</option>
-            </Select>
-          </FormField>
-          <FormField label={t('form.floor.label')} errors={errors.floor}>
-            <Select name="floor" ref={register} placeholder={t('form.choose')}>
-              <option value="parquetTraditionnel">
-                {t('form.floor.traditional')}
-              </option>
-              <option value="plancherDanse">{t('form.floor.dance')}</option>
-              <option value="other">{t('form.floor.other')}</option>
-            </Select>
-          </FormField>
-        </SimpleGrid>
-        <Flex mb={14} mt={6} alignItems="center">
-          {floor === 'other' && (
+    <>
+      <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
+      <Box pb={8} px={2.5}>
+        <form onSubmit={handleSubmit(submitForm)}>
+          {!place && (
+            <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
+              <Input name="name" ref={register} />
+            </FormField>
+          )}
+          <SimpleGrid columns={4} columnGap={5} rowGap={6}>
+            <FormField label={t('form.surface.label')} errors={errors.surface}>
+              <InputNumber name="surface" control={control} />
+            </FormField>
             <FormField
-              label={t('form.otherFloor.label')}
-              info={t('form.otherFloor.info')}
-              errors={errors.otherFloor}
+              label={t('form.length.label')}
+              errors={errors.roomLength}
             >
-              <Input
-                name="otherFloor"
-                ref={register({
-                  required: true,
-                })}
+              <InputNumber name="roomLength" control={control} />
+            </FormField>
+            <FormField label={t('form.width.label')} errors={errors.width}>
+              <InputNumber name="width" control={control} />
+            </FormField>
+            <FormField label={t('form.height.label')} errors={errors.height}>
+              <InputNumber name="height" control={control} />
+            </FormField>
+            <FormField label={t('form.mirror.label')} errors={errors.mirror}>
+              <Select
+                name="mirror"
+                ref={register}
+                placeholder={t('form.choose')}
+              >
+                <option value="true">{t('form.yes')}</option>
+                <option value="false">{t('form.no')}</option>
+              </Select>
+            </FormField>
+            <FormField
+              label={t('form.danceCarpet.label')}
+              errors={errors.danceCarpet}
+            >
+              <Select
+                name="danceCarpet"
+                ref={register}
+                placeholder={t('form.choose')}
+              >
+                <option value="true">{t('form.yes')}</option>
+                <option value="false">{t('form.no')}</option>
+              </Select>
+            </FormField>
+            <FormField
+              label={t('form.danceBar.label')}
+              errors={errors.danceBar}
+            >
+              <Select
+                name="danceBar"
+                ref={register}
+                placeholder={t('form.choose')}
+              >
+                <option value="true">{t('form.yes')}</option>
+                <option value="false">{t('form.no')}</option>
+              </Select>
+            </FormField>
+            <FormField
+              label={t('form.accomodation.label')}
+              errors={errors.accomodation}
+            >
+              <Select
+                name="accomodation"
+                ref={register}
+                placeholder={t('form.choose')}
+              >
+                <option value="true">{t('form.yes')}</option>
+                <option value="false">{t('form.no')}</option>
+              </Select>
+            </FormField>
+            <FormField
+              label={t('form.technicalStaff.label')}
+              errors={errors.technicalStaff}
+            >
+              <Select
+                name="technicalStaff"
+                ref={register}
+                placeholder={t('form.choose')}
+              >
+                <option value="true">{t('form.yes')}</option>
+                <option value="false">{t('form.no')}</option>
+              </Select>
+            </FormField>
+          </SimpleGrid>
+          <Flex mb={14} mt={6} alignItems="center">
+            <SimpleGrid columns={4} columnGap={5} w="100%">
+              <FormField label={t('form.floor.label')} errors={errors.floor}>
+                <Select
+                  name="floor"
+                  ref={register}
+                  placeholder={t('form.choose')}
+                >
+                  <option value="parquetTraditionnel">
+                    {t('form.floor.traditional')}
+                  </option>
+                  <option value="plancherDanse">{t('form.floor.dance')}</option>
+                  <option value="other">{t('form.floor.other')}</option>
+                </Select>
+              </FormField>
+              {floor === 'other' && (
+                <FormField
+                  label={t('form.otherFloor.label')}
+                  info={t('form.otherFloor.info')}
+                  errors={errors.otherFloor}
+                  gridColumn="2/5"
+                >
+                  <Input
+                    name="otherFloor"
+                    ref={register({
+                      required: true,
+                    })}
+                  />
+                </FormField>
+              )}
+            </SimpleGrid>
+          </Flex>
+          <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
+          <HStack spacing={5} mb={10}>
+            <FormField label={t('form.about.label')} errors={errors.about}>
+              <Textarea
+                name="about"
+                ref={register}
+                resize="none"
+                h="215px"
+                placeholder={t('form.about.placeholder')}
               />
             </FormField>
-          )}
-        </Flex>
-        <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
-        <HStack spacing={5} mb={10}>
-          <FormField label={t('form.about.label')} errors={errors.about}>
-            <Textarea
-              name="about"
-              ref={register}
-              resize="none"
-              h="215px"
-              placeholder={t('form.about.placeholder')}
-            />
-          </FormField>
-          <FormField label={t('form.details.label')} errors={errors.details}>
-            <Textarea
-              name="details"
-              ref={register}
-              resize="none"
-              h="215px"
-              placeholder={t('form.details.placeholder')}
-            />
-          </FormField>
-        </HStack>
-        <InputFile control={control} place={place} />
-        <Text textStyle="infoLabel" mt={16}>
-          {t('form.location')}
-        </Text>
-        <HStack spacing={5} mb={10} alignItems="flex-start">
-          <FormField
-            label={t('form.address.label')}
-            errors={errors.address}
-            flex={1}
-          >
-            <InputLocation
-              name="address"
-              control={control}
-              placeholder={t('form.address.placeholder')}
-            />
-          </FormField>
-          {Boolean(latitude) && Boolean(longitude) ? (
-            <FormField label={t('form.geolocation.label')} flex={1}>
-              <Box>
-                <Map flex={1} h="250px" markers={[{ latitude, longitude }]} />
-                <Text
-                  px={3.5}
-                  py={2.5}
-                  border="1px solid"
-                  borderColor="gray.200"
-                  borderBottomRadius="sm"
-                  borderTopColor="transparent"
-                >
-                  {address}
-                </Text>
-              </Box>
+            <FormField label={t('form.details.label')} errors={errors.details}>
+              <Textarea
+                name="details"
+                ref={register}
+                resize="none"
+                h="215px"
+                placeholder={t('form.details.placeholder')}
+              />
             </FormField>
-          ) : (
-            <Spacer flex={1} />
-          )}
-        </HStack>
-        <Flex justifyContent="center" mt={18}>
-          <Button
-            colorScheme="blue"
-            size="lg"
-            mt={6}
-            type="submit"
-            isLoading={isLoading}
-            isDisabled={Object.keys(formState.dirtyFields).length === 0}
-            rightIcon={<Arrow />}
-          >
-            {t(`form.submit`)}
-          </Button>
-        </Flex>
-      </form>
-    </Box>
+          </HStack>
+          <InputFile control={control} place={place} />
+          <Text textStyle="infoLabel" mt={16}>
+            {t('form.location')}
+          </Text>
+          <HStack spacing={5} mb={10} alignItems="flex-start">
+            <FormField
+              label={t('form.address.label')}
+              errors={errors.address}
+              flex={1}
+            >
+              <InputLocation
+                name="address"
+                control={control}
+                placeholder={t('form.address.placeholder')}
+              />
+            </FormField>
+            {Boolean(latitude) && Boolean(longitude) ? (
+              <FormField label={t('form.geolocation.label')} flex={1}>
+                <Box>
+                  <Map flex={1} h="250px" markers={[{ latitude, longitude }]} />
+                  <Text
+                    px={3.5}
+                    py={2.5}
+                    border="1px solid"
+                    borderColor="gray.200"
+                    borderBottomRadius="sm"
+                    borderTopColor="transparent"
+                  >
+                    {address}
+                  </Text>
+                </Box>
+              </FormField>
+            ) : (
+              <Spacer flex={1} />
+            )}
+          </HStack>
+          <Flex justifyContent="center" mt={18}>
+            <Button
+              colorScheme="blue"
+              size="lg"
+              mt={6}
+              type="submit"
+              isLoading={isLoading}
+              isDisabled={Object.keys(formState.dirtyFields).length === 0}
+              rightIcon={<Arrow />}
+            >
+              {t(`form.submit`)}
+            </Button>
+          </Flex>
+        </form>
+      </Box>
+    </>
   )
 }
 
