@@ -10,6 +10,9 @@ import BookingScheduleContext from '~components/Place/BookingScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
 import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
 import Confirm from 'public/assets/img/confirm.svg'
+import { useMyBookings } from '~hooks/useMyBookings'
+import { useMyRequests } from '~hooks/useMyRequests'
+import useConcurrentBookings from '~hooks/useConcurrentBookings'
 
 const styleSelected = {
   borderColor: 'confirm',
@@ -29,7 +32,13 @@ interface Props extends ScheduleEvent {
   isMonth?: boolean
 }
 
+const SpacerEvent = ({ isMonth }) => (
+  <Spacer bgColor={isMonth ? '#e5e7ed' : 'transparent'} borderRadius="lg" />
+)
+
 const BookingScheduleSlot = (props: Props) => {
+  const { data: bookings = [] } = useMyBookings()
+  const { data: requests = [] } = useMyRequests()
   const {
     extendedProps: { when, hasEventSameDay, id, type },
     start,
@@ -43,8 +52,10 @@ const BookingScheduleSlot = (props: Props) => {
     [selected, id],
   )
 
-  // TODO: handle value
-  const hasAnotherBooking = false
+  const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
+    requests.concat(bookings),
+    props,
+  )
 
   let Event = (
     <Flex
@@ -91,15 +102,29 @@ const BookingScheduleSlot = (props: Props) => {
   )
 
   if (hasAnotherBooking) {
-    Event = <PopoverOtherBooking>{Event}</PopoverOtherBooking>
+    Event = (
+      <PopoverOtherBooking booking={concurrentBooking}>
+        {Event}
+      </PopoverOtherBooking>
+    )
   }
 
   if (!hasEventSameDay) {
     return (
-      <SimpleGrid w="100%" h="100%" gridAutoRows="1fr" rowGap={2.5}>
-        {when === ScheduleEventWhen.AFTERNOON && <Spacer />}
+      <SimpleGrid
+        w="100%"
+        h="100%"
+        gridAutoRows="1fr"
+        rowGap="4px"
+        bgColor={isMonth ? 'blue.50' : 'transparent'}
+      >
+        {when === ScheduleEventWhen.AFTERNOON && (
+          <SpacerEvent isMonth={isMonth} />
+        )}
         {Event}
-        {when === ScheduleEventWhen.MORNING && <Spacer />}
+        {when === ScheduleEventWhen.MORNING && (
+          <SpacerEvent isMonth={isMonth} />
+        )}
       </SimpleGrid>
     )
   }

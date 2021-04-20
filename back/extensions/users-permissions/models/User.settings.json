@@ -122,8 +122,8 @@
       "type": "string"
     },
     "espaces": {
-      "via": "users_permissions_user",
-      "collection": "espace"
+      "collection": "espace",
+      "via": "users_permissions_user"
     },
     "type": {
       "type": "enumeration",
@@ -132,10 +132,6 @@
         "place"
       ],
       "required": true
-    },
-    "bookings": {
-      "via": "place",
-      "collection": "booking"
     }
   }
 }

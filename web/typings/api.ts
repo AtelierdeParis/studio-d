@@ -56,10 +56,10 @@ export interface Booking {
 
 export interface NewBooking {
   disponibilities?: string[];
-  company?: string;
   status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
   messages?: string[];
   espace?: string;
+  company?: string;
   place?: string;
   created_by?: string;
   updated_by?: string;
@@ -125,10 +125,10 @@ export interface Disponibility {
   booking?: {
     id: string;
     disponibilities?: string[];
-    company?: string;
     status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
     messages?: string[];
     espace?: string;
+    company?: string;
     place?: string;
     created_by?: string;
     updated_by?: string;
@@ -464,6 +464,7 @@ export interface UsersPermissionsUser {
   choreographer?: string;
   espaces?: Espace[];
   type: "company" | "place";
+  bookings?: Booking[];
 }
 
 export interface NewUsersPermissionsUser {

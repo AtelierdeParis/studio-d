@@ -71,7 +71,7 @@ const HomeSearch = () => {
             </Box>
           </Flex>
         </Flex>
-        <Button size="lg" type="submit">
+        <Button size="lg" type="submit" alignSelf="center">
           {t('search.btn')}
         </Button>
       </Flex>

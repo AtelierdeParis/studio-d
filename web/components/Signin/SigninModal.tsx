@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {
-  Button,
   useDisclosure,
   Modal,
   ModalBody,
@@ -24,6 +23,7 @@ interface ISigninModal {
 
 const SigninModal = ({ children }: ISigninModal) => {
   const { t } = useTranslation('common')
+  const initialRef = useRef()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {
     isOpen: isOpenReset,
@@ -34,7 +34,12 @@ const SigninModal = ({ children }: ISigninModal) => {
   return (
     <>
       <Box onClick={onOpen}>{children}</Box>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        initialFocusRef={initialRef}
+      >
         <ModalOverlay />
         <ModalContent pt={6} overflow="hidden">
           <ModalHeader py={0} fontSize="lg" textAlign="center" fontWeight="500">
@@ -43,7 +48,11 @@ const SigninModal = ({ children }: ISigninModal) => {
           <ModalCloseButton />
           <ModalBody px={6} pt={0}>
             <Divider my={6} />
-            <SigninForm onOpenReset={onOpenReset} onClose={onClose} />
+            <SigninForm
+              initialRef={initialRef}
+              onOpenReset={onOpenReset}
+              onClose={onClose}
+            />
           </ModalBody>
           <ModalFooter py={6} mt={8} bg="gray.100" justifyContent="center">
             <Link

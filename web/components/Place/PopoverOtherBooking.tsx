@@ -10,15 +10,20 @@ import {
   Circle,
 } from '@chakra-ui/react'
 import Link from '~components/Link'
+import { Booking } from '~typings/api'
 import { useTranslation, Trans } from 'next-i18next'
 import Help from 'public/assets/img/help.svg'
+import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
 
 interface Props {
   children: React.ReactNode
+  booking: Booking
 }
 
-const PopoverOtherBooking = ({ children }: Props) => {
-  const { t } = useTranslation('place')
+const PopoverOtherBooking = ({ children, booking }: Props) => {
+  const isAccepted = booking.status === 'accepted'
+  const route = isAccepted ? ROUTE_ACCOUNT_BOOKING : ROUTE_ACCOUNT_REQUEST
+
   return (
     <Popover placement="top" trigger="hover">
       <PopoverTrigger>
@@ -53,13 +58,22 @@ const PopoverOtherBooking = ({ children }: Props) => {
           <PopoverArrow bgColor="blue.500" />
           <PopoverBody w="450px">
             <Trans
-              i18nKey="place:detail.tooltip"
-              //   TODO: handle value
-              values={{ name: 'XXXXXX' }}
-              //   TODO: handle link
+              i18nKey={`place:detail.tooltip.${
+                isAccepted ? 'booking' : 'request'
+              }`}
+              values={{ name: booking.espace.name }}
               components={{
                 i: <i />,
-                a: <Link href="/" textDecoration="underline" />,
+                a: (
+                  <Link
+                    ml={2}
+                    whiteSpace="pre"
+                    alignSelf="flex-start"
+                    href={`${route}?id=${booking.id}`}
+                    as={`${route}/${booking.id}`}
+                    textDecoration="underline"
+                  />
+                ),
               }}
             />
           </PopoverBody>

@@ -303,6 +303,9 @@ a {
 .account-schedule.month .fc-view-harness-active > .fc-view {
   position: static;
 }
+.account-schedule .fc-liquid-hack .fc-daygrid-day-frame {
+  position: relative;
+}
 .booking-calendar#calendar .fc-daygrid-event-harness-abs {
   left: 12px;
   right: 12px;

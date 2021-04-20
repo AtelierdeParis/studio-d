@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/19/2021 4:57:38 PM"
+    "x-generation-date": "04/20/2021 2:50:04 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -8580,9 +8580,6 @@
               "type": "string"
             }
           },
-          "company": {
-            "type": "string"
-          },
           "status": {
             "type": "string",
             "enum": [
@@ -8604,6 +8601,9 @@
             "type": "string"
           },
           "place": {
+            "type": "string"
+          },
+          "company": {
             "type": "string"
           },
           "created_by": {
@@ -8846,9 +8846,6 @@
                   "type": "string"
                 }
               },
-              "company": {
-                "type": "string"
-              },
               "status": {
                 "type": "string",
                 "enum": [
@@ -8870,6 +8867,9 @@
                 "type": "string"
               },
               "place": {
+                "type": "string"
+              },
+              "company": {
                 "type": "string"
               },
               "created_by": {
@@ -9832,12 +9832,6 @@
                     "place"
                   ]
                 },
-                "bookings": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "created_by": {
                   "type": "string"
                 },
@@ -10026,6 +10020,12 @@
               "company",
               "place"
             ]
+          },
+          "bookings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Booking"
+            }
           }
         }
       },

@@ -147,22 +147,29 @@ const BookingConfirm = ({ events, place, back }: Props) => {
             </ButtonGroup>
           </Flex>
         </Box>
-        <Box>
+        <Box minW="300px">
           <Flex>
-            <AspectRatio
-              w="100px"
-              ratio={4 / 3}
-              overflow="hidden"
-              pos="relative"
-              borderRadius="sm"
-            >
-              <Image src={place.images[0].url || ''} />
-            </AspectRatio>
+            <Box>
+              <AspectRatio
+                minW="100px"
+                ratio={4 / 3}
+                flex={1}
+                overflow="hidden"
+                pos="relative"
+                borderRadius="sm"
+              >
+                <Image src={place.images[0].url || ''} />
+              </AspectRatio>
+            </Box>
             <Box pl={6}>
-              <Text fontFamily="mabry medium" fontWeight="500">
+              <Text
+                fontFamily="mabry medium"
+                fontWeight="500"
+                whiteSpace="pre-line"
+              >
                 {place.name}
               </Text>
-              <Text color="gray.500" isTruncated>
+              <Text color="gray.500" whiteSpace="pre-line">
                 {place.users_permissions_user.structureName}
               </Text>
               <Flex pt={2}>

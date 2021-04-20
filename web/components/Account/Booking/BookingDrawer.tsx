@@ -209,13 +209,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                             )}
                           </Text>
                           {notifs && notifs.message > 0 && (
-                            <Notif
-                              nb={notifs.message}
-                              pos="absolute"
-                              right={3}
-                              top="50%"
-                              transform="translateY(-50%)"
-                            />
+                            <Notif nb={notifs.message} ml={3} />
                           )}
                         </Button>
                       </Link>
