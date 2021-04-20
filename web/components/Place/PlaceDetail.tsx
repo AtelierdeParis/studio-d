@@ -81,11 +81,11 @@ const PlaceDetail = ({ place }: Props) => {
           <PlaceAttributesGrid place={place} />
         </Box>
       </Stack>
-      <Flex alignItems="flex-start">
-        <Box w="18px" mt={0.5}>
+      <Flex alignItems="center" mb={8}>
+        <Box w="18px" mt="-4px">
           <Calendar stroke="black" />
         </Box>
-        <Text textStyle="h2" mb={8} pl={5}>
+        <Text textStyle="h2" pl={5}>
           {t('detail.calendar')}
         </Text>
       </Flex>
@@ -140,7 +140,7 @@ const PlaceDetail = ({ place }: Props) => {
         )}
       </Flex>
       <Flex alignItems="flex-start" pt={20} id="map">
-        <Box w="18px">
+        <Box w="18px" mt={0.5}>
           <Compass />
         </Box>
         <Box pl={5}>
