@@ -24,17 +24,20 @@ import { Page } from '~typings/api'
 import { client } from '~api/client-api'
 import { getPage } from '~utils/page'
 
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  message: yup.string().required(),
-  from: yup.string().email().required(),
-})
-
 const Contact = ({ page }: { page?: Page }) => {
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [isSent, setSent] = useState(false)
   const { t } = useTranslation('contact')
+
+  const schema = yup.object().shape({
+    name: yup.string().required(t('yup:mixed.required')),
+    message: yup.string().required(t('yup:mixed.required')),
+    from: yup
+      .string()
+      .email(t('yup:string.email'))
+      .required(t('yup:mixed.required')),
+  })
 
   const { handleSubmit, register, errors } = useForm({
     resolver: yupResolver(schema),
@@ -50,6 +53,7 @@ const Contact = ({ page }: { page?: Page }) => {
       .catch(() => errorToast(t('error')))
       .finally(() => setLoading(false))
   }
+
   return (
     <Container maxW="container.sm">
       <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
@@ -65,7 +69,7 @@ const Contact = ({ page }: { page?: Page }) => {
               placeholder={t('name.placeholder')}
             />
           </FormField>
-          <FormField label={t('email.label')} errors={errors.email} isRequired>
+          <FormField label={t('email.label')} errors={errors.from} isRequired>
             <Input
               type="email"
               name="from"
@@ -73,7 +77,11 @@ const Contact = ({ page }: { page?: Page }) => {
               ref={register}
             />
           </FormField>
-          <FormField label={t('message.label')} isRequired>
+          <FormField
+            label={t('message.label')}
+            errors={errors.message}
+            isRequired
+          >
             <Textarea
               resize="none"
               name="message"
@@ -106,7 +114,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   return {
     props: {
       page,
-      ...(await serverSideTranslations(locale, ['common', 'contact'])),
+      ...(await serverSideTranslations(locale, ['common', 'contact', 'yup'])),
     },
   }
 }
