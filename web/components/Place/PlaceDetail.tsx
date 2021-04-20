@@ -161,25 +161,34 @@ const PlaceDetail = ({ place }: Props) => {
               {t('detail.howToGo')}
             </Text>
             <Text>{t('detail.located', { address: place?.address })}</Text>
-            {/* TODO: open streep map link */}
-            <Button
-              variant="line"
-              color="gray.500"
-              borderBottomColor="gray.500"
-              onClick={() => {
-                if ('geolocation' in navigator) {
-                  navigator.geolocation.getCurrentPosition((position) => {
-                    const currentLatitude = position.coords.latitude
-                    const currentLongitude = position.coords.longitude
-                    window.open(
-                      `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLongitude},${currentLatitude};${place?.longitude},${place?.latitude}`,
-                    )
-                  })
-                }
-              }}
-            >
-              {t('detail.itinerary')}
-            </Button>
+            {'geolocation' in navigator && (
+              <Button
+                variant="line"
+                color="gray.500"
+                borderBottomColor="gray.500"
+                onClick={() => {
+                  navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                      const currentLatitude = position.coords.latitude
+                      const currentLongitude = position.coords.longitude
+                      window.open(
+                        `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLatitude},${currentLongitude};${place?.longitude},${place?.latitude}&geometries=geojson`,
+                      )
+                    },
+                    (err) => {
+                      console.log('err', err)
+                    },
+                    {
+                      timeout: 30000,
+                      enableHighAccuracy: true,
+                      maximumAge: 75000,
+                    },
+                  )
+                }}
+              >
+                {t('detail.itinerary')}
+              </Button>
+            )}
           </Box>
         </Flex>
         <Map
