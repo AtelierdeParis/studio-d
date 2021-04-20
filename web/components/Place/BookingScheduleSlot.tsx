@@ -29,6 +29,13 @@ const styleAnotherBooking = {
     borderColor: 'transparent',
   },
 }
+
+const styleSelectable = {
+  cursor: 'pointer',
+  _hover: {
+    borderColor: '#cbcfe1',
+  },
+}
 interface Props extends ScheduleEvent {
   isMonth?: boolean
 }
@@ -53,7 +60,7 @@ const BookingScheduleSlot = (props: Props) => {
     () => selected.some((dispo) => dispo.extendedProps.id === id),
     [selected, id],
   )
-  console.log(user)
+
   const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
     requests.concat(bookings),
     props,
@@ -69,12 +76,9 @@ const BookingScheduleSlot = (props: Props) => {
       borderRadius="lg"
       w="100%"
       h="100%"
-      cursor="pointer"
       border="2px solid"
       borderColor="transparent"
-      _hover={{
-        borderColor: user.type === 'company' ? '#cbcfe1' : 'transparent',
-      }}
+      {...(user?.type === 'company' && styleSelectable)}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {

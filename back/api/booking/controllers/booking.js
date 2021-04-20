@@ -60,7 +60,7 @@ module.exports = {
     );
   },
   async create(ctx) {
-    const { id, type } = ctx.state.user;
+    const { id, type, confirmed } = ctx.state.user;
     const { disponibilities } = ctx.request.body;
 
     if (disponibilities.length === 0) {
@@ -69,6 +69,16 @@ module.exports = {
         formatError({
           id: "error.noDispo",
           message: "You must provide at least one disponibility",
+        })
+      );
+    }
+
+    if (!confirmed) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: "error.notConfirmed",
+          message: "Only confirmed user can create bookings",
         })
       );
     }

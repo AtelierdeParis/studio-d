@@ -309,6 +309,8 @@
         },
         "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
         "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+        "notConfirm": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
+        "notConfirms": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
         "nbSelected": "Vous avez sélectionné 1 créneau :",
         "nbSelecteds": "Vous avez sélectionné {{nb}} créneaux :",
         "submit": "Déposer une demande",
