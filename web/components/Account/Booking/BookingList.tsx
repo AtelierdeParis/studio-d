@@ -14,6 +14,7 @@ import BookingDrawer from '~components/Account/Booking/BookingDrawer'
 import BookingListItem from '~components/Account/Booking/BookingListItem'
 import Cell from '~components/Account/Booking/Cell'
 import { useRouter } from 'next/router'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface Props {
   bookings: Booking[]
@@ -24,6 +25,7 @@ const Divider = () => <ChakraDivider orientation="vertical" h="24px" mr={2.5} />
 
 const BookingList = ({ bookings, type }: Props) => {
   const router = useRouter()
+  const { data: user } = useCurrentUser()
   const { t } = useTranslation('booking')
   const [selected, setSelected] = useState<string>(
     (router?.query?.id as string) || null,
@@ -76,7 +78,7 @@ const BookingList = ({ bookings, type }: Props) => {
         </Cell>
         <Cell isHeader>
           <Divider />
-          <Text>{t('structure')}</Text>
+          <Text>{t(user.type === 'place' ? 'company' : 'structure')}</Text>
         </Cell>
         <Cell isHeader>
           <Divider />

@@ -1,4 +1,8 @@
 {
+    "header": {
+        "edit": "Éditer la fiche",
+        "noDispo": "Aucun créneau disponible, l’espace n’est pas visible"
+    },
     "noSlot": "Aucun créneau disponible, l’espace n’est actuellement pas visible",
     "cancel": "Annuler les changements",
     "save": "Enregistrer",

@@ -73,7 +73,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
   }
 
   return (
-    <Box maxW="container.lg" m="0 auto">
+    <Box maxW="container.lg" m="0 auto" pt={12}>
       <Heading as="h1" textStyle="h1" mt={10} mb={18} textAlign="center">
         {t('confirm.title')}
       </Heading>

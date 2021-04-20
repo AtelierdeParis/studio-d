@@ -10,6 +10,7 @@ import BookingScheduleContext from '~components/Place/BookingScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
 import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
 import Confirm from 'public/assets/img/confirm.svg'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useMyBookings } from '~hooks/useMyBookings'
 import { useMyRequests } from '~hooks/useMyRequests'
 import useConcurrentBookings from '~hooks/useConcurrentBookings'
@@ -37,6 +38,8 @@ const SpacerEvent = ({ isMonth }) => (
 )
 
 const BookingScheduleSlot = (props: Props) => {
+  const { t } = useTranslation('place')
+  const { data: user } = useCurrentUser()
   const { data: bookings = [] } = useMyBookings()
   const { data: requests = [] } = useMyRequests()
   const {
@@ -46,12 +49,11 @@ const BookingScheduleSlot = (props: Props) => {
     isMonth,
   } = props
   const { selected, setSelected } = useContext(BookingScheduleContext)
-  const { t } = useTranslation('place')
   const isSelected = useMemo(
     () => selected.some((dispo) => dispo.extendedProps.id === id),
     [selected, id],
   )
-
+  console.log(user)
   const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
     requests.concat(bookings),
     props,
@@ -71,12 +73,12 @@ const BookingScheduleSlot = (props: Props) => {
       border="2px solid"
       borderColor="transparent"
       _hover={{
-        borderColor: '#cbcfe1',
+        borderColor: user.type === 'company' ? '#cbcfe1' : 'transparent',
       }}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {
-        if (hasAnotherBooking) return null
+        if (hasAnotherBooking || user.type === 'place') return null
         if (!isSelected) {
           setSelected([...selected, props])
         } else {

@@ -4,6 +4,7 @@ import AccountLayout from 'components/Account/AccountLayout'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import { useRouter } from 'next/router'
+import { ROUTE_PLACE_DETAIL } from '~constants'
 
 interface ILayout {
   children: React.ReactNode
@@ -11,7 +12,10 @@ interface ILayout {
 
 const Layout = (props: ILayout) => {
   const router = useRouter()
-  const isHome = useMemo(() => router.pathname === '/', [router.pathname])
+  const isRouteWithoutContainer = useMemo(
+    () => ['/', ROUTE_PLACE_DETAIL].includes(router.pathname),
+    [router.pathname],
+  )
 
   if (router.pathname.startsWith('/compte')) {
     return <AccountLayout>{props.children}</AccountLayout>
@@ -20,8 +24,12 @@ const Layout = (props: ILayout) => {
   return (
     <Flex minH="100vh" direction="column" justifyContent="space-between">
       <Box>
-        <Header colorMode={isHome ? 'white' : 'black'} />
-        {isHome ? props.children : <Container>{props.children}</Container>}
+        <Header colorMode={router.pathname === '/' ? 'white' : 'black'} />
+        {isRouteWithoutContainer ? (
+          props.children
+        ) : (
+          <Container>{props.children}</Container>
+        )}
       </Box>
       <Footer />
     </Flex>

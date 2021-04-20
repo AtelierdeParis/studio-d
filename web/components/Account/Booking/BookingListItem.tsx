@@ -41,7 +41,11 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
         <Text isTruncated>{booking?.espace?.name}</Text>
       </Cell>
       <Cell status={status}>
-        <Text isTruncated>{booking?.place?.structureName}</Text>
+        <Text isTruncated>
+          {user.type === 'place'
+            ? booking?.company?.structureName
+            : booking?.place?.structureName}
+        </Text>
       </Cell>
       <Cell status={status}>
         <Flex direction="column">
