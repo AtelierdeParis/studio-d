@@ -36,7 +36,14 @@
     "seeMessage": "Voir le message",
     "modal": {
         "cancel": {
-            "text": "Vous êtes sur le point d’annuler votre demande de réservation. Voulez-vous continuer ?",
+            "title": {
+                "request": "Annuler la demande",
+                "booking": "Annuler la réservation"
+            },
+            "text": {
+                "request": "Vous êtes sur le point d’annuler cette demande de réservation. Voulez-vous continuer ?",
+                "booking": "Vous êtes sur le point d’annuler cette réservation. Voulez-vous continuer ?"
+            },
             "confirm": "Confirmer l’annulation",
             "back": "Non, fermer"
         },

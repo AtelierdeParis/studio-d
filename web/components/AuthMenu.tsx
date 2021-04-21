@@ -24,7 +24,7 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
     if (!user) return null
     if (user.type === 'place' && user.espaces.length > 0)
       return ROUTE_ACCOUNT_PLACES
-    if (user.type === 'company' && bookings.length > 0)
+    if (user.type === 'company' && bookings && bookings.length > 0)
       return ROUTE_ACCOUNT_REQUEST
     return ROUTE_ACCOUNT
   }, [user])

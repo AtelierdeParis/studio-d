@@ -5,6 +5,13 @@
  * to customize this model
  */
 
+const updateDispo = (dispos = [], status) => {
+  if (!dispos || dispos.length === 0) return null;
+  dispos.map(({ id }) => {
+    strapi.query("disponibility").update({ id }, { status });
+  });
+};
+
 module.exports = {
   lifecycles: {
     async afterFind(results) {
@@ -34,7 +41,6 @@ module.exports = {
         place: updated.place.id,
         company: updated.company.id,
       };
-
       if (body.status) {
         switch (body.status) {
           case "canceled":
@@ -43,6 +49,7 @@ module.exports = {
               status: "canceled",
               ...rel,
             });
+            updateDispo(updated.disponibilities, "available");
             break;
           case "canceledbyplace":
             strapi.services.message.create({
@@ -50,6 +57,7 @@ module.exports = {
               status: "canceledbyplace",
               ...rel,
             });
+            updateDispo(updated.disponibilities, "available");
             break;
           case "askcancel":
             strapi.services.message.create({
@@ -64,6 +72,7 @@ module.exports = {
               status: "accepted",
               ...rel,
             });
+            updateDispo(updated.disponibilities, "booked");
             break;
         }
       }

@@ -9,6 +9,7 @@ const FallbackImage = () => {
       h="100%"
       w="100%"
       bgColor="gray.100"
+      p={1.5}
     >
       <Image src="/assets/img/logo-studio-d-white.svg" />
     </Flex>

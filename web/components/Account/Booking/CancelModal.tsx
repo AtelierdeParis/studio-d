@@ -11,9 +11,10 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 interface ICancelModal {
   booking: Booking
   setSelected: (bookingId: string) => void
+  type: 'request' | 'booking'
 }
 
-const CancelModal = ({ booking, setSelected }: ICancelModal) => {
+const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
   const queryClient = useQueryClient()
   const { data: user } = useCurrentUser()
   const [isLoading, setLoading] = useState(false)
@@ -50,15 +51,15 @@ const CancelModal = ({ booking, setSelected }: ICancelModal) => {
           mt={2.5}
           isLoading={isLoading}
         >
-          <Text ml={2}>{t(`cancel`)}</Text>
+          <Text ml={2}>{t(`modal.cancel.title.${type}`)}</Text>
         </Button>
       }
-      title={t('cancel')}
+      title={t(`modal.cancel.title.${type}`)}
       onConfirm={onConfirm}
       confirmText={t('modal.cancel.confirm')}
       closeText={t('modal.cancel.back')}
     >
-      {t('modal.cancel.text')}
+      {t(`modal.cancel.text.${type}`)}
     </Modal>
   )
 }

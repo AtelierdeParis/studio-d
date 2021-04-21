@@ -158,7 +158,9 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                 pos="relative"
                 borderRadius="sm"
               >
-                <Image src={place.images[0].url || ''} />
+                <Image
+                  src={place.images.length > 0 ? place.images[0].url : ''}
+                />
               </AspectRatio>
             </Box>
             <Box pl={6}>
