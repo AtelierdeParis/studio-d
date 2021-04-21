@@ -77,9 +77,8 @@ const Footer = () => {
         borderTop="1px solid"
         borderTopColor="gray.100"
       >
-        {/* TODO: update license name */}
         <Text fontSize="xs" color="gray.500">
-          {t('footer.license')}
+          {t('footer.license', { name: process.env.NEXT_PUBLIC_LICENSE })}
         </Text>
       </Flex>
     </Box>

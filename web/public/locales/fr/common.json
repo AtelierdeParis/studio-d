@@ -56,7 +56,7 @@
     "subtitle": "Un projet conçu et porté par l'Atelier de Paris / CDCN avec le soutien de ses partenaires :",
     "plan": "Plan du site",
     "social": "Suivez-nous sur les réseaux sociaux",
-    "license": "Plateforme diffusée sous license XXX, droits des textes et photographies réservés"
+    "license": "Plateforme diffusée sous license {{name}}, droits des textes et photographies réservés"
   },
   "compagnie":"company",
   "lieu":"place",
