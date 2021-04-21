@@ -12,7 +12,6 @@ import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
 import Confirm from 'public/assets/img/confirm.svg'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useMyBookings } from '~hooks/useMyBookings'
-import { useMyRequests } from '~hooks/useMyRequests'
 import useConcurrentBookings from '~hooks/useConcurrentBookings'
 
 const styleSelected = {
@@ -48,7 +47,6 @@ const BookingScheduleSlot = (props: Props) => {
   const { t } = useTranslation('place')
   const { data: user } = useCurrentUser()
   const { data: bookings = [] } = useMyBookings()
-  const { data: requests = [] } = useMyRequests()
   const {
     extendedProps: { when, hasEventSameDay, id, type },
     start,
@@ -62,7 +60,7 @@ const BookingScheduleSlot = (props: Props) => {
   )
 
   const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
-    requests.concat(bookings),
+    bookings,
     props,
   )
 

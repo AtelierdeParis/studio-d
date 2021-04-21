@@ -102,7 +102,7 @@
     },
     "list": {
         "title": "Espaces",
-        "add": "Ajouter",
+        "add": "Ajouter un espace",
         "publish": "Publier à nouveau",
         "unpublish": "Dépublier",
         "unpublishModal": "Êtes-vous sur de vouloir dépublier votre espace ? Il ne sera plus visible sur le site et ne pourra plus recevoir de demandes de réservations",

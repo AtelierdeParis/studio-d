@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Modal from '~components/Modal'
 import { client } from '~api/client-api'
-import { Booking } from '~typings/api'
 import { Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
@@ -22,7 +21,7 @@ const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
     return client.bookings
       .bookingsUpdate(bookingId, { status: 'accepted' })
       .then(() => {
-        queryClient.refetchQueries('myRequests')
+        queryClient.refetchQueries(['myBookings', 'request'])
         setSelected(null)
       })
       .finally(() => setLoading(false))

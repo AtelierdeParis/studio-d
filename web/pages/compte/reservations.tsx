@@ -9,7 +9,7 @@ import Loading from '~components/Loading'
 import { useMyBookings } from '~hooks/useMyBookings'
 
 const AccountBooking = () => {
-  const { data: bookings, isLoading } = useMyBookings()
+  const { data: bookings, isLoading } = useMyBookings('booking')
 
   return (
     <Loading isLoading={isLoading} isCentered>

@@ -1,8 +1,14 @@
-import { useQuery } from 'react-query'
+import { useQuery, UseQueryOptions } from 'react-query'
 import { client } from '~api/client-api'
+import { Booking } from '~typings/api'
 
-export const useMyBookings = () => {
-  return useQuery('myBookings', () =>
-    client.bookings.getMyBookings().then((res) => res.data),
+export const useMyBookings = (
+  type: 'all' | 'request' | 'booking' = 'all',
+  options: UseQueryOptions<Booking[]> = {},
+) => {
+  return useQuery(
+    ['myBookings', type],
+    () => client.bookings.getMyBookings(type).then((res) => res.data),
+    options,
   )
 }

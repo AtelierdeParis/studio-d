@@ -7,13 +7,13 @@ import InfoPending from '~components/Account/Info/InfoPending'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 
-interface IAccountDashboard {
+interface Props {
   user: UsersPermissionsUser
 }
 
-const AccountDashboard = ({ user }: IAccountDashboard) => {
+const AccountDashboard = ({ user }: Props) => {
   if (user?.confirmed) {
-    return <InfoWelcome />
+    return <InfoWelcome user={user} />
   }
 
   return <InfoPending />

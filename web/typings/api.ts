@@ -630,17 +630,17 @@ export namespace Bookings {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = Booking[];
+    export type ResponseBody = { foo?: string };
   }
   /**
    * @description Get bookings related to current user
    * @tags Booking
    * @name GetMyBookings
-   * @request GET:/bookings/me
+   * @request GET:/bookings/me/{bookingType}
    * @secure
    */
   export namespace GetMyBookings {
-    export type RequestParams = {};
+    export type RequestParams = { bookingType: "all" | "request" | "booking" };
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
@@ -2423,7 +2423,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     requestsMeList: (params: RequestParams = {}) =>
-      this.request<Booking[], Error>({
+      this.request<{ foo?: string }, Error>({
         path: `/bookings/requests/me`,
         method: "GET",
         secure: true,
@@ -2436,12 +2436,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Booking
      * @name GetMyBookings
-     * @request GET:/bookings/me
+     * @request GET:/bookings/me/{bookingType}
      * @secure
      */
-    getMyBookings: (params: RequestParams = {}) =>
+    getMyBookings: (bookingType: "all" | "request" | "booking", params: RequestParams = {}) =>
       this.request<Booking[], Error>({
-        path: `/bookings/me`,
+        path: `/bookings/me/${bookingType}`,
         method: "GET",
         secure: true,
         format: "json",

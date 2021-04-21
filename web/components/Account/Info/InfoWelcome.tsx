@@ -3,8 +3,12 @@ import Info from '~components/Account/Info/Info'
 import { ROUTE_CGU, ROUTE_PLACES } from '~constants'
 import { useTranslation, Trans } from 'next-i18next'
 import Link from '~components/Link'
+import { UsersPermissionsUser } from '~typings/api'
+interface Props {
+  user: UsersPermissionsUser
+}
 
-const InfoWelcome = () => {
+const InfoWelcome = ({ user }: Props) => {
   const { t } = useTranslation('account')
   return (
     <Info
@@ -16,7 +20,7 @@ const InfoWelcome = () => {
       }}
     >
       <Trans
-        i18nKey="account:welcomeText"
+        i18nKey={`account:welcomeText.${user.type}`}
         components={{
           a: <Link href={ROUTE_CGU} textDecoration="underline" />,
         }}

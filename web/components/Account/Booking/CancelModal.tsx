@@ -27,7 +27,10 @@ const CancelModal = ({ booking, setSelected }: ICancelModal) => {
         status: isPlace ? 'canceledbyplace' : 'canceled',
       })
       .then(() => {
-        queryClient.refetchQueries(isPlace ? 'myBookings' : 'myRequests')
+        queryClient.refetchQueries([
+          'myBookings',
+          isPlace ? 'booking' : 'request',
+        ])
         setSelected(null)
       })
       .finally(() => setLoading(false))
