@@ -124,7 +124,10 @@
             "title": "Aucune réservation",
             "text": "Vous n’avez aucune réservation confirmée pour le moment.",
             "link1": "Voir mes demandes",
-            "link2": "Voir les espaces"
+            "link2": {
+                "place": "Voir mes espaces",
+                "company": "Voir les espaces"
+            }
         }
     },
     "tag": {
