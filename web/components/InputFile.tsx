@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Flex, Text, Button, Input, Box, Spacer } from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
@@ -21,6 +21,7 @@ const acceptableTypes = [
 
 const InputFile = ({ control, place }: IInputFile) => {
   const { t } = useTranslation('place')
+  const ref = useRef(null)
 
   const { field: removeField } = useController({
     name: 'removedFiles',
@@ -63,23 +64,35 @@ const InputFile = ({ control, place }: IInputFile) => {
     <Box>
       <Flex textStyle="infoLabel" justifyContent="space-between" mb={4}>
         <Text>{t('form.filesLabel')}</Text>
-        <Box pos="relative" cursor="pointer" overflow="hidden">
+        <Box pos="relative" cursor="pointer" overflow="hidden" role="group">
           <Button
+            pos="relative"
+            zIndex="99"
             variant="unstyled"
             display="flex"
             alignItems="center"
             color="black"
+            _hover={{ color: 'blue.500' }}
+            onClick={() => {
+              if (ref.current) {
+                ref.current.click()
+              }
+            }}
           >
             <Box pr={2}>{t('form.files.add')}</Box>
             <Add />
           </Button>
           <Input
+            ref={ref}
             pos="absolute"
             top="0"
             right="0"
             w="280px"
             cursor="pointer"
             type="file"
+            _groupHover={{
+              cursor: 'pointer',
+            }}
             multiple
             accept={acceptableTypes.join(',')}
             onChange={onChange}

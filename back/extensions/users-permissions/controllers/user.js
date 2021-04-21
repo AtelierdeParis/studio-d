@@ -74,6 +74,20 @@ module.exports = {
 
     ctx.send(sanitizeUser(data));
   },
+  async me(ctx) {
+    const { id } = ctx.state.user;
+    const user = await strapi.plugins["users-permissions"].services.user.fetch({
+      id,
+    });
+
+    if (!user) {
+      return ctx.badRequest(null, [
+        { messages: [{ id: "No authorization header was found" }] },
+      ]);
+    }
+
+    ctx.body = sanitizeUser(user);
+  },
   checkPassword(ctx) {
     const params = ctx.request.body;
     const user = ctx.state.user;

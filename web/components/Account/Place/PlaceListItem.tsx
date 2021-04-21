@@ -99,7 +99,19 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
             <UnpublishModal placeId={place.id} />
           ) : (
             <ButtonGroup spacing={4} alignSelf="flex-start">
-              <PublishModal placeId={place.id} />
+              {!place.filledUntil ? (
+                <Text
+                  pl={4}
+                  fontSize="sm"
+                  color="blue.500"
+                  maxW="300px"
+                  textAlign="right"
+                >
+                  {t('list.needDispo')}
+                </Text>
+              ) : (
+                <PublishModal placeId={place.id} />
+              )}
               <DeletePlaceModal placeId={place.id} />
             </ButtonGroup>
           )}

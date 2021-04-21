@@ -1,23 +1,39 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ButtonGroup, Button, Text, Flex, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import SigninModal from '~components/Signin/SigninModal'
-import { ROUTE_SIGNUP, ROUTE_ACCOUNT } from '~constants'
-import { useSession } from 'next-auth/client'
+import {
+  ROUTE_SIGNUP,
+  ROUTE_ACCOUNT,
+  ROUTE_ACCOUNT_PLACES,
+  ROUTE_ACCOUNT_REQUEST,
+} from '~constants'
 import Squares from 'public/assets/img/squares.svg'
+import { useCurrentUser } from '~hooks/useCurrentUser'
+import { useMyBookings } from '~hooks/useMyBookings'
 interface IAuthMenu {
   colorMode: 'white' | 'black'
 }
 const AuthMenu = ({ colorMode }: IAuthMenu) => {
   const { t } = useTranslation('common')
-  const [session] = useSession()
+  const { data: user } = useCurrentUser()
+  const { data: bookings } = useMyBookings('all', { enabled: Boolean(user) })
 
-  if (session) {
+  const routeToRedirect = useMemo(() => {
+    if (!user) return null
+    if (user.type === 'place' && user.espaces.length > 0)
+      return ROUTE_ACCOUNT_PLACES
+    if (user.type === 'company' && bookings && bookings.length > 0)
+      return ROUTE_ACCOUNT_REQUEST
+    return ROUTE_ACCOUNT
+  }, [user])
+
+  if (user) {
     return (
       <Flex
         as={Link}
-        href={ROUTE_ACCOUNT}
+        href={routeToRedirect}
         alignItems="center"
         role="group"
         _hover={{ textDecoration: 'none' }}
@@ -36,7 +52,7 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
               borderBottom: `1px solid ${colorMode}`,
             }}
           >
-            {session.user.name}
+            {user.structureName}
           </Text>
         </Box>
       </Flex>

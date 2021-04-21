@@ -1,6 +1,6 @@
 {
     "paths": {
-      "/bookings/me": {
+      "/bookings/me/{bookingType}": {
         "get": {
           "deprecated": false,
           "description": "Get bookings related to current user",
@@ -54,63 +54,23 @@
           "tags": [
             "Booking"
           ],
-          "parameters": []
-        }
-      },
-      "/bookings/requests/me": {
-        "get": {
-          "deprecated": false,
-          "description": "Get requests related to current user",
-          "responses": {
-            "200": {
-              "description": "response",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Booking"
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "description": "Forbidden",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
-              }
-            },
-            "default": {
-              "description": "unexpected error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Error"
-                  }
-                }
+          "parameters": [
+            {
+              "name": "bookingType",
+              "in": "path",
+              "description": "",
+              "deprecated": false,
+              "required": true,
+              "schema": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "request",
+                  "booking"
+                ]
               }
             }
-          },
-          "summary": "",
-          "tags": [
-            "Booking"
-          ],
-          "parameters": []
+          ]
         }
       }
     },

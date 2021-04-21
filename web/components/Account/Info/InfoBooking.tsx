@@ -1,9 +1,18 @@
 import React from 'react'
 import Info from '~components/Account/Info/Info'
 import { useTranslation } from 'next-i18next'
-import { ROUTE_ACCOUNT_REQUEST, ROUTE_PLACES } from '~constants'
+import {
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_PLACES,
+  ROUTE_ACCOUNT_PLACES,
+} from '~constants'
+import { UsersPermissionsUser } from '~typings/api'
 
-const InfoBooking = () => {
+interface Props {
+  user: UsersPermissionsUser
+}
+
+const InfoBooking = ({ user }: Props) => {
   const { t } = useTranslation('account')
   return (
     <Info
@@ -15,8 +24,8 @@ const InfoBooking = () => {
           text: t('bookings.info.link1'),
         },
         {
-          url: ROUTE_PLACES,
-          text: t('bookings.info.link2'),
+          url: user.type === 'place' ? ROUTE_ACCOUNT_PLACES : ROUTE_PLACES,
+          text: t(`bookings.info.link2.${user.type}`),
         },
       ]}
     >

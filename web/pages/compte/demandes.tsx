@@ -7,18 +7,18 @@ import BookingList from '~components/Account/Booking/BookingList'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 import Loading from '~components/Loading'
-import { useMyRequests } from '~hooks/useMyRequests'
+import { useMyBookings } from '~hooks/useMyBookings'
 interface Props {
   user: UsersPermissionsUser
 }
 
 const AccountRequest = ({ user }: Props) => {
-  const { data: requests, isLoading } = useMyRequests()
+  const { data: requests, isLoading } = useMyBookings('request')
 
   return (
     <Loading isLoading={isLoading} isCentered>
       {requests?.length === 0 ? (
-        <InfoRequest />
+        <InfoRequest user={user} />
       ) : (
         <BookingList bookings={requests} type="request" />
       )}

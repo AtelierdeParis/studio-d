@@ -1,20 +1,26 @@
 import React from 'react'
 import Info from '~components/Account/Info/Info'
 import { useTranslation } from 'next-i18next'
-import { ROUTE_PLACES } from '~constants'
+import { ROUTE_ACCOUNT_PLACES, ROUTE_PLACES } from '~constants'
+import { UsersPermissionsUser } from '~typings/api'
 
-const InfoRequest = () => {
+interface Props {
+  user: UsersPermissionsUser
+}
+
+const InfoRequest = ({ user }: Props) => {
   const { t } = useTranslation('account')
+
   return (
     <Info
       img="/assets/img/requests.svg"
-      title={t('requests.info.title')}
+      title={t(`requests.info.title`)}
       links={{
-        url: ROUTE_PLACES,
-        text: t('requests.info.link'),
+        url: user.type === 'place' ? ROUTE_ACCOUNT_PLACES : ROUTE_PLACES,
+        text: t(`requests.info.link.${user.type}`),
       }}
     >
-      {t('requests.info.text')}
+      {t(`requests.info.text.${user.type}`)}
     </Info>
   )
 }

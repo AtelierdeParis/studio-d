@@ -60,9 +60,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
         .toggleNotif({ status: type, bookingId: id })
         .then(() => {
           queryClient.refetchQueries(['myNotifications'])
-          queryClient.refetchQueries(
-            type === 'booking' ? 'myBookings' : 'myRequests',
-          )
+          queryClient.refetchQueries(['myBookings', type])
         })
     },
   })
@@ -232,8 +230,9 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         'canceledbyplace',
                         'past',
                         'occupied',
-                      ].includes(booking?.status) && (
+                      ].includes(status) && (
                         <CancelModal
+                          type={type}
                           booking={booking}
                           setSelected={setSelected}
                         />

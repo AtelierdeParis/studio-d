@@ -42,7 +42,7 @@ const getStyle = (status) => {
       return styleAvailable
     case 'pending':
       return stylePending
-    case 'accepted':
+    case 'booked':
       return styleBooked
     case 'error':
       return styleError

@@ -20,7 +20,10 @@
     "pendingText": "Votre compte est actuellement en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
     "backWebsite": "Retour à l’accueil du site",
     "welcome": "Bienvenue !",
-    "welcomeText": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les lieux par messagerie. Commencez par faire un tour des espaces disponibles, ou jetez un oeil <a>à notre charte d’utilisation</a>.",
+    "welcomeText": {
+        "company": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les lieux par messagerie. Commencez par faire un tour des espaces disponibles, ou jetez un oeil <a>à notre charte d’utilisation</a>.",
+        "place": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les compagnies par messagerie. Commencez par inscrire un premier espace de répétition, ou jetez un oeil <a>à notre charte d’utilisation</a>."
+    },
     "seePlaces": "Voir les espaces",
     "information": {
         "username": "Identifiants",
@@ -106,8 +109,14 @@
     "requests": {
         "info": {
             "title": "Aucune demande",
-            "text": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
-            "link": "Voir les espaces"
+            "text": {
+                "company": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
+                "place": "Vous n’avez aucune demande en attente. Parcourez la liste de vos espaces inscrits ainsi que leur disponibilités pour commencer à recevoir des demandes"
+            },
+            "link": {
+                "place": "Voir mes espaces",
+                "company": "Voir les espaces"
+            }
         }
     },
     "bookings": {
@@ -115,7 +124,10 @@
             "title": "Aucune réservation",
             "text": "Vous n’avez aucune réservation confirmée pour le moment.",
             "link1": "Voir mes demandes",
-            "link2": "Voir les espaces"
+            "link2": {
+                "place": "Voir mes espaces",
+                "company": "Voir les espaces"
+            }
         }
     },
     "tag": {

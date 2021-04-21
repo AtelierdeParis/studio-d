@@ -14,50 +14,49 @@ const formatError = (error) => ({
 
 const populate = ["disponibilities", "company", "espace", "place", "messages"];
 
-const getMybookings = (query, user) => {
-  return strapi
-    .query("booking")
-    .find(query, populate)
-    .then((res) => {
-      return Promise.all(
-        res.map(async (booking) => {
-          return {
-            ...booking,
-            notifications: await strapi.services.message.getNbNotifications({
-              id: user.id,
-              type: user.type,
-              bookingId: booking.id,
-            }),
-          };
-        })
-      );
-    });
+const filterBookings = (type) => {
+  switch (type) {
+    case "request":
+      return { status_in: ["pending", "canceled"] };
+    case "booking":
+      return {
+        status_in: ["past", "accepted", "canceledbyplace", "askcancel"],
+      };
+    case "all":
+      return {};
+  }
 };
 
 module.exports = {
   async myBookings(ctx) {
+    const { bookingType } = ctx.params;
     const { id, type } = ctx.state.user;
     const query = type === "place" ? { place: id } : { company: id };
-    return getMybookings(
-      {
-        ...query,
-        status_in: ["past", "accepted", "canceledbyplace", "askcancel"],
-        _sort: "disponibilities.start:desc",
-      },
-      ctx.state.user
-    );
-  },
-  async myRequests(ctx) {
-    const { id, type } = ctx.state.user;
-    const query = type === "place" ? { place: id } : { company: id };
-    return getMybookings(
-      {
-        ...query,
-        status_in: ["pending", "canceled"],
-        _sort: "disponibilities.start:desc",
-      },
-      ctx.state.user
-    );
+
+    return strapi
+      .query("booking")
+      .find(
+        {
+          ...query,
+          ...filterBookings(bookingType),
+          _sort: "disponibilities.start:desc",
+        },
+        populate
+      )
+      .then((res) => {
+        return Promise.all(
+          res.map(async (booking) => {
+            return {
+              ...booking,
+              notifications: await strapi.services.message.getNbNotifications({
+                id,
+                type,
+                bookingId: booking.id,
+              }),
+            };
+          })
+        );
+      });
   },
   async create(ctx) {
     const { id, type, confirmed } = ctx.state.user;

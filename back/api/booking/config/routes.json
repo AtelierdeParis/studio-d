@@ -2,17 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/bookings/requests/me",
-      "handler": "booking.myRequests",
-      "config": {
-          "policies": [],
-          "operationId": "myRequests",
-          "description": "Get requests related to current user"
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/bookings/me",
+      "path": "/bookings/me/:bookingType(all|request|booking)",
       "handler": "booking.myBookings",
       "config": {
           "policies": [],

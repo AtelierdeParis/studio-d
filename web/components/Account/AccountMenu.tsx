@@ -176,7 +176,6 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         </VStack>
       </Box>
       <Flex backgroundColor="blue.200" p={5}>
-        {/* TODO: create this page */}
         <Link href={ROUTE_USE_POLICY} display="flex" alignItems="center">
           <Charte />
           <Text pl={3}>{t('charte')}</Text>
