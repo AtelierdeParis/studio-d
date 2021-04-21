@@ -31,7 +31,7 @@ const PlaceList = ({ places }: IPlaceList) => {
           colorScheme="blue"
           rightIcon={<Add />}
         >
-          {t('list.add')}
+          {t('list.addPlace')}
         </Button>
       </Flex>
       <VStack alignItems="flex-start" spacing={0}>

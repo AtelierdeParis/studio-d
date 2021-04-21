@@ -15,7 +15,8 @@ const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
   const { t } = useTranslation('place')
   const { errorToast, successToast } = useToast()
   const onConfirm = (): Promise<any> => {
-    return client.espaces.espacesDelete(placeId)
+    return client.espaces
+      .espacesDelete(placeId)
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successDelete'))
@@ -25,7 +26,11 @@ const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
 
   return (
     <Modal
-      button={<Button variant="line">{t('list.delete')}</Button>}
+      button={
+        <Button variant="line" alignSelf="flex-start">
+          {t('list.delete')}
+        </Button>
+      }
       title={t('list.delete')}
       onConfirm={onConfirm}
       confirmText={t('list.delete')}

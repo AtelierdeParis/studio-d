@@ -28,7 +28,9 @@ module.exports = {
     const place = newDispo[0].espace;
 
     if (!place.filledUntil || isAfter(maxDate, new Date(place.filledUntil))) {
-      strapi.query("espace").update({ id: place.id }, { filledUntil: maxDate });
+      const data = { filledUntil: maxDate };
+      if (!place.filledUntil) data["published"] = true;
+      strapi.query("espace").update({ id: place.id }, data);
     }
 
     return newDispo;

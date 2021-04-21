@@ -21,9 +21,13 @@ const populate = [
 module.exports = {
   async myPlaces(ctx) {
     const { id } = ctx.state.user;
-    return strapi
-      .query("espace")
-      .find({ users_permissions_user: id }, populate);
+    return strapi.query("espace").find(
+      {
+        users_permissions_user: id,
+        _sort: "name:asc",
+      },
+      populate
+    );
   },
   async getCities() {
     const knex = strapi.connections.default;

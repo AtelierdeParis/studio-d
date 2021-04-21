@@ -101,8 +101,10 @@
         }
     },
     "list": {
+        "needDispo": "Définissez au-moins une disponibilité pour que cet espace soit publié",
         "title": "Espaces",
-        "add": "Ajouter un espace",
+        "add": "Ajouter",
+        "addPlace": "Ajouter un espace",
         "publish": "Publier à nouveau",
         "unpublish": "Dépublier",
         "unpublishModal": "Êtes-vous sur de vouloir dépublier votre espace ? Il ne sera plus visible sur le site et ne pourra plus recevoir de demandes de réservations",

@@ -18,7 +18,7 @@ const AccountRequest = ({ user }: Props) => {
   return (
     <Loading isLoading={isLoading} isCentered>
       {requests?.length === 0 ? (
-        <InfoRequest />
+        <InfoRequest user={user} />
       ) : (
         <BookingList bookings={requests} type="request" />
       )}

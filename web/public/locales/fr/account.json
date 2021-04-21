@@ -109,8 +109,14 @@
     "requests": {
         "info": {
             "title": "Aucune demande",
-            "text": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
-            "link": "Voir les espaces"
+            "text": {
+                "company": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
+                "place": "Vous n’avez aucune demande en attente. Parcourez la liste de vos espaces inscrits ainsi que leur disponibilités pour commencer à recevoir des demandes"
+            },
+            "link": {
+                "place": "Voir mes espaces",
+                "company": "Voir les espaces"
+            }
         }
     },
     "bookings": {
