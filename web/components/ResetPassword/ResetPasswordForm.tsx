@@ -37,13 +37,14 @@ const ResetPasswordForm = ({ onClose }: ResetPasswordFormProps) => {
 
   const onSubmit = (data) => {
     setLoading(true)
-    client.auth.forgotPassword(data.email)
+    client.auth
+      .forgotPassword({ email: data.email })
       .then(() => {
         successToast(t('reset.success'))
         onClose()
       })
       .catch((err) => {
-        if (err.response?.data) {
+        if (err.response?.data?.data) {
           err.response?.data?.data?.map(({ messages }) => {
             if (messages.length > 0) errorToast(t(messages[0].id))
           })

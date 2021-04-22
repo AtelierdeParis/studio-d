@@ -8,10 +8,14 @@
     "build": "strapi build",
     "strapi": "strapi",
     "config:dump": "strapi config:dump --file config.json -p",
-    "config:restore": "strapi configuration:restore -f config.json"
+    "config:restore": "strapi configuration:restore -f config.json",
+    "migrate:data": "node scripts/migrate_data.js"
   },
   "devDependencies": {},
   "dependencies": {
+    "axios": "^0.21.1",
+    "csv-parser": "^3.0.0",
+    "form-data": "^4.0.0",
     "knex": "0.21.18",
     "pg": "^8.5.1",
     "strapi": "3.5.3",

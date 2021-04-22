@@ -80,7 +80,7 @@ const BookingScheduleSlot = (props: Props) => {
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {
-        if (hasAnotherBooking || user.type === 'place') return null
+        if (hasAnotherBooking || user?.type === 'place') return null
         if (!isSelected) {
           setSelected([...selected, props])
         } else {

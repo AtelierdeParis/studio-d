@@ -645,7 +645,7 @@
           "latitude",
           "longitude",
           "city",
-          "danceCarpet"
+          "country"
         ],
         "properties": {
           "id": {
@@ -655,16 +655,16 @@
             "type": "string"
           },
           "surface": {
-            "type": "integer"
+            "type": "number"
           },
           "roomLength": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "mirror": {
             "type": "boolean"
@@ -683,7 +683,8 @@
             "enum": [
               "plancherDanse",
               "parquetTraditionnel",
-              "other"
+              "other",
+              "todefine"
             ]
           },
           "otherFloor": {
@@ -957,6 +958,9 @@
                   "place"
                 ]
               },
+              "external_id": {
+                "type": "integer"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1095,6 +1099,12 @@
                 }
               }
             }
+          },
+          "country": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "integer"
           }
         }
       },
@@ -1114,23 +1124,23 @@
           "latitude",
           "longitude",
           "city",
-          "danceCarpet"
+          "country"
         ],
         "properties": {
           "name": {
             "type": "string"
           },
           "surface": {
-            "type": "integer"
+            "type": "number"
           },
           "roomLength": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "mirror": {
             "type": "boolean"
@@ -1149,7 +1159,8 @@
             "enum": [
               "plancherDanse",
               "parquetTraditionnel",
-              "other"
+              "other",
+              "todefine"
             ]
           },
           "otherFloor": {
@@ -1201,6 +1212,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "country": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "integer"
           },
           "created_by": {
             "type": "string"

@@ -122,8 +122,8 @@
       "type": "string"
     },
     "espaces": {
-      "collection": "espace",
-      "via": "users_permissions_user"
+      "via": "users_permissions_user",
+      "collection": "espace"
     },
     "type": {
       "type": "enumeration",
@@ -132,6 +132,9 @@
         "place"
       ],
       "required": true
+    },
+    "external_id": {
+      "type": "integer"
     }
   }
 }
