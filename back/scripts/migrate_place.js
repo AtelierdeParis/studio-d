@@ -29,9 +29,7 @@ const uploadFile = (url, options) => {
   formData.append("refId", options.refId);
   formData.append("field", options.field);
   formData.append(`files`, request(url));
-
   const formHeaders = formData.getHeaders();
-
   axios
     .post("http://localhost:1337/upload", formData, {
       headers: {
@@ -82,12 +80,12 @@ const start = async () => {
               place.country = mapping_country[row.country];
             }
 
-            if (checkProp("lat", "latitude")) {
-              place.latitude = row.lat;
+            if (checkProp("lng", "longitude")) {
+              place.longitude = row.lat;
             }
 
-            if (checkProp("lng", "longitude")) {
-              place.longitude = row.lng;
+            if (checkProp("lat", "latitude")) {
+              place.latitude = row.lng;
             }
 
             if (checkProp("location", "address")) {
