@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonGroup, Button } from '@chakra-ui/react'
+import { HStack, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import AuthenticatedMenu from '~components/AuthenticatedMenu'
@@ -19,14 +19,24 @@ const AuthMenu = ({ colorMode }: IAuthMenu) => {
   }
 
   return (
-    <ButtonGroup spacing={5}>
-      <Button variant="unstyled" fontSize="md">
-        <Link href={ROUTE_SIGNUP}>{t('nav.signup')}</Link>
-      </Button>
+    <HStack spacing={5} alignItems="center">
+      <Link
+        href={ROUTE_SIGNUP}
+        lineHeight="1.2"
+        borderBottom="1px solid"
+        borderColor="transparent"
+        fontSize="md"
+        _hover={{
+          borderColor: 'orange.500',
+        }}
+      >
+        {t('nav.signup')}
+      </Link>
+
       <SigninModal>
         <Button>{t('nav.signin')}</Button>
       </SigninModal>
-    </ButtonGroup>
+    </HStack>
   )
 }
 

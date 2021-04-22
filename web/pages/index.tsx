@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     <Box>
       <HomeCarousel />
       <HomeMessage />
-      <Container py={20}>
+      <Container pb={20} pt={26}>
         <VStack alignItems="flex-start" w="100%" spacing={22}>
           {!loading && !session && <PlaceOrCompany />}
           <HomePlaces />

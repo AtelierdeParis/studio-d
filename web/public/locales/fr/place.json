@@ -160,8 +160,8 @@
         },
         "mirror": {
             "placeholder": "Miroir",
-            "yes": "Avec mirroir",
-            "no": "Sans mirroir"
+            "yes": "Avec miroir",
+            "no": "Sans miroir"
         },
         "danceBar": {
             "placeholder": "Barre de danse",
@@ -283,7 +283,7 @@
         "height": "Hauteur sous plafond",
         "floor": "Type de sol",
         "danceCarpet": "Tapis de danse",
-        "mirror": "Mirroir",
+        "mirror": "Miroir",
         "danceBar": "Barre de danse",
         "technicalStaff": "Personnel technique",
         "accomodation": "Hébergement",

@@ -30,7 +30,11 @@ const DesactivateAccountModal = () => {
     <Modal
       w="100%"
       button={
-        <Button leftIcon={<Delete />} variant="delete" isLoading={isLoading}>
+        <Button
+          leftIcon={<Delete width="20px" height="20px" />}
+          variant="delete"
+          isLoading={isLoading}
+        >
           <Text pl={3}>{t('information.desactivate.btn')}</Text>
         </Button>
       }

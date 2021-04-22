@@ -39,10 +39,11 @@ const AuthenticatedMenu = ({ user, colorMode }) => {
           fontWeight="500"
           lineHeight={1.2}
           isTruncated
-          borderBottom="1px solid transparent"
+          borderBottom="1px solid"
+          borderColor="transparent"
           _groupHover={{
             textDecoration: 'none',
-            borderBottom: `1px solid ${colorMode}`,
+            borderColor: 'orange.500',
           }}
         >
           {user.structureName}

@@ -55,7 +55,12 @@ const Header = ({ colorMode }: IHeader) => {
         colorMode === 'white' ? 'none' : '1px solid rgba(0, 0, 0, 0.1)'
       }
     >
-      <Flex pos="relative" zIndex="10" justifyContent="space-between">
+      <Flex
+        pos="relative"
+        zIndex="10"
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Link href="/">
           <Image
             src={`/assets/img/logo-studio-d${
@@ -65,14 +70,19 @@ const Header = ({ colorMode }: IHeader) => {
             alt="Logo Studio D"
           />
         </Link>
-        <HStack spacing={6} whiteSpace="nowrap" color={colorMode}>
+        <HStack
+          spacing={6}
+          whiteSpace="nowrap"
+          color={colorMode}
+          alignItems="center"
+        >
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
-          <Divider orientation="vertical" opacity={0.6} />
+          <Divider orientation="vertical" opacity={0.6} h="18px" />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
-          <Divider orientation="vertical" opacity={0.6} />
+          <Divider orientation="vertical" opacity={0.6} h="18px" />
           <AuthMenu colorMode={colorMode} />
         </HStack>
       </Flex>

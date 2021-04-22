@@ -334,7 +334,9 @@ const AccountInformation = ({ user }: Props) => {
             <Text textStyle="groupLabel">
               {t('information.desactivate.title')}
             </Text>
-            <DesactivateAccountModal />
+            <Box pl={2.5}>
+              <DesactivateAccountModal />
+            </Box>
           </Box>
         )}
         <Flex justifyContent="center">

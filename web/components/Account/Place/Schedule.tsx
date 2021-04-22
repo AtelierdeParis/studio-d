@@ -8,6 +8,7 @@ import { Box, Flex } from '@chakra-ui/react'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useFormContext } from 'react-hook-form'
 import isSameDay from 'date-fns/isSameDay'
+import isToday from 'date-fns/isToday'
 
 const view = createPlugin({
   views: {
@@ -76,7 +77,16 @@ const Schedule = (props: ISchedule) => {
           const hasEvent = events.some((event) =>
             isSameDay(event.start, day.date),
           )
-          return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
+          return (
+            <Box
+              color={hasEvent && 'black'}
+              borderBottom={isToday(day.date) && '1px solid orange'}
+              lineHeight="1"
+              pt={0.5}
+            >
+              {day.dayNumberText}
+            </Box>
+          )
         }}
         dateClick={(date) => {
           if (eventsIdToDelete.length > 0) setToDelete([])

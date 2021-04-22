@@ -20,7 +20,8 @@ const HomeCarousel = () => {
       backgroundSize="cover"
       justifyContent="flex-end"
       alignItems="center"
-      h="45vh"
+      height="calc(100vh - 250px)"
+      maxH="600px"
       pos="relative"
     >
       {Boolean(carousel) && (
@@ -53,7 +54,7 @@ const HomeCarousel = () => {
           pl={5}
           transform="translateY(50%)"
           textShadow="0px 0px 17px #2d2d2d"
-          lineHeight={1}
+          lineHeight={1.1}
         >
           {t('title')}
         </Heading>
