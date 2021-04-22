@@ -32,18 +32,8 @@ import useIsOccupied from '~hooks/useIsOccupied'
 import { client } from '~api/client-api'
 import { useQueryClient } from 'react-query'
 import { useMyNotifications } from '~hooks/useMyNotifications'
-
-const PlaceInfo = ({ label, value }) => {
-  if (!value) return null
-  return (
-    <Flex flexWrap="wrap">
-      <Text fontFamily="mabry medium" fontWeight="500" whiteSpace="nowrap">
-        {label}
-      </Text>
-      <Text pl={1}>{value}</Text>
-    </Flex>
-  )
-}
+import BookingDrawerCompany from '~components/Account/Booking/BookingDrawerCompany'
+import BookingDrawerPlace from '~components/Account/Booking/BookingDrawerPlace'
 
 interface Props {
   bookingId: string
@@ -180,10 +170,10 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                   <BookingHistory booking={booking} type={user?.type} />
                 </Box>
                 {booking?.status !== 'canceled' && (
-                  <Flex>
+                  <Flex flex={0}>
                     <Divider
                       orientation="vertical"
-                      mr={5}
+                      mx={5}
                       h="100%"
                       opacity="0.3"
                     />
@@ -238,54 +228,10 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         />
                       )}
                       <Divider opacity="0.3" my={5} />
-                      <Box>
-                        <Text fontFamily="mabry medium" fontWeight="500">
-                          {user.type === 'company'
-                            ? t('address')
-                            : booking?.company?.structureName}
-                        </Text>
-                        <Text>{booking?.espace?.address}</Text>
-                      </Box>
-                      <Box pt={5}>
-                        <PlaceInfo
-                          label={t('tel')}
-                          value={booking?.place?.phone}
-                        />
-                        <PlaceInfo
-                          label={t('email')}
-                          value={booking?.place?.email}
-                        />
-                        {booking?.place?.website && (
-                          <Link href={booking?.place?.website}>
-                            <Text textDecoration="underline" color="gray.300">
-                              {booking.place.website}
-                            </Text>
-                          </Link>
-                        )}
-                      </Box>
-                      {user.type === 'place' && (
-                        <Box pt={5}>
-                          <PlaceInfo
-                            label={t('siret')}
-                            value={booking?.place?.siret}
-                          />
-                          <PlaceInfo
-                            label={t('ape')}
-                            value={booking?.place?.ape}
-                          />
-                          <PlaceInfo
-                            label={t('insurance')}
-                            value={booking?.place?.insuranceName}
-                          />
-                          <PlaceInfo
-                            label={t('insuranceNb')}
-                            value={booking?.place?.insuranceNumber}
-                          />
-                          <PlaceInfo
-                            label={t('licence')}
-                            value={booking?.place?.license}
-                          />
-                        </Box>
+                      {user.type === 'place' ? (
+                        <BookingDrawerCompany company={booking?.company} />
+                      ) : (
+                        <BookingDrawerPlace place={booking?.place} />
                       )}
                     </Flex>
                   </Flex>
