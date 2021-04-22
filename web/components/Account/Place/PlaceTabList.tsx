@@ -23,14 +23,17 @@ const TabPlace = ({ isDisabled, children }) => {
   )
 }
 
-interface IPriceTabList {
+interface Props {
   disabledIndexes?: number[]
+  isComplete: boolean
   place?: Espace
 }
+
 const PriceTabList = ({
   disabledIndexes = [],
   place = null,
-}: IPriceTabList) => {
+  isComplete,
+}: Props) => {
   const { t } = useTranslation('place')
 
   const nbAvailable = useMemo(() => {
@@ -45,10 +48,10 @@ const PriceTabList = ({
       <TabPlace isDisabled={disabledIndexes.includes(0)}>
         {t('tabs.info')}
       </TabPlace>
-      <TabPlace isDisabled={disabledIndexes.includes(1)}>
+      <TabPlace isDisabled={!isComplete ? true : disabledIndexes.includes(1)}>
         {t('tabs.image')}
       </TabPlace>
-      <TabPlace isDisabled={disabledIndexes.includes(2)}>
+      <TabPlace isDisabled={!isComplete ? true : disabledIndexes.includes(2)}>
         {t('tabs.slot', { nb: nbAvailable })}
       </TabPlace>
     </TabList>

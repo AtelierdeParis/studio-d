@@ -27,6 +27,7 @@
         "slot": "Disponibilités ({{nb}})"
     },
     "form": {
+        "notComplete": "En raison de la refonte de Studio D et du changement de certaines données, vous devez saisir les valeurs manquantes",
         "error": "Une erreur est survenue en lors de l'enregistrement",
         "yes": "Oui",
         "no": "Non",
