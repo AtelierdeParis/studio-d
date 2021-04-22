@@ -60,7 +60,7 @@ const PlaceAttributesGrid = ({ place }: Props) => {
         withDivider
         label={t('detail.danceCarpet')}
         icon={<Carpet />}
-        text={place?.danceCarpet ? t('detail.available') : t('detail.no')}
+        text={t(`detail.${place?.danceCarpet}`)}
       />
       <GridItem
         withDivider

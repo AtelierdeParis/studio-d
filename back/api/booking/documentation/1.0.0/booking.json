@@ -827,9 +827,6 @@
               "city": {
                 "type": "string"
               },
-              "danceCarpet": {
-                "type": "boolean"
-              },
               "bookings": {
                 "type": "array",
                 "items": {
@@ -841,6 +838,14 @@
               },
               "external_id": {
                 "type": "integer"
+              },
+              "danceCarpet": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
               },
               "created_by": {
                 "type": "string"

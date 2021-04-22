@@ -121,10 +121,6 @@
       "type": "string",
       "required": true
     },
-    "danceCarpet": {
-      "type": "boolean",
-      "required": false
-    },
     "bookings": {
       "collection": "booking",
       "via": "espace"
@@ -135,6 +131,15 @@
     },
     "external_id": {
       "type": "integer"
+    },
+    "danceCarpet": {
+      "type": "enumeration",
+      "enum": [
+        "true",
+        "false",
+        "possible"
+      ],
+      "required": false
     }
   }
 }

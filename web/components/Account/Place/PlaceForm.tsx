@@ -144,6 +144,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
               >
                 <option value="true">{t('form.yes')}</option>
                 <option value="false">{t('form.no')}</option>
+                <option value="possible">{t('form.possible')}</option>
               </Select>
             </FormField>
             <FormField

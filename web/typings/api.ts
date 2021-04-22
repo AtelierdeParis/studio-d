@@ -108,7 +108,7 @@ export interface Disponibility {
     danceBar: boolean;
     accomodation: boolean;
     technicalStaff: boolean;
-    floor: "plancherDanse" | "parquetTraditionnel" | "other";
+    floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
     otherFloor?: string;
     about?: string;
     details?: string;
@@ -123,8 +123,10 @@ export interface Disponibility {
     filledUntil?: string;
     published?: boolean;
     city: string;
-    danceCarpet: boolean;
     bookings?: string[];
+    country: string;
+    external_id?: number;
+    danceCarpet: "true" | "false" | "possible";
     created_by?: string;
     updated_by?: string;
   };
@@ -193,7 +195,9 @@ export interface Espace {
   filledUntil?: string;
   published?: boolean;
   city: string;
-  danceCarpet: boolean;
+  country?: string;
+  external_id?: number;
+  danceCarpet: "true" | "false" | "possible";
 }
 
 export interface NewEspace {
@@ -206,7 +210,7 @@ export interface NewEspace {
   danceBar: boolean;
   accomodation: boolean;
   technicalStaff: boolean;
-  floor: "plancherDanse" | "parquetTraditionnel" | "other";
+  floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
   otherFloor?: string;
   about?: string;
   details?: string;
@@ -221,8 +225,10 @@ export interface NewEspace {
   filledUntil?: string;
   published?: boolean;
   city: string;
-  danceCarpet: boolean;
   bookings?: string[];
+  country: string;
+  external_id?: number;
+  danceCarpet: "true" | "false" | "possible";
   created_by?: string;
   updated_by?: string;
 }
@@ -419,6 +425,7 @@ export interface UsersPermissionsRole {
     choreographer?: string;
     espaces?: string[];
     type: "company" | "place";
+    external_id?: number;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -618,20 +625,6 @@ export namespace Actualities {
 }
 
 export namespace Bookings {
-  /**
-   * @description Get requests related to current user
-   * @tags Booking
-   * @name RequestsMeList
-   * @request GET:/bookings/requests/me
-   * @secure
-   */
-  export namespace RequestsMeList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
-  }
   /**
    * @description Get bookings related to current user
    * @tags Booking
@@ -2414,23 +2407,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   bookings = {
-    /**
-     * @description Get requests related to current user
-     *
-     * @tags Booking
-     * @name RequestsMeList
-     * @request GET:/bookings/requests/me
-     * @secure
-     */
-    requestsMeList: (params: RequestParams = {}) =>
-      this.request<{ foo?: string }, Error>({
-        path: `/bookings/requests/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
     /**
      * @description Get bookings related to current user
      *

@@ -58,6 +58,10 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     name: 'city',
     control,
   })
+  const { field: country } = useController({
+    name: 'country',
+    control,
+  })
 
   const onChange = (value) => {
     field.onChange(value?.label || '')
@@ -66,10 +70,13 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
       latitude.onChange(value?.item.geometry.coordinates[0])
       longitude.onChange(value?.item.geometry.coordinates[1])
       city.onChange(value?.item.properties.city)
+      // TODO: handle country
+      country.onChange('France')
     } else {
       latitude.onChange(null)
       longitude.onChange(null)
       city.onChange(null)
+      country.onChange(null)
     }
   }
 

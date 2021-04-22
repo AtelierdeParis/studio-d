@@ -885,8 +885,19 @@
           "city": {
             "type": "string"
           },
+          "country": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "integer"
+          },
           "danceCarpet": {
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "possible"
+            ]
           }
         }
       }
