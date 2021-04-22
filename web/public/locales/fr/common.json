@@ -31,10 +31,12 @@
     "signup": "Inscription",
     "email": {
       "label": "Email",
-      "placeholder": "mail@exemple.fr"
+      "placeholder": "mail@exemple.fr",
+      "error": "Email incorrect"
     },
     "password": {
-      "label": "Mot de passe"
+      "label": "Mot de passe",
+      "error": "Mot de passe requis"
     },
     "forgottenPassword": "mot de passe oublié ?",
     "error": "Authentification échouée, l'identifiant ou le mot de passe est incorrect"
