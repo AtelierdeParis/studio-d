@@ -22,7 +22,7 @@ const PlaceList = ({ places }: IPlaceList) => {
         borderBottom="1px solid"
         borderColor="gray.100"
       >
-        <Text textStyle="accountTitle" mr={5} pl={4}>
+        <Text textStyle="accountTitle" mr={5} pl={3}>
           {t('list.title')}
         </Text>
         <Button

@@ -53,7 +53,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
       <Link
         href={{
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-          query: { id: place.id },
+          query: { id: place.slug },
         }}
       >
         <AspectRatio
@@ -77,7 +77,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           <Link
             href={{
               pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-              query: { id: place.id },
+              query: { id: place.slug },
             }}
             _hover={{
               textDecoration: 'none',
@@ -96,22 +96,10 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
             </Box>
           </Link>
           {place.published ? (
-            <UnpublishModal placeId={place.id} />
+            <UnpublishModal place={place} />
           ) : (
             <ButtonGroup spacing={4} alignSelf="flex-start">
-              {!place.filledUntil ? (
-                <Text
-                  pl={4}
-                  fontSize="sm"
-                  color="blue.500"
-                  maxW="300px"
-                  textAlign="right"
-                >
-                  {t('list.needDispo')}
-                </Text>
-              ) : (
-                <PublishModal placeId={place.id} />
-              )}
+              {place.filledUntil && <PublishModal placeId={place.id} />}
               <DeletePlaceModal placeId={place.id} />
             </ButtonGroup>
           )}
@@ -126,25 +114,20 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 as={Link}
                 href={{
                   pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-                  query: { id: place.id, index: 2 },
+                  query: { id: place.slug, index: 2 },
                 }}
                 variant="line"
               >
-                {place?.disponibilities.length > 0
-                  ? t('list.edit')
-                  : t('list.add')}
+                {available.length > 0 ? t('list.edit') : t('list.add')}
               </Button>
             </Flex>
             <Box>
-              {place?.disponibilities.length > 0 ? (
+              {available.length > 0 ? (
                 <Box>
                   <Text>
-                    {t(
-                      `list.available${
-                        place?.disponibilities.length > 1 ? 's' : ''
-                      }`,
-                      { nb: available.length },
-                    )}
+                    {t(`list.available${available.length > 1 ? 's' : ''}`, {
+                      nb: available.length,
+                    })}
                   </Text>
                   <Text>
                     {t(`list.filledUntil`, {
@@ -153,9 +136,15 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                   </Text>
                 </Box>
               ) : (
-                <Text color="red.600" pt={2}>
-                  {t('list.noDisponibility')}
-                </Text>
+                <>
+                  {!place.filledUntil ? (
+                    <Text pt={2} color="red.600" fontSize="sm">
+                      {t('list.needDispo')}
+                    </Text>
+                  ) : (
+                    <Text color="red.600">{t('list.noDisponibility')}</Text>
+                  )}
+                </>
               )}
             </Box>
           </Box>
@@ -165,9 +154,11 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
               <Text color="gray.500" pr={2}>
                 {t('list.requests')}
               </Text>
-              <Button as={Link} href={ROUTE_ACCOUNT_REQUEST} variant="line">
-                {t('list.see')}
-              </Button>
+              {pending.length > 0 && (
+                <Button as={Link} href={ROUTE_ACCOUNT_REQUEST} variant="line">
+                  {t('list.see')}
+                </Button>
+              )}
             </Flex>
             <Box pt={2}>
               {pending.length > 0 ? (
@@ -185,9 +176,12 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
               <Text color="gray.500" pr={2}>
                 {t('list.bookings')}
               </Text>
-              <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
-                {t('list.see')}
-              </Button>
+              {coming.length > 0 ||
+                (past.length > 0 && (
+                  <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
+                    {t('list.see')}
+                  </Button>
+                ))}
             </Flex>
             <Box pt={2}>
               {coming.length > 0 || past.length > 0 ? (

@@ -7,13 +7,14 @@ import Schedule from '~components/Account/Place/Schedule'
 import ScheduleProvider from '~components/Account/Place/ScheduleProvider'
 import ScheduleRightContent from '~components/Account/Place/ScheduleRightContent'
 import { usePlace } from '~hooks/usePlace'
+import { Espace } from '~typings/api'
 
-interface IPlaceSchedule {
-  placeId: string
+interface Props {
+  place: Espace
 }
 
-const PlaceSchedule = ({ placeId }: IPlaceSchedule) => {
-  const { data: place } = usePlace(placeId)
+const PlaceSchedule = ({ place }: Props) => {
+  // const { data: place } = usePlace(place.slug)
   const form = useForm({
     resolver: yupResolver(schema),
   })

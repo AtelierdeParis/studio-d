@@ -19,8 +19,10 @@ import PlaceImage from '~components/Account/Place/PlaceImage'
 import Loading from '~components/Loading'
 import { useRouter } from 'next/router'
 import { requireAuth } from '~utils/auth'
+import { useIsComplete } from '~hooks/useIsComplete'
 import Check from 'public/assets/img/check.svg'
 import dynamic from 'next/dynamic'
+import { useTranslation } from 'next-i18next'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),
@@ -31,41 +33,37 @@ const PlaceSchedule = dynamic(
 
 interface IEditPlace {
   user: UsersPermissionsUser
-  placeId: string
+  slug: string
 }
 
-const EditPlace = ({ placeId }: IEditPlace) => {
+const EditPlace = ({ slug }: IEditPlace) => {
+  const { t } = useTranslation('place')
   const { query } = useRouter()
-  const { data: place, isLoading } = usePlace(placeId)
+  const { data: place, isLoading } = usePlace(slug)
+
+  const isComplete = useIsComplete(place)
 
   return (
     <Loading isLoading={isLoading} isCentered>
-      {/* <Flex
-        justifyContent="flex-end"
-        alignItems="center"
-        mx="-1rem"
-        px={4}
-        py={2}
-        borderBottom="1px solid"
-        borderColor="gray.100"
-      >
-        <Button
-          variant="unstyled"
-          color="gray.400"
-          _hover={{ textDecoration: 'underline' }}
+      {!isComplete && (
+        <Flex
+          justifyContent="flex-start"
+          alignItems="center"
+          mx="-1rem"
+          px={4}
+          py={2}
+          borderBottom="1px solid"
+          borderColor="gray.100"
         >
-          {t('cancel')}
-        </Button>
-        <Button ml={6} leftIcon={<Check />} size="lg">
-          {t('save')}
-        </Button>
-      </Flex> */}
+          <Text color="red.500">{t('form.notComplete')}</Text>
+        </Flex>
+      )}
       <Box pt={8}>
         <Text pb={6} ml={2.5} textStyle="accountTitle">
           {place?.name}
         </Text>
-        <Tabs isLazy defaultIndex={Number(query?.index) || 0}>
-          <PlaceTabList place={place} />
+        <Tabs isLazy defaultIndex={!isComplete ? 0 : Number(query?.index) || 0}>
+          <PlaceTabList isComplete={isComplete} place={place} />
           <TabPanels>
             <TabPanel px={0}>
               <PlaceEdit place={place} />
@@ -74,7 +72,7 @@ const EditPlace = ({ placeId }: IEditPlace) => {
               <PlaceImage place={place} />
             </TabPanel>
             <TabPanel px={0}>
-              <PlaceSchedule placeId={placeId} />
+              <PlaceSchedule place={place} />
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -87,7 +85,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
   async ({ locale, query }) => {
     return {
       props: {
-        placeId: query.placeId,
+        slug: query.placeId,
         ...(await serverSideTranslations(locale, [
           'account',
           'place',

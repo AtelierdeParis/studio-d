@@ -19,6 +19,11 @@ interface IMarker {
 }
 
 const Marker = ({ latitude, longitude, id, isFocus }: IMarker) => {
+  const icon = Leaflet.icon({
+    iconUrl: isFocus ? '/assets/img/pin.png' : '/assets/img/blue-pin.png',
+    iconSize: [30, 30],
+  })
+
   const markerRef = useRef(null)
 
   const geojsonData: GeoJsonObject = useMemo(
@@ -37,12 +42,7 @@ const Marker = ({ latitude, longitude, id, isFocus }: IMarker) => {
       data={geojsonData}
       pointToLayer={(feature, latlng) => {
         return Leaflet.marker(latlng, {
-          icon: Leaflet.icon({
-            iconUrl: isFocus
-              ? '/assets/img/pin.png'
-              : '/assets/img/blue-pin.png',
-            iconSize: [30, 30],
-          }),
+          icon,
         })
       }}
       style={{ fillColor: 'blue' }}

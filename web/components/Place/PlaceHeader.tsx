@@ -32,7 +32,7 @@ const PlaceHeader = ({ place }: Props) => {
         as={Link}
         href={{
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-          query: { id: place.id },
+          query: { id: place.slug },
         }}
       >
         {t('header.edit')}

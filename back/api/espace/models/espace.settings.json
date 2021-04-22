@@ -16,19 +16,19 @@
       "required": true
     },
     "surface": {
-      "type": "integer",
+      "type": "decimal",
       "required": true
     },
     "roomLength": {
-      "type": "integer",
+      "type": "decimal",
       "required": true
     },
     "width": {
-      "type": "integer",
+      "type": "decimal",
       "required": true
     },
     "height": {
-      "type": "integer",
+      "type": "decimal",
       "required": true
     },
     "mirror": {
@@ -52,7 +52,8 @@
       "enum": [
         "plancherDanse",
         "parquetTraditionnel",
-        "other"
+        "other",
+        "todefine"
       ],
       "required": true
     },
@@ -98,13 +99,13 @@
       "required": false
     },
     "users_permissions_user": {
-      "via": "espaces",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "espaces"
     },
     "disponibilities": {
-      "via": "espace",
-      "collection": "disponibility"
+      "collection": "disponibility",
+      "via": "espace"
     },
     "scheduleDetails": {
       "type": "text"
@@ -120,13 +121,30 @@
       "type": "string",
       "required": true
     },
-    "danceCarpet": {
-      "type": "boolean",
+    "bookings": {
+      "collection": "booking",
+      "via": "espace"
+    },
+    "country": {
+      "type": "string",
       "required": true
     },
-    "bookings": {
-      "via": "espace",
-      "collection": "booking"
+    "external_id": {
+      "type": "integer"
+    },
+    "danceCarpet": {
+      "type": "enumeration",
+      "enum": [
+        "true",
+        "false",
+        "possible"
+      ],
+      "required": false
+    },
+    "slug": {
+      "type": "string",
+      "required": false,
+      "unique": true
     }
   }
 }

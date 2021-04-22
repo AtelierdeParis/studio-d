@@ -13,13 +13,14 @@ interface Props {
 
 const stylePeriodMonth = {
   top: 1,
-  left: 1.5,
-  right: 'auto',
+  right: 1.5,
 }
 
 const styleLastDay = {
   spacing: 0,
   alignItems: 'flex-start',
+  left: 1.5,
+  right: 'auto',
 }
 
 const PeriodEvent = ({ isMonth, start, end }: Props) => {

@@ -29,13 +29,12 @@ interface FormData {
   password: string
 }
 
-const schema = yup.object({
-  email: yup.string().email(),
-  password: yup.string().required(),
-})
-
 const SignInForm = (props: SignInFormProps) => {
   const { t } = useTranslation('common')
+  const schema = yup.object({
+    email: yup.string().email(t('signin.email.error')),
+    password: yup.string().required(t('signin.password.error')),
+  })
   const { errorToast } = useToast()
   const [email, setEmail] = useState('')
   const { register, formState, handleSubmit, setError } = useForm<FormData>({

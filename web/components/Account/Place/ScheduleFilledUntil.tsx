@@ -41,10 +41,12 @@ const ScheduleFilledUntil = ({ place }: IScheduleFilledUntil) => {
 
   const onChange = (date: Date) => {
     if (place?.filledUntil && isSameDay(date, filledUntil)) return null
-    client.espaces.espacesUpdate(place.id, { filledUntil: date }).then((res) => {
-      setVisible(false)
-      queryClient.setQueryData(['place', place.id], res.data)
-    })
+    client.espaces
+      .espacesUpdate(place.id, { filledUntil: date })
+      .then((res) => {
+        setVisible(false)
+        queryClient.setQueryData(['place', place.slug], res.data)
+      })
   }
 
   if (!minDate) return null

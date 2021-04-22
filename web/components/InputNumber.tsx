@@ -22,7 +22,7 @@ const InputNumber = ({ control, name, ...rest }: IInputNumber) => {
   return (
     <NumberInput
       min={0.1}
-      max={100}
+      max={9999}
       step={1}
       {...rest}
       onChange={field.onChange}

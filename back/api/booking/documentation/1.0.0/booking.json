@@ -734,7 +734,7 @@
               "latitude",
               "longitude",
               "city",
-              "danceCarpet"
+              "country"
             ],
             "properties": {
               "id": {
@@ -744,16 +744,16 @@
                 "type": "string"
               },
               "surface": {
-                "type": "integer"
+                "type": "number"
               },
               "roomLength": {
-                "type": "integer"
+                "type": "number"
               },
               "width": {
-                "type": "integer"
+                "type": "number"
               },
               "height": {
-                "type": "integer"
+                "type": "number"
               },
               "mirror": {
                 "type": "boolean"
@@ -772,7 +772,8 @@
                 "enum": [
                   "plancherDanse",
                   "parquetTraditionnel",
-                  "other"
+                  "other",
+                  "todefine"
                 ]
               },
               "otherFloor": {
@@ -826,14 +827,28 @@
               "city": {
                 "type": "string"
               },
-              "danceCarpet": {
-                "type": "boolean"
-              },
               "bookings": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "country": {
+                "type": "string"
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "danceCarpet": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
+              },
+              "slug": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -956,6 +971,9 @@
                   "place"
                 ]
               },
+              "external_id": {
+                "type": "integer"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1076,6 +1094,9 @@
                   "company",
                   "place"
                 ]
+              },
+              "external_id": {
+                "type": "integer"
               },
               "created_by": {
                 "type": "string"

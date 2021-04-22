@@ -892,6 +892,9 @@
                   "place"
                 ]
               },
+              "external_id": {
+                "type": "integer"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1012,6 +1015,9 @@
                   "company",
                   "place"
                 ]
+              },
+              "external_id": {
+                "type": "integer"
               },
               "created_by": {
                 "type": "string"

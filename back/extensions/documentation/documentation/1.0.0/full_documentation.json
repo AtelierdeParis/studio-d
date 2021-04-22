@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/21/2021 11:34:30 AM"
+    "x-generation-date": "04/22/2021 5:57:48 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -8678,7 +8678,7 @@
               "latitude",
               "longitude",
               "city",
-              "danceCarpet"
+              "country"
             ],
             "properties": {
               "id": {
@@ -8688,16 +8688,16 @@
                 "type": "string"
               },
               "surface": {
-                "type": "integer"
+                "type": "number"
               },
               "roomLength": {
-                "type": "integer"
+                "type": "number"
               },
               "width": {
-                "type": "integer"
+                "type": "number"
               },
               "height": {
-                "type": "integer"
+                "type": "number"
               },
               "mirror": {
                 "type": "boolean"
@@ -8716,7 +8716,8 @@
                 "enum": [
                   "plancherDanse",
                   "parquetTraditionnel",
-                  "other"
+                  "other",
+                  "todefine"
                 ]
               },
               "otherFloor": {
@@ -8770,14 +8771,28 @@
               "city": {
                 "type": "string"
               },
-              "danceCarpet": {
-                "type": "boolean"
-              },
               "bookings": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "country": {
+                "type": "string"
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "danceCarpet": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
+              },
+              "slug": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -9030,8 +9045,22 @@
           "city": {
             "type": "string"
           },
+          "country": {
+            "type": "string"
+          },
+          "slug": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "integer"
+          },
           "danceCarpet": {
-            "type": "boolean"
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "possible"
+            ]
           }
         }
       },
@@ -9051,23 +9080,23 @@
           "latitude",
           "longitude",
           "city",
-          "danceCarpet"
+          "country"
         ],
         "properties": {
           "name": {
             "type": "string"
           },
           "surface": {
-            "type": "integer"
+            "type": "number"
           },
           "roomLength": {
-            "type": "integer"
+            "type": "number"
           },
           "width": {
-            "type": "integer"
+            "type": "number"
           },
           "height": {
-            "type": "integer"
+            "type": "number"
           },
           "mirror": {
             "type": "boolean"
@@ -9086,7 +9115,8 @@
             "enum": [
               "plancherDanse",
               "parquetTraditionnel",
-              "other"
+              "other",
+              "todefine"
             ]
           },
           "otherFloor": {
@@ -9130,14 +9160,28 @@
           "city": {
             "type": "string"
           },
-          "danceCarpet": {
-            "type": "boolean"
-          },
           "bookings": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "country": {
+            "type": "string"
+          },
+          "external_id": {
+            "type": "integer"
+          },
+          "danceCarpet": {
+            "type": "string",
+            "enum": [
+              "true",
+              "false",
+              "possible"
+            ]
+          },
+          "slug": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
@@ -9804,6 +9848,9 @@
                     "company",
                     "place"
                   ]
+                },
+                "external_id": {
+                  "type": "integer"
                 },
                 "created_by": {
                   "type": "string"

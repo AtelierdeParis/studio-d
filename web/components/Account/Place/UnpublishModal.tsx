@@ -8,19 +8,20 @@ import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
 import Link from '~components/Link'
 import { ROUTE_PLACE_DETAIL } from '~constants'
+import { Espace } from '~typings/api'
 
-interface IUnpublishModal {
-  placeId: string
+interface Props {
+  place: Espace
 }
 
-const UnpublishModal = ({ placeId }: IUnpublishModal) => {
+const UnpublishModal = ({ place }: Props) => {
   const queryClient = useQueryClient()
   const { t } = useTranslation('place')
   const { errorToast, successToast } = useToast()
 
   const onConfirm = (): Promise<any> => {
     return client.espaces
-      .espacesUpdate(placeId, { published: false })
+      .espacesUpdate(place.id, { published: false })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successUnpublish'))
@@ -44,7 +45,7 @@ const UnpublishModal = ({ placeId }: IUnpublishModal) => {
       <Link
         href={{
           pathname: ROUTE_PLACE_DETAIL,
-          query: { id: placeId },
+          query: { id: place.slug },
         }}
       >
         <Arrow />

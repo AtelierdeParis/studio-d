@@ -44,14 +44,16 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
               <Text color="gray.400" mr={1.5}>
                 {t('schedule.requests')}
               </Text>
-              <Button
-                as={Link}
-                variant="line"
-                href={ROUTE_ACCOUNT_REQUEST}
-                fontFamily="mabry medium"
-              >
-                {t('schedule.see')}
-              </Button>
+              {pending.length > 0 && (
+                <Button
+                  as={Link}
+                  variant="line"
+                  href={ROUTE_ACCOUNT_REQUEST}
+                  fontFamily="mabry medium"
+                >
+                  {t('schedule.see')}
+                </Button>
+              )}
             </Flex>
             <Tag bgColor="tag.yellow">
               {t('schedule.nbPending', { nb: pending.length })}
@@ -62,14 +64,17 @@ const ScheduleInfo = ({ place, showForm }: IScheduleInfo) => {
               <Text color="gray.400" mr={1.5}>
                 {t('schedule.bookings')}
               </Text>
-              <Button
-                as={Link}
-                variant="line"
-                href={ROUTE_ACCOUNT_BOOKING}
-                fontFamily="mabry medium"
-              >
-                {t('schedule.see')}
-              </Button>
+              {coming.length > 0 ||
+                (past.length > 0 && (
+                  <Button
+                    as={Link}
+                    variant="line"
+                    href={ROUTE_ACCOUNT_BOOKING}
+                    fontFamily="mabry medium"
+                  >
+                    {t('schedule.see')}
+                  </Button>
+                ))}
             </Flex>
             <HStack alignItems="center" spacing={2.5}>
               <Tag bgColor="tag.green">

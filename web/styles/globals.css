@@ -106,6 +106,10 @@ a {
   text-transform: lowercase;
 }
 
+#calendar .fc-day-past {
+  opacity: 0.35;
+}
+
 #calendar .fc-scrollgrid-section > td,
 #calendar .fc-scrollgrid {
   border: none;

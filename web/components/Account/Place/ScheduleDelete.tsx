@@ -62,7 +62,7 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
         successToast(t('schedule.delete.success'))
 
         const deletedIds = res.map(({ data }) => data.id)
-        queryClient.setQueryData(['place', place.id], {
+        queryClient.setQueryData(['place', place.slug], {
           ...place,
           disponibilities: place.disponibilities.filter(
             (dispo) => !deletedIds.includes(dispo.id),

@@ -44,7 +44,7 @@ const PlaceCreate = ({ user }: IPlaceCreate) => {
       .then((res) => {
         router.push({
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-          query: { id: res.data.id, index: 1 },
+          query: { id: res.data.slug, index: 1 },
         })
       })
 

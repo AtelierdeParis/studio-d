@@ -86,9 +86,13 @@ const renderers = {
     return (
       <Flex alignItems="flex-start">
         {props.ordered ? (
-          <Box>{props.index + 1} -</Box>
+          <Box w="28px" textAlign="center">
+            {props.index + 1}.
+          </Box>
         ) : (
-          <Circle size="6px" bgColor="gray.200" mt="6px" />
+          <Flex justifyContent="center" w="28px">
+            <Circle size="6px" bgColor="gray.200" mt="6px" />
+          </Flex>
         )}
         <Box pl={3}>{props.children}</Box>
       </Flex>

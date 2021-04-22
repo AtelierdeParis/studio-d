@@ -25,11 +25,11 @@ const ViewHandler = ({ place }) => {
 }
 
 interface Props {
-  placeId: string
+  slug: string
 }
 
-const PlacePage = ({ placeId }: Props) => {
-  const { data: place, isLoading } = usePlace(placeId, { availableOnly: true })
+const PlacePage = ({ slug }: Props) => {
+  const { data: place, isLoading } = usePlace(slug, { availableOnly: true })
 
   return (
     <Loading isLoading={isLoading} pt={20}>
@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
 }) => {
   return {
     props: {
-      placeId: query.id,
+      slug: query.id,
       ...(await serverSideTranslations(locale, ['common', 'place'])),
     },
   }

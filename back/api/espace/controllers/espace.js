@@ -107,7 +107,7 @@ module.exports = {
     const { availableOnly } = ctx.query;
 
     const entity = await strapi.services.espace
-      .findOne({ id }, populate)
+      .findOne({ slug: id }, populate)
       .then((res) => {
         if (availableOnly) {
           return {

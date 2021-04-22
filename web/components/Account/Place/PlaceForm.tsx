@@ -99,9 +99,9 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
 
   return (
     <>
-      <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
-      <Box pb={8} px={2.5}>
-        <form onSubmit={handleSubmit(submitForm)}>
+      <form onSubmit={handleSubmit(submitForm)}>
+        <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
+        <Box pb={8} px={2.5}>
           {!place && (
             <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
               <Input name="name" ref={register} />
@@ -144,6 +144,7 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
               >
                 <option value="true">{t('form.yes')}</option>
                 <option value="false">{t('form.no')}</option>
+                <option value="possible">{t('form.possible')}</option>
               </Select>
             </FormField>
             <FormField
@@ -218,8 +219,10 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
               )}
             </SimpleGrid>
           </Flex>
+        </Box>
+        <Box>
           <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
-          <HStack spacing={5} mb={10}>
+          <HStack spacing={5} mb={10} px={2.5}>
             <FormField label={t('form.about.label')} errors={errors.about}>
               <Textarea
                 name="about"
@@ -239,57 +242,65 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
               />
             </FormField>
           </HStack>
-          <InputFile control={control} place={place} />
+        </Box>
+        <InputFile control={control} place={place} />
+        <Box>
           <Text textStyle="infoLabel" mt={16}>
             {t('form.location')}
           </Text>
-          <HStack spacing={5} mb={10} alignItems="flex-start">
-            <FormField
-              label={t('form.address.label')}
-              errors={errors.address}
-              flex={1}
-            >
-              <InputLocation
-                name="address"
-                control={control}
-                placeholder={t('form.address.placeholder')}
-              />
-            </FormField>
-            {Boolean(latitude) && Boolean(longitude) ? (
-              <FormField label={t('form.geolocation.label')} flex={1}>
-                <Box>
-                  <Map flex={1} h="250px" markers={[{ latitude, longitude }]} />
-                  <Text
-                    px={3.5}
-                    py={2.5}
-                    border="1px solid"
-                    borderColor="gray.200"
-                    borderBottomRadius="sm"
-                    borderTopColor="transparent"
-                  >
-                    {address}
-                  </Text>
-                </Box>
+          <Box px={2.5}>
+            <HStack spacing={5} mb={10} alignItems="flex-start">
+              <FormField
+                label={t('form.address.label')}
+                errors={errors.address}
+                flex={1}
+              >
+                <InputLocation
+                  name="address"
+                  control={control}
+                  placeholder={t('form.address.placeholder')}
+                />
               </FormField>
-            ) : (
-              <Spacer flex={1} />
-            )}
-          </HStack>
-          <Flex justifyContent="center" mt={18}>
-            <Button
-              colorScheme="blue"
-              size="lg"
-              mt={6}
-              type="submit"
-              isLoading={isLoading}
-              isDisabled={Object.keys(formState.dirtyFields).length === 0}
-              rightIcon={<Arrow />}
-            >
-              {t(`form.submit`)}
-            </Button>
-          </Flex>
-        </form>
-      </Box>
+              {Boolean(latitude) && Boolean(longitude) ? (
+                <FormField label={t('form.geolocation.label')} flex={1}>
+                  <Box>
+                    <Map
+                      flex={1}
+                      h="250px"
+                      markers={[{ latitude, longitude }]}
+                    />
+                    <Text
+                      px={3.5}
+                      py={2.5}
+                      border="1px solid"
+                      borderColor="gray.200"
+                      borderBottomRadius="sm"
+                      borderTopColor="transparent"
+                    >
+                      {address}
+                    </Text>
+                  </Box>
+                </FormField>
+              ) : (
+                <Spacer flex={1} />
+              )}
+            </HStack>
+          </Box>
+        </Box>
+        <Flex justifyContent="center" mt={18}>
+          <Button
+            colorScheme="blue"
+            size="lg"
+            mt={6}
+            type="submit"
+            isLoading={isLoading}
+            isDisabled={Object.keys(formState.dirtyFields).length === 0}
+            rightIcon={<Arrow />}
+          >
+            {t(`form.submit`)}
+          </Button>
+        </Flex>
+      </form>
     </>
   )
 }

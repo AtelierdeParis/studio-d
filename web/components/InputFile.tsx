@@ -62,7 +62,12 @@ const InputFile = ({ control, place }: IInputFile) => {
 
   return (
     <Box>
-      <Flex textStyle="infoLabel" justifyContent="space-between" mb={4}>
+      <Flex
+        textStyle="infoLabel"
+        justifyContent="space-between"
+        mb={4}
+        pr={2.5}
+      >
         <Text>{t('form.filesLabel')}</Text>
         <Box pos="relative" cursor="pointer" overflow="hidden" role="group">
           <Button
