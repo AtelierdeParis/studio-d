@@ -81,7 +81,7 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
         })),
       )
       .then((res) => {
-        queryClient.setQueryData(['place', place.id], {
+        queryClient.setQueryData(['place', place.slug], {
           ...place,
           disponibilities: [...place.disponibilities, ...res.data],
         })

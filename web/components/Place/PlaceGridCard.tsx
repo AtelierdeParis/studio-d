@@ -48,7 +48,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
       <LinkOverlay
         href={{
           pathname: ROUTE_PLACE_DETAIL,
-          query: { id: place.id },
+          query: { id: place.slug },
         }}
       >
         <Flex

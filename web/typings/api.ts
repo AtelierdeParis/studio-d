@@ -126,7 +126,8 @@ export interface Disponibility {
     bookings?: string[];
     country: string;
     external_id?: number;
-    danceCarpet: "true" | "false" | "possible";
+    danceCarpet?: "true" | "false" | "possible";
+    slug?: string;
     created_by?: string;
     updated_by?: string;
   };
@@ -196,6 +197,7 @@ export interface Espace {
   published?: boolean;
   city: string;
   country?: string;
+  slug?: string;
   external_id?: number;
   danceCarpet: "true" | "false" | "possible";
 }
@@ -228,7 +230,8 @@ export interface NewEspace {
   bookings?: string[];
   country: string;
   external_id?: number;
-  danceCarpet: "true" | "false" | "possible";
+  danceCarpet?: "true" | "false" | "possible";
+  slug?: string;
   created_by?: string;
   updated_by?: string;
 }

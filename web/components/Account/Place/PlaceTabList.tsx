@@ -25,7 +25,7 @@ const TabPlace = ({ isDisabled, children }) => {
 
 interface Props {
   disabledIndexes?: number[]
-  isComplete: boolean
+  isComplete?: boolean
   place?: Espace
 }
 

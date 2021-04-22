@@ -33,13 +33,13 @@ const PlaceSchedule = dynamic(
 
 interface IEditPlace {
   user: UsersPermissionsUser
-  placeId: string
+  slug: string
 }
 
-const EditPlace = ({ placeId }: IEditPlace) => {
+const EditPlace = ({ slug }: IEditPlace) => {
   const { t } = useTranslation('place')
   const { query } = useRouter()
-  const { data: place, isLoading } = usePlace(placeId)
+  const { data: place, isLoading } = usePlace(slug)
 
   const isComplete = useIsComplete(place)
 
@@ -72,7 +72,7 @@ const EditPlace = ({ placeId }: IEditPlace) => {
               <PlaceImage place={place} />
             </TabPanel>
             <TabPanel px={0}>
-              <PlaceSchedule placeId={placeId} />
+              <PlaceSchedule place={place} />
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -85,7 +85,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
   async ({ locale, query }) => {
     return {
       props: {
-        placeId: query.placeId,
+        slug: query.placeId,
         ...(await serverSideTranslations(locale, [
           'account',
           'place',

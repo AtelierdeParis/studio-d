@@ -148,7 +148,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                       <Link
                         href={{
                           pathname: ROUTE_PLACE_DETAIL,
-                          query: { id: booking?.espace?.id },
+                          query: { id: booking?.espace?.slug },
                         }}
                         textDecoration="underline"
                         ml={2}

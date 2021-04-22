@@ -888,6 +888,9 @@
           "country": {
             "type": "string"
           },
+          "slug": {
+            "type": "string"
+          },
           "external_id": {
             "type": "integer"
           },

@@ -39,7 +39,7 @@ const PlaceEdit = ({ place }: IPlaceEdit) => {
         files: files.filter((file) => file.id),
       })
       .then((res) => {
-        queryClient.setQueryData(['place', Number(place.id)], res.data)
+        queryClient.setQueryData(['place', place.slug], res.data)
         successToast(t('common:success'))
         return res.data
       })

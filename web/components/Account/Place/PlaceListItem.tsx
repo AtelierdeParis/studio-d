@@ -53,7 +53,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
       <Link
         href={{
           pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-          query: { id: place.id },
+          query: { id: place.slug },
         }}
       >
         <AspectRatio
@@ -77,7 +77,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
           <Link
             href={{
               pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-              query: { id: place.id },
+              query: { id: place.slug },
             }}
             _hover={{
               textDecoration: 'none',
@@ -96,7 +96,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
             </Box>
           </Link>
           {place.published ? (
-            <UnpublishModal placeId={place.id} />
+            <UnpublishModal place={place} />
           ) : (
             <ButtonGroup spacing={4} alignSelf="flex-start">
               {place.filledUntil && <PublishModal placeId={place.id} />}
@@ -114,7 +114,7 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
                 as={Link}
                 href={{
                   pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-                  query: { id: place.id, index: 2 },
+                  query: { id: place.slug, index: 2 },
                 }}
                 variant="line"
               >

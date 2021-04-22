@@ -1446,6 +1446,9 @@
                     "possible"
                   ]
                 },
+                "slug": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },

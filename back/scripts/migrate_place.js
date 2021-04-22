@@ -4,6 +4,7 @@ const fs = require("fs");
 const axios = require("axios");
 const FormData = require("form-data");
 const request = require("request");
+const createSlug = require("url-slug");
 
 const TO_DEFINE = "todefine";
 const PATH_MIGRATION_CSV =
@@ -98,6 +99,7 @@ const start = async () => {
 
             if (checkProp("title", "name")) {
               place.name = row.title;
+              place.slug = createSlug(row.title);
             }
 
             if (checkProp("_Largeur de la salle (en mètre)", "width")) {

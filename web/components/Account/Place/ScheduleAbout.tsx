@@ -17,9 +17,11 @@ const ScheduleAbout = ({ place }: IScheduleAbout) => {
   const saveDetails = (event) => {
     const value = event.currentTarget.value
     if (value === place.scheduleDetails) return
-    client.espaces.espacesUpdate(place.id, { scheduleDetails: value }).then((res) => {
-      queryClient.setQueryData(['place', place.id], res.data)
-    })
+    client.espaces
+      .espacesUpdate(place.id, { scheduleDetails: value })
+      .then((res) => {
+        queryClient.setQueryData(['place', place.slug], res.data)
+      })
   }
   return (
     <Box mt={8} pt={8} borderTop="1px solid" borderColor="gray.100">
