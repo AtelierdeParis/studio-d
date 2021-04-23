@@ -6,7 +6,7 @@ import { schema } from '~components/Account/Place/ScheduleForm'
 import Schedule from '~components/Account/Place/Schedule'
 import ScheduleProvider from '~components/Account/Place/ScheduleProvider'
 import ScheduleRightContent from '~components/Account/Place/ScheduleRightContent'
-import { usePlace } from '~hooks/usePlace'
+import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import { Espace } from '~typings/api'
 
 interface Props {
@@ -14,7 +14,6 @@ interface Props {
 }
 
 const PlaceSchedule = ({ place }: Props) => {
-  // const { data: place } = usePlace(place.slug)
   const form = useForm({
     resolver: yupResolver(schema),
   })
@@ -29,6 +28,7 @@ const PlaceSchedule = ({ place }: Props) => {
           </Box>
         </Flex>
       </ScheduleProvider>
+      {place?.disponibilities.length === 0 && <PlaceFormBar isNotAvailable />}
     </FormProvider>
   )
 }

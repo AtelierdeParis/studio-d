@@ -65,7 +65,6 @@ const start = async () => {
             };
 
             // Test place
-            if (place.external_id == "87848") return;
 
             const checkProp = (prop, mappingProp = null) => {
               const isCheked = check(row, prop, errors);
