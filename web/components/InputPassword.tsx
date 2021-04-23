@@ -3,9 +3,9 @@ import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
 import Eye from 'public/assets/img/eye.svg'
 import EyeClosed from 'public/assets/img/eye-closed.svg'
 
-interface IInputPassword {
+interface Props {
   register?: () => void
-  inputRef: React.RefObject<any>
+  inputRef?: React.RefObject<any>
   placeholder?: string
   name?: string
   onChange?: (value: any) => void
@@ -17,7 +17,7 @@ const InputPassword = ({
   placeholder,
   name = 'password',
   onChange = null,
-}: IInputPassword) => {
+}: Props) => {
   const [isVisible, setVisible] = useState(false)
   return (
     <InputGroup>
