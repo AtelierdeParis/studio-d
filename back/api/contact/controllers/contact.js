@@ -19,8 +19,8 @@ const template = {
 
 module.exports = {
   create: async (ctx) => {
-    const created = await strapi.services.message.create(ctx.request.body);
-    const entity = sanitizeEntity(created, { model: strapi.models.message });
+    const created = await strapi.services.contact.create(ctx.request.body);
+    const entity = sanitizeEntity(created, { model: strapi.models.contact });
 
     await strapi.plugins["email"].services.email.sendTemplatedEmail(
       {
