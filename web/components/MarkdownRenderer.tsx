@@ -118,11 +118,6 @@ const MarkdownRenderer = ({ children }) => {
       remarkPlugins={[[gfm, { singleTilde: false }]]}
       rehypePlugins={[rehypeRaw]}
       components={renderers}
-      transformImageUri={(uri) =>
-        uri.includes(process.env.NEXT_PUBLIC_BACK_URL)
-          ? uri
-          : process.env.NEXT_PUBLIC_BACK_URL + uri
-      }
     >
       {children}
     </ReactMarkdown>
