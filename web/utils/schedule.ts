@@ -90,17 +90,19 @@ const checkIfEventSameDay = (disponibility, sources = []): boolean => {
 export const createOldEvents = (
   disponibilities: Disponibility[] = [],
 ): ScheduleEvent[] => {
-  return disponibilities.map((dispo) => {
-    return createScheduleEventObj({
-      id: dispo.id,
-      start: dispo.start,
-      end: dispo.end,
-      when: dispo.when,
-      status: dispo.status,
-      type: dispo.type,
-      hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
+  return disponibilities
+    .filter((dispo) => dispo.status !== 'past')
+    .map((dispo) => {
+      return createScheduleEventObj({
+        id: dispo.id,
+        start: dispo.start,
+        end: dispo.end,
+        when: dispo.when,
+        status: dispo.status,
+        type: dispo.type,
+        hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
+      })
     })
-  })
 }
 
 export const createNewEvents = (form, oldEventsDate = [], isError = false) => {

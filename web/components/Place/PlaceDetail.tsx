@@ -33,6 +33,7 @@ interface Props {
 
 const PlaceDetail = ({ place }: Props) => {
   const { t } = useTranslation('place')
+
   return (
     <Box>
       <PlaceHeader place={place} />
