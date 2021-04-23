@@ -12,7 +12,7 @@ import Conversation from '~components/Account/Message/Conversation'
 import { Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
-import { useContextualRouting } from 'next-use-contextual-routing'
+import UrlRewrite from '~components/UrlRewrite'
 
 interface Props {
   user: UsersPermissionsUser
@@ -20,7 +20,6 @@ interface Props {
 
 const AccountMessage = ({ user }: Props) => {
   const router = useRouter()
-  const { makeContextualHref } = useContextualRouting()
   const [selected, setSelected] = useState(
     (router?.query?.conversation as string) || null,
   )
@@ -34,13 +33,6 @@ const AccountMessage = ({ user }: Props) => {
     ) {
       setSelected(null)
     }
-    router.push(
-      makeContextualHref({ id: selected }),
-      `${ROUTE_ACCOUNT_MESSAGE}${selected ? `/${selected}` : ''}`,
-      {
-        shallow: true,
-      },
-    )
   }, [selected, conversations])
 
   if ((!isLoading && !conversations) || conversations?.length === 0)
@@ -49,6 +41,7 @@ const AccountMessage = ({ user }: Props) => {
   return (
     <Flex h="100%">
       <Loading isLoading={isLoading}>
+        <UrlRewrite id={selected} path={ROUTE_ACCOUNT_MESSAGE} />
         <ListConversations
           conversations={conversations}
           setSelected={setSelected}
