@@ -76,11 +76,11 @@ const PlaceForm = ({
   const {
     register,
     errors,
-    handleSubmit,
     watch,
     control,
     formState,
     reset,
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(getSchema(place)),
     defaultValues: getDefaultValues(place),

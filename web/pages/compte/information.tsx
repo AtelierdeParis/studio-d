@@ -73,14 +73,24 @@ const getSchema = (target) => {
         return match[0] === value
       },
     }),
-    website: yup.string().url(),
+    website: yup.string().test({
+      message: 'Url incorrect',
+      test: (value) => {
+        if (value === '') return true
+        const match = value.match(
+          /(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+        )
+        if (!match) return false
+        return match[0] === value
+      },
+    }),
     zipCode: yup.string().required(),
     city: yup.string().required(),
     siret: yup.string().required().min(14).max(14),
     ape: yup.string().required().min(5).max(5),
   }
 
-  if (target === 'compagnie') {
+  if (target === 'company') {
     schema['choreographer'] = yup.string().required()
     schema['insuranceName'] = yup.string().required()
     schema['insuranceNumber'] = yup.string().required()
@@ -101,17 +111,17 @@ const AccountInformation = ({ user }: Props) => {
   const {
     register,
     errors,
-    handleSubmit,
     getValues,
     formState,
     reset,
+    handleSubmit,
   } = useForm<FormInformation>({
     defaultValues: {
       ...user,
       password: undefined,
     },
     // @ts-ignore
-    resolver: yupResolver(getSchema(user.type)),
+    resolver: yupResolver(getSchema(user?.type)),
   })
 
   const save = (data) => {
@@ -132,7 +142,7 @@ const AccountInformation = ({ user }: Props) => {
   }
 
   const onSubmit = (data) => {
-    if (data.email !== user.email || data.password !== '') {
+    if (data.email !== user?.email || data.password !== '') {
       setShowModal(true)
       return
     }
@@ -282,7 +292,7 @@ const AccountInformation = ({ user }: Props) => {
               >
                 <Input name="website" ref={register} />
               </FormField>
-              {user.type === 'company' ? (
+              {user?.type === 'company' ? (
                 <FormField
                   label={t('information.choreographer')}
                   errors={errors.choreographer}
@@ -299,7 +309,7 @@ const AccountInformation = ({ user }: Props) => {
               )}
             </HStack>
             <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
-              {user.type === 'company' ? (
+              {user?.type === 'company' ? (
                 <>
                   <FormField
                     label={t('information.insuranceName')}
@@ -329,7 +339,7 @@ const AccountInformation = ({ user }: Props) => {
             </HStack>
           </VStack>
         </Box>
-        {user.confirmed && !user.blocked && (
+        {user?.confirmed && !user?.blocked && (
           <Box my={14}>
             <Text textStyle="groupLabel">
               {t('information.desactivate.title')}

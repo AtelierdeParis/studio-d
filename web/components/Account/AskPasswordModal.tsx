@@ -38,7 +38,8 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
   return (
     <Modal
       isLoading={isLoading}
-      isOpen
+      isOpen={true}
+      onClose={() => setShowModal(false)}
       w="100%"
       title={t('information.modal.title')}
       onConfirm={checkPassword}
