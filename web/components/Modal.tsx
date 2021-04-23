@@ -16,6 +16,7 @@ import {
 import { useTranslation } from 'next-i18next'
 
 interface Props extends BoxProps {
+  initialRef?: React.RefObject<any>
   isOpen?: boolean
   isLoading?: boolean
   children: React.ReactNode
@@ -39,6 +40,7 @@ const Modal = ({
   size = 'md',
   isOpen = false,
   onClose = null,
+  initialRef = null,
   ...rest
 }: Props) => {
   const [isLoadingInternal, setLoading] = useState(false)
@@ -65,6 +67,7 @@ const Modal = ({
         </Box>
       )}
       <ChakraModal
+        initialFocusRef={initialRef}
         isOpen={isOpen || isOpenInternal}
         onClose={onClose || onCloseInternal}
         isCentered
