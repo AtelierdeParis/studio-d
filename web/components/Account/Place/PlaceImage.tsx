@@ -139,6 +139,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
             </Button>
             <Button
               ml={3}
+              size="lg"
               leftIcon={<Check />}
               onClick={onSubmit}
               isLoading={isLoading}

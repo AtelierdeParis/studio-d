@@ -51,7 +51,7 @@ const PlaceSearch = () => {
         pb={5}
         borderRadius="sm"
         position="relative"
-        zIndex={9999}
+        zIndex={100}
         mb={10}
         mt={6}
         direction="column"

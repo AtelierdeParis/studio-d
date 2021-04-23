@@ -85,7 +85,9 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                   fontFamily="mabry medium"
                   fontWeight="500"
                 >
-                  {t('requestNb', { nb: booking?.id })}
+                  {t(type === 'request' ? 'requestNb' : 'bookingNb', {
+                    nb: booking?.id,
+                  })}
                 </Text>
                 <Tag status={status} alignSelf="center" />
               </Flex>

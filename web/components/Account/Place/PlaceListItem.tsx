@@ -176,12 +176,11 @@ const PlaceListItem = ({ place }: IPlaceListItem) => {
               <Text color="gray.500" pr={2}>
                 {t('list.bookings')}
               </Text>
-              {coming.length > 0 ||
-                (past.length > 0 && (
-                  <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
-                    {t('list.see')}
-                  </Button>
-                ))}
+              {(coming.length > 0 || past.length > 0) && (
+                <Button as={Link} href={ROUTE_ACCOUNT_BOOKING} variant="line">
+                  {t('list.see')}
+                </Button>
+              )}
             </Flex>
             <Box pt={2}>
               {coming.length > 0 || past.length > 0 ? (

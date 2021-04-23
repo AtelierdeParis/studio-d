@@ -317,6 +317,7 @@ const PlaceForm = ({
               </Button>
               <Button
                 ml={3}
+                size="lg"
                 leftIcon={<Check />}
                 isLoading={isLoading}
                 type="submit"

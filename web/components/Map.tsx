@@ -16,13 +16,22 @@ interface IMarker {
   longitude: string
   isFocus: boolean
   id?: string
+  icon?: Leaflet.IconOptions
 }
 
-const Marker = ({ latitude, longitude, id, isFocus }: IMarker) => {
-  const icon = Leaflet.icon({
-    iconUrl: isFocus ? '/assets/img/pin.png' : '/assets/img/blue-pin.png',
-    iconSize: [30, 30],
-  })
+const defaultIcon = (isFocus = false): Leaflet.IconOptions => ({
+  iconUrl: isFocus ? '/assets/img/pin.svg' : '/assets/img/pin-blue.svg',
+  iconSize: [32, 32],
+})
+
+const Marker = ({
+  latitude,
+  longitude,
+  id,
+  isFocus,
+  icon: iconProp,
+}: IMarker) => {
+  const icon = Leaflet.icon(iconProp || defaultIcon(isFocus))
 
   const markerRef = useRef(null)
 
@@ -45,7 +54,7 @@ const Marker = ({ latitude, longitude, id, isFocus }: IMarker) => {
           icon,
         })
       }}
-      style={{ fillColor: 'blue' }}
+      style={{ fillColor: '#E84E10' }}
     />
   )
 }
@@ -70,9 +79,10 @@ interface IMap extends BoxProps {
     longitude: string
   }[]
   focusedPlace?: string
+  icon?: Leaflet.IconOptions
 }
 
-const Map = ({ markers = [], focusedPlace, ...rest }: IMap) => {
+const Map = ({ markers = [], focusedPlace, icon, ...rest }: IMap) => {
   return (
     <Box {...rest}>
       <MapContainer
@@ -89,6 +99,7 @@ const Map = ({ markers = [], focusedPlace, ...rest }: IMap) => {
           {markers.map(({ latitude, longitude, id = '' }) => (
             <Marker
               id={id}
+              icon={icon}
               isFocus={id === focusedPlace}
               latitude={latitude}
               longitude={longitude}

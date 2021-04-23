@@ -5,6 +5,7 @@ import { Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
 import Check from 'public/assets/img/check-circle.svg'
+import useToast from '~hooks/useToast'
 
 interface IConfirmModal {
   bookingId: string
@@ -15,6 +16,7 @@ const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
   const queryClient = useQueryClient()
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('booking')
+  const { successToast } = useToast()
 
   const onConfirm = () => {
     setLoading(true)
@@ -23,6 +25,7 @@ const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
       .then(() => {
         queryClient.refetchQueries(['myBookings', 'request'])
         setSelected(null)
+        successToast(t('modal.confirm.success'))
       })
       .finally(() => setLoading(false))
   }

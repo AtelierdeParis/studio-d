@@ -17,7 +17,7 @@ const PlaceFormBar = ({ children = null, isNotAvailable = false }) => {
       borderTop="1px solid"
       borderColor="gray.100"
       bgColor="white"
-      zIndex={9999}
+      zIndex={998}
       pl="17.5rem"
     >
       {isNotAvailable ? (
