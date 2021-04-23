@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import {
   Image,
@@ -7,13 +7,20 @@ import {
   HeadingProps,
   Circle,
   Flex,
+  VStack,
 } from '@chakra-ui/react'
 import Link from 'components/Link'
 import rehypeRaw from 'rehype-raw'
 import gfm from 'remark-gfm'
 
 const Title = ({ children, ...rest }: HeadingProps) => (
-  <Heading {...rest} mb={3} fontFamily="mabry medium" fontWeight="500">
+  <Heading
+    {...rest}
+    fontFamily="mabry medium"
+    className="md-title"
+    fontWeight="500"
+    mt={2}
+  >
     {children}
   </Heading>
 )
@@ -42,35 +49,35 @@ const renderers = {
   },
   h1: ({ node, ...props }) => {
     return (
-      <Title as="h1" fontSize="22px">
+      <Title as="h2" fontSize="22px">
         {props.children}
       </Title>
     )
   },
   h2: ({ node, ...props }) => {
     return (
-      <Title as="h2" fontSize="20px">
+      <Title as="h3" fontSize="20px">
         {props.children}
       </Title>
     )
   },
   h3: ({ node, ...props }) => {
     return (
-      <Title as="h3" fontSize="18px">
+      <Title as="h4" fontSize="18px">
         {props.children}
       </Title>
     )
   },
   h4: ({ node, ...props }) => {
     return (
-      <Title as="h4" fontSize="16px">
+      <Title as="h5" fontSize="16px">
         {props.children}
       </Title>
     )
   },
   h5: ({ node, ...props }) => {
     return (
-      <Title as="h5" fontSize="14px">
+      <Title as="h6" fontSize="14px">
         {props.children}
       </Title>
     )
@@ -82,24 +89,38 @@ const renderers = {
       </Title>
     )
   },
+  ul: ({ node, ...props }) => {
+    return (
+      <Box>
+        <ul>{props.children}</ul>
+      </Box>
+    )
+  },
+  ol: ({ node, ...props }) => {
+    return (
+      <Box>
+        <ol>{props.children}</ol>
+      </Box>
+    )
+  },
   li: (props) => {
     return (
-      <Flex alignItems="flex-start">
+      <Flex alignItems="flex-start" mb={2}>
         {props.ordered ? (
-          <Box w="28px" textAlign="center">
+          <Box w="28px" minW="28px" textAlign="center">
             {props.index + 1}.
           </Box>
         ) : (
-          <Flex justifyContent="center" w="28px">
+          <Flex justifyContent="center" w="28px" minW="28px">
             <Circle size="6px" bgColor="gray.200" mt="6px" />
           </Flex>
         )}
-        <Box pl={3}>{props.children}</Box>
+        <Box pl={2}>{props.children}</Box>
       </Flex>
     )
   },
   p: ({ children }) => {
-    return <Box pb={4}>{children}</Box>
+    return <Box whiteSpace="pre-line">{children}</Box>
   },
   strong: (props) => {
     return (
@@ -112,15 +133,17 @@ const renderers = {
 
 const MarkdownRenderer = ({ children }) => {
   return (
-    <ReactMarkdown
-      unwrapDisallowed
-      skipHtml
-      remarkPlugins={[[gfm, { singleTilde: false }]]}
-      rehypePlugins={[rehypeRaw]}
-      components={renderers}
-    >
-      {children}
-    </ReactMarkdown>
+    <VStack spacing={6} alignItems="flex-start" className="md-renderer">
+      <ReactMarkdown
+        unwrapDisallowed
+        skipHtml
+        remarkPlugins={[[gfm, { singleTilde: false }]]}
+        rehypePlugins={[rehypeRaw]}
+        components={renderers}
+      >
+        {children}
+      </ReactMarkdown>
+    </VStack>
   )
 }
 
