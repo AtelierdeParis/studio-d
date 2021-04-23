@@ -16,7 +16,13 @@ import { useTranslation } from 'next-i18next'
 import Message from 'public/assets/img/message.svg'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
-import { ROUTE_PLACE_DETAIL, ROUTE_ACCOUNT_MESSAGE } from '~constants'
+import UrlRewrite from '~components/UrlRewrite'
+import {
+  ROUTE_PLACE_DETAIL,
+  ROUTE_ACCOUNT_MESSAGE,
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_ACCOUNT_BOOKING,
+} from '~constants'
 import { format } from '~utils/date'
 import differenceInDays from 'date-fns/differenceInDays'
 import { BookingStatus } from '~@types/booking.d'
@@ -76,6 +82,14 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
       <DrawerOverlay bgColor="rgb(255 255 255 / 67%)">
         <DrawerContent>
           <Loading isLoading={isLoading} isCentered>
+            <UrlRewrite
+              id={bookingId}
+              path={
+                type === 'request'
+                  ? ROUTE_ACCOUNT_REQUEST
+                  : ROUTE_ACCOUNT_BOOKING
+              }
+            />
             <DrawerCloseButton />
             <DrawerHeader>
               <Flex>
@@ -85,7 +99,9 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                   fontFamily="mabry medium"
                   fontWeight="500"
                 >
-                  {t('requestNb', { nb: booking?.id })}
+                  {t(type === 'request' ? 'requestNb' : 'bookingNb', {
+                    nb: booking?.id,
+                  })}
                 </Text>
                 <Tag status={status} alignSelf="center" />
               </Flex>

@@ -17,6 +17,7 @@
     "activity": "Activité",
     "detail": "Détails",
     "requestNb": "Demande n°{{nb}}",
+    "bookingNb": "Réservation n°{{nb}}",
     "message": "Échanger avec le lieu",
     "messageCompany": "Échanger avec la compagnie",
     "cancel":  "Annuler la demande",
@@ -61,7 +62,8 @@
             "title": "Accepter la demande",
             "text": "Vous êtes sur le point d'accepter la demande de réservation. Voulez-vous continuer ?",
             "back": "Non, fermer",
-            "confirm": "Confirmer la demande"
+            "confirm": "Confirmer la demande",
+            "success": "La demande a bien été accepté, vous pouvez la retrouver dans la page Réservation"
         }
     },
     "history": {

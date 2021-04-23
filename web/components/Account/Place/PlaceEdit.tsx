@@ -46,7 +46,7 @@ const PlaceEdit = ({ place }: IPlaceEdit) => {
       .catch(() => errorToast(t('common:error')))
   }
 
-  return <PlaceForm place={place} onSubmit={onSubmit} />
+  return <PlaceForm place={place} onSubmit={onSubmit} isEditMode />
 }
 
 export default PlaceEdit

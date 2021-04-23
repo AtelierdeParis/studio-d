@@ -159,7 +159,14 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     )
   }
   return (
-    <Flex direction="column" color="grayText.1" w="20rem" h="100vh">
+    <Flex
+      direction="column"
+      color="grayText.1"
+      w="20rem"
+      h="100vh"
+      pos="relative"
+      zIndex={999}
+    >
       <Box backgroundColor="blue.100" flexGrow={1}>
         <Flex pb={14} px={5} pt={4}>
           <Link href="/">

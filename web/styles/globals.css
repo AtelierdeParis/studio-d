@@ -371,3 +371,7 @@ a {
   max-width: none;
   width: fit-content;
 }
+
+.md-renderer > :first-child {
+  margin-top: 0 !important;
+}

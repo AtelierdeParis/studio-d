@@ -88,6 +88,7 @@
             "text": "Veuillez renseigner votre mot de passe actuel afin de mettre à jour vos informations",
             "btn": "Confirmer",
             "back": "Annuler",
+            "required": "Mot de passe requis",
             "error": "Le mot de passe ne correspond pas"
         }
     },

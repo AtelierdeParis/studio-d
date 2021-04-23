@@ -16,6 +16,7 @@ import {
 import { useTranslation } from 'next-i18next'
 
 interface Props extends BoxProps {
+  initialRef?: React.RefObject<any>
   isOpen?: boolean
   isLoading?: boolean
   children: React.ReactNode
@@ -25,6 +26,7 @@ interface Props extends BoxProps {
   confirmText?: string
   button?: JSX.Element
   onConfirm: () => Promise<any>
+  onClose?: () => void
 }
 
 const Modal = ({
@@ -36,18 +38,24 @@ const Modal = ({
   closeText = null,
   confirmText = null,
   size = 'md',
-  isOpen = null,
+  isOpen = false,
+  onClose = null,
+  initialRef = null,
   ...rest
 }: Props) => {
   const [isLoadingInternal, setLoading] = useState(false)
   const { t } = useTranslation('modal')
-  const { isOpen: isOpenInternal, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isOpenInternal,
+    onOpen,
+    onClose: onCloseInternal,
+  } = useDisclosure()
 
   const onClick = async () => {
     setLoading(true)
     onConfirm().finally(() => {
       setLoading(false)
-      onClose()
+      onCloseInternal()
     })
   }
 
@@ -59,8 +67,9 @@ const Modal = ({
         </Box>
       )}
       <ChakraModal
+        initialFocusRef={initialRef}
         isOpen={isOpen || isOpenInternal}
-        onClose={onClose}
+        onClose={onClose || onCloseInternal}
         isCentered
         size={size}
       >
@@ -83,7 +92,7 @@ const Modal = ({
           <ModalFooter py={6}>
             {!isLoading && (
               <Button
-                onClick={onClose}
+                onClick={onClose || onCloseInternal}
                 variant="unstyled"
                 mr={4}
                 color="gray.500"

@@ -1,11 +1,20 @@
 import React, { useState, useMemo } from 'react'
-import { SimpleGrid, CloseButton, Flex, Button, Image } from '@chakra-ui/react'
+import {
+  SimpleGrid,
+  CloseButton,
+  Flex,
+  Button,
+  Image,
+  Text,
+} from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
 import { client } from '~api/client-api'
 import { addFiles } from '~utils/file'
 import { Espace } from '~typings/api'
 import useToast from '~hooks/useToast'
 import { useTranslation } from 'next-i18next'
+import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
+import Check from 'public/assets/img/check.svg'
 interface IPlaceImage {
   place: Espace
 }
@@ -115,18 +124,33 @@ const PlaceImage = ({ place }: IPlaceImage) => {
         </SimpleGrid>
       )}
       <Dropzone onDrop={onDrop} nbFiles={files.length} />
-      <Flex justifyContent="center" mt={18}>
-        <Button
-          colorScheme="blue"
-          size="lg"
-          mt={6}
-          onClick={onSubmit}
-          isLoading={isLoading}
-          isDisabled={newFiles.length === 0 && removed.length === 0}
-        >
-          {t(`save`)}
-        </Button>
-      </Flex>
+      {(place.disponibilities.length === 0 ||
+        newFiles.length > 0 ||
+        removed.length > 0) && (
+        <PlaceFormBar isNotAvailable={place.disponibilities.length === 0}>
+          <Flex alignItems="center">
+            <Button
+              variant="unstyled"
+              color="gray.400"
+              _hover={{ color: 'gray.500' }}
+              onClick={() => setFiles(files.filter((file) => file.id))}
+            >
+              {t('cancel')}
+            </Button>
+            <Button
+              ml={3}
+              size="lg"
+              leftIcon={<Check />}
+              onClick={onSubmit}
+              isLoading={isLoading}
+              isDisabled={newFiles.length === 0 && removed.length === 0}
+              type="submit"
+            >
+              {t('save')}
+            </Button>
+          </Flex>
+        </PlaceFormBar>
+      )}
     </>
   )
 }

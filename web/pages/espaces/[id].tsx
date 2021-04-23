@@ -8,6 +8,8 @@ import PlaceDetail from '~components/Place/PlaceDetail'
 import BookingScheduleProvider from '~components/Place/BookingScheduleProvider'
 import BookingScheduleContext from '~components/Place/BookingScheduleContext'
 import BookingConfirm from '~components/Place/BookingConfirm'
+import { useRouter } from 'next/router'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 const ViewHandler = ({ place }) => {
   const { showConfirmView, selected, setConfirmView } = useContext(
@@ -29,7 +31,19 @@ interface Props {
 }
 
 const PlacePage = ({ slug }: Props) => {
+  const router = useRouter()
+  const { data: user } = useCurrentUser()
   const { data: place, isLoading } = usePlace(slug, { availableOnly: true })
+
+  if (
+    place &&
+    user &&
+    ((!place.published && user.id !== place.users_permissions_user.id) ||
+      place.users_permissions_user.blocked)
+  ) {
+    router.push('/')
+    return null
+  }
 
   return (
     <Loading isLoading={isLoading} pt={20}>

@@ -17,12 +17,15 @@ import { useForm } from 'react-hook-form'
 import FormField from '~components/FormField'
 import InputNumber from '~components/InputNumber'
 import InputLocation from '~components/InputLocation'
+import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import InputFile from '~components/InputFile'
 import { yupResolver } from '@hookform/resolvers/yup'
 import useToast from '~hooks/useToast'
 import * as yup from 'yup'
 import { Espace } from '~typings/api'
 import Arrow from 'public/assets/img/arrow-right.svg'
+import Check from 'public/assets/img/check.svg'
+import { useIsComplete } from '~hooks/useIsComplete'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
@@ -52,6 +55,7 @@ const getSchema = (place) => {
 interface IPlaceForm {
   place?: Espace
   onSubmit: (data: any) => Promise<any>
+  isEditMode?: boolean
 }
 
 const getDefaultValues = (place) => {
@@ -60,18 +64,23 @@ const getDefaultValues = (place) => {
   return placeAttributes
 }
 
-const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
+const PlaceForm = ({
+  place = null,
+  onSubmit,
+  isEditMode = false,
+}: IPlaceForm) => {
+  const isComplete = useIsComplete(place)
   const { errorToast } = useToast()
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
   const {
     register,
     errors,
-    handleSubmit,
     watch,
     control,
     formState,
     reset,
+    handleSubmit,
   } = useForm({
     resolver: yupResolver(getSchema(place)),
     defaultValues: getDefaultValues(place),
@@ -98,8 +107,13 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit(submitForm)}>
+    <form onSubmit={handleSubmit(submitForm)}>
+      <Box pb={20}>
+        {!isComplete && (
+          <Text alignSelf="flex-start" color="red.500" mb={6} pl={2.5}>
+            {t('form.notComplete')}
+          </Text>
+        )}
         <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
         <Box pb={8} px={2.5}>
           {!place && (
@@ -160,33 +174,37 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
                 <option value="false">{t('form.no')}</option>
               </Select>
             </FormField>
-            <FormField
-              label={t('form.accomodation.label')}
-              errors={errors.accomodation}
-            >
-              <Select
-                name="accomodation"
-                ref={register}
-                placeholder={t('form.choose')}
-              >
-                <option value="true">{t('form.yes')}</option>
-                <option value="false">{t('form.no')}</option>
-              </Select>
-            </FormField>
-            <FormField
-              label={t('form.technicalStaff.label')}
-              errors={errors.technicalStaff}
-            >
-              <Select
-                name="technicalStaff"
-                ref={register}
-                placeholder={t('form.choose')}
-              >
-                <option value="true">{t('form.yes')}</option>
-                <option value="false">{t('form.no')}</option>
-              </Select>
-            </FormField>
           </SimpleGrid>
+          <Flex mb={14} mt={6} alignItems="center">
+            <SimpleGrid columns={4} columnGap={5} w="100%">
+              <FormField
+                label={t('form.accomodation.label')}
+                errors={errors.accomodation}
+              >
+                <Select
+                  name="accomodation"
+                  ref={register}
+                  placeholder={t('form.choose')}
+                >
+                  <option value="true">{t('form.yes')}</option>
+                  <option value="false">{t('form.no')}</option>
+                </Select>
+              </FormField>
+              <FormField
+                label={t('form.technicalStaff.label')}
+                errors={errors.technicalStaff}
+              >
+                <Select
+                  name="technicalStaff"
+                  ref={register}
+                  placeholder={t('form.choose')}
+                >
+                  <option value="true">{t('form.yes')}</option>
+                  <option value="false">{t('form.no')}</option>
+                </Select>
+              </FormField>
+            </SimpleGrid>
+          </Flex>
           <Flex mb={14} mt={6} alignItems="center">
             <SimpleGrid columns={4} columnGap={5} w="100%">
               <FormField label={t('form.floor.label')} errors={errors.floor}>
@@ -287,11 +305,38 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
             </HStack>
           </Box>
         </Box>
-        <Flex justifyContent="center" mt={18}>
+      </Box>
+      {isEditMode &&
+        (place?.disponibilities.length === 0 ||
+          Object.keys(formState.dirtyFields).length > 0) && (
+          <PlaceFormBar isNotAvailable={place?.disponibilities.length === 0}>
+            <Flex alignItems="center">
+              <Button
+                variant="unstyled"
+                color="gray.400"
+                _hover={{ color: 'gray.500' }}
+                onClick={() => reset()}
+              >
+                {t('cancel')}
+              </Button>
+              <Button
+                ml={3}
+                size="lg"
+                leftIcon={<Check />}
+                isLoading={isLoading}
+                type="submit"
+                isDisabled={Object.keys(formState.dirtyFields).length === 0}
+              >
+                {t('save')}
+              </Button>
+            </Flex>
+          </PlaceFormBar>
+        )}
+      {!isEditMode && (
+        <PlaceFormBar>
           <Button
             colorScheme="blue"
             size="lg"
-            mt={6}
             type="submit"
             isLoading={isLoading}
             isDisabled={Object.keys(formState.dirtyFields).length === 0}
@@ -299,9 +344,9 @@ const PlaceForm = ({ place = null, onSubmit }: IPlaceForm) => {
           >
             {t(`form.submit`)}
           </Button>
-        </Flex>
-      </form>
-    </>
+        </PlaceFormBar>
+      )}
+    </form>
   )
 }
 

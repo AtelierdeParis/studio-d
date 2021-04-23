@@ -55,7 +55,17 @@ const getSchema = (target: Target) => {
         return match[0] === value
       },
     }),
-    website: yup.string().url(),
+    website: yup.string().test({
+      message: 'Url incorrect',
+      test: (value) => {
+        if (value === '') return true
+        const match = value.match(
+          /(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+        )
+        if (!match) return false
+        return match[0] === value
+      },
+    }),
     zipCode: yup.string().required(),
     city: yup.string().required(),
     siret: yup.string().required().min(14).max(14),

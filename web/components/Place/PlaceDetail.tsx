@@ -33,6 +33,7 @@ interface Props {
 
 const PlaceDetail = ({ place }: Props) => {
   const { t } = useTranslation('place')
+
   return (
     <Box>
       <PlaceHeader place={place} />
@@ -195,6 +196,10 @@ const PlaceDetail = ({ place }: Props) => {
           mt={10}
           w="100%"
           h="370px"
+          icon={{
+            iconUrl: '/assets/img/pin.svg',
+            iconSize: [42, 42],
+          }}
           markers={[
             {
               id: place?.id,

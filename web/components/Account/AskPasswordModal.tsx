@@ -6,6 +6,7 @@ import InputPassword from '~components/InputPassword'
 import { useForm } from 'react-hook-form'
 import { Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import FormField from '~components/FormField'
 
 interface Props {
   onSuccess: () => void
@@ -14,12 +15,22 @@ interface Props {
 
 const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
   const [isLoading, setLoading] = useState(false)
+  const [value, setValue] = useState('')
   const { t } = useTranslation('account')
-  const { register, getValues } = useForm()
+  const { getValues, setError, errors } = useForm()
   const { errorToast } = useToast()
+  const initialRef = React.useRef()
 
   const checkPassword = async () => {
     const { password } = getValues()
+    if (value === '') {
+      setError('password', {
+        type: 'manual',
+        message: t('information.modal.required'),
+      })
+      return
+    }
+
     if (password === '') return false
     setLoading(true)
     client.users
@@ -37,8 +48,10 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
 
   return (
     <Modal
+      initialRef={initialRef}
       isLoading={isLoading}
-      isOpen
+      isOpen={true}
+      onClose={() => setShowModal(false)}
       w="100%"
       title={t('information.modal.title')}
       onConfirm={checkPassword}
@@ -48,7 +61,12 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
       {t('information.modal.text')}
       <Box pt={5}>
         <form>
-          <InputPassword register={register} />
+          <FormField errors={errors?.password}>
+            <InputPassword
+              inputRef={initialRef}
+              onChange={(event) => setValue(event.target.value)}
+            />
+          </FormField>
         </form>
       </Box>
     </Modal>
