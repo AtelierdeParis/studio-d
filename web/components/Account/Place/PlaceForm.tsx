@@ -174,33 +174,37 @@ const PlaceForm = ({
                 <option value="false">{t('form.no')}</option>
               </Select>
             </FormField>
-            <FormField
-              label={t('form.accomodation.label')}
-              errors={errors.accomodation}
-            >
-              <Select
-                name="accomodation"
-                ref={register}
-                placeholder={t('form.choose')}
-              >
-                <option value="true">{t('form.yes')}</option>
-                <option value="false">{t('form.no')}</option>
-              </Select>
-            </FormField>
-            <FormField
-              label={t('form.technicalStaff.label')}
-              errors={errors.technicalStaff}
-            >
-              <Select
-                name="technicalStaff"
-                ref={register}
-                placeholder={t('form.choose')}
-              >
-                <option value="true">{t('form.yes')}</option>
-                <option value="false">{t('form.no')}</option>
-              </Select>
-            </FormField>
           </SimpleGrid>
+          <Flex mb={14} mt={6} alignItems="center">
+            <SimpleGrid columns={4} columnGap={5} w="100%">
+              <FormField
+                label={t('form.accomodation.label')}
+                errors={errors.accomodation}
+              >
+                <Select
+                  name="accomodation"
+                  ref={register}
+                  placeholder={t('form.choose')}
+                >
+                  <option value="true">{t('form.yes')}</option>
+                  <option value="false">{t('form.no')}</option>
+                </Select>
+              </FormField>
+              <FormField
+                label={t('form.technicalStaff.label')}
+                errors={errors.technicalStaff}
+              >
+                <Select
+                  name="technicalStaff"
+                  ref={register}
+                  placeholder={t('form.choose')}
+                >
+                  <option value="true">{t('form.yes')}</option>
+                  <option value="false">{t('form.no')}</option>
+                </Select>
+              </FormField>
+            </SimpleGrid>
+          </Flex>
           <Flex mb={14} mt={6} alignItems="center">
             <SimpleGrid columns={4} columnGap={5} w="100%">
               <FormField label={t('form.floor.label')} errors={errors.floor}>

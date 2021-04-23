@@ -17,7 +17,7 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
   const [isLoading, setLoading] = useState(false)
   const [value, setValue] = useState('')
   const { t } = useTranslation('account')
-  const { register, getValues, setError, errors } = useForm()
+  const { getValues, setError, errors } = useForm()
   const { errorToast } = useToast()
   const initialRef = React.useRef()
 
