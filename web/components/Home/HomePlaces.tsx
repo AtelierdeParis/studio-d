@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box, Text, Button } from '@chakra-ui/react'
+import { Flex, Box, Text, Button, useBreakpointValue } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'public/assets/img/arrow-bottom.svg'
 import { usePlaces } from '~hooks/usePlaces'
@@ -10,6 +10,12 @@ import { ROUTE_PLACES } from '~constants'
 interface Props {}
 
 const HomePlaces = ({}: Props) => {
+  const isLgOrSm = useBreakpointValue({
+    base: false,
+    sm: true,
+    md: false,
+    lg: true,
+  })
   const { t } = useTranslation('home')
   const { data: places } = usePlaces({
     published_eq: true,
@@ -21,7 +27,7 @@ const HomePlaces = ({}: Props) => {
 
   return (
     <Box py={4} w="100%">
-      <Flex alignItems="flex-start" pl={2}>
+      <Flex alignItems="flex-start" pl={{ base: 0, md: 2 }}>
         <Box w="18px">
           <Arrow />
         </Box>
@@ -29,8 +35,8 @@ const HomePlaces = ({}: Props) => {
           {t('places.title')}
         </Text>
       </Flex>
-      <PlaceGrid places={places.slice(0, 4)} />
-      <Flex justifyContent="center" pt={10}>
+      <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} />
+      <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>
         <Button
           as={Link}
           href={ROUTE_PLACES}

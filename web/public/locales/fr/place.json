@@ -27,7 +27,7 @@
         "slot": "Disponibilités ({{nb}})"
     },
     "form": {
-        "notComplete": "En raison de la refonte de Studio D et du changement de certaines données, vous devez saisir les valeurs manquantes",
+        "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
         "error": "Une erreur est survenue en lors de l'enregistrement",
         "yes": "Oui",
         "no": "Non",
@@ -148,6 +148,8 @@
             "label": "Sur quelle période ?",
             "placeholder": "Cliquer pour choisir des dates"
         },
+        "hide": "Masquer la carte",
+        "show": "Afficher la carte",
         "surface": "Superficie",
         "surfaceBetween": "Entre {{min}} et {{max}} m²",
         "heightBetween": "Entre {{min}} et {{max}} mètres",

@@ -44,7 +44,11 @@ const PriceTabList = ({
   }, [place])
 
   return (
-    <TabList borderColor="gray.100" borderBottom="1px solid" mb={6}>
+    <TabList
+      borderColor="gray.100"
+      borderBottom="1px solid"
+      mb={{ base: 2, md: 6 }}
+    >
       <TabPlace isDisabled={disabledIndexes.includes(0)}>
         {t('tabs.info')}
       </TabPlace>

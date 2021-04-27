@@ -8,6 +8,7 @@ import {
   Portal,
   Box,
   Circle,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { Booking } from '~typings/api'
@@ -22,24 +23,26 @@ interface Props {
 }
 
 const PopoverOtherBooking = ({ children, booking, isMonth }: Props) => {
+  const isMobile = useBreakpointValue({ base: true, sm: false })
   const isAccepted = booking.status === 'accepted'
   const route = isAccepted ? ROUTE_ACCOUNT_BOOKING : ROUTE_ACCOUNT_REQUEST
 
   return (
-    <Popover placement="top" trigger="hover">
+    <Popover placement="top" trigger={isMobile ? 'click' : 'hover'}>
       <PopoverTrigger>
         <Box pos="relative" w="100%" h="100%">
           <Circle
             pos="absolute"
             right={1.5}
-            top={1.5}
+            top={{ base: 'auto', sm: 1.5 }}
+            bottom={{ base: 1.5, sm: 'auto' }}
             zIndex={10}
             {...(isMonth && {
               right: 'auto',
               left: 1.5,
             })}
-            bgColor="gray.200"
-            size="16px"
+            bgColor={'gray.200'}
+            size={'16px'}
           >
             <Help />
           </Circle>
@@ -53,6 +56,7 @@ const PopoverOtherBooking = ({ children, booking, isMonth }: Props) => {
           borderRadius="lg"
           w="fit-content"
           zIndex={100}
+          maxW="100vw"
           bgColor="blue.500"
           color="white"
           _focus={{
@@ -61,7 +65,7 @@ const PopoverOtherBooking = ({ children, booking, isMonth }: Props) => {
           }}
         >
           <PopoverArrow bgColor="blue.500" />
-          <PopoverBody w="450px">
+          <PopoverBody w="450px" maxW="100%">
             <Trans
               i18nKey={`place:detail.tooltip.${
                 isAccepted ? 'booking' : 'request'

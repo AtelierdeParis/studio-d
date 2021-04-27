@@ -42,17 +42,23 @@ const HomeCarousel = () => {
           </Swiper>
         </Flex>
       )}
-      <Box maxW="700px" w="100%">
+      <Box
+        maxW="700px"
+        w="100%"
+        alignSelf={{ base: 'flex-start', md: 'center' }}
+      >
         <Heading
           as="h1"
-          textStyle="h1"
+          fontWeight="500"
           color="white"
-          whiteSpace="pre"
+          fontSize={{ base: 'xl', sm: '2xl', md: '3xl' }}
+          whiteSpace="pre-line"
           pos="relative"
           zIndex={10}
           mb={6}
           pl={5}
-          transform="translateY(50%)"
+          pr={{ base: 5, sm: 0 }}
+          transform={{ base: 'none', md: 'translateY(50%)' }}
           textShadow="0px 0px 17px #2d2d2d"
           lineHeight={1.1}
         >

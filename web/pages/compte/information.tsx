@@ -18,6 +18,7 @@ import {
   Spacer,
   Button,
   VStack,
+  Stack,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import Letter from 'public/assets/img/letter.svg'
@@ -150,7 +151,7 @@ const AccountInformation = ({ user }: Props) => {
   }
 
   return (
-    <Box py={8}>
+    <Box pt={{ base: 4, sm: 8 }} pb={8}>
       {showModal && (
         <AskPasswordModal
           onSuccess={() => save(getValues())}
@@ -160,7 +161,14 @@ const AccountInformation = ({ user }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <Text textStyle="groupLabel">{t('information.username')}</Text>
-          <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            spacing={5}
+            w="100%"
+            alignItems="flex-start"
+            pl={2.5}
+            pr={{ base: 2.5, md: 0 }}
+          >
             <FormField
               label={t('information.email.label')}
               errors={errors.email}
@@ -181,11 +189,18 @@ const AccountInformation = ({ user }: Props) => {
                 placeholder={t('information.password.placeholder')}
               />
             </FormField>
-          </HStack>
+          </Stack>
         </Box>
-        <Box my={14}>
+        <Box my={{ base: 10, sm: 14 }}>
           <Text textStyle="groupLabel">{t('information.address.title')}</Text>
-          <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            spacing={5}
+            w="100%"
+            alignItems="flex-start"
+            pl={2.5}
+            pr={{ base: 2.5, md: 0 }}
+          >
             <FormField
               label={t('information.address.label')}
               errors={errors.address}
@@ -199,8 +214,13 @@ const AccountInformation = ({ user }: Props) => {
               flex={1}
               alignItems="flex-start"
               spacing={5}
+              w={{ base: '100%', md: 'auto' }}
             >
-              <HStack spacing={5} w="100%">
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+              >
                 <FormField
                   label={t('information.zipCode.label')}
                   errors={errors.zipCode}
@@ -215,7 +235,7 @@ const AccountInformation = ({ user }: Props) => {
                 >
                   <Input name="city" ref={register} />
                 </FormField>
-              </HStack>
+              </Stack>
               <FormField
                 label={t('information.country.label')}
                 errors={errors.country}
@@ -224,12 +244,19 @@ const AccountInformation = ({ user }: Props) => {
                 <Input name="country" ref={register} />
               </FormField>
             </VStack>
-          </HStack>
+          </Stack>
         </Box>
         <Box my={14}>
           <Text textStyle="groupLabel">{t('information.info')}</Text>
           <VStack spacing={5}>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField
                 label={t('information.firstname')}
                 errors={errors.firstname}
@@ -244,8 +271,15 @@ const AccountInformation = ({ user }: Props) => {
               >
                 <Input name="lastname" ref={register} />
               </FormField>
-            </HStack>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            </Stack>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField
                 label={t('information.structure')}
                 errors={errors.structureName}
@@ -261,16 +295,30 @@ const AccountInformation = ({ user }: Props) => {
               >
                 <Input name="socialReason" ref={register} />
               </FormField>
-            </HStack>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            </Stack>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField label={t('information.siret')} errors={errors.siret}>
                 <Input name="siret" ref={register} />
               </FormField>
               <FormField label={t('information.ape')} errors={errors.ape}>
                 <Input name="ape" ref={register} />
               </FormField>
-            </HStack>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            </Stack>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField
                 label={t('information.phone.label')}
                 errors={errors.phone}
@@ -284,8 +332,15 @@ const AccountInformation = ({ user }: Props) => {
               >
                 <Input name="license" ref={register} />
               </FormField>
-            </HStack>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            </Stack>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField
                 label={t('information.website')}
                 errors={errors.website}
@@ -307,8 +362,15 @@ const AccountInformation = ({ user }: Props) => {
                   <Input name="legalRepresentative" ref={register} />
                 </FormField>
               )}
-            </HStack>
-            <HStack spacing={5} w="100%" alignItems="flex-start" pl={2.5}>
+            </Stack>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               {user?.type === 'company' ? (
                 <>
                   <FormField
@@ -336,7 +398,7 @@ const AccountInformation = ({ user }: Props) => {
                   <Spacer flex={1} />
                 </>
               )}
-            </HStack>
+            </Stack>
           </VStack>
         </Box>
         {user?.confirmed && !user?.blocked && (

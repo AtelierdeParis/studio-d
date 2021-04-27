@@ -19,6 +19,7 @@ const InputPassword = ({
   onChange = null,
 }: Props) => {
   const [isVisible, setVisible] = useState(false)
+
   return (
     <InputGroup>
       <Input

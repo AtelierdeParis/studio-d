@@ -15,7 +15,8 @@ const SignupSteps = ({ step, target }: ISignupSteps) => {
         as="h1"
         textStyle="h1"
         whiteSpace="pre"
-        mt={16}
+        mt={{ base: 6, md: 16 }}
+        fontSize={{ base: 'xl', md: '3xl' }}
         textAlign="center"
       >
         {t('signup:title')}
@@ -25,7 +26,13 @@ const SignupSteps = ({ step, target }: ISignupSteps) => {
           </Text>
         )}
       </Heading>
-      <Text textAlign="center" color="gray.500" fontSize="lg" mt={1} mb={10}>
+      <Text
+        textAlign="center"
+        color="gray.500"
+        fontSize={{ base: 'md', md: 'lg' }}
+        mt={1}
+        mb={{ base: 4, md: 10 }}
+      >
         {t('signup:step', { step })}
       </Text>
     </>

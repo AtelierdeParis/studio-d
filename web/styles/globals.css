@@ -72,11 +72,6 @@ a {
   border-bottom: 1px solid rgba(40, 53, 131, 0.1);
   padding: 15px 0;
 }
-
-#calendar .fc-view {
-  padding: 0 55px;
-}
-
 #calendar .fc-daygrid-day {
   border: none;
   padding: 4px;
@@ -300,16 +295,17 @@ a {
 #calendar .fc-daygrid-block-event:not(.fc-event-start) .periodEvent {
   display: none;
 }
-.account-schedule.month .fc-view-harness {
+.account-schedule .fc-view-harness {
   height: auto !important;
 }
-.account-schedule.month .fc-scroller-liquid-absolute,
-.account-schedule.month .fc-view-harness-active > .fc-view {
-  position: static;
+.account-schedule .fc-scroller-liquid-absolute,
+.account-schedule .fc-view-harness-active > .fc-view {
+  position: static !important;
 }
 .account-schedule .fc-liquid-hack .fc-daygrid-day-frame {
   position: relative;
 }
+
 .booking-calendar#calendar .fc-daygrid-event-harness-abs {
   left: 12px;
   right: 12px;
@@ -347,11 +343,25 @@ a {
   background-color: rgba(40, 53, 131, 0.05);
   top: 70px;
 }
-#calendar.account-schedule.month .fc-theme-standard:first-of-type .fc-view {
+#calendar.account-schedule:not(.month) .fc-view {
+  max-width: 450px;
+  margin: 0 auto;
+}
+#calendar.month .fc-theme-standard:first-of-type .fc-view {
   padding: 0 20px 0 0;
 }
-#calendar.account-schedule.month .fc-theme-standard:nth-of-type(2) .fc-view {
+#calendar.month .fc-theme-standard:nth-of-type(2) .fc-view {
   padding: 0 0 0 20px;
+}
+
+#calendar.is-mobile .fc-scrollgrid {
+  max-width: 550px;
+  margin: 0 auto;
+}
+#calendar.account-schedule.month.is-mobile
+  .fc-theme-standard:first-of-type
+  .fc-view {
+  padding: 0;
 }
 
 .fc-customPrev-button {

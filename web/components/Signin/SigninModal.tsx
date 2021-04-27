@@ -46,7 +46,7 @@ const SigninModal = ({ children }: ISigninModal) => {
             {t('signin.title')}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody px={6} pt={0}>
+          <ModalBody px={{ base: 4, md: 6 }} pt={0}>
             <Divider my={6} />
             <SigninForm
               initialRef={initialRef}
@@ -54,7 +54,12 @@ const SigninModal = ({ children }: ISigninModal) => {
               onClose={onClose}
             />
           </ModalBody>
-          <ModalFooter py={6} mt={8} bg="gray.100" justifyContent="center">
+          <ModalFooter
+            py={6}
+            mt={{ base: 4, md: 8 }}
+            bg="gray.100"
+            justifyContent="center"
+          >
             <Link
               href={ROUTE_SIGNUP}
               fontSize="sm"

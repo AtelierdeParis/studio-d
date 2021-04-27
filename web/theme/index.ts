@@ -1,4 +1,5 @@
 import { extendTheme } from '@chakra-ui/react'
+import { createBreakpoints } from '@chakra-ui/theme-tools'
 import {
   Button,
   Select,
@@ -10,7 +11,17 @@ import {
   Heading,
 } from './components'
 
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  schedule: '70em',
+  xl: '80em',
+  '2xl': '96em',
+})
+
 const theme = extendTheme({
+  breakpoints,
   fonts: {
     body: 'mabry, sans-serif',
     heading: 'mabry, serif',
@@ -94,18 +105,18 @@ const theme = extendTheme({
   textStyles: {
     h1: {
       fontFamily: 'mabry',
-      fontSize: '3xl',
+      fontSize: { base: 'xl', sm: '2xl', md: '3xl' },
       fontWeight: '500',
       lineHeight: 'base',
     },
     h2: {
-      fontSize: '2xl',
+      fontSize: { base: 'lg', md: '2xl' },
       fontFamily: 'mabry medium',
       fontWeight: '500',
     },
     titleFieldGroup: {
       color: 'blue.500',
-      fontSize: 'xl',
+      fontSize: { base: 'lg', md: '-xl' },
       fontWeight: '500',
       mb: '1.2rem',
       lineHeight: '1.1',
@@ -115,7 +126,7 @@ const theme = extendTheme({
       pl: 2.5,
       w: '100%',
       color: 'gray.400',
-      fontSize: 'xl',
+      fontSize: { base: 'md', sm: 'lg', md: 'xl' },
       pb: 2.5,
       mb: 7,
       borderBottom: '1px solid',
@@ -131,7 +142,7 @@ const theme = extendTheme({
       borderColor: 'gray.50',
     },
     accountTitle: {
-      fontSize: '2xl',
+      fontSize: { base: 'lg', sm: 'xl', md: '2xl' },
       color: 'blue.500',
       fontFamily: 'mabry medium',
     },
@@ -191,6 +202,11 @@ const theme = extendTheme({
     },
   },
   layerStyles: {
+    mainTitle: {
+      fontSize: { base: 'xl', sm: '2xl', md: '3xl' },
+      mt: { base: 6, md: 16 },
+      mb: { base: 4, md: 12 },
+    },
     blueBox: {
       borderRadius: 'lg',
       backgroundColor: 'blue.50',

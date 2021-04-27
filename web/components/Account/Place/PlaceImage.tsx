@@ -84,7 +84,12 @@ const PlaceImage = ({ place }: IPlaceImage) => {
   return (
     <>
       {files.length > 0 && (
-        <SimpleGrid columns={4} mb={2} columnGap={6} rowGap={6}>
+        <SimpleGrid
+          columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+          mb={2}
+          columnGap={6}
+          rowGap={6}
+        >
           {files.map((file, index) => (
             <Flex
               key={file?.id || file.name}
@@ -103,7 +108,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
                 zIndex="99"
                 borderRadius="full"
                 backgroundColor="gray.100"
-                opacity="0"
+                opacity={{ base: 1, md: 0 }}
                 _hover={{
                   backgroundColor: 'gray.100',
                   color: 'gray.600',

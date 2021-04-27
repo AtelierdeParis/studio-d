@@ -1,9 +1,7 @@
 import React, { useMemo, useContext } from 'react'
-import { Box, VStack, Text } from '@chakra-ui/react'
+import { Box, VStack } from '@chakra-ui/react'
 import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
-import getDate from 'date-fns/getDate'
-import differenceInDays from 'date-fns/differenceInDays'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
 
@@ -67,7 +65,8 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
     <Box
       className="scheduleEvent"
       flex={1}
-      border="2px solid"
+      border="solid"
+      borderWidth={{ base: '1px', sm: '2px' }}
       w="100%"
       borderRadius="md"
       cursor={id && 'pointer'}

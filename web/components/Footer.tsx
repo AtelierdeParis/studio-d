@@ -18,10 +18,13 @@ import Facebook from 'public/assets/img/facebook.svg'
 const Footer = () => {
   const { t } = useTranslation('common')
   return (
-    <Box as="footer" backgroundColor="gray.50" mt={20}>
-      <Container pt={8} pb={18} px={6}>
-        <Flex justifyContent="space-between">
-          <Box maxW="26rem">
+    <Box as="footer" backgroundColor="gray.50" mt={{ base: 14, lg: 20 }}>
+      <Container pt={8} pb={{ base: 10, lg: 18 }} px={{ base: 3, lg: 6 }}>
+        <Flex
+          justifyContent="space-between"
+          direction={{ base: 'column', lg: 'row' }}
+        >
+          <Box maxW={{ base: 'auto', lg: '26rem' }}>
             <Text fontFamily="mabry medium">{t('footer.title')}</Text>
             <Text mb={7}>{t('footer.subtitle')}</Text>
             <SimpleGrid
@@ -29,6 +32,7 @@ const Footer = () => {
               maxW="20rem"
               columnGap={5}
               rowGap={3}
+              mb={{ base: 4, lg: 0 }}
               alignItems="center"
               filter="grayscale(1)"
               style={{
@@ -43,14 +47,21 @@ const Footer = () => {
               <Image src="/assets/img/partners/logo-atelier-de-paris.svg" />
             </SimpleGrid>
           </Box>
-          <Flex>
+          <Flex direction={{ base: 'column-reverse', lg: 'row' }}>
             <Box>
               <Text fontFamily="mabry medium">{t('footer.plan')}</Text>
               <FooterMenu />
             </Box>
-            <Box pl={14}>
+            <Box
+              pl={{ base: 0, lg: 14 }}
+              borderTop="1px solid"
+              borderBottom="1px solid"
+              py={{ base: 5, lg: 0 }}
+              my={{ base: 5, lg: 0 }}
+              borderColor={{ base: 'gray.100', lg: 'transparent' }}
+            >
               <Text fontFamily="mabry medium">{t('footer.social')}</Text>
-              <HStack pt={3} spacing={6}>
+              <HStack pt={3} pb={{ base: 3, lg: 0 }} spacing={6}>
                 <Link
                   href="https://www.facebook.com/atelierdeparisCDCN/"
                   isExternal
@@ -72,8 +83,9 @@ const Footer = () => {
         </Flex>
       </Container>
       <Flex
-        justifyContent="center"
+        justifyContent={{ base: 'flex-start', md: 'center' }}
         py={3.5}
+        px={3}
         borderTop="1px solid"
         borderTopColor="gray.100"
       >

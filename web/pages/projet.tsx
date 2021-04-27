@@ -14,12 +14,11 @@ interface Props {
 
 const Project = ({ page }: Props) => {
   return (
-    <Container>
+    <>
       <Heading
         as="h1"
         textStyle="h1"
-        mt={16}
-        mb={12}
+        layerStyle="mainTitle"
         textAlign="center"
         maxW="container.sm"
         mx="auto"
@@ -29,7 +28,7 @@ const Project = ({ page }: Props) => {
       <Box maxW="container.sm" mx="auto">
         <MarkdownRenderer>{page.text}</MarkdownRenderer>
       </Box>
-    </Container>
+    </>
   )
 }
 

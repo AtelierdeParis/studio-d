@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'next-i18next'
-import { HStack, Box, Text, Button, Flex } from '@chakra-ui/react'
+import { Stack, Box, Text, Button, Flex } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { ROUTE_SIGNUP } from '~constants'
 
@@ -15,15 +15,19 @@ const Block = ({ title, description, btn, url }: IBlock) => {
     <Flex
       flex={1}
       backgroundColor="blue.50"
-      py={12}
-      px={20}
+      py={{ base: 6, md: 12 }}
+      px={{ base: 5, sm: 12, md: 16, lg: 20 }}
       borderRadius="lg"
       direction="column"
       justifyContent="space-between"
       lineHeight="1.55"
     >
       <Box>
-        <Text textAlign="center" mb={7} fontSize="1.7rem">
+        <Text
+          textAlign={{ base: 'left', md: 'center' }}
+          mb={{ base: 3, md: 7 }}
+          fontSize={{ base: 'lg', md: '1.7rem' }}
+        >
           {title}
         </Text>
         <Text color="gray.500">{description}</Text>
@@ -33,8 +37,8 @@ const Block = ({ title, description, btn, url }: IBlock) => {
         href={url}
         colorScheme="blue"
         size="lg"
-        alignSelf="center"
-        mt={8}
+        alignSelf={{ base: 'flex-start', md: 'center' }}
+        mt={{ base: 6, md: 8 }}
       >
         {btn}
       </Button>
@@ -45,7 +49,11 @@ const Block = ({ title, description, btn, url }: IBlock) => {
 const PlaceOrCompany = () => {
   const { t } = useTranslation('common')
   return (
-    <HStack spacing={5} alignItems="stretch">
+    <Stack
+      direction={{ base: 'column', md: 'row' }}
+      spacing={5}
+      alignItems="stretch"
+    >
       <Block
         title={t('signup.place.title')}
         description={t('signup.place.description')}
@@ -58,7 +66,7 @@ const PlaceOrCompany = () => {
         btn={t('signup.company.btn')}
         url={`${ROUTE_SIGNUP}/compagnie`}
       />
-    </HStack>
+    </Stack>
   )
 }
 

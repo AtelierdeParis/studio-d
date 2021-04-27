@@ -28,7 +28,12 @@ const FormField = ({
   return (
     <FormControl isInvalid={Boolean(errors)} w="100%" display="flex" {...rest}>
       <FormLabel fontWeight="400" fontSize="xxs" mb={0} mr={0} w="100%">
-        <Text fontWeight="500" mb={1} fontFamily="mabry medium">
+        <Text
+          fontWeight="500"
+          mb={1}
+          fontFamily="mabry medium"
+          fontSize={{ base: 'sm', sm: 'md' }}
+        >
           {label}
           {isRequired && (
             <Box as="span" color="blue.500">
@@ -38,12 +43,12 @@ const FormField = ({
         </Text>
         <Flex direction="column">
           {children}
-          <FormErrorMessage color="red.500" fontSize="sm">
+          <FormErrorMessage color="red.500" fontSize={{ base: 'xs', sm: 'sm' }}>
             {errors?.message}
           </FormErrorMessage>
         </Flex>
         {info && (
-          <Text fontSize="sm" color="gray.500" mt={1.5}>
+          <Text fontSize={{ base: 'xs', sm: 'sm' }} color="gray.500" mt={1.5}>
             {info}
           </Text>
         )}

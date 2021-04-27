@@ -22,7 +22,12 @@ const Layout = (props: ILayout) => {
   }
 
   return (
-    <Flex minH="100vh" direction="column" justifyContent="space-between">
+    <Flex
+      minH="100vh"
+      direction="column"
+      justifyContent="space-between"
+      fontSize={{ base: 'sm', sm: 'md' }}
+    >
       <Box>
         <Header colorMode={router.pathname === '/' ? 'white' : 'black'} />
         {isRouteWithoutContainer ? (

@@ -20,12 +20,27 @@ const InfoLogo = ({ img, title, children, links }: IInfoLogo) => {
   ])
   return (
     <Flex justifyContent="center" alignItems="center" h="100%">
-      <Box textAlign="center" maxW="34rem">
-        <Image src={img} mb={10} mx="auto" />
-        <Text fontSize="3xl" color="blue.500" mb={5} fontWeight="500">
+      <Box textAlign="center" maxW="34rem" px={2}>
+        <Image
+          src={img}
+          pb={{ base: 4, md: 10 }}
+          mx="auto"
+          maxW={{ base: '80px', md: 'none' }}
+        />
+        <Text
+          fontSize={{ base: 'xl', sm: '2xl', md: '3xl' }}
+          color="blue.500"
+          mb={5}
+          fontWeight="500"
+        >
           {title}
         </Text>
-        <Text pb={10} lineHeight="1.55" color="grayText.1">
+        <Text
+          pb={{ base: 4, md: 10 }}
+          lineHeight="1.55"
+          color="grayText.1"
+          fontSize={{ base: 'sm', sm: 'md' }}
+        >
           {children}
         </Text>
         <Flex justifyContent="center">

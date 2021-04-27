@@ -64,7 +64,9 @@ const SignInForm = (props: SignInFormProps) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!formState.errors.email}>
-          <FormLabel>{t('signin.email.label')}</FormLabel>
+          <FormLabel fontSize={{ base: 'sm', md: 'md' }}>
+            {t('signin.email.label')}
+          </FormLabel>
           <InputGroup>
             <Input
               name="email"
@@ -78,7 +80,9 @@ const SignInForm = (props: SignInFormProps) => {
           <FormErrorMessage>{formState.errors.email?.message}</FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={!!formState.errors.password} pt={3.5}>
-          <FormLabel>{t('signin.password.label')}</FormLabel>
+          <FormLabel fontSize={{ base: 'sm', md: 'md' }}>
+            {t('signin.password.label')}
+          </FormLabel>
           <InputPassword register={register} />
           <FormErrorMessage>
             {formState.errors.password?.message}

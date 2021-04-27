@@ -4,7 +4,7 @@ import {
   VStack,
   Box,
   Input,
-  HStack,
+  Stack,
   Text,
   Divider,
   Button,
@@ -122,11 +122,16 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
       .finally(() => setLoading(false))
   }
   return (
-    <Box maxW="40rem" m="0 auto">
+    <Box maxW={{ base: 'none', md: '40rem' }} m="0 auto">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Box px={8}>
-          <VStack spacing={5} mb={18}>
-            <HStack spacing={5} w="100%" alignItems="flex-start">
+        <Box px={{ base: 0, md: 8 }}>
+          <VStack spacing={5} mb={{ base: 10, md: 18 }}>
+            <Stack
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              direction={{ base: 'column', md: 'row' }}
+            >
               <FormField
                 label={t('form.firstname')}
                 errors={errors.firstname}
@@ -141,7 +146,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               >
                 <Input name="lastname" ref={register} />
               </FormField>
-            </HStack>
+            </Stack>
             <FormField
               label={t('form.email.label')}
               errors={errors.email}
@@ -186,7 +191,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
           </VStack>
           <Text textStyle="titleFieldGroup">{t('form.address')}</Text>
           <Divider opacity={0.5} mb={5} />
-          <VStack spacing={5} mb={18}>
+          <VStack spacing={5} mb={{ base: 10, md: 18 }}>
             <FormField
               label={t('form.street')}
               errors={errors.address}
@@ -194,19 +199,24 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             >
               <Input name="address" ref={register} />
             </FormField>
-            <HStack spacing={5} w="100%" alignItems="flex-start">
+            <Stack
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              direction={{ base: 'column', md: 'row' }}
+            >
               <FormField
                 label={t('form.zipCode')}
                 errors={errors.zipCode}
                 isRequired
-                w="50%"
+                w={{ base: '100%', md: '50%' }}
               >
                 <Input name="zipCode" ref={register} />
               </FormField>
               <FormField label={t('form.city')} errors={errors.city} isRequired>
                 <Input name="city" ref={register} />
               </FormField>
-            </HStack>
+            </Stack>
             <FormField
               label={
                 <Flex as="span" alignItems="center">
@@ -233,8 +243,13 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
           </VStack>
           <Text textStyle="titleFieldGroup">{t(`form.${target}Info`)}</Text>
           <Divider opacity={0.5} mb={5} />
-          <VStack spacing={5} mb={20}>
-            <HStack spacing={5} w="100%" alignItems="flex-start">
+          <VStack spacing={5} mb={{ base: 6, md: 20 }}>
+            <Stack
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              direction={{ base: 'column', md: 'row' }}
+            >
               <FormField
                 label={t('form.siret')}
                 errors={errors.siret}
@@ -245,7 +260,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               <FormField label={t('form.ape')} errors={errors.ape} isRequired>
                 <Input name="ape" ref={register} />
               </FormField>
-            </HStack>
+            </Stack>
             <FormField label={t('form.referent')} errors={errors.phone}>
               <Input name="phone" ref={register} />
             </FormField>
@@ -273,7 +288,12 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                     })}
                   />
                 </FormField>
-                <HStack spacing={5} w="100%" alignItems="flex-start">
+                <Stack
+                  spacing={5}
+                  w="100%"
+                  alignItems="flex-start"
+                  direction={{ base: 'column', md: 'row' }}
+                >
                   <FormField
                     label={t('form.insuranceName')}
                     errors={errors.insuranceName}
@@ -298,7 +318,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                       })}
                     />
                   </FormField>
-                </HStack>
+                </Stack>
               </>
             ) : (
               <>
@@ -330,7 +350,12 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             )}
           </VStack>
         </Box>
-        <Box layerStyle="blueBox" p={10} color="grayText.1">
+        <Box
+          layerStyle="blueBox"
+          px={{ base: 4, md: 10 }}
+          py={{ base: 6, md: 10 }}
+          color="grayText.1"
+        >
           <Flex alignItems="flex-start">
             <Checkbox
               id="condition"
@@ -340,7 +365,11 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               borderColor="grayText.1"
             />
             <Box whiteSpace="pre-line" pl={5}>
-              <FormLabel htmlFor="condition" m="0">
+              <FormLabel
+                htmlFor="condition"
+                m="0"
+                fontSize={{ base: 'sm', md: 'md' }}
+              >
                 <Trans
                   i18nKey="signup:form.condition"
                   components={{

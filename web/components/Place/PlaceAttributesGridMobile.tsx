@@ -1,5 +1,5 @@
 import React from 'react'
-import { SimpleGrid, Flex, Box, Text, Divider } from '@chakra-ui/react'
+import { SimpleGrid, Flex, Box, Text } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import Surface from 'public/assets/img/surface.svg'
 import Dimension from 'public/assets/img/dimension.svg'
@@ -17,16 +17,37 @@ interface Props {
 }
 
 const GridItem = ({ icon, label, text, withDivider = false }) => (
-  <Flex alignItems="flex-start">
-    {withDivider && <Divider orientation="vertical" opacity={0.4} mr={3.5} />}
-    <Box w="25px" mt={1}>
-      {icon}
+  <>
+    <Box
+      py={3}
+      h="100%"
+      pl={2}
+      borderBottom="1px solid"
+      borderColor={withDivider ? 'gray.100' : 'transparent'}
+    >
+      <Flex h="20px" alignItems="center">
+        {icon}
+      </Flex>
     </Box>
-    <Box pl={4}>
+    <Flex
+      pl={3}
+      h="100%"
+      borderBottom="1px solid"
+      borderColor={withDivider ? 'gray.100' : 'transparent'}
+      alignItems="center"
+    >
       <Text color="gray.500">{label}</Text>
+    </Flex>
+    <Flex
+      pl={5}
+      h="100%"
+      borderBottom="1px solid"
+      borderColor={withDivider ? 'gray.100' : 'transparent'}
+      alignItems="center"
+    >
       <Text>{text}</Text>
-    </Box>
-  </Flex>
+    </Flex>
+  </>
 )
 
 const PlaceAttributesGrid = ({ place }: Props) => {
@@ -34,11 +55,17 @@ const PlaceAttributesGrid = ({ place }: Props) => {
 
   return (
     <>
-      <Text pb={8} fontSize="sm">
+      <Text py={6} fontSize="sm">
         {t('detail.precise')}
       </Text>
-      <SimpleGrid columns={3} rowGap={5}>
+      <SimpleGrid
+        columns={{ base: 3 }}
+        rowGap={0}
+        alignItems="center"
+        gridTemplateColumns="fit-content(25px) fit-content(200px) minmax(auto, auto)"
+      >
         <GridItem
+          withDivider
           label={t('detail.surface')}
           icon={<Surface />}
           text={`${place?.surface}m²`}
@@ -56,6 +83,7 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           text={place?.danceBar ? t('detail.yes') : t('detail.no')}
         />
         <GridItem
+          withDivider
           label={t('detail.dimension')}
           icon={<Dimension />}
           text={`${place?.roomLength} x ${place?.width} m`}
@@ -73,6 +101,7 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           text={place?.technicalStaff ? t('detail.available') : t('detail.no')}
         />
         <GridItem
+          withDivider
           label={t('detail.height')}
           icon={<Height />}
           text={`${place?.height}m`}
@@ -84,7 +113,6 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           text={place?.mirror ? t('detail.yes') : t('detail.no')}
         />
         <GridItem
-          withDivider
           label={t('detail.accomodation')}
           icon={<Bed />}
           text={place?.accomodation ? t('detail.available') : t('detail.no')}

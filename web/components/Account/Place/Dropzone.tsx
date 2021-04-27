@@ -33,44 +33,51 @@ const Dropzone = ({ maxFiles = 10, onDrop, nbFiles, ...rest }: IDropzone) => {
       }
     >
       {({ getRootProps, getInputProps }) => (
-        <Box {...getRootProps()} position="relative">
-          <input {...getInputProps()} />
-          {nbFiles === 0 && (
-            <Flex
-              border="1px solid"
-              borderColor="blue.200"
-              color="grayText.1"
-              borderRadius="md"
-              backgroundColor="blue.100"
-              w="100%"
-              h="100%"
-              p={4}
-              direction="column"
-              justifyContent="center"
-              minH="15rem"
-              {...rest}
-            >
-              <Flex w="100%" justifyContent="center" alignItems="center" py={4}>
+        <Box pb={{ base: 26, md: 0 }}>
+          <Box {...getRootProps()} position="relative">
+            <input {...getInputProps()} />
+            {nbFiles === 0 && (
+              <Flex
+                border="1px solid"
+                borderColor="blue.200"
+                color="grayText.1"
+                borderRadius="md"
+                backgroundColor="blue.100"
+                w="100%"
+                h="100%"
+                p={4}
+                direction="column"
+                justifyContent="center"
+                minH="15rem"
+                {...rest}
+              >
                 <Flex
-                  textAlign="center"
-                  direction="column"
-                  alignItems="center"
-                  justifyContent="center"
                   w="100%"
-                  h="100%"
-                  maxW="md"
+                  justifyContent="center"
+                  alignItems="center"
+                  py={4}
                 >
-                  <Text fontSize="xl" my={4}>
-                    {t('dropzone.placeholder')}
-                  </Text>
-                  <Text fontSize="md">{t('dropzone.subtitle')}</Text>
+                  <Flex
+                    textAlign="center"
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    w="100%"
+                    h="100%"
+                    maxW="md"
+                  >
+                    <Text fontSize="xl" my={4}>
+                      {t('dropzone.placeholder')}
+                    </Text>
+                    <Text fontSize="md">{t('dropzone.subtitle')}</Text>
+                  </Flex>
                 </Flex>
               </Flex>
-            </Flex>
-          )}
-          <Button size="lg" pos="absolute" top="calc(100% + 20px)" right="0">
-            {t('addImg')}
-          </Button>
+            )}
+            <Button size="lg" pos="absolute" top="calc(100% + 20px)" right="0">
+              {t('addImg')}
+            </Button>
+          </Box>
         </Box>
       )}
     </ReactDropzone>

@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-  Container,
-  Image,
-  HStack,
-  Text,
-  Divider,
-  Box,
-  Flex,
-} from '@chakra-ui/react'
+import { Container, Image, HStack, Text, Divider, Flex } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import AuthMenu from '~components/AuthMenu'
@@ -30,6 +22,10 @@ const MenuItem = ({ href, text }) => {
       borderBottomColor={
         router.pathname === href ? 'orange.500' : 'transparent'
       }
+      display={{
+        base: 'none',
+        lg: 'block',
+      }}
       _hover={{
         borderColor: 'orange.500',
       }}
@@ -41,13 +37,14 @@ const MenuItem = ({ href, text }) => {
 interface IHeader {
   colorMode: 'white' | 'black'
 }
+
 const Header = ({ colorMode }: IHeader) => {
   const { t } = useTranslation('common')
   return (
     <Container
       pos={colorMode === 'white' ? 'absolute' : 'static'}
       as="header"
-      px={5}
+      px={{ base: 3, md: 5 }}
       py={3}
       maxW="full"
       zIndex={10}
@@ -68,21 +65,41 @@ const Header = ({ colorMode }: IHeader) => {
             }.svg`}
             cursor="pointer"
             alt="Logo Studio D"
+            h={{
+              base: '16px',
+              sm: 'auto',
+            }}
           />
         </Link>
         <HStack
-          spacing={6}
+          spacing={{ base: 0, md: 6 }}
           whiteSpace="nowrap"
           color={colorMode}
           alignItems="center"
         >
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
-          <Divider orientation="vertical" opacity={0.6} h="18px" />
+          <Divider
+            orientation="vertical"
+            opacity={0.6}
+            h="18px"
+            display={{
+              base: 'none',
+              lg: 'block',
+            }}
+          />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
-          <Divider orientation="vertical" opacity={0.6} h="18px" />
+          <Divider
+            orientation="vertical"
+            opacity={0.6}
+            h="18px"
+            display={{
+              base: 'none',
+              lg: 'block',
+            }}
+          />
           <AuthMenu colorMode={colorMode} />
         </HStack>
       </Flex>

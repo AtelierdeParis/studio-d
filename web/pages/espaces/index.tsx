@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react'
+import React, { useRef, useState, useMemo, useEffect } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -9,6 +9,7 @@ import {
   Button,
   Text,
   ButtonGroup,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import PlaceSearch from '~components/Place/PlaceSearch'
 import { useInfinitePlaces } from '~hooks/useInfinitePlaces'
@@ -23,6 +24,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { SortOptions } from '~utils/search'
 import { useQueryClient } from 'react-query'
 import NoResult from '~components/Place/NoResult'
+import MobileMap from '~components/Place/MobileMap'
 import { useRouter } from 'next/router'
 
 const styleSelected = {
@@ -32,7 +34,7 @@ const styleSelected = {
 
 const Places = () => {
   const router = useRouter()
-
+  const isMobile = useBreakpointValue({ base: true, md: false })
   const { t } = useTranslation('place')
   const ref = useRef(null)
   const [isGridView, setGridView] = useState<boolean>(true)
@@ -57,6 +59,10 @@ const Places = () => {
     ...searchQuery,
   })
 
+  useEffect(() => {
+    if (isMobile) setGridView(true)
+  }, [isMobile])
+
   useScrollBottom(
     ref,
     () => {
@@ -68,13 +74,14 @@ const Places = () => {
   )
 
   return (
-    <Container>
+    <Container px={0}>
       <FormProvider {...form}>
         <PlaceSearch />
         {!countLoading && nbPlace === 0 ? (
           <NoResult />
         ) : (
           <>
+            <MobileMap places={places?.pages?.flat()} />
             <Flex justifyContent="space-between" pb={4} alignItems="center">
               <Flex alignItems="center">
                 {nbPlace > 0 && (
@@ -90,56 +97,58 @@ const Places = () => {
                   </>
                 )}
               </Flex>
-              <ButtonGroup
-                spacing={4}
-                alignItems="center"
-                justifyContent="flex-end"
-              >
-                <Button
-                  variant="line"
-                  color="gray.500"
-                  borderBottomColor="transparent"
-                  {...(isGridView ? styleSelected : {})}
-                  onClick={() => setGridView(true)}
+              {!isMobile && (
+                <ButtonGroup
+                  spacing={4}
+                  alignItems="center"
+                  justifyContent="flex-end"
                 >
-                  {t('search.grid')}
-                </Button>
-                <Button
-                  variant="line"
-                  color="gray.500"
-                  borderBottomColor="transparent"
-                  {...(!isGridView ? styleSelected : {})}
-                  onClick={() => setGridView(false)}
-                >
-                  {t('search.list')}
-                </Button>
-                <Flex pl={10} alignItems="center">
-                  <Text color="gray.500" whiteSpace="nowrap" pr={3}>
-                    {t('search.filterBy.label')}
-                  </Text>
-                  <Select
-                    variant="unstyled"
-                    ref={form.register}
-                    name="sortBy"
-                    onChange={() => {
-                      queryClient.refetchQueries(['places'], { active: true })
-                    }}
+                  <Button
+                    variant="line"
+                    color="gray.500"
+                    borderBottomColor="transparent"
+                    {...(isGridView ? styleSelected : {})}
+                    onClick={() => setGridView(true)}
                   >
-                    <option value={SortOptions.DISPO_ASC}>
-                      {t('search.filterBy.dispo')}
-                    </option>
-                    <option value={SortOptions.NB_DISPO_DESC}>
-                      {t('search.filterBy.nbDispo')}
-                    </option>
-                    <option value={SortOptions.SURFACE_ASC}>
-                      {t('search.filterBy.surfaceAsc')}
-                    </option>
-                    <option value={SortOptions.SURFACE_DESC}>
-                      {t('search.filterBy.surfaceDesc')}
-                    </option>
-                  </Select>
-                </Flex>
-              </ButtonGroup>
+                    {t('search.grid')}
+                  </Button>
+                  <Button
+                    variant="line"
+                    color="gray.500"
+                    borderBottomColor="transparent"
+                    {...(!isGridView ? styleSelected : {})}
+                    onClick={() => setGridView(false)}
+                  >
+                    {t('search.list')}
+                  </Button>
+                  <Flex pl={10} alignItems="center">
+                    <Text color="gray.500" whiteSpace="nowrap" pr={3}>
+                      {t('search.filterBy.label')}
+                    </Text>
+                    <Select
+                      variant="unstyled"
+                      ref={form.register}
+                      name="sortBy"
+                      onChange={() => {
+                        queryClient.refetchQueries(['places'], { active: true })
+                      }}
+                    >
+                      <option value={SortOptions.DISPO_ASC}>
+                        {t('search.filterBy.dispo')}
+                      </option>
+                      <option value={SortOptions.NB_DISPO_DESC}>
+                        {t('search.filterBy.nbDispo')}
+                      </option>
+                      <option value={SortOptions.SURFACE_ASC}>
+                        {t('search.filterBy.surfaceAsc')}
+                      </option>
+                      <option value={SortOptions.SURFACE_DESC}>
+                        {t('search.filterBy.surfaceDesc')}
+                      </option>
+                    </Select>
+                  </Flex>
+                </ButtonGroup>
+              )}
             </Flex>
             {isGridView ? (
               <PlaceGrid

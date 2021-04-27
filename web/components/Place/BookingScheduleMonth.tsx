@@ -3,7 +3,7 @@ import React, { useRef } from 'react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, useBreakpointValue } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
 import { ScheduleEvent } from '~@types/schedule-event.d'
@@ -35,6 +35,7 @@ interface Props {
 }
 
 const BookingScheduleMonth = ({ place, events }: Props) => {
+  const isMobile = useBreakpointValue({ base: true, lg: false })
   const firstScheduleRef = useRef(null)
   const secondScheduleRef = useRef(null)
 
@@ -42,14 +43,14 @@ const BookingScheduleMonth = ({ place, events }: Props) => {
     <Flex
       w="100%"
       layerStyle="bluebox"
-      px={4}
-      pb={10}
+      px={{ base: 0, lg: 4 }}
+      pb={{ base: 4, lg: 10 }}
       id="calendar"
-      className="account-schedule month"
+      className={`account-schedule month ${isMobile ? 'is-mobile' : ''}`}
       pos="relative"
       justifyContent="center"
     >
-      <Flex maxW="1050px">
+      <Flex maxW="1050px" w={{ base: '100%', lg: 'auto' }}>
         <FullCalendar
           ref={firstScheduleRef}
           plugins={[dayGridPlugin, interactionPlugin, view]}
@@ -66,50 +67,59 @@ const BookingScheduleMonth = ({ place, events }: Props) => {
             },
           }}
           headerToolbar={{
-            start: 'customPrev',
+            start: isMobile ? 'prev' : 'customPrev',
             center: 'title',
-            end: '',
+            end: isMobile ? 'next' : '',
           }}
           dayCellContent={(day) => {
             const hasEvent = events.some((event) =>
               isSameDay(event.start, day.date),
             )
-            return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
+            return (
+              <Box
+                color={hasEvent && 'black'}
+                fontSize={{ base: '11px', sm: 'sm', md: 'md' }}
+              >
+                {day.dayNumberText}
+              </Box>
+            )
           }}
           fixedWeekCount={false}
           events={events}
           locale={frLocale}
         />
-        <FullCalendar
-          ref={secondScheduleRef}
-          plugins={[dayGridPlugin, interactionPlugin, view]}
-          initialView="custom"
-          initialDate={addMonths(new Date(), 1)}
-          customButtons={{
-            customNext: {
-              click: () => {
-                const firstApi = firstScheduleRef.current.getApi()
-                const secondApi = secondScheduleRef.current.getApi()
-                firstApi.next()
-                secondApi.next()
+        {!isMobile && (
+          <FullCalendar
+            ref={secondScheduleRef}
+            plugins={[dayGridPlugin, interactionPlugin, view]}
+            initialView="custom"
+            initialDate={addMonths(new Date(), 1)}
+            customButtons={{
+              customNext: {
+                click: () => {
+                  const firstApi = firstScheduleRef.current.getApi()
+                  const secondApi = secondScheduleRef.current.getApi()
+                  firstApi.next()
+                  secondApi.next()
+                },
               },
-            },
-          }}
-          headerToolbar={{
-            start: '',
-            center: 'title',
-            end: 'customNext',
-          }}
-          dayCellContent={(day) => {
-            const hasEvent = events.some((event) =>
-              isSameDay(event.start, day.date),
-            )
-            return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
-          }}
-          fixedWeekCount={false}
-          events={events}
-          locale={frLocale}
-        />
+            }}
+            headerToolbar={{
+              start: '',
+              center: 'title',
+              end: 'customNext',
+            }}
+            dayCellContent={(day) => {
+              const hasEvent = events.some((event) =>
+                isSameDay(event.start, day.date),
+              )
+              return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
+            }}
+            fixedWeekCount={false}
+            events={events}
+            locale={frLocale}
+          />
+        )}
       </Flex>
     </Flex>
   )

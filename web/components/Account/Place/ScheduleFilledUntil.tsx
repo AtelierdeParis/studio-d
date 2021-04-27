@@ -66,7 +66,7 @@ const ScheduleFilledUntil = ({ place }: IScheduleFilledUntil) => {
   }
   return (
     <Box>
-      <Text>
+      <Text fontSize={{ base: 'sm', sm: 'md' }}>
         {t(`schedule.${isFilled ? 'filledText' : 'notFilledText'}`, {
           date: format(isFilled ? filledUntil : minDate, 'dd/MM/yyyy'),
         })}

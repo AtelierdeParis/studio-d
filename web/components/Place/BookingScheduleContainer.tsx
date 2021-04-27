@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react'
-import { Box, Flex, Button, Text } from '@chakra-ui/react'
+import React, { useState, useMemo, useEffect } from 'react'
+import { Box, Flex, Button, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import BookingScheduleWeek from '~components/Place/BookingScheduleWeek'
@@ -18,17 +18,31 @@ interface Props {
 
 const BookingScheduleContainer = ({ place }: Props) => {
   const { t } = useTranslation('place')
-  const [isMonthView, setMonthView] = useState<boolean>(false)
+  const isMobile = useBreakpointValue({ base: true, lg: false })
+  const [isMonthView, setMonthView] = useState<boolean>(isMobile)
   const events = useMemo(() => createOldEvents(place?.disponibilities), [
     place?.disponibilities,
   ])
+  useEffect(() => {
+    if (isMobile) setMonthView(true)
+  }, [isMobile])
 
   return (
-    <Box bgColor="blue.100" p={6} borderRadius="sm">
-      <Flex justifyContent="space-between" pb={14} alignItems="flex-start">
+    <Box
+      bgColor="blue.100"
+      mx={{ base: '-0.75rem', lg: 0 }}
+      px={{ base: 4, lg: 6 }}
+      py={6}
+      borderRadius="sm"
+    >
+      <Flex
+        justifyContent="space-between"
+        pb={{ base: 6, lg: 14 }}
+        alignItems="flex-start"
+      >
         <Flex>
           {place?.scheduleDetails && (
-            <Box maxW="600px">
+            <Box maxW={{ base: 'auto', lg: '600px' }}>
               <Text
                 fontWeight="500"
                 fontFamily="mabry medium"
@@ -41,7 +55,7 @@ const BookingScheduleContainer = ({ place }: Props) => {
             </Box>
           )}
         </Flex>
-        <Flex>
+        <Flex display={{ base: 'none', lg: 'flex' }}>
           <Button
             variant="line"
             color="gray.500"

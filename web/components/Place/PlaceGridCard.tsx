@@ -58,6 +58,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
           className="placeCard"
           role="group"
           h="100%"
+          id={`place-${place.id}`}
         >
           <AspectRatio
             w="100%"
@@ -81,7 +82,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
             border="1px solid"
             borderColor="gray.100"
           >
-            <Box>
+            <Box fontSize="md">
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}
               </Text>
@@ -154,7 +155,7 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
                   <Text color="gray.500" px={3}>
                     {t('card.dim')}
                   </Text>
-                  <Text>{`${place.roomLength} x ${place.width} m`}</Text>
+                  <Text whiteSpace="pre">{`${place.roomLength} x ${place.width} m`}</Text>
                 </Flex>
               </Flex>
             </Box>

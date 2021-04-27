@@ -107,8 +107,14 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
               </Flex>
             </DrawerHeader>
             <DrawerBody display="flex" flexDirection="column">
-              <Flex pb={5}>
-                <Box flex={1}>
+              <Flex pb={5} direction={{ base: 'column', md: 'row' }}>
+                <Box
+                  flex={1}
+                  borderBottom="1px solid"
+                  pb={{ base: 4, md: 0 }}
+                  mb={{ base: 4, md: 0 }}
+                  borderColor={{ base: 'gray.50', md: 'transparent' }}
+                >
                   <Text fontFamily="mabry medium" fontWeight="500">
                     {t('date')}
                   </Text>
@@ -181,19 +187,29 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                 )}
               </Flex>
               <Divider opacity="0.3" />
-              <Flex justifyContent="space-between" mt={5} flex={1}>
+              <Flex
+                justifyContent={{ base: 'flex-end', md: 'space-between' }}
+                mt={5}
+                flex={1}
+                direction={{ base: 'column-reverse', md: 'row' }}
+              >
                 <Box>
                   <BookingHistory booking={booking} type={user?.type} />
                 </Box>
                 {booking?.status !== 'canceled' && (
                   <Flex flex={0}>
                     <Divider
+                      display={{ base: 'none', md: 'block' }}
                       orientation="vertical"
                       mx={5}
                       h="100%"
                       opacity="0.3"
                     />
-                    <Flex direction="column" minW="250px">
+                    <Flex
+                      direction="column"
+                      minW={{ base: 'none', md: '250px' }}
+                      w={{ base: '100%', md: 'fit-content' }}
+                    >
                       <Link
                         href={`${ROUTE_ACCOUNT_MESSAGE}?conversation=${target}`}
                         as={`${ROUTE_ACCOUNT_MESSAGE}/${target}`}
@@ -204,6 +220,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                           variant="message"
                           leftIcon={<Message />}
                           w="100%"
+                          whiteSpace="pre"
                         >
                           <Text ml={2}>
                             {t(

@@ -35,12 +35,11 @@ const Actuality = () => {
   )
 
   return (
-    <Container>
+    <>
       <Heading
         as="h1"
         textStyle="h1"
-        mt={16}
-        mb={18}
+        layerStyle="mainTitle"
         textAlign="center"
         maxW="container.sm"
         mx="auto"
@@ -53,8 +52,8 @@ const Actuality = () => {
           md: 2,
           base: 1,
         }}
-        columnGap={8}
-        rowGap={16}
+        columnGap={{ base: 4, md: 8 }}
+        rowGap={{ base: 6, md: 16 }}
         ref={ref}
       >
         <Loading isLoading={isLoading} skeleton={<ActuSkeleton />}>
@@ -65,7 +64,7 @@ const Actuality = () => {
         </Loading>
       </SimpleGrid>
       {isFetching && <Loader mt={10} />}
-    </Container>
+    </>
   )
 }
 

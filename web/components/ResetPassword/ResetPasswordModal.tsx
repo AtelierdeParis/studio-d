@@ -33,9 +33,9 @@ const ResetPasswordModal = ({ isOpen, onClose }: IResetPasswordModal) => {
           {t('reset.title')}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody px={6} pt={0}>
+        <ModalBody px={{ base: 4, md: 6 }} pt={0}>
           <Divider mt={6} mb={3} />
-          <Text color="gray.400" mb={5}>
+          <Text color="gray.400" mb={5} fontSize={{ base: 'sm', sm: 'md' }}>
             {t('reset.text')}
           </Text>
           <ResetPasswordForm onClose={onClose} />

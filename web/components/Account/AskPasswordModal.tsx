@@ -4,7 +4,7 @@ import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import InputPassword from '~components/InputPassword'
 import { useForm } from 'react-hook-form'
-import { Box } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import FormField from '~components/FormField'
 
@@ -58,7 +58,9 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
       confirmText={t('information.modal.btn')}
       closeText={t('information.modal.back')}
     >
-      {t('information.modal.text')}
+      <Text fontSize={{ base: 'sm', sm: 'md' }}>
+        {t('information.modal.text')}
+      </Text>
       <Box pt={5}>
         <form>
           <FormField errors={errors?.password}>

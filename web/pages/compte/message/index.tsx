@@ -47,7 +47,13 @@ const AccountMessage = ({ user }: Props) => {
           setSelected={setSelected}
           selected={selected}
         />
-        {selected && <Conversation id={selected} user={user} />}
+        {selected && (
+          <Conversation
+            id={selected}
+            user={user}
+            back={() => setSelected(null)}
+          />
+        )}
       </Loading>
     </Flex>
   )

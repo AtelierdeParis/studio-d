@@ -7,7 +7,7 @@ import Link from '~components/Link'
 const BookingDrawerPlace = ({ place }) => {
   const { t } = useTranslation('booking')
   return (
-    <>
+    <Box fontSize={{ base: 'sm', sm: 'md' }}>
       <Text fontFamily="mabry medium" fontWeight="500">
         {t('address')}
       </Text>
@@ -23,7 +23,7 @@ const BookingDrawerPlace = ({ place }) => {
           </Link>
         )}
       </Box>
-    </>
+    </Box>
   )
 }
 

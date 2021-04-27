@@ -57,7 +57,9 @@ const ResetPasswordForm = ({ onClose }: ResetPasswordFormProps) => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={!!formState.errors.email}>
-          <FormLabel>{t('reset.email.label')}</FormLabel>
+          <FormLabel fontSize={{ base: 'sm', md: 'md' }}>
+            {t('reset.email.label')}
+          </FormLabel>
           <InputGroup>
             <Input
               name="email"
@@ -69,7 +71,7 @@ const ResetPasswordForm = ({ onClose }: ResetPasswordFormProps) => {
           </InputGroup>
           <FormErrorMessage>{formState.errors.email?.message}</FormErrorMessage>
         </FormControl>
-        <Flex align="center" justify="center" mt={8}>
+        <Flex align="center" justify="center" mt={{ base: 4, sm: 8 }}>
           <Button type="submit" size="lg" isLoading={isLoading}>
             {t('reset.submit')}
           </Button>
