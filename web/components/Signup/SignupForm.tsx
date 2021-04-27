@@ -223,22 +223,11 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                   <Text as="span" mr={2}>
                     {t('form.country.label')}
                   </Text>
-                  <Lock />
                 </Flex>
               }
-              info={t('form.country.info')}
               errors={errors.country}
             >
-              <Input
-                name="country"
-                readOnly
-                ref={register}
-                value="France"
-                _readOnly={{
-                  cursor: 'not-allowed',
-                  opacity: 0.5,
-                }}
-              />
+              <Input name="country" ref={register} />
             </FormField>
           </VStack>
           <Text textStyle="titleFieldGroup">{t(`form.${target}Info`)}</Text>

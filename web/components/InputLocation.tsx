@@ -3,6 +3,8 @@ import AsyncSelect from 'react-select/async'
 import { useTheme } from '@chakra-ui/react'
 import { Control, useController } from 'react-hook-form'
 import axios from 'axios'
+import geocodingService from '@mapbox/mapbox-sdk/services/geocoding'
+import mbxClient from '@mapbox/mapbox-sdk'
 
 const getStyle = (theme) => {
   return {
@@ -40,6 +42,10 @@ interface Props {
 }
 
 const InputLocation = ({ name, control, placeholder }: Props) => {
+  const baseClient = mbxClient({
+    accessToken: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+  })
+  const geocoder = geocodingService(baseClient)
   const theme = useTheme()
   const { field } = useController({
     name,
@@ -69,9 +75,18 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     if (value?.item?.geometry?.coordinates) {
       latitude.onChange(value?.item.geometry.coordinates[0])
       longitude.onChange(value?.item.geometry.coordinates[1])
-      city.onChange(value?.item.properties.city)
-      // TODO: handle country
-      country.onChange('France')
+      const cityAttr = value?.item.context.find(({ id }) =>
+        id.startsWith('place'),
+      )
+      const countryAttr = value?.item.context.find(({ id }) =>
+        id.startsWith('country'),
+      )
+      if (cityAttr) {
+        city.onChange(cityAttr.text)
+      }
+      if (countryAttr) {
+        country.onChange(countryAttr.text)
+      }
     } else {
       latitude.onChange(null)
       longitude.onChange(null)
@@ -81,12 +96,16 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
   }
 
   const loadOptions = (inputValue) => {
-    return axios
-      .get(`https://api-adresse.data.gouv.fr/search/?q=${inputValue}`)
+    return geocoder
+      .forwardGeocode({
+        query: inputValue,
+      })
+      .send()
       .then((res) => {
-        return res.data?.features.map((item) => ({
-          value: item.properties.label,
-          label: item.properties.label,
+        if (!res.body.features || res.body.features.length === 0) return null
+        return res.body.features.map((item) => ({
+          value: item.place_name,
+          label: item.place_name,
           item,
         }))
       })

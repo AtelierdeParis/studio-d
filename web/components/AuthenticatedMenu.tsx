@@ -51,7 +51,7 @@ const AuthenticatedMenu = ({ user, colorMode, isMobileMenu = false }) => {
         >
           {user.structureName}
         </Text>
-        {Object.values(notifs).reduce((a, b) => a + b, 0) > 0 && (
+        {notifs && Object.values(notifs).reduce((a, b) => a + b, 0) > 0 && (
           <Circle
             pos="absolute"
             bgColor="orange.500"

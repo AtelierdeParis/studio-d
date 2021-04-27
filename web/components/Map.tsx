@@ -113,7 +113,8 @@ const Map = ({
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
+          id="mapbox/light-v10"
         />
         <MapContent markers={markers}>
           {markers.map(({ latitude, longitude, id = '' }) => (
