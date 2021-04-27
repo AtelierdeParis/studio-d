@@ -1,5 +1,12 @@
 import React from 'react'
-import { Flex, Box, Text, Button, SimpleGrid } from '@chakra-ui/react'
+import {
+  Flex,
+  Box,
+  Text,
+  Button,
+  SimpleGrid,
+  useBreakpointValue,
+} from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'public/assets/img/arrow-bottom.svg'
 import { useActualities } from '~hooks/useActualities'
@@ -11,8 +18,12 @@ interface Props {}
 
 const HomeActus = ({}: Props) => {
   const { t } = useTranslation('home')
+  const isMobile = useBreakpointValue({
+    base: true,
+    lg: false,
+  })
   const { data: actus } = useActualities({
-    _limit: 3,
+    _limit: isMobile ? 2 : 3,
     _sort: 'created_at:desc',
   })
 
@@ -20,7 +31,7 @@ const HomeActus = ({}: Props) => {
 
   return (
     <Box w="100%">
-      <Flex alignItems="flex-start" pl={2}>
+      <Flex alignItems="flex-start" pl={{ base: 0, md: 2 }}>
         <Box w="18px">
           <Arrow />
         </Box>
@@ -35,9 +46,9 @@ const HomeActus = ({}: Props) => {
           base: 1,
         }}
         columnGap={8}
-        rowGap={16}
+        rowGap={{ base: 5, md: 16 }}
       >
-        {actus.map((actu) => (
+        {actus.slice(0, isMobile ? 2 : 3).map((actu) => (
           <ActuCard actu={actu} key={actu.id} />
         ))}
       </SimpleGrid>

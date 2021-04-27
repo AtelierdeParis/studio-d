@@ -32,16 +32,29 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
 
   return (
     <Flex maxW="46rem" direction="column" m="0 auto">
-      <Text whiteSpace="pre-line" pb={18} px={20}>
+      <Text
+        whiteSpace="pre-line"
+        pb={{ base: 10, md: 18 }}
+        px={{ base: 4, md: 20 }}
+      >
         {t(`about.${target}.description`)}
       </Text>
       {list.map(({ img, name }) => (
         <Fragment key={name}>
           <Divider opacity={0.5} />
-          <Flex px={9} py={8}>
-            <Image src={img} alignSelf="flex-start" />
-            <Box ml={10}>
-              <Text fontSize="lg" fontWeight="500" mb={2}>
+          <Flex
+            px={{ base: 4, md: 9 }}
+            py={8}
+            direction={{ base: 'column', sm: 'row' }}
+          >
+            <Image src={img} alignSelf={{ base: 'center', sm: 'flex-start' }} />
+            <Box ml={{ base: 0, sm: 10 }} mt={{ base: 4, sm: 0 }}>
+              <Text
+                fontSize={{ base: 'md', md: 'lg' }}
+                fontWeight="500"
+                fontFamily="mabry medium"
+                mb={2}
+              >
                 {t(`about.${target}.${name}.title`)}
               </Text>
               <Text>{t(`about.${target}.${name}.text`)}</Text>
@@ -51,13 +64,14 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
       ))}
       <Divider opacity={0.5} />
       <Flex
-        mt={20}
+        mt={{ base: 6, md: 20 }}
         layerStyle="blueBox"
-        py={10}
-        px={18}
+        py={{ base: 6, md: 10 }}
+        px={{ base: 5, md: 18 }}
         direction="column"
         lineHeight="1.55"
-        mb={30}
+        mx={{ base: 4, md: 0 }}
+        mb={{ base: 0, md: 30 }}
       >
         <Box>
           <Text color="grayText.1">{t(`about.${target}.condition`)}</Text>

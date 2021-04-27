@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Textarea,
   Select,
+  Stack,
   Spacer,
 } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
@@ -108,7 +109,7 @@ const PlaceForm = ({
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <Box pb={20}>
+      <Box pb={{ base: 10, md: 20 }}>
         {!isComplete && (
           <Text alignSelf="flex-start" color="red.500" mb={6} pl={2.5}>
             {t('form.notComplete')}
@@ -121,7 +122,11 @@ const PlaceForm = ({
               <Input name="name" ref={register} />
             </FormField>
           )}
-          <SimpleGrid columns={4} columnGap={5} rowGap={6}>
+          <SimpleGrid
+            columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+            columnGap={5}
+            rowGap={6}
+          >
             <FormField label={t('form.surface.label')} errors={errors.surface}>
               <InputNumber name="surface" control={control} />
             </FormField>
@@ -175,8 +180,13 @@ const PlaceForm = ({
               </Select>
             </FormField>
           </SimpleGrid>
-          <Flex mb={14} mt={6} alignItems="center">
-            <SimpleGrid columns={4} columnGap={5} w="100%">
+          <Flex mt={6} alignItems="center">
+            <SimpleGrid
+              columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+              columnGap={5}
+              rowGap={6}
+              w="100%"
+            >
               <FormField
                 label={t('form.accomodation.label')}
                 errors={errors.accomodation}
@@ -205,8 +215,12 @@ const PlaceForm = ({
               </FormField>
             </SimpleGrid>
           </Flex>
-          <Flex mb={14} mt={6} alignItems="center">
-            <SimpleGrid columns={4} columnGap={5} w="100%">
+          <Flex mb={{ base: 0, md: 14 }} mt={6} alignItems="center">
+            <SimpleGrid
+              columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
+              columnGap={5}
+              w="100%"
+            >
               <FormField label={t('form.floor.label')} errors={errors.floor}>
                 <Select
                   name="floor"
@@ -240,7 +254,12 @@ const PlaceForm = ({
         </Box>
         <Box>
           <Text textStyle="infoLabel">{t('form.textsLabel')}</Text>
-          <HStack spacing={5} mb={10} px={2.5}>
+          <Stack
+            direction={{ base: 'column', md: 'row' }}
+            spacing={5}
+            mb={10}
+            px={2.5}
+          >
             <FormField label={t('form.about.label')} errors={errors.about}>
               <Textarea
                 name="about"
@@ -259,15 +278,20 @@ const PlaceForm = ({
                 placeholder={t('form.details.placeholder')}
               />
             </FormField>
-          </HStack>
+          </Stack>
         </Box>
         <InputFile control={control} place={place} />
         <Box>
-          <Text textStyle="infoLabel" mt={16}>
+          <Text textStyle="infoLabel" mt={{ base: 10, md: 16 }}>
             {t('form.location')}
           </Text>
           <Box px={2.5}>
-            <HStack spacing={5} mb={10} alignItems="flex-start">
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              mb={10}
+              alignItems="flex-start"
+            >
               <FormField
                 label={t('form.address.label')}
                 errors={errors.address}
@@ -286,6 +310,7 @@ const PlaceForm = ({
                       flex={1}
                       h="250px"
                       markers={[{ latitude, longitude }]}
+                      zoomControl={false}
                     />
                     <Text
                       px={3.5}
@@ -302,7 +327,7 @@ const PlaceForm = ({
               ) : (
                 <Spacer flex={1} />
               )}
-            </HStack>
+            </Stack>
           </Box>
         </Box>
       </Box>

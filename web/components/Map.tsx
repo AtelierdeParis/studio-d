@@ -17,6 +17,7 @@ interface IMarker {
   isFocus: boolean
   id?: string
   icon?: Leaflet.IconOptions
+  onMarkerClick: (id: string) => void
 }
 
 const defaultIcon = (isFocus = false): Leaflet.IconOptions => ({
@@ -30,6 +31,7 @@ const Marker = ({
   id,
   isFocus,
   icon: iconProp,
+  onMarkerClick,
 }: IMarker) => {
   const icon = Leaflet.icon(iconProp || defaultIcon(isFocus))
 
@@ -49,6 +51,11 @@ const Marker = ({
       key={latitude + longitude + id + isFocus}
       ref={markerRef}
       data={geojsonData}
+      onEachFeature={(feature, layer) => {
+        layer.on({
+          click: () => onMarkerClick(id),
+        })
+      }}
       pointToLayer={(feature, latlng) => {
         return Leaflet.marker(latlng, {
           icon,
@@ -64,7 +71,7 @@ const MapContent = ({ children, markers }) => {
   const groupRef = useRef(null)
 
   useEffect(() => {
-    if (groupRef.current) {
+    if (groupRef.current && markers.length > 0) {
       map.fitBounds(groupRef.current.getBounds())
     }
   }, [groupRef, markers])
@@ -80,14 +87,27 @@ interface IMap extends BoxProps {
   }[]
   focusedPlace?: string
   icon?: Leaflet.IconOptions
+  zoomControl?: boolean
+  attributionControl?: boolean
+  onMarkerClick?: (id: string) => void
 }
 
-const Map = ({ markers = [], focusedPlace, icon, ...rest }: IMap) => {
+const Map = ({
+  markers = [],
+  focusedPlace,
+  icon,
+  zoomControl = true,
+  attributionControl = false,
+  onMarkerClick,
+  ...rest
+}: IMap) => {
   return (
     <Box {...rest}>
       <MapContainer
         center={null}
         zoom={null}
+        zoomControl={zoomControl}
+        attributionControl={attributionControl}
         scrollWheelZoom={false}
         style={{ height: '100%', width: '100%', flexGrow: 1 }}
       >
@@ -104,6 +124,7 @@ const Map = ({ markers = [], focusedPlace, icon, ...rest }: IMap) => {
               latitude={latitude}
               longitude={longitude}
               key={latitude + longitude + id}
+              onMarkerClick={onMarkerClick}
             />
           ))}
         </MapContent>

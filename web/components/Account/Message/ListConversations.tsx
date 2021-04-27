@@ -44,7 +44,7 @@ const Item = ({ id, name, isSelected, setSelected }) => {
           color="grayText.1"
           isTruncated
           flex={1}
-          maxW="160px"
+          maxW={{ base: '100%', md: '120px', lg: '160px' }}
           mr={2}
         >
           {name}
@@ -62,11 +62,12 @@ interface Props {
 
 const ListConversations = ({ conversations, selected, setSelected }: Props) => {
   const { t } = useTranslation('booking')
+  if (selected) return null
 
   return (
     <Box
       py={5}
-      w="240px"
+      w={{ base: '100%', md: '180px', lg: '240px' }}
       borderRight="1px solid"
       borderColor="gray.100"
       h="100%"
@@ -76,7 +77,7 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
         fontWeight="500"
         textTransform="uppercase"
         fontSize="sm"
-        mb={8}
+        mb={{ base: 4, sm: 8 }}
         pl={5}
       >
         {t('messages.title')}

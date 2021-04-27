@@ -42,6 +42,7 @@ const PlaceList = ({ places = [], isFetching, isLoading, listRef }) => {
             h="80vh"
             markers={markers}
             focusedPlace={focusedPlace}
+            zoomControl
           />
         )}
       </Flex>

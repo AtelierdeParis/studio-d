@@ -10,8 +10,8 @@ import {
   ROUTE_ACCOUNT_PLACES,
 } from '~constants'
 import Link from '~components/Link'
-import Notif from '~components/Notif'
 import Back from 'public/assets/img/back.svg'
+import Notif from '~components/Notif'
 import Profile from 'public/assets/img/user.svg'
 import Charte from 'public/assets/img/charte.svg'
 import Logout from 'public/assets/img/logout.svg'
@@ -112,6 +112,8 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           fontSize="xs"
           color="black"
           pb={4}
+          fontWeight="500"
+          fontFamily="mabry medium"
         >
           {t(title)}
         </Text>
@@ -162,13 +164,13 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     <Flex
       direction="column"
       color="grayText.1"
-      w="20rem"
-      h="100vh"
+      w={{ base: '100%', md: '20rem' }}
+      h={{ base: 'fit-content', md: '100vh' }}
       pos="relative"
       zIndex={999}
     >
       <Box backgroundColor="blue.100" flexGrow={1}>
-        <Flex pb={14} px={5} pt={4}>
+        <Flex pb={14} px={5} pt={4} display={{ base: 'none', md: 'flex' }}>
           <Link href="/">
             <Back />
           </Link>
@@ -182,7 +184,11 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           {displayMenu(accountItems)}
         </VStack>
       </Box>
-      <Flex backgroundColor="blue.200" p={5}>
+      <Flex
+        backgroundColor="blue.200"
+        p={5}
+        display={{ base: 'none', md: 'flex' }}
+      >
         <Link href={ROUTE_USE_POLICY} display="flex" alignItems="center">
           <Charte />
           <Text pl={3}>{t('charte')}</Text>

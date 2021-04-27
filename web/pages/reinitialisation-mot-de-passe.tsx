@@ -39,10 +39,11 @@ const CreatePassword = ({ code }: ICreatePassword) => {
       })
     }
     setLoading(true)
-    client.auth.resetPassword({
-      ...data,
-      code,
-    })
+    client.auth
+      .resetPassword({
+        ...data,
+        code,
+      })
       .then(() => {
         successToast(t('success'))
         router.push('/')
@@ -51,12 +52,12 @@ const CreatePassword = ({ code }: ICreatePassword) => {
       .finally(() => setLoading(false))
   }
   return (
-    <Container maxW="container.sm">
-      <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
+    <Container maxW="container.sm" px={0}>
+      <Heading as="h1" textStyle="h1" layerStyle="mainTitle" textAlign="center">
         {t('title')}
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={6} mb={10}>
+        <VStack spacing={6} mb={{ base: 4, md: 10 }}>
           <FormField
             label={t('password.label')}
             info={t('password.info')}

@@ -49,35 +49,35 @@ const renderers = {
   },
   h1: ({ node, ...props }) => {
     return (
-      <Title as="h2" fontSize="22px">
+      <Title as="h2" fontSize={{ base: '20px', md: '22px' }}>
         {props.children}
       </Title>
     )
   },
   h2: ({ node, ...props }) => {
     return (
-      <Title as="h3" fontSize="20px">
+      <Title as="h3" fontSize={{ base: '18px', md: '20px' }}>
         {props.children}
       </Title>
     )
   },
   h3: ({ node, ...props }) => {
     return (
-      <Title as="h4" fontSize="18px">
+      <Title as="h4" fontSize={{ base: '16px', md: '18px' }}>
         {props.children}
       </Title>
     )
   },
   h4: ({ node, ...props }) => {
     return (
-      <Title as="h5" fontSize="16px">
+      <Title as="h5" fontSize={{ base: '14px', md: '16px' }}>
         {props.children}
       </Title>
     )
   },
   h5: ({ node, ...props }) => {
     return (
-      <Title as="h6" fontSize="14px">
+      <Title as="h6" fontSize={{ base: '12px', md: '14px' }}>
         {props.children}
       </Title>
     )
@@ -107,11 +107,19 @@ const renderers = {
     return (
       <Flex alignItems="flex-start" mb={2}>
         {props.ordered ? (
-          <Box w="28px" minW="28px" textAlign="center">
+          <Box
+            w={{ base: '18px', md: '28px' }}
+            minW={{ base: '18px', md: '28px' }}
+            textAlign="center"
+          >
             {props.index + 1}.
           </Box>
         ) : (
-          <Flex justifyContent="center" w="28px" minW="28px">
+          <Flex
+            justifyContent="center"
+            w={{ base: '18px', md: '28px' }}
+            minW={{ base: '18px', md: '28px' }}
+          >
             <Circle size="6px" bgColor="gray.200" mt="6px" />
           </Flex>
         )}

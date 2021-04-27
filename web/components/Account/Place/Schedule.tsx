@@ -27,9 +27,7 @@ const view = createPlugin({
   },
 })
 
-interface ISchedule {}
-
-const Schedule = (props: ISchedule) => {
+const Schedule = () => {
   const { watch } = useFormContext()
   const { start } = watch(['start'])
   const { oldEvents, newEvents, setToDelete, eventsIdToDelete } = useContext(
@@ -56,10 +54,14 @@ const Schedule = (props: ISchedule) => {
 
   return (
     <Flex
-      w="600px"
+      w={{ base: 'calc(100% + 1.5rem)', md: '100%', schedule: '600px' }}
       backgroundColor="blue.100"
       borderRadius="sm"
       px={4}
+      pb={6}
+      ml={{ base: '-0.75rem', md: 0 }}
+      minH={{ base: 'none', schedule: '600px' }}
+      my={{ base: 8, schedule: 0 }}
       id="calendar"
       className="account-schedule"
     >
@@ -72,7 +74,6 @@ const Schedule = (props: ISchedule) => {
           center: 'title',
           end: 'next',
         }}
-        height="700px"
         dayCellContent={(day) => {
           const hasEvent = events.some((event) =>
             isSameDay(event.start, day.date),
@@ -82,7 +83,8 @@ const Schedule = (props: ISchedule) => {
               color={hasEvent && 'black'}
               borderBottom={isToday(day.date) && '1px solid orange'}
               lineHeight="1"
-              pt={0.5}
+              fontSize={{ base: '11px', sm: 'sm', md: 'md' }}
+              pt={{ base: 0, sm: 0.5 }}
             >
               {day.dayNumberText}
             </Box>

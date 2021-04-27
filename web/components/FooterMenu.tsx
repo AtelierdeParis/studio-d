@@ -16,18 +16,8 @@ import SigninModal from '~components/Signin/SigninModal'
 import { useSession } from 'next-auth/client'
 
 const MenuItem = ({ href, text }) => {
-  // const router = useRouter()
   return (
-    <Link
-      href={href}
-      borderBottom="1px solid"
-      // borderBottomColor={
-      //   router.pathname === href ? 'orange.500' : 'transparent'
-      // }
-      // _hover={{
-      //   borderColor: 'orange.500',
-      // }}
-    >
+    <Link href={href} borderBottom="1px solid">
       <Text>{text}</Text>
     </Link>
   )
@@ -56,7 +46,11 @@ const FooterMenu = () => {
           </Box>
         )}
       </Flex>
-      <Divider my={5} opacity={0.5} />
+      <Divider
+        my={{ base: 2, lg: 5 }}
+        opacity={{ base: 0, lg: 1 }}
+        borderColor="gray.100"
+      />
       <Box>
         <MenuItem href={ROUTE_CGU} text={t('nav.cgu')} />
         <MenuItem href={ROUTE_USE_POLICY} text={t('nav.policy')} />

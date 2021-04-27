@@ -1,5 +1,14 @@
 import React, { useRef } from 'react'
-import { Flex, Text, Button, Input, Box, Spacer } from '@chakra-ui/react'
+import {
+  Flex,
+  Text,
+  Button,
+  Input,
+  Box,
+  Spacer,
+  useBreakpointValue,
+  Circle,
+} from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
 import { useTranslation } from 'next-i18next'
@@ -21,6 +30,7 @@ const acceptableTypes = [
 
 const InputFile = ({ control, place }: IInputFile) => {
   const { t } = useTranslation('place')
+  const isMobile = useBreakpointValue({ base: true, sm: false })
   const ref = useRef(null)
 
   const { field: removeField } = useController({
@@ -65,7 +75,7 @@ const InputFile = ({ control, place }: IInputFile) => {
       <Flex
         textStyle="infoLabel"
         justifyContent="space-between"
-        mb={4}
+        mb={{ base: 0, md: 4 }}
         pr={2.5}
       >
         <Text>{t('form.filesLabel')}</Text>
@@ -108,16 +118,21 @@ const InputFile = ({ control, place }: IInputFile) => {
       {field.value.length > 0 ? (
         <Box>
           <Flex
+            display={{ base: 'none', md: 'flex' }}
             backgroundColor="blue.200"
             color="grayText.1"
             py={2.5}
             alignItems="center"
             lineHeight="1.8"
           >
-            <Spacer w="40px" flex="none" />
+            <Spacer
+              w="40px"
+              flex="none"
+              display={{ base: 'none', md: 'flex' }}
+            />
             <Text
               borderLeft="1px solid"
-              borderColor="gray.200"
+              borderColor={{ base: 'transparent', md: 'gray.200' }}
               pl={2.5}
               w="35%"
             >
@@ -136,14 +151,19 @@ const InputFile = ({ control, place }: IInputFile) => {
             <Flex
               key={file?.name}
               py={2.5}
-              alignItems="center"
+              alignItems={{ base: 'flex-start', md: 'center' }}
               borderBottom="1px solid"
               borderColor="gray.100"
+              direction={{ base: 'column', md: 'row' }}
             >
-              <Flex w="40px" justifyContent="center">
+              <Flex
+                w="40px"
+                justifyContent="center"
+                display={{ base: 'none', md: 'flex' }}
+              >
                 <Attachment />
               </Flex>
-              <Text pl={2.5} w="35%">
+              <Text pl={2.5} w={{ base: '100%', md: '35%' }}>
                 {file?.name}
               </Text>
               <Flex
@@ -151,17 +171,32 @@ const InputFile = ({ control, place }: IInputFile) => {
                 flex={1}
                 alignItems="center"
                 pl={2.5}
+                pr={0.5}
+                w={{ base: '100%', md: 'auto' }}
               >
-                <Box>
+                <Box flex={1} pt={{ base: 2, md: 0 }}>
                   <Input
                     name={`files.name[${index}]`}
                     value={file.caption || ''}
                     onChange={(e) => updateName(e.currentTarget.value, index)}
                     size="sm"
-                    w="20rem"
+                    placeholder={isMobile && t('form.files.displayName')}
+                    w={{ base: '100%', lg: '20rem' }}
                   />
                 </Box>
+                {/* <Circle
+                    size="15px"
+                    border="1px solid"
+                    borderColor="black"
+                    fontSize="22px"
+                    onClick={() => deleteFile(index, file?.id)}
+                    cursor="pointer"
+                  >
+                    -
+                  </Circle> */}
+
                 <Button
+                  ml={{ base: 3, md: 0 }}
                   colorScheme="gray"
                   variant="outline"
                   color="grayText.1"
@@ -180,6 +215,7 @@ const InputFile = ({ control, place }: IInputFile) => {
           borderColor="gray.50"
           pb={4}
           pl={2.5}
+          mt={{ base: 4, md: 0 }}
           color="gray.400"
         >
           {t('form.files.noFile')}

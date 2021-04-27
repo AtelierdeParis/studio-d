@@ -76,7 +76,7 @@ const BookingScheduleSlot = (props: Props) => {
       h="100%"
       border="2px solid"
       borderColor="transparent"
-      {...(user?.type === 'company' && styleSelectable)}
+      {...((!Boolean(user) || user?.type === 'company') && styleSelectable)}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {

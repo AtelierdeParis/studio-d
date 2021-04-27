@@ -24,7 +24,12 @@ const PlaceGrid = ({
 }: Props) => {
   return (
     <Box>
-      <SimpleGrid columns={4} columnGap={5} rowGap={8} ref={gridRef}>
+      <SimpleGrid
+        columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
+        columnGap={5}
+        rowGap={{ base: 3, md: 8 }}
+        ref={gridRef}
+      >
         <Loading isLoading={isLoading} skeleton={<PlaceGridCardSkeleton />}>
           {places.map((place) => (
             <PlaceGridCard

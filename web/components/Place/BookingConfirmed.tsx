@@ -6,23 +6,18 @@ import { useTranslation } from 'next-i18next'
 const BookingConfirmed = ({ structureName }) => {
   const { t } = useTranslation('place')
   return (
-    <Flex maxW="38rem" m="0 auto" direction="column">
-      <Heading
-        as="h1"
-        textStyle="h1"
-        whiteSpace="pre"
-        mt={16}
-        mb={12}
-        textAlign="center"
-      >
+    <Flex maxW="38rem" m="0 auto" direction="column" px={3}>
+      <Heading as="h1" textStyle="h1" layerStyle="mainTitle" textAlign="center">
         {t('confirmed.title')}
       </Heading>
-      <Text mb={14}>{t('confirmed.text', { name: structureName })}</Text>
+      <Text mb={{ base: 6, md: 14 }}>
+        {t('confirmed.text', { name: structureName })}
+      </Text>
       <Button
         as={Link}
         href="/"
         alignSelf="center"
-        mb={20}
+        mb={{ base: 0, md: 20 }}
         variant="unstyled"
         display="flex"
         alignItems="center"

@@ -23,7 +23,8 @@ const BookingRecap = () => {
       bgColor="white"
       borderRadius="xl"
       justifyContent="space-between"
-      alignItems="center"
+      alignItems={{ base: 'flex-start', md: 'center' }}
+      direction={{ base: 'column', md: 'row' }}
     >
       {!user ? (
         <>
@@ -32,7 +33,12 @@ const BookingRecap = () => {
               {t(`detail.notAuth${isPlural}`, { nb: selected.length })}
             </Text>
           </Box>
-          <ButtonGroup spacing={5} alignItems="center">
+          <ButtonGroup
+            spacing={5}
+            alignSelf="center"
+            alignItems="center"
+            mt={{ base: 6, md: 0 }}
+          >
             <Button variant="unstyled" fontSize="md">
               <Link href={ROUTE_SIGNUP}>{t('common:nav.signup')}</Link>
             </Button>
@@ -58,7 +64,9 @@ const BookingRecap = () => {
                 <BookingSelection events={selected} />
               </Box>
               <Button
+                mt={{ base: 6, md: 0 }}
                 size="lg"
+                alignSelf="center"
                 onClick={() => {
                   window.scrollTo(0, 0)
                   setConfirmView(true)

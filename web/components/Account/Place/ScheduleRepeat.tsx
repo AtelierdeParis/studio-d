@@ -2,7 +2,7 @@ import React, { useMemo, useEffect, useContext } from 'react'
 import {
   Flex,
   Checkbox,
-  HStack,
+  Stack,
   Select,
   FormLabel,
   Text,
@@ -67,7 +67,12 @@ const ScheduleRepeat = ({ control }: IScheduleRepeat) => {
       </Flex>
       {repeat && (
         <>
-          <HStack spacing={5} w="100%" alignItems="flex-start">
+          <Stack
+            direction={{ base: 'column', sm: 'row' }}
+            spacing={5}
+            w="100%"
+            alignItems="flex-start"
+          >
             <FormField label={t('schedule.repeatNb')} errors={errors.repeatNb}>
               <InputNumber name="repeatNb" control={control} min={0} />
             </FormField>
@@ -90,7 +95,7 @@ const ScheduleRepeat = ({ control }: IScheduleRepeat) => {
                 <option value="month">{t('schedule.repeatType.month')}</option>
               </Select>
             </FormField>
-          </HStack>
+          </Stack>
           {(errors.repeatNb || errors.repeatType) && (
             <Text color="red.500" fontSize="sm">
               {t('schedule.repeatError')}

@@ -35,8 +35,8 @@ const EditPlace = ({ slug }: IEditPlace) => {
 
   return (
     <Loading isLoading={isLoading} isCentered>
-      <Box pt={8}>
-        <Text pb={6} ml={2.5} textStyle="accountTitle">
+      <Box pt={{ base: 3, md: 8 }} pb={{ base: 8, md: 0 }}>
+        <Text pb={6} ml={{ base: 0, schedule: 2.5 }} textStyle="accountTitle">
           {place?.name}
         </Text>
         <Tabs isLazy defaultIndex={!isComplete ? 0 : Number(query?.index) || 0}>

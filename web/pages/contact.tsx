@@ -55,13 +55,13 @@ const Contact = ({ page }: { page?: Page }) => {
   }
 
   return (
-    <Container maxW="container.sm">
-      <Heading as="h1" textStyle="h1" mt={16} mb={12} textAlign="center">
+    <Container maxW="container.sm" px={0}>
+      <Heading as="h1" textStyle="h1" layerStyle="mainTitle" textAlign="center">
         {page?.title || t('title')}
       </Heading>
-      {page?.text && <Text mb={10}>{page.text}</Text>}
+      {page?.text && <Text mb={{ base: 5, md: 10 }}>{page.text}</Text>}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <VStack spacing={6} mb={10}>
+        <VStack spacing={{ base: 4, md: 6 }} mb={{ base: 4, md: 10 }}>
           <FormField label={t('name.label')} errors={errors.name} isRequired>
             <Input
               name="name"

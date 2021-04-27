@@ -4,15 +4,15 @@ import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Heading, Box } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
-import { ROUTE_USE_POLICY } from '~constants'
+import { ROUTE_CGU } from '~constants'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
 
-interface ICharte {
+interface Props {
   page: Page
 }
 
-const Charte = ({ page }: ICharte) => {
+const CGU = ({ page }: Props) => {
   return (
     <>
       <Heading
@@ -35,7 +35,8 @@ const Charte = ({ page }: ICharte) => {
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   locale,
 }) => {
-  const page = await getPage(ROUTE_USE_POLICY)
+  const page = await getPage(ROUTE_CGU)
+
   if (!page) return { redirect: { destination: '/', permanent: false } }
 
   return {
@@ -46,4 +47,4 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
   }
 }
 
-export default Charte
+export default CGU

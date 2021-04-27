@@ -24,7 +24,12 @@ const ScheduleAbout = ({ place }: IScheduleAbout) => {
       })
   }
   return (
-    <Box mt={8} pt={8} borderTop="1px solid" borderColor="gray.100">
+    <Box
+      mt={{ base: 4, schedule: 8 }}
+      pt={{ base: 4, schedule: 8 }}
+      borderTop="1px solid"
+      borderColor="gray.100"
+    >
       <FormField
         label={t('schedule.scheduleDetails.label')}
         info={t('schedule.scheduleDetails.info')}

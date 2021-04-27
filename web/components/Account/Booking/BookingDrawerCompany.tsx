@@ -7,7 +7,7 @@ import Link from '~components/Link'
 const BookingDrawerCompany = ({ company }) => {
   const { t } = useTranslation('booking')
   return (
-    <>
+    <Box fontSize={{ base: 'sm', sm: 'md' }}>
       <Box>
         <Text fontFamily="mabry medium" fontWeight="500">
           {company?.structureName}
@@ -32,7 +32,6 @@ const BookingDrawerCompany = ({ company }) => {
           </Link>
         )}
       </Box>
-
       <Box pt={5}>
         <PlaceInfo label={t('siret')} value={company?.siret} />
         <PlaceInfo label={t('ape')} value={company?.ape} />
@@ -40,7 +39,7 @@ const BookingDrawerCompany = ({ company }) => {
         <PlaceInfo label={t('insuranceNb')} value={company?.insuranceNumber} />
         <PlaceInfo label={t('licence')} value={company?.license} />
       </Box>
-    </>
+    </Box>
   )
 }
 

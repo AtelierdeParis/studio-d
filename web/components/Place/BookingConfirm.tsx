@@ -31,7 +31,6 @@ interface Props {
 }
 
 const BookingConfirm = ({ events, place, back }: Props) => {
-  const [session] = useSession()
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const [isConfirmed, setConfirmed] = useState(false)
@@ -73,13 +72,24 @@ const BookingConfirm = ({ events, place, back }: Props) => {
   }
 
   return (
-    <Box maxW="container.lg" m="0 auto" pt={12}>
-      <Heading as="h1" textStyle="h1" mt={10} mb={18} textAlign="center">
+    <Box
+      maxW="container.lg"
+      m="0 auto"
+      pt={{ base: 0, lg: 12 }}
+      px={{ base: 3, lg: 0 }}
+    >
+      <Heading
+        as="h1"
+        textStyle="h1"
+        mt={{ base: 4, sm: 10 }}
+        mb={{ base: 8, sm: 18 }}
+        textAlign="center"
+      >
         {t('confirm.title')}
       </Heading>
-      <Flex>
-        <Box pr={12}>
-          <Box px={8}>
+      <Flex direction={{ base: 'column-reverse', lg: 'row' }}>
+        <Box pr={{ base: 0, lg: 12 }}>
+          <Box px={{ base: 0, lg: 8 }}>
             <FormField label={t('confirm.message.label')}>
               <Textarea
                 mt={1}
@@ -89,7 +99,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                 onChange={(event) => setMessage(event.target.value)}
               />
             </FormField>
-            <Text pt={10} px={2}>
+            <Text pt={{ base: 6, lg: 10 }} px={{ base: 0, lg: 2 }}>
               <Trans
                 i18nKey="place:confirm.textCharte"
                 components={{
@@ -105,9 +115,9 @@ const BookingConfirm = ({ events, place, back }: Props) => {
             </Text>
           </Box>
           <Flex
-            mt={10}
+            mt={{ base: 2, lg: 10 }}
             layerStyle="blueBox"
-            p={10}
+            p={{ base: 4, lg: 10 }}
             color="grayText.1"
             direction="column"
           >
@@ -147,7 +157,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
             </ButtonGroup>
           </Flex>
         </Box>
-        <Box minW="300px">
+        <Box minW={{ base: 'auto', lg: '350px' }}>
           <Flex>
             <Box>
               <AspectRatio
@@ -163,7 +173,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                 />
               </AspectRatio>
             </Box>
-            <Box pl={6}>
+            <Box pl={{ base: 3, sm: 6 }}>
               <Text
                 fontFamily="mabry medium"
                 fontWeight="500"
@@ -180,7 +190,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
               </Flex>
             </Box>
           </Flex>
-          <Divider my={6} />
+          <Divider my={6} opacity="0.5" />
           <Box>
             <Trans
               i18nKey={`place:confirm.recap${isPlural}`}
@@ -201,6 +211,11 @@ const BookingConfirm = ({ events, place, back }: Props) => {
           >
             {t('confirm.change')}
           </Button>
+          <Divider
+            my={6}
+            display={{ base: 'block', lg: 'none' }}
+            opacity="0.5"
+          />
         </Box>
       </Flex>
     </Box>

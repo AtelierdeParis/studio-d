@@ -23,23 +23,27 @@ const FAQ = () => {
   const { data: faq } = useFAQ()
 
   return (
-    <Container maxW="container.md">
+    <Container maxW="container.md" px={0}>
       <Heading
         as="h1"
         textStyle="h1"
-        mt={16}
-        mb={20}
+        layerStyle="mainTitle"
         textAlign="center"
         mx="auto"
       >
         {t('faq.title')}
       </Heading>
       {faq && faq.length > 0 ? (
-        <VStack spacing={14} alignItems="flex-start" w="100%" pb={20}>
+        <VStack
+          spacing={{ base: 10, md: 14 }}
+          alignItems="flex-start"
+          w="100%"
+          pb={{ base: 0, md: 20 }}
+        >
           {faq.map((category) => (
             <Box key={category.id} w="100%">
               <Text
-                fontSize="2xl"
+                fontSize={{ base: 'md', md: '2xl' }}
                 fontWeight="500"
                 fontFamily="mabry medium"
                 pb={5}
@@ -48,8 +52,8 @@ const FAQ = () => {
                 {category.name}
               </Text>
               <Accordion allowMultiple allowToggle>
-                {category.faq_questions.map(({ answer, question }) => (
-                  <AccordionItem borderColor="gray.100">
+                {category.faq_questions.map(({ answer, question, id }) => (
+                  <AccordionItem borderColor="gray.100" key={id}>
                     {({ isExpanded }) => (
                       <>
                         <AccordionButton
@@ -63,7 +67,7 @@ const FAQ = () => {
                             <Box
                               py={1}
                               textAlign="left"
-                              fontSize="16px"
+                              fontSize={{ base: 'sm', sm: 'md', md: '16px' }}
                               flex={1}
                             >
                               {question}

@@ -1,5 +1,5 @@
-import React, { useMemo, useRef, useEffect, useState } from 'react'
-import { Flex, VStack } from '@chakra-ui/react'
+import React, { useRef, useEffect, useState } from 'react'
+import { Flex, VStack, Text, Box } from '@chakra-ui/react'
 import { useConversation } from '~hooks/useConversation'
 import WriteMessage from '~components/Account/Message/WriteMessage'
 import Loading from '~components/Loading'
@@ -10,12 +10,16 @@ import { client } from '~api/client-api'
 import { useQueryClient } from 'react-query'
 import RightAsideMessage from '~components/Account/Message/RightAsideMessage'
 import { useBookings } from '~hooks/useBookings'
+import Chevron from 'public/assets/img/chevron-up.svg'
+import { useTranslation } from 'next-i18next'
 interface Props {
   id: string
   user: UsersPermissionsUser
+  back: () => void
 }
 
-const Conversation = ({ id, user }: Props) => {
+const Conversation = ({ id, user, back }: Props) => {
+  const { t } = useTranslation('booking')
   const listRef = useRef(null)
   const [hasScrolled, setScrolled] = useState(false)
   const queryClient = useQueryClient()
@@ -90,6 +94,23 @@ const Conversation = ({ id, user }: Props) => {
   return (
     <Loading isLoading={isLoading} h="100%" flex={1}>
       <Flex flex={1} direction="column">
+        <Flex
+          alignItems="center"
+          onClick={back}
+          px={2}
+          py={2}
+          borderBottom="1px solid"
+          borderColor="gray.100"
+          cursor="pointer"
+          display={{ base: 'flex', md: 'none' }}
+        >
+          <Box transform="rotate(90deg)">
+            <Chevron />
+          </Box>
+          <Text mt={0.5} pl={1}>
+            {t('back')}
+          </Text>
+        </Flex>
         <Flex
           direction="column"
           justifyContent="space-between"

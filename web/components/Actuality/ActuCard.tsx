@@ -25,7 +25,13 @@ const ActuCard = ({ actu }: IActuCard) => {
           _groupHover={{ transform: 'scale(1.05)' }}
         />
       </AspectRatio>
-      <Flex px={4} py={4} direction="column" alignItems="flex-start" flex={1}>
+      <Flex
+        px={{ base: 0, md: 4 }}
+        py={4}
+        direction="column"
+        alignItems="flex-start"
+        flex={1}
+      >
         <Box>
           <LinkOverlay
             href={{
@@ -42,7 +48,13 @@ const ActuCard = ({ actu }: IActuCard) => {
               date: format(actu.created_at, 'd MMMM yyyy'),
             })}
           </Text>
-          <Text fontSize="sm" color="gray.600" mt={5} noOfLines={4}>
+          <Text
+            fontSize="sm"
+            color="gray.600"
+            mt={5}
+            noOfLines={4}
+            wordBreak="break-all"
+          >
             {removeMd(actu.content)}
           </Text>
         </Box>

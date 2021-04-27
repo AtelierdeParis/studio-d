@@ -18,6 +18,7 @@ const SearchSelect = ({ control, children, name, ...rest }: ISearchSelect) => {
   return (
     <Box pos="relative">
       <Select
+        fontSize={{ base: 'sm', sm: 'md' }}
         value={field.value}
         name={name}
         {...rest}

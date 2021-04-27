@@ -19,6 +19,7 @@ const Button = {
       bgColor: 'tag.red',
       h: '40px',
       color: 'black',
+      whiteSpace: 'pre-line',
       _hover: {
         bgColor: '#efc8c8',
       },
@@ -28,6 +29,7 @@ const Button = {
       bgColor: 'tag.green',
       h: '40px',
       color: 'black',
+      whiteSpace: 'pre-line',
       _hover: {
         bgColor: '#c7ead0',
       },
@@ -36,6 +38,7 @@ const Button = {
       justifyContent: 'flex-start',
       bgColor: 'tag.blue',
       color: 'blue.500',
+      whiteSpace: 'pre-line',
       h: '40px',
       _hover: {
         bgColor: '#d9def7',
@@ -71,18 +74,18 @@ const Button = {
   },
   sizes: {
     md: {
-      fontSize: 'md',
-      px: 4,
-      h: '30px',
+      fontSize: { base: '13px', sm: 'md' },
+      px: { base: 3, md: 4 },
+      h: { base: '25px', sm: '28px', md: '30px' },
     },
     lg: {
-      fontSize: 'md',
-      px: 4,
-      h: '34px',
+      fontSize: { base: 'sm', sm: 'md' },
+      px: { base: 4 },
+      h: { base: '28px', sm: '30px', md: '34px' },
     },
     xl: {
-      px: 6,
-      h: '40px',
+      px: { base: 3, md: 6 },
+      h: { base: '32px', md: '40px' },
     },
   },
 }

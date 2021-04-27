@@ -87,10 +87,10 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
           </Text>
           <VStack spacing={1} alignItems="flex-start">
             {available.map((dispo) => (
-              <Box key={dispo.id}>
+              <Box key={dispo.id} fontSize={{ base: 'sm', sm: 'md' }}>
                 <Flex alignItems="center">
                   <Circle size="6px" mb={0.5} bgColor="gray.200" />
-                  <Flex pl={3} alignItems="center">
+                  <Flex pl={3} alignItems="center" flexWrap="wrap">
                     <Text>{format(dispo.start)}</Text>
                     {dispo.end !== dispo.start && (
                       <Text pl={1.5}>

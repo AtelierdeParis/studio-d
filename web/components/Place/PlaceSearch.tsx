@@ -7,6 +7,7 @@ import {
   ButtonGroup,
   Button,
   useTheme,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import FormField from '~components/FormField'
 import InputCity from '~components/InputCity'
@@ -34,6 +35,7 @@ const PlaceSearch = () => {
   const { t } = useTranslation('place')
   const form = useFormContext()
   const router = useRouter()
+  const isMobile = useBreakpointValue({ base: true, lg: false })
 
   const onSubmit = ({ sortBy, ...rest }) => {
     router.push({
@@ -46,18 +48,20 @@ const PlaceSearch = () => {
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Flex
         bgColor="blue.100"
-        px={5}
-        pt={6}
-        pb={5}
-        borderRadius="sm"
+        px={{ base: 3, md: 5 }}
+        py={{ base: 4, md: 6 }}
+        borderRadius="md"
         position="relative"
         zIndex={100}
-        mb={10}
+        mb={{ base: 0, sm: 10 }}
         mt={6}
         direction="column"
       >
-        <SimpleGrid columns={4} w="100%">
-          <Flex alignItems="flex-start">
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} rowGap={0} w="100%">
+          <Flex
+            alignItems="flex-start"
+            direction={{ base: 'column', md: 'row' }}
+          >
             <Flex w="100%" pt={1}>
               <Pin
                 stroke={theme.colors.blue['500']}
@@ -74,7 +78,18 @@ const PlaceSearch = () => {
                 </FormField>
               </Box>
             </Flex>
-            <Divider orientation="vertical" mx={3.5} />
+            <Divider
+              orientation="vertical"
+              mx={3.5}
+              opacity={0.5}
+              display={{ base: 'none', sm: 'none', md: 'block' }}
+            />
+            <Divider
+              orientation="horizontal"
+              my={4}
+              opacity={0.5}
+              display={{ base: 'block', md: 'none' }}
+            />
           </Flex>
           <Flex alignItems="flex-start" pos="relative">
             <Flex w="100%">
@@ -89,10 +104,19 @@ const PlaceSearch = () => {
                 />
               </Box>
             </Flex>
-            <Divider orientation="vertical" mx={3.5} />
+            <Divider
+              orientation="vertical"
+              mx={3.5}
+              opacity={0.5}
+              display={{ base: 'none', lg: 'block' }}
+            />
           </Flex>
-          <Flex alignItems="flex-start" pt={1}>
-            <Box flex={1}>
+          <Flex
+            alignItems="flex-start"
+            pt={1}
+            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+          >
+            <Box flex={1} pt={{ base: 6, md: 0 }}>
               <FormField>
                 <Select
                   name="surface"
@@ -109,7 +133,7 @@ const PlaceSearch = () => {
                   </option>
                 </Select>
               </FormField>
-              <Divider my={1.5} />
+              <Divider my={1.5} opacity={0.5} />
               <FormField>
                 <Select
                   name="floor"
@@ -125,7 +149,7 @@ const PlaceSearch = () => {
               </FormField>
               {hasMoreFilters && (
                 <>
-                  <Divider my={1.5} />
+                  <Divider my={1.5} opacity={0.5} />
                   <FormField>
                     <Select
                       name="mirror"
@@ -136,7 +160,7 @@ const PlaceSearch = () => {
                       <option value="true">{t('search.mirror.yes')}</option>
                     </Select>
                   </FormField>
-                  <Divider my={1.5} />
+                  <Divider my={1.5} opacity={0.5} />
                   <FormField>
                     <Select
                       name="technicalStaff"
@@ -152,10 +176,24 @@ const PlaceSearch = () => {
                 </>
               )}
             </Box>
-            <Divider orientation="vertical" mx={3.5} />
+            <Divider
+              orientation="vertical"
+              mx={3.5}
+              opacity={0.5}
+              display={{ base: 'none', md: 'block' }}
+            />
           </Flex>
-          <Flex alignItems="flex-start" pt={1}>
+          <Flex
+            alignItems="flex-start"
+            pt={{ base: 0, md: 1 }}
+            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+          >
             <Box flex={1}>
+              <Divider
+                my={1.5}
+                opacity={0.5}
+                display={{ base: 'block', md: 'none' }}
+              />
               <FormField>
                 <Select
                   name="height"
@@ -172,7 +210,7 @@ const PlaceSearch = () => {
                   </option>
                 </Select>
               </FormField>
-              <Divider my={1.5} />
+              <Divider my={1.5} opacity={0.5} />
               <FormField>
                 <Select
                   name="accomodation"
@@ -185,7 +223,7 @@ const PlaceSearch = () => {
               </FormField>
               {hasMoreFilters && (
                 <>
-                  <Divider my={1.5} />
+                  <Divider my={1.5} opacity={0.5} />
                   <FormField>
                     <Select
                       name="danceBar"

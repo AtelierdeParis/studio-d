@@ -37,7 +37,14 @@ const RightAsideMessage = ({ bookings, user }: Props) => {
   const { t } = useTranslation('booking')
 
   return (
-    <Box borderLeft="1px solid" borderColor="gray.100" w="240px" px={5} py={6}>
+    <Box
+      borderLeft="1px solid"
+      borderColor="gray.100"
+      w="240px"
+      px={5}
+      py={6}
+      display={{ base: 'none', lg: 'block' }}
+    >
       <Text
         textTransform="uppercase"
         fontSize="sm"

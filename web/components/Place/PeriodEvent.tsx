@@ -43,7 +43,7 @@ const PeriodEvent = ({ isMonth, start, end }: Props) => {
       right={3}
       alignItems="flex-end"
       direction={isLastDay ? 'column' : 'row'}
-      fontSize="sm"
+      fontSize={{ base: '11px', sm: 'sm' }}
       {...(isMonth && stylePeriodMonth)}
       {...(isLastDay && styleLastDay)}
     >

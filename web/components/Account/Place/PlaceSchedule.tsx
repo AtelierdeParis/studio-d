@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box } from '@chakra-ui/react'
+import { Flex, Box, useBreakpointValue } from '@chakra-ui/react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { schema } from '~components/Account/Place/ScheduleForm'
@@ -8,12 +8,14 @@ import ScheduleProvider from '~components/Account/Place/ScheduleProvider'
 import ScheduleRightContent from '~components/Account/Place/ScheduleRightContent'
 import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import { Espace } from '~typings/api'
+import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
 
 interface Props {
   place: Espace
 }
 
 const PlaceSchedule = ({ place }: Props) => {
+  const isLarge = useBreakpointValue({ base: false, xl: true })
   const form = useForm({
     resolver: yupResolver(schema),
   })
@@ -21,9 +23,10 @@ const PlaceSchedule = ({ place }: Props) => {
   return (
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
-        <Flex>
+        <Flex direction={{ base: 'column-reverse', schedule: 'row' }}>
+          {!isLarge && <ScheduleAbout place={place} />}
           <Schedule />
-          <Box flex={1} pl={8}>
+          <Box flex={1} pl={{ base: 0, schedule: 8 }}>
             <ScheduleRightContent />
           </Box>
         </Flex>
