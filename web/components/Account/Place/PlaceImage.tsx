@@ -16,11 +16,15 @@ import { useTranslation } from 'next-i18next'
 import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import Check from 'public/assets/img/check.svg'
 import FallbackImage from '~components/FallbackImage'
+import { Router } from 'next/router'
+import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
+import { useRouter } from 'next/router'
 interface Props {
   place: Espace
 }
 
 const PlaceImage = ({ place }: Props) => {
+  const router = useRouter()
   const { t } = useTranslation('place')
   const [files, setFiles] = useState<any>(place?.images || [])
   const newFiles = useMemo(() => files.filter((file) => !file.id), [files])
@@ -70,6 +74,7 @@ const PlaceImage = ({ place }: Props) => {
         field: 'images',
       })
         .then((res) => {
+          const redirect = files.length === newFiles.length
           setFiles(
             files.map((file) => {
               if (file.id) return file
@@ -80,6 +85,12 @@ const PlaceImage = ({ place }: Props) => {
               return file
             }),
           )
+          if (redirect) {
+            router.push({
+              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+              query: { id: place.slug, index: 2 },
+            })
+          }
           successToast(t('successImg'))
         })
         .catch(() => errorToast(t('common:error')))

@@ -25,7 +25,10 @@ const PlaceSchedule = ({ place }: Props) => {
   return (
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
-        <Flex direction={{ base: 'column-reverse', schedule: 'row' }}>
+        <Flex
+          direction={{ base: 'column-reverse', schedule: 'row' }}
+          pb={{ base: 8, lg: 4 }}
+        >
           {!isLarge && (
             <>
               <ScheduleAbout place={place} />

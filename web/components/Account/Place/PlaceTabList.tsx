@@ -4,13 +4,14 @@ import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 
-const TabPlace = ({ isDisabled, children }) => {
+const TabPlace = ({ isDisabled, onClick = null, children }) => {
   return (
     <Tab
       px={0}
       mx={2.5}
       isDisabled={isDisabled}
       mb="-1px"
+      onClick={onClick}
       _selected={{
         color: 'blue.500',
         fontFamily: 'mabry medium',
@@ -27,12 +28,14 @@ interface Props {
   disabledIndexes?: number[]
   isComplete?: boolean
   place?: Espace
+  setIndex?: (index: number) => void
 }
 
 const PriceTabList = ({
   disabledIndexes = [],
   place = null,
   isComplete,
+  setIndex = null,
 }: Props) => {
   const { t } = useTranslation('place')
 
@@ -49,13 +52,22 @@ const PriceTabList = ({
       borderBottom="1px solid"
       mb={{ base: 2, md: 6 }}
     >
-      <TabPlace isDisabled={disabledIndexes.includes(0)}>
+      <TabPlace
+        isDisabled={disabledIndexes.includes(0)}
+        onClick={() => setIndex(0)}
+      >
         {t('tabs.info')}
       </TabPlace>
-      <TabPlace isDisabled={!isComplete ? true : disabledIndexes.includes(1)}>
+      <TabPlace
+        isDisabled={!isComplete ? true : disabledIndexes.includes(1)}
+        onClick={() => setIndex(1)}
+      >
         {t('tabs.image')}
       </TabPlace>
-      <TabPlace isDisabled={!isComplete ? true : disabledIndexes.includes(2)}>
+      <TabPlace
+        isDisabled={!isComplete ? true : disabledIndexes.includes(2)}
+        onClick={() => setIndex(2)}
+      >
         {t('tabs.slot', { nb: nbAvailable })}
       </TabPlace>
     </TabList>

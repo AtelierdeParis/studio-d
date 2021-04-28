@@ -164,7 +164,8 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     <Flex
       direction="column"
       color="grayText.1"
-      w={{ base: '100%', md: '20rem' }}
+      minW={{ base: '100%', md: '15rem' }}
+      maxW={{ base: '100%', md: '15rem' }}
       h={{ base: 'fit-content', md: '100vh' }}
       pos="relative"
       zIndex={999}

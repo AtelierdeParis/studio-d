@@ -107,6 +107,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                     <Link
                       href={ROUTE_USE_POLICY}
                       textDecoration="underline"
+                      isExternal
                       color="blue.500"
                     />
                   ),
