@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { BugsnagErrorBoundary } from '@bugsnag/plugin-react'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Provider } from 'next-auth/client'
 import NextApp, { AppProps } from 'next/app'
@@ -7,11 +8,17 @@ import Layout from '~components/Layout'
 import { QueryClientProvider } from 'react-query'
 import { appWithTranslation } from 'next-i18next'
 import theme from '~theme'
+import Bugsnag, { isBugsnagEnabled } from '~utils/bugsnag'
 import { initYupLocale } from '~initYupLocale'
 import '../styles/globals.css'
 import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
+
+let ErrorBoundary: BugsnagErrorBoundary
+if (isBugsnagEnabled) {
+  ErrorBoundary = Bugsnag.getPlugin('react').createErrorBoundary(React)
+}
 
 const App = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -28,6 +35,17 @@ const App = ({ Component, pageProps }: AppProps) => {
       </QueryClientProvider>
     </Provider>
   )
+
+  if (isBugsnagEnabled) {
+    return (
+      <ErrorBoundary
+        // @ts-ignore
+        FallbackComponent={ErrorPage}
+      >
+        {content}
+      </ErrorBoundary>
+    )
+  }
 
   return content
 }
