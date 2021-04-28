@@ -2,6 +2,7 @@ import { i18n } from 'next-i18next'
 import * as yup from 'yup'
 
 export const initYupLocale = () => {
+  if (!i18n) return null
   return yup.setLocale({
     mixed: {
       notType: i18n.t('yup:mixed.notType', {
