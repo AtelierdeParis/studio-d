@@ -2,6 +2,7 @@ import React, { Fragment, useMemo } from 'react'
 import { format } from '~utils/date'
 import Message from 'public/assets/img/message.svg'
 import Tag from '~components/Tag'
+import CircleStatus from '~components/CircleStatus'
 import Link from '~components/Link'
 import { Booking } from '~typings/api'
 import { Circle, Text, Flex, Button, Box } from '@chakra-ui/react'
@@ -31,23 +32,53 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
 
   return (
     <Fragment key={booking?.id}>
-      <Cell status={status}>
+      <Cell
+        status={status}
+        display={{ base: 'none', lg: 'flex' }}
+        onClick={() => onSelect(booking.id)}
+      >
         <Text>{booking?.id}</Text>
       </Cell>
-      <Cell status={status} fullOpacity>
+      <Cell
+        status={status}
+        fullOpacity
+        display={{ base: 'none', lg: 'flex' }}
+        onClick={() => onSelect(booking.id)}
+      >
         <Tag status={status} />
       </Cell>
-      <Cell status={status}>
-        <Text isTruncated>{booking?.espace?.name}</Text>
+      <Cell
+        status={status}
+        pl={{ base: 1.5, sm: 5 }}
+        alignItems="center"
+        textOverflow="ellipsis"
+        whiteSpace="nowrap"
+        overflow="hidden"
+        onClick={() => onSelect(booking.id)}
+      >
+        <Flex alignItems="center" flex={1} w="100%">
+          <CircleStatus
+            status={status}
+            display={{ base: 'block', lg: 'none' }}
+            mr={3}
+          />
+          <Text isTruncated w="100%">
+            {booking?.espace?.name}
+          </Text>
+        </Flex>
       </Cell>
-      <Cell status={status}>
+      <Cell
+        status={status}
+        display={{ base: 'none', xl: 'flex' }}
+        onClick={() => onSelect(booking.id)}
+      >
         <Text isTruncated>
           {user.type === 'place'
             ? booking?.company?.structureName
             : booking?.place?.structureName}
         </Text>
       </Cell>
-      <Cell status={status}>
+      <Cell status={status} onClick={() => onSelect(booking.id)}>
         <Flex direction="column">
           {booking?.disponibilities.map((dispo) => (
             <Flex
@@ -72,7 +103,12 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
           ))}
         </Flex>
       </Cell>
-      <Cell status={status} fullOpacity>
+      <Cell
+        status={status}
+        fullOpacity
+        display={{ base: 'none', lg: 'flex' }}
+        cursor="auto"
+      >
         <Box pos="relative">
           <Button
             px={2}
@@ -99,6 +135,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
           )}
         </Box>
         <Link
+          display={{ base: 'none', lg: 'block' }}
           href={`${ROUTE_ACCOUNT_MESSAGE}?conversation=${target}`}
           as={`${ROUTE_ACCOUNT_MESSAGE}/${target}`}
         >
@@ -116,6 +153,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
                 right="0"
               />
             )}
+
             <Message />
           </Box>
         </Link>

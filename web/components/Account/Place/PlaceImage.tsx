@@ -5,21 +5,22 @@ import {
   Flex,
   Button,
   Image,
-  Text,
+  AspectRatio,
 } from '@chakra-ui/react'
 import Dropzone from '~components/Account/Place/Dropzone'
 import { client } from '~api/client-api'
 import { addFiles } from '~utils/file'
-import { Espace } from '~typings/api'
+import { Espace, UploadFile } from '~typings/api'
 import useToast from '~hooks/useToast'
 import { useTranslation } from 'next-i18next'
 import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import Check from 'public/assets/img/check.svg'
-interface IPlaceImage {
+import FallbackImage from '~components/FallbackImage'
+interface Props {
   place: Espace
 }
 
-const PlaceImage = ({ place }: IPlaceImage) => {
+const PlaceImage = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const [files, setFiles] = useState<any>(place?.images || [])
   const newFiles = useMemo(() => files.filter((file) => !file.id), [files])
@@ -38,11 +39,16 @@ const PlaceImage = ({ place }: IPlaceImage) => {
     ])
   }
 
-  const onRemove = (index: number, id?: number) => {
+  const onRemove = (index: number, file: UploadFile) => {
     const cloneArray = [...files]
     cloneArray.splice(index, 1)
     setFiles(cloneArray)
-    if (id) setRemoved([...removed, id])
+    if (file) setRemoved([...removed, file])
+  }
+
+  const onReset = () => {
+    setFiles(files.filter((file) => file.id).concat(removed))
+    setRemoved([])
   }
 
   const onSubmit = async () => {
@@ -50,7 +56,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
 
     if (removed.length > 0) {
       await Promise.all(
-        removed.map((id) => client.upload.filesDelete(id)),
+        removed.map(({ id }) => client.upload.filesDelete(id)),
       ).then(() => {
         if (newFiles.length === 0) successToast(t('successImg'))
       })
@@ -101,7 +107,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
               role="group"
             >
               <CloseButton
-                onClick={() => onRemove(index, file?.id || null)}
+                onClick={() => onRemove(index, file || null)}
                 pos="absolute"
                 top={1}
                 right={1}
@@ -117,13 +123,13 @@ const PlaceImage = ({ place }: IPlaceImage) => {
                   opacity: 1,
                 }}
               />
-              <Image
-                src={
-                  file?.preview
-                    ? file.preview
-                    : process.env.NEXT_PUBLIC_BACK_URL + file.url
-                }
-              />
+              <AspectRatio ratio={16 / 9} h="100%" w="100%">
+                <Image
+                  src={file?.preview ? file.preview : file.url}
+                  objectFit="cover"
+                  fallback={<FallbackImage />}
+                />
+              </AspectRatio>
             </Flex>
           ))}
         </SimpleGrid>
@@ -138,7 +144,7 @@ const PlaceImage = ({ place }: IPlaceImage) => {
               variant="unstyled"
               color="gray.400"
               _hover={{ color: 'gray.500' }}
-              onClick={() => setFiles(files.filter((file) => file.id))}
+              onClick={onReset}
             >
               {t('cancel')}
             </Button>

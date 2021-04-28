@@ -8,26 +8,30 @@ import Link from '~components/Link'
 import useToast from '~hooks/useToast'
 import { ROUTE_ACCOUNT_BOOKING, ROUTE_ACCOUNT_REQUEST } from '~constants'
 import { client } from '~api/client-api'
-import { Disponibility } from '~typings/api'
 import Delete from 'public/assets/img/delete.svg'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useQueryClient } from 'react-query'
 
-interface IScheduleDelete {
-  disponibilities: Disponibility[]
-  onClose: () => void
-}
-
-const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
+const ScheduleDelete = () => {
+  const { place, setToDelete, eventsIdToDelete } = useContext(ScheduleContext)
+  const dispos = useMemo(
+    () =>
+      eventsIdToDelete.map((eventId) => {
+        const event = place?.disponibilities.find(
+          (dispo) => dispo.id === eventId,
+        )
+        return event
+      }),
+    [eventsIdToDelete, place?.disponibilities],
+  )
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('place')
   const { successToast, errorToast } = useToast()
-  const { place, setToDelete } = useContext(ScheduleContext)
   const queryClient = useQueryClient()
 
   const { available, booked } = useMemo(
     () =>
-      disponibilities.reduce(
+      dispos.reduce(
         (total, event) => {
           if (event.status !== DisponibilityStatus.AVAILABLE)
             total.booked.push(event)
@@ -36,11 +40,9 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
         },
         { available: [], booked: [] },
       ),
-    [disponibilities],
+    [dispos],
   )
-  const isPlural = useMemo(() => (disponibilities.length > 1 ? 's' : ''), [
-    disponibilities,
-  ])
+  const isPlural = useMemo(() => (dispos.length > 1 ? 's' : ''), [dispos])
 
   const isAvailablePlural = useMemo(() => (available.length > 1 ? 's' : ''), [
     available,
@@ -73,10 +75,18 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
       .finally(() => setLoading(false))
   }
 
+  if (dispos.length === 0) return null
+
   return (
-    <Box w="100%">
+    <Box
+      w="100%"
+      pb={{ base: 6 }}
+      mb={{ base: 6 }}
+      borderBottom="1px solid"
+      borderColor="gray.100"
+    >
       <Text fontFamily="mabry medium" pb={2}>
-        {t(`schedule.delete.title${isPlural}`, { nb: disponibilities.length })}
+        {t(`schedule.delete.title${isPlural}`, { nb: dispos.length })}
       </Text>
       {available.length > 0 && (
         <>
@@ -125,7 +135,7 @@ const ScheduleDelete = ({ disponibilities = [], onClose }: IScheduleDelete) => {
               variant="unstyled"
               color="gray.500"
               ml={4}
-              onClick={onClose}
+              onClick={() => setToDelete([])}
             >
               {t(`schedule.cancel`)}
             </Button>

@@ -26,8 +26,17 @@ const PublishModal = ({ placeId }: IPublishModal) => {
 
   return (
     <Modal
+      w="100%"
       button={
-        <Button variant="line" borderBottomColor="blue.500">
+        <Button
+          w="100%"
+          variant="line"
+          px={{ base: 3, lg: 0 }}
+          py={{ base: 1.5, lg: 0 }}
+          justifyContent={{ base: 'flex-start', lg: 'center' }}
+          _hover={{ borderBottomColor: { base: 'transparent', lg: 'black' } }}
+          borderBottomColor={{ base: 'transparent', lg: 'blue.500' }}
+        >
           {t('list.publish')}
         </Button>
       }

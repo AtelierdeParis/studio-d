@@ -76,6 +76,7 @@ const ScheduleFilledUntil = ({ place }: IScheduleFilledUntil) => {
         onClick={() => setVisible(true)}
         fontFamily="mabry medium"
         textDecoration="underline"
+        px={0}
       >
         {t('schedule.modifyDate')}
       </Button>

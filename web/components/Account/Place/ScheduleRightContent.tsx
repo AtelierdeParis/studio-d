@@ -1,30 +1,14 @@
-import React, { useState, useContext, useMemo } from 'react'
+import React, { useState, useContext } from 'react'
 import ScheduleInfo from '~components/Account/Place/ScheduleInfo'
 import ScheduleForm from '~components/Account/Place/ScheduleForm'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 
-const ScheduleRightContent = () => {
+const ScheduleRightContent = ({ isLarge }) => {
   const [showForm, setShowForm] = useState(false)
-  const { place, eventsIdToDelete, setToDelete } = useContext(ScheduleContext)
-  const dispoToDelete = useMemo(
-    () =>
-      eventsIdToDelete.map((eventId) => {
-        const event = place?.disponibilities.find(
-          (dispo) => dispo.id === eventId,
-        )
-        return event
-      }),
-    [eventsIdToDelete, place?.disponibilities],
-  )
+  const { place, eventsIdToDelete } = useContext(ScheduleContext)
 
-  if (dispoToDelete.length > 0)
-    return (
-      <ScheduleDelete
-        disponibilities={dispoToDelete}
-        onClose={() => setToDelete([])}
-      />
-    )
+  if (eventsIdToDelete.length > 0 && isLarge) return <ScheduleDelete />
 
   return (
     <>

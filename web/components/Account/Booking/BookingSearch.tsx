@@ -69,17 +69,13 @@ const BookingSearch = ({ bookings, setBookings }: Props) => {
   const { t } = useTranslation('booking')
   const { options } = useMemo(() => {
     return bookings.reduce(
-      (total, { disponibilities }) => {
-        const place =
-          disponibilities.length > 0 ? disponibilities[0].espace : null
-        if (place) {
-          if (!total.values.includes(place.name)) {
-            total.values.push(place.name)
-            total.options.push({
-              value: place.name,
-              label: place.name,
-            })
-          }
+      (total, { espace }) => {
+        if (!total.values.includes(espace.name)) {
+          total.values.push(espace.name)
+          total.options.push({
+            value: espace.name,
+            label: espace.name,
+          })
         }
         return total
       },
@@ -98,19 +94,13 @@ const BookingSearch = ({ bookings, setBookings }: Props) => {
 
     setBookings(
       bookings.filter((booking) => {
-        const place =
-          booking.disponibilities.length > 0
-            ? booking.disponibilities[0].espace
-            : null
-        if (!place) return false
-
-        return values.includes(place.name)
+        return values.includes(booking.espace.name)
       }),
     )
   }
 
   return (
-    <Flex minW="300px">
+    <Flex minW={{ base: '100%', sm: '300px' }}>
       <InputGroup size="md">
         <Select
           isMulti

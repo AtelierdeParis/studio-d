@@ -15,14 +15,20 @@ const PlaceList = ({ places }: IPlaceList) => {
   const { t } = useTranslation('place')
 
   return (
-    <Box py={8}>
+    <Box py={{ base: 4, md: 8 }}>
       <Flex
         alignItems="center"
         pb={4}
         borderBottom="1px solid"
         borderColor="gray.100"
+        justifyContent={{ base: 'flex-end', md: 'flex-start' }}
       >
-        <Text textStyle="accountTitle" mr={5} pl={3}>
+        <Text
+          textStyle="accountTitle"
+          mr={5}
+          pl={3}
+          display={{ base: 'none', md: 'block' }}
+        >
           {t('list.title')}
         </Text>
         <Button
