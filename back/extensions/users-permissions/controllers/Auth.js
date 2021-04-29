@@ -21,6 +21,33 @@ const formatError = (error) => ({
 
 module.exports = {
   async callback(ctx) {
+    // strapi.plugins["email"].services.email.sendEmail();
+    // await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
+    //   {
+    //     to: ["guillaume@live.fr", "bonjour@live.fr"],
+    //   },
+    //   {
+    //     templateId: 3,
+    //   },
+    //   {
+    //     signature: "fdsk",
+    //     footer: "pla",
+    //     user_name: "Guillaume",
+    //     url_site: process.env.FRONT_URL,
+    //     url_btn: process.env.FRONT_URL,
+    //     url_confirm: `${process.env.FRONT_URL}/email-confirmation`,
+    //     token: "confirmationToken",
+    //   }
+    //   // {
+    //   //   signature,
+    //   //   footer: getFooter("place"),
+    //   //   user_name: "Guillaume",
+    //   //   url_site: process.env.FRONT_URL,
+    //   //   url_confirm: `${process.env.FRONT_URL}/email-confirmation`,
+    //   //   token: "confirmationToken",
+    //   // }
+    // );
+    // return;
     const provider = ctx.params.provider || "local";
     const params = ctx.request.body;
 
@@ -311,15 +338,13 @@ module.exports = {
     // Generate random token.
     const resetPasswordToken = crypto.randomBytes(64).toString("hex");
 
-    const settings = await pluginStore
-      .get({ key: "email" })
-      .then((storeEmail) => {
-        try {
-          return storeEmail["reset_password"].options;
-        } catch (error) {
-          return {};
-        }
-      });
+    await pluginStore.get({ key: "email" }).then((storeEmail) => {
+      try {
+        return storeEmail["reset_password"].options;
+      } catch (error) {
+        return {};
+      }
+    });
 
     const advanced = await pluginStore.get({
       key: "advanced",
@@ -329,33 +354,21 @@ module.exports = {
       model: strapi.query("user", "users-permissions").model,
     });
 
-    settings.message = await strapi.plugins[
-      "users-permissions"
-    ].services.userspermissions.template(settings.message, {
-      URL: advanced.email_reset_password,
-      USER: userInfo,
-      TOKEN: resetPasswordToken,
-    });
-
-    settings.object = await strapi.plugins[
-      "users-permissions"
-    ].services.userspermissions.template(settings.object, {
-      USER: userInfo,
-    });
-
     try {
       // Send an email to the user.
-      await strapi.plugins["email"].services.email.send({
-        to: user.email,
-        from:
-          settings.from.email || settings.from.name
-            ? `${settings.from.name} <${settings.from.email}>`
-            : undefined,
-        replyTo: settings.response_email,
-        subject: settings.object,
-        text: settings.message,
-        html: settings.message,
-      });
+      await strapi.plugins["email"].services.email.sendEmail(
+        {
+          to: userInfo.email,
+        },
+        {
+          templateId: 7,
+        },
+        {
+          url_btn: `${advanced.email_reset_password}?code=${resetPasswordToken}`,
+          user_type: userInfo.type,
+          user_name: userInfo.firstname,
+        }
+      );
     } catch (err) {
       return ctx.badRequest(null, err);
     }
@@ -472,6 +485,7 @@ module.exports = {
 
     params.role = role.id;
     params.blocked = false;
+    params.accepted = false;
     params.password = await strapi.plugins[
       "users-permissions"
     ].services.user.hashPassword(params);
@@ -598,6 +612,40 @@ module.exports = {
     await userService.edit(
       { id: user.id },
       { confirmed: true, confirmationToken: null }
+    );
+
+    // Send confirmed email
+    await strapi.plugins["email"].services.email.sendEmail(
+      {
+        to: user.email,
+      },
+      {
+        templateId: 14,
+      },
+      {
+        user_type: user.type,
+        user_name: user.firstname,
+      }
+    );
+
+    // Send email to administration
+    const isPlace = user.type === "place";
+    await strapi.plugins["email"].services.email.sendEmail(
+      {
+        to: process.env.EMAIL_RECIPIENT,
+      },
+      {
+        templateId: 15,
+        subject: `${
+          isPlace ? "Un nouveau lieu" : "Une nouvelle compagnie"
+        } vient de s'inscrire`,
+      },
+      {
+        url_btn: `${process.env.BASE_URL}/admin/plugins/content-manager/collectionType/plugins::users-permissions.user/${user.id}`,
+        user_type: isPlace ? "Le lieu" : "La compagnie",
+        user_name: user.structureName,
+      },
+      true
     );
 
     if (returnUser) {

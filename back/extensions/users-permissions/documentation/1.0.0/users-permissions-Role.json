@@ -640,6 +640,9 @@
                 "external_id": {
                   "type": "integer"
                 },
+                "accepted": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },

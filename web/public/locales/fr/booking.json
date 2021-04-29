@@ -57,6 +57,7 @@
             "confirm": "Envoyer",
             "message": {
                 "label": "Votre message",
+                "error": "Champs requis",
                 "placeholder": "Renseignez votre message"
             }
         },

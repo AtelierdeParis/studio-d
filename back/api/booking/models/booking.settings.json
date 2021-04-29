@@ -18,8 +18,9 @@
     "status": {
       "type": "enumeration",
       "enum": [
-        "canceled",
-        "canceledbyplace",
+        "requestcanceled",
+        "requestcanceledbyplace",
+        "bookingcanceledbyplace",
         "askcancel",
         "past",
         "accepted",
@@ -31,8 +32,8 @@
       "via": "booking"
     },
     "espace": {
-      "via": "bookings",
-      "model": "espace"
+      "model": "espace",
+      "via": "bookings"
     },
     "place": {
       "plugin": "users-permissions",

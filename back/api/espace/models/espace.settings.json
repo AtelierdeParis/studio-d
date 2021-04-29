@@ -99,9 +99,9 @@
       "required": false
     },
     "users_permissions_user": {
+      "via": "espaces",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "espaces"
+      "model": "user"
     },
     "disponibilities": {
       "collection": "disponibility",
@@ -122,8 +122,8 @@
       "required": true
     },
     "bookings": {
-      "collection": "booking",
-      "via": "espace"
+      "via": "espace",
+      "collection": "booking"
     },
     "country": {
       "type": "string",

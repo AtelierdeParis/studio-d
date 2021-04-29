@@ -65,5 +65,10 @@
   "faq": {
     "title": "FAQ",
     "empty": "La FAQ ne contient actuellement aucun contenu"
+  },
+  "confirmEmail": {
+    "title": "Confirmation email",
+    "error": "Impossible de confirmer l'email",
+    "success": "Votre email a bien été confirmé vous pouvez à présent vous authentifier, vous allez être rédiriger vers l'accueil.\nVous pouvez également cliquer sur ce <a>lien</a> pour vous y rendre."
   }
 }

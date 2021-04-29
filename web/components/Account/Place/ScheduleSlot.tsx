@@ -7,6 +7,7 @@ import PeriodEvent from '~components/Place/PeriodEvent'
 
 const styleSelected = {
   border: '1px dashed',
+  borderWidth: '1px',
   borderColor: 'blue.500',
   bgColor: 'white',
 }

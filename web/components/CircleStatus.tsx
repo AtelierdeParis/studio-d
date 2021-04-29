@@ -9,8 +9,9 @@ interface Props extends BoxProps {
     | 'askcancel'
     | 'pending'
     | 'past'
-    | 'canceled'
-    | 'canceledbyplace'
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
     | 'occupied'
 }
 
@@ -29,8 +30,9 @@ const Tag = ({ status, ...rest }: Props) => {
       return <Circle bgColor="tag.yellow" {...rest} />
     case 'past':
       return <Circle bgColor="tag.gray" {...rest} />
-    case 'canceled':
-    case 'canceledbyplace':
+    case 'requestcanceled':
+    case 'requestcanceledbyplace':
+    case 'bookingcanceledbyplace':
       return <Circle bgColor="tag.red" {...rest} />
     case 'occupied':
       return <Circle bgColor="tag.green" {...rest} />

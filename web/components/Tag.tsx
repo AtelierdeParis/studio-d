@@ -2,7 +2,7 @@ import React from 'react'
 import { Tag as ChakraTag, TagProps, Circle, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 
-interface ITag extends TagProps {
+interface Props extends TagProps {
   status:
     | 'booked'
     | 'available'
@@ -10,13 +10,14 @@ interface ITag extends TagProps {
     | 'askcancel'
     | 'pending'
     | 'past'
-    | 'canceled'
-    | 'canceledbyplace'
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
     | 'occupied'
   children?: React.ReactNode
 }
 
-const Tag = ({ status, children, ...rest }: ITag) => {
+const Tag = ({ status, children, ...rest }: Props) => {
   const { t } = useTranslation('account')
   switch (status) {
     case 'booked':
@@ -40,8 +41,9 @@ const Tag = ({ status, children, ...rest }: ITag) => {
           {children || t('tag.past')}
         </ChakraTag>
       )
-    case 'canceled':
-    case 'canceledbyplace':
+    case 'requestcanceled':
+    case 'requestcanceledbyplace':
+    case 'bookingcanceledbyplace':
       return (
         <ChakraTag bgColor="tag.red" {...rest}>
           {children || t('tag.canceled')}

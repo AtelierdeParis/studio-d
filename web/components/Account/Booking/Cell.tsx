@@ -38,7 +38,11 @@ const Cell = ({
       {...rest}
     >
       <Flex
-        {...(['canceled', 'canceledbyplace'].includes(status) &&
+        {...([
+          'requestcanceled',
+          'requestcanceledbyplace',
+          'bookingcanceledbyplace',
+        ].includes(status) &&
           !fullOpacity &&
           canceledStyle)}
         w="100%"

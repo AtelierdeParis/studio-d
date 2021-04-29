@@ -9,6 +9,7 @@ const max = require("date-fns/max");
 
 module.exports = {
   createMany: async (ctx) => {
+    const user = ctx.state.user;
     if (!Array.isArray(ctx.request.body))
       return ctx.badRequest(
         null,
@@ -29,8 +30,32 @@ module.exports = {
 
     if (!place.filledUntil || isAfter(maxDate, new Date(place.filledUntil))) {
       const data = { filledUntil: maxDate };
-      if (!place.filledUntil) data["published"] = true;
-      strapi.query("espace").update({ id: place.id }, data);
+      if (!place.filledUntil) {
+        data["published"] = true;
+      }
+      strapi
+        .query("espace")
+        .update({ id: place.id }, data)
+        .then(() => {
+          if (!place.filledUntil) {
+            // Send email to administration
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: process.env.EMAIL_RECIPIENT,
+              },
+              {
+                templateId: 17,
+              },
+              {
+                user_type: user.type,
+                user_name: user.firstname,
+                slug: place.slug,
+                url_strapi: `${process.env.BASE_URL}/admin/plugins/content-manager/collectionType/application::espace.espace/${place.id}`,
+              },
+              true
+            );
+          }
+        });
     }
 
     return newDispo;

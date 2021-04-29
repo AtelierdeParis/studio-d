@@ -181,6 +181,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         </Flex>
         <VStack spacing={12}>
           {user?.confirmed &&
+            user?.accepted &&
             displayMenu(user.type === 'company' ? companyItems : placeItems)}
           {displayMenu(accountItems)}
         </VStack>

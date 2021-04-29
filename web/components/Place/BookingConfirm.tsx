@@ -22,7 +22,6 @@ import useToast from '~hooks/useToast'
 import { Espace } from '~typings/api'
 import { client } from '~api/client-api'
 import Pin from 'public/assets/img/pin-outline.svg'
-import { useSession } from 'next-auth/client'
 
 interface Props {
   events: ScheduleEvent[]

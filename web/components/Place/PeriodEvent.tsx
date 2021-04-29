@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Flex, Box, Stack } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import { format } from '~utils/date'
 import differenceInDays from 'date-fns/differenceInDays'
 import isSunday from 'date-fns/isSunday'
