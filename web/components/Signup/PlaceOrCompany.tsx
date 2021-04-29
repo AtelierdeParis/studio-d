@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { Stack, Box, Text, Button, Flex } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { ROUTE_SIGNUP } from '~constants'
+import Bugsnag from '@bugsnag/js'
 
 interface IBlock {
   title: string

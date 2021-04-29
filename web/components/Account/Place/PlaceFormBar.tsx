@@ -11,9 +11,10 @@ const PlaceFormBar = ({ children = null, isNotAvailable = false }) => {
       pos="fixed"
       bottom="0"
       justifyContent="space-between"
-      alignItems="center"
+      alignItems={{ base: 'flex-end', md: 'center' }}
       pr={4}
       py={2.5}
+      direction={{ base: 'column', md: 'row' }}
       borderTop="1px solid"
       borderColor="gray.100"
       bgColor="white"
@@ -21,7 +22,12 @@ const PlaceFormBar = ({ children = null, isNotAvailable = false }) => {
       pl={{ base: 4, md: '16.7rem' }}
     >
       {isNotAvailable ? (
-        <Text color="red.500" pr={4} fontSize={{ base: 'sm', md: 'md' }}>
+        <Text
+          color="red.500"
+          pr={{ base: 0, md: 4 }}
+          pb={{ base: 2, md: 0 }}
+          fontSize={{ base: 'sm', md: 'md' }}
+        >
           {t('notAvailable')}
         </Text>
       ) : (

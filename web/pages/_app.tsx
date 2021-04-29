@@ -10,12 +10,14 @@ import { appWithTranslation } from 'next-i18next'
 import theme from '~theme'
 import Bugsnag, { isBugsnagEnabled } from '~utils/bugsnag'
 import { initYupLocale } from '~initYupLocale'
+import ErrorPage from '~pages/_error'
 import '../styles/globals.css'
 import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
 
 let ErrorBoundary: BugsnagErrorBoundary
+
 if (isBugsnagEnabled) {
   ErrorBoundary = Bugsnag.getPlugin('react').createErrorBoundary(React)
 }

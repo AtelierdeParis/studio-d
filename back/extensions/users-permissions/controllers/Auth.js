@@ -18,6 +18,7 @@ const formatError = (error) => ({
   message: error.message,
   field: error.field,
 });
+
 module.exports = {
   async callback(ctx) {
     const provider = ctx.params.provider || "local";

@@ -1,6 +1,6 @@
 import React from 'react'
 import NextErrorPage from 'next/error'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import Bugsnag, { isBugsnagEnabled } from 'utils/bugsnag'
 import { NextPage } from 'next'
 
 const ErrorPage: NextPage<{ statusCode: number }> = ({
@@ -11,13 +11,9 @@ const ErrorPage: NextPage<{ statusCode: number }> = ({
   return <NextErrorPage statusCode={statusCode} />
 }
 
-export const getServerSideProps = async ({ locale, res, err }) => {
-  return {
-    props: {
-      statusCode: res ? res.statusCode : err ? err.statusCode : 404,
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  }
+ErrorPage.getInitialProps = async (ctx) => {
+  if (ctx.err && isBugsnagEnabled) Bugsnag.notify(ctx.err)
+  return NextErrorPage.getInitialProps(ctx)
 }
 
 export default ErrorPage
