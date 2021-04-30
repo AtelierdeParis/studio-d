@@ -7,6 +7,7 @@ import {
   Text,
   Box,
   FormControlProps,
+  StyleProps,
 } from '@chakra-ui/react'
 
 interface IFormField extends Omit<FormControlProps, 'label'> {
@@ -15,6 +16,7 @@ interface IFormField extends Omit<FormControlProps, 'label'> {
   info?: string
   children: React.ReactNode
   errors?: FieldError | null
+  labelStyle?: StyleProps
 }
 
 const FormField = ({
@@ -23,6 +25,7 @@ const FormField = ({
   errors = null,
   info,
   isRequired,
+  labelStyle = {},
   ...rest
 }: IFormField) => {
   return (
@@ -33,6 +36,7 @@ const FormField = ({
           mb={1}
           fontFamily="mabry medium"
           fontSize={{ base: 'sm', sm: 'md' }}
+          {...labelStyle}
         >
           {label}
           {isRequired && (

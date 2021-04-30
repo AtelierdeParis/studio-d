@@ -32,19 +32,31 @@ const sendEmail = async (
   if (!entity)
     return console.log("Template not found", "id", template.templateId);
 
-  await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
-    options,
-    {
-      ...template,
-      templateId: entity.id,
-    },
-    {
-      signature: isAdmin ? signatureAdmin : signature,
-      footer: data.user_type ? getFooter(data.user_type) : "",
-      url_site: process.env.FRONT_URL,
-      ...data,
-    }
-  );
+  await strapi.plugins["email-designer"].services.email
+    .sendTemplatedEmail(
+      options,
+      {
+        ...template,
+        templateId: entity.id,
+      },
+      {
+        signature: isAdmin ? signatureAdmin : signature,
+        footer: data.user_type ? getFooter(data.user_type) : "",
+        url_site: process.env.FRONT_URL,
+        ...data,
+      }
+    )
+    .then(() => {
+      console.log(
+        `Email with id ${template.templateId} has been sent successfully`
+      );
+    })
+    .catch((err) => {
+      console.log(
+        `Error trying to send email with id ${template.templateId}`,
+        err
+      );
+    });
 };
 
 module.exports = {

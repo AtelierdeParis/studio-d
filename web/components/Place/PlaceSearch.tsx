@@ -62,7 +62,7 @@ const PlaceSearch = () => {
             alignItems="flex-start"
             direction={{ base: 'column', md: 'row' }}
           >
-            <Flex w="100%" pt={1}>
+            <Flex w="100%">
               <Pin
                 stroke={theme.colors.blue['500']}
                 width="22px"
@@ -113,11 +113,10 @@ const PlaceSearch = () => {
           </Flex>
           <Flex
             alignItems="flex-start"
-            pt={1}
             display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
           >
             <Box flex={1} pt={{ base: 6, md: 0 }}>
-              <FormField>
+              <FormField labelStyle={{ mb: 0 }}>
                 <Select
                   name="surface"
                   control={form.control}
@@ -185,7 +184,6 @@ const PlaceSearch = () => {
           </Flex>
           <Flex
             alignItems="flex-start"
-            pt={{ base: 0, md: 1 }}
             display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
           >
             <Box flex={1}>
@@ -194,7 +192,7 @@ const PlaceSearch = () => {
                 opacity={0.5}
                 display={{ base: 'block', md: 'none' }}
               />
-              <FormField>
+              <FormField labelStyle={{ mb: 0 }}>
                 <Select
                   name="height"
                   control={form.control}

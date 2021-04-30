@@ -30,7 +30,7 @@ module.exports = {
       }
     },
     async afterUpdate(updated) {
-      if (!updated.accepted) {
+      if (!updated.accepted && updated.confirmed) {
         // Send email to administration
         strapi.plugins["email"].services.email.sendEmail(
           {
