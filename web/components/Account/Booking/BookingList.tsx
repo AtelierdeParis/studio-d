@@ -86,7 +86,7 @@ const BookingList = ({ bookings, type }: Props) => {
         }}
       >
         <Cell isHeader display={{ base: 'none', lg: 'flex' }}>
-          <Text>{t('nb')}</Text>
+          <Text pl="9px">{t('ref')}</Text>
         </Cell>
         <Cell isHeader display={{ base: 'none', lg: 'flex' }}>
           <Divider />
