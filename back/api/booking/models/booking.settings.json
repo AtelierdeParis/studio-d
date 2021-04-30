@@ -28,8 +28,8 @@
       ]
     },
     "messages": {
-      "collection": "message",
-      "via": "booking"
+      "via": "booking",
+      "collection": "message"
     },
     "espace": {
       "model": "espace",
