@@ -1103,6 +1103,10 @@
           "hasbeenread": {
             "type": "boolean",
             "default": false
+          },
+          "notified": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -1142,6 +1146,10 @@
             "type": "string"
           },
           "hasbeenread": {
+            "type": "boolean",
+            "default": false
+          },
+          "notified": {
             "type": "boolean",
             "default": false
           },

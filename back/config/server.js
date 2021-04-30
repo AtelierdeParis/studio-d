@@ -7,4 +7,7 @@ module.exports = ({ env }) => ({
     },
   },
   url: env("BASE_URL", "/"),
+  cron: {
+    enabled: true,
+  },
 });

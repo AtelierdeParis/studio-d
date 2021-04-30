@@ -44,13 +44,17 @@
       "required": true
     },
     "booking": {
-      "via": "messages",
-      "model": "booking"
+      "model": "booking",
+      "via": "messages"
     },
     "hasbeenread": {
       "type": "boolean",
       "default": false,
       "required": false
+    },
+    "notified": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

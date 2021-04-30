@@ -21,33 +21,6 @@ const formatError = (error) => ({
 
 module.exports = {
   async callback(ctx) {
-    // strapi.plugins["email"].services.email.sendEmail();
-    // await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
-    //   {
-    //     to: ["guillaume@live.fr", "bonjour@live.fr"],
-    //   },
-    //   {
-    //     templateId: 3,
-    //   },
-    //   {
-    //     signature: "fdsk",
-    //     footer: "pla",
-    //     user_name: "Guillaume",
-    //     url_site: process.env.FRONT_URL,
-    //     url_btn: process.env.FRONT_URL,
-    //     url_confirm: `${process.env.FRONT_URL}/email-confirmation`,
-    //     token: "confirmationToken",
-    //   }
-    //   // {
-    //   //   signature,
-    //   //   footer: getFooter("place"),
-    //   //   user_name: "Guillaume",
-    //   //   url_site: process.env.FRONT_URL,
-    //   //   url_confirm: `${process.env.FRONT_URL}/email-confirmation`,
-    //   //   token: "confirmationToken",
-    //   // }
-    // );
-    // return;
     const provider = ctx.params.provider || "local";
     const params = ctx.request.body;
 

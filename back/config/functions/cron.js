@@ -1,21 +1,47 @@
-'use strict';
-
-/**
- * Cron config that gives you an opportunity
- * to run scheduled jobs.
- *
- * The cron format consists of:
- * [SECOND (optional)] [MINUTE] [HOUR] [DAY OF MONTH] [MONTH OF YEAR] [DAY OF WEEK]
- *
- * See more details here: https://strapi.io/documentation/developer-docs/latest/setup-deployment-guides/configurations.html#cron-tasks
- */
+"use strict";
 
 module.exports = {
-  /**
-   * Simple example.
-   * Every monday at 1am.
-   */
-  // '0 1 * * 1': () => {
-  //
-  // }
+  // Send email notification if message is unread
+  "*/1 * * * *": async () => {
+    const knex = strapi.connections.default;
+    const messages = await knex.raw(
+      "SELECT place, company FROM messages WHERE hasbeenread = false AND notified = false AND status = 'message' AND  created_at < (NOW() + INTERVAL '5 minute') GROUP BY place, company"
+    );
+    console.log("cron", messages.rows.length > 0);
+    if (messages.rows.length > 0) {
+      messages.rows.map(async (row) => {
+        const { place, company } = row;
+        const lastMessage = await strapi.query("message").findOne({
+          place,
+          company,
+          status: "message",
+          _sort: "created_at:desc",
+        });
+
+        if (!lastMessage || lastMessage.notified || lastMessage.hasbeenread)
+          return;
+
+        const isPlace = lastMessage.author === "place";
+        await knex("messages")
+          .where({ place: 63, company: 60 })
+          .update({ notified: true });
+
+        // Send email to the last user who didn't see the last messages
+        strapi.plugins["email"].services.email.sendEmail(
+          {
+            to: isPlace ? lastMessage.company.email : lastMessage.place.email,
+          },
+          {
+            templateId: 22,
+          },
+          {
+            user_type: "XXXX",
+            user_name: "XXXX",
+            ref: "1",
+            message: lastMessage.message,
+          }
+        );
+      });
+    }
+  },
 };

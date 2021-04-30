@@ -709,6 +709,9 @@
                 "hasbeenread": {
                   "type": "boolean"
                 },
+                "notified": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },
