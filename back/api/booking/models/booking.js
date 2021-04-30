@@ -135,7 +135,7 @@ module.exports = {
                 to: updated.place.email,
               },
               {
-                templateId: 20,
+                templateId: 18,
                 subject: `La compagnie ${updated.company.structureName} a annulé sa demande réf. ${updated.id}`,
               },
               {
@@ -163,7 +163,7 @@ module.exports = {
                 to: updated.company.email,
               },
               {
-                templateId: 21,
+                templateId: 16,
                 subject: `Votre demande a été annulé par ${updated.place.structureName}`,
               },
               {
@@ -190,7 +190,7 @@ module.exports = {
                 to: updated.company.email,
               },
               {
-                templateId: 13,
+                templateId: 11,
                 subject: `Votre demande réf. ${updated.id} vient d'être annulée par ${updated.place.structureName}`,
               },
               {
@@ -215,7 +215,7 @@ module.exports = {
                 to: updated.company.email,
               },
               {
-                templateId: 11,
+                templateId: 10,
                 subject: `Votre demande d'annulation à ${updated.place.structureName}`,
               },
               {
@@ -234,7 +234,7 @@ module.exports = {
                 to: updated.place.email,
               },
               {
-                templateId: 12,
+                templateId: 7,
                 subject: `La compagnie ${updated.company.structureName} souhaiterait annuler sa demande réf. ${updated.id}`,
               },
               {
@@ -261,7 +261,7 @@ module.exports = {
                 to: updated.company.email,
               },
               {
-                templateId: 19,
+                templateId: 4,
                 subject: `Votre demande réf. ${updated.id} pour ${updated.espace.name} (${updated.place.structureName}) vient d'être confirmée`,
               },
               {

@@ -334,7 +334,7 @@ module.exports = {
           to: userInfo.email,
         },
         {
-          templateId: 7,
+          templateId: 17,
         },
         {
           url_btn: `${advanced.email_reset_password}?code=${resetPasswordToken}`,
@@ -593,7 +593,7 @@ module.exports = {
         to: user.email,
       },
       {
-        templateId: 14,
+        templateId: 8,
       },
       {
         user_type: user.type,
@@ -608,7 +608,7 @@ module.exports = {
         to: process.env.EMAIL_RECIPIENT,
       },
       {
-        templateId: 15,
+        templateId: 13,
         subject: `${
           isPlace ? "Un nouveau lieu" : "Une nouvelle compagnie"
         } vient de s'inscrire`,

@@ -29,7 +29,7 @@ module.exports = {
         to: user.email,
       },
       {
-        templateId: 1,
+        templateId: 6,
       },
       {
         user_type: userInfo.type,
