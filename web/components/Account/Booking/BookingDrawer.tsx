@@ -196,7 +196,11 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                 <Box>
                   <BookingHistory booking={booking} type={user?.type} />
                 </Box>
-                {booking?.status !== 'canceled' && (
+                {![
+                  'requestcanceled',
+                  'requestcanceledbyplace',
+                  'bookingcanceledbyplace',
+                ].includes(booking?.status) && (
                   <Flex flex={0}>
                     <Divider
                       display={{ base: 'none', md: 'block' }}
@@ -249,8 +253,9 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                           />
                         )}
                       {![
-                        'canceled',
-                        'canceledbyplace',
+                        'requestcanceled',
+                        'requestcanceledbyplace',
+                        'bookingcanceledbyplace',
                         'past',
                         'occupied',
                       ].includes(status) && (
