@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Flex,
   SimpleGrid,
@@ -28,14 +28,23 @@ const selectProps = {
   pl: 3,
 }
 
-const PlaceSearch = () => {
+const PlaceSearch = ({ searchQuery }) => {
   const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
+  const [isDisabled, setDisabled] = useState(true)
   const [hasMoreFilters, setMoreFilter] = useState(false)
   const { t } = useTranslation('place')
   const form = useFormContext()
   const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, lg: false })
+
+  useEffect(() => {
+    setDisabled(
+      Object.keys(searchQuery).filter(
+        (key) => !['published_eq', '_sort'].includes(key),
+      ).length === 0,
+    )
+  }, [searchQuery])
 
   const onSubmit = ({ sortBy, ...rest }) => {
     router.push({
@@ -45,7 +54,16 @@ const PlaceSearch = () => {
   }
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      onChange={() => {
+        setDisabled(
+          Object.entries(form.getValues()).filter(
+            ([key, v]) => key !== 'sortBy' && Boolean(v),
+          ).length === 0,
+        )
+      }}
+    >
       <Flex
         bgColor="blue.100"
         px={{ base: 3, md: 5 }}
@@ -250,6 +268,7 @@ const PlaceSearch = () => {
               type="submit"
               colorScheme="blue"
               size="lg"
+              isDisabled={isDisabled}
               isLoading={isLoading}
             >
               {t('search.submit')}

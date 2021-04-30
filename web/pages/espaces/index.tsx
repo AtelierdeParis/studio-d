@@ -76,7 +76,7 @@ const Places = () => {
   return (
     <Container px={0}>
       <FormProvider {...form}>
-        <PlaceSearch />
+        <PlaceSearch searchQuery={searchQuery} />
         {!countLoading && nbPlace === 0 ? (
           <NoResult />
         ) : (

@@ -31,6 +31,7 @@ const FormField = ({
   return (
     <FormControl isInvalid={Boolean(errors)} w="100%" display="flex" {...rest}>
       <FormLabel fontWeight="400" fontSize="xxs" mb={0} mr={0} w="100%">
+        {/* @ts-ignore */}
         <Text
           fontWeight="500"
           mb={1}
