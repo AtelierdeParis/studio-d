@@ -18,9 +18,26 @@ const sendEmail = async (
   data = {},
   isAdmin = false
 ) => {
+  if (!template.templateId) {
+    console.log("No template id given");
+    return;
+  }
+
+  const entity = await strapi.plugins["email-designer"].services.template.fetch(
+    {
+      slug: template.templateId,
+    }
+  );
+
+  if (!entity)
+    return console.log("Template not found", "id", template.templateId);
+
   await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
     options,
-    template,
+    {
+      ...template,
+      templateId: entity.id,
+    },
     {
       signature: isAdmin ? signatureAdmin : signature,
       footer: data.user_type ? getFooter(data.user_type) : "",

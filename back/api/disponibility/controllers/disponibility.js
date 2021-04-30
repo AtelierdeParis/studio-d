@@ -44,7 +44,7 @@ module.exports = {
                 to: process.env.EMAIL_RECIPIENT,
               },
               {
-                templateId: 17,
+                templateId: "admin-new-place",
               },
               {
                 user_type: user.type,

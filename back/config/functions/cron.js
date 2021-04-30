@@ -2,12 +2,12 @@
 
 module.exports = {
   // Send email notification if message is unread
-  "*/1 * * * *": async () => {
+  "*/5 * * * *": async () => {
     const knex = strapi.connections.default;
     const messages = await knex.raw(
       "SELECT place, company FROM messages WHERE hasbeenread = false AND notified = false AND status = 'message' AND  created_at < (NOW() + INTERVAL '5 minute') GROUP BY place, company"
     );
-    console.log("cron", messages.rows.length > 0);
+
     if (messages.rows.length > 0) {
       messages.rows.map(async (row) => {
         const { place, company } = row;
@@ -32,7 +32,7 @@ module.exports = {
             to: isPlace ? lastMessage.company.email : lastMessage.place.email,
           },
           {
-            templateId: 22,
+            templateId: "new-message",
           },
           {
             user_type: "XXXX",
