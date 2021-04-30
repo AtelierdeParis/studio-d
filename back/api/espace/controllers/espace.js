@@ -31,7 +31,7 @@ module.exports = {
   },
   async getCities() {
     const knex = strapi.connections.default;
-    return knex.distinct().from("place").pluck("city");
+    return knex.distinct().from("place").pluck("city").orderBy("city", "asc");
   },
   async find(ctx) {
     const { _sort, ...query } = ctx.query;

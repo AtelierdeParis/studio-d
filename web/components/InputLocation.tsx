@@ -2,7 +2,6 @@ import React from 'react'
 import AsyncSelect from 'react-select/async'
 import { useTheme } from '@chakra-ui/react'
 import { Control, useController } from 'react-hook-form'
-import axios from 'axios'
 import geocodingService from '@mapbox/mapbox-sdk/services/geocoding'
 import mbxClient from '@mapbox/mapbox-sdk'
 

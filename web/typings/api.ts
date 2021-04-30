@@ -53,7 +53,14 @@ export interface NewActuality {
 
 export interface Booking {
   id: string;
-  status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
+  status?:
+    | "requestcanceled"
+    | "requestcanceledbyplace"
+    | "bookingcanceledbyplace"
+    | "askcancel"
+    | "past"
+    | "accepted"
+    | "pending";
   disponibilities?: Disponibility[];
   espace?: Espace;
   company?: UsersPermissionsUser;
@@ -64,7 +71,14 @@ export interface Booking {
 
 export interface NewBooking {
   disponibilities?: string[];
-  status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
+  status?:
+    | "requestcanceled"
+    | "requestcanceledbyplace"
+    | "bookingcanceledbyplace"
+    | "askcancel"
+    | "past"
+    | "accepted"
+    | "pending";
   messages?: string[];
   espace?: string;
   place?: string;
@@ -136,7 +150,14 @@ export interface Disponibility {
   booking?: {
     id: string;
     disponibilities?: string[];
-    status?: "canceled" | "canceledbyplace" | "askcancel" | "past" | "accepted" | "pending";
+    status?:
+      | "requestcanceled"
+      | "requestcanceledbyplace"
+      | "bookingcanceledbyplace"
+      | "askcancel"
+      | "past"
+      | "accepted"
+      | "pending";
     messages?: string[];
     espace?: string;
     place?: string;
@@ -429,6 +450,7 @@ export interface UsersPermissionsRole {
     espaces?: string[];
     type: "company" | "place";
     external_id?: number;
+    accepted?: boolean;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -460,6 +482,7 @@ export interface UsersPermissionsUser {
   };
   username: string;
   confirmed?: boolean;
+  accepted?: boolean;
   blocked?: boolean;
   firstname: string;
   lastname: string;
@@ -2160,7 +2183,7 @@ export namespace Auth {
    */
   export namespace EmailConfirmationList {
     export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestQuery = { confirmation?: string };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = { foo?: string };
@@ -4301,10 +4324,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/auth/email-confirmation
      * @secure
      */
-    emailConfirmationList: (params: RequestParams = {}) =>
+    emailConfirmationList: (query?: { confirmation?: string }, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/auth/email-confirmation`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

@@ -5,6 +5,7 @@ import {
   SimpleGrid,
   Box,
   Divider as ChakraDivider,
+  DividerProps,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Booking } from '~typings/api'
@@ -21,7 +22,9 @@ interface Props {
   type: 'request' | 'booking'
 }
 
-const Divider = () => <ChakraDivider orientation="vertical" h="24px" mr={2.5} />
+const Divider = (props: DividerProps) => (
+  <ChakraDivider orientation="vertical" h="24px" mr={2.5} {...props} />
+)
 
 const BookingList = ({ bookings, type }: Props) => {
   const router = useRouter()
@@ -58,25 +61,42 @@ const BookingList = ({ bookings, type }: Props) => {
           type={type}
         />
       )}
-      <Flex alignItems="center" pt={8} pb={4} justifyContent="space-between">
-        <Text textStyle="accountTitle" pl={4}>
+      <Flex
+        alignItems="center"
+        pt={{ base: 4, md: 8 }}
+        pb={4}
+        justifyContent={{ base: 'flex-end', md: 'space-between' }}
+      >
+        <Text
+          textStyle="accountTitle"
+          pl={4}
+          display={{ base: 'none', md: 'block' }}
+        >
           {t(`${type}.title`)}
         </Text>
         <BookingSearch bookings={bookings} setBookings={setList} />
       </Flex>
-      <SimpleGrid gridTemplateColumns="fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
-        <Cell isHeader>
+      <SimpleGrid
+        gridTemplateColumns={{
+          base: 'minmax(auto, auto) minmax(auto, auto)',
+          lg:
+            'fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) fit-content(300px)',
+          xl:
+            'fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)',
+        }}
+      >
+        <Cell isHeader display={{ base: 'none', lg: 'flex' }}>
           <Text>{t('nb')}</Text>
         </Cell>
-        <Cell isHeader>
+        <Cell isHeader display={{ base: 'none', lg: 'flex' }}>
           <Divider />
           <Text>{t('status')}</Text>
         </Cell>
         <Cell isHeader>
-          <Divider />
+          <Divider display={{ base: 'none', lg: 'block' }} />
           <Text>{t('place')}</Text>
         </Cell>
-        <Cell isHeader>
+        <Cell isHeader display={{ base: 'none', xl: 'flex' }}>
           <Divider />
           <Text>{t(user.type === 'place' ? 'company' : 'structure')}</Text>
         </Cell>
@@ -95,7 +115,7 @@ const BookingList = ({ bookings, type }: Props) => {
             </Box>
           </Flex>
         </Cell>
-        <Cell isHeader>
+        <Cell isHeader display={{ base: 'none', lg: 'flex' }}>
           <Divider />
           <Text>{t('activity')}</Text>
         </Cell>

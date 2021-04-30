@@ -17,9 +17,15 @@ const AskCancelModal = ({ booking, setSelected }: Props) => {
   const queryClient = useQueryClient()
   const [isLoading, setLoading] = useState<boolean>(false)
   const [message, setMessage] = useState<string>('')
+  const [error, setError] = useState<string>(null)
   const { t } = useTranslation('booking')
 
-  const onConfirm = () => {
+  const onConfirm = async () => {
+    if (message === '') {
+      setError(t('modal.askcancel.message.error'))
+      Promise.reject(new Error('required'))
+      return
+    }
     setLoading(true)
     return client.bookings
       .bookingsUpdate(booking?.id, { status: 'askcancel' })
@@ -56,21 +62,29 @@ const AskCancelModal = ({ booking, setSelected }: Props) => {
         </Button>
       }
       title={t('modal.askcancel.title')}
-      onConfirm={onConfirm}
+      onConfirm={message === '' ? null : onConfirm}
       confirmText={t('modal.askcancel.confirm')}
       closeText={t('modal.askcancel.back')}
     >
       <Box>
         <Text pb={5}>{t('modal.askcancel.text')}</Text>
-        <FormField label={t('modal.askcancel.message.label')} isRequired>
-          <Textarea
-            mt={1}
-            placeholder={t('modal.askcancel.message.placeholder')}
-            resize="none"
-            h="180px"
-            onChange={(event) => setMessage(event.target.value)}
-          />
-        </FormField>
+        <form>
+          <FormField
+            label={t('modal.askcancel.message.label')}
+            isRequired
+            // @ts-ignore
+            errors={error ? { message: error } : null}
+          >
+            <Textarea
+              required
+              mt={1}
+              placeholder={t('modal.askcancel.message.placeholder')}
+              resize="none"
+              h="180px"
+              onChange={(event) => setMessage(event.target.value)}
+            />
+          </FormField>
+        </form>
       </Box>
     </Modal>
   )

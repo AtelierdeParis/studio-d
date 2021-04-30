@@ -9,6 +9,8 @@
     "get-types": "swagger-typescript-api -p ../back/extensions/documentation/documentation/1.0.0/full_documentation.json -o ./typings -n api.ts --route-types --module-name-index 0 --axios"
   },
   "dependencies": {
+    "@bugsnag/js": "^7.9.2",
+    "@bugsnag/plugin-react": "^7.9.2",
     "@chakra-ui/react": "^1.3.4",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",

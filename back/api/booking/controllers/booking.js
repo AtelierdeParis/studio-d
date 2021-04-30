@@ -17,10 +17,12 @@ const populate = ["disponibilities", "company", "espace", "place", "messages"];
 const filterBookings = (type) => {
   switch (type) {
     case "request":
-      return { status_in: ["pending", "canceled"] };
+      return {
+        status_in: ["pending", "requestcanceled", "requestcanceledbyplace"],
+      };
     case "booking":
       return {
-        status_in: ["past", "accepted", "canceledbyplace", "askcancel"],
+        status_in: ["past", "accepted", "bookingcanceledbyplace", "askcancel"],
       };
     case "all":
       return {};

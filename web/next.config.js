@@ -4,27 +4,6 @@ const withTM = require('next-transpile-modules')([
   '@fullcalendar/daygrid',
 ])
 
-const env = process.env.NODE_ENV || 'development'
-
-let envVars = {}
-
-if (env !== 'development') {
-  const {
-    DB_URL,
-    EMAIL_SERVER,
-    NEXTAUTH_URL,
-    NEXT_PUBLIC_BACK_URL,
-    JWT_TOKEN_SECRET,
-  } = process.env
-  envVars = {
-    DB_URL,
-    EMAIL_SERVER,
-    NEXTAUTH_URL,
-    NEXT_PUBLIC_BACK_URL,
-    JWT_TOKEN_SECRET,
-  }
-}
-
 module.exports = withTM({
   i18n,
   webpack(config) {
@@ -35,5 +14,7 @@ module.exports = withTM({
 
     return config
   },
-  env: envVars,
+  env: {
+    BUGSNAG_API_KEY: process.env.BUGSNAG_API_KEY,
+  },
 })

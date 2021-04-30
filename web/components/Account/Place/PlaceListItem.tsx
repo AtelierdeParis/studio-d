@@ -11,7 +11,6 @@ import {
   Divider,
   HStack,
   AspectRatio,
-  ButtonGroup,
   useBreakpointValue,
   Stack,
 } from '@chakra-ui/react'
@@ -26,10 +25,8 @@ import {
   ROUTE_ACCOUNT_REQUEST,
 } from '~constants'
 import { useTranslation } from 'next-i18next'
-import UnpublishModal from '~components/Account/Place/UnpublishModal'
-import PublishModal from '~components/Account/Place/PublishModal'
-import DeletePlaceModal from '~components/Account/Place/DeletePlaceModal'
 import { format } from '~utils/date'
+import PlaceListItemOptions from '~components/Account/Place/PlaceListItemOptions'
 
 const SubInfo = ({ place, available, isMobile = false }) => {
   const { t } = useTranslation('place')
@@ -40,7 +37,7 @@ const SubInfo = ({ place, available, isMobile = false }) => {
       pt={{ base: 4, lg: 0 }}
       spacing={{ base: 3, lg: 0 }}
     >
-      <Box flex={1}>
+      <Box flex={1} fontSize={{ base: 'sm', sm: 'md' }}>
         <Flex alignItems="center">
           <Text color="gray.500" pr={2}>
             {t('list.disponibility')}
@@ -86,9 +83,13 @@ const SubInfo = ({ place, available, isMobile = false }) => {
       <Divider
         orientation={isMobile ? 'horizontal' : 'vertical'}
         mx={5}
-        opacity={0.6}
+        opacity={0.5}
+        display={{ base: 'none', md: 'block', lg: 'none', xl: 'block' }}
       />
-      <Box flex={1}>
+      <Box
+        flex={1}
+        display={{ base: 'none', md: 'block', lg: 'none', xl: 'block' }}
+      >
         <Flex alignItems="center">
           <Text color="gray.500" pr={2}>
             {t('list.requests')}
@@ -112,9 +113,10 @@ const SubInfo = ({ place, available, isMobile = false }) => {
       <Divider
         orientation={isMobile ? 'horizontal' : 'vertical'}
         mx={5}
-        opacity={0.6}
+        display={{ base: 'none', md: 'block' }}
+        opacity={0.5}
       />
-      <Box flex={1}>
+      <Box flex={1} display={{ base: 'none', md: 'block' }}>
         <Flex alignItems="center">
           <Text color="gray.500" pr={2}>
             {t('list.bookings')}
@@ -162,7 +164,7 @@ const PlaceListItem = ({ place }: Props) => {
     <Flex
       py={8}
       w="100%"
-      px={3}
+      px={{ base: 0, md: 3 }}
       borderBottom="1px solid"
       borderColor="gray.100"
       _hover={{
@@ -170,7 +172,7 @@ const PlaceListItem = ({ place }: Props) => {
       }}
       direction="column"
     >
-      <Flex>
+      <Flex direction={{ base: 'column-reverse', lg: 'row' }}>
         <Link
           href={{
             pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
@@ -178,7 +180,7 @@ const PlaceListItem = ({ place }: Props) => {
           }}
         >
           <AspectRatio
-            w="230px"
+            w={{ base: '100%', lg: '230px' }}
             ratio={4 / 3}
             mr={8}
             alignItems="center"
@@ -193,8 +195,16 @@ const PlaceListItem = ({ place }: Props) => {
             )}
           </AspectRatio>
         </Link>
-        <Flex direction="column" justifyContent="space-between" flex={1}>
-          <Flex justifyContent="space-between">
+        <Flex
+          direction="column"
+          justifyContent="space-between"
+          flex={1}
+          mb={{ base: 5, lg: 0 }}
+        >
+          <Flex
+            justifyContent="space-between"
+            alignItems={{ base: 'flex-start', xl: 'center' }}
+          >
             <Link
               href={{
                 pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
@@ -209,21 +219,16 @@ const PlaceListItem = ({ place }: Props) => {
                   {place.name}
                 </Text>
                 <Flex>
-                  <Text mr={2}>{place.address}</Text>
+                  <Text mr={2} display={{ base: 'none', md: 'block' }}>
+                    {place.address}
+                  </Text>
                   {isOccupied && (
                     <Tag status="occupied">{t('list.occupied')}</Tag>
                   )}
                 </Flex>
               </Box>
             </Link>
-            {place.published ? (
-              <UnpublishModal place={place} />
-            ) : (
-              <ButtonGroup spacing={4} alignSelf="flex-start">
-                {place.filledUntil && <PublishModal placeId={place.id} />}
-                <DeletePlaceModal placeId={place.id} />
-              </ButtonGroup>
-            )}
+            <PlaceListItemOptions place={place} />
           </Flex>
           {!isMobile && <SubInfo place={place} available={available} />}
         </Flex>

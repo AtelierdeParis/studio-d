@@ -9,6 +9,8 @@ import ScheduleRightContent from '~components/Account/Place/ScheduleRightContent
 import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import { Espace } from '~typings/api'
 import ScheduleAbout from '~components/Account/Place/ScheduleAbout'
+import ScheduleRecap from '~components/Account/Place/ScheduleRecap'
+import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 
 interface Props {
   place: Espace
@@ -23,11 +25,20 @@ const PlaceSchedule = ({ place }: Props) => {
   return (
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
-        <Flex direction={{ base: 'column-reverse', schedule: 'row' }}>
-          {!isLarge && <ScheduleAbout place={place} />}
+        <Flex
+          direction={{ base: 'column-reverse', schedule: 'row' }}
+          pb={{ base: 8, lg: 4 }}
+        >
+          {!isLarge && (
+            <>
+              <ScheduleAbout place={place} />
+              <ScheduleRecap place={place} />
+              <ScheduleDelete />
+            </>
+          )}
           <Schedule />
           <Box flex={1} pl={{ base: 0, schedule: 8 }}>
-            <ScheduleRightContent />
+            <ScheduleRightContent isLarge={isLarge} />
           </Box>
         </Flex>
       </ScheduleProvider>

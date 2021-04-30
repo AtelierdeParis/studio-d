@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/22/2021 5:57:48 PM"
+    "x-generation-date": "04/29/2021 6:25:33 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -7894,7 +7894,18 @@
         "tags": [
           "Authentication"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "confirmation",
+            "in": "query",
+            "required": false,
+            "description": "Token",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          }
+        ],
         "security": []
       }
     },
@@ -8511,8 +8522,9 @@
             "type": "string",
             "default": "pending",
             "enum": [
-              "canceled",
-              "canceledbyplace",
+              "requestcanceled",
+              "requestcanceledbyplace",
+              "bookingcanceledbyplace",
               "askcancel",
               "past",
               "accepted",
@@ -8556,8 +8568,9 @@
           "status": {
             "type": "string",
             "enum": [
-              "canceled",
-              "canceledbyplace",
+              "requestcanceled",
+              "requestcanceledbyplace",
+              "bookingcanceledbyplace",
               "askcancel",
               "past",
               "accepted",
@@ -8837,8 +8850,9 @@
               "status": {
                 "type": "string",
                 "enum": [
-                  "canceled",
-                  "canceledbyplace",
+                  "requestcanceled",
+                  "requestcanceledbyplace",
+                  "bookingcanceledbyplace",
                   "askcancel",
                   "past",
                   "accepted",
@@ -9852,6 +9866,9 @@
                 "external_id": {
                   "type": "integer"
                 },
+                "accepted": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -9967,6 +9984,10 @@
             "minLength": 3
           },
           "confirmed": {
+            "type": "boolean",
+            "default": false
+          },
+          "accepted": {
             "type": "boolean",
             "default": false
           },

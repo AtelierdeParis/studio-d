@@ -12,7 +12,7 @@ interface Props {
 }
 
 const AccountDashboard = ({ user }: Props) => {
-  if (user?.confirmed) {
+  if (user?.confirmed && user?.accepted) {
     return <InfoWelcome user={user} />
   }
 

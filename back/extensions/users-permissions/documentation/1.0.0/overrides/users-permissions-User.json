@@ -141,7 +141,19 @@
     "/auth/email-confirmation": {
       "get": {
         "tags": ["Authentication"],
-        "security": []
+        "security": [],
+        "parameters": [
+          {
+            "name": "confirmation",
+            "in": "query",
+            "required": false,
+            "description": "Token",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          }
+        ]
       }
     },
     "/auth/{provider}/callback": {
@@ -819,6 +831,10 @@
             "minLength": 3
           },
           "confirmed": {
+            "type": "boolean",
+            "default": false
+          },
+          "accepted": {
             "type": "boolean",
             "default": false
           },

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import {
-  HStack,
   Box,
   Input,
   Text,

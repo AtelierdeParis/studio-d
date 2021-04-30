@@ -60,6 +60,7 @@ const start = async () => {
             const resetPasswordToken = crypto.randomBytes(64).toString("hex");
             const user = {
               confirmed: true,
+              accepted: true,
               provider: "local",
               blocked: false,
               role: 1,

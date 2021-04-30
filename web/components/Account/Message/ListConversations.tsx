@@ -62,7 +62,6 @@ interface Props {
 
 const ListConversations = ({ conversations, selected, setSelected }: Props) => {
   const { t } = useTranslation('booking')
-  if (selected) return null
 
   return (
     <Box
@@ -70,6 +69,7 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
       w={{ base: '100%', md: '180px', lg: '240px' }}
       borderRight="1px solid"
       borderColor="gray.100"
+      display={{ base: selected ? 'none' : 'block', md: 'block' }}
       h="100%"
     >
       <Text

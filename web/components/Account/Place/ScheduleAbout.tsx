@@ -25,7 +25,7 @@ const ScheduleAbout = ({ place }: IScheduleAbout) => {
   }
   return (
     <Box
-      mt={{ base: 4, schedule: 8 }}
+      mt={{ base: 6, schedule: 8 }}
       pt={{ base: 4, schedule: 8 }}
       borderTop="1px solid"
       borderColor="gray.100"

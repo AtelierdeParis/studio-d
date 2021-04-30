@@ -88,8 +88,9 @@
               "type": "string",
               "default": "pending",
               "enum": [
-                "canceled",
-                "canceledbyplace",
+                "requestcanceled",
+                "requestcanceledbyplace",
+                "bookingcanceledbyplace",
                 "askcancel",
                 "past",
                 "accepted",

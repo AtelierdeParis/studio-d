@@ -1,15 +1,54 @@
 "use strict";
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
- * to customize this model
- */
+const differenceInDays = require("date-fns/differenceInDays");
+const format = require("date-fns/format");
+const fr = require("date-fns/locale/fr");
+const capitalize = (s) => {
+  if (typeof s !== "string") return "";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+const locale = {
+  locale: fr,
+};
 
 const updateDispo = (dispos = [], status) => {
   if (!dispos || dispos.length === 0) return null;
   dispos.map(({ id }) => {
     strapi.query("disponibility").update({ id }, { status });
   });
+};
+
+const getDispoEmail = (dispos = []) => {
+  return dispos
+    .map((dispo) => {
+      const start = format(new Date(dispo.start), "d MMMM", locale);
+      const end = format(new Date(dispo.end), "d MMMM", locale);
+      switch (dispo.type) {
+        case "day":
+          return `&nbsp;&nbsp;- ${start} (journée entière)`;
+        case "punctual":
+          return `&nbsp;&nbsp;- ${start} (${
+            dispo.when === "morning" ? "matin" : "après-midi"
+          })`;
+        case "period":
+          return `&nbsp;&nbsp;- ${start} - ${end} (${
+            differenceInDays(new Date(dispo.end), new Date(dispo.start)) + 1
+          } jours)`;
+      }
+    })
+    .join("<br/>");
+};
+
+const getPlaceInfoEmail = (place) => {
+  const infos = [];
+  if (place.tel)
+    infos.push(`Tél. : <a href="tel:${place.tel}">${place.tel}</a>`);
+  if (place.email)
+    infos.push(`Email : <a href="mailto:${place.email}">${place.email}</a>`);
+  if (place.website)
+    infos.push(`<a href="${place.website}">${place.website}</a>`);
+
+  return infos.join("<br/>");
 };
 
 module.exports = {
@@ -31,9 +70,48 @@ module.exports = {
         author: "company",
         status: "created",
         booking: created.id,
-        place: created.espace.users_permissions_user,
+        place: created.place.id,
         company: created.company.id,
       });
+
+      // Send email to the company
+      strapi.plugins["email"].services.email.sendEmail(
+        {
+          to: created.company.email,
+        },
+        {
+          templateId: 8,
+          subject: `Votre demande réf. ${created.id} a bien été transmise à ${created.place.structureName}`,
+        },
+        {
+          espace_name: created.espace.name,
+          place_id: created.place.id,
+          place_name: created.place.structureName,
+          ref: created.id,
+          user_type: "company",
+          user_name: created.company.firstname,
+        }
+      );
+
+      // Send email to the place
+      strapi.plugins["email"].services.email.sendEmail(
+        {
+          to: created.place.email,
+        },
+        {
+          templateId: 9,
+          subject: `Nouvelle demande réf. ${created.id} pour l'espace ${created.espace.name}`,
+        },
+        {
+          from: capitalize(created.company.firstname),
+          user_name: created.company.firstname,
+          company: created.company.structureName,
+          ref: created.id,
+          espace_name: created.espace.name,
+          user_type: "place",
+          dispos: getDispoEmail(created.disponibilities),
+        }
+      );
     },
     async afterUpdate(updated, params, body) {
       const rel = {
@@ -43,21 +121,86 @@ module.exports = {
       };
       if (body.status) {
         switch (body.status) {
-          case "canceled":
+          case "requestcanceled":
             strapi.services.message.create({
               author: "company",
               status: "canceled",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
+
+            // Send email to the place
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.place.email,
+              },
+              {
+                templateId: 20,
+                subject: `La compagnie ${updated.company.structureName} a annulé sa demande réf. ${updated.id}`,
+              },
+              {
+                from: capitalize(updated.company.firstname),
+                company: updated.company.structureName,
+                user_name: updated.company.firstname,
+                ref: updated.id,
+                espace_name: updated.espace.name,
+                user_type: "place",
+                dispos: getDispoEmail(updated.disponibilities),
+              }
+            );
             break;
-          case "canceledbyplace":
+          case "requestcanceledbyplace":
             strapi.services.message.create({
               author: "place",
               status: "canceledbyplace",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
+
+            // Send email to the company
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.company.email,
+              },
+              {
+                templateId: 21,
+                subject: `Votre demande a été annulé par ${updated.place.structureName}`,
+              },
+              {
+                dispos: getDispoEmail(updated.disponibilities),
+                user_name: updated.company.firstname,
+                ref: updated.id,
+                espace_name: updated.espace.name,
+                user_type: "company",
+                place_name: updated.place.structureName,
+              }
+            );
+            break;
+          case "bookingcanceledbyplace":
+            strapi.services.message.create({
+              author: "place",
+              status: "canceledbyplace",
+              ...rel,
+            });
+            updateDispo(updated.disponibilities, "available");
+
+            // Send email to the company
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.company.email,
+              },
+              {
+                templateId: 13,
+                subject: `Votre demande réf. ${updated.id} vient d'être annulée par ${updated.place.structureName}`,
+              },
+              {
+                user_name: updated.company.firstname,
+                ref: updated.id,
+                company: capitalize(updated.company.structureName),
+                espace_name: updated.espace.name,
+                user_type: "company",
+              }
+            );
             break;
           case "askcancel":
             strapi.services.message.create({
@@ -65,6 +208,44 @@ module.exports = {
               status: "askcancel",
               ...rel,
             });
+
+            // Send email to the company
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.company.email,
+              },
+              {
+                templateId: 11,
+                subject: `Votre demande d'annulation à ${updated.place.structureName}`,
+              },
+              {
+                espace_name: updated.espace.name,
+                ref: updated.id,
+                place_name: updated.place.structureName,
+                place_id: updated.place.id,
+                user_type: "company",
+                user_name: updated.company.firstname,
+              }
+            );
+
+            // Send email to the place
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.place.email,
+              },
+              {
+                templateId: 12,
+                subject: `La compagnie ${updated.company.structureName} souhaiterait annuler sa demande réf. ${updated.id}`,
+              },
+              {
+                from: capitalize(updated.company.firstname),
+                user_name: updated.company.firstname,
+                company: updated.company.structureName,
+                ref: updated.id,
+                espace_name: updated.espace.name,
+                user_type: "place",
+              }
+            );
             break;
           case "accepted":
             strapi.services.message.create({
@@ -73,6 +254,29 @@ module.exports = {
               ...rel,
             });
             updateDispo(updated.disponibilities, "booked");
+
+            // Send confirmation email to the company
+            strapi.plugins["email"].services.email.sendEmail(
+              {
+                to: updated.company.email,
+              },
+              {
+                templateId: 19,
+                subject: `Votre demande réf. ${updated.id} pour ${updated.espace.name} (${updated.place.structureName}) vient d'être confirmée`,
+              },
+              {
+                dispos: getDispoEmail(updated.disponibilities),
+                espace_name: updated.espace.name,
+                place_name: updated.place.structureName,
+                place_id: updated.place.id,
+                slug: updated.espace.slug,
+                ref: updated.id,
+                user_type: "company",
+                user_name: updated.company.firstname,
+                address: `<a href="https://www.openstreetmap.org/search?query=${updated.espace.address}">${updated.espace.address}</a>`,
+                info: getPlaceInfoEmail(updated.place),
+              }
+            );
             break;
         }
       }

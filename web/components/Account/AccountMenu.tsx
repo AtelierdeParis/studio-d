@@ -164,7 +164,8 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     <Flex
       direction="column"
       color="grayText.1"
-      w={{ base: '100%', md: '20rem' }}
+      minW={{ base: '100%', md: '15rem' }}
+      maxW={{ base: '100%', md: '15rem' }}
       h={{ base: 'fit-content', md: '100vh' }}
       pos="relative"
       zIndex={999}
@@ -180,6 +181,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         </Flex>
         <VStack spacing={12}>
           {user?.confirmed &&
+            user?.accepted &&
             displayMenu(user.type === 'company' ? companyItems : placeItems)}
           {displayMenu(accountItems)}
         </VStack>

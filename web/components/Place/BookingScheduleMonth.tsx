@@ -84,6 +84,7 @@ const BookingScheduleMonth = ({ place, events }: Props) => {
               </Box>
             )
           }}
+          showNonCurrentDates={isMobile}
           fixedWeekCount={false}
           events={events}
           locale={frLocale}
@@ -115,6 +116,7 @@ const BookingScheduleMonth = ({ place, events }: Props) => {
               )
               return <Box color={hasEvent && 'black'}>{day.dayNumberText}</Box>
             }}
+            showNonCurrentDates={false}
             fixedWeekCount={false}
             events={events}
             locale={frLocale}

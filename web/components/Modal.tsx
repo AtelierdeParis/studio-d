@@ -52,11 +52,15 @@ const Modal = ({
   } = useDisclosure()
 
   const onClick = async () => {
+    if (!onConfirm) return
     setLoading(true)
-    onConfirm().finally(() => {
-      setLoading(false)
-      onCloseInternal()
-    })
+    onConfirm()
+      .then(() => {
+        onCloseInternal()
+      })
+      .finally(() => {
+        setLoading(false)
+      })
   }
 
   return (

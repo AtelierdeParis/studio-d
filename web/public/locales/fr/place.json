@@ -103,6 +103,7 @@
         }
     },
     "list": {
+        "openWebpage": "Ouvrir sur le site",
         "needDispo": "Définissez au-moins une disponibilité pour que cet espace soit publié",
         "title": "Espaces",
         "add": "Ajouter",
@@ -273,7 +274,8 @@
             "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
             "see": {
                 "pending": "Voir la demande.",
-                "accepted": "Voir la réservation."
+                "accepted": "Voir la réservation.",
+                "booked": "Voir la réservation."
             }
         }
     },

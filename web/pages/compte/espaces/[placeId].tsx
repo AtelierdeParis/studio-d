@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -13,7 +13,6 @@ import { useRouter } from 'next/router'
 import { requireAuth } from '~utils/auth'
 import { useIsComplete } from '~hooks/useIsComplete'
 import dynamic from 'next/dynamic'
-import { useTranslation } from 'next-i18next'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),
@@ -28,10 +27,16 @@ interface IEditPlace {
 }
 
 const EditPlace = ({ slug }: IEditPlace) => {
-  const { t } = useTranslation('place')
   const { query } = useRouter()
   const { data: place, isLoading } = usePlace(slug)
   const isComplete = useIsComplete(place)
+  const [index, setIndex] = useState(
+    !isComplete ? 0 : Number(query?.index) || 0,
+  )
+  useEffect(() => {
+    if (!Boolean(query) || !query?.index) return
+    setIndex(Number(query.index))
+  }, [query?.index])
 
   return (
     <Loading isLoading={isLoading} isCentered>
@@ -39,8 +44,12 @@ const EditPlace = ({ slug }: IEditPlace) => {
         <Text pb={6} ml={{ base: 0, schedule: 2.5 }} textStyle="accountTitle">
           {place?.name}
         </Text>
-        <Tabs isLazy defaultIndex={!isComplete ? 0 : Number(query?.index) || 0}>
-          <PlaceTabList isComplete={isComplete} place={place} />
+        <Tabs isLazy index={index}>
+          <PlaceTabList
+            isComplete={isComplete}
+            place={place}
+            setIndex={setIndex}
+          />
           <TabPanels>
             <TabPanel px={0}>
               <PlaceEdit place={place} />

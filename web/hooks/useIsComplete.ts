@@ -2,8 +2,7 @@ import { useMemo } from 'react'
 
 export const useIsComplete = (place) => {
   return useMemo(() => {
-    if (!place) return false
-    if (!place.external_id) return true
+    if (!place || !place.external_id) return true
     return !(
       place.height === 0 ||
       place.surface === 0 ||

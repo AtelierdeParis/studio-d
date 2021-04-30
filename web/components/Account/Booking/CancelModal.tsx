@@ -25,7 +25,8 @@ const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
     setLoading(true)
     return client.bookings
       .bookingsUpdate(booking?.id, {
-        status: isPlace ? 'canceledbyplace' : 'canceled',
+        // @ts-ignore
+        status: isPlace ? `${type}canceledbyplace` : `requestcanceled`,
       })
       .then(() => {
         queryClient.refetchQueries([
