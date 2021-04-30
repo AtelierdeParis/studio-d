@@ -32,7 +32,7 @@ module.exports = {
             to: isPlace ? lastMessage.company.email : lastMessage.place.email,
           },
           {
-            templateId: 9,
+            templateId: "new-message",
           },
           {
             user_type: "XXXX",

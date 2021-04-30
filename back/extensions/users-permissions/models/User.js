@@ -18,7 +18,7 @@ module.exports = {
                   to: user.email,
                 },
                 {
-                  templateId: isPlace ? 15 : 14,
+                  templateId: isPlace ? "welcome-place" : "welcome-company",
                 },
                 {
                   user_type: user.type,
@@ -37,7 +37,7 @@ module.exports = {
             to: process.env.EMAIL_RECIPIENT,
           },
           {
-            templateId: 3,
+            templateId: "admin-user-updated",
           },
           {
             user_type: updated.type === "place" ? "Le lieu" : "La compagnie",
