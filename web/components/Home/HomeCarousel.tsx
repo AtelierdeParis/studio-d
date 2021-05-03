@@ -36,7 +36,7 @@ const HomeCarousel = () => {
           >
             {carousel?.images?.map((img) => (
               <SwiperSlide key={img.id}>
-                <Image src={img.url} objectFit="cover" h="45vh" w="100%" />
+                <Image src={img.url} objectFit="cover" h="100%" w="100%" />
               </SwiperSlide>
             ))}
           </Swiper>
