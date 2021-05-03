@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from '~components/Link'
 import Tag from '~components/Tag'
 import Image from '~components/Image'
@@ -155,14 +155,21 @@ const SubInfo = ({ place, available, isMobile = false }) => {
 
 interface Props {
   place: Espace
+  setVisible: (type: boolean) => void
 }
 
-const PlaceListItem = ({ place }: Props) => {
+const PlaceListItem = ({ place, setVisible }: Props) => {
   const { t } = useTranslation('place')
   const { available, booked } = useNbDisponibility(place.disponibilities)
   const isOccupied = useIsOccupied(booked)
   const isMobile = useBreakpointValue({ base: true, lg: false })
   const isComplete = useIsComplete(place)
+
+  useEffect(() => {
+    if (!isComplete) {
+      setVisible(true)
+    }
+  }, [isComplete])
 
   return (
     <Flex

@@ -84,11 +84,11 @@
         },
         "about": {
             "label": "À propos de l’espace",
-            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
+            "placeholder": "# Le lieu et l’espace\n\nPrécisions sur le lieu et l’espace\n\n# Conditions d'accueil \n\n- L'accès'\n- Les possibilités d'hébergement 2\n- Personnel technique"
         },
         "details": {
             "label": "Détails techniques",
-            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
+            "placeholder": "# Système son\n\nEnceinte/puissance\n\n# Lumière\n\n- Nombre de lumière\n- Type de lumière\n- Précisions techniques particulières"
         },
         "files": {
             "noFile": "Aucun fichier à afficher",
@@ -214,7 +214,7 @@
         "nbDays" : "{{nb}} jours",
         "nbDays()" : "({{nb}} jours)",
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
-        "success": "Une nouvelle disponibilité a été ajouté",
+        "success": "Une nouvelle disponibilité a été ajoutée",
         "type": {
             "label": "Ajouter une disponibilité :",
             "placeholder": "Choisir le type de disponibilité",
@@ -271,7 +271,7 @@
             "request": "Demande réf. {{ref}}",
             "booking": "Réservation réf. {{ref}}",
             "error": "Une erreur est survenue pendant la suppression",
-            "success": "Les créneaux sélectionnés ont été supprimé",
+            "success": "Les créneaux sélectionnés ont été supprimés",
             "title": "Vous avez sélectionné {{nb}} créneau.",
             "titles": "Vous avez sélectionné {{nb}} créneaux.",
             "slotAvailable" : "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
@@ -326,7 +326,7 @@
         },
         "tooltip": {
             "request": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
-            "booking": "Vous avez déjà une réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
+            "booking": "Vous avez déjà une réservation en attente sur ce même créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
         },
         "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
         "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
