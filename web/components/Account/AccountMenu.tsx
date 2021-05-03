@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
 import {
   ROUTE_ACCOUNT,
@@ -103,12 +103,6 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const router = useRouter()
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
-
-  useEffect(() => {
-    if (!isComplete) {
-      router.push(ROUTE_ACCOUNT_INFORMATION)
-    }
-  }, [router.pathname, isComplete])
 
   const displayMenu = ({ title, items }) => {
     const isDisactivated = !isComplete && title === 'dashboard'

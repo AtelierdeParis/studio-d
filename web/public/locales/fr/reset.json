@@ -1,4 +1,8 @@
 {
+    "migration": {
+        "title": "Réactivation de votre compte",
+        "message": "Votre mot de passe est entre de bonnes mains chez StudioD, et entièrement sécurisé sur  nos serveurs. Pour cette raison, nous n’y avons pas eu accès lors de la migration des comptes vers notre nouvelle plateforme et avons besoin que vous en saisissiez un nouveau afin de créer votre espace personnel."
+    },
     "title": "Nouveau mot de passe",
     "password": {
         "label": "Mot de passe",

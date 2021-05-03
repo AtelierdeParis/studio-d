@@ -30,7 +30,7 @@ import * as yup from 'yup'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 import MigrationMessage from '~components/MigrationMessage'
-import { ROUTE_ACCOUNT_PLACES } from '~constants'
+import { ROUTE_ACCOUNT_PLACES, ROUTE_ACCOUNT } from '~constants'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
 
@@ -154,8 +154,10 @@ const AccountInformation = ({ user }: Props) => {
     client.users
       .putUsers(filteredData as NewUsersPermissionsUser)
       .then((res) => {
-        if (user.external_id && user.type === 'place' && !isComplete) {
-          router.push(ROUTE_ACCOUNT_PLACES)
+        if (user.external_id && !isComplete) {
+          router.push(
+            user.type === 'place' ? ROUTE_ACCOUNT_PLACES : ROUTE_ACCOUNT,
+          )
         }
         queryClient.setQueryData(['me'], res.data)
         reset(filteredData, { dirtyFields: false })

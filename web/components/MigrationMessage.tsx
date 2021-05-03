@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Text, Box, useBreakpointValue } from '@chakra-ui/react'
 import Pin from 'public/assets/img/pin-home.svg'
 
-const MigrationMessage = ({ title, message }) => {
+const MigrationMessage = ({ title, message, ...rest }) => {
   const style = useBreakpointValue({
     base: {
       py: 5,
@@ -16,7 +16,7 @@ const MigrationMessage = ({ title, message }) => {
   })
 
   return (
-    <Box bgColor="orange.100" mb="10" {...style}>
+    <Box bgColor="orange.100" mb="10" {...style} {...rest}>
       <Flex
         direction="column"
         maxW="700px"

@@ -211,7 +211,7 @@ module.exports = {
         .query("user", "users-permissions")
         .update({ id: user.id }, { resetPasswordToken: null, password });
 
-      return ctx.send({ ok: true });
+      return ctx.send({ ok: true, email: user.email });
     } else if (
       params.password &&
       params.passwordConfirmation &&

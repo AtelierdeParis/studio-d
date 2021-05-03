@@ -3,7 +3,7 @@
 module.exports = {
   lifecycles: {
     async afterFindOne(user) {
-      if (user.external_id) {
+      if (user && user.external_id) {
         Object.entries(user).map(([k, v]) => {
           if (v === "todefine") {
             user[k] = null;

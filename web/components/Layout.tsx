@@ -1,17 +1,29 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { Container, Flex, Box } from '@chakra-ui/react'
 import AccountLayout from 'components/Account/AccountLayout'
 import Header from 'components/Header'
 import Footer from 'components/Footer'
 import { useRouter } from 'next/router'
 import { ROUTE_PLACE_DETAIL } from '~constants'
+import { useCurrentUser } from '~hooks/useCurrentUser'
+import { useUserIsComplete } from '~hooks/useUserIsComplete'
+import { ROUTE_ACCOUNT_INFORMATION } from '~constants'
 
-interface ILayout {
+interface props {
   children: React.ReactNode
 }
 
-const Layout = (props: ILayout) => {
+const Layout = (props: props) => {
   const router = useRouter()
+  const { data: user } = useCurrentUser()
+  const isComplete = useUserIsComplete(user)
+
+  useEffect(() => {
+    if (!isComplete) {
+      router.push(ROUTE_ACCOUNT_INFORMATION)
+    }
+  }, [user, isComplete, router.pathname])
+
   const isRouteWithoutContainer = useMemo(
     () => ['/', ROUTE_PLACE_DETAIL].includes(router.pathname),
     [router.pathname],
