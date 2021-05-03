@@ -268,6 +268,8 @@
             "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
         },
         "delete": {
+            "request": "Demande réf. {{ref}}",
+            "booking": "Réservation réf. {{ref}}",
             "error": "Une erreur est survenue pendant la suppression",
             "success": "Les créneaux sélectionnés ont été supprimé",
             "title": "Vous avez sélectionné {{nb}} créneau.",
@@ -275,7 +277,7 @@
             "slotAvailable" : "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
             "slotAvailables" : "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
             "slotNotAvailable" : "Ce créneau ne peut pas être supprimé :",
-            "slotNotAvailables" : "{{nb}} créneaux ne peuvent pas être supprimés :",
+            "slotNotAvailables" : "Plusieurs créneaux ne peuvent pas être supprimés :",
             "delete": "Supprimer le créneau disponible",
             "deletes": "Supprimer les créneaux disponibles",
             "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",

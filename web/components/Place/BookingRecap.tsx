@@ -49,7 +49,7 @@ const BookingRecap = () => {
         </>
       ) : (
         <>
-          {!user.confirmed && !user.accepted ? (
+          {!user.confirmed || !user.accepted ? (
             <Box>
               <Text>
                 {t(`detail.notConfirm${isPlural}`, { nb: selected.length })}

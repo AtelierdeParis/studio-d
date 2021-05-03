@@ -1,7 +1,14 @@
 import React, { useMemo, useContext, useState } from 'react'
-import { Flex, Box, Text, Circle, VStack, Button } from '@chakra-ui/react'
+import {
+  Flex,
+  Box,
+  Text,
+  Circle,
+  VStack,
+  Button,
+  Divider,
+} from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { DisponibilityStatus } from '~@types/disponibility.d'
 import { format } from '~utils/date'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
@@ -14,43 +21,60 @@ import { useQueryClient } from 'react-query'
 
 const ScheduleDelete = () => {
   const { place, setToDelete, eventsIdToDelete } = useContext(ScheduleContext)
-  const dispos = useMemo(
+  const { available, booked } = useMemo(
     () =>
-      eventsIdToDelete.map((eventId) => {
-        const event = place?.disponibilities.find(
-          (dispo) => dispo.id === eventId,
-        )
-        return event
-      }),
+      eventsIdToDelete
+        .map((eventId) => {
+          const event = place?.disponibilities.find(
+            (dispo) => dispo.id === eventId,
+          )
+          return event
+        })
+        .reduce(
+          (total, current) => {
+            if (!current.booking || !current.booking.id) {
+              total.available.push(current)
+              return total
+            }
+            if (!total.booked[current.booking.id]) {
+              total.booked[current.booking.id] = {
+                booking: current.booking,
+                dispos: [current],
+              }
+            } else {
+              total.booked[current.booking.id].dispos.push(current)
+            }
+            return total
+          },
+          { available: [], booked: {} },
+        ),
     [eventsIdToDelete, place?.disponibilities],
   )
+
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('place')
   const { successToast, errorToast } = useToast()
+
   const queryClient = useQueryClient()
 
-  const { available, booked } = useMemo(
-    () =>
-      dispos.reduce(
-        (total, event) => {
-          if (event.status !== DisponibilityStatus.AVAILABLE)
-            total.booked.push(event)
-          else total.available.push(event)
-          return total
-        },
-        { available: [], booked: [] },
-      ),
-    [dispos],
+  const isPlural = useMemo(
+    () => (available.length > 0 || Object.keys(booked).length > 1 ? 's' : ''),
+    [available, booked],
   )
-  const isPlural = useMemo(() => (dispos.length > 1 ? 's' : ''), [dispos])
 
   const isAvailablePlural = useMemo(() => (available.length > 1 ? 's' : ''), [
     available,
   ])
 
-  const isBookedPlural = useMemo(() => (booked.length > 1 ? 's' : ''), [
-    available,
-  ])
+  const isBookedPlural = useMemo(
+    () =>
+      Object.keys(booked).length > 1 ||
+      (Object.keys(booked).length === 1 &&
+        booked[Object.keys(booked)[0]].dispos.length > 1)
+        ? 's'
+        : '',
+    [available],
+  )
 
   const onDelete = () => {
     setLoading(true)
@@ -75,7 +99,7 @@ const ScheduleDelete = () => {
       .finally(() => setLoading(false))
   }
 
-  if (dispos.length === 0) return null
+  if (available.length === 0 && Object.keys(booked).length === 0) return null
 
   return (
     <Box
@@ -86,7 +110,9 @@ const ScheduleDelete = () => {
       borderColor="gray.100"
     >
       <Text fontFamily="mabry medium" pb={2}>
-        {t(`schedule.delete.title${isPlural}`, { nb: dispos.length })}
+        {t(`schedule.delete.title${isPlural}`, {
+          nb: eventsIdToDelete.length,
+        })}
       </Text>
       {available.length > 0 && (
         <>
@@ -142,46 +168,64 @@ const ScheduleDelete = () => {
           </Flex>
         </>
       )}
-      {booked.length > 0 && (
+      {Object.keys(booked).length > 0 && available.length > 0 && (
+        <Divider my={6} />
+      )}
+      {Object.keys(booked).length > 0 && (
         <>
-          <Text pt={5} fontFamily="mabry medium" pb={1.5}>
-            {t(`schedule.delete.slotNotAvailable${isBookedPlural}`, {
-              nb: booked.length,
-            })}
+          <Text
+            pt={available.length > 0 ? 0 : 5}
+            fontFamily="mabry medium"
+            pb={1.5}
+          >
+            {t(`schedule.delete.slotNotAvailable${isBookedPlural}`)}
           </Text>
           <VStack spacing={4} alignItems="flex-start">
-            {booked.map((dispo) => {
-              const route = ['pending', 'canceled'].includes(dispo.status)
+            {Object.keys(booked).map((key) => {
+              const { booking, dispos } = booked[key]
+              const isRequest = [
+                'pending',
+                'requestcanceled',
+                'requestcanceledbyplace',
+              ].includes(booking.status)
+              const route = isRequest
                 ? ROUTE_ACCOUNT_REQUEST
                 : ROUTE_ACCOUNT_BOOKING
               return (
-                <Box key={dispo.id}>
-                  <Flex alignItems="center">
-                    <Circle size="6px" mb={0.5} bgColor="gray.200" />
-                    <Flex pl={3} alignItems="center">
-                      <Text>{format(dispo.start)}</Text>
-                      <Text textTransform="lowercase" px={1.5}>
-                        {`(${
-                          dispo.when
-                            ? t(`schedule.${dispo.when}`)
-                            : t(`schedule.type.${dispo.type}`)
-                        })`}
-                      </Text>
-                      <Tag status={dispo.status} />
+                <Box key={booking.id}>
+                  <Text mt={2} fontFamily="mabry medium">
+                    {t(`schedule.delete.${isRequest ? 'request' : 'booking'}`, {
+                      ref: booking.id,
+                    })}
+                  </Text>
+                  {dispos.map((dispo) => (
+                    <Flex alignItems="center" my={1.5} key={dispo.id}>
+                      <Circle size="6px" mb={0.5} bgColor="gray.200" />
+                      <Flex pl={3} alignItems="center">
+                        <Text>{format(dispo.start)}</Text>
+                        <Text textTransform="lowercase" px={1.5}>
+                          {`(${
+                            dispo.when
+                              ? t(`schedule.${dispo.when}`)
+                              : t(`schedule.type.${dispo.type}`)
+                          })`}
+                        </Text>
+                        <Tag status={dispo.status} />
+                      </Flex>
                     </Flex>
-                  </Flex>
+                  ))}
                   <Text pt={1}>
                     {t('schedule.delete.booked', {
-                      name: dispo?.booking?.company?.structureName,
+                      name: booking?.company?.structureName,
                     })}
                     <Link
                       textDecoration="underline"
                       ml={1.5}
                       whiteSpace="pre"
-                      href={`${route}?id=${dispo?.booking?.id}`}
-                      as={`${route}/${dispo?.booking?.id}`}
+                      href={`${route}?id=${booking?.id}`}
+                      as={`${route}/${booking?.id}`}
                     >
-                      {t(`schedule.delete.see.${dispo.status}`)}
+                      {t(`schedule.delete.see.${booking.status}`)}
                     </Link>
                   </Text>
                 </Box>
