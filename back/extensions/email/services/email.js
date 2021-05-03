@@ -1,5 +1,4 @@
 "use strict";
-
 const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">studiod-danse.fr</a>`;
 
 const signatureAdmin = `Bonne journée`;
@@ -46,9 +45,11 @@ const sendEmail = async (
         ...data,
       }
     )
-    .then(() => {
+    .then((res) => {
       console.log(
-        `Email with id ${template.templateId} has been sent successfully`
+        `Email with id ${template.templateId} has been sent successfully`,
+        options.to,
+        res
       );
     })
     .catch((err) => {

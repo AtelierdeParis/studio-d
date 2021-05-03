@@ -6,16 +6,21 @@ import { Box, Button, Text, Flex, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Add from 'public/assets/img/add.svg'
 import PlaceListItem from '~components/Account/Place/PlaceListItem'
+import MigrationMessage from '~components/MigrationMessage'
 
-interface IPlaceList {
+interface Props {
   places: Espace[]
 }
 
-const PlaceList = ({ places }: IPlaceList) => {
+const PlaceList = ({ places }: Props) => {
   const { t } = useTranslation('place')
 
   return (
     <Box py={{ base: 4, md: 8 }}>
+      <MigrationMessage
+        title={t('list.migration.title')}
+        message={t('list.migration.message')}
+      />
       <Flex
         alignItems="center"
         pb={4}

@@ -2,6 +2,15 @@
 
 module.exports = {
   lifecycles: {
+    async afterFindOne(user) {
+      if (user.external_id) {
+        Object.entries(user).map(([k, v]) => {
+          if (v === "todefine") {
+            user[k] = null;
+          }
+        });
+      }
+    },
     async beforeUpdate(param, data) {
       if (param.id) {
         strapi

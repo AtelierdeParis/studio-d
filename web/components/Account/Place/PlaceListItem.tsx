@@ -19,18 +19,21 @@ import { DisponibilityStatus } from '~@types/disponibility.d'
 import useNbDisponibility from '~hooks/useNbDisponibility'
 import useNbBooking from '~hooks/useNbBooking'
 import useIsOccupied from '~hooks/useIsOccupied'
+import { useIsComplete } from '~hooks/useIsComplete'
 import {
   ROUTE_ACCOUNT_PLACE_DETAIL,
   ROUTE_ACCOUNT_BOOKING,
   ROUTE_ACCOUNT_REQUEST,
 } from '~constants'
-import { useTranslation } from 'next-i18next'
+import { Trans, useTranslation } from 'next-i18next'
 import { format } from '~utils/date'
 import PlaceListItemOptions from '~components/Account/Place/PlaceListItemOptions'
+import NotComplete from '~components/NotComplete'
 
 const SubInfo = ({ place, available, isMobile = false }) => {
   const { t } = useTranslation('place')
   const { coming, past, pending } = useNbBooking(place.disponibilities)
+
   return (
     <Stack
       direction={{ base: 'column', lg: 'row' }}
@@ -159,6 +162,7 @@ const PlaceListItem = ({ place }: Props) => {
   const { available, booked } = useNbDisponibility(place.disponibilities)
   const isOccupied = useIsOccupied(booked)
   const isMobile = useBreakpointValue({ base: true, lg: false })
+  const isComplete = useIsComplete(place)
 
   return (
     <Flex
@@ -234,6 +238,24 @@ const PlaceListItem = ({ place }: Props) => {
         </Flex>
       </Flex>
       {isMobile && <SubInfo place={place} available={available} isMobile />}
+      {!isComplete && (
+        <NotComplete mt={8} w="fit-content">
+          <Trans
+            i18nKey="place:list.migration.error"
+            components={{
+              a: (
+                <Link
+                  href={{
+                    pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+                    query: { id: place.slug },
+                  }}
+                  textDecoration="underline"
+                />
+              ),
+            }}
+          />
+        </NotComplete>
+      )}
     </Flex>
   )
 }

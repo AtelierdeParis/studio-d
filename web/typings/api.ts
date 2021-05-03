@@ -355,6 +355,7 @@ export interface NewMessage {
   status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
   booking?: string;
   hasbeenread?: boolean;
+  notified?: boolean;
   created_by?: string;
   updated_by?: string;
 }
@@ -504,6 +505,7 @@ export interface UsersPermissionsUser {
   choreographer?: string;
   espaces?: Espace[];
   type: "company" | "place";
+  external_id?: string;
   bookings?: Booking[];
 }
 

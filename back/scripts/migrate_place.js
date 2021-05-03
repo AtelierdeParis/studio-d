@@ -94,10 +94,6 @@ const start = async () => {
 
             if (checkProp("title", "name")) {
               place.name = row.title;
-            }
-
-            if (checkProp("title", "name")) {
-              place.name = row.title;
               place.slug = createSlug(row.title);
             }
 

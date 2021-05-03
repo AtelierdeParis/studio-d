@@ -9,14 +9,18 @@ import {
   FormControlProps,
   StyleProps,
 } from '@chakra-ui/react'
+import NotComplete from '~components/NotComplete'
 
-interface IFormField extends Omit<FormControlProps, 'label'> {
+const migrationMessage = `Nous avons maintenant besoin de cette valeur, veuillez remplir ce champ.`
+
+interface Props extends Omit<FormControlProps, 'label'> {
   label?: string | JSX.Element
   isRequired?: boolean
   info?: string
   children: React.ReactNode
   errors?: FieldError | null
   labelStyle?: StyleProps
+  isComplete?: boolean
 }
 
 const FormField = ({
@@ -25,9 +29,10 @@ const FormField = ({
   errors = null,
   info,
   isRequired,
+  isComplete = true,
   labelStyle = {},
   ...rest
-}: IFormField) => {
+}: Props) => {
   return (
     <FormControl isInvalid={Boolean(errors)} w="100%" display="flex" {...rest}>
       <FormLabel fontWeight="400" fontSize="xxs" mb={0} mr={0} w="100%">
@@ -48,9 +53,23 @@ const FormField = ({
         </Text>
         <Flex direction="column">
           {children}
-          <FormErrorMessage color="red.500" fontSize={{ base: 'xs', sm: 'sm' }}>
-            {errors?.message}
-          </FormErrorMessage>
+          {isComplete ? (
+            <FormErrorMessage
+              color="red.500"
+              fontSize={{ base: 'xs', sm: 'sm' }}
+            >
+              {errors?.message}
+            </FormErrorMessage>
+          ) : (
+            <FormErrorMessage
+              color="orange.500"
+              fontSize={{ base: 'xs', sm: 'sm' }}
+            >
+              <NotComplete message={errors?.message}>
+                {migrationMessage}
+              </NotComplete>
+            </FormErrorMessage>
+          )}
         </Flex>
         {info && (
           <Text fontSize={{ base: 'xs', sm: 'sm' }} color="gray.500" mt={1.5}>

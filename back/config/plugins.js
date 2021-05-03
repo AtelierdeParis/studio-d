@@ -14,8 +14,8 @@ module.exports = ({ env }) => ({
       ignoreTLS: true,
     },
     settings: {
-      defaultFrom: "no-reply@studio-d.fr",
-      defaultReplyTo: "no-reply@studio-d.fr",
+      defaultFrom: "StudioD <no-reply@studio-d.fr>",
+      defaultReplyTo: "StudioD <no-reply@studio-d.fr>",
     },
   },
   upload: {

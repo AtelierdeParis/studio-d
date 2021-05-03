@@ -1724,7 +1724,7 @@ add-dom-event-listener@^1.1.0:
   dependencies:
     object-assign "4.x"
 
-addressparser@1.0.1:
+addressparser@1.0.1, addressparser@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
   integrity sha1-R6++GiqSYhkdtoOOT9HTm0CCF0Y=
@@ -7064,6 +7064,14 @@ nodemailer-fetch@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.6.0.tgz#79c4908a1c0f5f375b73fe888da9828f6dc963a4"
   integrity sha1-ecSQihwPXzdbc/6IjamCj23JY6Q=
+
+nodemailer-sendinblue-transport@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/nodemailer-sendinblue-transport/-/nodemailer-sendinblue-transport-1.2.3.tgz#255ea2b682d321f3491c1f4d080667561fb6851e"
+  integrity sha1-JV6itoLTIfNJHB9NCAZnVh+2hR4=
+  dependencies:
+    addressparser "^1.0.1"
+    promise "^7.1.1"
 
 nodemailer-shared@1.1.0:
   version "1.1.0"

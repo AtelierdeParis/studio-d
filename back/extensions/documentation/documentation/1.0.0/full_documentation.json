@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/30/2021 12:52:58 PM"
+    "x-generation-date": "05/03/2021 11:35:47 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10065,6 +10065,9 @@
               "company",
               "place"
             ]
+          },
+          "external_id": {
+            "type": "string"
           },
           "bookings": {
             "type": "array",

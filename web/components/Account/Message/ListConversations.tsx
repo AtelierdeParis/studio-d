@@ -29,7 +29,7 @@ const Item = ({ id, name, isSelected, setSelected }) => {
       justifyContent="space-between"
     >
       <Avatar
-        name={name[0]}
+        name={name}
         bgColor="gray.300"
         color="white"
         width="20px"
@@ -88,7 +88,7 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
             key={user.id}
             id={user.id}
             name={user.structureName}
-            isSelected={selected?.toString() === user.id.toString()}
+            isSelected={selected?.toString() === user?.id?.toString()}
             setSelected={setSelected}
           />
         ))}
