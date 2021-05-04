@@ -858,6 +858,7 @@
               "city",
               "siret",
               "ape",
+              "license",
               "type"
             ],
             "properties": {

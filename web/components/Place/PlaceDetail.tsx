@@ -27,6 +27,7 @@ import Compass from 'public/assets/img/compass.svg'
 import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
+import axios from 'axios'
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
 interface Props {
@@ -146,10 +147,7 @@ const PlaceDetail = ({ place }: Props) => {
                         colorScheme="gray"
                         fontSize="md"
                         onClick={() => {
-                          saveAs(
-                            process.env.NEXT_PUBLIC_BACK_URL + file.url,
-                            file.name,
-                          )
+                          saveAs(file.url, file.name)
                         }}
                       >
                         {file.caption

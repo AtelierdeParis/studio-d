@@ -103,7 +103,6 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const router = useRouter()
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
-  console.log(notifs)
 
   const displayMenu = ({ title, items }) => {
     const isDisactivated = !isComplete && title === 'dashboard'

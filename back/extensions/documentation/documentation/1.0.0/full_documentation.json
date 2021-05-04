@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/04/2021 10:05:49 AM"
+    "x-generation-date": "05/04/2021 10:50:47 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -9502,8 +9502,9 @@
             "enum": [
               "accepted",
               "created",
-              "canceled",
-              "canceledbyplace",
+              "requestcanceled",
+              "requestcanceledbyplace",
+              "bookingcanceledbyplace",
               "askcancel",
               "message"
             ]
@@ -9768,6 +9769,7 @@
                 "city",
                 "siret",
                 "ape",
+                "license",
                 "type"
               ],
               "properties": {

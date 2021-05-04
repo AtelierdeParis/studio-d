@@ -25,7 +25,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { client } from '~api/client-api'
 import Letter from 'public/assets/img/letter.svg'
-import Lock from 'public/assets/img/lock.svg'
 
 const getSchema = (target: Target) => {
   const schema = {
@@ -38,7 +37,6 @@ const getSchema = (target: Target) => {
     phone: yup.string().test({
       message: 'Le format du téléphone est incorrect',
       test: (value) => {
-        if (value === '') return true
         const match = value.match(
           /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
         )
@@ -46,15 +44,18 @@ const getSchema = (target: Target) => {
         return match[0] === value
       },
     }),
-    license: yup.string().test({
-      message: 'Les licences doivent être séparés par des virgules',
-      test: (value) => {
-        if (value === '') return true
-        const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
+    license: yup
+      .string()
+      .test({
+        message: 'Les licences doivent être séparés par des virgules',
+        test: (value) => {
+          if (value === '') return true
+          const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
+          if (!match) return false
+          return match[0] === value
+        },
+      })
+      .required(),
     website: yup.string().test({
       message: 'Url incorrect',
       test: (value) => {
@@ -257,6 +258,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               label={t('form.license.label')}
               errors={errors.license}
               info={t('form.license.info')}
+              isRequired
             >
               <Input name="license" ref={register} />
             </FormField>

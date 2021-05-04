@@ -69,15 +69,17 @@ const getSchema = (target, t) => {
           return match[0] === value
         },
       }),
-    license: yup.string().test({
-      message: 'Les licences doivent être séparés par des virgules',
-      test: (value) => {
-        if (value === '') return true
-        const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
+    license: yup
+      .string()
+      .test({
+        message: 'Les licences doivent être séparés par des virgules',
+        test: (value) => {
+          const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
+          if (!match) return false
+          return match[0] === value
+        },
+      })
+      .required(),
     website: yup.string().test({
       message: 'Url incorrect',
       test: (value) => {
@@ -380,6 +382,7 @@ const AccountInformation = ({ user }: Props) => {
                 info={t('information.license.info')}
                 errors={errors.license}
                 isComplete={isComplete && Boolean(user?.external_id)}
+                isRequired
               >
                 <Input name="license" ref={register} />
               </FormField>

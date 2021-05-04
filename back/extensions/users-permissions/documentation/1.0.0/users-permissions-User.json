@@ -1197,6 +1197,7 @@
           "city",
           "siret",
           "ape",
+          "license",
           "type"
         ],
         "properties": {
@@ -1486,6 +1487,7 @@
           "city",
           "siret",
           "ape",
+          "license",
           "type"
         ],
         "properties": {

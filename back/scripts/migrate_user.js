@@ -164,31 +164,36 @@ const start = async () => {
                 .toUpperCase();
             }
 
-            user.license = row["_Numéro de licence entrepreneur spectacle"]
-              .toLowerCase()
-              .replace(/licences?/g, ",")
-              .replace(/cat[ée]gorie/g, ",")
-              .replace(/cat/g, ",")
-              .replace(/et/g, ",")
-              .replace(/\r/g, ",")
-              .replace(/\n/g, ",")
-              .replace(/;/g, "")
-              .replace(/\//g, ",")
-              .replace(/|/g, "")
-              .replace(/ [0-9]{1,2}-/g, ",")
-              .replace(/  /g, ",")
-              .replace(/ /g, "")
-              .replace(/n°/g, "")
-              .replace(/,[0-9]{1}-/g, ",")
-              .replace(/:/g, "")
-              .replace(/^[0-9]{1,2}(-|,)/, "")
-              .replace(/-/g, "")
-              .replace(/&[0-9]/g, ",")
-              .replace(/,{2,9}/g, ",")
-              .replace(/,[0-9],/g, ",")
-              .replace(/^,/, "")
-              .replace(/,$/, "")
-              .toUpperCase();
+            if (
+              checkProp("_Numéro de licence entrepreneur spectacle", "license")
+            ) {
+              user.license = row["_Numéro de licence entrepreneur spectacle"]
+                .toLowerCase()
+                .replace(/licences?/g, ",")
+                .replace(/cat[ée]gorie/g, ",")
+                .replace(/cat/g, ",")
+                .replace(/et/g, ",")
+                .replace(/\r/g, ",")
+                .replace(/\n/g, ",")
+                .replace(/;/g, "")
+                .replace(/\//g, ",")
+                .replace(/|/g, "")
+                .replace(/ [0-9]{1,2}-/g, ",")
+                .replace(/  /g, ",")
+                .replace(/ /g, "")
+                .replace(/n°/g, "")
+                .replace(/,[0-9]{1}-/g, ",")
+                .replace(/:/g, "")
+                .replace(/^[0-9]{1,2}(-|,)/, "")
+                .replace(/-/g, "")
+                .replace(/&[0-9]/g, ",")
+                .replace(/,{2,9}/g, ",")
+                .replace(/,[0-9],/g, ",")
+                .replace(/^,/, "")
+                .replace(/,$/, "")
+                .toUpperCase();
+            }
+
             user.phone = row.phone_number;
             user.website = row["_Site internet"];
 
