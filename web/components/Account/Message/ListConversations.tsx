@@ -4,10 +4,13 @@ import { Avatar, Flex, VStack, Box, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import Notif from '~components/Notif'
+import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
+import Reload from 'public/assets/img/reload.svg'
+import { useRouter } from 'next/router'
 
 const Item = ({ id, name, isSelected, setSelected }) => {
   const { data: notifs } = useMyNotifications({ id })
-
+  const router = useRouter()
   return (
     <Flex
       alignItems="center"
@@ -24,7 +27,16 @@ const Item = ({ id, name, isSelected, setSelected }) => {
       w="100%"
       cursor="pointer"
       onClick={() => {
-        setSelected(isSelected ? null : id)
+        if (!isSelected) {
+          setSelected(id)
+          router.push(
+            `${ROUTE_ACCOUNT_MESSAGE}?conversation=${id}`,
+            `${ROUTE_ACCOUNT_MESSAGE}/${id}`,
+            {
+              shallow: true,
+            },
+          )
+        }
       }}
       justifyContent="space-between"
     >
@@ -72,16 +84,24 @@ const ListConversations = ({ conversations, selected, setSelected }: Props) => {
       display={{ base: selected ? 'none' : 'block', md: 'block' }}
       h="100%"
     >
-      <Text
-        fontFamily="mabry medium"
-        fontWeight="500"
-        textTransform="uppercase"
-        fontSize="sm"
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
         mb={{ base: 4, sm: 8 }}
-        pl={5}
+        px={5}
       >
-        {t('messages.title')}
-      </Text>
+        <Text
+          fontFamily="mabry medium"
+          fontWeight="500"
+          textTransform="uppercase"
+          fontSize="sm"
+        >
+          {t('messages.title')}
+        </Text>
+        <Box cursor="pointer" onClick={() => window.location.reload()}>
+          <Reload />
+        </Box>
+      </Flex>
       <VStack alignItems="flex-start" spacing={0}>
         {conversations.map((user) => (
           <Item
