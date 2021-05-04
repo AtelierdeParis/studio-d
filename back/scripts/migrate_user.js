@@ -194,7 +194,10 @@ const start = async () => {
                 .toUpperCase();
             }
 
-            user.phone = row.phone_number;
+            if (checkProp("phone_number", "phone")) {
+              user.phone = row.phone_number;
+            }
+
             user.website = row["_Site internet"];
 
             const socialReason =

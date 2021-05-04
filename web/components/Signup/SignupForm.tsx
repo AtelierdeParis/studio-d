@@ -34,16 +34,19 @@ const getSchema = (target: Target) => {
     password: yup.string().required().min(10),
     structureName: yup.string().required(),
     address: yup.string().required(),
-    phone: yup.string().test({
-      message: 'Le format du téléphone est incorrect',
-      test: (value) => {
-        const match = value.match(
-          /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
-        )
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
+    phone: yup
+      .string()
+      .test({
+        message: 'Le format du téléphone est incorrect',
+        test: (value) => {
+          const match = value.match(
+            /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
+          )
+          if (!match) return false
+          return match[0] === value
+        },
+      })
+      .required(),
     license: yup
       .string()
       .test({
@@ -67,6 +70,7 @@ const getSchema = (target: Target) => {
         return match[0] === value
       },
     }),
+    country: yup.string().required(),
     zipCode: yup.string().required(),
     city: yup.string().required(),
     siret: yup.string().required().min(14).max(14),
@@ -219,6 +223,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               </FormField>
             </Stack>
             <FormField
+              isRequired
               label={
                 <Flex as="span" alignItems="center">
                   <Text as="span" mr={2}>
@@ -251,7 +256,11 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                 <Input name="ape" ref={register} />
               </FormField>
             </Stack>
-            <FormField label={t('form.referent')} errors={errors.phone}>
+            <FormField
+              label={t('form.referent')}
+              errors={errors.phone}
+              isRequired
+            >
               <Input name="phone" ref={register} />
             </FormField>
             <FormField

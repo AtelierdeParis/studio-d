@@ -58,18 +58,17 @@ const getSchema = (target, t) => {
     address: yup.string().required(t('errors.required')),
     phone: yup
       .string()
-      .optional()
       .test({
         message: 'Le format du téléphone est incorrect',
         test: (value) => {
-          if (value === '') return true
           const match = value.match(
             /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
           )
           if (!match) return false
           return match[0] === value
         },
-      }),
+      })
+      .required(t('errors.required')),
     license: yup
       .string()
       .test({
@@ -94,6 +93,7 @@ const getSchema = (target, t) => {
     }),
     zipCode: yup.string().required(t('errors.required')),
     city: yup.string().required(t('errors.required')),
+    country: yup.string().required(t('errors.required')),
     siret: yup
       .string()
       .required(t('errors.required'))

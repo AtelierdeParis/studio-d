@@ -7,6 +7,7 @@ import { useTranslation, Trans } from 'next-i18next'
 import { client } from '~api/client-api'
 import Loading from '~components/Loading'
 import Link from '~components/Link'
+import { ROUTE_ACCOUNT } from '~constants'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 
