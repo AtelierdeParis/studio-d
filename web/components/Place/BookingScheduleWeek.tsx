@@ -1,5 +1,5 @@
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useMemo } from 'react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
@@ -9,6 +9,7 @@ import { format } from '~utils/date'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
 import BookingFilledUntil from '~components/Place/BookingFilledUntil'
 import { ScheduleEvent } from '~@types/schedule-event.d'
+import min from 'date-fns/min'
 
 const view = createPlugin({
   views: {
@@ -33,9 +34,13 @@ interface Props {
   events: ScheduleEvent[]
 }
 
-const BookingScheduleWeek = ({ place, events }: Props) => {
+const BookingScheduleWeek = ({ place, events = [] }: Props) => {
   const scheduleRef = useRef(null)
   const [dateRange, setDateRange] = useState({ start: null, end: null })
+  const initialDate = useMemo(() => {
+    if (events.length === 0) return new Date()
+    return min(events.map(({ start }) => start))
+  }, [events])
 
   return (
     <Flex
@@ -50,6 +55,7 @@ const BookingScheduleWeek = ({ place, events }: Props) => {
         ref={scheduleRef}
         plugins={[dayGridPlugin, interactionPlugin, view]}
         initialView="custom"
+        initialDate={initialDate}
         datesSet={({ start, end }) => {
           setDateRange({ start, end })
         }}
