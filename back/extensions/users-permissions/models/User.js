@@ -38,8 +38,8 @@ module.exports = {
           });
       }
     },
-    async afterUpdate(updated) {
-      if (!updated.accepted && updated.confirmed) {
+    async afterUpdate(updated, query, data) {
+      if (!updated.accepted && updated.confirmed && !data.confirmed) {
         // Send email to administration
         strapi.plugins["email"].services.email.sendEmail(
           {
