@@ -46,7 +46,9 @@ const SpacerEvent = ({ isMonth }) => (
 const BookingScheduleSlot = (props: Props) => {
   const { t } = useTranslation('place')
   const { data: user } = useCurrentUser()
-  const { data: bookings = [] } = useMyBookings()
+  const { data: bookings = [] } = useMyBookings('all', {
+    enabled: Boolean(user),
+  })
   const {
     extendedProps: { when, hasEventSameDay, id, type },
     start,
