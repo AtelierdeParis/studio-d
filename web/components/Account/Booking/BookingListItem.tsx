@@ -142,7 +142,15 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
           <Box
             pl={3}
             pos="relative"
-            opacity={['canceled', 'canceledbyplace'].includes(status) ? 0.2 : 1}
+            opacity={
+              [
+                'requestcanceled',
+                'requestcanceledbyplace',
+                'bookingcanceledbyplace',
+              ].includes(status)
+                ? 0.2
+                : 1
+            }
           >
             {booking?.notifications?.message > 0 && (
               <Circle

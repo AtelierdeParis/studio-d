@@ -48,7 +48,8 @@
                 "booking": "Vous êtes sur le point d’annuler cette réservation. Voulez-vous continuer ?"
             },
             "confirm": "Confirmer l’annulation",
-            "back": "Non, fermer"
+            "back": "Non, fermer",
+            "success": "L'annulation a bien été prise en compte"
         },
         "askcancel": {
             "title": "Demander l'annulation",

@@ -55,6 +55,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
       client.notifications
         .toggleNotif({ status: type, bookingId: id })
         .then(() => {
+          console.log('fsjkls')
           queryClient.refetchQueries(['myNotifications'])
           queryClient.refetchQueries(['myBookings', type])
         })

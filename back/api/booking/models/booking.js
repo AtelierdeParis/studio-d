@@ -119,12 +119,13 @@ module.exports = {
         place: updated.place.id,
         company: updated.company.id,
       };
+
       if (body.status) {
         switch (body.status) {
           case "requestcanceled":
             strapi.services.message.create({
               author: "company",
-              status: "canceled",
+              status: "requestcanceled",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
@@ -152,7 +153,7 @@ module.exports = {
           case "requestcanceledbyplace":
             strapi.services.message.create({
               author: "place",
-              status: "canceledbyplace",
+              status: "requestcanceledbyplace",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
@@ -179,7 +180,7 @@ module.exports = {
           case "bookingcanceledbyplace":
             strapi.services.message.create({
               author: "place",
-              status: "canceledbyplace",
+              status: "bookingcanceledbyplace",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");

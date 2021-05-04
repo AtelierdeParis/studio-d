@@ -697,8 +697,9 @@
                   "enum": [
                     "accepted",
                     "created",
-                    "canceled",
-                    "canceledbyplace",
+                    "requestcanceled",
+                    "requestcanceledbyplace",
+                    "bookingcanceledbyplace",
                     "askcancel",
                     "message"
                   ]

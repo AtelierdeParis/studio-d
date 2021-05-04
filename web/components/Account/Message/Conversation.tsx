@@ -35,11 +35,7 @@ const Conversation = ({ id, user, back }: Props) => {
       client.notifications
         .toggleNotif({ status: 'message', targetId: id })
         .then(() => {
-          queryClient.setQueryData(['myNotifications', { id }], {
-            request: 0,
-            message: 0,
-            booking: 0,
-          })
+          queryClient.refetchQueries(['myNotifications'])
         })
     },
   })

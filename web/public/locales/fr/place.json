@@ -326,7 +326,7 @@
         },
         "tooltip": {
             "request": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
-            "booking": "Vous avez déjà une réservation en attente sur ce même créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
+            "booking": "Vous avez déjà une réservation accepté sur ce même créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
         },
         "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
         "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
