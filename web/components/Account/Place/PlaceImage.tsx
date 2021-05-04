@@ -19,11 +19,13 @@ import FallbackImage from '~components/FallbackImage'
 import { Router } from 'next/router'
 import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import { useRouter } from 'next/router'
+import { useQueryClient } from 'react-query'
 interface Props {
   place: Espace
 }
 
 const PlaceImage = ({ place }: Props) => {
+  const queryClient = useQueryClient()
   const router = useRouter()
   const { t } = useTranslation('place')
   const [files, setFiles] = useState<any>(place?.images || [])
@@ -61,8 +63,15 @@ const PlaceImage = ({ place }: Props) => {
     if (removed.length > 0) {
       await Promise.all(
         removed.map(({ id }) => client.upload.filesDelete(id)),
-      ).then(() => {
+      ).then((res) => {
         if (newFiles.length === 0) successToast(t('successImg'))
+        const removedImages = res.map(({ data }) => data.id)
+        queryClient.setQueryData(['place', place.slug], {
+          ...place,
+          images: [
+            ...place.images.filter(({ id }) => !removedImages.includes(id)),
+          ],
+        })
       })
       setRemoved([])
     }
@@ -74,6 +83,10 @@ const PlaceImage = ({ place }: Props) => {
         field: 'images',
       })
         .then((res) => {
+          queryClient.setQueryData(['place', place.slug], {
+            ...place,
+            images: [...place.images, ...res.data],
+          })
           const redirect = files.length === newFiles.length
           setFiles(
             files.map((file) => {
@@ -85,6 +98,7 @@ const PlaceImage = ({ place }: Props) => {
               return file
             }),
           )
+
           if (redirect) {
             router.push({
               pathname: ROUTE_ACCOUNT_PLACE_DETAIL,

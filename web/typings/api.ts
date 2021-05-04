@@ -1865,7 +1865,7 @@ export namespace Upload {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = void;
+    export type ResponseBody = UploadFile;
   }
   /**
    * @description Search for an uploaded file
@@ -3923,10 +3923,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     filesDelete: (id: string, params: RequestParams = {}) =>
-      this.request<void, Error>({
+      this.request<UploadFile, Error>({
         path: `/upload/files/${id}`,
         method: "DELETE",
         secure: true,
+        format: "json",
         ...params,
       }),
 
