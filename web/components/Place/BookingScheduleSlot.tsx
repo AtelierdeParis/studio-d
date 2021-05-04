@@ -39,8 +39,13 @@ interface Props extends ScheduleEvent {
   isMonth?: boolean
 }
 
-const SpacerEvent = ({ isMonth }) => (
-  <Spacer bgColor={isMonth ? '#e5e7ed' : 'transparent'} borderRadius="lg" />
+const SpacerEvent = ({ isMonth, ...rest }) => (
+  <Spacer
+    bgColor={isMonth ? '#e5e7ed' : 'transparent'}
+    borderRadius="lg"
+    flex={1}
+    {...rest}
+  />
 )
 
 const BookingScheduleSlot = (props: Props) => {
@@ -78,6 +83,7 @@ const BookingScheduleSlot = (props: Props) => {
       h="100%"
       border="2px solid"
       borderColor="transparent"
+      flex={1}
       {...((!Boolean(user) || user?.type === 'company') && styleSelectable)}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
@@ -117,21 +123,23 @@ const BookingScheduleSlot = (props: Props) => {
 
   if (!hasEventSameDay) {
     return (
-      <SimpleGrid
+      <Flex
+        direction="column"
         w="100%"
         h="100%"
         gridAutoRows="1fr"
         rowGap="4px"
+        className="grid"
         bgColor={isMonth ? 'blue.50' : 'transparent'}
       >
         {when === ScheduleEventWhen.AFTERNOON && (
-          <SpacerEvent isMonth={isMonth} />
+          <SpacerEvent isMonth={isMonth} borderBottom="2px solid transparent" />
         )}
         {Event}
         {when === ScheduleEventWhen.MORNING && (
-          <SpacerEvent isMonth={isMonth} />
+          <SpacerEvent isMonth={isMonth} borderTop="2px solid transparent" />
         )}
-      </SimpleGrid>
+      </Flex>
     )
   }
 

@@ -90,7 +90,7 @@ const Schedule = () => {
             </Box>
           )
         }}
-        dateClick={(date) => {
+        dateClick={() => {
           if (eventsIdToDelete.length > 0) setToDelete([])
         }}
         fixedWeekCount={false}
