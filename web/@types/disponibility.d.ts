@@ -5,4 +5,5 @@ export enum DisponibilityStatus {
   PENDING = 'pending',
   BOOKED = 'booked',
   PAST = 'past',
+  CANCELED = 'canceled',
 }

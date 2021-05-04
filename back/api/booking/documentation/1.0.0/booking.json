@@ -635,7 +635,8 @@
                     "available",
                     "booked",
                     "pending",
-                    "past"
+                    "past",
+                    "canceled"
                   ]
                 },
                 "booking": {

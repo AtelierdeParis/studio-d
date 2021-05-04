@@ -146,7 +146,7 @@ export interface Disponibility {
     updated_by?: string;
   };
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past";
+  status: "available" | "booked" | "pending" | "past" | "canceled";
   booking?: {
     id: string;
     disponibilities?: string[];
@@ -180,7 +180,7 @@ export interface NewDisponibility {
   end: string;
   espace?: string;
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past";
+  status: "available" | "booked" | "pending" | "past" | "canceled";
   booking?: string;
 
   /** @format date-time */
@@ -343,7 +343,14 @@ export interface Message {
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
   booking?: Booking;
-  status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
+  status:
+    | "accepted"
+    | "created"
+    | "requestcanceled"
+    | "requestcanceledbyplace"
+    | "bookingcanceledbyplace"
+    | "askcancel"
+    | "message";
   author?: "company" | "place";
 }
 
@@ -352,7 +359,14 @@ export interface NewMessage {
   place?: string;
   company?: string;
   author?: "company" | "place";
-  status: "accepted" | "created" | "canceled" | "canceledbyplace" | "askcancel" | "message";
+  status:
+    | "accepted"
+    | "created"
+    | "requestcanceled"
+    | "requestcanceledbyplace"
+    | "bookingcanceledbyplace"
+    | "askcancel"
+    | "message";
   booking?: string;
   hasbeenread?: boolean;
   notified?: boolean;
@@ -441,7 +455,7 @@ export interface UsersPermissionsRole {
     siret: string;
     ape: string;
     phone?: string;
-    license?: string;
+    license: string;
     website?: string;
     legalRepresentative?: string;
     statusRepresentative?: string;

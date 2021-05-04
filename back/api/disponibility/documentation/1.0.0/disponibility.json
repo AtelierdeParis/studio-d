@@ -769,7 +769,8 @@
               "available",
               "booked",
               "pending",
-              "past"
+              "past",
+              "canceled"
             ]
           },
           "booking": {
@@ -869,7 +870,8 @@
               "available",
               "booked",
               "pending",
-              "past"
+              "past",
+              "canceled"
             ]
           },
           "booking": {

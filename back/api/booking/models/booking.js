@@ -13,8 +13,17 @@ const locale = {
 
 const updateDispo = (dispos = [], status) => {
   if (!dispos || dispos.length === 0) return null;
-  dispos.map(({ id }) => {
-    strapi.query("disponibility").update({ id }, { status });
+  const data = { status };
+  if (status === "available") {
+    data.booking = null;
+  }
+  dispos.map((dispo) => {
+    strapi.query("disponibility").update({ id: dispo.id }, data);
+    if (status === "available") {
+      strapi
+        .query("disponibility")
+        .create({ ...dispo, place: null, status: "canceled" });
+    }
   });
 };
 

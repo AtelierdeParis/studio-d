@@ -38,7 +38,6 @@ const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
         ])
         setSelected(null)
         successToast(t('modal.cancel.success'))
-        console.log(['myBookings', isBooking ? 'booking' : 'request'])
       })
       .finally(() => setLoading(false))
   }

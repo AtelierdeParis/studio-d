@@ -29,8 +29,8 @@
       "required": true
     },
     "espace": {
-      "via": "disponibilities",
-      "model": "espace"
+      "model": "espace",
+      "via": "disponibilities"
     },
     "type": {
       "type": "enumeration",
@@ -47,14 +47,15 @@
         "available",
         "booked",
         "pending",
-        "past"
+        "past",
+        "canceled"
       ],
       "default": "available",
       "required": true
     },
     "booking": {
-      "via": "disponibilities",
-      "model": "booking"
+      "model": "booking",
+      "via": "disponibilities"
     }
   }
 }

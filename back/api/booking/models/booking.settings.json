@@ -12,8 +12,8 @@
   },
   "attributes": {
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "booking"
+      "via": "booking",
+      "collection": "disponibility"
     },
     "status": {
       "type": "enumeration",
