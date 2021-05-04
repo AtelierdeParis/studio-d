@@ -149,7 +149,10 @@
             "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
             "btn": "Réinitialiser les filtres"
         },
+        "nbPlace": "{{nb}} espace inscrit",
         "nbPlaces": "{{nb}} espaces inscrits",
+        "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
+        "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
         "where": {
             "label": "Où cherchez-vous ?",
             "placeholder": "Renseignez une ville…"

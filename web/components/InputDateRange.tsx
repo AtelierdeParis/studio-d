@@ -20,17 +20,15 @@ import Arrow from 'public/assets/img/chevron-right.svg'
 import isSameDay from 'date-fns/isSameDay'
 import isToday from 'date-fns/isToday'
 import FormField from '~components/FormField'
-import { useTranslation } from 'next-i18next'
 import Remove from 'public/assets/img/remove.svg'
 
-interface IInputDateRange {
+interface Props {
   control: Control
   placeholder?: string
   label?: string
 }
 
-const InputDateRange = ({ control, placeholder, label }: IInputDateRange) => {
-  const { t } = useTranslation('place')
+const InputDateRange = ({ control, placeholder, label }: Props) => {
   const theme = useTheme()
   const [range, setRange] = useState({
     startDate: new Date(),
@@ -61,9 +59,9 @@ const InputDateRange = ({ control, placeholder, label }: IInputDateRange) => {
       <Popover>
         <PopoverTrigger>
           <Flex mt={0.5} cursor="pointer">
-            <FormField label={label}>
+            <FormField label={label} labelStyle={{ mb: 0 }}>
               {fieldStart.value ? (
-                <HStack alignItems="center" spacing={3}>
+                <HStack alignItems="center" spacing={2} mt={1}>
                   <Text>{format(fieldStart.value)}</Text>
                   {fieldEnd.value &&
                     !isSameDay(
@@ -71,7 +69,7 @@ const InputDateRange = ({ control, placeholder, label }: IInputDateRange) => {
                       new Date(fieldEnd.value),
                     ) && (
                       <>
-                        <Arrow />
+                        <Arrow width="10px" height="10px" />
                         <Text>{format(fieldEnd.value)}</Text>
                       </>
                     )}

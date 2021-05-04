@@ -42,6 +42,7 @@ export interface SearchQuery {
 }
 
 export const formatSearchToQuery = (data): Record<string, any> => {
+  // const { sortBy, ...rest } = data
   return Object.fromEntries(
     Object.entries(data)
       .map(([_, v]) => {
@@ -52,7 +53,7 @@ export const formatSearchToQuery = (data): Record<string, any> => {
   )
 }
 
-export const formatSearch = (formData): SearchQuery => {
+export const formatSearch = (formData, forceSort = false): SearchQuery => {
   const query = {}
   const data = Object.fromEntries(
     Object.entries(formData).map(([key, value]) => {
@@ -63,7 +64,9 @@ export const formatSearch = (formData): SearchQuery => {
     }),
   )
 
-  if (Boolean(data.sortBy)) {
+  if (forceSort) {
+    query['_sort'] = 'nbDispo'
+  } else if (Boolean(data.sortBy)) {
     switch (data.sortBy) {
       case SortOptions.DISPO_ASC:
         query['_sort'] = 'dispo'

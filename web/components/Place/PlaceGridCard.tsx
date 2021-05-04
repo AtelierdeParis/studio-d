@@ -22,17 +22,18 @@ import useDispoInRange from '~hooks/useDispoInRange'
 
 interface Props {
   place: Espace
-  searchQuery?: SearchQuery
+  searchParams?: SearchQuery
 }
 
-const PlaceGridCard = ({ place, searchQuery }: Props) => {
+const PlaceGridCard = ({ place, searchParams }: Props) => {
   const { t } = useTranslation('place')
 
   const disposInRange = useDispoInRange(
     place?.disponibilities,
-    searchQuery?.['disponibilities.start_gte'],
-    searchQuery?.['disponibilities.end_lte'],
+    searchParams?.['disponibilities.start_gte'],
+    searchParams?.['disponibilities.end_lte'],
   )
+  console.log(disposInRange)
 
   const disposThisWeek = useNbDispoPerWeek(
     new Date(),

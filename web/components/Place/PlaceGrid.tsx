@@ -12,7 +12,7 @@ interface Props {
   gridRef?: React.RefObject<any>
   isFetching?: boolean
   isLoading?: boolean
-  searchQuery?: SearchQuery
+  searchParams?: SearchQuery
 }
 
 const PlaceGrid = ({
@@ -20,7 +20,7 @@ const PlaceGrid = ({
   isLoading = null,
   isFetching = false,
   gridRef = null,
-  searchQuery = null,
+  searchParams = null,
 }: Props) => {
   return (
     <Box>
@@ -35,7 +35,7 @@ const PlaceGrid = ({
             <PlaceGridCard
               place={place}
               key={place.id}
-              searchQuery={searchQuery}
+              searchParams={searchParams}
             />
           ))}
         </Loading>

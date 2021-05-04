@@ -86,7 +86,6 @@ interface Props {
 
 const InputCity = ({ name, control, placeholder }: Props) => {
   const { data: cities } = useCities()
-
   const theme = useTheme()
   const { field } = useController({
     name,

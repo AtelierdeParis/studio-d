@@ -18,9 +18,6 @@ import Pin from 'public/assets/img/pin-outline.svg'
 import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import { SurfaceOptions, HeightOptions } from '~utils/search'
-import { formatSearchToQuery } from '~utils/search'
-import { ROUTE_PLACES } from '~constants'
-import { useRouter } from 'next/router'
 
 const selectProps = {
   variant: 'unstyled',
@@ -28,42 +25,16 @@ const selectProps = {
   pl: 3,
 }
 
-const PlaceSearch = ({ searchQuery }) => {
+const PlaceSearch = ({ onSubmit }) => {
   const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
-  const [isDisabled, setDisabled] = useState(true)
   const [hasMoreFilters, setMoreFilter] = useState(false)
   const { t } = useTranslation('place')
   const form = useFormContext()
-  const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, lg: false })
 
-  useEffect(() => {
-    setDisabled(
-      Object.keys(searchQuery).filter(
-        (key) => !['published_eq', '_sort'].includes(key),
-      ).length === 0,
-    )
-  }, [searchQuery])
-
-  const onSubmit = ({ sortBy, ...rest }) => {
-    router.push({
-      pathname: ROUTE_PLACES,
-      query: formatSearchToQuery(rest),
-    })
-  }
-
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      onChange={() => {
-        setDisabled(
-          Object.entries(form.getValues()).filter(
-            ([key, v]) => key !== 'sortBy' && Boolean(v),
-          ).length === 0,
-        )
-      }}
-    >
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <Flex
         bgColor="blue.100"
         px={{ base: 3, md: 5 }}
@@ -86,8 +57,11 @@ const PlaceSearch = ({ searchQuery }) => {
                 width="22px"
                 height="22px"
               />
-              <Box pl={3.5} flex={1}>
-                <FormField label={t('search.where.label')}>
+              <Box pl={3.5} flex={1} pt={1}>
+                <FormField
+                  label={t('search.where.label')}
+                  labelStyle={{ mb: 0 }}
+                >
                   <InputCity
                     name="city"
                     control={form.control}
@@ -268,7 +242,7 @@ const PlaceSearch = ({ searchQuery }) => {
               type="submit"
               colorScheme="blue"
               size="lg"
-              isDisabled={isDisabled}
+              // isDisabled={isDisabled}
               isLoading={isLoading}
             >
               {t('search.submit')}
