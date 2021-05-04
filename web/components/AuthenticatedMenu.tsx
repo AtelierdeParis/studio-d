@@ -4,24 +4,15 @@ import Link from '~components/Link'
 import Squares from 'public/assets/img/squares.svg'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import { useMyBookings } from '~hooks/useMyBookings'
-import {
-  ROUTE_ACCOUNT,
-  ROUTE_ACCOUNT_PLACES,
-  ROUTE_ACCOUNT_REQUEST,
-} from '~constants'
+import { getRouteToRedirect } from '~utils/auth'
 
 const AuthenticatedMenu = ({ user, colorMode, isMobileMenu = false }) => {
   const { data: notifs } = useMyNotifications()
   const { data: bookings } = useMyBookings('all')
 
-  const routeToRedirect = useMemo(() => {
-    if (!user) return null
-    if (user.type === 'place' && user.espaces.length > 0)
-      return ROUTE_ACCOUNT_PLACES
-    if (user.type === 'company' && bookings && bookings.length > 0)
-      return ROUTE_ACCOUNT_REQUEST
-    return ROUTE_ACCOUNT
-  }, [user])
+  const routeToRedirect = useMemo(() => getRouteToRedirect(user, bookings), [
+    user,
+  ])
 
   return (
     <Flex

@@ -17,11 +17,12 @@ import ResetPasswordModal from '~components/ResetPassword/ResetPasswordModal'
 import Link from '~components/Link'
 import { ROUTE_SIGNUP } from '~constants'
 
-interface ISigninModal {
+interface Props {
   children: React.ReactNode
+  redirect?: boolean
 }
 
-const SigninModal = ({ children }: ISigninModal) => {
+const SigninModal = ({ children, redirect = true }: Props) => {
   const { t } = useTranslation('common')
   const initialRef = useRef()
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -49,6 +50,7 @@ const SigninModal = ({ children }: ISigninModal) => {
           <ModalBody px={{ base: 4, md: 6 }} pt={0}>
             <Divider my={6} />
             <SigninForm
+              redirect={redirect}
               initialRef={initialRef}
               onOpenReset={onOpenReset}
               onClose={onClose}
