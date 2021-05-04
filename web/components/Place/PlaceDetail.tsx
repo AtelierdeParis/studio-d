@@ -147,7 +147,13 @@ const PlaceDetail = ({ place }: Props) => {
                         colorScheme="gray"
                         fontSize="md"
                         onClick={() => {
-                          saveAs(file.url, file.name)
+                          axios({
+                            url: file.url,
+                            method: 'GET',
+                            responseType: 'blob',
+                          }).then(() => {
+                            saveAs(file.url, file.name)
+                          })
                         }}
                       >
                         {file.caption

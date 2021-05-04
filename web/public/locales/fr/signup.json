@@ -95,8 +95,8 @@
         }
     },
     "completed": {
-        "title": "Merci pour votre inscription !",
-        "text": "Vous recevrez sous peu un email de confirmation. Votre compte est actuellement en attente de validation par StudioD, nécessaire afin de pouvoir déposer votre première demande de réservation. Vous recevrez un email dès que cette activation sera effective.",
+        "title": "Confirmez votre adresse email",
+        "text": "Afin de finaliser votre demande d’inscription, nous avons besoin que vous confirmiez votre adresse email. Vous recevrez sous peu un email de confirmation. Votre compte sera ensuite placé en attente de validation par StudioD, nécessaire afin de pouvoir déposer votre première demande de réservation.",
         "btn": "Retour à l’accueil"
     },
     "error": {
