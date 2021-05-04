@@ -23,10 +23,15 @@ const Tag = ({ status, children, ...rest }: Props) => {
     case 'booked':
     case 'available':
     case 'accepted':
-    case 'askcancel':
       return (
         <ChakraTag bgColor="tag.green" {...rest}>
           {children || t('tag.booked')}
+        </ChakraTag>
+      )
+    case 'askcancel':
+      return (
+        <ChakraTag bgColor="tag.yellow" {...rest}>
+          {children || t('tag.askcancel')}
         </ChakraTag>
       )
     case 'pending':

@@ -150,7 +150,8 @@
         "booked": "A venir",
         "canceled": "Annulée",
         "past": "Passée",
-        "occupied": "En cours"
+        "occupied": "En cours",
+        "askcancel": "Ann. demandée"
     },
     "errors": {
         "required": "Champs requis",

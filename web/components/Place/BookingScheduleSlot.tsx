@@ -84,6 +84,7 @@ const BookingScheduleSlot = (props: Props) => {
       border="2px solid"
       borderColor="transparent"
       flex={1}
+      cursor={user?.type === 'place' && 'not-allowed'}
       {...((!Boolean(user) || user?.type === 'company') && styleSelectable)}
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
