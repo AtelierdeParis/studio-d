@@ -53,6 +53,14 @@ const PlacePage = ({ slug }: Props) => {
         openGraph={{
           url: process.env.NEXT_PUBLIC_FRONT_URL + router.asPath,
           title: place?.name,
+          images: [
+            place &&
+              place?.images.length > 0 && {
+                url: place?.images[0].url,
+                width: 400,
+                height: 300,
+              },
+          ],
         }}
       />
       <BookingScheduleProvider>
