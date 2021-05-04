@@ -70,7 +70,7 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           withDivider
           label={t('detail.technicalStaff')}
           icon={<Staff />}
-          text={place?.technicalStaff ? t('detail.available') : t('detail.no')}
+          text={place?.technicalStaff ? t('detail.possible') : t('detail.no')}
         />
         <GridItem
           label={t('detail.height')}
@@ -87,7 +87,7 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           withDivider
           label={t('detail.accomodation')}
           icon={<Bed />}
-          text={place?.accomodation ? t('detail.available') : t('detail.no')}
+          text={place?.accomodation ? t('detail.possible') : t('detail.no')}
         />
       </SimpleGrid>
     </>
