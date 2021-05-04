@@ -267,7 +267,10 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                       )}
                       <Divider opacity="0.3" my={5} />
                       {user.type === 'place' ? (
-                        <BookingDrawerCompany company={booking?.company} />
+                        <BookingDrawerCompany
+                          company={booking?.company}
+                          espace={booking.espace}
+                        />
                       ) : (
                         <BookingDrawerPlace place={booking?.place} />
                       )}
