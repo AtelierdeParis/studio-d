@@ -40,6 +40,7 @@ import { useQueryClient } from 'react-query'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import BookingDrawerCompany from '~components/Account/Booking/BookingDrawerCompany'
 import BookingDrawerPlace from '~components/Account/Booking/BookingDrawerPlace'
+import { NextSeo } from 'next-seo'
 
 interface Props {
   bookingId: string
@@ -79,6 +80,11 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
       }}
       size="xl"
     >
+      <NextSeo
+        title={t(type === 'request' ? 'requestNb' : 'bookingNb', {
+          nb: booking?.id,
+        })}
+      />
       <DrawerOverlay bgColor="rgb(255 255 255 / 67%)">
         <DrawerContent>
           <Loading isLoading={isLoading} isCentered>
@@ -269,7 +275,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                       {user.type === 'place' ? (
                         <BookingDrawerCompany
                           company={booking?.company}
-                          espace={booking.espace}
+                          espace={booking?.espace}
                         />
                       ) : (
                         <BookingDrawerPlace place={booking?.place} />

@@ -15,6 +15,7 @@ import { useIsComplete } from '~hooks/useIsComplete'
 import dynamic from 'next/dynamic'
 import { useTranslation } from 'next-i18next'
 import MigrationMessage from '~components/MigrationMessage'
+import { NextSeo } from 'next-seo'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),
@@ -30,7 +31,7 @@ interface Props {
 
 const EditPlace = ({ slug }: Props) => {
   const { t } = useTranslation('place')
-  const { query } = useRouter()
+  const { query, asPath } = useRouter()
   const { data: place, isLoading } = usePlace(slug)
   const isComplete = useIsComplete(place)
   const [index, setIndex] = useState(
@@ -43,6 +44,13 @@ const EditPlace = ({ slug }: Props) => {
 
   return (
     <Loading isLoading={isLoading} isCentered>
+      <NextSeo
+        title={place?.name}
+        openGraph={{
+          url: process.env.NEXT_PUBLIC_FRONT_URL + asPath,
+          title: place?.name,
+        }}
+      />
       <Box pt={{ base: 3, md: 8 }} pb={{ base: 8, md: 0 }}>
         {!isComplete && (
           <MigrationMessage

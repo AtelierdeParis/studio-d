@@ -1,4 +1,15 @@
 {
+  "title": {
+    "charte": "Charte de la compagnie",
+    "cgu": "Conditions Générales d’Utilisation",
+    "contact": "Contact",
+    "signup": "Inscription",
+    "emailConfirmation": "Confirmation email",
+    "resetPassword": "Réinitialisation mot de passe",
+    "faq": "FAQ",
+    "places": "Les espaces",
+    "actus": "Les actualités"
+  },
   "nav": {
     "home": "Accueil",
     "places": "Les espaces",

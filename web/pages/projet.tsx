@@ -2,12 +2,12 @@ import React from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container, Heading, Box } from '@chakra-ui/react'
+import { Heading, Box } from '@chakra-ui/react'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_PROJECT } from '~constants'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
-
+import { NextSeo } from 'next-seo'
 interface Props {
   page: Page
 }
@@ -15,6 +15,7 @@ interface Props {
 const Project = ({ page }: Props) => {
   return (
     <>
+      <NextSeo title={page.title} />
       <Heading
         as="h1"
         textStyle="h1"

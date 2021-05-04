@@ -13,12 +13,15 @@ import { Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
 import UrlRewrite from '~components/UrlRewrite'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   user: UsersPermissionsUser
 }
 
 const AccountMessage = ({ user }: Props) => {
+  const { t } = useTranslation('account')
   const router = useRouter()
   const [selected, setSelected] = useState(
     (router?.query?.conversation as string) || null,
@@ -41,6 +44,7 @@ const AccountMessage = ({ user }: Props) => {
   return (
     <Flex h="100%">
       <Loading isLoading={isLoading}>
+        <NextSeo title={t('title.message')} />
         <UrlRewrite id={selected} path={ROUTE_ACCOUNT_MESSAGE} />
         <ListConversations
           conversations={conversations}

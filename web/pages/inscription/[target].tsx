@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { useRouter } from 'next/router'
@@ -9,11 +9,14 @@ import AboutUs from '~components/Signup/AboutUs'
 import SignupForm from '~components/Signup/SignupForm'
 import SignupCompleted from '~components/Signup/SignupCompleted'
 import { requireAuth } from '~utils/auth'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 export type Target = 'compagnie' | 'lieu'
 const availableTargets = ['compagnie', 'lieu']
 
 const Home: NextPage = () => {
+  const { t } = useTranslation('common')
   const [skipCondition, setSkip] = useState(false)
   const router = useRouter()
   const [isCompleted, setComplete] = useState(false)
@@ -33,6 +36,7 @@ const Home: NextPage = () => {
 
   return (
     <Box>
+      <NextSeo title={t('title.signup')} />
       <SignupSteps
         step={skipCondition ? 3 : 2}
         target={router.query.target as Target}

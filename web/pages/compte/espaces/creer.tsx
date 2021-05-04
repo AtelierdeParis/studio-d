@@ -7,14 +7,19 @@ import PlaceCreate from '~components/Account/Place/PlaceCreate'
 import PlaceTabList from '~components/Account/Place/PlaceTabList'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 interface ICreatePlace {
   user: UsersPermissionsUser
 }
 
 const CreatePlace = ({ user }: ICreatePlace) => {
+  const { t } = useTranslation('account')
+
   return (
     <Box pt={8}>
+      <NextSeo title={t('title.createPlace')} />
       <Tabs isLazy index={0}>
         <PlaceTabList disabledIndexes={[1, 2]} />
         <TabPanels>

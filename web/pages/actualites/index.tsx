@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Container, Heading, SimpleGrid } from '@chakra-ui/react'
+import { Heading, SimpleGrid } from '@chakra-ui/react'
 import { useInfiniteActualities } from '~hooks/useInfiniteActualities'
 import { useNbActualities } from '~hooks/useNbActualities'
 import { useScrollBottom } from '~hooks/useScrollBottom'
@@ -11,6 +11,7 @@ import ActuSkeleton from '~components/Actuality/ActuSkeleton'
 import Loading from '~components/Loading'
 import Loader from '~components/Loader'
 import { useTranslation } from 'next-i18next'
+import { NextSeo } from 'next-seo'
 
 const Actuality = () => {
   const ref = useRef(null)
@@ -36,6 +37,7 @@ const Actuality = () => {
 
   return (
     <>
+      <NextSeo title={t('common:title.actus')} />
       <Heading
         as="h1"
         textStyle="h1"

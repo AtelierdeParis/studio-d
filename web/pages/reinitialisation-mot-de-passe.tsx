@@ -14,6 +14,7 @@ import { client } from '~api/client-api'
 import { ROUTE_ACCOUNT_INFORMATION } from '~constants'
 import MigrationMessage from '~components/MigrationMessage'
 import { signIn } from 'next-auth/client'
+import { NextSeo } from 'next-seo'
 
 interface Props {
   code: string
@@ -67,6 +68,7 @@ const CreatePassword = ({ code, isMigration }: Props) => {
   }
   return (
     <>
+      <NextSeo title={t('common:title.resetPassword')} />
       {isMigration && (
         <MigrationMessage
           mt={8}

@@ -10,6 +10,7 @@ import BookingScheduleContext from '~components/Place/BookingScheduleContext'
 import BookingConfirm from '~components/Place/BookingConfirm'
 import { useRouter } from 'next/router'
 import { useCurrentUser } from '~hooks/useCurrentUser'
+import { NextSeo } from 'next-seo'
 
 const ViewHandler = ({ place }) => {
   const { showConfirmView, selected, setConfirmView } = useContext(
@@ -47,6 +48,13 @@ const PlacePage = ({ slug }: Props) => {
 
   return (
     <Loading isLoading={isLoading} pt={20}>
+      <NextSeo
+        title={place?.name}
+        openGraph={{
+          url: process.env.NEXT_PUBLIC_FRONT_URL + router.asPath,
+          title: place?.name,
+        }}
+      />
       <BookingScheduleProvider>
         <ViewHandler place={place} />
       </BookingScheduleProvider>

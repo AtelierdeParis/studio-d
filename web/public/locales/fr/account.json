@@ -1,4 +1,14 @@
 {
+    "title": {
+        "actus": "Les actualités",
+        "info": "Mes informations",
+        "dashboard": "Tableau de bord",
+        "requests": "Mes demandes",
+        "bookings": "Mes réservations",
+        "message": "Messagerie",
+        "createPlace": "Créer un espace",
+        "places": "Mes espaces"
+    },
     "myAccount": "Mon compte",
     "dashboard": "Tableau de bord",
     "info": "Mes informations",

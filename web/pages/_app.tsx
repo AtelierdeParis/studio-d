@@ -11,6 +11,7 @@ import theme from '~theme'
 import Bugsnag, { isBugsnagEnabled } from '~utils/bugsnag'
 import { initYupLocale } from '~initYupLocale'
 import ErrorPage from '~pages/_error'
+import { DefaultSeo } from 'next-seo'
 import '../styles/globals.css'
 import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
@@ -27,15 +28,31 @@ const App = ({ Component, pageProps }: AppProps) => {
     initYupLocale()
   }, [])
   const content = (
-    <Provider session={pageProps.session}>
-      <QueryClientProvider client={client}>
-        <ChakraProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </ChakraProvider>
-      </QueryClientProvider>
-    </Provider>
+    <>
+      <DefaultSeo
+        title="Studio D"
+        description="Plateforme solidaire de mise à disposition de studios de danse"
+        titleTemplate="%s | Studio D"
+        openGraph={{
+          type: 'website',
+          url: process.env.NEXT_PUBLIC_FRONT_URL,
+          site_name: 'Studio D',
+        }}
+        twitter={{
+          handle: '@studiodphoto',
+          cardType: 'summary_large_image',
+        }}
+      />
+      <Provider session={pageProps.session}>
+        <QueryClientProvider client={client}>
+          <ChakraProvider theme={theme}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ChakraProvider>
+        </QueryClientProvider>
+      </Provider>
+    </>
   )
 
   if (isBugsnagEnabled) {

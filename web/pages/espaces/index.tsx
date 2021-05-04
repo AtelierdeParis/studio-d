@@ -26,6 +26,7 @@ import { useQueryClient } from 'react-query'
 import NoResult from '~components/Place/NoResult'
 import MobileMap from '~components/Place/MobileMap'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 const styleSelected = {
   color: 'blue.500',
@@ -75,6 +76,7 @@ const Places = () => {
 
   return (
     <Container px={0}>
+      <NextSeo title={t('common:title.places')} />
       <FormProvider {...form}>
         <PlaceSearch searchQuery={searchQuery} />
         {!countLoading && nbPlace === 0 ? (

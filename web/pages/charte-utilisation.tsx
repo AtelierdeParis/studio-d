@@ -7,14 +7,18 @@ import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_USE_POLICY } from '~constants'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
-interface ICharte {
+interface Props {
   page: Page
 }
 
-const Charte = ({ page }: ICharte) => {
+const Charte = ({ page }: Props) => {
+  const { t } = useTranslation('common')
   return (
     <>
+      <NextSeo title={t('title.charte')} />
       <Heading
         as="h1"
         textStyle="h1"

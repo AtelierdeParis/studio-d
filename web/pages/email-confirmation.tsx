@@ -8,6 +8,7 @@ import { client } from '~api/client-api'
 import Loading from '~components/Loading'
 import Link from '~components/Link'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 const EmailConfirmation = ({ token }) => {
   const router = useRouter()
@@ -38,6 +39,7 @@ const EmailConfirmation = ({ token }) => {
       maxW="container.sm"
       fontSize={{ base: 'md', md: 'lg' }}
     >
+      <NextSeo title={t('title.emailConfirmation')} />
       <Heading
         as="h1"
         textStyle="h1"

@@ -23,6 +23,7 @@ import { ROUTE_CONTACT } from '~constants'
 import { Page } from '~typings/api'
 import { client } from '~api/client-api'
 import { getPage } from '~utils/page'
+import { NextSeo } from 'next-seo'
 
 const Contact = ({ page }: { page?: Page }) => {
   const { errorToast } = useToast()
@@ -56,6 +57,7 @@ const Contact = ({ page }: { page?: Page }) => {
 
   return (
     <Container maxW="container.sm" px={0}>
+      <NextSeo title={t('common:title.contact')} />
       <Heading as="h1" textStyle="h1" layerStyle="mainTitle" textAlign="center">
         {page?.title || t('title')}
       </Heading>

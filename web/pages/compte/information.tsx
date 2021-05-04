@@ -33,6 +33,7 @@ import MigrationMessage from '~components/MigrationMessage'
 import { ROUTE_ACCOUNT_PLACES, ROUTE_ACCOUNT } from '~constants'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 interface Props {
   user: UsersPermissionsUser
@@ -179,6 +180,7 @@ const AccountInformation = ({ user }: Props) => {
 
   return (
     <Box pt={{ base: 4, sm: 8 }} pb={8}>
+      <NextSeo title={t('title.info')} />
       {showModal && (
         <AskPasswordModal
           onSuccess={() => save(getValues())}

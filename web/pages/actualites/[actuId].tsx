@@ -11,16 +11,33 @@ import Image from '~components/Image'
 import Link from '~components/Link'
 import { ROUTE_ACTU } from '~constants'
 import { format } from '~utils/date'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
-interface IActualityDetail {
+interface Props {
   actu: Actuality
 }
 
-const ActualityDetail = ({ actu }: IActualityDetail) => {
+const ActualityDetail = ({ actu }: Props) => {
   const { t } = useTranslation('actuality')
+  const router = useRouter()
 
   return (
     <Box textAlign="center">
+      <NextSeo
+        title={actu?.title}
+        openGraph={{
+          url: process.env.NEXT_PUBLIC_FRONT_URL + router.asPath,
+          title: actu?.title,
+          images: [
+            {
+              url: actu.image.url,
+              width: 400,
+              height: 300,
+            },
+          ],
+        }}
+      />
       <Heading
         as="h1"
         textStyle="h1"
