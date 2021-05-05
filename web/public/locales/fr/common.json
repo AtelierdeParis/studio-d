@@ -78,8 +78,9 @@
     "empty": "La FAQ ne contient actuellement aucun contenu"
   },
   "confirmEmail": {
-    "title": "Confirmation email",
+    "title": "En attente",
     "error": "Impossible de confirmer l'email",
-    "success": "Votre email a bien été confirmé vous pouvez à présent vous authentifier, vous allez être rédiriger vers l'accueil.\nVous pouvez également cliquer sur ce <a>lien</a> pour vous y rendre."
+    "success": "Merci ! Votre mail est validé et votre compte est maintenant en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
+    "btn": "Retour à l’accueil"
   }
 }
