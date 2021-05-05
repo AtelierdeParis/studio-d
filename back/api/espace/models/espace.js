@@ -7,7 +7,8 @@ const isPast = require("date-fns/isPast");
  */
 
 const checkCity = async (data) => {
-  if (data.city) {
+  console.log(data.city);
+  if (data.city && typeof data.city === "string") {
     const city = await strapi
       .query("city")
       .findOne({ name: data.city.toLowerCase() });

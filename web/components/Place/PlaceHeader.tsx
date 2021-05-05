@@ -5,16 +5,11 @@ import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import Link from '~components/Link'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
+import { capitalize } from '~utils/string'
 import { checkCurrentSearch } from '~utils/search'
 import { useMyPlaces } from '~hooks/useMyPlaces'
-
 import Arrow from 'public/assets/img/left-arrow.svg'
 import { useCurrentUser } from '~hooks/useCurrentUser'
-
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
 
 const BackSearch = ({ hasSearch }) => {
   const { t } = useTranslation('place')

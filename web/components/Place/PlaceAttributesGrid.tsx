@@ -1,5 +1,5 @@
 import React from 'react'
-import { SimpleGrid, Flex, Box, Text, Divider } from '@chakra-ui/react'
+import { SimpleGrid, Flex, Box, Text, Divider, Tooltip } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import Surface from 'public/assets/img/surface.svg'
 import Dimension from 'public/assets/img/dimension.svg'
@@ -7,6 +7,7 @@ import Height from 'public/assets/img/height.svg'
 import Floor from 'public/assets/img/floor.svg'
 import Carpet from 'public/assets/img/carpet.svg'
 import Mirror from 'public/assets/img/mirror.svg'
+import { capitalize } from '~utils/string'
 import DanceBar from 'public/assets/img/danceBar.svg'
 import Staff from 'public/assets/img/staff.svg'
 import Bed from 'public/assets/img/accomodation.svg'
@@ -22,9 +23,9 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
     <Box w="25px" mt={1}>
       {icon}
     </Box>
-    <Box pl={4}>
+    <Box pl={4} overflow="hidden" pr={1}>
       <Text color="gray.500">{label}</Text>
-      <Text>{text}</Text>
+      <Text isTruncated>{text}</Text>
     </Box>
   </Flex>
 )
@@ -47,7 +48,15 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           withDivider
           label={t('detail.floor')}
           icon={<Floor />}
-          text={t(`detail.${place?.floor}`)}
+          text={
+            place?.floor !== 'other' ? (
+              t(`detail.${place?.floor}`)
+            ) : (
+              <Tooltip label={capitalize(place?.otherFloor)}>
+                {capitalize(place?.otherFloor)}
+              </Tooltip>
+            )
+          }
         />
         <GridItem
           withDivider

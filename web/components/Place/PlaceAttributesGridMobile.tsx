@@ -1,5 +1,5 @@
-import React from 'react'
-import { SimpleGrid, Flex, Box, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { SimpleGrid, Flex, Box, Text, Tooltip } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import Surface from 'public/assets/img/surface.svg'
 import Dimension from 'public/assets/img/dimension.svg'
@@ -11,6 +11,7 @@ import DanceBar from 'public/assets/img/danceBar.svg'
 import Staff from 'public/assets/img/staff.svg'
 import Bed from 'public/assets/img/accomodation.svg'
 import { useTranslation } from 'next-i18next'
+import { capitalize } from '~utils/string'
 
 interface Props {
   place: Espace
@@ -44,14 +45,16 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
       borderBottom="1px solid"
       borderColor={withDivider ? 'gray.100' : 'transparent'}
       alignItems="center"
+      overflow="hidden"
     >
-      <Text>{text}</Text>
+      <Text isTruncated>{text}</Text>
     </Flex>
   </>
 )
 
 const PlaceAttributesGrid = ({ place }: Props) => {
   const { t } = useTranslation('place')
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <>
@@ -74,7 +77,24 @@ const PlaceAttributesGrid = ({ place }: Props) => {
           withDivider
           label={t('detail.floor')}
           icon={<Floor />}
-          text={t(`detail.${place?.floor}`)}
+          text={
+            place?.floor !== 'other' ? (
+              t(`detail.${place?.floor}`)
+            ) : (
+              <Tooltip label={capitalize(place?.otherFloor)} isOpen={isOpen}>
+                <Box
+                  as="span"
+                  onClick={() => {
+                    console.log('flsdkj')
+                    setOpen(!isOpen)
+                  }}
+                  cursor="pointer"
+                >
+                  {capitalize(place?.otherFloor)}
+                </Box>
+              </Tooltip>
+            )
+          }
         />
         <GridItem
           withDivider
