@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import {
   Box,
   Flex,
@@ -15,9 +15,7 @@ import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
 import Tag from '~components/Tag'
 import { DisponibilityStatus } from '~@types/disponibility.d'
-import addWeeks from 'date-fns/addWeeks'
 import { SearchQuery } from '~utils/search'
-import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
 import useDispoInRange from '~hooks/useDispoInRange'
 
 interface Props {
@@ -32,15 +30,6 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
     place?.disponibilities,
     searchParams?.['disponibilities.start_gte'],
     searchParams?.['disponibilities.end_lte'],
-  )
-
-  const disposThisWeek = useNbDispoPerWeek(
-    new Date(),
-    disposInRange || place?.disponibilities,
-  )
-  const disposNextWeek = useNbDispoPerWeek(
-    addWeeks(new Date(), 1),
-    disposInRange || place?.disponibilities,
   )
 
   return (
@@ -99,7 +88,7 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                 {t('card.noDispo')}
               </Tag>
             )}
-            {disposThisWeek?.length > 0 && (
+            {disposInRange?.length > 0 && (
               <Tag
                 status={DisponibilityStatus.AVAILABLE}
                 alignSelf="flex-start"
@@ -107,26 +96,10 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
               >
                 {t(
                   `card.${disposInRange ? 'searchDispo' : 'thisWeek'}${
-                    disposThisWeek?.length > 1 ? 's' : ''
+                    disposInRange?.length > 1 ? 's' : ''
                   }`,
                   {
-                    nb: disposThisWeek.length,
-                  },
-                )}
-              </Tag>
-            )}
-            {disposThisWeek?.length === 0 && disposNextWeek?.length > 0 && (
-              <Tag
-                status={DisponibilityStatus.PENDING}
-                alignSelf="flex-start"
-                mt={1.5}
-              >
-                {t(
-                  `card.${disposInRange ? 'searchDispo' : 'nextWeek'}${
-                    disposNextWeek?.length > 1 ? 's' : ''
-                  }`,
-                  {
-                    nb: disposNextWeek.length,
+                    nb: disposInRange.length,
                   },
                 )}
               </Tag>

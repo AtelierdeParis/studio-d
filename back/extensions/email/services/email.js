@@ -4,7 +4,7 @@ const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">s
 const signatureAdmin = `Bonne journée`;
 
 const getFooter = (type) => {
-  return `Vous recevez cet email car vous êtes inscrit•e en tant que ${
+  return `Vous recevez cet email car vous êtes inscrit·e en tant que ${
     type === "place" ? "lieu" : "compagnie"
   } sur la plateforme <a href="${
     process.env.FRONT_URL
