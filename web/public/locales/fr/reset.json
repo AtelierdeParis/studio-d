@@ -15,5 +15,6 @@
     },
     "submit": "Créer",
     "success": "Votre nouveau mot de passe a bien été créé, vous pouvez désormais vous authentifier",
+    "successMigration": "Votre nouveau mot de passe a bien été créé",
     "errorDifferent": "Les mots de passe ne sont pas identiques"
 }

@@ -113,7 +113,7 @@ module.exports = {
         },
         {
           from: capitalize(created.company.firstname),
-          user_name: created.company.firstname,
+          user_name: created.place.firstname,
           company: created.company.structureName,
           ref: created.id,
           espace_name: created.espace.name,

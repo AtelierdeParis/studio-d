@@ -50,16 +50,16 @@ const CreatePassword = ({ code, isMigration }: Props) => {
         code,
       })
       .then(async (res) => {
-        successToast(t('success'))
-
         if (isMigration && res.data.email) {
           await signIn('credentials', {
             username: res.data.email,
             password: data.password,
             redirect: false,
           })
+          successToast(t('successMigration'))
           router.push(ROUTE_ACCOUNT_INFORMATION)
         } else {
+          successToast(t('success'))
           router.push('/')
         }
       })

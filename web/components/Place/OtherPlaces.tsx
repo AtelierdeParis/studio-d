@@ -17,7 +17,9 @@ const OtherPlaces = ({ userId }: Props) => {
 
   const places = useMemo(() => {
     if (!user?.espaces || user?.espaces.length === 0) return null
-    return user?.espaces.filter((place) => place.slug !== router.query.id)
+    return user?.espaces.filter(
+      (place) => place.slug !== router.query.id && place.published,
+    )
   }, [user?.espaces, router.query.placeId])
 
   if (!places || places.length === 0) return null

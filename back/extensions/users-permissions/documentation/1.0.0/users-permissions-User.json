@@ -1263,6 +1263,10 @@
             "type": "boolean",
             "default": false
           },
+          "accepted": {
+            "type": "boolean",
+            "default": false
+          },
           "firstname": {
             "type": "string"
           },
@@ -1469,10 +1473,6 @@
           },
           "external_id": {
             "type": "integer"
-          },
-          "accepted": {
-            "type": "boolean",
-            "default": false
           }
         }
       },
@@ -1524,6 +1524,10 @@
             "default": false
           },
           "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "accepted": {
             "type": "boolean",
             "default": false
           },
@@ -1596,10 +1600,6 @@
           },
           "external_id": {
             "type": "integer"
-          },
-          "accepted": {
-            "type": "boolean",
-            "default": false
           },
           "created_by": {
             "type": "string"

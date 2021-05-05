@@ -57,6 +57,11 @@
       "type": "boolean",
       "default": false
     },
+    "accepted": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
     "firstname": {
       "type": "string",
       "required": true
@@ -138,11 +143,6 @@
     },
     "external_id": {
       "type": "integer"
-    },
-    "accepted": {
-      "type": "boolean",
-      "default": false,
-      "required": false
     }
   }
 }

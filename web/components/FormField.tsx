@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import NotComplete from '~components/NotComplete'
 
-const migrationMessage = `Nous avons maintenant besoin de cette valeur, veuillez remplir ce champ.`
+const migrationMessage = `Nous avons maintenant besoin de cette information, veuillez remplir ce champ.`
 
 interface Props extends Omit<FormControlProps, 'label'> {
   label?: string | JSX.Element

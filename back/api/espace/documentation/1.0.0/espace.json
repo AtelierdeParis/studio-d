@@ -893,6 +893,9 @@
               "blocked": {
                 "type": "boolean"
               },
+              "accepted": {
+                "type": "boolean"
+              },
               "firstname": {
                 "type": "string"
               },
@@ -962,9 +965,6 @@
               },
               "external_id": {
                 "type": "integer"
-              },
-              "accepted": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
