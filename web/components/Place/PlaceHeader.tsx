@@ -5,8 +5,9 @@ import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import Link from '~components/Link'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
+import { checkCurrentSearch } from '~utils/search'
 import { useMyPlaces } from '~hooks/useMyPlaces'
-import { ROUTE_PLACES } from '~constants'
+
 import Arrow from 'public/assets/img/left-arrow.svg'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 
@@ -15,11 +16,11 @@ const capitalize = (s) => {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
-const BackSearch = ({ hideBackToSearch }) => {
+const BackSearch = ({ hasSearch }) => {
   const { t } = useTranslation('place')
   const prevPath = sessionStorage.getItem('sd-prevPath')
 
-  if (hideBackToSearch) {
+  if (!hasSearch) {
     return <Spacer />
   }
 
@@ -108,14 +109,9 @@ interface Props {
 const PlaceHeader = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const { data: user } = useCurrentUser()
-  const prevPath = sessionStorage.getItem('sd-prevPath')
+  const hasSearch = checkCurrentSearch()
 
-  const hideBackToSearch =
-    !prevPath ||
-    !prevPath.startsWith(`${ROUTE_PLACES}?`) ||
-    prevPath === `${ROUTE_PLACES}?sortBy=dispoAsc`
-
-  if (!Boolean(user) && hideBackToSearch) return null
+  if (!Boolean(user) && !hasSearch) return null
 
   return (
     <Flex
@@ -128,7 +124,7 @@ const PlaceHeader = ({ place }: Props) => {
       {!place.filledUntil ? (
         <Text color="grayText.1">{t(`header.noDispo`)}</Text>
       ) : (
-        <BackSearch hideBackToSearch={hideBackToSearch} />
+        <BackSearch hasSearch={hasSearch} />
       )}
       {Boolean(user) && <SeeForm place={place} />}
     </Flex>

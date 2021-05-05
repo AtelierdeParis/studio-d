@@ -1,5 +1,6 @@
 import isDate from 'date-fns/isDate'
 import { format } from '~utils/date'
+import { ROUTE_PLACES } from '~constants'
 
 export enum SurfaceOptions {
   LESS_50 = '< 50',
@@ -148,4 +149,14 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
     published_eq: true,
     ...query,
   }
+}
+
+export const checkCurrentSearch = () => {
+  const prevPath = sessionStorage.getItem('sd-prevPath')
+
+  return (
+    prevPath &&
+    prevPath.startsWith(`${ROUTE_PLACES}?`) &&
+    prevPath !== `${ROUTE_PLACES}?sortBy=dispoAsc`
+  )
 }
