@@ -1,119 +1,6 @@
 {
   "paths": {
-    "/espaces/cities": {
-      "get": {
-        "deprecated": false,
-        "description": "Get list of cities",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Espace"
-        ],
-        "parameters": []
-      }
-    },
-    "/espaces/me": {
-      "get": {
-        "deprecated": false,
-        "description": "Get places related to current user",
-        "operationId": "myPlaces",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Espace"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Espace"
-        ],
-        "parameters": []
-      }
-    },
-    "/espaces": {
+    "/cities": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -125,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Espace"
+                    "$ref": "#/components/schemas/City"
                   }
                 }
               }
@@ -164,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
         "parameters": [
           {
@@ -314,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Espace"
+                  "$ref": "#/components/schemas/City"
                 }
               }
             }
@@ -352,22 +239,22 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/NewCity"
               }
             }
           }
         }
       }
     },
-    "/espaces/count": {
+    "/cities/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -419,149 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
-        "parameters": [
-          {
-            "name": "_limit",
-            "in": "query",
-            "required": false,
-            "description": "Maximum number of results possible",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_sort",
-            "in": "query",
-            "required": false,
-            "description": "Sort according to a specific field.",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_start",
-            "in": "query",
-            "required": false,
-            "description": "Skip a specific number of entries (especially useful for pagination)",
-            "schema": {
-              "type": "integer"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "=",
-            "in": "query",
-            "required": false,
-            "description": "Get entries that matches exactly your input",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_ne",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are not equals to something",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lt",
-            "in": "query",
-            "required": false,
-            "description": "Get record that are lower than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_lte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are lower than or equal to a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gt",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_gte",
-            "in": "query",
-            "required": false,
-            "description": "Get records that are greater than  or equal a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_contains",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_containss",
-            "in": "query",
-            "required": false,
-            "description": "Get records that contains (case sensitive) a value",
-            "schema": {
-              "type": "string"
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_in",
-            "in": "query",
-            "required": false,
-            "description": "Get records that matches any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          },
-          {
-            "name": "_nin",
-            "in": "query",
-            "required": false,
-            "description": "Get records that doesn't match any value in the array of values",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "deprecated": false
-          }
-        ]
+        "parameters": []
       }
     },
-    "/espaces/{id}": {
+    "/cities/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -571,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Espace"
+                  "$ref": "#/components/schemas/City"
                 }
               }
             }
@@ -609,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
         "parameters": [
           {
@@ -621,16 +371,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "availableOnly",
-            "in": "query",
-            "required": false,
-            "description": "Return place with only available disponibilities",
-            "schema": {
-              "type": "boolean"
-            },
-            "deprecated": false
           }
         ]
       },
@@ -643,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Espace"
+                  "$ref": "#/components/schemas/City"
                 }
               }
             }
@@ -681,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
         "requestBody": {
           "description": "",
@@ -689,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/NewCity"
               }
             }
           }
@@ -755,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Espace"
+          "City"
         ],
         "parameters": [
           {
@@ -774,24 +514,12 @@
   },
   "components": {
     "schemas": {
-      "Espace": {
+      "City": {
         "required": [
           "id",
           "name",
-          "surface",
-          "roomLength",
-          "width",
-          "height",
-          "mirror",
-          "danceBar",
-          "accomodation",
-          "technicalStaff",
-          "floor",
-          "address",
           "latitude",
-          "longitude",
-          "city",
-          "danceCarpet"
+          "longitude"
         ],
         "properties": {
           "id": {
@@ -800,48 +528,165 @@
           "name": {
             "type": "string"
           },
-          "surface": {
-            "type": "integer"
-          },
-          "roomLength": {
-            "type": "integer"
-          },
-          "width": {
-            "type": "integer"
-          },
-          "height": {
-            "type": "integer"
-          },
-          "mirror": {
-            "type": "boolean"
-          },
-          "danceBar": {
-            "type": "boolean"
-          },
-          "accomodation": {
-            "type": "boolean"
-          },
-          "technicalStaff": {
-            "type": "boolean"
-          },
-          "floor": {
-            "type": "string",
-            "enum": [
-              "plancherDanse",
-              "parquetTraditionnel",
-              "other"
-            ]
-          },
-          "otherFloor": {
+          "latitude": {
             "type": "string"
           },
-          "about": {
+          "longitude": {
             "type": "string"
           },
-          "details": {
-            "type": "string"
-          },
-          "address": {
+          "espaces": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "surface",
+                "roomLength",
+                "width",
+                "height",
+                "mirror",
+                "danceBar",
+                "accomodation",
+                "technicalStaff",
+                "floor",
+                "address",
+                "latitude",
+                "longitude",
+                "country"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "surface": {
+                  "type": "number"
+                },
+                "roomLength": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                },
+                "mirror": {
+                  "type": "boolean"
+                },
+                "danceBar": {
+                  "type": "boolean"
+                },
+                "accomodation": {
+                  "type": "boolean"
+                },
+                "technicalStaff": {
+                  "type": "boolean"
+                },
+                "floor": {
+                  "type": "string",
+                  "enum": [
+                    "plancherDanse",
+                    "parquetTraditionnel",
+                    "other",
+                    "todefine"
+                  ]
+                },
+                "otherFloor": {
+                  "type": "string"
+                },
+                "about": {
+                  "type": "string"
+                },
+                "details": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": "string"
+                },
+                "longitude": {
+                  "type": "string"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "images": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "users_permissions_user": {
+                  "type": "string"
+                },
+                "disponibilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "scheduleDetails": {
+                  "type": "string"
+                },
+                "filledUntil": {
+                  "type": "string"
+                },
+                "published": {
+                  "type": "boolean"
+                },
+                "bookings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "country": {
+                  "type": "string"
+                },
+                "external_id": {
+                  "type": "integer"
+                },
+                "danceCarpet": {
+                  "type": "string",
+                  "enum": [
+                    "true",
+                    "false",
+                    "possible"
+                  ]
+                },
+                "slug": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NewCity": {
+        "required": [
+          "name",
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "name": {
             "type": "string"
           },
           "latitude": {
@@ -850,60 +695,25 @@
           "longitude": {
             "type": "string"
           },
-          "files": {
+          "espaces": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UploadFile"
+              "type": "string"
             }
           },
-          "images": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/UploadFile"
-            }
-          },
-          "users_permissions_user": {
-            "$ref": "#/components/schemas/UsersPermissionsUser"
-          },
-          "disponibilities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Disponibility"
-            }
-          },
-          "scheduleDetails": {
+          "created_by": {
             "type": "string"
           },
-          "filledUntil": {
-            "type": "string",
-            "format": "date"
-          },
-          "published": {
-            "type": "boolean",
-            "default": true
-          },
-          "city": {
-            "$ref": "#/components/schemas/City"
-          },
-          "country": {
+          "updated_by": {
             "type": "string"
-          },
-          "slug": {
-            "type": "string"
-          },
-          "external_id": {
-            "type": "integer"
-          },
-          "danceCarpet": {
-            "type": "string",
-            "enum": [
-              "true",
-              "false",
-              "possible"
-            ]
           }
         }
       }
     }
-  }
+  },
+  "tags": [
+    {
+      "name": "City"
+    }
+  ]
 }

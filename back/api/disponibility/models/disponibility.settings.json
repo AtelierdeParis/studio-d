@@ -29,8 +29,8 @@
       "required": true
     },
     "espace": {
-      "model": "espace",
-      "via": "disponibilities"
+      "via": "disponibilities",
+      "model": "espace"
     },
     "type": {
       "type": "enumeration",

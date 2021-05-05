@@ -12,6 +12,7 @@ import Bugsnag, { isBugsnagEnabled } from '~utils/bugsnag'
 import { initYupLocale } from '~initYupLocale'
 import ErrorPage from '~pages/_error'
 import { DefaultSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 import '../styles/globals.css'
 import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
@@ -24,7 +25,17 @@ if (isBugsnagEnabled) {
 }
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter()
+
   useEffect(() => {
+    const handleRouteChange = (url, test) => {
+      if (sessionStorage) {
+        const prevPath = sessionStorage.getItem('sd-currentPath')
+        sessionStorage.setItem('sd-prevPath', prevPath)
+        sessionStorage.setItem('sd-currentPath', url)
+      }
+    }
+    router.events.on('beforeHistoryChange', handleRouteChange)
     initYupLocale()
   }, [])
   const content = (

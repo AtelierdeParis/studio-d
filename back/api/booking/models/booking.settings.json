@@ -32,8 +32,8 @@
       "collection": "message"
     },
     "espace": {
-      "model": "espace",
-      "via": "bookings"
+      "via": "bookings",
+      "model": "espace"
     },
     "place": {
       "plugin": "users-permissions",

@@ -224,13 +224,7 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
             </Stack>
             <FormField
               isRequired
-              label={
-                <Flex as="span" alignItems="center">
-                  <Text as="span" mr={2}>
-                    {t('form.country.label')}
-                  </Text>
-                </Flex>
-              }
+              label={t('form.country.label')}
               errors={errors.country}
             >
               <Input name="country" ref={register} />

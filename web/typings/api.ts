@@ -87,6 +87,56 @@ export interface NewBooking {
   updated_by?: string;
 }
 
+export interface City {
+  id: string;
+  name: string;
+  latitude: string;
+  longitude: string;
+  espaces?: {
+    id: string;
+    name: string;
+    surface: number;
+    roomLength: number;
+    width: number;
+    height: number;
+    mirror: boolean;
+    danceBar: boolean;
+    accomodation: boolean;
+    technicalStaff: boolean;
+    floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
+    otherFloor?: string;
+    about?: string;
+    details?: string;
+    address: string;
+    latitude: string;
+    longitude: string;
+    files?: string[];
+    images?: string[];
+    users_permissions_user?: string;
+    disponibilities?: string[];
+    scheduleDetails?: string;
+    filledUntil?: string;
+    published?: boolean;
+    bookings?: string[];
+    country: string;
+    external_id?: number;
+    danceCarpet?: "true" | "false" | "possible";
+    slug?: string;
+    city?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+}
+
+export interface NewCity {
+  name: string;
+  latitude: string;
+  longitude: string;
+  espaces?: string[];
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface Contact {
   id: string;
   name: string;
@@ -136,12 +186,12 @@ export interface Disponibility {
     scheduleDetails?: string;
     filledUntil?: string;
     published?: boolean;
-    city: string;
     bookings?: string[];
     country: string;
     external_id?: number;
     danceCarpet?: "true" | "false" | "possible";
     slug?: string;
+    city?: string;
     created_by?: string;
     updated_by?: string;
   };
@@ -216,7 +266,7 @@ export interface Espace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
-  city: string;
+  city: City;
   country?: string;
   slug?: string;
   external_id?: number;
@@ -247,12 +297,12 @@ export interface NewEspace {
   /** @format date */
   filledUntil?: string;
   published?: boolean;
-  city: string;
   bookings?: string[];
   country: string;
   external_id?: number;
   danceCarpet?: "true" | "false" | "possible";
   slug?: string;
+  city?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -451,10 +501,10 @@ export interface UsersPermissionsRole {
     address: string;
     zipCode: string;
     city: string;
-    country?: string;
+    country: string;
     siret: string;
     ape: string;
-    phone?: string;
+    phone: string;
     license: string;
     website?: string;
     legalRepresentative?: string;
@@ -773,6 +823,107 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
+export namespace Cities {
+  /**
+   * No description
+   * @tags City
+   * @name CitiesList
+   * @request GET:/cities
+   * @secure
+   */
+  export namespace CitiesList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = City[];
+  }
+  /**
+   * @description Create a new record
+   * @tags City
+   * @name CitiesCreate
+   * @request POST:/cities
+   * @secure
+   */
+  export namespace CitiesCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewCity;
+    export type RequestHeaders = {};
+    export type ResponseBody = City;
+  }
+  /**
+   * No description
+   * @tags City
+   * @name CountList
+   * @request GET:/cities/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags City
+   * @name CitiesDetail
+   * @request GET:/cities/{id}
+   * @secure
+   */
+  export namespace CitiesDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = City;
+  }
+  /**
+   * @description Update a record
+   * @tags City
+   * @name CitiesUpdate
+   * @request PUT:/cities/{id}
+   * @secure
+   */
+  export namespace CitiesUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewCity;
+    export type RequestHeaders = {};
+    export type ResponseBody = City;
+  }
+  /**
+   * @description Delete a record
+   * @tags City
+   * @name CitiesDelete
+   * @request DELETE:/cities/{id}
+   * @secure
+   */
+  export namespace CitiesDelete {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
     export type RequestBody = never;
@@ -2584,6 +2735,131 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     bookingsDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/bookings/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  cities = {
+    /**
+     * No description
+     *
+     * @tags City
+     * @name CitiesList
+     * @request GET:/cities
+     * @secure
+     */
+    citiesList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<City[], Error>({
+        path: `/cities`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags City
+     * @name CitiesCreate
+     * @request POST:/cities
+     * @secure
+     */
+    citiesCreate: (data: NewCity, params: RequestParams = {}) =>
+      this.request<City, Error>({
+        path: `/cities`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags City
+     * @name CountList
+     * @request GET:/cities/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/cities/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags City
+     * @name CitiesDetail
+     * @request GET:/cities/{id}
+     * @secure
+     */
+    citiesDetail: (id: string, params: RequestParams = {}) =>
+      this.request<City, Error>({
+        path: `/cities/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags City
+     * @name CitiesUpdate
+     * @request PUT:/cities/{id}
+     * @secure
+     */
+    citiesUpdate: (id: string, data: NewCity, params: RequestParams = {}) =>
+      this.request<City, Error>({
+        path: `/cities/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags City
+     * @name CitiesDelete
+     * @request DELETE:/cities/{id}
+     * @secure
+     */
+    citiesDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/cities/${id}`,
         method: "DELETE",
         secure: true,
         format: "json",

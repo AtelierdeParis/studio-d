@@ -2,24 +2,6 @@ const strapiLib = import("strapi");
 const csv = require("csv-parser");
 const fs = require("fs");
 const crypto = require("crypto");
-// const user = {
-//   provider: "local",
-//   confirmed: true,
-//   blocked: false,
-//   role: 1,
-//   city: "Paris",
-//   country: "France",
-//   address: "test address",
-//   zipCode: "91100",
-//   structureName: "My structure",
-//   email: "migration.test@live.fr",
-//   username: "migration.test@live.fr",
-//   type: "company",
-//   firstname: "Guillaume",
-//   lastname: "Esnault",
-//   siret: "siret test",
-//   ape: "12345",
-// };
 
 const mapping_country = {
   FR: "France",

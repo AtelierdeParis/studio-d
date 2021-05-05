@@ -44,10 +44,11 @@ const Places = () => {
     defaultValues: router.query,
   })
 
-  const [searchParams, setSearchParams] = useState<any>({
-    published_eq: true,
-    _sort: router?.query?.sortBy || 'dispoAsc',
-  })
+  const [searchParams, setSearchParams] = useState<any>({})
+
+  useEffect(() => {
+    setSearchParams(formatSearch(router.query))
+  }, [])
   const queryClient = useQueryClient()
 
   const {

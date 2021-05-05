@@ -157,6 +157,9 @@
             "label": "Où cherchez-vous ?",
             "placeholder": "Renseignez une ville…"
         },
+        "perimeter": {
+            "label": "Dans quel rayon ?"
+        },
         "when": {
             "label": "Sur quelle période ?",
             "placeholder": "Cliquer pour choisir des dates"
@@ -294,6 +297,7 @@
         }
     },
     "detail": {
+        "back": "Retour à la recherche",
         "seeMap": "Voir sur la carte",
         "precise": "* précisez vos besoins lors de la réservation",
         "surface": "Superficie",

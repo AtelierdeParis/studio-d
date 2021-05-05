@@ -32,7 +32,7 @@ const uploadFile = (url, options) => {
   formData.append(`files`, request(url));
   const formHeaders = formData.getHeaders();
   axios
-    .post("http://localhost:1337/upload", formData, {
+    .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
       headers: {
         ...formHeaders,
       },

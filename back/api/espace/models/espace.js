@@ -6,6 +6,23 @@ const isPast = require("date-fns/isPast");
  * to customize this model
  */
 
+const checkCity = async (data) => {
+  if (data.city) {
+    const city = await strapi
+      .query("city")
+      .findOne({ name: data.city.toLowerCase() });
+
+    if (city) {
+      data.city = city.id;
+    } else {
+      const createdCity = await strapi
+        .query("city")
+        .create({ name: data.city.toLowerCase() });
+      data.city = createdCity.id;
+    }
+  }
+};
+
 module.exports = {
   lifecycles: {
     beforeCreate: async (data) => {
@@ -13,11 +30,13 @@ module.exports = {
       if (data.name) {
         data.slug = createSlug(data.name);
       }
+      await checkCity(data);
     },
     beforeUpdate: async (params, data) => {
       if (data.name) {
         data.slug = createSlug(data.name);
       }
+      await checkCity(data);
     },
     async afterFindOne(result) {
       if (result) {

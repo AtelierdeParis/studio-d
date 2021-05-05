@@ -99,13 +99,13 @@
       "required": false
     },
     "users_permissions_user": {
-      "via": "espaces",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "espaces"
     },
     "disponibilities": {
-      "via": "espace",
-      "collection": "disponibility"
+      "collection": "disponibility",
+      "via": "espace"
     },
     "scheduleDetails": {
       "type": "text"
@@ -117,13 +117,9 @@
       "type": "boolean",
       "default": true
     },
-    "city": {
-      "type": "string",
-      "required": true
-    },
     "bookings": {
-      "via": "espace",
-      "collection": "booking"
+      "collection": "booking",
+      "via": "espace"
     },
     "country": {
       "type": "string",
@@ -145,6 +141,10 @@
       "type": "string",
       "required": false,
       "unique": true
+    },
+    "city": {
+      "via": "espaces",
+      "model": "city"
     }
   }
 }

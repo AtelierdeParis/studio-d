@@ -3,13 +3,14 @@ import { client } from '~api/client-api'
 
 export const useCities = () => {
   return useQuery('cities', () =>
-    client.espaces.citiesList().then((res) =>
-      res.data
-        .filter((val) => val !== 'todefine')
+    // @ts-ignore
+    client.cities.citiesList({ 'espaces.published_eq': true }).then((res) => {
+      return res.data
+        .filter((val) => val.name !== 'todefine' && val.espaces.length > 0)
         .map((city) => ({
-          value: city,
-          label: city,
-        })),
-    ),
+          value: city.name,
+          label: city.name,
+        }))
+    }),
   )
 }

@@ -28,7 +28,7 @@ import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
 import axios from 'axios'
-import { useCurrentUser } from '~hooks/useCurrentUser'
+
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
 interface Props {
@@ -38,11 +38,11 @@ interface Props {
 const PlaceDetail = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, lg: false })
-  const { data: user } = useCurrentUser()
 
   return (
     <Box>
-      {Boolean(user) && <PlaceHeader place={place} />}
+      <PlaceHeader place={place} />
+
       <Container px={{ base: 3, lg: 5 }}>
         <Stack
           direction={{ base: 'column-reverse', lg: 'row' }}

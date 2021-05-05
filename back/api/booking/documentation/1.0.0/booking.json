@@ -739,7 +739,6 @@
               "address",
               "latitude",
               "longitude",
-              "city",
               "country"
             ],
             "properties": {
@@ -830,9 +829,6 @@
               "published": {
                 "type": "boolean"
               },
-              "city": {
-                "type": "string"
-              },
               "bookings": {
                 "type": "array",
                 "items": {
@@ -854,6 +850,9 @@
                 ]
               },
               "slug": {
+                "type": "string"
+              },
+              "city": {
                 "type": "string"
               },
               "created_by": {

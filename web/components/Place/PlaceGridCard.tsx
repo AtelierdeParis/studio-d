@@ -136,7 +136,9 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                 <Text color="gray.500" pr={9}>
                   {t('card.city')}
                 </Text>
-                <Text isTruncated>{place.city}</Text>
+                <Text isTruncated textTransform="capitalize">
+                  {place.city?.name}
+                </Text>
               </Flex>
               <Divider my={2} borderColor="gray.100" />
               <Flex justifyContent="space-between" alignItems="center">

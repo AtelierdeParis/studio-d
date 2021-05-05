@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Flex,
   SimpleGrid,
@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import FormField from '~components/FormField'
 import InputCity from '~components/InputCity'
+import PlaceSlider from '~components/Place/PlaceSlider'
 import InputDateRange from '~components/InputDateRange'
 import Select from '~components/Select'
 import Calendar from 'public/assets/img/calendar.svg'
@@ -32,6 +33,7 @@ const PlaceSearch = ({ onSubmit }) => {
   const { t } = useTranslation('place')
   const form = useFormContext()
   const isMobile = useBreakpointValue({ base: true, lg: false })
+  const city = form.watch('city')
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -51,24 +53,43 @@ const PlaceSearch = ({ onSubmit }) => {
             alignItems="flex-start"
             direction={{ base: 'column', md: 'row' }}
           >
-            <Flex w="100%">
-              <Pin
-                stroke={theme.colors.blue['500']}
-                width="22px"
-                height="22px"
-              />
-              <Box pl={3.5} flex={1} pt={1}>
-                <FormField
-                  label={t('search.where.label')}
-                  labelStyle={{ mb: 0 }}
-                >
-                  <InputCity
-                    name="city"
-                    control={form.control}
-                    placeholder={t('search.where.placeholder')}
-                  />
-                </FormField>
-              </Box>
+            <Flex w="100%" direction="column">
+              <Flex w="100%">
+                <Pin
+                  stroke={theme.colors.blue['500']}
+                  width="22px"
+                  height="22px"
+                />
+                <Box pl={3.5} flex={1} pt={1}>
+                  <FormField
+                    label={t('search.where.label')}
+                    labelStyle={{ mb: 0 }}
+                  >
+                    <InputCity
+                      name="city"
+                      control={form.control}
+                      placeholder={t('search.where.placeholder')}
+                    />
+                  </FormField>
+                </Box>
+              </Flex>
+              {city && city !== '' && (
+                <Flex w="100%">
+                  <Box ml="22px" pl={3.5} flex={1} pt={1}>
+                    <Divider
+                      orientation="horizontal"
+                      opacity={{ base: 0, md: 0.5 }}
+                      my={2.5}
+                    />
+                    <FormField
+                      label={t('search.perimeter.label')}
+                      labelStyle={{ mb: 0 }}
+                    >
+                      <PlaceSlider control={form.control} />
+                    </FormField>
+                  </Box>
+                </Flex>
+              )}
             </Flex>
             <Divider
               orientation="vertical"

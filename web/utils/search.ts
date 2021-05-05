@@ -42,7 +42,6 @@ export interface SearchQuery {
 }
 
 export const formatSearchToQuery = (data): Record<string, any> => {
-  // const { sortBy, ...rest } = data
   return Object.fromEntries(
     Object.entries(data)
       .map(([_, v]) => {
@@ -65,12 +64,9 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
   )
 
   if (forceSort) {
-    query['_sort'] = 'nbDispo'
+    query['_sort'] = 'nbDispoDesc'
   } else if (Boolean(data.sortBy)) {
     switch (data.sortBy) {
-      case SortOptions.DISPO_ASC:
-        query['_sort'] = 'dispoAsc'
-        break
       case SortOptions.NB_DISPO_DESC:
         query['_sort'] = 'nbDispoDesc'
         break
@@ -79,6 +75,9 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
         break
       case SortOptions.SURFACE_DESC:
         query['_sort'] = 'surface:desc'
+        break
+      default:
+        query['_sort'] = 'dispoAsc'
         break
     }
   }
@@ -114,7 +113,7 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
   }
 
   if (Boolean(data.city)) {
-    query['city_eq'] = data.city
+    query['city.name_eq'] = data.city
   }
 
   if (data.accomodation) {

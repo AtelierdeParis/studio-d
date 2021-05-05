@@ -128,8 +128,6 @@ const BookingScheduleSlot = (props: Props) => {
         direction="column"
         w="100%"
         h="100%"
-        gridAutoRows="1fr"
-        rowGap="4px"
         className="grid"
         bgColor={isMonth ? 'blue.50' : 'transparent'}
       >

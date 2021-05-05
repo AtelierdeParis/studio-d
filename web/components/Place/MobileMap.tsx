@@ -28,6 +28,7 @@ const MobileMap = ({ places = [] }) => {
     <>
       {isVisible && (
         <Map
+          zIndex="10"
           flex={1}
           mt={10}
           h="240px"
