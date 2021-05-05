@@ -15,7 +15,7 @@ const HistoryLine = ({ message, isAuthor, type }: Props) => {
     message.booking,
     type,
   )
-
+  console.log(message)
   return (
     <Flex
       w="100%"
@@ -26,6 +26,7 @@ const HistoryLine = ({ message, isAuthor, type }: Props) => {
 
       <Text fontSize="sm" color={color} textAlign={isAuthor ? 'right' : 'left'}>
         {text}
+        {` (réf. ${message.booking.id})`}
       </Text>
 
       {isAuthor && <Circle size="6px" bgColor={colorCircle} mt={2} ml={2} />}

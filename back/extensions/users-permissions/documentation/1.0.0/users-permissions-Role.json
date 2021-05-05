@@ -535,8 +535,10 @@
                 "address",
                 "zipCode",
                 "city",
+                "country",
                 "siret",
                 "ape",
+                "phone",
                 "license",
                 "type"
               ],

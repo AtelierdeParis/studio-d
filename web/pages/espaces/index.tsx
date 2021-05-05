@@ -98,7 +98,7 @@ const Places = () => {
     <Container px={0}>
       <NextSeo title={t('common:title.places')} />
       <FormProvider {...form}>
-        <PlaceSearch searchParams={searchParams} onSubmit={onSubmit} />
+        <PlaceSearch onSubmit={onSubmit} />
         {!isLoading && !isFetching && places?.pages?.flat().length === 0 ? (
           <NoResult />
         ) : (
