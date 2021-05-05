@@ -33,7 +33,6 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
     searchParams?.['disponibilities.start_gte'],
     searchParams?.['disponibilities.end_lte'],
   )
-  console.log(disposInRange)
 
   const disposThisWeek = useNbDispoPerWeek(
     new Date(),

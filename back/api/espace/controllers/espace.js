@@ -36,7 +36,7 @@ module.exports = {
   async find(ctx) {
     const { _sort, ...query } = ctx.query;
 
-    const isSortOnDisponibility = ["dispo", "nbDispo"].includes(_sort);
+    const isSortOnDisponibility = ["dispoAsc", "nbDispoDesc"].includes(_sort);
 
     const places = await strapi.services.espace
       .find({
@@ -56,11 +56,11 @@ module.exports = {
       });
 
     if (isSortOnDisponibility) {
-      if (_sort === "nbDispo") {
+      if (_sort === "nbDispoDesc") {
         return places.sort(
           (a, b) => b.disponibilities.length - a.disponibilities.length
         );
-      } else if (_sort === "dispo") {
+      } else if (_sort === "dispoAsc") {
         return places.sort((a, b) => {
           const dateFirst =
             a.disponibilities.length > 0

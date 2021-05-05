@@ -43,8 +43,10 @@ const Places = () => {
   const form = useForm({
     defaultValues: router.query,
   })
+
   const [searchParams, setSearchParams] = useState<any>({
     published_eq: true,
+    _sort: router?.query?.sortBy || 'dispoAsc',
   })
   const queryClient = useQueryClient()
 
@@ -112,7 +114,9 @@ const Places = () => {
                     <Text textStyle="h2" pl={4}>
                       {t(
                         `search.${
-                          Object.keys(router.query).length > 0
+                          Object.keys(router.query).filter(
+                            (k) => k !== 'sortBy',
+                          ).length > 0
                             ? 'nbPlacesWithDispo'
                             : 'nbPlace'
                         }${isPlural ? 's' : ''}`,

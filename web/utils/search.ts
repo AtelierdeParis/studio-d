@@ -69,10 +69,10 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
   } else if (Boolean(data.sortBy)) {
     switch (data.sortBy) {
       case SortOptions.DISPO_ASC:
-        query['_sort'] = 'dispo'
+        query['_sort'] = 'dispoAsc'
         break
       case SortOptions.NB_DISPO_DESC:
-        query['_sort'] = 'nbDispo'
+        query['_sort'] = 'nbDispoDesc'
         break
       case SortOptions.SURFACE_ASC:
         query['_sort'] = 'surface:asc'
