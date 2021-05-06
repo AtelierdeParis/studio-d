@@ -18,13 +18,6 @@ const BookingDrawerCompany = ({ company, espace }) => {
         </Text>
       </Box>
       <Box pt={5}>
-        <Text fontFamily="mabry medium" fontWeight="500">
-          {t('place')}
-        </Text>
-        <Text>{espace?.name}</Text>
-        <Text>{espace?.address}</Text>
-      </Box>
-      <Box pt={5}>
         <PlaceInfo label={t('tel')} value={company?.phone} />
         <PlaceInfo label={t('email')} value={company?.email} />
         {company?.website && (

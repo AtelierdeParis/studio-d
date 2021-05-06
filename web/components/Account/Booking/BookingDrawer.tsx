@@ -166,25 +166,45 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                     opacity="0.3"
                   />
                 </Box>
+                <Box
+                  flex={1}
+                  borderBottom="1px solid"
+                  pb={{ base: 4, md: 0 }}
+                  mb={{ base: 4, md: 0 }}
+                  borderColor={{ base: 'gray.50', md: 'transparent' }}
+                >
+                  <Text fontFamily="mabry medium" fontWeight="500">
+                    {t('place')}
+                  </Text>
+                  <Text>
+                    {booking?.espace?.name}
+                    <Link
+                      href={{
+                        pathname: ROUTE_PLACE_DETAIL,
+                        query: { id: booking?.espace?.slug },
+                      }}
+                      textDecoration="underline"
+                      ml={2}
+                    >{`(${t('placeDetail')})`}</Link>
+                  </Text>
+                </Box>
+                <Box>
+                  <Divider
+                    orientation="vertical"
+                    mx={5}
+                    h="100%"
+                    opacity="0.3"
+                  />
+                </Box>
                 {user.type === 'company' ? (
-                  <Box flex={1}>
+                  <Box flex={1} minW="250px" maxW="250px">
                     <Text fontFamily="mabry medium" fontWeight="500">
-                      {t('place')}
+                      {t('structure')}
                     </Text>
-                    <Text>
-                      {booking?.espace?.name}
-                      <Link
-                        href={{
-                          pathname: ROUTE_PLACE_DETAIL,
-                          query: { id: booking?.espace?.slug },
-                        }}
-                        textDecoration="underline"
-                        ml={2}
-                      >{`(${t('placeDetail')})`}</Link>
-                    </Text>
+                    <Text>{booking?.place?.structureName}</Text>
                   </Box>
                 ) : (
-                  <Box flex={1}>
+                  <Box flex={1} minW="280px" maxW="280px">
                     <Text fontFamily="mabry medium" fontWeight="500">
                       {t('company')}
                     </Text>
@@ -217,7 +237,14 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                     />
                     <Flex
                       direction="column"
-                      minW={{ base: 'none', md: '250px' }}
+                      minW={{
+                        base: 'none',
+                        md: user.type === 'company' ? '250px' : '280px',
+                      }}
+                      maxW={{
+                        base: 'none',
+                        md: user.type === 'company' ? '250px' : '280px',
+                      }}
                       w={{ base: '100%', md: 'fit-content' }}
                     >
                       <Link
