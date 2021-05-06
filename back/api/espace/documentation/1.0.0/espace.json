@@ -1123,7 +1123,8 @@
               "id",
               "name",
               "latitude",
-              "longitude"
+              "longitude",
+              "country"
             ],
             "properties": {
               "id": {
@@ -1143,6 +1144,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "country": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"

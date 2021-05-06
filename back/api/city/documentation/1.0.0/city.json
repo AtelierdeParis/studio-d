@@ -519,7 +519,8 @@
           "id",
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "country"
         ],
         "properties": {
           "id": {
@@ -676,6 +677,9 @@
                 }
               }
             }
+          },
+          "country": {
+            "type": "string"
           }
         }
       },
@@ -683,7 +687,8 @@
         "required": [
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "country"
         ],
         "properties": {
           "name": {
@@ -700,6 +705,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "country": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

@@ -27,6 +27,10 @@
     "espaces": {
       "collection": "espace",
       "via": "city"
+    },
+    "country": {
+      "type": "string",
+      "required": true
     }
   }
 }

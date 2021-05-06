@@ -25,26 +25,26 @@ const check = (obj, prop, errors) => {
 };
 
 const uploadFile = (url, options) => {
-  const formData = new FormData({ maxDataSize: 9999999999 });
-  formData.append("ref", options.ref);
-  formData.append("refId", options.refId);
-  formData.append("field", options.field);
-  formData.append(`files`, request(url));
-  const formHeaders = formData.getHeaders();
-  axios
-    .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
-      headers: {
-        ...formHeaders,
-      },
-      maxContentLength: 100000000,
-      maxBodyLength: 1000000000,
-    })
-    .then(() => {
-      console.log(`[UPLOADED] ${options.refId}`);
-    })
-    .catch((err) => {
-      console.log(`[ERROR UPLOAD] ${options.refId}`, err);
-    });
+  // const formData = new FormData({ maxDataSize: 9999999999 });
+  // formData.append("ref", options.ref);
+  // formData.append("refId", options.refId);
+  // formData.append("field", options.field);
+  // formData.append(`files`, request(url));
+  // const formHeaders = formData.getHeaders();
+  // axios
+  //   .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
+  //     headers: {
+  //       ...formHeaders,
+  //     },
+  //     maxContentLength: 100000000,
+  //     maxBodyLength: 1000000000,
+  //   })
+  //   .then(() => {
+  //     console.log(`[UPLOADED] ${options.refId}`);
+  //   })
+  //   .catch((err) => {
+  //     console.log(`[ERROR UPLOAD] ${options.refId}`, err);
+  //   });
 };
 
 const start = async () => {
@@ -57,14 +57,14 @@ const start = async () => {
       fs.createReadStream(PATH_MIGRATION_CSV)
         .pipe(csv({ separator: ";" }))
         .on("data", (data) => rows.push(data))
-        .on("end", () => {
-          rows.map(async (row) => {
+        .on("end", async () => {
+          for (let index = 0; index < rows.length; index++) {
+            const row = rows[index];
+
             const errors = [];
             const place = {
               external_id: Object.entries(row)[0][1],
             };
-
-            // Test place
 
             const checkProp = (prop, mappingProp = null) => {
               const isCheked = check(row, prop, errors);
@@ -73,7 +73,7 @@ const start = async () => {
             };
 
             if (checkProp("city", "city")) {
-              place.city = row.city;
+              place.city = row.city.toLowerCase();
             }
 
             if (checkProp("country") && mapping_country[row.country]) {
@@ -166,7 +166,7 @@ const start = async () => {
                   console.log("[ERROR] update failed:", err, place)
                 );
             }
-          });
+          }
         });
     });
 };

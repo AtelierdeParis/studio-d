@@ -30,7 +30,7 @@ import { format } from '~utils/date'
 import PlaceListItemOptions from '~components/Account/Place/PlaceListItemOptions'
 import NotComplete from '~components/NotComplete'
 
-const SubInfo = ({ place, available, isMobile = false }) => {
+const SubInfo = ({ place, available, isMobile = false, isComplete = true }) => {
   const { t } = useTranslation('place')
   const { coming, past, pending } = useNbBooking(place.disponibilities)
 
@@ -45,16 +45,18 @@ const SubInfo = ({ place, available, isMobile = false }) => {
           <Text color="gray.500" pr={2}>
             {t('list.disponibility')}
           </Text>
-          <Button
-            as={Link}
-            href={{
-              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
-              query: { id: place.slug, index: 2 },
-            }}
-            variant="line"
-          >
-            {available.length > 0 ? t('list.edit') : t('list.add')}
-          </Button>
+          {isComplete && (
+            <Button
+              as={Link}
+              href={{
+                pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+                query: { id: place.slug, index: 2 },
+              }}
+              variant="line"
+            >
+              {available.length > 0 ? t('list.edit') : t('list.add')}
+            </Button>
+          )}
         </Flex>
         <Box>
           {available.length > 0 ? (
@@ -241,10 +243,23 @@ const PlaceListItem = ({ place, setVisible }: Props) => {
             </Link>
             <PlaceListItemOptions place={place} />
           </Flex>
-          {!isMobile && <SubInfo place={place} available={available} />}
+          {!isMobile && (
+            <SubInfo
+              place={place}
+              available={available}
+              isComplete={isComplete}
+            />
+          )}
         </Flex>
       </Flex>
-      {isMobile && <SubInfo place={place} available={available} isMobile />}
+      {isMobile && (
+        <SubInfo
+          place={place}
+          available={available}
+          isMobile
+          isComplete={isComplete}
+        />
+      )}
       {!isComplete && (
         <NotComplete mt={8} w="fit-content">
           <Trans
