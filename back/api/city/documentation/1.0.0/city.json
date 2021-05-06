@@ -518,8 +518,6 @@
         "required": [
           "id",
           "name",
-          "latitude",
-          "longitude",
           "country"
         ],
         "properties": {
@@ -527,12 +525,6 @@
             "type": "string"
           },
           "name": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
             "type": "string"
           },
           "espaces": {
@@ -680,24 +672,22 @@
           },
           "country": {
             "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           }
         }
       },
       "NewCity": {
         "required": [
           "name",
-          "latitude",
-          "longitude",
           "country"
         ],
         "properties": {
           "name": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
             "type": "string"
           },
           "espaces": {
@@ -708,6 +698,12 @@
           },
           "country": {
             "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           },
           "created_by": {
             "type": "string"

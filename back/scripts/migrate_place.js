@@ -25,26 +25,26 @@ const check = (obj, prop, errors) => {
 };
 
 const uploadFile = (url, options) => {
-  // const formData = new FormData({ maxDataSize: 9999999999 });
-  // formData.append("ref", options.ref);
-  // formData.append("refId", options.refId);
-  // formData.append("field", options.field);
-  // formData.append(`files`, request(url));
-  // const formHeaders = formData.getHeaders();
-  // axios
-  //   .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
-  //     headers: {
-  //       ...formHeaders,
-  //     },
-  //     maxContentLength: 100000000,
-  //     maxBodyLength: 1000000000,
-  //   })
-  //   .then(() => {
-  //     console.log(`[UPLOADED] ${options.refId}`);
-  //   })
-  //   .catch((err) => {
-  //     console.log(`[ERROR UPLOAD] ${options.refId}`, err);
-  //   });
+  const formData = new FormData({ maxDataSize: 9999999999 });
+  formData.append("ref", options.ref);
+  formData.append("refId", options.refId);
+  formData.append("field", options.field);
+  formData.append(`files`, request(url));
+  const formHeaders = formData.getHeaders();
+  axios
+    .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
+      headers: {
+        ...formHeaders,
+      },
+      maxContentLength: 100000000,
+      maxBodyLength: 1000000000,
+    })
+    .then(() => {
+      console.log(`[UPLOADED] ${options.refId}`);
+    })
+    .catch((err) => {
+      console.log(`[ERROR UPLOAD] ${options.refId}`, err);
+    });
 };
 
 const start = async () => {
@@ -154,9 +154,9 @@ const start = async () => {
               await strapi
                 .query("espace")
                 .update({ external_id: place.external_id }, place)
-                .then((res) => {
+                .then(async (res) => {
                   console.log(`[UPDATED] ${place.name}`);
-                  uploadFile(row.cover, {
+                  await uploadFile(row.cover, {
                     ref: "espace",
                     refId: res.id,
                     field: "images",
