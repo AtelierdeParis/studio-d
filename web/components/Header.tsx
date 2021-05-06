@@ -34,11 +34,11 @@ const MenuItem = ({ href, text }) => {
     </Link>
   )
 }
-interface IHeader {
+interface Props {
   colorMode: 'white' | 'black'
 }
 
-const Header = ({ colorMode }: IHeader) => {
+const Header = ({ colorMode }: Props) => {
   const { t } = useTranslation('common')
   return (
     <Container

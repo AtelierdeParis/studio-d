@@ -48,6 +48,13 @@ const App = ({ Component, pageProps }: AppProps) => {
           type: 'website',
           url: process.env.NEXT_PUBLIC_FRONT_URL,
           site_name: 'Studio D',
+          images: [
+            {
+              url:
+                process.env.NEXT_PUBLIC_FRONT_URL +
+                '/assets/img/logo-studio-d.svg',
+            },
+          ],
         }}
         twitter={{
           handle: '@studiodphoto',
