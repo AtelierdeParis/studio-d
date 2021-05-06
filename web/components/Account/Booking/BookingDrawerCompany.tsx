@@ -4,7 +4,7 @@ import PlaceInfo from '~components/Account/Booking/PlaceInfo'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 
-const BookingDrawerCompany = ({ company }) => {
+const BookingDrawerCompany = ({ company, espace }) => {
   const { t } = useTranslation('booking')
   return (
     <Box fontSize={{ base: 'sm', sm: 'md' }}>

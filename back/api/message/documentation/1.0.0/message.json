@@ -790,8 +790,11 @@
               "address",
               "zipCode",
               "city",
+              "country",
               "siret",
               "ape",
+              "phone",
+              "license",
               "type"
             ],
             "properties": {
@@ -823,6 +826,9 @@
                 "type": "boolean"
               },
               "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
                 "type": "boolean"
               },
               "firstname": {
@@ -894,9 +900,6 @@
               },
               "external_id": {
                 "type": "integer"
-              },
-              "accepted": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -917,8 +920,11 @@
               "address",
               "zipCode",
               "city",
+              "country",
               "siret",
               "ape",
+              "phone",
+              "license",
               "type"
             ],
             "properties": {
@@ -950,6 +956,9 @@
                 "type": "boolean"
               },
               "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
                 "type": "boolean"
               },
               "firstname": {
@@ -1021,9 +1030,6 @@
               },
               "external_id": {
                 "type": "integer"
-              },
-              "accepted": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -1045,8 +1051,9 @@
             "enum": [
               "accepted",
               "created",
-              "canceled",
-              "canceledbyplace",
+              "requestcanceled",
+              "requestcanceledbyplace",
+              "bookingcanceledbyplace",
               "askcancel",
               "message"
             ]
@@ -1136,8 +1143,9 @@
             "enum": [
               "accepted",
               "created",
-              "canceled",
-              "canceledbyplace",
+              "requestcanceled",
+              "requestcanceledbyplace",
+              "bookingcanceledbyplace",
               "askcancel",
               "message"
             ]

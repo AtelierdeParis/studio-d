@@ -24,6 +24,7 @@ import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import { UsersPermissionsUser } from '~typings/api'
 import { useMyNotifications } from '~hooks/useMyNotifications'
+import { useUserIsComplete } from '~hooks/useUserIsComplete'
 
 const accountItems = {
   title: 'myAccount',
@@ -100,12 +101,13 @@ const styleNotif: BoxProps = {
 const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const { t } = useTranslation('account')
   const router = useRouter()
-
+  const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
 
   const displayMenu = ({ title, items }) => {
+    const isDisactivated = !isComplete && title === 'dashboard'
     return (
-      <Box w="100%">
+      <Box w="100%" opacity={isDisactivated ? 0.5 : 1}>
         <Text
           px={5}
           textTransform="uppercase"
@@ -119,7 +121,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         </Text>
         {items.map(({ icon, label, url = '#', onClick = null }) => (
           <Link
-            href={url}
+            href={isDisactivated ? '' : url}
             _hover={{ textDecoration: 'none' }}
             key={label}
             display="block"
@@ -128,9 +130,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
               position="relative"
               alignItems="center"
               _hover={{
-                color: 'blue.500',
+                color: isDisactivated ? 'auto' : 'blue.500',
               }}
-              cursor="pointer"
+              cursor={isDisactivated ? 'not-allowed' : 'pointer'}
               px={5}
               py={2.5}
               w="100%"

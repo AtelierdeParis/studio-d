@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import FormField from '~components/FormField'
 import InputCity from '~components/InputCity'
+import PlaceSlider from '~components/Place/PlaceSlider'
 import InputDateRange from '~components/InputDateRange'
 import Select from '~components/Select'
 import Calendar from 'public/assets/img/calendar.svg'
@@ -18,9 +19,6 @@ import Pin from 'public/assets/img/pin-outline.svg'
 import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import { SurfaceOptions, HeightOptions } from '~utils/search'
-import { formatSearchToQuery } from '~utils/search'
-import { ROUTE_PLACES } from '~constants'
-import { useRouter } from 'next/router'
 
 const selectProps = {
   variant: 'unstyled',
@@ -28,21 +26,14 @@ const selectProps = {
   pl: 3,
 }
 
-const PlaceSearch = () => {
+const PlaceSearch = ({ onSubmit }) => {
   const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
   const [hasMoreFilters, setMoreFilter] = useState(false)
   const { t } = useTranslation('place')
   const form = useFormContext()
-  const router = useRouter()
   const isMobile = useBreakpointValue({ base: true, lg: false })
-
-  const onSubmit = ({ sortBy, ...rest }) => {
-    router.push({
-      pathname: ROUTE_PLACES,
-      query: formatSearchToQuery(rest),
-    })
-  }
+  const city = form.watch('city')
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -62,21 +53,43 @@ const PlaceSearch = () => {
             alignItems="flex-start"
             direction={{ base: 'column', md: 'row' }}
           >
-            <Flex w="100%" pt={1}>
-              <Pin
-                stroke={theme.colors.blue['500']}
-                width="22px"
-                height="22px"
-              />
-              <Box pl={3.5} flex={1}>
-                <FormField label={t('search.where.label')}>
-                  <InputCity
-                    name="city"
-                    control={form.control}
-                    placeholder={t('search.where.placeholder')}
-                  />
-                </FormField>
-              </Box>
+            <Flex w="100%" direction="column">
+              <Flex w="100%">
+                <Pin
+                  stroke={theme.colors.blue['500']}
+                  width="22px"
+                  height="22px"
+                />
+                <Box pl={3.5} flex={1} pt={1}>
+                  <FormField
+                    label={t('search.where.label')}
+                    labelStyle={{ mb: 0 }}
+                  >
+                    <InputCity
+                      name="city"
+                      control={form.control}
+                      placeholder={t('search.where.placeholder')}
+                    />
+                  </FormField>
+                </Box>
+              </Flex>
+              {city && city !== '' && (
+                <Flex w="100%">
+                  <Box ml="22px" pl={3.5} flex={1} pt={1}>
+                    <Divider
+                      orientation="horizontal"
+                      opacity={{ base: 0, md: 0.5 }}
+                      my={2.5}
+                    />
+                    <FormField
+                      label={t('search.perimeter.label')}
+                      labelStyle={{ mb: 0 }}
+                    >
+                      <PlaceSlider control={form.control} />
+                    </FormField>
+                  </Box>
+                </Flex>
+              )}
             </Flex>
             <Divider
               orientation="vertical"
@@ -113,11 +126,10 @@ const PlaceSearch = () => {
           </Flex>
           <Flex
             alignItems="flex-start"
-            pt={1}
             display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
           >
             <Box flex={1} pt={{ base: 6, md: 0 }}>
-              <FormField>
+              <FormField labelStyle={{ mb: 0 }}>
                 <Select
                   name="surface"
                   control={form.control}
@@ -185,7 +197,6 @@ const PlaceSearch = () => {
           </Flex>
           <Flex
             alignItems="flex-start"
-            pt={{ base: 0, md: 1 }}
             display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
           >
             <Box flex={1}>
@@ -194,7 +205,7 @@ const PlaceSearch = () => {
                 opacity={0.5}
                 display={{ base: 'block', md: 'none' }}
               />
-              <FormField>
+              <FormField labelStyle={{ mb: 0 }}>
                 <Select
                   name="height"
                   control={form.control}
@@ -252,6 +263,7 @@ const PlaceSearch = () => {
               type="submit"
               colorScheme="blue"
               size="lg"
+              // isDisabled={isDisabled}
               isLoading={isLoading}
             >
               {t('search.submit')}

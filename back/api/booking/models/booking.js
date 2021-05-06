@@ -13,8 +13,17 @@ const locale = {
 
 const updateDispo = (dispos = [], status) => {
   if (!dispos || dispos.length === 0) return null;
-  dispos.map(({ id }) => {
-    strapi.query("disponibility").update({ id }, { status });
+  const data = { status };
+  if (status === "available") {
+    data.booking = null;
+  }
+  dispos.map((dispo) => {
+    strapi.query("disponibility").update({ id: dispo.id }, data);
+    if (status === "available") {
+      strapi
+        .query("disponibility")
+        .create({ ...dispo, place: null, status: "canceled" });
+    }
   });
 };
 
@@ -49,6 +58,17 @@ const getPlaceInfoEmail = (place) => {
     infos.push(`<a href="${place.website}">${place.website}</a>`);
 
   return infos.join("<br/>");
+};
+
+const checkStatus = (booking, status) => {
+  const statusToCheck = Array.isArray(status) ? status : [status];
+  console.log(
+    booking.status,
+    statusToCheck,
+    statusToCheck.includes(booking.status)
+  );
+  if (!booking || !statusToCheck.includes(booking.status))
+    throw new Error("An error occured, booking has a wrong status");
 };
 
 module.exports = {
@@ -104,7 +124,7 @@ module.exports = {
         },
         {
           from: capitalize(created.company.firstname),
-          user_name: created.company.firstname,
+          user_name: created.place.firstname,
           company: created.company.structureName,
           ref: created.id,
           espace_name: created.espace.name,
@@ -113,18 +133,38 @@ module.exports = {
         }
       );
     },
+    beforeUpdate: async (params, data) => {
+      if (data.status) {
+        const booking = await strapi
+          .query("booking")
+          .findOne({ id: params.id });
+
+        switch (data.status) {
+          case "accepted":
+          case "requestcanceled":
+          case "requestcanceledbyplace":
+            checkStatus(booking, "pending");
+            break;
+          case "bookingcanceledbyplace":
+          case "askcancel":
+            checkStatus(booking, ["accepted", "askcancel"]);
+            break;
+        }
+      }
+    },
     async afterUpdate(updated, params, body) {
       const rel = {
         booking: updated.id,
         place: updated.place.id,
         company: updated.company.id,
       };
+
       if (body.status) {
         switch (body.status) {
           case "requestcanceled":
             strapi.services.message.create({
               author: "company",
-              status: "canceled",
+              status: "requestcanceled",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
@@ -152,7 +192,7 @@ module.exports = {
           case "requestcanceledbyplace":
             strapi.services.message.create({
               author: "place",
-              status: "canceledbyplace",
+              status: "requestcanceledbyplace",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");
@@ -179,7 +219,7 @@ module.exports = {
           case "bookingcanceledbyplace":
             strapi.services.message.create({
               author: "place",
-              status: "canceledbyplace",
+              status: "bookingcanceledbyplace",
               ...rel,
             });
             updateDispo(updated.disponibilities, "available");

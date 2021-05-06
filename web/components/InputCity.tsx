@@ -33,15 +33,21 @@ const getStyle = (theme) => {
     placeholder: (styles) => ({
       ...styles,
       lineHeight: 1,
+      textTransform: 'none',
     }),
     valueContainer: (styles) => ({
       ...styles,
       padding: 0,
       height: '100%',
+      textTransform: 'capitalize',
     }),
     clearIndicator: (styles) => ({
       ...styles,
       padding: 0,
+    }),
+    option: (styles) => ({
+      ...styles,
+      textTransform: 'capitalize',
     }),
     indicatorSeparator: () => ({
       display: 'none',
@@ -86,7 +92,6 @@ interface Props {
 
 const InputCity = ({ name, control, placeholder }: Props) => {
   const { data: cities } = useCities()
-
   const theme = useTheme()
   const { field } = useController({
     name,

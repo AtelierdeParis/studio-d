@@ -20,16 +20,23 @@ const useNbDisponibility = (disponibilities: Disponibility[] = []) => {
             case DisponibilityStatus.PENDING:
               total.pending.push(current)
               break
+            case DisponibilityStatus.CANCELED:
+              total.canceled.push(current)
+              break
           }
 
           return total
         },
         {
-          nbDispo: disponibilities.length || 0,
+          nbDispo:
+            disponibilities.filter(
+              (dispo) => !['past', 'canceled'].includes(dispo.status),
+            ).length || 0,
           available: [],
           booked: [],
           pending: [],
           past: [],
+          canceled: [],
         },
       ),
     [disponibilities],

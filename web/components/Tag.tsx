@@ -14,6 +14,7 @@ interface Props extends TagProps {
     | 'requestcanceledbyplace'
     | 'bookingcanceledbyplace'
     | 'occupied'
+    | 'nextweek'
   children?: React.ReactNode
 }
 
@@ -23,10 +24,21 @@ const Tag = ({ status, children, ...rest }: Props) => {
     case 'booked':
     case 'available':
     case 'accepted':
-    case 'askcancel':
       return (
         <ChakraTag bgColor="tag.green" {...rest}>
           {children || t('tag.booked')}
+        </ChakraTag>
+      )
+    case 'askcancel':
+      return (
+        <ChakraTag bgColor="tag.yellow" {...rest}>
+          {children || t('tag.askcancel')}
+        </ChakraTag>
+      )
+    case 'nextweek':
+      return (
+        <ChakraTag bgColor="#FBEBE3" {...rest}>
+          {children || t('tag.nextweek')}
         </ChakraTag>
       )
     case 'pending':

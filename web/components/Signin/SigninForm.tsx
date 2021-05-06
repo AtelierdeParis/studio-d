@@ -18,23 +18,34 @@ import { signIn } from 'next-auth/client'
 import InputPassword from '~components/InputPassword'
 import useToast from '~hooks/useToast'
 import Letter from 'public/assets/img/letter.svg'
+import { client } from '~api/client-api'
+import { getRouteToRedirect } from '~utils/auth'
+import { useRouter } from 'next/router'
 
-interface SignInFormProps {
+interface Propz {
   onClose: () => void
   onOpenReset: () => void
   initialRef: React.Ref<any>
+  redirect?: boolean
 }
 interface FormData {
   email: string
   password: string
 }
 
-const SignInForm = (props: SignInFormProps) => {
+const SignInForm = ({
+  initialRef,
+  onClose,
+  onOpenReset,
+  redirect = true,
+}: Propz) => {
+  const router = useRouter()
   const { t } = useTranslation('common')
   const schema = yup.object({
     email: yup.string().email(t('signin.email.error')),
     password: yup.string().required(t('signin.password.error')),
   })
+
   const { errorToast } = useToast()
   const [email, setEmail] = useState('')
   const { register, formState, handleSubmit, setError } = useForm<FormData>({
@@ -50,11 +61,19 @@ const SignInForm = (props: SignInFormProps) => {
       return
     }
     try {
-      await signIn('credentials', {
+      const res = await signIn('credentials', {
         username: email,
         password: values.password,
         redirect: false,
       })
+      if (res.ok && redirect) {
+        const [user, bookings] = await Promise.all([
+          client.users.getUsers().then((res) => res.data),
+          client.bookings.getMyBookings('all').then((res) => res.data),
+        ])
+
+        router.push(getRouteToRedirect(user, bookings))
+      }
     } catch {
       errorToast(t('signin.error'))
     }
@@ -70,7 +89,7 @@ const SignInForm = (props: SignInFormProps) => {
           <InputGroup>
             <Input
               name="email"
-              ref={props.initialRef}
+              ref={initialRef}
               type="email"
               onChange={(event) => setEmail(event.target.value)}
               placeholder={t('signin.email.placeholder')}
@@ -91,8 +110,8 @@ const SignInForm = (props: SignInFormProps) => {
             <Box
               as="span"
               onClick={() => {
-                props.onClose()
-                props.onOpenReset()
+                onClose()
+                onOpenReset()
               }}
               textDecoration="underline"
               fontSize="sm"

@@ -42,14 +42,14 @@ const BookingRecap = () => {
             <Button variant="unstyled" fontSize="md">
               <Link href={ROUTE_SIGNUP}>{t('common:nav.signup')}</Link>
             </Button>
-            <SigninModal>
+            <SigninModal redirect={false}>
               <Button size="lg">{t('common:nav.signin')}</Button>
             </SigninModal>
           </ButtonGroup>
         </>
       ) : (
         <>
-          {!user.confirmed && !user.accepted ? (
+          {!user.confirmed || !user.accepted ? (
             <Box>
               <Text>
                 {t(`detail.notConfirm${isPlural}`, { nb: selected.length })}

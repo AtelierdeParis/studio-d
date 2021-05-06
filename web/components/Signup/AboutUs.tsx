@@ -47,7 +47,12 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
             py={8}
             direction={{ base: 'column', sm: 'row' }}
           >
-            <Image src={img} alignSelf={{ base: 'center', sm: 'flex-start' }} />
+            <Image
+              src={img}
+              alignSelf={{ base: 'center', sm: 'flex-start' }}
+              w="48px"
+              h="48px"
+            />
             <Box ml={{ base: 0, sm: 10 }} mt={{ base: 4, sm: 0 }}>
               <Text
                 fontSize={{ base: 'md', md: 'lg' }}

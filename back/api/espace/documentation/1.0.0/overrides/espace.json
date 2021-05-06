@@ -883,7 +883,7 @@
             "default": true
           },
           "city": {
-            "type": "string"
+            "$ref": "#/components/schemas/City"
           },
           "country": {
             "type": "string"

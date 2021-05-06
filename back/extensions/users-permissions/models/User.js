@@ -2,6 +2,15 @@
 
 module.exports = {
   lifecycles: {
+    async afterFindOne(user) {
+      if (user && user.external_id) {
+        Object.entries(user).map(([k, v]) => {
+          if (v === "todefine") {
+            user[k] = null;
+          }
+        });
+      }
+    },
     async beforeUpdate(param, data) {
       if (param.id) {
         strapi
@@ -29,8 +38,8 @@ module.exports = {
           });
       }
     },
-    async afterUpdate(updated) {
-      if (!updated.accepted) {
+    async afterUpdate(updated, query, data) {
+      if (!updated.accepted && updated.confirmed && !data.confirmed) {
         // Send email to administration
         strapi.plugins["email"].services.email.sendEmail(
           {

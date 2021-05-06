@@ -3,12 +3,12 @@ import { Select, SelectProps, Box } from '@chakra-ui/react'
 import { useController, Control } from 'react-hook-form'
 import Remove from 'public/assets/img/remove.svg'
 
-interface ISearchSelect extends SelectProps {
+interface Props extends SelectProps {
   control: Control
   children: React.ReactNode
 }
 
-const SearchSelect = ({ control, children, name, ...rest }: ISearchSelect) => {
+const SearchSelect = ({ control, children, name, ...rest }: Props) => {
   const { field } = useController({ name, control })
 
   const handleChange = (value) => {
@@ -39,7 +39,9 @@ const SearchSelect = ({ control, children, name, ...rest }: ISearchSelect) => {
           bottom="0"
           w="30px"
           cursor="pointer"
-          onClick={() => handleChange('')}
+          onClick={() => {
+            handleChange('')
+          }}
         />
       )}
     </Box>

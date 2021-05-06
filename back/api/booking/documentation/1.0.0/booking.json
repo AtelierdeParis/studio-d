@@ -635,7 +635,8 @@
                     "available",
                     "booked",
                     "pending",
-                    "past"
+                    "past",
+                    "canceled"
                   ]
                 },
                 "booking": {
@@ -697,8 +698,9 @@
                   "enum": [
                     "accepted",
                     "created",
-                    "canceled",
-                    "canceledbyplace",
+                    "requestcanceled",
+                    "requestcanceledbyplace",
+                    "bookingcanceledbyplace",
                     "askcancel",
                     "message"
                   ]
@@ -737,7 +739,6 @@
               "address",
               "latitude",
               "longitude",
-              "city",
               "country"
             ],
             "properties": {
@@ -828,9 +829,6 @@
               "published": {
                 "type": "boolean"
               },
-              "city": {
-                "type": "string"
-              },
               "bookings": {
                 "type": "array",
                 "items": {
@@ -854,6 +852,9 @@
               "slug": {
                 "type": "string"
               },
+              "city": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -873,8 +874,11 @@
               "address",
               "zipCode",
               "city",
+              "country",
               "siret",
               "ape",
+              "phone",
+              "license",
               "type"
             ],
             "properties": {
@@ -906,6 +910,9 @@
                 "type": "boolean"
               },
               "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
                 "type": "boolean"
               },
               "firstname": {
@@ -977,9 +984,6 @@
               },
               "external_id": {
                 "type": "integer"
-              },
-              "accepted": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -1000,8 +1004,11 @@
               "address",
               "zipCode",
               "city",
+              "country",
               "siret",
               "ape",
+              "phone",
+              "license",
               "type"
             ],
             "properties": {
@@ -1033,6 +1040,9 @@
                 "type": "boolean"
               },
               "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
                 "type": "boolean"
               },
               "firstname": {
@@ -1104,9 +1114,6 @@
               },
               "external_id": {
                 "type": "integer"
-              },
-              "accepted": {
-                "type": "boolean"
               },
               "created_by": {
                 "type": "string"

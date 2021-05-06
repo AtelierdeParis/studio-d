@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import {
   Box,
@@ -29,30 +29,42 @@ import { useIsComplete } from '~hooks/useIsComplete'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
-const getSchema = (place) => {
+const getSchema = (place, t) => {
   return yup.object().shape({
-    name: !place ? yup.string().required() : null,
-    surface: yup.number().required(),
-    roomLength: yup.number().required(),
-    width: yup.number().required(),
-    height: yup.number().required(),
-    danceCarpet: yup.string().required(),
-    mirror: yup.string().required(),
-    danceBar: yup.string().required(),
-    accomodation: yup.string().required(),
-    technicalStaff: yup.string().required(),
-    floor: yup.string().required(),
-    address: yup.string().required(),
-    latitude: yup.string().required(),
-    longitude: yup.string().required(),
+    name: !place ? yup.string().required(t('account:errors.required')) : null,
+    surface: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    roomLength: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    width: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    height: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    danceCarpet: yup.string().required(t('account:errors.required')),
+    mirror: yup.string().required(t('account:errors.required')),
+    danceBar: yup.string().required(t('account:errors.required')),
+    accomodation: yup.string().required(t('account:errors.required')),
+    technicalStaff: yup.string().required(t('account:errors.required')),
+    floor: yup.string().required(t('account:errors.required')),
+    address: yup.string().required(t('account:errors.required')),
+    latitude: yup.string().required(t('account:errors.required')),
+    longitude: yup.string().required(t('account:errors.required')),
     otherFloor: yup.string().when('floor', {
       is: 'other',
-      then: yup.string().required(),
+      then: yup.string().required(t('account:errors.required')),
     }),
   })
 }
 
-interface IPlaceForm {
+interface Props {
   place?: Espace
   onSubmit: (data: any) => Promise<any>
   isEditMode?: boolean
@@ -64,15 +76,11 @@ const getDefaultValues = (place) => {
   return placeAttributes
 }
 
-const PlaceForm = ({
-  place = null,
-  onSubmit,
-  isEditMode = false,
-}: IPlaceForm) => {
-  const isComplete = useIsComplete(place)
+const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
   const { errorToast } = useToast()
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
+  const isComplete = useIsComplete(place)
   const {
     register,
     errors,
@@ -81,8 +89,10 @@ const PlaceForm = ({
     formState,
     reset,
     handleSubmit,
+    trigger,
   } = useForm({
-    resolver: yupResolver(getSchema(place)),
+    mode: isComplete ? 'onSubmit' : 'onChange',
+    resolver: yupResolver(getSchema(place, t)),
     defaultValues: getDefaultValues(place),
   })
 
@@ -92,6 +102,12 @@ const PlaceForm = ({
     'latitude',
     'longitude',
   ])
+
+  useEffect(() => {
+    if (isEditMode) {
+      trigger()
+    }
+  }, [])
 
   const submitForm = (values) => {
     setLoading(true)
@@ -109,11 +125,6 @@ const PlaceForm = ({
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       <Box pb={{ base: 10, md: 20 }}>
-        {!isComplete && (
-          <Text alignSelf="flex-start" color="red.500" mb={6} pl={2.5}>
-            {t('form.notComplete')}
-          </Text>
-        )}
         <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
         <Box pb={8} px={2.5}>
           {!place && (
@@ -126,7 +137,11 @@ const PlaceForm = ({
             columnGap={5}
             rowGap={6}
           >
-            <FormField label={t('form.surface.label')} errors={errors.surface}>
+            <FormField
+              label={t('form.surface.label')}
+              errors={errors.surface}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <InputNumber name="surface" control={control} />
             </FormField>
             <FormField
@@ -135,13 +150,25 @@ const PlaceForm = ({
             >
               <InputNumber name="roomLength" control={control} />
             </FormField>
-            <FormField label={t('form.width.label')} errors={errors.width}>
+            <FormField
+              label={t('form.width.label')}
+              errors={errors.width}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <InputNumber name="width" control={control} />
             </FormField>
-            <FormField label={t('form.height.label')} errors={errors.height}>
+            <FormField
+              label={t('form.height.label')}
+              errors={errors.height}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <InputNumber name="height" control={control} />
             </FormField>
-            <FormField label={t('form.mirror.label')} errors={errors.mirror}>
+            <FormField
+              label={t('form.mirror.label')}
+              errors={errors.mirror}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <Select
                 name="mirror"
                 ref={register}
@@ -154,6 +181,7 @@ const PlaceForm = ({
             <FormField
               label={t('form.danceCarpet.label')}
               errors={errors.danceCarpet}
+              isComplete={isComplete && Boolean(place?.external_id)}
             >
               <Select
                 name="danceCarpet"
@@ -168,6 +196,7 @@ const PlaceForm = ({
             <FormField
               label={t('form.danceBar.label')}
               errors={errors.danceBar}
+              isComplete={isComplete && Boolean(place?.external_id)}
             >
               <Select
                 name="danceBar"
@@ -189,6 +218,7 @@ const PlaceForm = ({
               <FormField
                 label={t('form.accomodation.label')}
                 errors={errors.accomodation}
+                isComplete={isComplete && Boolean(place?.external_id)}
               >
                 <Select
                   name="accomodation"
@@ -202,6 +232,7 @@ const PlaceForm = ({
               <FormField
                 label={t('form.technicalStaff.label')}
                 errors={errors.technicalStaff}
+                isComplete={isComplete && Boolean(place?.external_id)}
               >
                 <Select
                   name="technicalStaff"
@@ -220,7 +251,11 @@ const PlaceForm = ({
               columnGap={5}
               w="100%"
             >
-              <FormField label={t('form.floor.label')} errors={errors.floor}>
+              <FormField
+                label={t('form.floor.label')}
+                errors={errors.floor}
+                isComplete={isComplete && Boolean(place?.external_id)}
+              >
                 <Select
                   name="floor"
                   ref={register}
@@ -239,6 +274,7 @@ const PlaceForm = ({
                   info={t('form.otherFloor.info')}
                   errors={errors.otherFloor}
                   gridColumn="2/5"
+                  isComplete={isComplete && Boolean(place?.external_id)}
                 >
                   <Input
                     name="otherFloor"
@@ -259,7 +295,11 @@ const PlaceForm = ({
             mb={10}
             px={2.5}
           >
-            <FormField label={t('form.about.label')} errors={errors.about}>
+            <FormField
+              label={t('form.about.label')}
+              errors={errors.about}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <Textarea
                 name="about"
                 ref={register}
@@ -268,7 +308,11 @@ const PlaceForm = ({
                 placeholder={t('form.about.placeholder')}
               />
             </FormField>
-            <FormField label={t('form.details.label')} errors={errors.details}>
+            <FormField
+              label={t('form.details.label')}
+              errors={errors.details}
+              isComplete={isComplete && Boolean(place?.external_id)}
+            >
               <Textarea
                 name="details"
                 ref={register}
@@ -295,6 +339,7 @@ const PlaceForm = ({
                 label={t('form.address.label')}
                 errors={errors.address}
                 flex={1}
+                isComplete={isComplete && Boolean(place?.external_id)}
               >
                 <InputLocation
                   name="address"

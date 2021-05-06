@@ -6,7 +6,7 @@
         "title": "Réservations"
     },
     "search": "Recherche",
-    "nb": "No.",
+    "ref": "Réf.",
     "slot": "{{nb}} créneau",
     "slots": "{{nb}} créneaux",
     "status": "Statut",
@@ -18,8 +18,8 @@
     "date": "Date(s)",
     "activity": "Activité",
     "detail": "Détails",
-    "requestNb": "Demande n°{{nb}}",
-    "bookingNb": "Réservation n°{{nb}}",
+    "requestNb": "Demande réf {{nb}}",
+    "bookingNb": "Réservation réf {{nb}}",
     "message": "Échanger avec le lieu",
     "messageCompany": "Échanger avec la compagnie",
     "cancel":  "Annuler la demande",
@@ -48,13 +48,16 @@
                 "booking": "Vous êtes sur le point d’annuler cette réservation. Voulez-vous continuer ?"
             },
             "confirm": "Confirmer l’annulation",
-            "back": "Non, fermer"
+            "back": "Non, fermer",
+            "error": "Une erreur est survenue, veuillez rafraichir la page",
+            "success": "L'annulation a bien été prise en compte"
         },
         "askcancel": {
             "title": "Demander l'annulation",
             "text": "Indiquez au lieu la raison pour laquelle vous devez annuler cette réservation. Vous recevrez une notification mail lorsqu’il procèdera à l’annulation.",
             "back": "Fermer",
             "confirm": "Envoyer",
+            "error": "Une erreur est survenue, veuillez rafraichir la page",
             "message": {
                 "label": "Votre message",
                 "error": "Champs requis",
@@ -66,7 +69,8 @@
             "text": "Vous êtes sur le point d'accepter la demande de réservation. Voulez-vous continuer ?",
             "back": "Non, fermer",
             "confirm": "Confirmer la demande",
-            "success": "La demande a bien été accepté, vous pouvez la retrouver dans la page Réservation"
+            "success": "La demande a bien été acceptée, vous pouvez la retrouver dans la page Réservations",
+            "error": "Une erreur est survenue, veuillez rafraichir la page"
         }
     },
     "history": {

@@ -35,11 +35,7 @@ const Conversation = ({ id, user, back }: Props) => {
       client.notifications
         .toggleNotif({ status: 'message', targetId: id })
         .then(() => {
-          queryClient.setQueryData(['myNotifications', { id }], {
-            request: 0,
-            message: 0,
-            booking: 0,
-          })
+          queryClient.refetchQueries(['myNotifications'])
         })
     },
   })
@@ -122,6 +118,7 @@ const Conversation = ({ id, user, back }: Props) => {
             spacing={5}
             alignItems="flex-start"
             p={5}
+            flex={1}
             overflow="auto"
             ref={listRef}
             onScroll={() => {

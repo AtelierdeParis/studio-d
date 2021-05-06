@@ -1195,8 +1195,11 @@
           "address",
           "zipCode",
           "city",
+          "country",
           "siret",
           "ape",
+          "phone",
+          "license",
           "type"
         ],
         "properties": {
@@ -1257,6 +1260,10 @@
             "default": false
           },
           "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "accepted": {
             "type": "boolean",
             "default": false
           },
@@ -1332,7 +1339,6 @@
                 "address",
                 "latitude",
                 "longitude",
-                "city",
                 "country"
               ],
               "properties": {
@@ -1423,9 +1429,6 @@
                 "published": {
                   "type": "boolean"
                 },
-                "city": {
-                  "type": "string"
-                },
                 "bookings": {
                   "type": "array",
                   "items": {
@@ -1449,6 +1452,9 @@
                 "slug": {
                   "type": "string"
                 },
+                "city": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -1467,10 +1473,6 @@
           },
           "external_id": {
             "type": "integer"
-          },
-          "accepted": {
-            "type": "boolean",
-            "default": false
           }
         }
       },
@@ -1484,8 +1486,11 @@
           "address",
           "zipCode",
           "city",
+          "country",
           "siret",
           "ape",
+          "phone",
+          "license",
           "type"
         ],
         "properties": {
@@ -1519,6 +1524,10 @@
             "default": false
           },
           "blocked": {
+            "type": "boolean",
+            "default": false
+          },
+          "accepted": {
             "type": "boolean",
             "default": false
           },
@@ -1591,10 +1600,6 @@
           },
           "external_id": {
             "type": "integer"
-          },
-          "accepted": {
-            "type": "boolean",
-            "default": false
           },
           "created_by": {
             "type": "string"

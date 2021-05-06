@@ -7,14 +7,19 @@ import MarkdownRenderer from '~components/MarkdownRenderer'
 import { ROUTE_CGU } from '~constants'
 import { Page } from '~typings/api'
 import { getPage } from '~utils/page'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   page: Page
 }
 
 const CGU = ({ page }: Props) => {
+  const { t } = useTranslation('common')
+
   return (
     <>
+      <NextSeo title={t('title.cgu')} />
       <Heading
         as="h1"
         textStyle="h1"

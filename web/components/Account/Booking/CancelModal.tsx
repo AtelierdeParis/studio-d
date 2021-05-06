@@ -4,6 +4,7 @@ import { client } from '~api/client-api'
 import { Booking } from '~typings/api'
 import { Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
 import Delete from 'public/assets/img/delete.svg'
 import { useCurrentUser } from '~hooks/useCurrentUser'
@@ -19,22 +20,26 @@ const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
   const { data: user } = useCurrentUser()
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('booking')
+  const { successToast, errorToast } = useToast()
 
   const onConfirm = () => {
-    const isPlace = user.type === 'place'
+    const isBooking = type === 'booking'
     setLoading(true)
     return client.bookings
       .bookingsUpdate(booking?.id, {
         // @ts-ignore
-        status: isPlace ? `${type}canceledbyplace` : `requestcanceled`,
+        status:
+          user.type === 'place' ? `${type}canceledbyplace` : `requestcanceled`,
       })
       .then(() => {
         queryClient.refetchQueries([
           'myBookings',
-          isPlace ? 'booking' : 'request',
+          isBooking ? 'booking' : 'request',
         ])
         setSelected(null)
+        successToast(t('modal.cancel.success'))
       })
+      .catch(() => errorToast(t('modal.cancel.error')))
       .finally(() => setLoading(false))
   }
 

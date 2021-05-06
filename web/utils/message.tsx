@@ -87,13 +87,14 @@ export const getHistoryInfo = (status, booking, type) => {
           />
         ),
       }
-    case 'canceled':
+    case 'requestcanceled':
       return {
         colorCircle: 'red.600',
         color: 'red.600',
         text: <Trans i18nKey={`booking:history.${type}.canceledByYou`} />,
       }
-    case 'canceledbyplace':
+    case 'requestcanceledbyplace':
+    case 'bookingcanceledbyplace':
       return {
         colorCircle: 'red.600',
         color: 'red.600',

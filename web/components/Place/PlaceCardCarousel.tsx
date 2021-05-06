@@ -33,7 +33,7 @@ const PlaceCardCarousel = ({ images = [], showNumber = false }) => {
         }}
         pos="absolute"
         right={4}
-        bottom={4}
+        bottom={2}
         color="white"
         zIndex={6}
         fontFamily="mabry medium"

@@ -8,14 +8,18 @@ import Loading from '~components/Loading'
 import { useMyPlaces } from '~hooks/useMyPlaces'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
-interface IAccountPlace {
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
+interface Props {
   user: UsersPermissionsUser
 }
 
-const AccountPlace = ({ user }: IAccountPlace) => {
+const AccountPlace = ({ user }: Props) => {
+  const { t } = useTranslation('account')
   const { data: places, isLoading } = useMyPlaces()
   return (
     <Loading isLoading={isLoading} isCentered>
+      <NextSeo title={t('title.places')} />
       {places?.length === 0 ? <InfoPlace /> : <PlaceList places={places} />}
     </Loading>
   )

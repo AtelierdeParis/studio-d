@@ -1,17 +1,17 @@
 "use strict";
-
 const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">studiod-danse.fr</a>`;
 
 const signatureAdmin = `Bonne journée`;
 
 const getFooter = (type) => {
-  return `Vous recevez cet email car vous êtes inscrit•e en tant que ${
+  return `Vous recevez cet email car vous êtes inscrit·e en tant que ${
     type === "place" ? "lieu" : "compagnie"
   } sur la plateforme <a href="${
     process.env.FRONT_URL
-  }">studiod-danse.fr</a>. Explication de qui contacter en cas d’erreur, etc...`;
+  }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${
+    process.env.FRONT_URL
+  }/contact">nous contacter</a>`;
 };
-
 const sendEmail = async (
   options = {},
   template = {},
@@ -32,19 +32,33 @@ const sendEmail = async (
   if (!entity)
     return console.log("Template not found", "id", template.templateId);
 
-  await strapi.plugins["email-designer"].services.email.sendTemplatedEmail(
-    options,
-    {
-      ...template,
-      templateId: entity.id,
-    },
-    {
-      signature: isAdmin ? signatureAdmin : signature,
-      footer: data.user_type ? getFooter(data.user_type) : "",
-      url_site: process.env.FRONT_URL,
-      ...data,
-    }
-  );
+  await strapi.plugins["email-designer"].services.email
+    .sendTemplatedEmail(
+      options,
+      {
+        ...template,
+        templateId: entity.id,
+      },
+      {
+        signature: isAdmin ? signatureAdmin : signature,
+        footer: data.user_type ? getFooter(data.user_type) : "",
+        url_site: process.env.FRONT_URL,
+        ...data,
+      }
+    )
+    .then((res) => {
+      console.log(
+        `Email with id ${template.templateId} has been sent successfully`,
+        options.to,
+        res
+      );
+    })
+    .catch((err) => {
+      console.log(
+        `Error trying to send email with id ${template.templateId}`,
+        err
+      );
+    });
 };
 
 module.exports = {

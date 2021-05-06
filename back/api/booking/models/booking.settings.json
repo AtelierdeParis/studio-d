@@ -12,8 +12,8 @@
   },
   "attributes": {
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "booking"
+      "via": "booking",
+      "collection": "disponibility"
     },
     "status": {
       "type": "enumeration",
@@ -32,8 +32,8 @@
       "collection": "message"
     },
     "espace": {
-      "model": "espace",
-      "via": "bookings"
+      "via": "bookings",
+      "model": "espace"
     },
     "place": {
       "plugin": "users-permissions",

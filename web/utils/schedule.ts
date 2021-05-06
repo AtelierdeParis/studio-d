@@ -91,8 +91,8 @@ export const createOldEvents = (
   disponibilities: Disponibility[] = [],
 ): ScheduleEvent[] => {
   return disponibilities
-    .filter((dispo) => dispo.status !== 'past')
-    .map((dispo) => {
+    .filter((dispo) => dispo.status !== 'past' && dispo.status !== 'canceled')
+    .map((dispo, index, array) => {
       return createScheduleEventObj({
         id: dispo.id,
         start: dispo.start,
@@ -100,7 +100,7 @@ export const createOldEvents = (
         when: dispo.when,
         status: dispo.status,
         type: dispo.type,
-        hasEventSameDay: checkIfEventSameDay(dispo, disponibilities),
+        hasEventSameDay: checkIfEventSameDay(dispo, array),
       })
     })
 }

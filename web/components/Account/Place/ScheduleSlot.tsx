@@ -51,7 +51,7 @@ const getStyle = (status) => {
 }
 
 const Event = ({ status = null, when = null, range = null, id = null }) => {
-  const { setToDelete, eventsIdToDelete } = useContext(ScheduleContext)
+  const { setToDelete, eventsIdToDelete, place } = useContext(ScheduleContext)
   const isPeriod = useMemo(() => {
     if (!range) return null
     return !isSameDay(range.start, range.end)
@@ -73,10 +73,32 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       cursor={id && 'pointer'}
       onClick={() => {
         if (!id) return setToDelete([])
+        const dispo = place.disponibilities.find((dispo) => dispo.id === id)
+        if (!dispo) return
+
+        const disposSameBooking = place.disponibilities
+          .filter(
+            (el) =>
+              el.booking && dispo.booking && el.booking.id === dispo.booking.id,
+          )
+          .map((dispo) => dispo.id)
+
         if (isSelected) {
-          setToDelete(eventsIdToDelete.filter((eventId) => eventId !== id))
+          if (disposSameBooking.length > 0) {
+            setToDelete(
+              eventsIdToDelete.filter(
+                (eventId) => !disposSameBooking.includes(eventId),
+              ),
+            )
+          } else {
+            setToDelete(eventsIdToDelete.filter((eventId) => eventId !== id))
+          }
         } else {
-          setToDelete([...eventsIdToDelete, id])
+          if (disposSameBooking.length > 0) {
+            setToDelete([...eventsIdToDelete, ...disposSameBooking])
+          } else {
+            setToDelete([...eventsIdToDelete, id])
+          }
         }
       }}
       borderColor={isSelected ? 'blue.500' : 'transparent'}
@@ -87,7 +109,7 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
   )
 }
 
-const getSlot = ({ hasEventSameDay, ...props }: IScheduleSlot) => {
+const getSlot = ({ hasEventSameDay, ...props }: Props) => {
   switch (props.when) {
     case ScheduleEventWhen.MORNING:
       return (
@@ -115,7 +137,7 @@ const getSlot = ({ hasEventSameDay, ...props }: IScheduleSlot) => {
   }
 }
 
-interface IScheduleSlot {
+interface Props {
   id?: number
   when: ScheduleEventWhen
   status?: 'selected' | 'available'
@@ -123,7 +145,7 @@ interface IScheduleSlot {
   range: { start: Date; end: Date }
 }
 
-const ScheduleSlot = (props: IScheduleSlot) => {
+const ScheduleSlot = (props: Props) => {
   return (
     <VStack spacing="4px" h="100%" bgColor="blue.100" w="100%">
       {getSlot(props)}

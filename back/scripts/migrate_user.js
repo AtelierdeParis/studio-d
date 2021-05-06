@@ -2,24 +2,6 @@ const strapiLib = import("strapi");
 const csv = require("csv-parser");
 const fs = require("fs");
 const crypto = require("crypto");
-// const user = {
-//   provider: "local",
-//   confirmed: true,
-//   blocked: false,
-//   role: 1,
-//   city: "Paris",
-//   country: "France",
-//   address: "test address",
-//   zipCode: "91100",
-//   structureName: "My structure",
-//   email: "migration.test@live.fr",
-//   username: "migration.test@live.fr",
-//   type: "company",
-//   firstname: "Guillaume",
-//   lastname: "Esnault",
-//   siret: "siret test",
-//   ape: "12345",
-// };
 
 const mapping_country = {
   FR: "France",
@@ -144,10 +126,6 @@ const start = async () => {
               }
             }
 
-            if (checkProp("status")) {
-              user.blocked = row.status === "disabled";
-            }
-
             if (checkProp("_Siret", "siret")) {
               user.siret = row._Siret;
             }
@@ -164,33 +142,52 @@ const start = async () => {
                 .toUpperCase();
             }
 
-            user.license = row["_Numéro de licence entrepreneur spectacle"]
-              .toLowerCase()
-              .replace(/licences?/g, ",")
-              .replace(/cat[ée]gorie/g, ",")
-              .replace(/cat/g, ",")
-              .replace(/et/g, ",")
-              .replace(/\r/g, ",")
-              .replace(/\n/g, ",")
-              .replace(/;/g, "")
-              .replace(/\//g, ",")
-              .replace(/|/g, "")
-              .replace(/ [0-9]{1,2}-/g, ",")
-              .replace(/  /g, ",")
-              .replace(/ /g, "")
-              .replace(/n°/g, "")
-              .replace(/,[0-9]{1}-/g, ",")
-              .replace(/:/g, "")
-              .replace(/^[0-9]{1,2}(-|,)/, "")
-              .replace(/-/g, "")
-              .replace(/&[0-9]/g, ",")
-              .replace(/,{2,9}/g, ",")
-              .replace(/,[0-9],/g, ",")
-              .replace(/^,/, "")
-              .replace(/,$/, "")
-              .toUpperCase();
-            user.phone = row.phone_number;
-            user.website = row["_Site internet"];
+            if (
+              checkProp("_Numéro de licence entrepreneur spectacle", "license")
+            ) {
+              user.license = row["_Numéro de licence entrepreneur spectacle"]
+                .toLowerCase()
+                .replace(/licences?/g, ",")
+                .replace(/cat[ée]gorie/g, ",")
+                .replace(/cat/g, ",")
+                .replace(/et/g, ",")
+                .replace(/\r/g, ",")
+                .replace(/\n/g, ",")
+                .replace(/;/g, "")
+                .replace(/\//g, ",")
+                .replace(/|/g, "")
+                .replace(/ [0-9]{1,2}-/g, ",")
+                .replace(/  /g, ",")
+                .replace(/ /g, "")
+                .replace(/n°/g, "")
+                .replace(/,[0-9]{1}-/g, ",")
+                .replace(/:/g, "")
+                .replace(/^[0-9]{1,2}(-|,)/, "")
+                .replace(/-/g, "")
+                .replace(/&[0-9]/g, ",")
+                .replace(/,{2,9}/g, ",")
+                .replace(/,[0-9],/g, ",")
+                .replace(/^,/, "")
+                .replace(/,$/, "")
+                .toUpperCase();
+            }
+
+            if (checkProp("phone_number", "phone")) {
+              user.phone = row.phone_number;
+            }
+
+            if (row["_Site internet"]) {
+              const match = row["_Site internet"].match(
+                /(https?:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+              );
+              if (!match) {
+                user.website = "";
+              } else {
+                user.website = row["_Site internet"];
+              }
+            } else {
+              user.website = "";
+            }
 
             const socialReason =
               row[

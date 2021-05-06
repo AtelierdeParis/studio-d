@@ -6,10 +6,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import PlaceOrCompany from '~components/Signup/PlaceOrCompany'
 import SignupSteps from '~components/Signup/SignupSteps'
 import { requireAuth } from '~utils/auth'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 const Home: NextPage = () => {
+  const { t } = useTranslation('common')
   return (
     <Box>
+      <NextSeo title={t('title.signup')} />
       <SignupSteps step={1} />
       <PlaceOrCompany />
     </Box>

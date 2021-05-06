@@ -65,7 +65,7 @@ const RightAsideMessage = ({ bookings, user }: Props) => {
                 <Box pl={3} py={4} w="100%">
                   <Flex>
                     <Text fontWeight="500" mr={1} fontFamily="mabry medium">
-                      {booking.id},
+                      Réf. {booking.id},
                     </Text>
                     <DateBooking dispos={booking.disponibilities} />
                   </Flex>

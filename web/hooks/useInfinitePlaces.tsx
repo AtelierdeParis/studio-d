@@ -2,10 +2,7 @@ import { useInfiniteQuery } from 'react-query'
 import { client } from '~api/client-api'
 import { Espaces } from '~typings/api'
 
-export const useInfinitePlaces = (
-  nbPlaces,
-  params: Espaces.EspacesList.RequestQuery,
-) => {
+export const useInfinitePlaces = (params: Espaces.EspacesList.RequestQuery) => {
   return useInfiniteQuery(
     ['places', params],
     ({ pageParam = 0 }) => {
@@ -17,9 +14,8 @@ export const useInfinitePlaces = (
         .then((res) => res.data)
     },
     {
-      enabled: Boolean(nbPlaces),
       getNextPageParam: (lastPage, pages) => {
-        if (pages.flat().length < nbPlaces) return pages.length
+        if (lastPage.length >= params._limit) return pages.length
       },
     },
   )

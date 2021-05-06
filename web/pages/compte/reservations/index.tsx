@@ -8,16 +8,20 @@ import { requireAuth } from '~utils/auth'
 import Loading from '~components/Loading'
 import { useMyBookings } from '~hooks/useMyBookings'
 import { UsersPermissionsUser } from '~typings/api'
+import { NextSeo } from 'next-seo'
+import { useTranslation } from 'next-i18next'
 
 interface Props {
   user: UsersPermissionsUser
 }
 
 const AccountBooking = ({ user }: Props) => {
+  const { t } = useTranslation('account')
   const { data: bookings, isLoading } = useMyBookings('booking')
 
   return (
     <Loading isLoading={isLoading} isCentered>
+      <NextSeo title={t('title.bookings')} />
       {bookings?.length === 0 ? (
         <InfoBooking user={user} />
       ) : (

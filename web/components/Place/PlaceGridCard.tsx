@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import {
   Box,
   Flex,
@@ -15,23 +15,23 @@ import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
 import Tag from '~components/Tag'
 import { DisponibilityStatus } from '~@types/disponibility.d'
-import addWeeks from 'date-fns/addWeeks'
 import { SearchQuery } from '~utils/search'
-import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
 import useDispoInRange from '~hooks/useDispoInRange'
+import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
+import addWeeks from 'date-fns/addWeeks'
 
 interface Props {
   place: Espace
-  searchQuery?: SearchQuery
+  searchParams?: SearchQuery
 }
 
-const PlaceGridCard = ({ place, searchQuery }: Props) => {
+const PlaceGridCard = ({ place, searchParams }: Props) => {
   const { t } = useTranslation('place')
 
   const disposInRange = useDispoInRange(
     place?.disponibilities,
-    searchQuery?.['disponibilities.start_gte'],
-    searchQuery?.['disponibilities.end_lte'],
+    searchParams?.['disponibilities.start_gte'],
+    searchParams?.['disponibilities.end_lte'],
   )
 
   const disposThisWeek = useNbDispoPerWeek(
@@ -99,44 +99,41 @@ const PlaceGridCard = ({ place, searchQuery }: Props) => {
                 {t('card.noDispo')}
               </Tag>
             )}
-            {disposThisWeek?.length > 0 && (
+            {disposInRange?.length > 0 && (
               <Tag
-                status={DisponibilityStatus.AVAILABLE}
+                status={disposInRange?.length <= 4 ? 'nextweek' : 'available'}
                 alignSelf="flex-start"
                 mt={1.5}
               >
-                {t(
-                  `card.${disposInRange ? 'searchDispo' : 'thisWeek'}${
-                    disposThisWeek?.length > 1 ? 's' : ''
-                  }`,
-                  {
-                    nb: disposThisWeek.length,
-                  },
-                )}
+                {t(`card.searchDispo${disposInRange?.length > 1 ? 's' : ''}`, {
+                  nb: disposInRange.length,
+                })}
               </Tag>
             )}
-            {disposThisWeek?.length === 0 && disposNextWeek?.length > 0 && (
-              <Tag
-                status={DisponibilityStatus.PENDING}
-                alignSelf="flex-start"
-                mt={1.5}
-              >
-                {t(
-                  `card.${disposInRange ? 'searchDispo' : 'nextWeek'}${
-                    disposNextWeek?.length > 1 ? 's' : ''
-                  }`,
-                  {
+            {!disposInRange && disposThisWeek.length > 0 && (
+              <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
+                {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
+                  nb: disposThisWeek.length,
+                })}
+              </Tag>
+            )}
+            {!disposInRange &&
+              disposThisWeek?.length === 0 &&
+              disposNextWeek?.length > 0 && (
+                <Tag status={'nextweek'} alignSelf="flex-start" mt={1.5}>
+                  {t(`card.nextWeek${disposNextWeek?.length > 1 ? 's' : ''}`, {
                     nb: disposNextWeek.length,
-                  },
-                )}
-              </Tag>
-            )}
+                  })}
+                </Tag>
+              )}
             <Box fontSize="sm" pt={6}>
               <Flex w="100%">
                 <Text color="gray.500" pr={9}>
                   {t('card.city')}
                 </Text>
-                <Text isTruncated>{place.city}</Text>
+                <Text isTruncated textTransform="capitalize">
+                  {place.city?.name}
+                </Text>
               </Flex>
               <Divider my={2} borderColor="gray.100" />
               <Flex justifyContent="space-between" alignItems="center">

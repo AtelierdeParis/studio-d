@@ -25,14 +25,15 @@ const check = (obj, prop, errors) => {
 };
 
 const uploadFile = (url, options) => {
+  if (url === "/img/default.jpg") return null;
   const formData = new FormData({ maxDataSize: 9999999999 });
   formData.append("ref", options.ref);
   formData.append("refId", options.refId);
   formData.append("field", options.field);
   formData.append(`files`, request(url));
   const formHeaders = formData.getHeaders();
-  axios
-    .post("http://localhost:1337/upload", formData, {
+  return axios
+    .post("https://studio-d-lafs6.ondigitalocean.app/strapi/upload", formData, {
       headers: {
         ...formHeaders,
       },
@@ -43,7 +44,7 @@ const uploadFile = (url, options) => {
       console.log(`[UPLOADED] ${options.refId}`);
     })
     .catch((err) => {
-      console.log(`[ERROR UPLOAD] ${options.refId}`, err);
+      console.log(`[ERROR UPLOAD] ${options.refId}`, err.response.data);
     });
 };
 
@@ -57,14 +58,14 @@ const start = async () => {
       fs.createReadStream(PATH_MIGRATION_CSV)
         .pipe(csv({ separator: ";" }))
         .on("data", (data) => rows.push(data))
-        .on("end", () => {
-          rows.map(async (row) => {
+        .on("end", async () => {
+          for (let index = 0; index < rows.length; index++) {
+            const row = rows[index];
+
             const errors = [];
             const place = {
               external_id: Object.entries(row)[0][1],
             };
-
-            // Test place
 
             const checkProp = (prop, mappingProp = null) => {
               const isCheked = check(row, prop, errors);
@@ -73,7 +74,7 @@ const start = async () => {
             };
 
             if (checkProp("city", "city")) {
-              place.city = row.city;
+              place.city = row.city.toLowerCase();
             }
 
             if (checkProp("country") && mapping_country[row.country]) {
@@ -90,10 +91,6 @@ const start = async () => {
 
             if (checkProp("location", "address")) {
               place.address = row.location;
-            }
-
-            if (checkProp("title", "name")) {
-              place.name = row.title;
             }
 
             if (checkProp("title", "name")) {
@@ -133,7 +130,7 @@ const start = async () => {
               throw new Error("Owner not found");
             }
 
-            place.users_permissions_user = owner.id;
+            place.users_permissions_user = 8;
 
             const isAlreadyCreated = await strapi
               .query("espace")
@@ -158,9 +155,9 @@ const start = async () => {
               await strapi
                 .query("espace")
                 .update({ external_id: place.external_id }, place)
-                .then((res) => {
+                .then(async (res) => {
                   console.log(`[UPDATED] ${place.name}`);
-                  uploadFile(row.cover, {
+                  await uploadFile(row.cover, {
                     ref: "espace",
                     refId: res.id,
                     field: "images",
@@ -170,7 +167,7 @@ const start = async () => {
                   console.log("[ERROR] update failed:", err, place)
                 );
             }
-          });
+          }
         });
     });
 };

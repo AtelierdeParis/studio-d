@@ -88,7 +88,6 @@ interface IMap extends BoxProps {
   focusedPlace?: string
   icon?: Leaflet.IconOptions
   zoomControl?: boolean
-  attributionControl?: boolean
   onMarkerClick?: (id: string) => void
 }
 
@@ -97,7 +96,6 @@ const Map = ({
   focusedPlace,
   icon,
   zoomControl = true,
-  attributionControl = false,
   onMarkerClick,
   ...rest
 }: IMap) => {
@@ -107,9 +105,8 @@ const Map = ({
         center={null}
         zoom={null}
         zoomControl={zoomControl}
-        attributionControl={attributionControl}
         scrollWheelZoom={false}
-        style={{ height: '100%', width: '100%', flexGrow: 1 }}
+        style={{ height: '100%', width: '100%', flexGrow: 1, zIndex: 10 }}
       >
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

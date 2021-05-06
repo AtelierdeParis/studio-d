@@ -72,7 +72,7 @@ const PlaceCard = ({ place, setFocus }: Props) => {
 
             <SimpleGrid columns={2} pt={4} w="fit-content" columnGap={2}>
               <Text color="gray.500">{t('card.city')}</Text>
-              <Text>{place.city}</Text>
+              <Text textTransform="capitalize">{place.city.name}</Text>
               <Text color="gray.500">{t('card.surface')}</Text>
               <Text>{`${place.surface}m²`}</Text>
               <Text color="gray.500">{t('card.dim')}</Text>

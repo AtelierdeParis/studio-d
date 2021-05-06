@@ -1,14 +1,17 @@
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useMemo } from 'react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import frLocale from '@fullcalendar/core/locales/fr'
 import { Box, Flex, Text, SimpleGrid } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
+import { checkCurrentSearch } from '~utils/search'
 import BookingScheduleSlot from '~components/Place/BookingScheduleSlot'
 import BookingFilledUntil from '~components/Place/BookingFilledUntil'
 import { ScheduleEvent } from '~@types/schedule-event.d'
+import min from 'date-fns/min'
+import isBefore from 'date-fns/isBefore'
 
 const view = createPlugin({
   views: {
@@ -33,9 +36,28 @@ interface Props {
   events: ScheduleEvent[]
 }
 
-const BookingScheduleWeek = ({ place, events }: Props) => {
+const BookingScheduleWeek = ({ place, events = [] }: Props) => {
   const scheduleRef = useRef(null)
   const [dateRange, setDateRange] = useState({ start: null, end: null })
+  const initialDate = useMemo(() => {
+    if (events.length === 0) return new Date()
+    let array = [...events]
+    const prevPath = sessionStorage.getItem('sd-prevPath')
+
+    const hasSearch = checkCurrentSearch()
+    if (hasSearch) {
+      const url = new URL(prevPath, process.env.NEXT_PUBLIC_FRONT_URL)
+      const startDate = url.searchParams.get('startDate')
+      if (startDate) {
+        array = events.filter((evt) => {
+          return !isBefore(evt.start, new Date(startDate))
+        })
+        if (array.length === 0) return new Date()
+      }
+    }
+
+    return min(array.map(({ start }) => start))
+  }, [events])
 
   return (
     <Flex
@@ -50,6 +72,7 @@ const BookingScheduleWeek = ({ place, events }: Props) => {
         ref={scheduleRef}
         plugins={[dayGridPlugin, interactionPlugin, view]}
         initialView="custom"
+        initialDate={initialDate}
         datesSet={({ start, end }) => {
           setDateRange({ start, end })
         }}

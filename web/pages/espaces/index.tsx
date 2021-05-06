@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react'
 import PlaceSearch from '~components/Place/PlaceSearch'
 import { useInfinitePlaces } from '~hooks/useInfinitePlaces'
-import { useNbPlace } from '~hooks/useNbPlace'
 import { useScrollBottom } from '~hooks/useScrollBottom'
 import PlaceGrid from '~components/Place/PlaceGrid'
 import PlaceList from '~components/Place/PlaceList'
@@ -26,6 +25,9 @@ import { useQueryClient } from 'react-query'
 import NoResult from '~components/Place/NoResult'
 import MobileMap from '~components/Place/MobileMap'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
+import { formatSearchToQuery } from '~utils/search'
+import { ROUTE_PLACES } from '~constants'
 
 const styleSelected = {
   color: 'blue.500',
@@ -41,12 +43,13 @@ const Places = () => {
   const form = useForm({
     defaultValues: router.query,
   })
-  const queryClient = useQueryClient()
-  const searchQuery = useMemo(() => formatSearch(form.getValues()), [
-    form.getValues(),
-  ])
 
-  const { data: nbPlace, isLoading: countLoading } = useNbPlace(searchQuery)
+  const [searchParams, setSearchParams] = useState<any>({})
+
+  useEffect(() => {
+    setSearchParams(formatSearch(router.query))
+  }, [])
+  const queryClient = useQueryClient()
 
   const {
     data: places,
@@ -54,10 +57,12 @@ const Places = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
-  } = useInfinitePlaces(nbPlace, {
+  } = useInfinitePlaces({
     _limit: isGridView ? 12 : 6,
-    ...searchQuery,
+    ...searchParams,
   })
+  const nbPlaces = useMemo(() => places?.pages?.flat().length, [places?.pages])
+  const isPlural = useMemo(() => nbPlaces > 1, [nbPlaces])
 
   useEffect(() => {
     if (isMobile) setGridView(true)
@@ -73,26 +78,53 @@ const Places = () => {
     isGridView,
   )
 
+  const onSubmit = (data) => {
+    let forceSort
+    if (
+      !searchParams['disponibilities.start_gte'] &&
+      Boolean(data?.startDate)
+    ) {
+      forceSort = true
+      form.setValue('sortBy', 'nbDispoDesc')
+    }
+    const newSearch = formatSearch(data, forceSort)
+
+    setSearchParams(newSearch)
+
+    router.push({
+      pathname: ROUTE_PLACES,
+      query: formatSearchToQuery(data),
+    })
+  }
+
   return (
     <Container px={0}>
+      <NextSeo title={t('common:title.places')} />
       <FormProvider {...form}>
-        <PlaceSearch />
-        {!countLoading && nbPlace === 0 ? (
+        <PlaceSearch onSubmit={onSubmit} />
+        {!isLoading && !isFetching && places?.pages?.flat().length === 0 ? (
           <NoResult />
         ) : (
           <>
             <MobileMap places={places?.pages?.flat()} />
             <Flex justifyContent="space-between" pb={4} alignItems="center">
               <Flex alignItems="center">
-                {nbPlace > 0 && (
+                {nbPlaces > 0 && (
                   <>
                     <Arrow />
                     <Text textStyle="h2" pl={4}>
-                      {t('search.nbPlaces', {
-                        nb: searchQuery?.['disponibilities.start_gte']
-                          ? places?.pages?.flat().length
-                          : nbPlace,
-                      })}
+                      {t(
+                        `search.${
+                          Object.keys(router.query).filter(
+                            (k) => k !== 'sortBy',
+                          ).length > 0
+                            ? 'nbPlacesWithDispo'
+                            : 'nbPlace'
+                        }${isPlural ? 's' : ''}`,
+                        {
+                          nb: nbPlaces,
+                        },
+                      )}
                     </Text>
                   </>
                 )}
@@ -152,7 +184,7 @@ const Places = () => {
             </Flex>
             {isGridView ? (
               <PlaceGrid
-                searchQuery={searchQuery}
+                searchParams={searchParams}
                 places={places?.pages?.flat()}
                 isFetching={isFetching}
                 isLoading={isLoading}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Espace } from '~typings/api'
 import { ROUTE_ACCOUNT_ADD_PLACES } from '~constants'
 import Link from '~components/Link'
@@ -6,16 +6,24 @@ import { Box, Button, Text, Flex, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Add from 'public/assets/img/add.svg'
 import PlaceListItem from '~components/Account/Place/PlaceListItem'
+import MigrationMessage from '~components/MigrationMessage'
 
-interface IPlaceList {
+interface Props {
   places: Espace[]
 }
 
-const PlaceList = ({ places }: IPlaceList) => {
+const PlaceList = ({ places }: Props) => {
   const { t } = useTranslation('place')
+  const [isVisible, setVisible] = useState(false)
 
   return (
     <Box py={{ base: 4, md: 8 }}>
+      {isVisible && (
+        <MigrationMessage
+          title={t('list.migration.title')}
+          message={t('list.migration.message')}
+        />
+      )}
       <Flex
         alignItems="center"
         pb={4}
@@ -42,7 +50,7 @@ const PlaceList = ({ places }: IPlaceList) => {
       </Flex>
       <VStack alignItems="flex-start" spacing={0}>
         {places.map((place) => (
-          <PlaceListItem place={place} key={place.id} />
+          <PlaceListItem place={place} key={place.id} setVisible={setVisible} />
         ))}
       </VStack>
     </Box>

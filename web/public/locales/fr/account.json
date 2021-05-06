@@ -1,4 +1,14 @@
 {
+    "title": {
+        "actus": "Les actualités",
+        "info": "Mes informations",
+        "dashboard": "Tableau de bord",
+        "requests": "Mes demandes",
+        "bookings": "Mes réservations",
+        "message": "Messagerie",
+        "createPlace": "Créer un espace",
+        "places": "Mes espaces"
+    },
     "myAccount": "Mon compte",
     "dashboard": "Tableau de bord",
     "info": "Mes informations",
@@ -26,6 +36,10 @@
     },
     "seePlaces": "Voir les espaces",
     "information": {
+        "migration": {
+            "title": "Bienvenue sur le nouveau StudioD",
+            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet  à la nouvelle interface."
+        },
         "username": "Identifiants",
         "email": {
             "label": "Votre adresse email"
@@ -136,6 +150,13 @@
         "booked": "A venir",
         "canceled": "Annulée",
         "past": "Passée",
-        "occupied": "En cours"
+        "occupied": "En cours",
+        "askcancel": "Ann. demandée",
+        "newtweek": "Le semaine prochaine"
+    },
+    "errors": {
+        "required": "Champs requis",
+        "min": "La taille minimale doit être de {{ min }}",
+        "max": "La taille maximale doit être de {{ max }}"
     }
 }

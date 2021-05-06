@@ -1,5 +1,12 @@
 "use strict";
 
+function truncateString(str, num) {
+  if (str.length <= num) {
+    return str;
+  }
+  return str.slice(0, num) + "...";
+}
+
 module.exports = {
   // Send email notification if message is unread
   "*/5 * * * *": async () => {
@@ -23,7 +30,7 @@ module.exports = {
 
         const isPlace = lastMessage.author === "place";
         await knex("messages")
-          .where({ place: 63, company: 60 })
+          .where({ place, company })
           .update({ notified: true });
 
         // Send email to the last user who didn't see the last messages
@@ -35,10 +42,18 @@ module.exports = {
             templateId: "new-message",
           },
           {
-            user_type: "XXXX",
-            user_name: "XXXX",
-            ref: "1",
-            message: lastMessage.message,
+            user_type: lastMessage.author,
+            user_name: isPlace
+              ? lastMessage.place.firstname
+              : lastMessage.company.firstname,
+            from: isPlace
+              ? lastMessage.company.firstname
+              : lastMessage.place.firstname,
+            structure: isPlace
+              ? lastMessage.place.structureName
+              : lastMessage.company.structureName,
+            user_id: isPlace ? lastMessage.company.id : lastMessage.place.id,
+            message: truncateString(lastMessage.message, 200),
           }
         );
       });

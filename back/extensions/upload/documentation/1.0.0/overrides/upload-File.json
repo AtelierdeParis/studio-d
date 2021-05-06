@@ -181,7 +181,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Document deleted"
+            "description": "Document deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadFile"
+                }
+              }
+            }
           }
         }
       }

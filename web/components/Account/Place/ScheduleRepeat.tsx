@@ -29,7 +29,12 @@ const ScheduleRepeat = ({ control }: IScheduleRepeat) => {
     const eventRepeatedOnAnother = newEvents.some(
       (event) => event.extendedProps.hasEventSameDay,
     )
-    if (eventRepeatedOnAnother && !errors.repeatNb && !errors.repeatType) {
+    if (
+      repeat &&
+      eventRepeatedOnAnother &&
+      !errors.repeatNb &&
+      !errors.repeatType
+    ) {
       setError('repeatNb', {
         type: 'manual',
       })

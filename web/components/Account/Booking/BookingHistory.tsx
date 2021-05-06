@@ -16,13 +16,7 @@ const BookingHistory = ({ booking, type }: Props) => {
   const { t } = useTranslation('booking')
 
   return (
-    <Box
-      w="100%"
-      borderTop="1px solid"
-      borderColor={{ base: 'gray.100', md: 'transparent' }}
-      pt={{ base: 5, md: 0 }}
-      mt={{ base: 5, md: 0 }}
-    >
+    <Box w="100%" pt={{ base: 5, md: 0 }}>
       <Text
         fontFamily="mabry medium"
         fontWeight="500"

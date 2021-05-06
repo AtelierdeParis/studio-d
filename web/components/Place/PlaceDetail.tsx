@@ -27,6 +27,8 @@ import Compass from 'public/assets/img/compass.svg'
 import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
+import axios from 'axios'
+
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
 interface Props {
@@ -40,6 +42,7 @@ const PlaceDetail = ({ place }: Props) => {
   return (
     <Box>
       <PlaceHeader place={place} />
+
       <Container px={{ base: 3, lg: 5 }}>
         <Stack
           direction={{ base: 'column-reverse', lg: 'row' }}
@@ -146,10 +149,13 @@ const PlaceDetail = ({ place }: Props) => {
                         colorScheme="gray"
                         fontSize="md"
                         onClick={() => {
-                          saveAs(
-                            process.env.NEXT_PUBLIC_BACK_URL + file.url,
-                            file.name,
-                          )
+                          axios({
+                            url: file.url,
+                            method: 'GET',
+                            responseType: 'blob',
+                          }).then(() => {
+                            saveAs(file.url, file.name)
+                          })
                         }}
                       >
                         {file.caption

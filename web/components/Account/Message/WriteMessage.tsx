@@ -17,7 +17,7 @@ const WriteMessage = ({ sendMessage }) => {
   }
 
   return (
-    <Box borderTop="1px solid" borderColor="gray.100" p={5}>
+    <Box borderTop="1px solid" borderColor="gray.100" p={5} flex={0}>
       <Textarea
         h="150px"
         resize="none"

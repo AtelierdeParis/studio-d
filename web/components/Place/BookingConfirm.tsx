@@ -186,7 +186,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
               </Text>
               <Flex pt={2}>
                 <Pin width="20px" height="20px" stroke="black" />
-                <Text pl={3}>{place.city}</Text>
+                <Text pl={3}>{place.city.name}</Text>
               </Flex>
             </Box>
           </Flex>

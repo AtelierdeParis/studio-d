@@ -55,11 +55,16 @@ module.exports = {
         if (current.status === "message") {
           total.message = Number(current.count);
         } else if (
-          ["canceled", "pending", "created"].includes(current.status)
+          ["requestcanceled", "pending", "created"].includes(current.status)
         ) {
           total.request = Number(total.request) + Number(current.count);
         } else if (
-          ["accepted", "askcancel", "canceledbyplace"].includes(current.status)
+          [
+            "accepted",
+            "askcancel",
+            "requestcanceledbyplace",
+            "bookingcanceledbyplace",
+          ].includes(current.status)
         ) {
           total.booking = Number(total.booking) + Number(current.count);
         }

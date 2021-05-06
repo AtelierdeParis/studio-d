@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useFAQ } from '~hooks/useFAQ'
+import { NextSeo } from 'next-seo'
 
 const FAQ = () => {
   const { t } = useTranslation('common')
@@ -24,6 +25,7 @@ const FAQ = () => {
 
   return (
     <Container maxW="container.md" px={0}>
+      <NextSeo title={t('title.faq')} />
       <Heading
         as="h1"
         textStyle="h1"

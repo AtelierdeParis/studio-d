@@ -25,7 +25,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { client } from '~api/client-api'
 import Letter from 'public/assets/img/letter.svg'
-import Lock from 'public/assets/img/lock.svg'
 
 const getSchema = (target: Target) => {
   const schema = {
@@ -35,26 +34,31 @@ const getSchema = (target: Target) => {
     password: yup.string().required().min(10),
     structureName: yup.string().required(),
     address: yup.string().required(),
-    phone: yup.string().test({
-      message: 'Le format du téléphone est incorrect',
-      test: (value) => {
-        if (value === '') return true
-        const match = value.match(
-          /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
-        )
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
-    license: yup.string().test({
-      message: 'Les licences doivent être séparés par des virgules',
-      test: (value) => {
-        if (value === '') return true
-        const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
-        if (!match) return false
-        return match[0] === value
-      },
-    }),
+    phone: yup
+      .string()
+      .test({
+        message: 'Le format du téléphone est incorrect',
+        test: (value) => {
+          const match = value.match(
+            /[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]{8,12}/i,
+          )
+          if (!match) return false
+          return match[0] === value
+        },
+      })
+      .required(),
+    license: yup
+      .string()
+      .test({
+        message: 'Les licences doivent être séparés par des virgules',
+        test: (value) => {
+          if (value === '') return true
+          const match = value.match(/[a-z0-9]+(, ?[a-z0-9]+)*/i)
+          if (!match) return false
+          return match[0] === value
+        },
+      })
+      .required(),
     website: yup.string().test({
       message: 'Url incorrect',
       test: (value) => {
@@ -66,6 +70,7 @@ const getSchema = (target: Target) => {
         return match[0] === value
       },
     }),
+    country: yup.string().required(),
     zipCode: yup.string().required(),
     city: yup.string().required(),
     siret: yup.string().required().min(14).max(14),
@@ -85,12 +90,12 @@ const getSchema = (target: Target) => {
   return yup.object().shape(schema)
 }
 
-interface ISignupForm {
+interface Props {
   target: Target
   onSuccess: () => void
 }
 
-const SignupForm = ({ target, onSuccess }: ISignupForm) => {
+const SignupForm = ({ target, onSuccess }: Props) => {
   const { t } = useTranslation('signup')
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
@@ -218,13 +223,8 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
               </FormField>
             </Stack>
             <FormField
-              label={
-                <Flex as="span" alignItems="center">
-                  <Text as="span" mr={2}>
-                    {t('form.country.label')}
-                  </Text>
-                </Flex>
-              }
+              isRequired
+              label={t('form.country.label')}
               errors={errors.country}
             >
               <Input name="country" ref={register} />
@@ -250,13 +250,18 @@ const SignupForm = ({ target, onSuccess }: ISignupForm) => {
                 <Input name="ape" ref={register} />
               </FormField>
             </Stack>
-            <FormField label={t('form.referent')} errors={errors.phone}>
+            <FormField
+              label={t('form.referent')}
+              errors={errors.phone}
+              isRequired
+            >
               <Input name="phone" ref={register} />
             </FormField>
             <FormField
               label={t('form.license.label')}
               errors={errors.license}
               info={t('form.license.info')}
+              isRequired
             >
               <Input name="license" ref={register} />
             </FormField>

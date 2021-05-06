@@ -7,7 +7,13 @@ export const useIsComplete = (place) => {
       place.height === 0 ||
       place.surface === 0 ||
       place.danceCarpet === null ||
-      place.floor === 'todefine'
+      place.floor === 'todefine' ||
+      place.city === 'todefine' ||
+      place.country === 'todefine' ||
+      place.latitude === 'todefine' ||
+      place.longitude === 'todefine' ||
+      place.address === 'todefine' ||
+      place.name === 'todefine'
     )
   }, [place])
 }

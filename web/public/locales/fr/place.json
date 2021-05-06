@@ -3,7 +3,7 @@
         "edit": "Éditer la fiche",
         "noDispo": "Aucun créneau disponible, l’espace n’est pas visible"
     },
-    "notAvailable": "La fiche n'est pas encore complète, l’espace n’est actuellement pas visible",
+    "notAvailable": "La fiche n'est pas encore complète. Renseignez vos informations, et au moins une disponibilité pour rendre votre espace visible",
     "cancel": "Annuler les changements",
     "save": "Enregistrer",
     "addImg": "Ajouter une image",
@@ -27,6 +27,10 @@
         "slot": "Disponibilités ({{nb}})"
     },
     "form": {
+        "migration": {
+            "title": "Finalisez votre migration de compte",
+            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet  à la nouvelle interface."
+        },
         "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
         "error": "Une erreur est survenue en lors de l'enregistrement",
         "yes": "Oui",
@@ -80,11 +84,11 @@
         },
         "about": {
             "label": "À propos de l’espace",
-            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
+            "placeholder": "# Le lieu et l’espace\n\nPrécisions sur le lieu et l’espace\n\n# Conditions d'accueil \n\n- L'accès'\n- Les possibilités d'hébergement 2\n- Personnel technique"
         },
         "details": {
             "label": "Détails techniques",
-            "placeholder": "# Sous-titre\nParagraphe de texte\n\n# Sous-titre\n\n- Liste 1\n- Liste 2\n- Liste 3"
+            "placeholder": "# Système son\n\nEnceinte/puissance\n\n# Lumière\n\n- Nombre de lumière\n- Type de lumière\n- Précisions techniques particulières"
         },
         "files": {
             "noFile": "Aucun fichier à afficher",
@@ -103,6 +107,11 @@
         }
     },
     "list": {
+        "migration": {
+            "title": "Finalisez votre migration de compte",
+            "message": "Nous avons fait notre possible pour préserver vos informations d’espaces lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés sur chaque page en orange. Ils nous sont indispensables avant de pouvoir lister vos espaces de nouveau.",
+            "error": "Des informations sont manquantes suite à la migration. <a>Compléter</a>"
+        },
         "openWebpage": "Ouvrir sur le site",
         "needDispo": "Définissez au-moins une disponibilité pour que cet espace soit publié",
         "title": "Espaces",
@@ -140,10 +149,16 @@
             "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
             "btn": "Réinitialiser les filtres"
         },
+        "nbPlace": "{{nb}} espace inscrit",
         "nbPlaces": "{{nb}} espaces inscrits",
+        "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
+        "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
         "where": {
             "label": "Où cherchez-vous ?",
             "placeholder": "Renseignez une ville…"
+        },
+        "perimeter": {
+            "label": "Dans quel rayon ?"
         },
         "when": {
             "label": "Sur quelle période ?",
@@ -205,7 +220,7 @@
         "nbDays" : "{{nb}} jours",
         "nbDays()" : "({{nb}} jours)",
         "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
-        "success": "Une nouvelle disponibilité a été ajouté",
+        "success": "Une nouvelle disponibilité a été ajoutée",
         "type": {
             "label": "Ajouter une disponibilité :",
             "placeholder": "Choisir le type de disponibilité",
@@ -259,14 +274,16 @@
             "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
         },
         "delete": {
+            "request": "Demande réf. {{ref}}",
+            "booking": "Réservation réf. {{ref}}",
             "error": "Une erreur est survenue pendant la suppression",
-            "success": "Les créneaux sélectionnés ont été supprimé",
+            "success": "Les créneaux sélectionnés ont été supprimés",
             "title": "Vous avez sélectionné {{nb}} créneau.",
             "titles": "Vous avez sélectionné {{nb}} créneaux.",
             "slotAvailable" : "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
             "slotAvailables" : "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
             "slotNotAvailable" : "Ce créneau ne peut pas être supprimé :",
-            "slotNotAvailables" : "{{nb}} créneaux ne peuvent pas être supprimés :",
+            "slotNotAvailables" : "Plusieurs créneaux ne peuvent pas être supprimés :",
             "delete": "Supprimer le créneau disponible",
             "deletes": "Supprimer les créneaux disponibles",
             "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",
@@ -280,6 +297,7 @@
         }
     },
     "detail": {
+        "back": "Retour à la recherche",
         "seeMap": "Voir sur la carte",
         "precise": "* précisez vos besoins lors de la réservation",
         "surface": "Superficie",
@@ -314,8 +332,8 @@
             "day": "Journée"
         },
         "tooltip": {
-            "request": "Vous avez déjà une demande de réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
-            "booking": "Vous avez déjà une réservation en attente pour ce créneau auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
+            "request": "Vous avez déjà une demande de réservation en attente pour cette période auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
+            "booking": "Vous avez déjà une réservation accepté sur à cette même période auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
         },
         "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
         "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",

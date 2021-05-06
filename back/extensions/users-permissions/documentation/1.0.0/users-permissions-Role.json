@@ -535,8 +535,11 @@
                 "address",
                 "zipCode",
                 "city",
+                "country",
                 "siret",
                 "ape",
+                "phone",
+                "license",
                 "type"
               ],
               "properties": {
@@ -568,6 +571,9 @@
                   "type": "boolean"
                 },
                 "blocked": {
+                  "type": "boolean"
+                },
+                "accepted": {
                   "type": "boolean"
                 },
                 "firstname": {
@@ -639,9 +645,6 @@
                 },
                 "external_id": {
                   "type": "integer"
-                },
-                "accepted": {
-                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"

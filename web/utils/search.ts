@@ -1,5 +1,6 @@
 import isDate from 'date-fns/isDate'
 import { format } from '~utils/date'
+import { ROUTE_PLACES } from '~constants'
 
 export enum SurfaceOptions {
   LESS_50 = '< 50',
@@ -52,7 +53,7 @@ export const formatSearchToQuery = (data): Record<string, any> => {
   )
 }
 
-export const formatSearch = (formData): SearchQuery => {
+export const formatSearch = (formData, forceSort = false): SearchQuery => {
   const query = {}
   const data = Object.fromEntries(
     Object.entries(formData).map(([key, value]) => {
@@ -63,19 +64,21 @@ export const formatSearch = (formData): SearchQuery => {
     }),
   )
 
-  if (Boolean(data.sortBy)) {
+  if (forceSort) {
+    query['_sort'] = 'nbDispoDesc'
+  } else if (Boolean(data.sortBy)) {
     switch (data.sortBy) {
-      case SortOptions.DISPO_ASC:
-        query['_sort'] = 'dispo'
-        break
       case SortOptions.NB_DISPO_DESC:
-        query['_sort'] = 'nbDispo'
+        query['_sort'] = 'nbDispoDesc'
         break
       case SortOptions.SURFACE_ASC:
         query['_sort'] = 'surface:asc'
         break
       case SortOptions.SURFACE_DESC:
         query['_sort'] = 'surface:desc'
+        break
+      default:
+        query['_sort'] = 'dispoAsc'
         break
     }
   }
@@ -111,7 +114,7 @@ export const formatSearch = (formData): SearchQuery => {
   }
 
   if (Boolean(data.city)) {
-    query['city_eq'] = data.city
+    query['city.name_eq'] = data.city
   }
 
   if (data.accomodation) {
@@ -146,4 +149,14 @@ export const formatSearch = (formData): SearchQuery => {
     published_eq: true,
     ...query,
   }
+}
+
+export const checkCurrentSearch = () => {
+  const prevPath = sessionStorage.getItem('sd-prevPath')
+
+  return (
+    prevPath &&
+    prevPath.startsWith(`${ROUTE_PLACES}?`) &&
+    prevPath !== `${ROUTE_PLACES}?sortBy=dispoAsc`
+  )
 }

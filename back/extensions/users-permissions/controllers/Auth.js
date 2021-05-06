@@ -211,7 +211,7 @@ module.exports = {
         .query("user", "users-permissions")
         .update({ id: user.id }, { resetPasswordToken: null, password });
 
-      return ctx.send({ ok: true });
+      return ctx.send({ ok: true, email: user.email });
     } else if (
       params.password &&
       params.passwordConfirmation &&
@@ -319,10 +319,6 @@ module.exports = {
       }
     });
 
-    const advanced = await pluginStore.get({
-      key: "advanced",
-    });
-
     const userInfo = sanitizeEntity(user, {
       model: strapi.query("user", "users-permissions").model,
     });
@@ -337,7 +333,7 @@ module.exports = {
           templateId: "new-password",
         },
         {
-          url_btn: `${advanced.email_reset_password}?code=${resetPasswordToken}`,
+          url_btn: `${process.env.FRONT_URL}?code=${resetPasswordToken}`,
           user_type: userInfo.type,
           user_name: userInfo.firstname,
         }

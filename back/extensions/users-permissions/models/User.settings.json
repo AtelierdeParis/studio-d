@@ -57,6 +57,11 @@
       "type": "boolean",
       "default": false
     },
+    "accepted": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
     "firstname": {
       "type": "string",
       "required": true
@@ -87,7 +92,8 @@
       "required": true
     },
     "country": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "siret": {
       "type": "string",
@@ -98,10 +104,12 @@
       "required": true
     },
     "phone": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "license": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "website": {
       "type": "string"
@@ -122,8 +130,8 @@
       "type": "string"
     },
     "espaces": {
-      "collection": "espace",
-      "via": "users_permissions_user"
+      "via": "users_permissions_user",
+      "collection": "espace"
     },
     "type": {
       "type": "enumeration",
@@ -135,11 +143,6 @@
     },
     "external_id": {
       "type": "integer"
-    },
-    "accepted": {
-      "type": "boolean",
-      "default": false,
-      "required": false
     }
   }
 }

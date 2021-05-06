@@ -20,7 +20,7 @@ const HomePlaces = ({}: Props) => {
   const { data: places } = usePlaces({
     published_eq: true,
     _limit: 20,
-    _sort: 'dispo',
+    _sort: 'dispoAsc',
   })
 
   if (!places || places.length === 0) return null

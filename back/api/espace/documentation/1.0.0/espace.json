@@ -644,7 +644,6 @@
           "address",
           "latitude",
           "longitude",
-          "city",
           "country"
         ],
         "properties": {
@@ -856,8 +855,11 @@
               "address",
               "zipCode",
               "city",
+              "country",
               "siret",
               "ape",
+              "phone",
+              "license",
               "type"
             ],
             "properties": {
@@ -889,6 +891,9 @@
                 "type": "boolean"
               },
               "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
                 "type": "boolean"
               },
               "firstname": {
@@ -961,9 +966,6 @@
               "external_id": {
                 "type": "integer"
               },
-              "accepted": {
-                "type": "boolean"
-              },
               "created_by": {
                 "type": "string"
               },
@@ -1017,7 +1019,8 @@
                     "available",
                     "booked",
                     "pending",
-                    "past"
+                    "past",
+                    "canceled"
                   ]
                 },
                 "booking": {
@@ -1045,9 +1048,6 @@
           "published": {
             "type": "boolean",
             "default": true
-          },
-          "city": {
-            "type": "string"
           },
           "bookings": {
             "type": "array",
@@ -1117,6 +1117,42 @@
           },
           "slug": {
             "type": "string"
+          },
+          "city": {
+            "required": [
+              "id",
+              "name",
+              "country"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "country": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1135,7 +1171,6 @@
           "address",
           "latitude",
           "longitude",
-          "city",
           "country"
         ],
         "properties": {
@@ -1213,9 +1248,6 @@
             "type": "boolean",
             "default": true
           },
-          "city": {
-            "type": "string"
-          },
           "bookings": {
             "type": "array",
             "items": {
@@ -1237,6 +1269,9 @@
             ]
           },
           "slug": {
+            "type": "string"
+          },
+          "city": {
             "type": "string"
           },
           "created_by": {
