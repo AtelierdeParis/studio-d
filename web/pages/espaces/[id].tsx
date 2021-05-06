@@ -34,7 +34,15 @@ interface Props {
 const PlacePage = ({ slug }: Props) => {
   const router = useRouter()
   const { data: user } = useCurrentUser()
-  const { data: place, isLoading } = usePlace(slug, { availableOnly: true })
+  const { data: place, isLoading } = usePlace(
+    slug,
+    { availableOnly: true },
+    {
+      onError: () => {
+        router.push('/')
+      },
+    },
+  )
 
   if (
     place &&
@@ -47,7 +55,7 @@ const PlacePage = ({ slug }: Props) => {
   }
 
   return (
-    <Loading isLoading={isLoading} pt={20}>
+    <Loading isLoading={isLoading || !place} pt={20}>
       <NextSeo
         title={place?.name}
         openGraph={{
