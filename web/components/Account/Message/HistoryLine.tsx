@@ -15,7 +15,7 @@ const HistoryLine = ({ message, isAuthor, type }: Props) => {
     message.booking,
     type,
   )
-  console.log(message)
+
   return (
     <Flex
       w="100%"

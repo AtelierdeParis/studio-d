@@ -118,6 +118,7 @@ const Conversation = ({ id, user, back }: Props) => {
             spacing={5}
             alignItems="flex-start"
             p={5}
+            flex={1}
             overflow="auto"
             ref={listRef}
             onScroll={() => {

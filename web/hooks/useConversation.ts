@@ -2,7 +2,7 @@ import { useInfiniteQuery, UseInfiniteQueryOptions } from 'react-query'
 import { client } from '~api/client-api'
 import { Message } from '~typings/api'
 
-const _limit = 10
+const _limit = 30
 export const useConversation = (
   id,
   options?: UseInfiniteQueryOptions<Message[]>,
