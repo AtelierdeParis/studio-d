@@ -464,7 +464,7 @@ const AccountInformation = ({ user }: Props) => {
             </Stack>
           </VStack>
         </Box>
-        {user?.confirmed && !user?.blocked && (
+        {/* {user?.confirmed && !user?.blocked && (
           <Box my={14}>
             <Text textStyle="groupLabel">
               {t('information.desactivate.title')}
@@ -473,7 +473,7 @@ const AccountInformation = ({ user }: Props) => {
               <DesactivateAccountModal />
             </Box>
           </Box>
-        )}
+        )} */}
         <Flex justifyContent="center">
           <Button
             colorScheme="blue"
