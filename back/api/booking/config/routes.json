@@ -5,7 +5,7 @@
       "path": "/bookings/me/:bookingType(all|request|booking)",
       "handler": "booking.myBookings",
       "config": {
-          "policies": [],
+          "policies": ["global::is-authenticated"],
           "operationId": "myBookings",
           "description": "Get bookings related to current user"
       }
@@ -15,7 +15,7 @@
       "path": "/bookings",
       "handler": "booking.find",
       "config": {
-        "policies": []
+        "policies": ["is-concerned"]
       }
     },
     {
@@ -31,7 +31,7 @@
       "path": "/bookings/:id",
       "handler": "booking.findOne",
       "config": {
-        "policies": []
+        "policies": ["is-concerned"]
       }
     },
     {
@@ -39,7 +39,7 @@
       "path": "/bookings",
       "handler": "booking.create",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -47,7 +47,7 @@
       "path": "/bookings/:id",
       "handler": "booking.update",
       "config": {
-        "policies": []
+        "policies": ["is-concerned"]
       }
     },
     {
@@ -55,7 +55,7 @@
       "path": "/bookings/:id",
       "handler": "booking.delete",
       "config": {
-        "policies": []
+        "policies": ["is-concerned"]
       }
     }
   ]

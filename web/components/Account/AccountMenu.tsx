@@ -179,7 +179,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           </Link>
           <Link
             href={
-              user.type === 'company'
+              user?.type === 'company'
                 ? ROUTE_ACCOUNT_REQUEST
                 : ROUTE_ACCOUNT_PLACES
             }

@@ -57,7 +57,7 @@ const HomeSearch = () => {
           <Flex w="100%" pt={0.5}>
             <Pin stroke={theme.colors.blue['500']} width="22px" height="22px" />
             <Box pl={3.5} flex={1}>
-              <FormField label={t('search.where.label')}>
+              <FormField label={t('search.where.label')} labelStyle={{ mb: 0 }}>
                 <InputCity
                   name="city"
                   control={control}
