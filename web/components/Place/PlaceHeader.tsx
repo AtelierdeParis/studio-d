@@ -14,6 +14,7 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 const BackSearch = ({ hasSearch }) => {
   const { t } = useTranslation('place')
   const prevPath = sessionStorage.getItem('sd-prevPath')
+  console.log(prevPath)
 
   if (!hasSearch) {
     return <Spacer />
@@ -106,7 +107,7 @@ const PlaceHeader = ({ place }: Props) => {
   const { data: user } = useCurrentUser()
   const hasSearch = checkCurrentSearch()
 
-  if (!Boolean(user) && !hasSearch) return null
+  if ((!Boolean(user) || user.type === 'company') && !hasSearch) return null
 
   return (
     <Flex
