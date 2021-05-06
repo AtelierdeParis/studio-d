@@ -151,7 +151,8 @@
         "canceled": "Annulée",
         "past": "Passée",
         "occupied": "En cours",
-        "askcancel": "Ann. demandée"
+        "askcancel": "Ann. demandée",
+        "newtweek": "Le semaine prochaine"
     },
     "errors": {
         "required": "Champs requis",

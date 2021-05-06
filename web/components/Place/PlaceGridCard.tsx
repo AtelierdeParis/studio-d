@@ -17,6 +17,8 @@ import Tag from '~components/Tag'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 import { SearchQuery } from '~utils/search'
 import useDispoInRange from '~hooks/useDispoInRange'
+import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
+import addWeeks from 'date-fns/addWeeks'
 
 interface Props {
   place: Espace
@@ -30,6 +32,15 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
     place?.disponibilities,
     searchParams?.['disponibilities.start_gte'],
     searchParams?.['disponibilities.end_lte'],
+  )
+
+  const disposThisWeek = useNbDispoPerWeek(
+    new Date(),
+    disposInRange || place?.disponibilities,
+  )
+  const disposNextWeek = useNbDispoPerWeek(
+    addWeeks(new Date(), 1),
+    disposInRange || place?.disponibilities,
   )
 
   return (
@@ -90,20 +101,31 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
             )}
             {disposInRange?.length > 0 && (
               <Tag
-                status={DisponibilityStatus.AVAILABLE}
+                status={disposInRange?.length <= 4 ? 'nextweek' : 'available'}
                 alignSelf="flex-start"
                 mt={1.5}
               >
-                {t(
-                  `card.${disposInRange ? 'searchDispo' : 'thisWeek'}${
-                    disposInRange?.length > 1 ? 's' : ''
-                  }`,
-                  {
-                    nb: disposInRange.length,
-                  },
-                )}
+                {t(`card.searchDispo${disposInRange?.length > 1 ? 's' : ''}`, {
+                  nb: disposInRange.length,
+                })}
               </Tag>
             )}
+            {!disposInRange && disposThisWeek.length > 0 && (
+              <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
+                {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
+                  nb: disposThisWeek.length,
+                })}
+              </Tag>
+            )}
+            {!disposInRange &&
+              disposThisWeek?.length === 0 &&
+              disposNextWeek?.length > 0 && (
+                <Tag status={'nextweek'} alignSelf="flex-start" mt={1.5}>
+                  {t(`card.nextWeek${disposNextWeek?.length > 1 ? 's' : ''}`, {
+                    nb: disposNextWeek.length,
+                  })}
+                </Tag>
+              )}
             <Box fontSize="sm" pt={6}>
               <Flex w="100%">
                 <Text color="gray.500" pr={9}>
