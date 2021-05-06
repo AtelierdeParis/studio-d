@@ -8,9 +8,10 @@ const getFooter = (type) => {
     type === "place" ? "lieu" : "compagnie"
   } sur la plateforme <a href="${
     process.env.FRONT_URL
-  }">studiod-danse.fr</a>. Explication de qui contacter en cas d’erreur, etc...`;
+  }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${
+    process.env.FRONT_URL
+  }/contact">nous contacter</a>`;
 };
-
 const sendEmail = async (
   options = {},
   template = {},
