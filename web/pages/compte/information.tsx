@@ -5,7 +5,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import FormField from '~components/FormField'
 import InputPassword from '~components/InputPassword'
 import AskPasswordModal from '~components/Account/AskPasswordModal'
-import DesactivateAccountModal from '~components/Account/DesactivateAccountModal'
 import { useTranslation } from 'next-i18next'
 import {
   Box,
@@ -209,7 +208,7 @@ const AccountInformation = ({ user }: Props) => {
               label={t('information.email.label')}
               errors={errors.email}
               isRequired
-              isComplete={isComplete && Boolean(user?.external_id)}
+              isComplete={isComplete}
             >
               <InputGroup>
                 <Input name="email" type="email" ref={register} />
@@ -220,7 +219,7 @@ const AccountInformation = ({ user }: Props) => {
               label={t('information.password.label')}
               info={t('information.password.info')}
               errors={errors.password}
-              isComplete={isComplete && Boolean(user?.external_id)}
+              isComplete={isComplete}
             >
               <InputPassword
                 register={register}
@@ -244,7 +243,7 @@ const AccountInformation = ({ user }: Props) => {
               errors={errors.address}
               isRequired
               flex={1}
-              isComplete={isComplete && Boolean(user?.external_id)}
+              isComplete={isComplete}
             >
               <Input name="address" ref={register} />
             </FormField>
@@ -264,7 +263,7 @@ const AccountInformation = ({ user }: Props) => {
                   label={t('information.zipCode.label')}
                   errors={errors.zipCode}
                   isRequired
-                  isComplete={isComplete && Boolean(user?.external_id)}
+                  isComplete={isComplete}
                 >
                   <Input name="zipCode" ref={register} />
                 </FormField>
@@ -272,7 +271,7 @@ const AccountInformation = ({ user }: Props) => {
                   label={t('information.city.label')}
                   errors={errors.city}
                   isRequired
-                  isComplete={isComplete && Boolean(user?.external_id)}
+                  isComplete={isComplete}
                 >
                   <Input name="city" ref={register} />
                 </FormField>
@@ -281,7 +280,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.country.label')}
                 errors={errors.country}
                 isRequired
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="country" ref={register} />
               </FormField>
@@ -303,7 +302,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.firstname')}
                 errors={errors.firstname}
                 flex={1}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="firstname" ref={register} />
               </FormField>
@@ -311,7 +310,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.lastname')}
                 errors={errors.lastname}
                 flex={1}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="lastname" ref={register} />
               </FormField>
@@ -328,7 +327,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.structure')}
                 errors={errors.structureName}
                 flex={1}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="structureName" ref={register} />
               </FormField>
@@ -337,7 +336,7 @@ const AccountInformation = ({ user }: Props) => {
                 info={t('information.socialReason.info')}
                 errors={errors.socialReason}
                 flex={1}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="socialReason" ref={register} />
               </FormField>
@@ -353,14 +352,14 @@ const AccountInformation = ({ user }: Props) => {
               <FormField
                 label={t('information.siret')}
                 errors={errors.siret}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="siret" ref={register} />
               </FormField>
               <FormField
                 label={t('information.ape')}
                 errors={errors.ape}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="ape" ref={register} />
               </FormField>
@@ -376,7 +375,7 @@ const AccountInformation = ({ user }: Props) => {
               <FormField
                 label={t('information.phone.label')}
                 errors={errors.phone}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="phone" ref={register} />
               </FormField>
@@ -384,7 +383,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.license.label')}
                 info={t('information.license.info')}
                 errors={errors.license}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
                 isRequired
               >
                 <Input name="license" ref={register} />
@@ -401,7 +400,7 @@ const AccountInformation = ({ user }: Props) => {
               <FormField
                 label={t('information.website')}
                 errors={errors.website}
-                isComplete={isComplete && Boolean(user?.external_id)}
+                isComplete={isComplete}
               >
                 <Input name="website" ref={register} />
               </FormField>
@@ -409,7 +408,7 @@ const AccountInformation = ({ user }: Props) => {
                 <FormField
                   label={t('information.choreographer')}
                   errors={errors.choreographer}
-                  isComplete={isComplete && Boolean(user?.external_id)}
+                  isComplete={isComplete}
                 >
                   <Input name="choreographer" ref={register} />
                 </FormField>
@@ -417,7 +416,7 @@ const AccountInformation = ({ user }: Props) => {
                 <FormField
                   label={t('information.legalRepresentative')}
                   errors={errors.legalRepresentative}
-                  isComplete={isComplete && Boolean(user?.external_id)}
+                  isComplete={isComplete}
                 >
                   <Input name="legalRepresentative" ref={register} />
                 </FormField>
@@ -436,14 +435,14 @@ const AccountInformation = ({ user }: Props) => {
                   <FormField
                     label={t('information.insuranceName')}
                     errors={errors.insuranceName}
-                    isComplete={isComplete && Boolean(user?.external_id)}
+                    isComplete={isComplete}
                   >
                     <Input name="insuranceName" ref={register} />
                   </FormField>
                   <FormField
                     label={t('information.insuranceNumber')}
                     errors={errors.insuranceNumber}
-                    isComplete={isComplete && Boolean(user?.external_id)}
+                    isComplete={isComplete}
                   >
                     <Input name="insuranceNumber" ref={register} />
                   </FormField>
@@ -454,7 +453,7 @@ const AccountInformation = ({ user }: Props) => {
                     flex={1}
                     label={t('information.qualityRepresentative')}
                     errors={errors.statusRepresentative}
-                    isComplete={isComplete && Boolean(user?.external_id)}
+                    isComplete={isComplete}
                   >
                     <Input name="statusRepresentative" ref={register} />
                   </FormField>

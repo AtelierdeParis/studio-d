@@ -49,6 +49,7 @@ module.exports = {
             templateId: "admin-user-updated",
           },
           {
+            url_btn: `${process.env.BASE_URL}/admin/plugins/content-manager/collectionType/plugins::users-permissions.user/${updated.id}`,
             user_type: updated.type === "place" ? "Le lieu" : "La compagnie",
             user_name: updated.firstname,
           },
