@@ -17,8 +17,8 @@
       "unique": true
     },
     "espaces": {
-      "collection": "espace",
-      "via": "city"
+      "via": "city",
+      "collection": "espace"
     },
     "country": {
       "type": "string",

@@ -585,9 +585,8 @@
           "technicalStaff",
           "floor",
           "address",
-          "latitude",
-          "longitude",
-          "country"
+          "country",
+          "latitude"
         ],
         "properties": {
           "id": {
@@ -639,12 +638,6 @@
             "type": "string"
           },
           "address": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
             "type": "string"
           },
           "files": {
@@ -1096,6 +1089,12 @@
                 "type": "string"
               }
             }
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           }
         }
       },
@@ -1112,9 +1111,8 @@
           "technicalStaff",
           "floor",
           "address",
-          "latitude",
-          "longitude",
-          "country"
+          "country",
+          "latitude"
         ],
         "properties": {
           "name": {
@@ -1165,12 +1163,6 @@
           "address": {
             "type": "string"
           },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
-            "type": "string"
-          },
           "users_permissions_user": {
             "type": "string"
           },
@@ -1216,6 +1208,12 @@
           },
           "city": {
             "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           },
           "created_by": {
             "type": "string"

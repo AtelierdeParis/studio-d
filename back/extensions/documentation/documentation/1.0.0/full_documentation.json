@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/06/2021 6:41:30 PM"
+    "x-generation-date": "05/06/2021 7:17:28 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -9091,9 +9091,8 @@
                 "technicalStaff",
                 "floor",
                 "address",
-                "latitude",
-                "longitude",
-                "country"
+                "country",
+                "latitude"
               ],
               "properties": {
                 "id": {
@@ -9145,12 +9144,6 @@
                   "type": "string"
                 },
                 "address": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "string"
-                },
-                "longitude": {
                   "type": "string"
                 },
                 "files": {
@@ -9208,6 +9201,12 @@
                 },
                 "city": {
                   "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
                 },
                 "created_by": {
                   "type": "string"
@@ -9349,9 +9348,8 @@
               "technicalStaff",
               "floor",
               "address",
-              "latitude",
-              "longitude",
-              "country"
+              "country",
+              "latitude"
             ],
             "properties": {
               "id": {
@@ -9403,12 +9401,6 @@
                 "type": "string"
               },
               "address": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "string"
-              },
-              "longitude": {
                 "type": "string"
               },
               "files": {
@@ -9466,6 +9458,12 @@
               },
               "city": {
                 "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
               },
               "created_by": {
                 "type": "string"
@@ -9753,9 +9751,8 @@
           "technicalStaff",
           "floor",
           "address",
-          "latitude",
-          "longitude",
-          "country"
+          "country",
+          "latitude"
         ],
         "properties": {
           "name": {
@@ -9806,12 +9803,6 @@
           "address": {
             "type": "string"
           },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
-            "type": "string"
-          },
           "users_permissions_user": {
             "type": "string"
           },
@@ -9857,6 +9848,12 @@
           },
           "city": {
             "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           },
           "created_by": {
             "type": "string"
