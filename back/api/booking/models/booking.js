@@ -60,6 +60,17 @@ const getPlaceInfoEmail = (place) => {
   return infos.join("<br/>");
 };
 
+const checkStatus = (booking, status) => {
+  const statusToCheck = Array.isArray(status) ? status : [status];
+  console.log(
+    booking.status,
+    statusToCheck,
+    statusToCheck.includes(booking.status)
+  );
+  if (!booking || !statusToCheck.includes(booking.status))
+    throw new Error("An error occured, booking has a wrong status");
+};
+
 module.exports = {
   lifecycles: {
     async afterFind(results) {
@@ -128,8 +139,17 @@ module.exports = {
           .query("booking")
           .findOne({ id: params.id });
 
-        if (!booking || booking.status !== "pending")
-          throw new Error("Impossible to accept this booking");
+        switch (data.status) {
+          case "accepted":
+          case "requestcanceled":
+          case "requestcanceledbyplace":
+            checkStatus(booking, "pending");
+            break;
+          case "bookingcanceledbyplace":
+          case "askcancel":
+            checkStatus(booking, ["accepted", "askcancel"]);
+            break;
+        }
       }
     },
     async afterUpdate(updated, params, body) {

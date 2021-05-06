@@ -20,7 +20,7 @@ const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
   const { data: user } = useCurrentUser()
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('booking')
-  const { successToast } = useToast()
+  const { successToast, errorToast } = useToast()
 
   const onConfirm = () => {
     const isBooking = type === 'booking'
@@ -39,6 +39,7 @@ const CancelModal = ({ booking, setSelected, type }: ICancelModal) => {
         setSelected(null)
         successToast(t('modal.cancel.success'))
       })
+      .catch(() => errorToast(t('modal.cancel.error')))
       .finally(() => setLoading(false))
   }
 
