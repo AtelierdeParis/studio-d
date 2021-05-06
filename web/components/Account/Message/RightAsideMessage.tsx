@@ -23,10 +23,7 @@ const DateBooking = ({ dispos }) => {
     }
 
     return (
-      <>{`${format(dispo.start, 'd')} - ${format(
-        dispo.start,
-        'd MMM yyyy',
-      )}`}</>
+      <>{`${format(dispo.start, 'd')} - ${format(dispo.end, 'd MMM yyyy')}`}</>
     )
   }
 
