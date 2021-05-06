@@ -135,6 +135,7 @@ const AccountInformation = ({ user }: Props) => {
     handleSubmit,
     trigger,
   } = useForm<FormInformation>({
+    mode: isComplete ? 'onSubmit' : 'onChange',
     defaultValues: {
       ...user,
       password: undefined,

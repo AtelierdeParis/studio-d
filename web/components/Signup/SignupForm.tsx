@@ -90,12 +90,12 @@ const getSchema = (target: Target) => {
   return yup.object().shape(schema)
 }
 
-interface ISignupForm {
+interface Props {
   target: Target
   onSuccess: () => void
 }
 
-const SignupForm = ({ target, onSuccess }: ISignupForm) => {
+const SignupForm = ({ target, onSuccess }: Props) => {
   const { t } = useTranslation('signup')
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)

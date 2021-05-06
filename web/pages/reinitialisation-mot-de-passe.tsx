@@ -21,10 +21,15 @@ interface Props {
   isMigration: string
 }
 
-const schema = yup.object().shape({
-  password: yup.string().required(),
-  passwordConfirmation: yup.string().required(),
-})
+const getSchema = (t) => {
+  return yup.object().shape({
+    password: yup
+      .string()
+      .required(t('yup:mixed.required'))
+      .min(10, t('yup:number.min', { min: 10 })),
+    passwordConfirmation: yup.string().required(t('yup:mixed.required')),
+  })
+}
 
 const CreatePassword = ({ code, isMigration }: Props) => {
   const { errorToast, successToast } = useToast()
@@ -33,7 +38,7 @@ const CreatePassword = ({ code, isMigration }: Props) => {
   const { t } = useTranslation('reset')
 
   const { handleSubmit, register, errors, setError } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(getSchema(t)),
   })
 
   const onSubmit = (data) => {
@@ -56,14 +61,16 @@ const CreatePassword = ({ code, isMigration }: Props) => {
             password: data.password,
             redirect: false,
           })
-          successToast(t('successMigration'))
           router.push(ROUTE_ACCOUNT_INFORMATION)
+          successToast(t('successMigration'))
         } else {
           successToast(t('success'))
           router.push('/')
         }
       })
-      .catch(() => errorToast(t('common:error')))
+      .catch((err) => {
+        errorToast(t('common:error'))
+      })
       .finally(() => setLoading(false))
   }
   return (
@@ -135,7 +142,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   }
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'reset'])),
+      ...(await serverSideTranslations(locale, ['common', 'reset', 'yup'])),
       code: query.code,
       isMigration: query?.ismigration ? Boolean(query?.ismigration) : false,
     },

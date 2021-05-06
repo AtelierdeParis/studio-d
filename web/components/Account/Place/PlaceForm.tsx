@@ -29,30 +29,42 @@ import { useIsComplete } from '~hooks/useIsComplete'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
-const getSchema = (place) => {
+const getSchema = (place, t) => {
   return yup.object().shape({
-    name: !place ? yup.string().required() : null,
-    surface: yup.number().min(1).required(),
-    roomLength: yup.number().min(1).required(),
-    width: yup.number().min(1).required(),
-    height: yup.number().min(1).required(),
-    danceCarpet: yup.string().required(),
-    mirror: yup.string().required(),
-    danceBar: yup.string().required(),
-    accomodation: yup.string().required(),
-    technicalStaff: yup.string().required(),
-    floor: yup.string().required(),
-    address: yup.string().required(),
-    latitude: yup.string().required(),
-    longitude: yup.string().required(),
+    name: !place ? yup.string().required(t('account:errors.required')) : null,
+    surface: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    roomLength: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    width: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    height: yup
+      .number()
+      .min(1, t('account:errors.min', { min: 1 }))
+      .required(t('account:errors.required')),
+    danceCarpet: yup.string().required(t('account:errors.required')),
+    mirror: yup.string().required(t('account:errors.required')),
+    danceBar: yup.string().required(t('account:errors.required')),
+    accomodation: yup.string().required(t('account:errors.required')),
+    technicalStaff: yup.string().required(t('account:errors.required')),
+    floor: yup.string().required(t('account:errors.required')),
+    address: yup.string().required(t('account:errors.required')),
+    latitude: yup.string().required(t('account:errors.required')),
+    longitude: yup.string().required(t('account:errors.required')),
     otherFloor: yup.string().when('floor', {
       is: 'other',
-      then: yup.string().required(),
+      then: yup.string().required(t('account:errors.required')),
     }),
   })
 }
 
-interface props {
+interface Props {
   place?: Espace
   onSubmit: (data: any) => Promise<any>
   isEditMode?: boolean
@@ -64,7 +76,7 @@ const getDefaultValues = (place) => {
   return placeAttributes
 }
 
-const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: props) => {
+const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
   const { errorToast } = useToast()
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
@@ -79,7 +91,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: props) => {
     handleSubmit,
     trigger,
   } = useForm({
-    resolver: yupResolver(getSchema(place)),
+    mode: isComplete ? 'onSubmit' : 'onChange',
+    resolver: yupResolver(getSchema(place, t)),
     defaultValues: getDefaultValues(place),
   })
 

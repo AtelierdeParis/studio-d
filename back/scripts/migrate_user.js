@@ -126,10 +126,6 @@ const start = async () => {
               }
             }
 
-            if (checkProp("status")) {
-              user.blocked = row.status === "disabled";
-            }
-
             if (checkProp("_Siret", "siret")) {
               user.siret = row._Siret;
             }
