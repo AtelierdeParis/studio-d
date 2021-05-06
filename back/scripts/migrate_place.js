@@ -25,14 +25,15 @@ const check = (obj, prop, errors) => {
 };
 
 const uploadFile = (url, options) => {
+  if (url === "/img/default.jpg") return null;
   const formData = new FormData({ maxDataSize: 9999999999 });
   formData.append("ref", options.ref);
   formData.append("refId", options.refId);
   formData.append("field", options.field);
   formData.append(`files`, request(url));
   const formHeaders = formData.getHeaders();
-  axios
-    .post("https://studio-d-hxyhn.ondigitalocean.app/strapi/upload", formData, {
+  return axios
+    .post("https://studio-d-lafs6.ondigitalocean.app/strapi/upload", formData, {
       headers: {
         ...formHeaders,
       },
@@ -43,7 +44,7 @@ const uploadFile = (url, options) => {
       console.log(`[UPLOADED] ${options.refId}`);
     })
     .catch((err) => {
-      console.log(`[ERROR UPLOAD] ${options.refId}`, err);
+      console.log(`[ERROR UPLOAD] ${options.refId}`, err.response.data);
     });
 };
 
@@ -129,7 +130,7 @@ const start = async () => {
               throw new Error("Owner not found");
             }
 
-            place.users_permissions_user = owner.id;
+            place.users_permissions_user = 8;
 
             const isAlreadyCreated = await strapi
               .query("espace")
