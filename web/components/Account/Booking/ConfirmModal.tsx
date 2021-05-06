@@ -16,7 +16,7 @@ const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
   const queryClient = useQueryClient()
   const [isLoading, setLoading] = useState(false)
   const { t } = useTranslation('booking')
-  const { successToast } = useToast()
+  const { successToast, errorToast } = useToast()
 
   const onConfirm = () => {
     setLoading(true)
@@ -27,6 +27,7 @@ const ConfirmModal = ({ bookingId, setSelected }: IConfirmModal) => {
         setSelected(null)
         successToast(t('modal.confirm.success'))
       })
+      .catch(() => errorToast(t('modal.confirm.error')))
       .finally(() => setLoading(false))
   }
 

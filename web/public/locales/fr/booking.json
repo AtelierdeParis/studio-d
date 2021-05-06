@@ -67,7 +67,8 @@
             "text": "Vous êtes sur le point d'accepter la demande de réservation. Voulez-vous continuer ?",
             "back": "Non, fermer",
             "confirm": "Confirmer la demande",
-            "success": "La demande a bien été acceptée, vous pouvez la retrouver dans la page Réservations"
+            "success": "La demande a bien été acceptée, vous pouvez la retrouver dans la page Réservations",
+            "error": "Une erreur est survenue, veuillez rafraichir la page"
         }
     },
     "history": {

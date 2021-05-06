@@ -122,6 +122,16 @@ module.exports = {
         }
       );
     },
+    beforeUpdate: async (params, data) => {
+      if (data.status) {
+        const booking = await strapi
+          .query("booking")
+          .findOne({ id: params.id });
+
+        if (!booking || booking.status !== "pending")
+          throw new Error("Impossible to accept this booking");
+      }
+    },
     async afterUpdate(updated, params, body) {
       const rel = {
         booking: updated.id,
