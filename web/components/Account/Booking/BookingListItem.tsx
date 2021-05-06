@@ -30,7 +30,6 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
     return booking.status
   }, [booking, isOccupied])
 
-  console.log(status)
   return (
     <Fragment key={booking?.id}>
       <Cell
