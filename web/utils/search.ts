@@ -19,6 +19,7 @@ export enum SortOptions {
   NB_DISPO_DESC = 'nbDispoDesc',
   SURFACE_ASC = 'surfaceAsc',
   SURFACE_DESC = 'surfaceDesc',
+  DISTANCE_ASC = 'distanceAsc',
 }
 
 export interface SearchQuery {
@@ -111,6 +112,10 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
         query['height_gt'] = 5
         break
     }
+  }
+
+  if (typeof data.perimeter !== 'undefined') {
+    query['perimeter'] = data.perimeter
   }
 
   if (Boolean(data.city)) {

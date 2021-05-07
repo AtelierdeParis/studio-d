@@ -110,7 +110,7 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                 })}
               </Tag>
             )}
-            {!disposInRange && disposThisWeek.length > 0 && (
+            {!disposInRange && disposThisWeek?.length > 0 && (
               <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
                 {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
                   nb: disposThisWeek.length,

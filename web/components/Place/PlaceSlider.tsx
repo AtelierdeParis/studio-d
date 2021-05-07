@@ -18,7 +18,6 @@ const PlaceSlider = ({ control, name = 'perimeter' }: Props) => {
   const { field } = useController({
     name,
     control,
-    defaultValue: 75,
   })
 
   const onChange = (value) => {
