@@ -333,7 +333,7 @@ module.exports = {
           templateId: "new-password",
         },
         {
-          url_btn: `${process.env.FRONT_URL}?code=${resetPasswordToken}`,
+          url_btn: `${process.env.FRONT_URL}/reinitialisation-mot-de-passe?code=${resetPasswordToken}`,
           user_type: userInfo.type,
           user_name: userInfo.firstname,
         }

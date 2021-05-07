@@ -5,7 +5,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Box,
   Flex,
   InputGroup,
   InputRightElement,
@@ -44,10 +43,8 @@ const ResetPasswordForm = ({ onClose }: ResetPasswordFormProps) => {
         onClose()
       })
       .catch((err) => {
-        if (err.response?.data?.data) {
-          err.response?.data?.data?.map(({ messages }) => {
-            if (messages.length > 0) errorToast(t(messages[0].id))
-          })
+        if (err?.response?.data?.message?.id) {
+          errorToast(t(err.response.data.message.id))
         } else errorToast(t('error'))
       })
       .finally(() => setLoading(false))

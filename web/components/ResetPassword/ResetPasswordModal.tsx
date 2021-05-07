@@ -1,21 +1,16 @@
 import React from 'react'
 import {
-  Button,
-  useDisclosure,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalHeader,
   ModalContent,
   ModalOverlay,
-  ModalFooter,
   Divider,
   Text,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ResetPasswordForm from '~components/ResetPassword/ResetPasswordForm'
-import Link from '~components/Link'
-import { ROUTE_SIGNUP } from '~constants'
 
 interface IResetPasswordModal {
   isOpen: boolean
