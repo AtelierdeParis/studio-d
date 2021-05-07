@@ -14,7 +14,6 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 const BackSearch = ({ hasSearch }) => {
   const { t } = useTranslation('place')
   const prevPath = sessionStorage.getItem('sd-prevPath')
-  console.log(prevPath)
 
   if (!hasSearch) {
     return <Spacer />

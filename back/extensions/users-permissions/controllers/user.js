@@ -91,7 +91,6 @@ module.exports = {
   checkPassword(ctx) {
     const params = ctx.request.body;
     const user = ctx.state.user;
-    console.log(params);
     return strapi.plugins["users-permissions"].services.user.validatePassword(
       params.password,
       user.password
