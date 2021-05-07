@@ -45,6 +45,6 @@ yarn server:start
 Default url: [http://localhost:3000](http://localhost:3000)
 
 ### Email
-In order to be able to you email functions, you must import email templates in strapi, go to Plugins > Email Designer in the left menu, then you will see a button Import templates, choose the files located in ```back/email-designer-templates_XXXXXXXX.json```.  
+In order to be able to you email functions, you must import email templates in strapi, in the left menu go to Plugins > Email Designer, then you will see a button **Import templates**, choose the file located in ```back/email-designer-templates_XXXXXXXX.json```.  
   
 Note: You must refresh your navigator to see imported templates
