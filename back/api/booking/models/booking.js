@@ -62,11 +62,6 @@ const getPlaceInfoEmail = (place) => {
 
 const checkStatus = (booking, status) => {
   const statusToCheck = Array.isArray(status) ? status : [status];
-  console.log(
-    booking.status,
-    statusToCheck,
-    statusToCheck.includes(booking.status)
-  );
   if (!booking || !statusToCheck.includes(booking.status))
     throw new Error("An error occured, booking has a wrong status");
 };

@@ -85,7 +85,6 @@ const PlaceAttributesGrid = ({ place }: Props) => {
                 <Box
                   as="span"
                   onClick={() => {
-                    console.log('flsdkj')
                     setOpen(!isOpen)
                   }}
                   cursor="pointer"

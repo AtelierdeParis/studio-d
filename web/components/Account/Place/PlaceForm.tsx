@@ -128,7 +128,12 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
         <Text textStyle="infoLabel">{t('form.detailsLabel')}</Text>
         <Box pb={8} px={2.5}>
           {!place && (
-            <FormField label={t('form.name.label')} errors={errors.name} mb={6}>
+            <FormField
+              label={t('form.name.label')}
+              errors={errors.name}
+              mb={6}
+              isRequired
+            >
               <Input name="name" ref={register} />
             </FormField>
           )}
@@ -140,34 +145,39 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <FormField
               label={t('form.surface.label')}
               errors={errors.surface}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <InputNumber name="surface" control={control} />
             </FormField>
             <FormField
               label={t('form.length.label')}
               errors={errors.roomLength}
+              isRequired
             >
               <InputNumber name="roomLength" control={control} />
             </FormField>
             <FormField
               label={t('form.width.label')}
               errors={errors.width}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <InputNumber name="width" control={control} />
             </FormField>
             <FormField
               label={t('form.height.label')}
               errors={errors.height}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <InputNumber name="height" control={control} />
             </FormField>
             <FormField
               label={t('form.mirror.label')}
               errors={errors.mirror}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <Select
                 name="mirror"
@@ -181,7 +191,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <FormField
               label={t('form.danceCarpet.label')}
               errors={errors.danceCarpet}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <Select
                 name="danceCarpet"
@@ -196,7 +207,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <FormField
               label={t('form.danceBar.label')}
               errors={errors.danceBar}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
+              isRequired
             >
               <Select
                 name="danceBar"
@@ -218,7 +230,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
               <FormField
                 label={t('form.accomodation.label')}
                 errors={errors.accomodation}
-                isComplete={isComplete && Boolean(place?.external_id)}
+                isComplete={isComplete}
+                isRequired
               >
                 <Select
                   name="accomodation"
@@ -232,12 +245,14 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
               <FormField
                 label={t('form.technicalStaff.label')}
                 errors={errors.technicalStaff}
-                isComplete={isComplete && Boolean(place?.external_id)}
+                isComplete={isComplete}
+                isRequired
               >
                 <Select
                   name="technicalStaff"
                   ref={register}
                   placeholder={t('form.choose')}
+                  isRequired
                 >
                   <option value="true">{t('form.yes')}</option>
                   <option value="false">{t('form.no')}</option>
@@ -254,7 +269,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
               <FormField
                 label={t('form.floor.label')}
                 errors={errors.floor}
-                isComplete={isComplete && Boolean(place?.external_id)}
+                isComplete={isComplete}
+                isRequired
               >
                 <Select
                   name="floor"
@@ -274,7 +290,7 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
                   info={t('form.otherFloor.info')}
                   errors={errors.otherFloor}
                   gridColumn="2/5"
-                  isComplete={isComplete && Boolean(place?.external_id)}
+                  isComplete={isComplete}
                 >
                   <Input
                     name="otherFloor"
@@ -298,7 +314,7 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <FormField
               label={t('form.about.label')}
               errors={errors.about}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
             >
               <Textarea
                 name="about"
@@ -311,7 +327,7 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <FormField
               label={t('form.details.label')}
               errors={errors.details}
-              isComplete={isComplete && Boolean(place?.external_id)}
+              isComplete={isComplete}
             >
               <Textarea
                 name="details"
@@ -339,7 +355,8 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
                 label={t('form.address.label')}
                 errors={errors.address}
                 flex={1}
-                isComplete={isComplete && Boolean(place?.external_id)}
+                isComplete={isComplete}
+                isRequired
               >
                 <InputLocation
                   name="address"
