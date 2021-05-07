@@ -1,15 +1,14 @@
 # Studio D
 
-This project goal is to have a setup of yarn workspaces with the following projects
-
-- web : Next.js 
-- back : Strapi
+The project is divided in two parts:
+- web : Next.js
+- back : Strapi (Node Js server)
 
 ## QuickStart
 
 
 ```bash
-# Start infrastructure
+# Start infrastructure (database, local email service)
 docker-compose up
 
 # Install all dependencies
@@ -44,3 +43,8 @@ yarn server:start
 ```
 
 Default url: [http://localhost:3000](http://localhost:3000)
+
+### Email
+In order to be able to you email functions, you must import email templates in strapi, in the left menu go to Plugins > Email Designer, then you will see a button **Import templates**, choose the file located in ```back/email-designer-templates_XXXXXXXX.json```.  
+  
+Note: You must refresh your navigator to see imported templates
