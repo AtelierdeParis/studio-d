@@ -24,7 +24,7 @@ const checkCity = async (data) => {
     const city = await strapi
       .query("city")
       .findOne({ name: data.city.toLowerCase() });
-    console.log(city);
+
     if (city) {
       data.city = city.id;
     } else {
@@ -47,10 +47,26 @@ module.exports = {
       await checkCity(data);
     },
     beforeUpdate: async (params, data) => {
+      console.log(data);
       if (data.name) {
         await generateSlug(data, params);
       }
       await checkCity(data);
+    },
+    async afterFind(result) {
+      if (result && result.length > 0) {
+        result.map((place, index) => {
+          result[index].disponibilities = place.disponibilities.map((dispo) => {
+            if (isPast(new Date(dispo.start))) {
+              strapi
+                .query("disponibility")
+                .update({ id: dispo.id }, { status: "past" });
+              dispo.status = "past";
+            }
+            return dispo;
+          });
+        });
+      }
     },
     async afterFindOne(result) {
       if (result) {

@@ -74,12 +74,15 @@ const InputLocation = ({ name, control, placeholder }: Props) => {
     if (value?.item?.geometry?.coordinates) {
       latitude.onChange(value?.item.geometry.coordinates[0])
       longitude.onChange(value?.item.geometry.coordinates[1])
-      const cityAttr = value?.item.context.find(({ id }) =>
-        id.startsWith('place'),
-      )
+
+      const cityAttr = value?.item.id.startsWith('place')
+        ? value?.item
+        : value?.item.context.find(({ id }) => id.startsWith('place'))
+
       const countryAttr = value?.item.context.find(({ id }) =>
         id.startsWith('country'),
       )
+
       if (cityAttr) {
         city.onChange(cityAttr.text)
       }

@@ -10,6 +10,7 @@ import {
   Image,
   Flex,
   Text,
+  Circle,
   CloseButton as OpenButton,
 } from '@chakra-ui/react'
 import {
@@ -27,6 +28,7 @@ import { useRouter } from 'next/router'
 import AccountMenu from '~components/Account/AccountMenu'
 import { UsersPermissionsUser } from '~typings/api'
 import Chevron from 'public/assets/img/chevron-up.svg'
+import { useMyNotifications } from '~hooks/useMyNotifications'
 
 const routeLabel = {
   [ROUTE_ACCOUNT_INFORMATION]: 'info',
@@ -40,6 +42,7 @@ const routeLabel = {
 }
 
 const AccountMobileMenu = ({ user }: { user: UsersPermissionsUser }) => {
+  const { data: notifs } = useMyNotifications()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { t } = useTranslation('account')
   const router = useRouter()
@@ -49,7 +52,7 @@ const AccountMobileMenu = ({ user }: { user: UsersPermissionsUser }) => {
       onClose()
     }
   }, [router.pathname])
-
+  console.log(notifs)
   return (
     <>
       <Flex
@@ -76,6 +79,16 @@ const AccountMobileMenu = ({ user }: { user: UsersPermissionsUser }) => {
           </Link>
         </Flex>
         <Flex alignItems="center" cursor="pointer" onClick={onOpen}>
+          {notifs && Object.values(notifs).reduce((a, b) => a + b, 0) > 0 && (
+            <Circle
+              // pos="absolute"
+              bgColor="orange.500"
+              size="8px"
+              mr={2}
+              // right="-8px"
+              // top="0"
+            />
+          )}
           {routeLabel[router.pathname] && (
             <Text mr={2} color="grayText.1" _hover={{ color: 'blue.500' }}>
               {t(routeLabel[router.pathname])}

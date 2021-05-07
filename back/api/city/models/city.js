@@ -30,7 +30,6 @@ module.exports = {
                 match.place_type.includes("place")
               );
               if (!city) {
-                console.log(res.body.features);
                 throw new Error("City not found with mapbox");
               }
 

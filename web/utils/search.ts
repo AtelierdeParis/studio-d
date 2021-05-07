@@ -113,6 +113,10 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
     }
   }
 
+  if (typeof data.perimeter !== 'undefined') {
+    query['perimeter'] = data.perimeter
+  }
+
   if (Boolean(data.city)) {
     query['city.name_eq'] = data.city
   }

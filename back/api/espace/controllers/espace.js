@@ -29,14 +29,20 @@ module.exports = {
       populate
     );
   },
-  async getCities() {
-    const knex = strapi.connections.default;
-    // return knex.distinct().from("place").pluck("city").orderBy("city", "asc");
-  },
   async find(ctx) {
-    const { _sort, ...query } = ctx.query;
-
+    const { _sort, perimeter, ...query } = ctx.query;
     const isSortOnDisponibility = ["dispoAsc", "nbDispoDesc"].includes(_sort);
+
+    if (perimeter && query["city.name_eq"]) {
+      const placesInPerimeter = await strapi.services.espace.getPlacesInPerimeter(
+        perimeter,
+        query["city.name_eq"]
+      );
+      if (placesInPerimeter.length > 0) {
+        query["id_in"] = placesInPerimeter;
+        delete query["city.name_eq"];
+      }
+    }
 
     const places = await strapi.services.espace
       .find({
