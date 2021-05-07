@@ -543,9 +543,8 @@
                 "technicalStaff",
                 "floor",
                 "address",
-                "latitude",
-                "longitude",
-                "country"
+                "country",
+                "latitude"
               ],
               "properties": {
                 "id": {
@@ -597,12 +596,6 @@
                   "type": "string"
                 },
                 "address": {
-                  "type": "string"
-                },
-                "latitude": {
-                  "type": "string"
-                },
-                "longitude": {
                   "type": "string"
                 },
                 "files": {
@@ -660,6 +653,12 @@
                 },
                 "city": {
                   "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
                 },
                 "created_by": {
                   "type": "string"

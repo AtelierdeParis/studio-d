@@ -17,12 +17,11 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
   const [isLoading, setLoading] = useState(false)
   const [value, setValue] = useState('')
   const { t } = useTranslation('account')
-  const { getValues, setError, errors } = useForm()
+  const { setError, errors } = useForm()
   const { errorToast } = useToast()
   const initialRef = React.useRef()
 
   const checkPassword = async () => {
-    const { password } = getValues()
     if (value === '') {
       setError('password', {
         type: 'manual',
@@ -31,10 +30,9 @@ const AskPasswordModal = ({ onSuccess, setShowModal }: Props) => {
       return
     }
 
-    if (password === '') return false
     setLoading(true)
     client.users
-      .checkPasswordCreate({ password })
+      .checkPasswordCreate({ password: value })
       .then((res) => {
         if (!res.data) {
           errorToast(t('information.modal.error'))

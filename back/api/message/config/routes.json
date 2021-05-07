@@ -5,7 +5,7 @@
       "path": "/conversation/me",
       "handler": "message.myConversations",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -13,7 +13,7 @@
       "path": "/notifications/toggle",
       "handler": "message.readNotifications",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -21,7 +21,7 @@
       "path": "/notifications/me",
       "handler": "message.myNotifications",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -29,7 +29,7 @@
       "path": "/conversation/:id",
       "handler": "message.getConversation",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -37,7 +37,7 @@
       "path": "/messages",
       "handler": "message.find",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -45,7 +45,7 @@
       "path": "/messages/count",
       "handler": "message.count",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -53,7 +53,7 @@
       "path": "/messages/:id",
       "handler": "message.findOne",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -61,7 +61,7 @@
       "path": "/messages",
       "handler": "message.create",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -69,7 +69,7 @@
       "path": "/messages/:id",
       "handler": "message.update",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     },
     {
@@ -77,7 +77,7 @@
       "path": "/messages/:id",
       "handler": "message.delete",
       "config": {
-        "policies": []
+        "policies": ["global::is-authenticated"]
       }
     }
   ]

@@ -29,7 +29,7 @@
       "path": "/disponibilities",
       "handler": "disponibility.create",
       "config": {
-        "policies": []
+        "policies": ["global::is-place"]
       }
     },
     {
@@ -37,7 +37,7 @@
       "path": "/bulk/disponibilities",
       "handler": "disponibility.createMany",
       "config": {
-        "policies": []
+        "policies": ["global::is-place"]
       }
     },
     {
@@ -45,7 +45,7 @@
       "path": "/disponibilities/:id",
       "handler": "disponibility.update",
       "config": {
-        "policies": []
+        "policies": ["global::is-place", "is-owner"]
       }
     },
     {
@@ -53,7 +53,7 @@
       "path": "/disponibilities/:id",
       "handler": "disponibility.delete",
       "config": {
-        "policies": []
+        "policies": ["global::is-place", "is-owner"]
       }
     }
   ]

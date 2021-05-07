@@ -24,7 +24,7 @@ const checkCity = async (data) => {
     const city = await strapi
       .query("city")
       .findOne({ name: data.city.toLowerCase() });
-
+    console.log(city);
     if (city) {
       data.city = city.id;
     } else {

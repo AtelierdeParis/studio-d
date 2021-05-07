@@ -5,19 +5,9 @@
       "path": "/espaces/me",
       "handler": "espace.myPlaces",
       "config": {
-          "policies": [],
+          "policies": ["global::is-authenticated"],
           "operationId": "myPlaces",
           "description": "Get places related to current user"
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/espaces/cities",
-      "handler": "espace.getCities",
-      "config": {
-          "policies": [],
-          "operationId": "getCities",
-          "description": "Get list of cities"
       }
     },
     {
@@ -49,7 +39,7 @@
       "path": "/espaces",
       "handler": "espace.create",
       "config": {
-        "policies": []
+        "policies": ["global::is-place"]
       }
     },
     {
@@ -57,7 +47,7 @@
       "path": "/espaces/:id",
       "handler": "espace.update",
       "config": {
-        "policies": []
+        "policies": ["global::is-place", "is-owner"]
       }
     },
     {
@@ -65,7 +55,7 @@
       "path": "/espaces/:id",
       "handler": "espace.delete",
       "config": {
-        "policies": []
+        "policies": ["global::is-place", "is-owner"]
       }
     }
   ]

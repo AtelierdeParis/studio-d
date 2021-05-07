@@ -57,63 +57,6 @@
         "parameters": []
       }
     },
-    "/espaces/cities": {
-      "get": {
-        "deprecated": false,
-        "description": "Get list of cities",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Espace"
-        ],
-        "parameters": []
-      }
-    },
     "/espaces": {
       "get": {
         "deprecated": false,
@@ -642,9 +585,8 @@
           "technicalStaff",
           "floor",
           "address",
-          "latitude",
-          "longitude",
-          "country"
+          "country",
+          "latitude"
         ],
         "properties": {
           "id": {
@@ -696,12 +638,6 @@
             "type": "string"
           },
           "address": {
-            "type": "string"
-          },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
             "type": "string"
           },
           "files": {
@@ -1153,6 +1089,12 @@
                 "type": "string"
               }
             }
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           }
         }
       },
@@ -1169,9 +1111,8 @@
           "technicalStaff",
           "floor",
           "address",
-          "latitude",
-          "longitude",
-          "country"
+          "country",
+          "latitude"
         ],
         "properties": {
           "name": {
@@ -1222,12 +1163,6 @@
           "address": {
             "type": "string"
           },
-          "latitude": {
-            "type": "string"
-          },
-          "longitude": {
-            "type": "string"
-          },
           "users_permissions_user": {
             "type": "string"
           },
@@ -1273,6 +1208,12 @@
           },
           "city": {
             "type": "string"
+          },
+          "latitude": {
+            "type": "number"
+          },
+          "longitude": {
+            "type": "number"
           },
           "created_by": {
             "type": "string"

@@ -177,7 +177,13 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           <Link href="/">
             <Back />
           </Link>
-          <Link href={ROUTE_ACCOUNT}>
+          <Link
+            href={
+              user?.type === 'company'
+                ? ROUTE_ACCOUNT_REQUEST
+                : ROUTE_ACCOUNT_PLACES
+            }
+          >
             <Image ml={3} src="/assets/img/logo-studio-d.svg" w="100px" />
           </Link>
         </Flex>

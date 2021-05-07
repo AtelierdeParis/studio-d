@@ -42,7 +42,6 @@ const PlaceDetail = ({ place }: Props) => {
   return (
     <Box>
       <PlaceHeader place={place} />
-
       <Container px={{ base: 3, lg: 5 }}>
         <Stack
           direction={{ base: 'column-reverse', lg: 'row' }}
