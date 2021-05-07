@@ -327,6 +327,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.structure')}
                 errors={errors.structureName}
                 flex={1}
+                isRequired
                 isComplete={isComplete}
               >
                 <Input name="structureName" ref={register} />
@@ -353,6 +354,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.siret')}
                 errors={errors.siret}
                 isComplete={isComplete}
+                isRequired
               >
                 <Input name="siret" ref={register} />
               </FormField>
@@ -360,6 +362,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.ape')}
                 errors={errors.ape}
                 isComplete={isComplete}
+                isRequired
               >
                 <Input name="ape" ref={register} />
               </FormField>
@@ -376,6 +379,7 @@ const AccountInformation = ({ user }: Props) => {
                 label={t('information.phone.label')}
                 errors={errors.phone}
                 isComplete={isComplete}
+                isRequired
               >
                 <Input name="phone" ref={register} />
               </FormField>
