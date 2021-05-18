@@ -96,7 +96,7 @@
     },
     "completed": {
         "title": "Confirmez votre adresse email",
-        "text": "Afin de finaliser votre demande d’inscription, nous avons besoin que vous confirmiez votre adresse email. Vous recevrez sous peu un email de confirmation. Votre compte sera ensuite placé en attente de validation par StudioD, nécessaire afin de pouvoir déposer votre première demande de réservation.",
+        "text": "Afin de finaliser votre demande d’inscription, nous avons besoin que vous confirmiez votre adresse email. Vous recevrez sous peu un email de confirmation. Votre compte sera ensuite placé en attente de validation par StudioD.",
         "btn": "Retour à l’accueil"
     },
     "error": {
