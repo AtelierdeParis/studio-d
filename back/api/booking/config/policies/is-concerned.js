@@ -1,5 +1,6 @@
 module.exports = async (ctx, next) => {
   const { id } = ctx.params;
+
   if (id && ctx.state.user) {
     const { user } = ctx.state;
     const booking = await strapi.query("booking").findOne({ id });

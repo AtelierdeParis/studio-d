@@ -15,7 +15,7 @@
       "path": "/bookings",
       "handler": "booking.find",
       "config": {
-        "policies": ["is-concerned"]
+        "policies": []
       }
     },
     {

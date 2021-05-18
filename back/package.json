@@ -1,7 +1,6 @@
 {
   "name": "studio-d",
   "private": true,
-  "version": "0.1.0",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
