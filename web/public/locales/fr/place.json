@@ -350,7 +350,7 @@
         "filledUntil": {
             "title": {
                 "empty" : "L'espace n'a pas de créneaux disponibles",
-                "default" : "L’espace n’a plus de créneaux disponibles jusqu'au {{date}}"
+                "default" : "L’espace n’a pas de créneaux renseignés au-delà du {{date}} pour le moment."
             },
             "text": {
                 "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",
