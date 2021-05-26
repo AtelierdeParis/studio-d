@@ -16,8 +16,8 @@
       "required": true
     },
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "dispositif"
+      "via": "dispositif",
+      "collection": "disponibility"
     },
     "actif": {
       "type": "boolean",

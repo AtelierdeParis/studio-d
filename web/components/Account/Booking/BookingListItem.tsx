@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from 'react'
-import { format } from '~utils/date'
+import { format, orderByDate } from '~utils/date'
 import Message from 'public/assets/img/message.svg'
 import Tag from '~components/Tag'
 import CircleStatus from '~components/CircleStatus'
@@ -80,11 +80,15 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
       </Cell>
       <Cell status={status} onClick={() => onSelect(booking.id)}>
         <Flex direction="column">
-          {booking?.disponibilities.map((dispo) => (
+          {orderByDate(booking?.disponibilities, 'start').map((dispo) => (
             <Flex
               py={0.5}
               alignItems="center"
               whiteSpace="nowrap"
+              color={dispo.status === 'removed' ? 'gray.400' : 'black'}
+              textDecoration={
+                dispo.status === 'removed' ? 'line-through' : 'none'
+              }
               key={dispo.id}
             >
               <Text>{format(dispo.start, 'd MMM yyyy')}</Text>

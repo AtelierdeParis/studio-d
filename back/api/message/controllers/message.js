@@ -47,6 +47,7 @@ module.exports = {
           "place",
           "company",
           "booking",
+          "disponibilities",
           "booking.disponibilities",
         ]),
       {

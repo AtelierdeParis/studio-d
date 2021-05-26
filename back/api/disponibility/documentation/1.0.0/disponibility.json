@@ -768,7 +768,8 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
@@ -858,6 +859,68 @@
               }
             }
           },
+          "message": {
+            "required": [
+              "id",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
+              "company": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "accepted",
+                  "created",
+                  "requestcanceled",
+                  "requestcanceledbyplace",
+                  "bookingcanceledbyplace",
+                  "askcancel",
+                  "message",
+                  "disporemovedbyplace",
+                  "disporemovedbycompany"
+                ]
+              },
+              "booking": {
+                "type": "string"
+              },
+              "hasbeenread": {
+                "type": "boolean"
+              },
+              "notified": {
+                "type": "boolean"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -907,13 +970,17 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
             "type": "string"
           },
           "dispositif": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           },
           "published_at": {

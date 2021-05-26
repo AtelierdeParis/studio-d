@@ -415,6 +415,12 @@
             "company": {
               "$ref": "#/components/schemas/UsersPermissionsUser"
             },
+            "disponibilities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Disponibility"
+              }
+            },
             "booking": {
               "$ref": "#/components/schemas/Booking"
             },

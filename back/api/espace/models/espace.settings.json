@@ -98,8 +98,8 @@
       "via": "espaces"
     },
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "espace"
+      "via": "espace",
+      "collection": "disponibility"
     },
     "scheduleDetails": {
       "type": "text"

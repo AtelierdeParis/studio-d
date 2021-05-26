@@ -98,7 +98,7 @@ const BookingList = ({ bookings, type }: Props) => {
         </Cell>
         <Cell isHeader display={{ base: 'none', xl: 'flex' }}>
           <Divider />
-          <Text>{t(user.type === 'place' ? 'company' : 'structure')}</Text>
+          <Text>{t(user?.type === 'place' ? 'company' : 'structure')}</Text>
         </Cell>
         <Cell isHeader>
           <Divider />

@@ -198,7 +198,7 @@ export interface Disponibility {
     updated_by?: string;
   };
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled";
+  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
   booking?: {
     id: string;
     disponibilities?: string[];
@@ -227,6 +227,29 @@ export interface Disponibility {
     created_by?: string;
     updated_by?: string;
   };
+  message?: {
+    id: string;
+    message?: string;
+    place?: string;
+    company?: string;
+    author?: "company" | "place";
+    status:
+      | "accepted"
+      | "created"
+      | "requestcanceled"
+      | "requestcanceledbyplace"
+      | "bookingcanceledbyplace"
+      | "askcancel"
+      | "message"
+      | "disporemovedbyplace"
+      | "disporemovedbycompany";
+    booking?: string;
+    hasbeenread?: boolean;
+    notified?: boolean;
+    disponibilities?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
 
   /** @format date-time */
   published_at?: string;
@@ -242,9 +265,10 @@ export interface NewDisponibility {
   end: string;
   espace?: string;
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled";
+  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
   booking?: string;
   dispositif?: string;
+  message?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -262,9 +286,10 @@ export interface Dispositif {
     end: string;
     espace?: string;
     type: "punctual" | "day" | "period";
-    status: "available" | "booked" | "pending" | "past" | "canceled";
+    status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
     booking?: string;
     dispositif?: string;
+    message?: string;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -477,6 +502,7 @@ export interface Message {
   created_at?: string;
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
+  disponibilities?: Disponibility[];
   booking?: Booking;
   status:
     | "accepted"
@@ -501,10 +527,13 @@ export interface NewMessage {
     | "requestcanceledbyplace"
     | "bookingcanceledbyplace"
     | "askcancel"
-    | "message";
+    | "message"
+    | "disporemovedbyplace"
+    | "disporemovedbycompany";
   booking?: string;
   hasbeenread?: boolean;
   notified?: boolean;
+  disponibilities?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -915,6 +944,20 @@ export namespace Bookings {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = number;
+  }
+  /**
+   * @description Update a record
+   * @tags Booking
+   * @name RemoveDispos
+   * @request PUT:/bookings/{id}/remove-dispo
+   * @secure
+   */
+  export namespace RemoveDispos {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = { dispos?: string[] };
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
   }
 }
 
@@ -2911,6 +2954,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/bookings/${id}`,
         method: "DELETE",
         secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Booking
+     * @name RemoveDispos
+     * @request PUT:/bookings/{id}/remove-dispo
+     * @secure
+     */
+    removeDispos: (id: string, data: { dispos?: string[] }, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/bookings/${id}/remove-dispo`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

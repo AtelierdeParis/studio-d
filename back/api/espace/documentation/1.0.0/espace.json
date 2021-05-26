@@ -962,13 +962,17 @@
                     "booked",
                     "pending",
                     "past",
-                    "canceled"
+                    "canceled",
+                    "removed"
                   ]
                 },
                 "booking": {
                   "type": "string"
                 },
                 "dispositif": {
+                  "type": "string"
+                },
+                "message": {
                   "type": "string"
                 },
                 "published_at": {

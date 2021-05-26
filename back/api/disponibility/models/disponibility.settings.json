@@ -48,7 +48,8 @@
         "booked",
         "pending",
         "past",
-        "canceled"
+        "canceled",
+        "removed"
       ],
       "default": "available",
       "required": true
@@ -60,6 +61,10 @@
     "dispositif": {
       "via": "disponibilities",
       "model": "dispositif"
+    },
+    "message": {
+      "via": "disponibilities",
+      "model": "message"
     }
   }
 }

@@ -12,6 +12,7 @@ import {
   Divider,
   Box,
   BoxProps,
+  ModalBodyProps,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 
@@ -20,9 +21,12 @@ interface Props extends BoxProps {
   isOpen?: boolean
   isLoading?: boolean
   children: React.ReactNode
+  hasHeaderDivider?: boolean
   title: string
+  bodyStyle?: ModalBodyProps
   closeText?: string
   size?: string
+  isDisabled?: boolean
   confirmText?: string
   button?: JSX.Element
   onConfirm: () => Promise<any>
@@ -40,7 +44,10 @@ const Modal = ({
   size = 'md',
   isOpen = false,
   onClose = null,
+  isDisabled = false,
   initialRef = null,
+  hasHeaderDivider = true,
+  bodyStyle = {},
   ...rest
 }: Props) => {
   const [isLoadingInternal, setLoading] = useState(false)
@@ -87,10 +94,10 @@ const Modal = ({
             fontFamily="mabry medium"
           >
             {title}
-            <Divider my={6} />
+            {hasHeaderDivider && <Divider my={6} borderColor="gray.100" />}
           </ModalHeader>
           <ModalCloseButton top="20px" />
-          <ModalBody px={6} pt={0} color="gray.600">
+          <ModalBody px={6} pt={0} color="gray.600" {...bodyStyle}>
             {children}
           </ModalBody>
           <ModalFooter py={6}>
@@ -107,6 +114,7 @@ const Modal = ({
             <Button
               onClick={onClick}
               size="lg"
+              isDisabled={isDisabled}
               isLoading={isLoading || isLoadingInternal}
             >
               {confirmText || t('confirm')}

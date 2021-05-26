@@ -1067,7 +1067,9 @@
               "requestcanceledbyplace",
               "bookingcanceledbyplace",
               "askcancel",
-              "message"
+              "message",
+              "disporemovedbyplace",
+              "disporemovedbycompany"
             ]
           },
           "booking": {
@@ -1126,6 +1128,77 @@
           "notified": {
             "type": "boolean",
             "default": false
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "when": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
+                },
+                "start": {
+                  "type": "string"
+                },
+                "end": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "available",
+                    "booked",
+                    "pending",
+                    "past",
+                    "canceled",
+                    "removed"
+                  ]
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1159,7 +1232,9 @@
               "requestcanceledbyplace",
               "bookingcanceledbyplace",
               "askcancel",
-              "message"
+              "message",
+              "disporemovedbyplace",
+              "disporemovedbycompany"
             ]
           },
           "booking": {
@@ -1172,6 +1247,12 @@
           "notified": {
             "type": "boolean",
             "default": false
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

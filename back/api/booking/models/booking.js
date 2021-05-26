@@ -11,6 +11,12 @@ const locale = {
   locale: fr,
 };
 
+const deleteRemovedDispos = (bookingId) => {
+  return strapi
+    .query("disponibility")
+    .delete({ booking: bookingId, status: "removed" });
+};
+
 const updateDispo = (dispos = [], status) => {
   if (!dispos || dispos.length === 0) return null;
   const data = { status };
@@ -162,6 +168,7 @@ module.exports = {
               status: "requestcanceled",
               ...rel,
             });
+            await deleteRemovedDispos(updated.id);
             updateDispo(updated.disponibilities, "available");
 
             // Send email to the place
@@ -190,6 +197,7 @@ module.exports = {
               status: "requestcanceledbyplace",
               ...rel,
             });
+            await deleteRemovedDispos(updated.id);
             updateDispo(updated.disponibilities, "available");
 
             // Send email to the company

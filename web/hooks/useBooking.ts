@@ -4,7 +4,7 @@ import { Booking } from '~typings/api'
 
 export const useBooking = (id: string, options?: UseQueryOptions<Booking>) => {
   return useQuery(
-    ['booking', id],
+    ['booking', id.toString()],
     () => client.bookings.bookingsDetail(id).then((res) => res.data),
     options,
   )

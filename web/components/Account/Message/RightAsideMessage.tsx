@@ -64,7 +64,11 @@ const RightAsideMessage = ({ bookings, user }: Props) => {
                     <Text fontWeight="500" mr={1} fontFamily="mabry medium">
                       Réf. {booking.id},
                     </Text>
-                    <DateBooking dispos={booking.disponibilities} />
+                    <DateBooking
+                      dispos={booking.disponibilities.filter(
+                        (dispo) => dispo.status !== 'removed',
+                      )}
+                    />
                   </Flex>
                   <Flex alignItems="center">
                     <Tag status={booking.status} />

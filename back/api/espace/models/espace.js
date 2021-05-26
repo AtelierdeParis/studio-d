@@ -47,7 +47,6 @@ module.exports = {
       await checkCity(data);
     },
     beforeUpdate: async (params, data) => {
-      console.log(data);
       if (data.name) {
         await generateSlug(data, params);
       }

@@ -51,6 +51,14 @@
       }
     },
     {
+      "method": "PUT",
+      "path": "/bookings/:id/remove-dispo",
+      "handler": "booking.removeDispo",
+      "config": {
+        "policies": ["is-concerned"]
+      }
+    },
+    {
       "method": "DELETE",
       "path": "/bookings/:id",
       "handler": "booking.delete",

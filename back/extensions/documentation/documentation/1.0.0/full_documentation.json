@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/26/2021 11:11:35 AM"
+    "x-generation-date": "05/26/2021 3:57:19 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1138,6 +1138,93 @@
             }
           }
         ]
+      }
+    },
+    "/bookings/{id}/remove-dispo": {
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "dispos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "removeDispos"
       }
     },
     "/cities": {
@@ -10000,7 +10087,8 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
@@ -10090,6 +10178,68 @@
               }
             }
           },
+          "message": {
+            "required": [
+              "id",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
+              "company": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "accepted",
+                  "created",
+                  "requestcanceled",
+                  "requestcanceledbyplace",
+                  "bookingcanceledbyplace",
+                  "askcancel",
+                  "message",
+                  "disporemovedbyplace",
+                  "disporemovedbycompany"
+                ]
+              },
+              "booking": {
+                "type": "string"
+              },
+              "hasbeenread": {
+                "type": "boolean"
+              },
+              "notified": {
+                "type": "boolean"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -10139,13 +10289,17 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
             "type": "string"
           },
           "dispositif": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           },
           "published_at": {
@@ -10218,13 +10372,17 @@
                     "booked",
                     "pending",
                     "past",
-                    "canceled"
+                    "canceled",
+                    "removed"
                   ]
                 },
                 "booking": {
                   "type": "string"
                 },
                 "dispositif": {
+                  "type": "string"
+                },
+                "message": {
                   "type": "string"
                 },
                 "published_at": {
@@ -10968,6 +11126,12 @@
           "company": {
             "$ref": "#/components/schemas/UsersPermissionsUser"
           },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Disponibility"
+            }
+          },
           "booking": {
             "$ref": "#/components/schemas/Booking"
           },
@@ -11022,7 +11186,9 @@
               "requestcanceledbyplace",
               "bookingcanceledbyplace",
               "askcancel",
-              "message"
+              "message",
+              "disporemovedbyplace",
+              "disporemovedbycompany"
             ]
           },
           "booking": {
@@ -11035,6 +11201,12 @@
           "notified": {
             "type": "boolean",
             "default": false
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

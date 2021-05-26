@@ -12,7 +12,14 @@ const formatError = (error) => ({
  * to customize this controller
  */
 
-const populate = ["disponibilities", "company", "espace", "place", "messages"];
+const populate = [
+  "disponibilities",
+  "company",
+  "espace",
+  "place",
+  "messages",
+  "messages.disponibilities",
+];
 
 const filterBookings = (type) => {
   switch (type) {
@@ -30,6 +37,85 @@ const filterBookings = (type) => {
 };
 
 module.exports = {
+  async removeDispo(ctx) {
+    const { id } = ctx.params;
+    const { dispos } = ctx.request.body;
+    const { type } = ctx.state.user;
+
+    if (!dispos || (Array.isArray(dispos) && dispos.length === 0))
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: "error.noDispo",
+          message: "You must provide at least one disponibility",
+        })
+      );
+
+    const booking = await strapi.query("booking").findOne(
+      {
+        id,
+      },
+      []
+    );
+
+    if (!booking) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: "error.bookingNotFound",
+          message: "Booking not found",
+        })
+      );
+    }
+
+    const disponibilities = await strapi.query("disponibility").find(
+      {
+        id: dispos,
+      },
+      []
+    );
+
+    if (!disponibilities) {
+      return ctx.badRequest(
+        null,
+        formatError({
+          id: "error.disposNotFound",
+          message: "Disponibilities not found",
+        })
+      );
+    }
+
+    return Promise.all(
+      disponibilities.map(({ id, ...rest }) =>
+        strapi.query("disponibility").create({ ...rest, status: "removed" })
+      )
+    ).then(async (res) => {
+      await Promise.all(
+        dispos.map((id) =>
+          strapi
+            .query("disponibility")
+            .update({ id }, { status: "available", booking: null })
+        )
+      );
+
+      await strapi.services.message.create({
+        author: type,
+        status:
+          type === "place" ? "disporemovedbyplace" : "disporemovedbycompany",
+        booking: id,
+        place: booking.place,
+        company: booking.company,
+        disponibilities: res.map(({ id }) => id),
+      });
+
+      return strapi.query("booking").findOne(
+        {
+          id,
+        },
+        populate
+      );
+    });
+  },
   async myBookings(ctx) {
     const { bookingType } = ctx.params;
     const { id, type } = ctx.state.user;
@@ -59,6 +145,12 @@ module.exports = {
           })
         );
       });
+  },
+  async findOne(ctx) {
+    const { id } = ctx.params;
+
+    const entity = await strapi.services.booking.findOne({ id }, populate);
+    return sanitizeEntity(entity, { model: strapi.models.booking });
   },
   async create(ctx) {
     const { id, type, confirmed } = ctx.state.user;

@@ -1,5 +1,6 @@
 import React from 'react'
 import { getHistoryInfo } from '~utils/message'
+import { getBookingType } from '~utils/booking'
 import { Message } from '~typings/api'
 import { Flex, Circle, Text } from '@chakra-ui/react'
 
@@ -14,6 +15,8 @@ const HistoryLine = ({ message, isAuthor, type }: Props) => {
     message.status,
     message.booking,
     type,
+    getBookingType(message.booking.status),
+    message.disponibilities,
   )
 
   return (
