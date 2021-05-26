@@ -41,7 +41,7 @@ const RemoveDispoModal = ({ booking, type, setSelected }: Props) => {
     client.bookings
       .removeDispos(booking?.id, { dispos: selectedDispos })
       .then((res) => {
-        // setSelected(null)
+        setSelectedDispos([])
         queryClient.setQueryData(['booking', booking.id.toString()], res.data)
       })
       .finally(() => setLoading(false))

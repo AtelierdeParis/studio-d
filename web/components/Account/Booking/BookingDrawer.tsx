@@ -277,7 +277,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         >
                           <Text ml={2}>
                             {t(
-                              user.type === 'company'
+                              user?.type === 'company'
                                 ? `message`
                                 : 'messageCompany',
                             )}
@@ -294,11 +294,13 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                             setSelected={setSelected}
                           />
                         )}
-                      <RemoveDispoModal
-                        type={type}
-                        booking={booking}
-                        setSelected={setSelected}
-                      />
+                      {user?.type === 'place' && (
+                        <RemoveDispoModal
+                          type={type}
+                          booking={booking}
+                          setSelected={setSelected}
+                        />
+                      )}
                       {booking?.status === BookingStatus.ACCEPTED &&
                         user.type === 'company' && (
                           <AskCancelModal

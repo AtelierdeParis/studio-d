@@ -55,7 +55,7 @@
       "path": "/bookings/:id/remove-dispo",
       "handler": "booking.removeDispo",
       "config": {
-        "policies": ["is-concerned"]
+        "policies": ["is-concerned", "global::is-place"]
       }
     },
     {

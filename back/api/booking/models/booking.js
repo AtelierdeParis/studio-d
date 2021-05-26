@@ -326,3 +326,5 @@ module.exports = {
     },
   },
 };
+
+module.exports.getDispoEmail = getDispoEmail;
