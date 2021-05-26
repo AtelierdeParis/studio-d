@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/dispositifs",
+      "handler": "dispositif.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dispositifs/count",
+      "handler": "dispositif.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/dispositifs/:id",
+      "handler": "dispositif.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/dispositifs",
+      "handler": "dispositif.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/dispositifs/:id",
+      "handler": "dispositif.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/dispositifs/:id",
+      "handler": "dispositif.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

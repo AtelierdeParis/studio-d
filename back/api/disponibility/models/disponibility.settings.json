@@ -56,6 +56,10 @@
     "booking": {
       "model": "booking",
       "via": "disponibilities"
+    },
+    "dispositif": {
+      "via": "disponibilities",
+      "model": "dispositif"
     }
   }
 }

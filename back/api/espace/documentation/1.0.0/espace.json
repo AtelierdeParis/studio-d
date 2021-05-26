@@ -902,6 +902,12 @@
               "external_id": {
                 "type": "integer"
               },
+              "dispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -960,6 +966,9 @@
                   ]
                 },
                 "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
                   "type": "string"
                 },
                 "published_at": {

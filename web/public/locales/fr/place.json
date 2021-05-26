@@ -29,7 +29,7 @@
     "form": {
         "migration": {
             "title": "Finalisez votre migration de compte",
-            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet  à la nouvelle interface."
+            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
         },
         "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
         "error": "Une erreur est survenue en lors de l'enregistrement",
@@ -239,6 +239,10 @@
         "startDate": "Date de début",
         "endDate": "Date de fin",
         "repeat": "Répéter",
+        "dispositif": {
+            "label" :"Dispositifs disponibles",
+            "placeholder": "Choisir un dispositif"
+        },
         "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
         "repeatNb": "Répéter les",
         "repeatType": {

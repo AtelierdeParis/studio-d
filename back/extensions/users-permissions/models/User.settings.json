@@ -143,6 +143,10 @@
     },
     "external_id": {
       "type": "integer"
+    },
+    "dispositifs": {
+      "via": "users_permissions_users",
+      "collection": "dispositif"
     }
   }
 }

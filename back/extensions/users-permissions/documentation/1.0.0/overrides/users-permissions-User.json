@@ -917,6 +917,12 @@
             "items": {
               "$ref": "#/components/schemas/Booking"
             }
+          },
+          "dispositifs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dispositif"
+            }
           }
         }
       },

@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { HStack, Box, VStack, Button, Flex, Select } from '@chakra-ui/react'
 import ScheduleDates from '~components/Account/Place/ScheduleDates'
 import ScheduleRepeat from '~components/Account/Place/ScheduleRepeat'
+import ScheduleDispositif from '~components/Account/Place/ScheduleDispositif'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
 import * as yup from 'yup'
@@ -16,6 +17,7 @@ import ScheduleContext from '~components/Account/Place/ScheduleContext'
 
 export const schema = yup.object().shape({
   type: yup.string().required(),
+  dispositif: yup.string().optional(),
   when: yup.string().when('type', {
     is: ScheduleEventType.PUNCTUAL,
     then: yup.string().required(),
@@ -50,7 +52,7 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
   const { register, errors, handleSubmit, watch, control } = useFormContext()
   const { type, repeat } = watch(['type', 'repeat'])
 
-  const submitForm = async ({ type, start, end, when }) => {
+  const submitForm = async ({ type, start, end, when, dispositif }) => {
     if (newEvents.length === 0) return
     const events = []
 
@@ -78,6 +80,7 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
         events.flat().map((event) => ({
           ...event,
           espace: place.id,
+          dispositif: dispositif !== '' ? dispositif : null,
         })),
       )
       .then((res) => {
@@ -137,6 +140,7 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
           {Boolean(type) && (
             <>
               <ScheduleDates control={control} />
+              <ScheduleDispositif control={control} />
               <ScheduleRepeat control={control} />
             </>
           )}

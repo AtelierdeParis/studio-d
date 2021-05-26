@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/disponibilities": {
+    "/dispositifs": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Disponibility"
+                    "$ref": "#/components/schemas/Dispositif"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Dispositif"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "$ref": "#/components/schemas/NewDispositif"
               }
             }
           }
         }
       }
     },
-    "/disponibilities/count": {
+    "/dispositifs/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "parameters": []
       }
     },
-    "/disponibilities/{id}": {
+    "/dispositifs/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Dispositif"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Disponibility"
+                  "$ref": "#/components/schemas/Dispositif"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewDisponibility"
+                "$ref": "#/components/schemas/NewDispositif"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Disponibility"
+          "Dispositif"
         ],
         "parameters": [
           {
@@ -510,415 +510,265 @@
           }
         ]
       }
-    },
-    "/bulk/disponibilities": {
-      "post": {
-        "deprecated": false,
-        "description": "Create a new record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "Disponibility": {
+      "Dispositif": {
         "required": [
           "id",
-          "start",
-          "end",
-          "type",
-          "status"
+          "name"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
+          "name": {
+            "type": "string"
           },
-          "start": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "end": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "espace": {
-            "required": [
-              "id",
-              "name",
-              "surface",
-              "roomLength",
-              "width",
-              "height",
-              "mirror",
-              "danceBar",
-              "accomodation",
-              "technicalStaff",
-              "floor",
-              "address",
-              "country",
-              "latitude"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "surface": {
-                "type": "number"
-              },
-              "roomLength": {
-                "type": "number"
-              },
-              "width": {
-                "type": "number"
-              },
-              "height": {
-                "type": "number"
-              },
-              "mirror": {
-                "type": "boolean"
-              },
-              "danceBar": {
-                "type": "boolean"
-              },
-              "accomodation": {
-                "type": "boolean"
-              },
-              "technicalStaff": {
-                "type": "boolean"
-              },
-              "floor": {
-                "type": "string",
-                "enum": [
-                  "plancherDanse",
-                  "parquetTraditionnel",
-                  "other",
-                  "todefine"
-                ]
-              },
-              "otherFloor": {
-                "type": "string"
-              },
-              "about": {
-                "type": "string"
-              },
-              "details": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "files": {
-                "type": "array",
-                "items": {
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "when": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
+                },
+                "start": {
+                  "type": "string"
+                },
+                "end": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "available",
+                    "booked",
+                    "pending",
+                    "past",
+                    "canceled"
+                  ]
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
                   "type": "string"
                 }
-              },
-              "images": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "users_permissions_user": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "scheduleDetails": {
-                "type": "string"
-              },
-              "filledUntil": {
-                "type": "string"
-              },
-              "published": {
-                "type": "boolean"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "country": {
-                "type": "string"
-              },
-              "external_id": {
-                "type": "integer"
-              },
-              "danceCarpet": {
-                "type": "string",
-                "enum": [
-                  "true",
-                  "false",
-                  "possible"
-                ]
-              },
-              "slug": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longitude": {
-                "type": "number"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
           },
-          "type": {
-            "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
+          "actif": {
+            "type": "boolean",
+            "default": true
           },
-          "status": {
+          "expiration": {
             "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past",
-              "canceled"
-            ]
+            "format": "date"
           },
-          "booking": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
+          "users_permissions_users": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "email",
+                "username",
+                "firstname",
+                "lastname",
+                "structureName",
+                "address",
+                "zipCode",
+                "city",
+                "country",
+                "siret",
+                "ape",
+                "phone",
+                "license",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "accepted": {
+                  "type": "boolean"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "structureName": {
+                  "type": "string"
+                },
+                "socialReason": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "siret": {
+                  "type": "string"
+                },
+                "ape": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "license": {
+                  "type": "string"
+                },
+                "website": {
+                  "type": "string"
+                },
+                "legalRepresentative": {
+                  "type": "string"
+                },
+                "statusRepresentative": {
+                  "type": "string"
+                },
+                "insuranceNumber": {
+                  "type": "string"
+                },
+                "insuranceName": {
+                  "type": "string"
+                },
+                "choreographer": {
+                  "type": "string"
+                },
+                "espaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
+                },
+                "external_id": {
+                  "type": "integer"
+                },
+                "dispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
                   "type": "string"
                 }
-              },
-              "status": {
-                "type": "string",
-                "enum": [
-                  "requestcanceled",
-                  "requestcanceledbyplace",
-                  "bookingcanceledbyplace",
-                  "askcancel",
-                  "past",
-                  "accepted",
-                  "pending"
-                ]
-              },
-              "messages": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "espace": {
-                "type": "string"
-              },
-              "place": {
-                "type": "string"
-              },
-              "company": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
               }
             }
-          },
-          "dispositif": {
-            "required": [
-              "id",
-              "name"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "disponibilities": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "actif": {
-                "type": "boolean"
-              },
-              "expiration": {
-                "type": "string"
-              },
-              "users_permissions_users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
-      "NewDisponibility": {
+      "NewDispositif": {
         "required": [
-          "start",
-          "end",
-          "type",
-          "status"
+          "name"
         ],
         "properties": {
-          "when": {
-            "type": "string",
-            "enum": [
-              "morning",
-              "afternoon",
-              "full"
-            ]
-          },
-          "start": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "end": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "espace": {
+          "name": {
             "type": "string"
           },
-          "type": {
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "actif": {
+            "type": "boolean",
+            "default": true
+          },
+          "expiration": {
             "type": "string",
-            "enum": [
-              "punctual",
-              "day",
-              "period"
-            ]
+            "format": "date"
           },
-          "status": {
-            "type": "string",
-            "default": "available",
-            "enum": [
-              "available",
-              "booked",
-              "pending",
-              "past",
-              "canceled"
-            ]
-          },
-          "booking": {
-            "type": "string"
-          },
-          "dispositif": {
-            "type": "string"
-          },
-          "published_at": {
-            "type": "string",
-            "format": "date-time"
+          "users_permissions_users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
@@ -932,7 +782,7 @@
   },
   "tags": [
     {
-      "name": "Disponibility"
+      "name": "Dispositif"
     }
   ]
 }
