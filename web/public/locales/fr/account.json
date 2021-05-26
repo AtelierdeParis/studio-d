@@ -35,6 +35,7 @@
         "place": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les compagnies par messagerie. Commencez par inscrire un premier espace de répétition, ou jetez un oeil <a>à notre charte d’utilisation</a>."
     },
     "seePlaces": "Voir les espaces",
+    "seeMyPlaces": "Voir mes espaces",
     "information": {
         "migration": {
             "title": "Bienvenue sur le nouveau StudioD",
