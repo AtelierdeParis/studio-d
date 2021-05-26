@@ -229,6 +229,16 @@ a {
 .placeCard .swiper-button-prev.swiper-button-disabled {
   opacity: 0;
 }
+
+@media screen and (max-width: 800px) {
+  .placeCard .swiper-button-next,
+  .placeCard .swiper-button-prev,
+  .placeCard .swiper-button-next.swiper-button-disabled,
+  .placeCard .swiper-button-prev.swiper-button-disabled {
+    opacity: 1;
+  }
+}
+
 .placeCard:hover .swiper-button-next.swiper-button-disabled,
 .placeCard:hover .swiper-button-prev.swiper-button-disabled {
   opacity: 0.35;

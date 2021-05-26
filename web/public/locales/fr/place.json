@@ -318,6 +318,7 @@
         "true": "Oui",
         "false": "Non",
         "possible":"Possible *",
+        "available":"Possible *",
         "calendar": "Calendrier des disponibilités",
         "about": "À propos de l’espace",
         "details": "Détails techniques",
