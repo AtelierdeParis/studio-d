@@ -9,6 +9,7 @@ const isPast = require("date-fns/isPast");
 
 module.exports = {
   async checkIsPast(booking) {
+    if (!booking.disponibilities) return booking;
     if (
       booking.status === "pending" &&
       isPast(min(booking.disponibilities.map((dispo) => new Date(dispo.start))))

@@ -239,6 +239,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                   />
                 </Box>
                 {![
+                  'expired',
                   'requestcanceled',
                   'requestcanceledbyplace',
                   'bookingcanceledbyplace',

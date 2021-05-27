@@ -23,14 +23,16 @@ const updateDispo = (dispos = [], status) => {
   if (status === "available") {
     data.booking = null;
   }
-  dispos.map((dispo) => {
-    strapi.query("disponibility").update({ id: dispo.id }, data);
-    if (status === "available") {
-      strapi
-        .query("disponibility")
-        .create({ ...dispo, place: null, status: "canceled" });
-    }
-  });
+  dispos
+    .filter((dispo) => dispo.status !== "removed")
+    .map((dispo) => {
+      strapi.query("disponibility").update({ id: dispo.id }, data);
+      if (status === "available") {
+        strapi
+          .query("disponibility")
+          .create({ ...dispo, place: null, status: "canceled" });
+      }
+    });
 };
 
 const getDispoEmail = (dispos = []) => {
