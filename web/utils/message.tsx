@@ -144,14 +144,14 @@ export const getHistoryInfo = (
         color: 'red.600',
         text: <Trans i18nKey={`booking:history.${userType}.canceledByYou`} />,
       }
-    case 'disporemovedbyplace':
-    case 'disporemovedbycompany':
+    case 'requestdisporemovedbyplace':
+    case 'bookingdisporemovedbyplace':
       return {
         colorCircle: 'red.600',
         color: 'red.600',
         text: getDisposRemovedText(
           userType,
-          status,
+          'disporemovedbyplace',
           bookingType,
           disponibilities,
         ),

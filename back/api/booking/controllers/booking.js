@@ -112,21 +112,21 @@ module.exports = {
         )
       );
 
-      // Create history message
-      await strapi.services.message.create({
-        author: "place",
-        status: "disporemovedbyplace",
-        booking: id,
-        place: booking.place,
-        company: booking.company,
-        disponibilities: res.map(({ id }) => id),
-      });
-
       const bookingUpdated = await strapi
         .query("booking")
         .findOne({ id }, populate);
 
       const bookingType = getBookingType(bookingUpdated.status);
+
+      // Create history message
+      await strapi.services.message.create({
+        author: "place",
+        status: `${bookingType}disporemovedbyplace`,
+        booking: id,
+        place: booking.place,
+        company: booking.company,
+        disponibilities: res.map(({ id }) => id),
+      });
 
       let dispos_wording = "";
 

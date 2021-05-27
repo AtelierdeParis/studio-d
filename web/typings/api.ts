@@ -241,7 +241,8 @@ export interface Disponibility {
       | "bookingcanceledbyplace"
       | "askcancel"
       | "message"
-      | "disporemovedbyplace"
+      | "requestdisporemovedbyplace"
+      | "bookingdisporemovedbyplace"
       | "disporemovedbycompany";
     booking?: string;
     hasbeenread?: boolean;
@@ -528,7 +529,8 @@ export interface NewMessage {
     | "bookingcanceledbyplace"
     | "askcancel"
     | "message"
-    | "disporemovedbyplace"
+    | "requestdisporemovedbyplace"
+    | "bookingdisporemovedbyplace"
     | "disporemovedbycompany";
   booking?: string;
   hasbeenread?: boolean;

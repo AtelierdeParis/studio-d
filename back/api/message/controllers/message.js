@@ -6,9 +6,20 @@ const getTarget = (type) => (type === "place" ? "company" : "place");
 const mapStatus = (status) => {
   switch (status) {
     case "booking":
-      return ["past", "accepted", "bookingcanceledbyplace", "askcancel"];
+      return [
+        "past",
+        "accepted",
+        "bookingcanceledbyplace",
+        "askcancel",
+        "bookingdisporemovedbyplace",
+      ];
     case "request":
-      return ["requestcanceled", "requestcanceledbyplace", "created"];
+      return [
+        "requestcanceled",
+        "requestcanceledbyplace",
+        "created",
+        "requestdisporemovedbyplace",
+      ];
     case "message":
       return ["message"];
   }

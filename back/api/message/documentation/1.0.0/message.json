@@ -1068,7 +1068,8 @@
               "bookingcanceledbyplace",
               "askcancel",
               "message",
-              "disporemovedbyplace",
+              "requestdisporemovedbyplace",
+              "bookingdisporemovedbyplace",
               "disporemovedbycompany"
             ]
           },
@@ -1233,7 +1234,8 @@
               "bookingcanceledbyplace",
               "askcancel",
               "message",
-              "disporemovedbyplace",
+              "requestdisporemovedbyplace",
+              "bookingdisporemovedbyplace",
               "disporemovedbycompany"
             ]
           },

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "05/27/2021 12:58:14 PM"
+    "x-generation-date": "05/27/2021 1:51:58 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10213,7 +10213,8 @@
                   "bookingcanceledbyplace",
                   "askcancel",
                   "message",
-                  "disporemovedbyplace",
+                  "requestdisporemovedbyplace",
+                  "bookingdisporemovedbyplace",
                   "disporemovedbycompany"
                 ]
               },
@@ -11187,7 +11188,8 @@
               "bookingcanceledbyplace",
               "askcancel",
               "message",
-              "disporemovedbyplace",
+              "requestdisporemovedbyplace",
+              "bookingdisporemovedbyplace",
               "disporemovedbycompany"
             ]
           },

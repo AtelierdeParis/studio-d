@@ -41,7 +41,8 @@
         "bookingcanceledbyplace",
         "askcancel",
         "message",
-        "disporemovedbyplace",
+        "requestdisporemovedbyplace",
+        "bookingdisporemovedbyplace",
         "disporemovedbycompany"
       ],
       "required": true
