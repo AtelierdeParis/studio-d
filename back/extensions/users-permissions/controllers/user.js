@@ -53,7 +53,9 @@ module.exports = {
           })
         );
       }
-      ctx.request.body.email = ctx.request.body.email.toLowerCase();
+      const newEmail = ctx.request.body.email.toLowerCase();
+      ctx.request.body.email = newEmail;
+      ctx.request.body.username = newEmail;
     }
 
     let updateData = {
