@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import { saveAs } from 'file-saver'
 import {
@@ -38,6 +38,15 @@ interface Props {
 const PlaceDetail = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, lg: false })
+
+  const displayPrecise = useMemo(() => {
+    if (!place) return false
+    return (
+      place.accomodation ||
+      place.technicalStaff ||
+      place.danceCarpet === 'possible'
+    )
+  }, [place])
 
   return (
     <Box>
@@ -105,7 +114,10 @@ const PlaceDetail = ({ place }: Props) => {
             {!isMobile && (
               <>
                 <Divider mt={5} mb={2} opacity={0.4} />
-                <PlaceAttributesGrid place={place} />
+                <PlaceAttributesGrid
+                  place={place}
+                  displayPrecise={displayPrecise}
+                />
               </>
             )}
           </Box>
@@ -119,7 +131,12 @@ const PlaceDetail = ({ place }: Props) => {
           </Text>
         </Flex>
         <BookingScheduleContainer place={place} />
-        {isMobile && <PlaceAttributesGridMobile place={place} />}
+        {isMobile && (
+          <PlaceAttributesGridMobile
+            place={place}
+            displayPrecise={displayPrecise}
+          />
+        )}
         <Stack
           direction={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
