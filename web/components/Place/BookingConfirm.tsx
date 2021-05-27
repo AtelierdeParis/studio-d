@@ -59,6 +59,7 @@ const BookingConfirm = ({ events, place, back }: Props) => {
           return client.messages.messagesCreate({
             author: 'company',
             status: 'message',
+            notified: true,
             booking: res.data.id,
             place: place.users_permissions_user.id,
             message,
