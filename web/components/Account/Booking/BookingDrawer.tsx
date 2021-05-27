@@ -328,7 +328,10 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                           espace={booking?.espace}
                         />
                       ) : (
-                        <BookingDrawerPlace place={booking?.place} />
+                        <BookingDrawerPlace
+                          place={booking?.place}
+                          espace={booking?.espace}
+                        />
                       )}
                     </Flex>
                   </Flex>

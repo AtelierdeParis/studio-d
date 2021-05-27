@@ -3,7 +3,7 @@ import { ScheduleEvent } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import areIntervalsOverlapping from 'date-fns/areIntervalsOverlapping'
 
-const useConcurrentBookings = (bookings, event: ScheduleEvent) => {
+const useConcurrentBookings = (bookings, event: ScheduleEvent, user) => {
   const {
     extendedProps: { when, type },
     start,
@@ -11,7 +11,8 @@ const useConcurrentBookings = (bookings, event: ScheduleEvent) => {
   } = event
 
   return useMemo(() => {
-    if (!bookings || bookings.length === 0) return { hasAnotherBooking: false }
+    if (!bookings || bookings.length === 0 || (user && user.type === 'place'))
+      return { hasAnotherBooking: false }
     const concurrentBookings = bookings.filter((booking) => {
       if (!['pending', 'accepted'].includes(booking.status)) return false
       return booking.disponibilities.some((dispo) => {

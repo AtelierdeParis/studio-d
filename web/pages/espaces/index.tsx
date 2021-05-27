@@ -40,8 +40,11 @@ const Places = () => {
   const { t } = useTranslation('place')
   const ref = useRef(null)
   const [isGridView, setGridView] = useState<boolean>(true)
-  const form = useForm({
-    defaultValues: router.query,
+  const form = useForm<any>({
+    defaultValues: {
+      perimeter: 15,
+      ...router.query,
+    },
   })
 
   const [searchParams, setSearchParams] = useState<any>({})
@@ -161,7 +164,9 @@ const Places = () => {
                       variant="unstyled"
                       ref={form.register}
                       name="sortBy"
-                      onChange={() => {
+                      onChange={(event) => {
+                        form.setValue('sortBy', event.target.value)
+                        onSubmit(form.getValues())
                         queryClient.refetchQueries(['places'], { active: true })
                       }}
                     >

@@ -322,6 +322,7 @@
         "calendar": "Calendrier des disponibilités",
         "about": "À propos de l’espace",
         "details": "Détails techniques",
+        "onlyCompany": "Les lieux ne sont pas autorisés à faire des réservations",
         "howToGo": "Comment s’y rendre ?",
         "located": "L’espace se situe au {{address}}.",
         "itinerary": "Calculez votre itinéraire sur OpenstreetMap",

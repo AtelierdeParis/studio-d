@@ -17,7 +17,7 @@ const BookingHistory = ({ booking, userType, bookingType }: Props) => {
   const { t } = useTranslation('booking')
 
   return (
-    <Box w="100%" pt={{ base: 5, md: 0 }}>
+    <Box w="100%" pt={{ base: 5, md: 0 }} mb={10}>
       <Text
         fontFamily="mabry medium"
         fontWeight="500"
