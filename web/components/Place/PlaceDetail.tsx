@@ -23,7 +23,6 @@ import MarkdownRenderer from '~components/MarkdownRenderer'
 import BookingScheduleContainer from '~components/Place/BookingScheduleContainer'
 import Pin from 'public/assets/img/pin-outline.svg'
 import Calendar from 'public/assets/img/calendar.svg'
-import Compass from 'public/assets/img/compass.svg'
 import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
@@ -196,12 +195,7 @@ const PlaceDetail = ({ place }: Props) => {
             </Box>
           )}
         </Stack>
-        <Flex alignItems="flex-start" pt={{ base: 14, lg: 20 }} id="map">
-          <Box w="18px" mt={0.5}>
-            <Compass />
-          </Box>
-          <PlaceItinerary place={place} />
-        </Flex>
+        <PlaceItinerary place={place} />
         <Map
           mt={10}
           w="100%"
