@@ -8,6 +8,7 @@ import {
   SimpleGrid,
   Link,
   HStack,
+  Stack,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import FooterMenu from '~components/FooterMenu'
@@ -84,6 +85,8 @@ const Footer = () => {
       </Container>
       <Flex
         justifyContent={{ base: 'flex-start', md: 'center' }}
+        direction="column"
+        alignItems="center"
         py={3.5}
         px={3}
         borderTop="1px solid"
@@ -92,6 +95,46 @@ const Footer = () => {
         <Text fontSize="xs" color="gray.500">
           {t('footer.license', { name: process.env.NEXT_PUBLIC_LICENSE })}
         </Text>
+        <Stack
+          mt={{ base: 3, sm: 0 }}
+          direction={{ base: 'column', sm: 'row' }}
+          fontSize="xs"
+          color="gray.500"
+          spacing={1}
+          w="100%"
+          justifyContent={{ base: 'flex-start', sm: 'center' }}
+        >
+          <Text>
+            Conception :
+            <Link href="http://pcfh.studio" isExternal ml={1} color="gray.700">
+              PCFH Studio
+            </Link>
+          </Text>
+          <Box display={{ base: 'none', sm: 'block' }}>-</Box>
+          <Text>
+            Design :
+            <Link
+              href="http://sylvain-jule.fr/"
+              isExternal
+              ml={1}
+              color="gray.700"
+            >
+              Sylvain Julé
+            </Link>
+          </Text>
+          <Box display={{ base: 'none', sm: 'block' }}>-</Box>
+          <Text>
+            Développement :
+            <Link
+              href="http://premieroctet.com/"
+              isExternal
+              ml={1}
+              color="gray.700"
+            >
+              Premier Octet
+            </Link>
+          </Text>
+        </Stack>
       </Flex>
     </Box>
   )
