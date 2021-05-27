@@ -25,16 +25,16 @@ const RemoveDispoModal = ({ booking, type, setSelected }: Props) => {
   const [selectedDispos, setSelectedDispos] = useState<string[]>([])
   const { t } = useTranslation('booking')
 
-  const textConfirm = useMemo(() => {
-    if (selectedDispos.length === booking?.disponibilities.length)
-      return `modal.removedispo.confirmAll${type}`
-    return `modal.removedispo.confirm${selectedDispos.length > 1 ? 's' : ''}`
-  }, [selectedDispos])
-
   const disponibilities = useMemo(() => {
     if (!booking?.disponibilities) return []
     return booking.disponibilities.filter(({ status }) => status !== 'removed')
   }, [booking?.disponibilities])
+
+  const textConfirm = useMemo(() => {
+    if (selectedDispos.length === disponibilities.length)
+      return `modal.removedispo.confirmAll${type}`
+    return `modal.removedispo.confirm`
+  }, [selectedDispos])
 
   const updateDispos = () => {
     setLoading(true)
@@ -65,7 +65,7 @@ const RemoveDispoModal = ({ booking, type, setSelected }: Props) => {
   }
 
   const onConfirm = async () => {
-    if (selectedDispos.length === booking?.disponibilities.length) {
+    if (selectedDispos.length === disponibilities.length) {
       cancelBooking()
     } else {
       updateDispos()
@@ -186,7 +186,7 @@ const RemoveDispoModal = ({ booking, type, setSelected }: Props) => {
                 >
                   {t(
                     `modal.removedispo.${
-                      isSelected ? 'willBeCanceled' : 'cancel'
+                      isSelected ? `willBeCanceled${type}` : `action${type}`
                     }`,
                   )}
                 </Button>
