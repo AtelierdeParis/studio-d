@@ -744,6 +744,9 @@
               "longitude": {
                 "type": "number"
               },
+              "deleted": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },

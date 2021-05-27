@@ -16,7 +16,6 @@ import { useTranslation } from 'next-i18next'
 import PlaceFormBar from '~components/Account/Place/PlaceFormBar'
 import Check from 'public/assets/img/check.svg'
 import FallbackImage from '~components/FallbackImage'
-import { Router } from 'next/router'
 import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import { useRouter } from 'next/router'
 import { useQueryClient } from 'react-query'
@@ -77,7 +76,7 @@ const PlaceImage = ({ place }: Props) => {
     }
 
     if (newFiles.length > 0) {
-      addFiles(newFiles, {
+      await addFiles(newFiles, {
         ref: 'espace',
         refId: place.id.toString(),
         field: 'images',
@@ -179,7 +178,6 @@ const PlaceImage = ({ place }: Props) => {
               leftIcon={<Check />}
               onClick={onSubmit}
               isLoading={isLoading}
-              isDisabled={newFiles.length === 0 && removed.length === 0}
               type="submit"
             >
               {t('save')}

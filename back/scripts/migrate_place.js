@@ -64,6 +64,7 @@ const start = async () => {
 
             const errors = [];
             const place = {
+              deleted: false,
               external_id: Object.entries(row)[0][1],
             };
 

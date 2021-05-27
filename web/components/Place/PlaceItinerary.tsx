@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Box, Text, Button, Link, Flex } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'

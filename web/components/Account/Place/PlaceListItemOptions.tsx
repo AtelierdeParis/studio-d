@@ -1,5 +1,4 @@
-import React from 'react'
-import Link from '~components/Link'
+import React, { useMemo } from 'react'
 import UnpublishModal from '~components/Account/Place/UnpublishModal'
 import PublishModal from '~components/Account/Place/PublishModal'
 import DeletePlaceModal from '~components/Account/Place/DeletePlaceModal'
@@ -12,14 +11,24 @@ import {
   MenuDivider,
   useBreakpointValue,
   Button,
+  Flex,
 } from '@chakra-ui/react'
 import Dots from 'public/assets/img/dots.svg'
 import { ROUTE_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
+import useNbBooking from '~hooks/useNbBooking'
+import Arrow from 'public/assets/img/circle-arrow.svg'
+import Link from '~components/Link'
 
 const PlaceListItemOptions = ({ place }) => {
   const { t } = useTranslation('place')
+  const { coming, pending } = useNbBooking(place.disponibilities)
   const isMobile = useBreakpointValue({ base: true, xl: false })
+
+  const hasBookingInFuture = useMemo(
+    () => coming.length > 0 || pending.length > 0,
+    [coming, pending],
+  )
 
   if (isMobile) {
     return (
@@ -74,9 +83,25 @@ const PlaceListItemOptions = ({ place }) => {
       </Menu>
     )
   }
+
   if (place.published) {
-    return <UnpublishModal place={place} />
+    return (
+      <Flex>
+        {!hasBookingInFuture && <UnpublishModal place={place} />}
+        <Link
+          ml={5}
+          display={{ base: 'none', lg: 'block' }}
+          href={{
+            pathname: ROUTE_PLACE_DETAIL,
+            query: { id: place.slug },
+          }}
+        >
+          <Arrow />
+        </Link>
+      </Flex>
+    )
   }
+
   return (
     <ButtonGroup spacing={4} alignSelf="flex-start">
       {place.filledUntil && <PublishModal placeId={place.id} />}

@@ -24,6 +24,7 @@ module.exports = {
     return strapi.query("espace").find(
       {
         users_permissions_user: id,
+        deleted: false,
         _sort: "name:asc",
       },
       populate
@@ -34,10 +35,11 @@ module.exports = {
     const isSortOnDisponibility = ["dispoAsc", "nbDispoDesc"].includes(_sort);
 
     if (perimeter && query["city.name_eq"]) {
-      const placesInPerimeter = await strapi.services.espace.getPlacesInPerimeter(
-        perimeter,
-        query["city.name_eq"]
-      );
+      const placesInPerimeter =
+        await strapi.services.espace.getPlacesInPerimeter(
+          perimeter,
+          query["city.name_eq"]
+        );
       if (placesInPerimeter.length > 0) {
         query["id_in"] = placesInPerimeter;
         delete query["city.name_eq"];
