@@ -317,6 +317,7 @@
         "no": "Non",
         "true": "Oui",
         "false": "Non",
+        "cancel": "Annuler",
         "possible":"Possible *",
         "available":"Possible *",
         "calendar": "Calendrier des disponibilités",
