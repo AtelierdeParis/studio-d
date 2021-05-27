@@ -51,7 +51,7 @@ interface Props {
 
 const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
   const queryClient = useQueryClient()
-  const { data: user } = useCurrentUser()
+  const { data: user, isLoading: userLoading } = useCurrentUser()
   const { data: booking, isLoading } = useBooking(bookingId, {
     onSuccess: ({ id }) => {
       client.notifications
@@ -88,7 +88,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
       />
       <DrawerOverlay bgColor="rgb(255 255 255 / 67%)">
         <DrawerContent>
-          <Loading isLoading={isLoading} isCentered>
+          <Loading isLoading={isLoading || userLoading} isCentered>
             <UrlRewrite
               id={bookingId}
               path={
@@ -156,7 +156,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                           ) : (
                             <Box>
                               <Flex alignItems="center">
-                                <Text>{format(dispo.end, 'd MMM yyyy')}</Text>
+                                <Text>{format(dispo.start, 'd MMM yyyy')}</Text>
                                 {dispo.when && (
                                   <Text textTransform="lowercase" pl={1.5}>
                                     {`(${t(`${dispo.when}`)})`}
@@ -208,7 +208,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                     opacity="0.3"
                   />
                 </Box>
-                {user.type === 'company' ? (
+                {user?.type === 'company' ? (
                   <Box flex={1} minW="250px" maxW="250px">
                     <Text fontFamily="mabry medium" fontWeight="500">
                       {t('structure')}
@@ -255,11 +255,11 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                       direction="column"
                       minW={{
                         base: 'none',
-                        md: user.type === 'company' ? '250px' : '280px',
+                        md: user?.type === 'company' ? '250px' : '280px',
                       }}
                       maxW={{
                         base: 'none',
-                        md: user.type === 'company' ? '250px' : '280px',
+                        md: user?.type === 'company' ? '250px' : '280px',
                       }}
                       w={{ base: '100%', md: 'fit-content' }}
                     >
@@ -288,7 +288,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         </Button>
                       </Link>
                       {booking?.status === BookingStatus.PENDING &&
-                        user.type === 'place' && (
+                        user?.type === 'place' && (
                           <ConfirmModal
                             bookingId={booking?.id}
                             setSelected={setSelected}
@@ -302,7 +302,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         />
                       )}
                       {booking?.status === BookingStatus.ACCEPTED &&
-                        user.type === 'company' && (
+                        user?.type === 'company' && (
                           <AskCancelModal
                             booking={booking}
                             setSelected={setSelected}
@@ -322,7 +322,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         />
                       )}
                       <Divider opacity="0.3" my={5} />
-                      {user.type === 'place' ? (
+                      {user?.type === 'place' ? (
                         <BookingDrawerCompany
                           company={booking?.company}
                           espace={booking?.espace}

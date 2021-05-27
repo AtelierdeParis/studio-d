@@ -26,7 +26,12 @@ const filterBookings = (type) => {
   switch (type) {
     case "request":
       return {
-        status_in: ["pending", "requestcanceled", "requestcanceledbyplace"],
+        status_in: [
+          "pending",
+          "requestcanceled",
+          "requestcanceledbyplace",
+          "expired",
+        ],
       };
     case "booking":
       return {

@@ -753,7 +753,8 @@
               "askcancel",
               "past",
               "accepted",
-              "pending"
+              "pending",
+              "expired"
             ]
           },
           "messages": {
@@ -1252,7 +1253,8 @@
               "askcancel",
               "past",
               "accepted",
-              "pending"
+              "pending",
+              "expired"
             ]
           },
           "messages": {

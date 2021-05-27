@@ -55,8 +55,8 @@
       "required": true
     },
     "booking": {
-      "model": "booking",
-      "via": "disponibilities"
+      "via": "disponibilities",
+      "model": "booking"
     },
     "dispositif": {
       "via": "disponibilities",

@@ -15,11 +15,13 @@ interface Props extends TagProps {
     | 'bookingcanceledbyplace'
     | 'occupied'
     | 'nextweek'
+    | 'expired'
   children?: React.ReactNode
 }
 
 const Tag = ({ status, children, ...rest }: Props) => {
   const { t } = useTranslation('account')
+
   switch (status) {
     case 'booked':
     case 'available':
@@ -45,6 +47,12 @@ const Tag = ({ status, children, ...rest }: Props) => {
       return (
         <ChakraTag bgColor="tag.yellow" {...rest}>
           {children || t('tag.pending')}
+        </ChakraTag>
+      )
+    case 'expired':
+      return (
+        <ChakraTag bgColor="tag.gray" {...rest}>
+          {children || t('tag.expired')}
         </ChakraTag>
       )
     case 'past':

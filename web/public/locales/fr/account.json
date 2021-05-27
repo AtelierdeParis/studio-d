@@ -153,6 +153,7 @@
         "past": "Passée",
         "occupied": "En cours",
         "askcancel": "Ann. demandée",
+        "expired": "Expirée",
         "newtweek": "Le semaine prochaine"
     },
     "errors": {

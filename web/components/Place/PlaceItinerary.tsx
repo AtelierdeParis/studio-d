@@ -9,22 +9,8 @@ interface Props {
 
 const PlaceItinerary = ({ place }: Props) => {
   const { t } = useTranslation('place')
-  const [isEnabled, setEnabled] = useState(true)
   const [link, setLink] = useState('')
   const ref = useRef()
-
-  useEffect(() => {
-    if (typeof navigator !== 'undefined' && 'permissions' in navigator) {
-      navigator.permissions
-        .query({ name: 'geolocation' })
-        .then((res) => {
-          setEnabled(res.state === 'granted')
-        })
-        .catch(() => {
-          setEnabled(false)
-        })
-    }
-  }, [])
 
   if (!('geolocation' in navigator)) return null
 
@@ -47,7 +33,6 @@ const PlaceItinerary = ({ place }: Props) => {
             onClick={() => {
               navigator.geolocation.getCurrentPosition(
                 (position) => {
-                  if (!isEnabled) setEnabled(true)
                   const currentLatitude = position.coords.latitude
                   const currentLongitude = position.coords.longitude
                   setLink(
@@ -59,7 +44,6 @@ const PlaceItinerary = ({ place }: Props) => {
                   }
                 },
                 (err) => {
-                  setEnabled(false)
                   console.log('err', err)
                 },
                 {
@@ -70,7 +54,7 @@ const PlaceItinerary = ({ place }: Props) => {
               )
             }}
           >
-            {isEnabled ? t('detail.itinerary') : t('detail.notEnabled')}
+            {t('detail.itinerary')}
           </Button>
         )}
       </Box>

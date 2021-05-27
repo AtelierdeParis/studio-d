@@ -74,6 +74,10 @@ const checkStatus = (booking, status) => {
 
 module.exports = {
   lifecycles: {
+    async afterFindOne(result) {
+      const { status } = await strapi.services.booking.checkIsPast(result);
+      result.status = status;
+    },
     async afterFind(results) {
       if (results.length > 0) {
         await Promise.all(
@@ -135,7 +139,7 @@ module.exports = {
       );
     },
     beforeUpdate: async (params, data) => {
-      if (data.status) {
+      if (data.status && data.status !== "expired") {
         const booking = await strapi
           .query("booking")
           .findOne({ id: params.id });

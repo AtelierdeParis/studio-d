@@ -13,6 +13,7 @@ interface Props extends BoxProps {
     | 'requestcanceledbyplace'
     | 'bookingcanceledbyplace'
     | 'occupied'
+    | 'expired'
 }
 
 const Circle = ({ bgColor, ...rest }) => {
@@ -29,6 +30,7 @@ const Tag = ({ status, ...rest }: Props) => {
     case 'askcancel':
       return <Circle bgColor="tag.yellow" {...rest} />
     case 'past':
+    case 'expired':
       return <Circle bgColor="tag.gray" {...rest} />
     case 'requestcanceled':
     case 'requestcanceledbyplace':

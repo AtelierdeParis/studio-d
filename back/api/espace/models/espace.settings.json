@@ -112,8 +112,8 @@
       "default": true
     },
     "bookings": {
-      "collection": "booking",
-      "via": "espace"
+      "via": "espace",
+      "collection": "booking"
     },
     "country": {
       "type": "string",
