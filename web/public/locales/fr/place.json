@@ -325,6 +325,7 @@
         "howToGo": "Comment s’y rendre ?",
         "located": "L’espace se situe au {{address}}.",
         "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
+        "notEnabled": "La localisation est désactivé, cliquer pour demander l'autorisation",
         "otherPlaces": "Autres espaces de {{name}}",
         "week": "Semaine",
         "month": "Mois",

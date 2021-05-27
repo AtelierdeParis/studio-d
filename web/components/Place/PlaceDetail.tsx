@@ -28,6 +28,7 @@ import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
 import axios from 'axios'
+import PlaceItinerary from '~components/Place/PlaceItinerary'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
@@ -199,40 +200,7 @@ const PlaceDetail = ({ place }: Props) => {
           <Box w="18px" mt={0.5}>
             <Compass />
           </Box>
-          <Box pl={5}>
-            <Text textStyle="h2" mb={5}>
-              {t('detail.howToGo')}
-            </Text>
-            <Text>{t('detail.located', { address: place?.address })}</Text>
-            {'geolocation' in navigator && (
-              <Button
-                variant="line"
-                color="gray.500"
-                borderBottomColor="gray.500"
-                onClick={() => {
-                  navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                      const currentLatitude = position.coords.latitude
-                      const currentLongitude = position.coords.longitude
-                      window.open(
-                        `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLatitude},${currentLongitude};${place?.longitude},${place?.latitude}&geometries=geojson`,
-                      )
-                    },
-                    (err) => {
-                      console.log('err', err)
-                    },
-                    {
-                      timeout: 30000,
-                      enableHighAccuracy: true,
-                      maximumAge: 75000,
-                    },
-                  )
-                }}
-              >
-                {t('detail.itinerary')}
-              </Button>
-            )}
-          </Box>
+          <PlaceItinerary place={place} />
         </Flex>
         <Map
           mt={10}
