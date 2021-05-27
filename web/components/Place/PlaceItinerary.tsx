@@ -12,7 +12,7 @@ const PlaceItinerary = ({ place }: Props) => {
   const [isEnabled, setEnabled] = useState(true)
 
   useEffect(() => {
-    if (typeof navigator !== 'undefined') {
+    if (typeof navigator !== 'undefined' && 'permissions' in navigator) {
       navigator.permissions
         .query({ name: 'geolocation' })
         .then((res) => {
@@ -36,24 +36,26 @@ const PlaceItinerary = ({ place }: Props) => {
           color="gray.500"
           borderBottomColor="gray.500"
           onClick={() => {
-            navigator.geolocation.getCurrentPosition(
-              (position) => {
-                if (!isEnabled) setEnabled(true)
-                const currentLatitude = position.coords.latitude
-                const currentLongitude = position.coords.longitude
-                const windowToOpen = window.open(null, '_blank')
-                windowToOpen.location.href = `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLatitude},${currentLongitude};${place?.longitude},${place?.latitude}&geometries=geojson`
-              },
-              (err) => {
-                setEnabled(false)
-                console.log('err', err)
-              },
-              {
-                timeout: 30000,
-                enableHighAccuracy: true,
-                maximumAge: 75000,
-              },
-            )
+            if ('geolocation' in navigator) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  if (!isEnabled) setEnabled(true)
+                  const currentLatitude = position.coords.latitude
+                  const currentLongitude = position.coords.longitude
+                  const windowToOpen = window.open(null, '_blank')
+                  windowToOpen.location.href = `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLatitude},${currentLongitude};${place?.longitude},${place?.latitude}&geometries=geojson`
+                },
+                (err) => {
+                  setEnabled(false)
+                  console.log('err', err)
+                },
+                {
+                  timeout: 30000,
+                  enableHighAccuracy: true,
+                  maximumAge: 75000,
+                },
+              )
+            }
           }}
         >
           {isEnabled ? t('detail.itinerary') : t('detail.notEnabled')}
