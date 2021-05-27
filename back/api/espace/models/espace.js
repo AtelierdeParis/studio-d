@@ -55,18 +55,22 @@ module.exports = {
     async afterFind(result) {
       if (result && result.length > 0) {
         result.map((place, index) => {
-          result[index] = result.disponibilities.filter(
-            (dispo) => dispo.status !== "removed"
-          );
-          result[index].disponibilities = place.disponibilities.map((dispo) => {
-            if (isPast(new Date(dispo.start))) {
-              strapi
-                .query("disponibility")
-                .update({ id: dispo.id }, { status: "past" });
-              dispo.status = "past";
-            }
-            return dispo;
-          });
+          if (result.disponibilities) {
+            result[index] = result.disponibilities.filter(
+              (dispo) => dispo.status !== "removed"
+            );
+            result[index].disponibilities = place.disponibilities.map(
+              (dispo) => {
+                if (isPast(new Date(dispo.start))) {
+                  strapi
+                    .query("disponibility")
+                    .update({ id: dispo.id }, { status: "past" });
+                  dispo.status = "past";
+                }
+                return dispo;
+              }
+            );
+          }
         });
       }
     },
