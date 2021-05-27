@@ -24,9 +24,9 @@ const Tag = ({ status, ...rest }: Props) => {
     case 'booked':
     case 'available':
     case 'accepted':
-    case 'askcancel':
       return <Circle bgColor="tag.green" {...rest} />
     case 'pending':
+    case 'askcancel':
       return <Circle bgColor="tag.yellow" {...rest} />
     case 'past':
       return <Circle bgColor="tag.gray" {...rest} />

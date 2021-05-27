@@ -183,7 +183,7 @@ module.exports = {
               {
                 from: capitalize(updated.company.firstname),
                 company: updated.company.structureName,
-                user_name: updated.company.firstname,
+                user_name: updated.place.firstname,
                 ref: updated.id,
                 espace_name: updated.espace.name,
                 user_type: "place",

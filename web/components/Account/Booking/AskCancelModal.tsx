@@ -41,7 +41,7 @@ const AskCancelModal = ({ booking, setSelected }: Props) => {
       })
       .then(() => {
         setSelected(null)
-        queryClient.refetchQueries('myBookings')
+        queryClient.refetchQueries(['myBookings'])
       })
       .finally(() => setLoading(false))
   }
