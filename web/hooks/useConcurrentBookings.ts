@@ -9,7 +9,7 @@ const useConcurrentBookings = (bookings, event: ScheduleEvent, user) => {
     start,
     end,
   } = event
-  console.log(bookings)
+
   return useMemo(() => {
     if (!bookings || bookings.length === 0 || (user && user.type === 'place'))
       return { hasAnotherBooking: false }

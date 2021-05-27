@@ -81,6 +81,8 @@ export const formatSearch = (formData, forceSort = false): SearchQuery => {
         query['_sort'] = 'dispoAsc'
         break
     }
+  } else {
+    query['_sort'] = 'dispoAsc'
   }
 
   if (Boolean(data.surface)) {
