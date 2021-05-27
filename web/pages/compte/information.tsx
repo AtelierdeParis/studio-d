@@ -168,7 +168,13 @@ const AccountInformation = ({ user }: Props) => {
         reset(filteredData, { dirtyFields: false })
         successToast(t('information.success'))
       })
-      .catch(() => errorToast(t('information.error')))
+      .catch((res) => {
+        if (res?.response?.data?.data?.id) {
+          errorToast(t(res?.response?.data?.data?.id))
+        } else {
+          errorToast(t('information.error'))
+        }
+      })
       .finally(() => setLoading(false))
   }
 

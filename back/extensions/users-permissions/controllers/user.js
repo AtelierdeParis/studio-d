@@ -1,4 +1,9 @@
 "use strict";
+const formatError = (error) => ({
+  id: error.id,
+  message: error.message,
+  field: error.field,
+});
 const { sanitizeEntity } = require("strapi-utils");
 const sanitizeUser = (user) =>
   sanitizeEntity(user, {
@@ -47,7 +52,7 @@ module.exports = {
         return ctx.badRequest(
           null,
           formatError({
-            id: "Auth.form.error.email.taken",
+            id: "error.emailTaken",
             message: "Email already taken",
             field: ["email"],
           })

@@ -9,6 +9,9 @@
         "createPlace": "Créer un espace",
         "places": "Mes espaces"
     },
+    "error": {
+        "emailTaken": "Cet email est déjà utilisé"
+    },
     "myAccount": "Mon compte",
     "dashboard": "Tableau de bord",
     "info": "Mes informations",

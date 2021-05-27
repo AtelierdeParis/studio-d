@@ -282,7 +282,7 @@ module.exports = {
       return ctx.badRequest(
         null,
         formatError({
-          id: "common;reset.validEmail",
+          id: "common:reset.validEmail",
           message: "Please provide valid email address.",
         })
       );
