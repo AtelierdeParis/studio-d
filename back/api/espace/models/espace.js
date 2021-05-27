@@ -55,6 +55,9 @@ module.exports = {
     async afterFind(result) {
       if (result && result.length > 0) {
         result.map((place, index) => {
+          result[index] = result.disponibilities.filter(
+            (dispo) => dispo.status !== "removed"
+          );
           result[index].disponibilities = place.disponibilities.map((dispo) => {
             if (isPast(new Date(dispo.start))) {
               strapi
@@ -69,6 +72,9 @@ module.exports = {
     },
     async afterFindOne(result) {
       if (result) {
+        result.disponibilities = result.disponibilities.filter(
+          (dispo) => dispo.status !== "removed"
+        );
         result.disponibilities.map((dispo) => {
           if (isPast(new Date(dispo.start))) {
             strapi
