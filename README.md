@@ -50,11 +50,7 @@ Email templates are located in folder `back/email-templates.sql`, you must execu
 If you create new email templates from strapi keep in mind that you have to export them from your sql client as INSERT queries and update `back/email-templates.sql`
 
 ### Deployment
-
-#### Staging
 Staging deployment is launched when new code is either pushed or merged on **develop** branch
-
-#### Production
 Production deployment is launched when new code is either pushed or merged on **master** branch
 
 ### Environment vars
