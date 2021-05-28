@@ -10,6 +10,7 @@ interface Props {
 const PlaceItinerary = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const [link, setLink] = useState('')
+  const [isLoading, setLoading] = useState(false)
   const ref = useRef()
 
   if (!('geolocation' in navigator)) return null
@@ -23,14 +24,16 @@ const PlaceItinerary = ({ place }: Props) => {
         <Text textStyle="h2" mb={5}>
           {t('detail.howToGo')}
         </Text>
-        <Link target="_blank" href={link} ref={ref} />
         <Text>{t('detail.located', { address: place?.address })}</Text>
-        {'geolocation' in navigator && (
+        <Link href={link !== '' ? link : null} ref={ref} target="_blank">
           <Button
             variant="line"
+            textDecoration="underline"
+            borderBottom="none"
             color="gray.500"
-            borderBottomColor="gray.500"
+            isLoading={isLoading}
             onClick={() => {
+              setLoading(true)
               navigator.geolocation.getCurrentPosition(
                 (position) => {
                   const currentLatitude = position.coords.latitude
@@ -42,9 +45,11 @@ const PlaceItinerary = ({ place }: Props) => {
                     // @ts-ignore
                     ref.current.click()
                   }
+                  setLoading(false)
                 },
                 (err) => {
                   console.log('err', err)
+                  setLoading(false)
                 },
                 {
                   timeout: 30000,
@@ -56,7 +61,7 @@ const PlaceItinerary = ({ place }: Props) => {
           >
             {t('detail.itinerary')}
           </Button>
-        )}
+        </Link>
       </Box>
     </Flex>
   )
