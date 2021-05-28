@@ -65,7 +65,7 @@ const BookingRecap = () => {
             </Box>
           ) : (
             <>
-              <Box>
+              <Box flex={1}>
                 <Text>
                   {t(`detail.nbSelected${isPlural}`, { nb: selected.length })}
                 </Text>
@@ -74,9 +74,10 @@ const BookingRecap = () => {
                 </Box>
               </Box>
               <ButtonGroup
+                flex={0}
                 mt={{ base: 2, md: 0 }}
                 alignItems="center"
-                justifyContent={{ base: 'flex-end', md: 'center' }}
+                justifyContent={{ base: 'flex-end', md: 'flex-end' }}
                 w="100%"
                 spacing={4}
               >

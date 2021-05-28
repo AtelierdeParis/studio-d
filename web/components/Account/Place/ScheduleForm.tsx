@@ -140,8 +140,8 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
           {Boolean(type) && (
             <>
               <ScheduleDates control={control} />
-              <ScheduleDispositif control={control} />
               <ScheduleRepeat control={control} />
+              <ScheduleDispositif control={control} />
             </>
           )}
           <Flex justifyContent="flex-end" mt={18} alignItems="center" w="100%">
