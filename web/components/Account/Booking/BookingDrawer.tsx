@@ -23,7 +23,7 @@ import {
   ROUTE_ACCOUNT_REQUEST,
   ROUTE_ACCOUNT_BOOKING,
 } from '~constants'
-import { format } from '~utils/date'
+import { format, orderByDate } from '~utils/date'
 import differenceInDays from 'date-fns/differenceInDays'
 import { BookingStatus } from '~@types/booking.d'
 import Loading from '~components/Loading'
@@ -31,6 +31,7 @@ import Notif from '~components/Notif'
 import BookingHistory from '~components/Account/Booking/BookingHistory'
 import CancelModal from '~components/Account/Booking/CancelModal'
 import AskCancelModal from '~components/Account/Booking/AskCancelModal'
+import RemoveDispoModal from '~components/Account/Booking/RemoveDispoModal'
 import ConfirmModal from '~components/Account/Booking/ConfirmModal'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useBooking } from '~hooks/useBooking'
@@ -50,7 +51,7 @@ interface Props {
 
 const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
   const queryClient = useQueryClient()
-  const { data: user } = useCurrentUser()
+  const { data: user, isLoading: userLoading } = useCurrentUser()
   const { data: booking, isLoading } = useBooking(bookingId, {
     onSuccess: ({ id }) => {
       client.notifications
@@ -87,7 +88,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
       />
       <DrawerOverlay bgColor="rgb(255 255 255 / 67%)">
         <DrawerContent>
-          <Loading isLoading={isLoading} isCentered>
+          <Loading isLoading={isLoading || userLoading} isCentered>
             <UrlRewrite
               id={bookingId}
               path={
@@ -125,37 +126,48 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                     {t('date')}
                   </Text>
                   <Box>
-                    {booking?.disponibilities.map((dispo) => (
-                      <Box fontSize="sm" key={dispo.id}>
-                        {dispo.type === 'period' ? (
-                          <>
-                            <Box as="span">
-                              {`${format(dispo.start, 'd')} - ${format(
-                                dispo.end,
-                                'd MMM yyyy',
-                              )}`}
+                    {orderByDate(booking?.disponibilities, 'start').map(
+                      (dispo) => (
+                        <Box
+                          fontSize="sm"
+                          key={dispo.id}
+                          color={
+                            dispo.status === 'removed' ? 'gray.400' : 'black'
+                          }
+                          textDecoration={
+                            dispo.status === 'removed' ? 'line-through' : 'none'
+                          }
+                        >
+                          {dispo.type === 'period' ? (
+                            <>
+                              <Box as="span">
+                                {`${format(dispo.start, 'd')} - ${format(
+                                  dispo.end,
+                                  'd MMM yyyy',
+                                )}`}
+                              </Box>
+                              <Box pl={1.5} as="span">{`(${
+                                differenceInDays(
+                                  new Date(dispo.end),
+                                  new Date(dispo.start),
+                                ) + 1
+                              } jours)`}</Box>
+                            </>
+                          ) : (
+                            <Box>
+                              <Flex alignItems="center">
+                                <Text>{format(dispo.start, 'd MMM yyyy')}</Text>
+                                {dispo.when && (
+                                  <Text textTransform="lowercase" pl={1.5}>
+                                    {`(${t(`${dispo.when}`)})`}
+                                  </Text>
+                                )}
+                              </Flex>
                             </Box>
-                            <Box pl={1.5} as="span">{`(${
-                              differenceInDays(
-                                new Date(dispo.end),
-                                new Date(dispo.start),
-                              ) + 1
-                            } jours)`}</Box>
-                          </>
-                        ) : (
-                          <Box>
-                            <Flex alignItems="center">
-                              <Text>{format(dispo.end, 'd MMM yyyy')}</Text>
-                              {dispo.when && (
-                                <Text textTransform="lowercase" pl={1.5}>
-                                  {`(${t(`${dispo.when}`)})`}
-                                </Text>
-                              )}
-                            </Flex>
-                          </Box>
-                        )}
-                      </Box>
-                    ))}
+                          )}
+                        </Box>
+                      ),
+                    )}
                   </Box>
                 </Box>
                 <Box>
@@ -196,7 +208,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                     opacity="0.3"
                   />
                 </Box>
-                {user.type === 'company' ? (
+                {user?.type === 'company' ? (
                   <Box flex={1} minW="250px" maxW="250px">
                     <Text fontFamily="mabry medium" fontWeight="500">
                       {t('structure')}
@@ -220,9 +232,14 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                 direction={{ base: 'column-reverse', md: 'row' }}
               >
                 <Box>
-                  <BookingHistory booking={booking} type={user?.type} />
+                  <BookingHistory
+                    booking={booking}
+                    userType={user?.type}
+                    bookingType={type}
+                  />
                 </Box>
                 {![
+                  'expired',
                   'requestcanceled',
                   'requestcanceledbyplace',
                   'bookingcanceledbyplace',
@@ -239,11 +256,11 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                       direction="column"
                       minW={{
                         base: 'none',
-                        md: user.type === 'company' ? '250px' : '280px',
+                        md: user?.type === 'company' ? '250px' : '280px',
                       }}
                       maxW={{
                         base: 'none',
-                        md: user.type === 'company' ? '250px' : '280px',
+                        md: user?.type === 'company' ? '250px' : '280px',
                       }}
                       w={{ base: '100%', md: 'fit-content' }}
                     >
@@ -261,7 +278,7 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         >
                           <Text ml={2}>
                             {t(
-                              user.type === 'company'
+                              user?.type === 'company'
                                 ? `message`
                                 : 'messageCompany',
                             )}
@@ -272,14 +289,21 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         </Button>
                       </Link>
                       {booking?.status === BookingStatus.PENDING &&
-                        user.type === 'place' && (
+                        user?.type === 'place' && (
                           <ConfirmModal
                             bookingId={booking?.id}
                             setSelected={setSelected}
                           />
                         )}
+                      {user?.type === 'place' && (
+                        <RemoveDispoModal
+                          type={type}
+                          booking={booking}
+                          setSelected={setSelected}
+                        />
+                      )}
                       {booking?.status === BookingStatus.ACCEPTED &&
-                        user.type === 'company' && (
+                        user?.type === 'company' && (
                           <AskCancelModal
                             booking={booking}
                             setSelected={setSelected}
@@ -299,13 +323,16 @@ const BookingDrawer = ({ bookingId, setSelected, type }: Props) => {
                         />
                       )}
                       <Divider opacity="0.3" my={5} />
-                      {user.type === 'place' ? (
+                      {user?.type === 'place' ? (
                         <BookingDrawerCompany
                           company={booking?.company}
                           espace={booking?.espace}
                         />
                       ) : (
-                        <BookingDrawerPlace place={booking?.place} />
+                        <BookingDrawerPlace
+                          place={booking?.place}
+                          espace={booking?.espace}
+                        />
                       )}
                     </Flex>
                   </Flex>

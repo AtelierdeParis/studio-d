@@ -4,7 +4,7 @@ import {
   ScheduleEventWhen,
   ScheduleEvent,
 } from '~@types/schedule-event.d'
-import { Flex, SimpleGrid, Spacer, Text, Box } from '@chakra-ui/react'
+import { Flex, useBreakpointValue, Spacer, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import BookingScheduleContext from '~components/Place/BookingScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
@@ -49,6 +49,7 @@ const SpacerEvent = ({ isMonth, ...rest }) => (
 )
 
 const BookingScheduleSlot = (props: Props) => {
+  const isMobile = useBreakpointValue({ base: true, md: false })
   const { t } = useTranslation('place')
   const { data: user } = useCurrentUser()
   const { data: bookings = [] } = useMyBookings('all', {
@@ -69,6 +70,7 @@ const BookingScheduleSlot = (props: Props) => {
   const { hasAnotherBooking, concurrentBooking } = useConcurrentBookings(
     bookings,
     props,
+    user,
   )
 
   let Event = (
@@ -89,7 +91,14 @@ const BookingScheduleSlot = (props: Props) => {
       {...(isSelected && styleSelected)}
       {...(hasAnotherBooking && styleAnotherBooking)}
       onClick={() => {
-        if (hasAnotherBooking || user?.type === 'place') return null
+        if (user?.type === 'place') {
+          if (isMobile) {
+            window.alert(t(`detail.onlyCompany`))
+          }
+
+          return null
+        }
+        if (hasAnotherBooking) return null
         if (!isSelected) {
           setSelected([...selected, props])
         } else {

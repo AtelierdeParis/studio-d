@@ -578,6 +578,89 @@
           }
         ]
       }
+    },
+    "/bookings/{id}/remove-dispo": {
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Booking"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -636,10 +719,17 @@
                     "booked",
                     "pending",
                     "past",
-                    "canceled"
+                    "canceled",
+                    "removed"
                   ]
                 },
                 "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
+                  "type": "string"
+                },
+                "message": {
                   "type": "string"
                 },
                 "published_at": {
@@ -663,7 +753,8 @@
               "askcancel",
               "past",
               "accepted",
-              "pending"
+              "pending",
+              "expired"
             ]
           },
           "messages": {
@@ -702,7 +793,10 @@
                     "requestcanceledbyplace",
                     "bookingcanceledbyplace",
                     "askcancel",
-                    "message"
+                    "message",
+                    "requestdisporemovedbyplace",
+                    "bookingdisporemovedbyplace",
+                    "disporemovedbycompany"
                   ]
                 },
                 "booking": {
@@ -713,6 +807,12 @@
                 },
                 "notified": {
                   "type": "boolean"
+                },
+                "disponibilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -854,6 +954,9 @@
               "longitude": {
                 "type": "number"
               },
+              "deleted": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -983,6 +1086,12 @@
               },
               "external_id": {
                 "type": "integer"
+              },
+              "dispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -1114,6 +1223,12 @@
               "external_id": {
                 "type": "integer"
               },
+              "dispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1141,7 +1256,8 @@
               "askcancel",
               "past",
               "accepted",
-              "pending"
+              "pending",
+              "expired"
             ]
           },
           "messages": {

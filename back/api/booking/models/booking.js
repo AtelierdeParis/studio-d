@@ -11,20 +11,28 @@ const locale = {
   locale: fr,
 };
 
+const deleteRemovedDispos = (bookingId) => {
+  return strapi
+    .query("disponibility")
+    .delete({ booking: bookingId, status: "removed" });
+};
+
 const updateDispo = (dispos = [], status) => {
   if (!dispos || dispos.length === 0) return null;
   const data = { status };
   if (status === "available") {
     data.booking = null;
   }
-  dispos.map((dispo) => {
-    strapi.query("disponibility").update({ id: dispo.id }, data);
-    if (status === "available") {
-      strapi
-        .query("disponibility")
-        .create({ ...dispo, place: null, status: "canceled" });
-    }
-  });
+  dispos
+    .filter((dispo) => dispo.status !== "removed")
+    .map((dispo) => {
+      strapi.query("disponibility").update({ id: dispo.id }, data);
+      if (status === "available") {
+        strapi
+          .query("disponibility")
+          .create({ ...dispo, place: null, status: "canceled" });
+      }
+    });
 };
 
 const getDispoEmail = (dispos = []) => {
@@ -68,6 +76,10 @@ const checkStatus = (booking, status) => {
 
 module.exports = {
   lifecycles: {
+    async afterFindOne(result) {
+      const { status } = await strapi.services.booking.checkIsPast(result);
+      result.status = status;
+    },
     async afterFind(results) {
       if (results.length > 0) {
         await Promise.all(
@@ -129,7 +141,7 @@ module.exports = {
       );
     },
     beforeUpdate: async (params, data) => {
-      if (data.status) {
+      if (data.status && data.status !== "expired") {
         const booking = await strapi
           .query("booking")
           .findOne({ id: params.id });
@@ -162,6 +174,7 @@ module.exports = {
               status: "requestcanceled",
               ...rel,
             });
+            await deleteRemovedDispos(updated.id);
             updateDispo(updated.disponibilities, "available");
 
             // Send email to the place
@@ -176,7 +189,7 @@ module.exports = {
               {
                 from: capitalize(updated.company.firstname),
                 company: updated.company.structureName,
-                user_name: updated.company.firstname,
+                user_name: updated.place.firstname,
                 ref: updated.id,
                 espace_name: updated.espace.name,
                 user_type: "place",
@@ -190,6 +203,7 @@ module.exports = {
               status: "requestcanceledbyplace",
               ...rel,
             });
+            await deleteRemovedDispos(updated.id);
             updateDispo(updated.disponibilities, "available");
 
             // Send email to the company
@@ -318,3 +332,5 @@ module.exports = {
     },
   },
 };
+
+module.exports.getDispoEmail = getDispoEmail;

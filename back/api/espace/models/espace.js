@@ -47,7 +47,6 @@ module.exports = {
       await checkCity(data);
     },
     beforeUpdate: async (params, data) => {
-      console.log(data);
       if (data.name) {
         await generateSlug(data, params);
       }
@@ -56,20 +55,30 @@ module.exports = {
     async afterFind(result) {
       if (result && result.length > 0) {
         result.map((place, index) => {
-          result[index].disponibilities = place.disponibilities.map((dispo) => {
-            if (isPast(new Date(dispo.start))) {
-              strapi
-                .query("disponibility")
-                .update({ id: dispo.id }, { status: "past" });
-              dispo.status = "past";
-            }
-            return dispo;
-          });
+          if (result.disponibilities) {
+            result[index] = result.disponibilities.filter(
+              (dispo) => dispo.status !== "removed"
+            );
+            result[index].disponibilities = place.disponibilities.map(
+              (dispo) => {
+                if (isPast(new Date(dispo.start))) {
+                  strapi
+                    .query("disponibility")
+                    .update({ id: dispo.id }, { status: "past" });
+                  dispo.status = "past";
+                }
+                return dispo;
+              }
+            );
+          }
         });
       }
     },
     async afterFindOne(result) {
       if (result) {
+        result.disponibilities = result.disponibilities.filter(
+          (dispo) => dispo.status !== "removed"
+        );
         result.disponibilities.map((dispo) => {
           if (isPast(new Date(dispo.start))) {
             strapi

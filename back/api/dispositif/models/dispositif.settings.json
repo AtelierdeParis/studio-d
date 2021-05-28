@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dispositifs",
+  "info": {
+    "name": "Dispositif",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "disponibilities": {
+      "via": "dispositif",
+      "collection": "disponibility"
+    },
+    "actif": {
+      "type": "boolean",
+      "default": true
+    },
+    "expiration": {
+      "type": "date"
+    },
+    "users_permissions_users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "dispositifs",
+      "dominant": true
+    }
+  }
+}

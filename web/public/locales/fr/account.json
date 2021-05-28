@@ -9,6 +9,9 @@
         "createPlace": "Créer un espace",
         "places": "Mes espaces"
     },
+    "error": {
+        "emailTaken": "Cet email est déjà utilisé"
+    },
     "myAccount": "Mon compte",
     "dashboard": "Tableau de bord",
     "info": "Mes informations",
@@ -35,10 +38,11 @@
         "place": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les compagnies par messagerie. Commencez par inscrire un premier espace de répétition, ou jetez un oeil <a>à notre charte d’utilisation</a>."
     },
     "seePlaces": "Voir les espaces",
+    "seeMyPlaces": "Voir mes espaces",
     "information": {
         "migration": {
             "title": "Bienvenue sur le nouveau StudioD",
-            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet  à la nouvelle interface."
+            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
         },
         "username": "Identifiants",
         "email": {
@@ -152,6 +156,7 @@
         "past": "Passée",
         "occupied": "En cours",
         "askcancel": "Ann. demandée",
+        "expired": "Expirée",
         "newtweek": "Le semaine prochaine"
     },
     "errors": {

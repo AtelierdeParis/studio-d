@@ -52,7 +52,7 @@ const AccountMobileMenu = ({ user }: { user: UsersPermissionsUser }) => {
       onClose()
     }
   }, [router.pathname])
-  console.log(notifs)
+
   return (
     <>
       <Flex

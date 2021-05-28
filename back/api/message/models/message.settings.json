@@ -40,13 +40,16 @@
         "requestcanceledbyplace",
         "bookingcanceledbyplace",
         "askcancel",
-        "message"
+        "message",
+        "requestdisporemovedbyplace",
+        "bookingdisporemovedbyplace",
+        "disporemovedbycompany"
       ],
       "required": true
     },
     "booking": {
-      "model": "booking",
-      "via": "messages"
+      "via": "messages",
+      "model": "booking"
     },
     "hasbeenread": {
       "type": "boolean",
@@ -56,6 +59,10 @@
     "notified": {
       "type": "boolean",
       "default": false
+    },
+    "disponibilities": {
+      "collection": "disponibility",
+      "via": "message"
     }
   }
 }

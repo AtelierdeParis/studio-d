@@ -10,7 +10,9 @@ import SigninModal from '~components/Signin/SigninModal'
 
 const BookingRecap = () => {
   const { t } = useTranslation('place')
-  const { selected, setConfirmView } = useContext(BookingScheduleContext)
+  const { selected, setConfirmView, setSelected } = useContext(
+    BookingScheduleContext,
+  )
   const isPlural = useMemo(() => (selected.length > 1 ? 's' : ''), [selected])
   const { data: user, isLoading } = useCurrentUser()
 
@@ -18,8 +20,14 @@ const BookingRecap = () => {
 
   return (
     <Flex
-      px={8}
-      py={5}
+      boxShadow="1px 1px 4px #ccc"
+      pos={{ base: 'fixed', md: 'static' }}
+      left={0}
+      right={0}
+      bottom={0}
+      px={{ base: 5, md: 8 }}
+      py={{ base: 4, md: 5 }}
+      zIndex={{ base: 20, md: 1 }}
       bgColor="white"
       borderRadius="xl"
       justifyContent="space-between"
@@ -57,23 +65,35 @@ const BookingRecap = () => {
             </Box>
           ) : (
             <>
-              <Box>
+              <Box flex={1}>
                 <Text>
                   {t(`detail.nbSelected${isPlural}`, { nb: selected.length })}
                 </Text>
-                <BookingSelection events={selected} />
+                <Box display={{ base: 'none', md: 'block' }}>
+                  <BookingSelection events={selected} />
+                </Box>
               </Box>
-              <Button
-                mt={{ base: 6, md: 0 }}
-                size="lg"
-                alignSelf="center"
-                onClick={() => {
-                  window.scrollTo(0, 0)
-                  setConfirmView(true)
-                }}
+              <ButtonGroup
+                flex={0}
+                mt={{ base: 2, md: 0 }}
+                alignItems="center"
+                justifyContent={{ base: 'flex-end', md: 'flex-end' }}
+                w="100%"
+                spacing={4}
               >
-                {t('detail.submit')}
-              </Button>
+                <Button onClick={() => setSelected([])} variant="unstyled">
+                  {t('detail.cancel')}
+                </Button>
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    window.scrollTo(0, 0)
+                    setConfirmView(true)
+                  }}
+                >
+                  {t('detail.submit')}
+                </Button>
+              </ButtonGroup>
             </>
           )}
         </>

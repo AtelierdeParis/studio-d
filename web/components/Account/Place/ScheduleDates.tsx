@@ -44,7 +44,7 @@ const ScheduleDates = ({ control }) => {
         <InputDate
           name="start"
           control={control}
-          minDate={new Date()}
+          minDate={addDays(new Date(), 1)}
           excludeDates={oldEventsDate}
         />
       </FormField>

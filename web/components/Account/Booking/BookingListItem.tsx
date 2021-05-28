@@ -1,5 +1,5 @@
 import React, { Fragment, useMemo } from 'react'
-import { format } from '~utils/date'
+import { format, orderByDate } from '~utils/date'
 import Message from 'public/assets/img/message.svg'
 import Tag from '~components/Tag'
 import CircleStatus from '~components/CircleStatus'
@@ -7,7 +7,7 @@ import Link from '~components/Link'
 import { Booking } from '~typings/api'
 import { Circle, Text, Flex, Button, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import Cell from '~components/Account/Booking/Cell'
+import Cell, { checkIsCanceled } from '~components/Account/Booking/Cell'
 import { ROUTE_ACCOUNT_MESSAGE } from '~constants'
 import isSameDay from 'date-fns/isSameDay'
 import useIsOccupied from '~hooks/useIsOccupied'
@@ -54,6 +54,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
         textOverflow="ellipsis"
         whiteSpace="nowrap"
         overflow="hidden"
+        fullOpacity
         onClick={() => onSelect(booking.id)}
       >
         <Flex alignItems="center" flex={1} w="100%">
@@ -62,7 +63,11 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
             display={{ base: 'block', lg: 'none' }}
             mr={3}
           />
-          <Text isTruncated w="100%">
+          <Text
+            isTruncated
+            w="100%"
+            opacity={checkIsCanceled(status) ? 0.3 : 1}
+          >
             {booking?.espace?.name}
           </Text>
         </Flex>
@@ -80,11 +85,15 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
       </Cell>
       <Cell status={status} onClick={() => onSelect(booking.id)}>
         <Flex direction="column">
-          {booking?.disponibilities.map((dispo) => (
+          {orderByDate(booking?.disponibilities, 'start').map((dispo) => (
             <Flex
               py={0.5}
               alignItems="center"
               whiteSpace="nowrap"
+              color={dispo.status === 'removed' ? 'gray.400' : 'black'}
+              textDecoration={
+                dispo.status === 'removed' ? 'line-through' : 'none'
+              }
               key={dispo.id}
             >
               <Text>{format(dispo.start, 'd MMM yyyy')}</Text>
@@ -142,15 +151,7 @@ const BookingListItem = ({ booking, onSelect }: Props) => {
           <Box
             pl={3}
             pos="relative"
-            opacity={
-              [
-                'requestcanceled',
-                'requestcanceledbyplace',
-                'bookingcanceledbyplace',
-              ].includes(status)
-                ? 0.2
-                : 1
-            }
+            opacity={checkIsCanceled(status) ? 0.3 : 1}
           >
             {booking?.notifications?.message > 0 && (
               <Circle

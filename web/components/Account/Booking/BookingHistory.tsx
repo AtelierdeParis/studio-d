@@ -9,14 +9,15 @@ import { useTranslation } from 'next-i18next'
 
 interface Props {
   booking: Booking
-  type: 'company' | 'place'
+  userType: 'company' | 'place'
+  bookingType: 'request' | 'booking'
 }
 
-const BookingHistory = ({ booking, type }: Props) => {
+const BookingHistory = ({ booking, userType, bookingType }: Props) => {
   const { t } = useTranslation('booking')
 
   return (
-    <Box w="100%" pt={{ base: 5, md: 0 }}>
+    <Box w="100%" pt={{ base: 5, md: 0 }} mb={10}>
       <Text
         fontFamily="mabry medium"
         fontWeight="500"
@@ -30,14 +31,16 @@ const BookingHistory = ({ booking, type }: Props) => {
           .filter((message) => message.status !== 'message')
           // @ts-ignore
           .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-          .map(({ id, status, created_at }) => {
+          .map(({ id, status, created_at, disponibilities }) => {
             const { color, colorCircle, text } = getHistoryInfo(
               status,
               booking,
-              type,
+              userType,
+              bookingType,
+              disponibilities,
             )
             const target =
-              type === 'place' ? booking.company.id : booking.place.id
+              userType === 'place' ? booking.company.id : booking.place.id
 
             return (
               <Flex key={id} alignItems="flex-start">

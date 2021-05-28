@@ -29,6 +29,7 @@ import * as yup from 'yup'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 import MigrationMessage from '~components/MigrationMessage'
+import Loading from '~components/Loading'
 import { ROUTE_ACCOUNT_PLACES, ROUTE_ACCOUNT } from '~constants'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
@@ -41,18 +42,19 @@ interface FormInformation extends UsersPermissionsUser {
   password: string
 }
 
-const getSchema = (target, t) => {
+const getSchema = (user: UsersPermissionsUser, t) => {
+  if (!user) return null
   const schema = {
     firstname: yup.string().required(t('errors.required')),
     lastname: yup.string().required(t('errors.required')),
-    email: yup.string().email().required(t('errors.required')),
-    password: yup.string().test({
-      message: 'Le mot de passe doit faire au minimum 10 caractères',
-      test: (value) => {
-        if (value !== '') return value.length >= 10
-        return true
-      },
-    }),
+    // email: yup.string().email().required(t('errors.required')),
+    // password: yup.string().test({
+    //   message: 'Le mot de passe doit faire au minimum 10 caractères',
+    //   test: (value) => {
+    //     if (value !== '') return value.length >= 10
+    //     return true
+    //   },
+    // }),
     structureName: yup.string().required(t('errors.required')),
     address: yup.string().required(t('errors.required')),
     phone: yup
@@ -105,7 +107,7 @@ const getSchema = (target, t) => {
       .max(5, t('errors.max', { max: 5 })),
   }
 
-  if (target === 'company') {
+  if (user.type === 'company') {
     schema['choreographer'] = yup.string().required(t('errors.required'))
     schema['insuranceName'] = yup.string().required(t('errors.required'))
     schema['insuranceNumber'] = yup.string().required(t('errors.required'))
@@ -140,7 +142,7 @@ const AccountInformation = ({ user }: Props) => {
       password: undefined,
     },
     // @ts-ignore
-    resolver: yupResolver(getSchema(user?.type, t)),
+    resolver: yupResolver(getSchema(user, t)),
   })
 
   useEffect(() => {
@@ -166,12 +168,21 @@ const AccountInformation = ({ user }: Props) => {
         reset(filteredData, { dirtyFields: false })
         successToast(t('information.success'))
       })
-      .catch(() => errorToast(t('information.error')))
+      .catch((res) => {
+        if (res?.response?.data?.data?.id) {
+          errorToast(t(res?.response?.data?.data?.id))
+        } else {
+          errorToast(t('information.error'))
+        }
+      })
       .finally(() => setLoading(false))
   }
 
   const onSubmit = (data) => {
-    if (data.email !== user?.email || data.password !== '') {
+    if (
+      (!!data.email && data.email !== user?.email) ||
+      (!!data.password && data.password !== '')
+    ) {
       setShowModal(true)
       return
     }
@@ -179,295 +190,298 @@ const AccountInformation = ({ user }: Props) => {
   }
 
   return (
-    <Box pt={{ base: 4, sm: 8 }} pb={8}>
-      <NextSeo title={t('title.info')} />
-      {showModal && (
-        <AskPasswordModal
-          onSuccess={() => save(getValues())}
-          setShowModal={setShowModal}
-        />
-      )}
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box>
+    <Loading isLoading={!user} isCentered>
+      <Box pt={{ base: 4, sm: 8 }} pb={8}>
+        <NextSeo title={t('title.info')} />
+        {showModal && (
+          <AskPasswordModal
+            onSuccess={() => save(getValues())}
+            setShowModal={setShowModal}
+          />
+        )}
+        <form onSubmit={handleSubmit(onSubmit)}>
           {user?.external_id && !isComplete && (
             <MigrationMessage
               title={t('information.migration.title')}
               message={t('information.migration.message')}
             />
           )}
-          <Text textStyle="groupLabel">{t('information.username')}</Text>
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            spacing={5}
-            w="100%"
-            alignItems="flex-start"
-            pl={2.5}
-            pr={{ base: 2.5, md: 0 }}
-          >
-            <FormField
-              label={t('information.email.label')}
-              errors={errors.email}
-              isRequired
-              isComplete={isComplete}
-            >
-              <InputGroup>
-                <Input name="email" type="email" ref={register} />
-                <InputRightElement children={<Letter />} />
-              </InputGroup>
-            </FormField>
-            <FormField
-              label={t('information.password.label')}
-              info={t('information.password.info')}
-              errors={errors.password}
-              isComplete={isComplete}
-            >
-              <InputPassword
-                register={register}
-                placeholder={t('information.password.placeholder')}
-              />
-            </FormField>
-          </Stack>
-        </Box>
-        <Box my={{ base: 10, sm: 14 }}>
-          <Text textStyle="groupLabel">{t('information.address.title')}</Text>
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            spacing={5}
-            w="100%"
-            alignItems="flex-start"
-            pl={2.5}
-            pr={{ base: 2.5, md: 0 }}
-          >
-            <FormField
-              label={t('information.address.label')}
-              errors={errors.address}
-              isRequired
-              flex={1}
-              isComplete={isComplete}
-            >
-              <Input name="address" ref={register} />
-            </FormField>
-            <VStack
-              direction="column"
-              flex={1}
-              alignItems="flex-start"
-              spacing={5}
-              w={{ base: '100%', md: 'auto' }}
-            >
+          {user?.confirmed && user?.accepted && (
+            <Box mb={{ base: 10, sm: 14 }}>
+              <Text textStyle="groupLabel">{t('information.username')}</Text>
               <Stack
                 direction={{ base: 'column', md: 'row' }}
                 spacing={5}
                 w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
               >
                 <FormField
-                  label={t('information.zipCode.label')}
-                  errors={errors.zipCode}
+                  label={t('information.email.label')}
+                  errors={errors.email}
                   isRequired
                   isComplete={isComplete}
                 >
-                  <Input name="zipCode" ref={register} />
+                  <InputGroup>
+                    <Input name="email" type="email" ref={register} />
+                    <InputRightElement children={<Letter />} />
+                  </InputGroup>
                 </FormField>
                 <FormField
-                  label={t('information.city.label')}
-                  errors={errors.city}
-                  isRequired
+                  label={t('information.password.label')}
+                  info={t('information.password.info')}
+                  errors={errors.password}
                   isComplete={isComplete}
                 >
-                  <Input name="city" ref={register} />
+                  <InputPassword
+                    register={register}
+                    placeholder={t('information.password.placeholder')}
+                  />
                 </FormField>
               </Stack>
+            </Box>
+          )}
+          <Box mb={{ base: 10, sm: 14 }}>
+            <Text textStyle="groupLabel">{t('information.address.title')}</Text>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={5}
+              w="100%"
+              alignItems="flex-start"
+              pl={2.5}
+              pr={{ base: 2.5, md: 0 }}
+            >
               <FormField
-                label={t('information.country.label')}
-                errors={errors.country}
+                label={t('information.address.label')}
+                errors={errors.address}
                 isRequired
+                flex={1}
                 isComplete={isComplete}
               >
-                <Input name="country" ref={register} />
+                <Input name="address" ref={register} />
               </FormField>
+              <VStack
+                direction="column"
+                flex={1}
+                alignItems="flex-start"
+                spacing={5}
+                w={{ base: '100%', md: 'auto' }}
+              >
+                <Stack
+                  direction={{ base: 'column', md: 'row' }}
+                  spacing={5}
+                  w="100%"
+                >
+                  <FormField
+                    label={t('information.zipCode.label')}
+                    errors={errors.zipCode}
+                    isRequired
+                    isComplete={isComplete}
+                  >
+                    <Input name="zipCode" ref={register} />
+                  </FormField>
+                  <FormField
+                    label={t('information.city.label')}
+                    errors={errors.city}
+                    isRequired
+                    isComplete={isComplete}
+                  >
+                    <Input name="city" ref={register} />
+                  </FormField>
+                </Stack>
+                <FormField
+                  label={t('information.country.label')}
+                  errors={errors.country}
+                  isRequired
+                  isComplete={isComplete}
+                >
+                  <Input name="country" ref={register} />
+                </FormField>
+              </VStack>
+            </Stack>
+          </Box>
+          <Box my={14}>
+            <Text textStyle="groupLabel">{t('information.info')}</Text>
+            <VStack spacing={5}>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                <FormField
+                  label={t('information.firstname')}
+                  errors={errors.firstname}
+                  flex={1}
+                  isComplete={isComplete}
+                >
+                  <Input name="firstname" ref={register} />
+                </FormField>
+                <FormField
+                  label={t('information.lastname')}
+                  errors={errors.lastname}
+                  flex={1}
+                  isComplete={isComplete}
+                >
+                  <Input name="lastname" ref={register} />
+                </FormField>
+              </Stack>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                <FormField
+                  label={t('information.structure')}
+                  errors={errors.structureName}
+                  flex={1}
+                  isRequired
+                  isComplete={isComplete}
+                >
+                  <Input name="structureName" ref={register} />
+                </FormField>
+                <FormField
+                  label={t('information.socialReason.label')}
+                  info={t('information.socialReason.info')}
+                  errors={errors.socialReason}
+                  flex={1}
+                  isComplete={isComplete}
+                >
+                  <Input name="socialReason" ref={register} />
+                </FormField>
+              </Stack>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                <FormField
+                  label={t('information.siret')}
+                  errors={errors.siret}
+                  isComplete={isComplete}
+                  isRequired
+                >
+                  <Input name="siret" ref={register} />
+                </FormField>
+                <FormField
+                  label={t('information.ape')}
+                  errors={errors.ape}
+                  isComplete={isComplete}
+                  isRequired
+                >
+                  <Input name="ape" ref={register} />
+                </FormField>
+              </Stack>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                <FormField
+                  label={t('information.phone.label')}
+                  errors={errors.phone}
+                  isComplete={isComplete}
+                  isRequired
+                >
+                  <Input name="phone" ref={register} />
+                </FormField>
+                <FormField
+                  label={t('information.license.label')}
+                  info={t('information.license.info')}
+                  errors={errors.license}
+                  isComplete={isComplete}
+                  isRequired
+                >
+                  <Input name="license" ref={register} />
+                </FormField>
+              </Stack>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                <FormField
+                  label={t('information.website')}
+                  errors={errors.website}
+                  isComplete={isComplete}
+                >
+                  <Input name="website" ref={register} />
+                </FormField>
+                {user?.type === 'company' ? (
+                  <FormField
+                    label={t('information.choreographer')}
+                    errors={errors.choreographer}
+                    isComplete={isComplete}
+                  >
+                    <Input name="choreographer" ref={register} />
+                  </FormField>
+                ) : (
+                  <FormField
+                    label={t('information.legalRepresentative')}
+                    errors={errors.legalRepresentative}
+                    isComplete={isComplete}
+                  >
+                    <Input name="legalRepresentative" ref={register} />
+                  </FormField>
+                )}
+              </Stack>
+              <Stack
+                direction={{ base: 'column', md: 'row' }}
+                spacing={5}
+                w="100%"
+                alignItems="flex-start"
+                pl={2.5}
+                pr={{ base: 2.5, md: 0 }}
+              >
+                {user?.type === 'company' ? (
+                  <>
+                    <FormField
+                      label={t('information.insuranceName')}
+                      errors={errors.insuranceName}
+                      isComplete={isComplete}
+                    >
+                      <Input name="insuranceName" ref={register} />
+                    </FormField>
+                    <FormField
+                      label={t('information.insuranceNumber')}
+                      errors={errors.insuranceNumber}
+                      isComplete={isComplete}
+                    >
+                      <Input name="insuranceNumber" ref={register} />
+                    </FormField>
+                  </>
+                ) : (
+                  <>
+                    <FormField
+                      flex={1}
+                      label={t('information.qualityRepresentative')}
+                      errors={errors.statusRepresentative}
+                      isComplete={isComplete}
+                    >
+                      <Input name="statusRepresentative" ref={register} />
+                    </FormField>
+                    <Spacer flex={1} />
+                  </>
+                )}
+              </Stack>
             </VStack>
-          </Stack>
-        </Box>
-        <Box my={14}>
-          <Text textStyle="groupLabel">{t('information.info')}</Text>
-          <VStack spacing={5}>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              <FormField
-                label={t('information.firstname')}
-                errors={errors.firstname}
-                flex={1}
-                isComplete={isComplete}
-              >
-                <Input name="firstname" ref={register} />
-              </FormField>
-              <FormField
-                label={t('information.lastname')}
-                errors={errors.lastname}
-                flex={1}
-                isComplete={isComplete}
-              >
-                <Input name="lastname" ref={register} />
-              </FormField>
-            </Stack>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              <FormField
-                label={t('information.structure')}
-                errors={errors.structureName}
-                flex={1}
-                isRequired
-                isComplete={isComplete}
-              >
-                <Input name="structureName" ref={register} />
-              </FormField>
-              <FormField
-                label={t('information.socialReason.label')}
-                info={t('information.socialReason.info')}
-                errors={errors.socialReason}
-                flex={1}
-                isComplete={isComplete}
-              >
-                <Input name="socialReason" ref={register} />
-              </FormField>
-            </Stack>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              <FormField
-                label={t('information.siret')}
-                errors={errors.siret}
-                isComplete={isComplete}
-                isRequired
-              >
-                <Input name="siret" ref={register} />
-              </FormField>
-              <FormField
-                label={t('information.ape')}
-                errors={errors.ape}
-                isComplete={isComplete}
-                isRequired
-              >
-                <Input name="ape" ref={register} />
-              </FormField>
-            </Stack>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              <FormField
-                label={t('information.phone.label')}
-                errors={errors.phone}
-                isComplete={isComplete}
-                isRequired
-              >
-                <Input name="phone" ref={register} />
-              </FormField>
-              <FormField
-                label={t('information.license.label')}
-                info={t('information.license.info')}
-                errors={errors.license}
-                isComplete={isComplete}
-                isRequired
-              >
-                <Input name="license" ref={register} />
-              </FormField>
-            </Stack>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              <FormField
-                label={t('information.website')}
-                errors={errors.website}
-                isComplete={isComplete}
-              >
-                <Input name="website" ref={register} />
-              </FormField>
-              {user?.type === 'company' ? (
-                <FormField
-                  label={t('information.choreographer')}
-                  errors={errors.choreographer}
-                  isComplete={isComplete}
-                >
-                  <Input name="choreographer" ref={register} />
-                </FormField>
-              ) : (
-                <FormField
-                  label={t('information.legalRepresentative')}
-                  errors={errors.legalRepresentative}
-                  isComplete={isComplete}
-                >
-                  <Input name="legalRepresentative" ref={register} />
-                </FormField>
-              )}
-            </Stack>
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              spacing={5}
-              w="100%"
-              alignItems="flex-start"
-              pl={2.5}
-              pr={{ base: 2.5, md: 0 }}
-            >
-              {user?.type === 'company' ? (
-                <>
-                  <FormField
-                    label={t('information.insuranceName')}
-                    errors={errors.insuranceName}
-                    isComplete={isComplete}
-                  >
-                    <Input name="insuranceName" ref={register} />
-                  </FormField>
-                  <FormField
-                    label={t('information.insuranceNumber')}
-                    errors={errors.insuranceNumber}
-                    isComplete={isComplete}
-                  >
-                    <Input name="insuranceNumber" ref={register} />
-                  </FormField>
-                </>
-              ) : (
-                <>
-                  <FormField
-                    flex={1}
-                    label={t('information.qualityRepresentative')}
-                    errors={errors.statusRepresentative}
-                    isComplete={isComplete}
-                  >
-                    <Input name="statusRepresentative" ref={register} />
-                  </FormField>
-                  <Spacer flex={1} />
-                </>
-              )}
-            </Stack>
-          </VStack>
-        </Box>
-        {/* {user?.confirmed && !user?.blocked && (
+          </Box>
+          {/* {user?.confirmed && !user?.blocked && (
           <Box my={14}>
             <Text textStyle="groupLabel">
               {t('information.desactivate.title')}
@@ -477,19 +491,20 @@ const AccountInformation = ({ user }: Props) => {
             </Box>
           </Box>
         )} */}
-        <Flex justifyContent="center">
-          <Button
-            colorScheme="blue"
-            size="lg"
-            isLoading={isLoading}
-            type="submit"
-            isDisabled={Object.keys(formState.dirtyFields).length === 0}
-          >
-            {t('information.submit')}
-          </Button>
-        </Flex>
-      </form>
-    </Box>
+          <Flex justifyContent="center">
+            <Button
+              colorScheme="blue"
+              size="lg"
+              isLoading={isLoading}
+              type="submit"
+              isDisabled={Object.keys(formState.dirtyFields).length === 0}
+            >
+              {t('information.submit')}
+            </Button>
+          </Flex>
+        </form>
+      </Box>
+    </Loading>
   )
 }
 

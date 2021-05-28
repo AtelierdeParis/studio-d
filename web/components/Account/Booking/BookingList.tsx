@@ -26,7 +26,7 @@ const Divider = (props: DividerProps) => (
   <ChakraDivider orientation="vertical" h="24px" mr={2.5} {...props} />
 )
 
-const BookingList = ({ bookings, type }: Props) => {
+const BookingList = ({ bookings = [], type }: Props) => {
   const router = useRouter()
   const { data: user } = useCurrentUser()
   const { t } = useTranslation('booking')
@@ -98,7 +98,7 @@ const BookingList = ({ bookings, type }: Props) => {
         </Cell>
         <Cell isHeader display={{ base: 'none', xl: 'flex' }}>
           <Divider />
-          <Text>{t(user.type === 'place' ? 'company' : 'structure')}</Text>
+          <Text>{t(user?.type === 'place' ? 'company' : 'structure')}</Text>
         </Cell>
         <Cell isHeader>
           <Divider />

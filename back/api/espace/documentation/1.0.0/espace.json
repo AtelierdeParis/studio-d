@@ -902,6 +902,12 @@
               "external_id": {
                 "type": "integer"
               },
+              "dispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -956,10 +962,17 @@
                     "booked",
                     "pending",
                     "past",
-                    "canceled"
+                    "canceled",
+                    "removed"
                   ]
                 },
                 "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
+                  "type": "string"
+                },
+                "message": {
                   "type": "string"
                 },
                 "published_at": {
@@ -1010,7 +1023,8 @@
                     "askcancel",
                     "past",
                     "accepted",
-                    "pending"
+                    "pending",
+                    "expired"
                   ]
                 },
                 "messages": {
@@ -1095,6 +1109,10 @@
           },
           "longitude": {
             "type": "number"
+          },
+          "deleted": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -1214,6 +1232,10 @@
           },
           "longitude": {
             "type": "number"
+          },
+          "deleted": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

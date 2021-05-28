@@ -15,7 +15,7 @@
       "path": "/bookings",
       "handler": "booking.find",
       "config": {
-        "policies": ["is-concerned"]
+        "policies": []
       }
     },
     {
@@ -48,6 +48,14 @@
       "handler": "booking.update",
       "config": {
         "policies": ["is-concerned"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/bookings/:id/remove-dispo",
+      "handler": "booking.removeDispo",
+      "config": {
+        "policies": ["is-concerned", "global::is-place"]
       }
     },
     {

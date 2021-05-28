@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import { saveAs } from 'file-saver'
 import {
@@ -23,11 +23,11 @@ import MarkdownRenderer from '~components/MarkdownRenderer'
 import BookingScheduleContainer from '~components/Place/BookingScheduleContainer'
 import Pin from 'public/assets/img/pin-outline.svg'
 import Calendar from 'public/assets/img/calendar.svg'
-import Compass from 'public/assets/img/compass.svg'
 import Download from 'public/assets/img/download.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
 import axios from 'axios'
+import PlaceItinerary from '~components/Place/PlaceItinerary'
 
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
@@ -38,6 +38,15 @@ interface Props {
 const PlaceDetail = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, lg: false })
+
+  const displayPrecise = useMemo(() => {
+    if (!place) return false
+    return (
+      place.accomodation ||
+      place.technicalStaff ||
+      place.danceCarpet === 'possible'
+    )
+  }, [place])
 
   return (
     <Box>
@@ -105,7 +114,10 @@ const PlaceDetail = ({ place }: Props) => {
             {!isMobile && (
               <>
                 <Divider mt={5} mb={2} opacity={0.4} />
-                <PlaceAttributesGrid place={place} />
+                <PlaceAttributesGrid
+                  place={place}
+                  displayPrecise={displayPrecise}
+                />
               </>
             )}
           </Box>
@@ -119,7 +131,12 @@ const PlaceDetail = ({ place }: Props) => {
           </Text>
         </Flex>
         <BookingScheduleContainer place={place} />
-        {isMobile && <PlaceAttributesGridMobile place={place} />}
+        {isMobile && (
+          <PlaceAttributesGridMobile
+            place={place}
+            displayPrecise={displayPrecise}
+          />
+        )}
         <Stack
           direction={{ base: 'column', lg: 'row' }}
           justifyContent="space-between"
@@ -178,45 +195,7 @@ const PlaceDetail = ({ place }: Props) => {
             </Box>
           )}
         </Stack>
-        <Flex alignItems="flex-start" pt={{ base: 14, lg: 20 }} id="map">
-          <Box w="18px" mt={0.5}>
-            <Compass />
-          </Box>
-          <Box pl={5}>
-            <Text textStyle="h2" mb={5}>
-              {t('detail.howToGo')}
-            </Text>
-            <Text>{t('detail.located', { address: place?.address })}</Text>
-            {'geolocation' in navigator && (
-              <Button
-                variant="line"
-                color="gray.500"
-                borderBottomColor="gray.500"
-                onClick={() => {
-                  navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                      const currentLatitude = position.coords.latitude
-                      const currentLongitude = position.coords.longitude
-                      window.open(
-                        `https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route=${currentLatitude},${currentLongitude};${place?.longitude},${place?.latitude}&geometries=geojson`,
-                      )
-                    },
-                    (err) => {
-                      console.log('err', err)
-                    },
-                    {
-                      timeout: 30000,
-                      enableHighAccuracy: true,
-                      maximumAge: 75000,
-                    },
-                  )
-                }}
-              >
-                {t('detail.itinerary')}
-              </Button>
-            )}
-          </Box>
-        </Flex>
+        <PlaceItinerary place={place} />
         <Map
           mt={10}
           w="100%"

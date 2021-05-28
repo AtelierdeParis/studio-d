@@ -90,8 +90,6 @@ export interface NewBooking {
 export interface City {
   id: string;
   name: string;
-  latitude: string;
-  longitude: string;
   espaces?: {
     id: string;
     name: string;
@@ -108,8 +106,6 @@ export interface City {
     about?: string;
     details?: string;
     address: string;
-    latitude: string;
-    longitude: string;
     files?: string[];
     images?: string[];
     users_permissions_user?: string;
@@ -123,16 +119,22 @@ export interface City {
     danceCarpet?: "true" | "false" | "possible";
     slug?: string;
     city?: string;
+    latitude: number;
+    longitude?: number;
     created_by?: string;
     updated_by?: string;
   }[];
+  country: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface NewCity {
   name: string;
-  latitude: string;
-  longitude: string;
   espaces?: string[];
+  country: string;
+  latitude?: number;
+  longitude?: number;
   created_by?: string;
   updated_by?: string;
 }
@@ -177,8 +179,6 @@ export interface Disponibility {
     about?: string;
     details?: string;
     address: string;
-    latitude: string;
-    longitude: string;
     files?: string[];
     images?: string[];
     users_permissions_user?: string;
@@ -192,11 +192,13 @@ export interface Disponibility {
     danceCarpet?: "true" | "false" | "possible";
     slug?: string;
     city?: string;
+    latitude: number;
+    longitude?: number;
     created_by?: string;
     updated_by?: string;
   };
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled";
+  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
   booking?: {
     id: string;
     disponibilities?: string[];
@@ -215,6 +217,40 @@ export interface Disponibility {
     created_by?: string;
     updated_by?: string;
   };
+  dispositif?: {
+    id: string;
+    name: string;
+    disponibilities?: string[];
+    actif?: boolean;
+    expiration?: string;
+    users_permissions_users?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
+  message?: {
+    id: string;
+    message?: string;
+    place?: string;
+    company?: string;
+    author?: "company" | "place";
+    status:
+      | "accepted"
+      | "created"
+      | "requestcanceled"
+      | "requestcanceledbyplace"
+      | "bookingcanceledbyplace"
+      | "askcancel"
+      | "message"
+      | "requestdisporemovedbyplace"
+      | "bookingdisporemovedbyplace"
+      | "disporemovedbycompany";
+    booking?: string;
+    hasbeenread?: boolean;
+    notified?: boolean;
+    disponibilities?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
 
   /** @format date-time */
   published_at?: string;
@@ -230,11 +266,86 @@ export interface NewDisponibility {
   end: string;
   espace?: string;
   type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled";
+  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
   booking?: string;
+  dispositif?: string;
+  message?: string;
 
   /** @format date-time */
   published_at?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface Dispositif {
+  id: string;
+  name: string;
+  disponibilities?: {
+    id: string;
+    when?: "morning" | "afternoon" | "full";
+    start: string;
+    end: string;
+    espace?: string;
+    type: "punctual" | "day" | "period";
+    status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
+    booking?: string;
+    dispositif?: string;
+    message?: string;
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+  actif?: boolean;
+
+  /** @format date */
+  expiration?: string;
+  users_permissions_users?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    dispositifs?: string[];
+    created_by?: string;
+    updated_by?: string;
+  }[];
+}
+
+export interface NewDispositif {
+  name: string;
+  disponibilities?: string[];
+  actif?: boolean;
+
+  /** @format date */
+  expiration?: string;
+  users_permissions_users?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -288,8 +399,6 @@ export interface NewEspace {
   about?: string;
   details?: string;
   address: string;
-  latitude: string;
-  longitude: string;
   users_permissions_user?: string;
   disponibilities?: string[];
   scheduleDetails?: string;
@@ -303,6 +412,8 @@ export interface NewEspace {
   danceCarpet?: "true" | "false" | "possible";
   slug?: string;
   city?: string;
+  latitude: number;
+  longitude?: number;
   created_by?: string;
   updated_by?: string;
 }
@@ -392,6 +503,7 @@ export interface Message {
   created_at?: string;
   place?: UsersPermissionsUser;
   company?: UsersPermissionsUser;
+  disponibilities?: Disponibility[];
   booking?: Booking;
   status:
     | "accepted"
@@ -416,10 +528,14 @@ export interface NewMessage {
     | "requestcanceledbyplace"
     | "bookingcanceledbyplace"
     | "askcancel"
-    | "message";
+    | "message"
+    | "requestdisporemovedbyplace"
+    | "bookingdisporemovedbyplace"
+    | "disporemovedbycompany";
   booking?: string;
   hasbeenread?: boolean;
   notified?: boolean;
+  disponibilities?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -494,6 +610,7 @@ export interface UsersPermissionsRole {
     username: string;
     confirmed?: boolean;
     blocked?: boolean;
+    accepted?: boolean;
     firstname: string;
     lastname: string;
     structureName: string;
@@ -515,7 +632,7 @@ export interface UsersPermissionsRole {
     espaces?: string[];
     type: "company" | "place";
     external_id?: number;
-    accepted?: boolean;
+    dispositifs?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -571,6 +688,7 @@ export interface UsersPermissionsUser {
   type: "company" | "place";
   external_id?: string;
   bookings?: Booking[];
+  dispositifs?: Dispositif[];
 }
 
 export interface NewUsersPermissionsUser {
@@ -828,6 +946,20 @@ export namespace Bookings {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = number;
+  }
+  /**
+   * @description Update a record
+   * @tags Booking
+   * @name RemoveDispos
+   * @request PUT:/bookings/{id}/remove-dispo
+   * @secure
+   */
+  export namespace RemoveDispos {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = { dispos?: string[] };
+    export type RequestHeaders = {};
+    export type ResponseBody = { foo?: string };
   }
 }
 
@@ -1151,6 +1283,107 @@ export namespace Bulk {
   }
 }
 
+export namespace Dispositifs {
+  /**
+   * No description
+   * @tags Dispositif
+   * @name DispositifsList
+   * @request GET:/dispositifs
+   * @secure
+   */
+  export namespace DispositifsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Dispositif[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Dispositif
+   * @name DispositifsCreate
+   * @request POST:/dispositifs
+   * @secure
+   */
+  export namespace DispositifsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewDispositif;
+    export type RequestHeaders = {};
+    export type ResponseBody = Dispositif;
+  }
+  /**
+   * No description
+   * @tags Dispositif
+   * @name CountList
+   * @request GET:/dispositifs/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Dispositif
+   * @name DispositifsDetail
+   * @request GET:/dispositifs/{id}
+   * @secure
+   */
+  export namespace DispositifsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Dispositif;
+  }
+  /**
+   * @description Update a record
+   * @tags Dispositif
+   * @name DispositifsUpdate
+   * @request PUT:/dispositifs/{id}
+   * @secure
+   */
+  export namespace DispositifsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewDispositif;
+    export type RequestHeaders = {};
+    export type ResponseBody = Dispositif;
+  }
+  /**
+   * @description Delete a record
+   * @tags Dispositif
+   * @name DispositifsDelete
+   * @request DELETE:/dispositifs/{id}
+   * @secure
+   */
+  export namespace DispositifsDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
 export namespace Espaces {
   /**
    * @description Get places related to current user
@@ -1165,20 +1398,6 @@ export namespace Espaces {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Espace[];
-  }
-  /**
-   * @description Get list of cities
-   * @tags Espace
-   * @name CitiesList
-   * @request GET:/espaces/cities
-   * @secure
-   */
-  export namespace CitiesList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = string[];
   }
   /**
    * No description
@@ -2740,6 +2959,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Booking
+     * @name RemoveDispos
+     * @request PUT:/bookings/{id}/remove-dispo
+     * @secure
+     */
+    removeDispos: (id: string, data: { dispos?: string[] }, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/bookings/${id}/remove-dispo`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
   };
   cities = {
     /**
@@ -3136,6 +3374,131 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
+  dispositifs = {
+    /**
+     * No description
+     *
+     * @tags Dispositif
+     * @name DispositifsList
+     * @request GET:/dispositifs
+     * @secure
+     */
+    dispositifsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Dispositif[], Error>({
+        path: `/dispositifs`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Dispositif
+     * @name DispositifsCreate
+     * @request POST:/dispositifs
+     * @secure
+     */
+    dispositifsCreate: (data: NewDispositif, params: RequestParams = {}) =>
+      this.request<Dispositif, Error>({
+        path: `/dispositifs`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Dispositif
+     * @name CountList
+     * @request GET:/dispositifs/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/dispositifs/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Dispositif
+     * @name DispositifsDetail
+     * @request GET:/dispositifs/{id}
+     * @secure
+     */
+    dispositifsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Dispositif, Error>({
+        path: `/dispositifs/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Dispositif
+     * @name DispositifsUpdate
+     * @request PUT:/dispositifs/{id}
+     * @secure
+     */
+    dispositifsUpdate: (id: string, data: NewDispositif, params: RequestParams = {}) =>
+      this.request<Dispositif, Error>({
+        path: `/dispositifs/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Dispositif
+     * @name DispositifsDelete
+     * @request DELETE:/dispositifs/{id}
+     * @secure
+     */
+    dispositifsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/dispositifs/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   espaces = {
     /**
      * @description Get places related to current user
@@ -3148,23 +3511,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     myPlaces: (params: RequestParams = {}) =>
       this.request<Espace[], Error>({
         path: `/espaces/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Get list of cities
-     *
-     * @tags Espace
-     * @name CitiesList
-     * @request GET:/espaces/cities
-     * @secure
-     */
-    citiesList: (params: RequestParams = {}) =>
-      this.request<string[], Error>({
-        path: `/espaces/cities`,
         method: "GET",
         secure: true,
         format: "json",

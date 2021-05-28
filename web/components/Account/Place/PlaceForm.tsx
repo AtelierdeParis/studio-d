@@ -264,6 +264,7 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
             <SimpleGrid
               columns={{ base: 1, sm: 2, lg: 3, xl: 4 }}
               columnGap={5}
+              rowGap={6}
               w="100%"
             >
               <FormField
@@ -289,7 +290,7 @@ const PlaceForm = ({ place = null, onSubmit, isEditMode = false }: Props) => {
                   label={t('form.otherFloor.label')}
                   info={t('form.otherFloor.info')}
                   errors={errors.otherFloor}
-                  gridColumn="2/5"
+                  gridColumn={{ base: 1, sm: '2/3', lg: '2/4', xl: '2/5' }}
                   isComplete={isComplete}
                 >
                   <Input

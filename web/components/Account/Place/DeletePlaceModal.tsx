@@ -16,7 +16,7 @@ const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
   const { errorToast, successToast } = useToast()
   const onConfirm = (): Promise<any> => {
     return client.espaces
-      .espacesDelete(placeId)
+      .espacesUpdate(placeId, { deleted: true })
       .then(() => {
         queryClient.refetchQueries(['myPlaces'])
         successToast(t('list.successDelete'))

@@ -18,6 +18,7 @@ const PlaceSlider = ({ control, name = 'perimeter' }: Props) => {
   const { field } = useController({
     name,
     control,
+    // defaultValue: 15,
   })
 
   const onChange = (value) => {
@@ -29,10 +30,10 @@ const PlaceSlider = ({ control, name = 'perimeter' }: Props) => {
       <Slider
         aria-label="slider-ex-1"
         min={0}
-        max={150}
-        step={1}
+        max={100}
+        step={5}
         defaultValue={field.value}
-        onChangeEnd={onChange}
+        onChange={onChange}
       >
         <SliderTrack>
           <SliderFilledTrack />

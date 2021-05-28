@@ -17,10 +17,15 @@ interface Props {
 const AccountPlace = ({ user }: Props) => {
   const { t } = useTranslation('account')
   const { data: places, isLoading } = useMyPlaces()
+
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.places')} />
-      {places?.length === 0 ? <InfoPlace /> : <PlaceList places={places} />}
+      {!places || places?.length === 0 ? (
+        <InfoPlace />
+      ) : (
+        <PlaceList places={places} />
+      )}
     </Loading>
   )
 }

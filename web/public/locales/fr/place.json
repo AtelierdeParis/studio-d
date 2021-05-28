@@ -7,7 +7,7 @@
     "cancel": "Annuler les changements",
     "save": "Enregistrer",
     "addImg": "Ajouter une image",
-    "successImg": "Vos images ont été ajouté avec succès",
+    "successImg": "Vos images ont été mises à jour avec succès",
     "dropzone": {
         "placeholder": "Déposez ou cliquer pour ajouter des fichiers",
         "subtitle": "Seulement .jpg et .png",
@@ -29,7 +29,7 @@
     "form": {
         "migration": {
             "title": "Finalisez votre migration de compte",
-            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet  à la nouvelle interface."
+            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
         },
         "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
         "error": "Une erreur est survenue en lors de l'enregistrement",
@@ -239,6 +239,10 @@
         "startDate": "Date de début",
         "endDate": "Date de fin",
         "repeat": "Répéter",
+        "dispositif": {
+            "label" :"Dispositifs disponibles",
+            "placeholder": "Choisir un dispositif"
+        },
         "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
         "repeatNb": "Répéter les",
         "repeatType": {
@@ -313,13 +317,17 @@
         "no": "Non",
         "true": "Oui",
         "false": "Non",
+        "cancel": "Annuler",
         "possible":"Possible *",
+        "available":"Possible *",
         "calendar": "Calendrier des disponibilités",
         "about": "À propos de l’espace",
         "details": "Détails techniques",
+        "onlyCompany": "Les lieux ne sont pas autorisés à faire des réservations",
         "howToGo": "Comment s’y rendre ?",
         "located": "L’espace se situe au {{address}}.",
         "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
+        "notEnabled": "La localisation est désactivé, cliquer pour demander l'autorisation",
         "otherPlaces": "Autres espaces de {{name}}",
         "week": "Semaine",
         "month": "Mois",
@@ -346,7 +354,7 @@
         "filledUntil": {
             "title": {
                 "empty" : "L'espace n'a pas de créneaux disponibles",
-                "default" : "L’espace n’a plus de créneaux disponibles jusqu'au {{date}}"
+                "default" : "L’espace n’a pas de créneaux renseignés au-delà du {{date}} pour le moment."
             },
             "text": {
                 "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",

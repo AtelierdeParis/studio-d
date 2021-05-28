@@ -744,6 +744,9 @@
               "longitude": {
                 "type": "number"
               },
+              "deleted": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -768,7 +771,8 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
@@ -794,7 +798,8 @@
                   "askcancel",
                   "past",
                   "accepted",
-                  "pending"
+                  "pending",
+                  "expired"
                 ]
               },
               "messages": {
@@ -811,6 +816,107 @@
               },
               "company": {
                 "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "dispositif": {
+            "required": [
+              "id",
+              "name"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "actif": {
+                "type": "boolean"
+              },
+              "expiration": {
+                "type": "string"
+              },
+              "users_permissions_users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "message": {
+            "required": [
+              "id",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "place": {
+                "type": "string"
+              },
+              "company": {
+                "type": "string"
+              },
+              "author": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "accepted",
+                  "created",
+                  "requestcanceled",
+                  "requestcanceledbyplace",
+                  "bookingcanceledbyplace",
+                  "askcancel",
+                  "message",
+                  "requestdisporemovedbyplace",
+                  "bookingdisporemovedbyplace",
+                  "disporemovedbycompany"
+                ]
+              },
+              "booking": {
+                "type": "string"
+              },
+              "hasbeenread": {
+                "type": "boolean"
+              },
+              "notified": {
+                "type": "boolean"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -869,10 +975,17 @@
               "booked",
               "pending",
               "past",
-              "canceled"
+              "canceled",
+              "removed"
             ]
           },
           "booking": {
+            "type": "string"
+          },
+          "dispositif": {
+            "type": "string"
+          },
+          "message": {
             "type": "string"
           },
           "published_at": {

@@ -48,14 +48,23 @@
         "booked",
         "pending",
         "past",
-        "canceled"
+        "canceled",
+        "removed"
       ],
       "default": "available",
       "required": true
     },
     "booking": {
-      "model": "booking",
-      "via": "disponibilities"
+      "via": "disponibilities",
+      "model": "booking"
+    },
+    "dispositif": {
+      "via": "disponibilities",
+      "model": "dispositif"
+    },
+    "message": {
+      "via": "disponibilities",
+      "model": "message"
     }
   }
 }

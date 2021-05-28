@@ -98,8 +98,8 @@
       "via": "espaces"
     },
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "espace"
+      "via": "espace",
+      "collection": "disponibility"
     },
     "scheduleDetails": {
       "type": "text"
@@ -112,8 +112,8 @@
       "default": true
     },
     "bookings": {
-      "collection": "booking",
-      "via": "espace"
+      "via": "espace",
+      "collection": "booking"
     },
     "country": {
       "type": "string",
@@ -146,6 +146,10 @@
     },
     "longitude": {
       "type": "float"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

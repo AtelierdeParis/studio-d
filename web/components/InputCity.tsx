@@ -114,7 +114,7 @@ const InputCity = ({ name, control, placeholder }: Props) => {
       value={field.value && { label: field.value, value: field.value }}
       isClearable
       onChange={onChange}
-      noOptionsMessage={() => null}
+      noOptionsMessage={() => 'Aucun résultat'}
     />
   )
 }

@@ -1,7 +1,6 @@
 {
   "name": "studio-d",
   "private": true,
-  "version": "0.1.0",
   "scripts": {
     "develop": "strapi develop",
     "start": "strapi start",
@@ -10,7 +9,9 @@
     "config:dump": "strapi config:dump --file config.json -p",
     "config:restore": "strapi configuration:restore -f config.json",
     "migrate:user": "node scripts/migrate_user.js",
-    "migrate:place": "node scripts/migrate_place.js"
+    "migrate:place": "node scripts/migrate_place.js",
+    "migrate:email:place": "node scripts/migrate_place_email.js",
+    "migrate:email:company": "node scripts/migrate_company_email.js"
   },
   "devDependencies": {},
   "dependencies": {

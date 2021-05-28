@@ -3,11 +3,8 @@ import Modal from '~components/Modal'
 import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { Flex, Button } from '@chakra-ui/react'
-import Arrow from 'public/assets/img/circle-arrow.svg'
 import { useTranslation } from 'next-i18next'
 import { useQueryClient } from 'react-query'
-import Link from '~components/Link'
-import { ROUTE_PLACE_DETAIL } from '~constants'
 import { Espace } from '~typings/api'
 
 interface Props {
@@ -56,16 +53,6 @@ const UnpublishModal = ({ place }: Props) => {
       >
         {t('list.unpublishModal')}
       </Modal>
-      <Link
-        ml={5}
-        display={{ base: 'none', lg: 'block' }}
-        href={{
-          pathname: ROUTE_PLACE_DETAIL,
-          query: { id: place.slug },
-        }}
-      >
-        <Arrow />
-      </Link>
     </Flex>
   )
 }

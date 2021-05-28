@@ -15,6 +15,7 @@ import { useTranslation } from 'next-i18next'
 
 interface Props {
   place: Espace
+  displayPrecise: boolean
 }
 
 const GridItem = ({ icon, label, text, withDivider = false }) => (
@@ -30,15 +31,13 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
   </Flex>
 )
 
-const PlaceAttributesGrid = ({ place }: Props) => {
+const PlaceAttributesGrid = ({ place, displayPrecise }: Props) => {
   const { t } = useTranslation('place')
 
   return (
     <>
-      <Text pb={8} fontSize="sm">
-        {t('detail.precise')}
-      </Text>
-      <SimpleGrid columns={3} rowGap={5}>
+      {displayPrecise && <Text fontSize="sm">{t('detail.precise')}</Text>}
+      <SimpleGrid pt={8} columns={3} rowGap={5}>
         <GridItem
           label={t('detail.surface')}
           icon={<Surface />}

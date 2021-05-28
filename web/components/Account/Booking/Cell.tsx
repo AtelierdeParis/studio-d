@@ -1,8 +1,15 @@
 import React from 'react'
 import { Flex, FlexProps } from '@chakra-ui/react'
 
+export const checkIsCanceled = (status) =>
+  [
+    'requestcanceled',
+    'requestcanceledbyplace',
+    'bookingcanceledbyplace',
+  ].includes(status)
+
 const canceledStyle = {
-  opacity: 0.2,
+  opacity: 0.3,
 }
 interface Props extends FlexProps {
   children: React.ReactNode
@@ -38,13 +45,7 @@ const Cell = ({
       {...rest}
     >
       <Flex
-        {...([
-          'requestcanceled',
-          'requestcanceledbyplace',
-          'bookingcanceledbyplace',
-        ].includes(status) &&
-          !fullOpacity &&
-          canceledStyle)}
+        {...(checkIsCanceled(status) && !fullOpacity && canceledStyle)}
         w="100%"
         alignItems="center"
       >

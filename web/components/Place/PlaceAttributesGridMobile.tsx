@@ -15,6 +15,7 @@ import { capitalize } from '~utils/string'
 
 interface Props {
   place: Espace
+  displayPrecise: boolean
 }
 
 const GridItem = ({ icon, label, text, withDivider = false }) => (
@@ -52,16 +53,19 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
   </>
 )
 
-const PlaceAttributesGrid = ({ place }: Props) => {
+const PlaceAttributesGrid = ({ place, displayPrecise }: Props) => {
   const { t } = useTranslation('place')
   const [isOpen, setOpen] = useState(false)
 
   return (
     <>
-      <Text py={6} fontSize="sm">
-        {t('detail.precise')}
-      </Text>
+      {displayPrecise && (
+        <Text pt={6} fontSize="sm">
+          {t('detail.precise')}
+        </Text>
+      )}
       <SimpleGrid
+        pt={6}
         columns={{ base: 3 }}
         rowGap={0}
         alignItems="center"

@@ -24,7 +24,8 @@
         "askcancel",
         "past",
         "accepted",
-        "pending"
+        "pending",
+        "expired"
       ]
     },
     "messages": {
