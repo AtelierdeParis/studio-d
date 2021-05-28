@@ -41,16 +41,37 @@ const Schedule = () => {
     calendarApi.gotoDate(new Date(start))
   }, [start, scheduleRef])
 
-  const events = useMemo(
-    () =>
-      oldEvents.concat(newEvents).filter((event) => {
-        return !(
-          event.extendedProps.hasEventSameDay &&
-          event.extendedProps.status === 'error'
+  const events = useMemo(() => {
+    const filteredEvents = oldEvents.concat(newEvents).filter((event) => {
+      return !(
+        event.extendedProps.hasEventSameDay &&
+        event.extendedProps.status === 'error'
+      )
+    })
+
+    return filteredEvents
+      .map((event) => {
+        const hasEventSameDay = filteredEvents.some(
+          (e) =>
+            event.extendedProps.id !== e.extendedProps.id &&
+            !event.extendedProps.hasEventSameDay &&
+            isSameDay(e.start, event.start),
         )
-      }),
-    [oldEvents, newEvents],
-  )
+
+        return {
+          ...event,
+          extendedProps: {
+            ...event.extendedProps,
+            hasEventSameDay:
+              hasEventSameDay || event.extendedProps.hasEventSameDay,
+          },
+        }
+      })
+      .sort((a, b) => {
+        // @ts-ignore
+        return new Date(a.start) - new Date(b.start)
+      })
+  }, [oldEvents, newEvents])
 
   return (
     <Flex

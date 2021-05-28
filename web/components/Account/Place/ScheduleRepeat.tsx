@@ -13,6 +13,7 @@ import InputNumber from '~components/InputNumber'
 import { ScheduleEventType } from '~@types/schedule-event.d'
 import { useFormContext, Control } from 'react-hook-form'
 import differenceInDays from 'date-fns/differenceInDays'
+import isSameDay from 'date-fns/isSameDay'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 
 interface IScheduleRepeat {
@@ -22,13 +23,34 @@ interface IScheduleRepeat {
 const ScheduleRepeat = ({ control }: IScheduleRepeat) => {
   const { t } = useTranslation('place')
   const { errors, watch, register, setError, clearErrors } = useFormContext()
-  const { newEvents } = useContext(ScheduleContext)
-  const { type, repeat, start, end } = watch(['type', 'repeat', 'start', 'end'])
+  const { newEvents, oldEvents } = useContext(ScheduleContext)
+  const { type, repeat, start, end, when } = watch([
+    'type',
+    'repeat',
+    'start',
+    'end',
+    'when',
+  ])
 
   useEffect(() => {
-    const eventRepeatedOnAnother = newEvents.some(
-      (event) => event.extendedProps.hasEventSameDay,
-    )
+    const eventRepeatedOnAnother = newEvents.some((event) => {
+      const currentEventType = event.extendedProps.type
+
+      const hasEventSameDay =
+        (currentEventType !== 'punctual' ||
+          (currentEventType === 'punctual' && when === 'full')) &&
+        event.extendedProps.hasEventSameDay
+
+      const hasEventSamePartOftheDay =
+        event.extendedProps.type === 'punctual' &&
+        oldEvents.some(
+          (oldEvent) =>
+            isSameDay(oldEvent.start, event.start) &&
+            oldEvent.extendedProps.when === event.extendedProps.when,
+        )
+
+      return hasEventSameDay || hasEventSamePartOftheDay
+    })
     if (
       repeat &&
       eventRepeatedOnAnother &&
@@ -47,7 +69,7 @@ const ScheduleRepeat = ({ control }: IScheduleRepeat) => {
     ) {
       clearErrors(['repeatNb', 'repeatType'])
     }
-  }, [newEvents])
+  }, [newEvents, oldEvents, repeat, start, when])
 
   const daysInPeriod = useMemo(
     () => differenceInDays(new Date(end), new Date(start)),

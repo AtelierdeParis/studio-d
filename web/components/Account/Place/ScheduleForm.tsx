@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useTranslation } from 'next-i18next'
 import { HStack, Box, VStack, Button, Flex, Select } from '@chakra-ui/react'
 import ScheduleDates from '~components/Account/Place/ScheduleDates'
@@ -14,6 +14,7 @@ import { createDbEvent } from '~utils/schedule'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
+import { isSameDay } from 'date-fns'
 
 export const schema = yup.object().shape({
   type: yup.string().required(),
@@ -38,19 +39,38 @@ export const schema = yup.object().shape({
   }),
 })
 
-interface IScheduleForm {
+interface Props {
   place: Espace
   hideForm: () => void
 }
 
-const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
-  const { newEvents } = useContext(ScheduleContext)
+const ScheduleForm = ({ place, hideForm }: Props) => {
+  const { newEvents, oldEventsDate, oldEvents } = useContext(ScheduleContext)
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
+  const [hideChoices, setHideChoices] = useState(false)
   const { errorToast, successToast } = useToast()
   const queryClient = useQueryClient()
   const { register, errors, handleSubmit, watch, control } = useFormContext()
-  const { type, repeat } = watch(['type', 'repeat'])
+  const { type, repeat, start, when } = watch([
+    'type',
+    'repeat',
+    'start',
+    'when',
+  ])
+
+  useEffect(() => {
+    if (
+      start &&
+      type &&
+      type === 'punctual' &&
+      oldEventsDate.some((date) => isSameDay(date, start))
+    ) {
+      setHideChoices(true)
+    } else if (hideChoices) {
+      setHideChoices(false)
+    }
+  }, [start, type, oldEventsDate])
 
   const submitForm = async ({ type, start, end, when, dispositif }) => {
     if (newEvents.length === 0) return
@@ -109,12 +129,16 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
                 <option value={ScheduleEventType.PUNCTUAL}>
                   {t('schedule.type.punctual')}
                 </option>
-                <option value={ScheduleEventType.DAY}>
-                  {t('schedule.type.day')}
-                </option>
-                <option value={ScheduleEventType.PERIOD}>
-                  {t('schedule.type.period')}
-                </option>
+                {!hideChoices && (
+                  <>
+                    <option value={ScheduleEventType.DAY}>
+                      {t('schedule.type.day')}
+                    </option>
+                    <option value={ScheduleEventType.PERIOD}>
+                      {t('schedule.type.period')}
+                    </option>
+                  </>
+                )}
               </Select>
             </FormField>
             {type === ScheduleEventType.PUNCTUAL && (
@@ -124,15 +148,35 @@ const ScheduleForm = ({ place, hideForm }: IScheduleForm) => {
                   ref={register}
                   placeholder={t('schedule.when.placeholder')}
                 >
-                  <option value={ScheduleEventWhen.MORNING}>
-                    {t('schedule.morning')}
-                  </option>
-                  <option value={ScheduleEventWhen.AFTERNOON}>
-                    {t('schedule.afternoon')}
-                  </option>
-                  <option value={ScheduleEventWhen.FULL}>
-                    {t('schedule.both')}
-                  </option>
+                  {(!hideChoices ||
+                    (hideChoices &&
+                      (when === 'morning' ||
+                        oldEvents.some(
+                          (event) =>
+                            isSameDay(event.start, start) &&
+                            event.extendedProps.when === 'afternoon',
+                        )))) && (
+                    <option value={ScheduleEventWhen.MORNING}>
+                      {t('schedule.morning')}
+                    </option>
+                  )}
+                  {(!hideChoices ||
+                    (hideChoices &&
+                      (when === 'afternoon' ||
+                        oldEvents.some(
+                          (event) =>
+                            isSameDay(event.start, start) &&
+                            event.extendedProps.when === 'morning',
+                        )))) && (
+                    <option value={ScheduleEventWhen.AFTERNOON}>
+                      {t('schedule.afternoon')}
+                    </option>
+                  )}
+                  {!hideChoices && (
+                    <option value={ScheduleEventWhen.FULL}>
+                      {t('schedule.both')}
+                    </option>
+                  )}
                 </Select>
               </FormField>
             )}
