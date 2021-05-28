@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, Box, Flex, Button, AspectRatio, LinkBox } from '@chakra-ui/react'
 import LinkOverlay from '~components/LinkOverlay'
 import Image from '~components/Image'
+import Link from '~components/Link'
 import { format } from '~utils/date'
 import { ROUTE_ACTU_DETAIL } from '~constants'
 import { Actuality } from '~typings/api'
@@ -16,7 +17,15 @@ const ActuCard = ({ actu }: IActuCard) => {
   const { t } = useTranslation('actuality')
 
   return (
-    <LinkBox role="group" display="flex" flexDirection="column">
+    <Link
+      _hover={{
+        textDecoration: 'none',
+      }}
+      href={{
+        pathname: ROUTE_ACTU_DETAIL,
+        query: { id: actu.slug },
+      }}
+    >
       <AspectRatio w="100%" maxH="300px" ratio={16 / 9} overflow="hidden">
         <Image
           src={actu?.image?.url}
@@ -33,16 +42,10 @@ const ActuCard = ({ actu }: IActuCard) => {
         flex={1}
       >
         <Box>
-          <LinkOverlay
-            href={{
-              pathname: ROUTE_ACTU_DETAIL,
-              query: { id: actu.slug },
-            }}
-          >
-            <Text fontFamily="mabry medium" fontSize="lg">
-              {actu.title}
-            </Text>
-          </LinkOverlay>
+          <Text fontFamily="mabry medium" fontSize="lg">
+            {actu.title}
+          </Text>
+
           <Text color="gray.600">
             {t('date', {
               date: format(actu.created_at, 'd MMMM yyyy'),
@@ -62,7 +65,7 @@ const ActuCard = ({ actu }: IActuCard) => {
           {t('more')}
         </Button>
       </Flex>
-    </LinkBox>
+    </Link>
   )
 }
 

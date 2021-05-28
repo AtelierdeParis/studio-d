@@ -10,6 +10,7 @@ import addDays from 'date-fns/addDays'
 import addWeeks from 'date-fns/addWeeks'
 import isBefore from 'date-fns/isBefore'
 import setHours from 'date-fns/setHours'
+import getHours from 'date-fns/getHours'
 import isSameDay from 'date-fns/isSameDay'
 
 export const createScheduleEventObj = ({
@@ -55,7 +56,8 @@ const repeatDailyEvent = (start, repeatNb, repeatType) => {
       range = array.map((nb) => addMonths(start, nb))
       break
   }
-  return range
+
+  return range.map((date) => setHours(date, getHours(start)))
 }
 
 const repeatPeriodEvent = (start, end, repeatNb, repeatType) => {
@@ -120,20 +122,37 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
     (form.type === ScheduleEventType.PUNCTUAL && form.when) ||
     form.type === ScheduleEventType.DAY
   ) {
+    let transformedStart = start
+
+    if (
+      form.type === ScheduleEventType.PUNCTUAL &&
+      form.when === ScheduleEventWhen.AFTERNOON
+    ) {
+      transformedStart = setHours(start, 13)
+    }
+
     if (isRepeatable) {
       const repeatedEvents = repeatDailyEvent(
-        start,
+        transformedStart,
         form.repeatNb,
         form.repeatType,
       )
+
       repeatedEvents.map((start) =>
-        events.push(createScheduleEventObj({ start, when: form.when })),
+        events.push(
+          createScheduleEventObj({
+            start,
+            when: form.when,
+            type: form.type,
+          }),
+        ),
       )
     } else {
       events.push(
         createScheduleEventObj({
-          start,
+          start: transformedStart,
           when: form.when,
+          type: form.type,
         }),
       )
     }
