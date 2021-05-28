@@ -78,7 +78,8 @@ export interface NewBooking {
     | "askcancel"
     | "past"
     | "accepted"
-    | "pending";
+    | "pending"
+    | "expired";
   messages?: string[];
   espace?: string;
   place?: string;
@@ -121,6 +122,7 @@ export interface City {
     city?: string;
     latitude: number;
     longitude?: number;
+    deleted?: boolean;
     created_by?: string;
     updated_by?: string;
   }[];
@@ -194,6 +196,7 @@ export interface Disponibility {
     city?: string;
     latitude: number;
     longitude?: number;
+    deleted?: boolean;
     created_by?: string;
     updated_by?: string;
   };
@@ -209,7 +212,8 @@ export interface Disponibility {
       | "askcancel"
       | "past"
       | "accepted"
-      | "pending";
+      | "pending"
+      | "expired";
     messages?: string[];
     espace?: string;
     place?: string;
@@ -414,6 +418,7 @@ export interface NewEspace {
   city?: string;
   latitude: number;
   longitude?: number;
+  deleted?: boolean;
   created_by?: string;
   updated_by?: string;
 }

@@ -17,6 +17,7 @@
     "reset-cache": "yarn reset-yarn && yarn reset-rn",
     "reset": "yarn reset-modules && yarn reset-cache",
     "lint": "yarn workspaces run lint",
-    "start:all": "yarn run-p dev:*"
+    "start:all": "yarn run-p dev:*",
+    "get-types": "cd web && yarn get-types"
   }
 }
