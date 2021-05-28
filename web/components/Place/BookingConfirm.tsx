@@ -186,8 +186,10 @@ const BookingConfirm = ({ events, place, back }: Props) => {
                 {place.users_permissions_user.structureName}
               </Text>
               <Flex pt={2}>
-                <Pin width="20px" height="20px" stroke="black" />
-                <Text pl={3}>{place.city.name}</Text>
+                <Box>
+                  <Pin width="20px" height="20px" stroke="black" />
+                </Box>
+                <Text pl={3}>{place.address}</Text>
               </Flex>
             </Box>
           </Flex>
