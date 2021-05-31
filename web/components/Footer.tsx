@@ -93,19 +93,16 @@ const Footer = () => {
         borderTopColor="gray.100"
       >
         <Text fontSize="xs" color="gray.500">
-          <Trans
-            i18nKey="common:footer.license"
-            values={{ name: process.env.NEXT_PUBLIC_LICENSE }}
-            components={{
-              a: (
-                <Link
-                  isExternal
-                  color="gray.700"
-                  href={'https://github.com/AtelierdeParis/studio-d'}
-                />
-              ),
-            }}
-          />
+          Plateforme diffusée sous license {process.env.NEXT_PUBLIC_LICENSE}{' '}
+          dont le code est publié sur{' '}
+          <Link
+            isExternal
+            color="gray.700"
+            href="https://github.com/AtelierdeParis/studio-d"
+          >
+            Github
+          </Link>
+          , droits des textes et photographies réservés
         </Text>
         <Stack
           mt={{ base: 3, sm: 0 }}
