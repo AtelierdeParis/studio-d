@@ -61,7 +61,9 @@ const CreatePassword = ({ code, isMigration }: Props) => {
             password: data.password,
             redirect: false,
           })
-          router.push(ROUTE_ACCOUNT_INFORMATION)
+          router.push({
+            pathname: ROUTE_ACCOUNT_INFORMATION,
+          })
           successToast(t('successMigration'))
         } else {
           successToast(t('success'))

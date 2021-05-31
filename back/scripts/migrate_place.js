@@ -8,7 +8,7 @@ const createSlug = require("url-slug");
 
 const TO_DEFINE = "todefine";
 const PATH_MIGRATION_CSV =
-  "/Users/gesno/Downloads/studio-d_listings_2021-04-22-11-18.csv";
+  "/Users/gesno/Downloads/studio-d_listings_2021-05-30-12-48.csv";
 
 const mapping_country = {
   FR: "France",
@@ -54,6 +54,7 @@ const start = async () => {
     .default()
     .load()
     .then(async (strapi) => {
+      console.log(process.env.BASE_URL);
       const rows = [];
       fs.createReadStream(PATH_MIGRATION_CSV)
         .pipe(csv({ separator: ";" }))
@@ -131,7 +132,7 @@ const start = async () => {
               throw new Error("Owner not found");
             }
 
-            place.users_permissions_user = 8;
+            place.users_permissions_user = owner.id;
 
             const isAlreadyCreated = await strapi
               .query("espace")

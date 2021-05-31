@@ -9,7 +9,7 @@ const mapping_country = {
   BE: "Belgique",
 };
 const PATH_MIGRATION_CSV =
-  "/Users/gesno/Downloads/studio-d_users_2021-04-21-13-31.csv";
+  "/Users/gesno/Downloads/studio-d_users_2021-05-30-12-48.csv";
 const TYPE_PLACE = "16149";
 const TYPE_COMPANY = "16150";
 
