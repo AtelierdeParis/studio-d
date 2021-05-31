@@ -1,5 +1,5 @@
 {
-  "name": "studio-d",
+  "name": "fact",
   "scripts": {
     "install": "yarn install:front && yarn install:back",
     "install:front": "cd web && yarn",
