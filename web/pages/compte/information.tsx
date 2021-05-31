@@ -42,19 +42,11 @@ interface FormInformation extends UsersPermissionsUser {
   password: string
 }
 
-const getSchema = (user: UsersPermissionsUser, t) => {
+const getSchema = (user: UsersPermissionsUser, t, isComplete: boolean) => {
   if (!user) return null
   const schema = {
     firstname: yup.string().required(t('errors.required')),
     lastname: yup.string().required(t('errors.required')),
-    // email: yup.string().email().required(t('errors.required')),
-    // password: yup.string().test({
-    //   message: 'Le mot de passe doit faire au minimum 10 caractères',
-    //   test: (value) => {
-    //     if (value !== '') return value.length >= 10
-    //     return true
-    //   },
-    // }),
     structureName: yup.string().required(t('errors.required')),
     address: yup.string().required(t('errors.required')),
     phone: yup
@@ -107,6 +99,20 @@ const getSchema = (user: UsersPermissionsUser, t) => {
       .max(5, t('errors.max', { max: 5 })),
   }
 
+  if (user?.confirmed && user?.accepted) {
+    schema['email'] = yup.string().email().required(t('errors.required'))
+
+    if (isComplete) {
+      schema['password'] = yup.string().test({
+        message: 'Le mot de passe doit faire au minimum 10 caractères',
+        test: (value) => {
+          if (value !== '') return value.length >= 10
+          return true
+        },
+      })
+    }
+  }
+
   if (user.type === 'company') {
     schema['choreographer'] = yup.string().required(t('errors.required'))
     schema['insuranceName'] = yup.string().required(t('errors.required'))
@@ -142,7 +148,7 @@ const AccountInformation = ({ user }: Props) => {
       password: undefined,
     },
     // @ts-ignore
-    resolver: yupResolver(getSchema(user, t)),
+    resolver: yupResolver(getSchema(user, t, isComplete)),
   })
 
   useEffect(() => {
@@ -228,17 +234,18 @@ const AccountInformation = ({ user }: Props) => {
                     <InputRightElement children={<Letter />} />
                   </InputGroup>
                 </FormField>
-                <FormField
-                  label={t('information.password.label')}
-                  info={t('information.password.info')}
-                  errors={errors.password}
-                  isComplete={isComplete}
-                >
-                  <InputPassword
-                    register={register}
-                    placeholder={t('information.password.placeholder')}
-                  />
-                </FormField>
+                {isComplete && (
+                  <FormField
+                    label={t('information.password.label')}
+                    info={t('information.password.info')}
+                    errors={errors.password}
+                  >
+                    <InputPassword
+                      register={register}
+                      placeholder={t('information.password.placeholder')}
+                    />
+                  </FormField>
+                )}
               </Stack>
             </Box>
           )}

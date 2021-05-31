@@ -10,7 +10,7 @@ import {
   HStack,
   Stack,
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, Trans } from 'next-i18next'
 import FooterMenu from '~components/FooterMenu'
 import Twitter from 'public/assets/img/twitter.svg'
 import Instagram from 'public/assets/img/instagram.svg'
@@ -93,7 +93,19 @@ const Footer = () => {
         borderTopColor="gray.100"
       >
         <Text fontSize="xs" color="gray.500">
-          {t('footer.license', { name: process.env.NEXT_PUBLIC_LICENSE })}
+          <Trans
+            i18nKey="common:footer.license"
+            values={{ name: process.env.NEXT_PUBLIC_LICENSE }}
+            components={{
+              a: (
+                <Link
+                  isExternal
+                  color="gray.700"
+                  href={'https://github.com/AtelierdeParis/studio-d'}
+                />
+              ),
+            }}
+          />
         </Text>
         <Stack
           mt={{ base: 3, sm: 0 }}
