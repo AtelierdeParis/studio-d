@@ -95,6 +95,14 @@ module.exports = {
 
     ctx.body = sanitizeUser(user);
   },
+  async findOne(ctx) {
+    const { id } = ctx.params;
+
+    const user = await strapi
+      .query("user", "users-permissions")
+      .findOne({ id }, ["espaces", "espaces.city", "espaces.images"]);
+    return sanitizeUser(user);
+  },
   checkPassword(ctx) {
     const params = ctx.request.body;
     const user = ctx.state.user;
