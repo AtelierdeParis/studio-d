@@ -15,7 +15,7 @@ docker-compose up
 yarn install
 ```
 
-### Back
+### Front
 
 Start the project
 
@@ -29,7 +29,7 @@ yarn client:start
 ```
 Default url: [http://localhost:1337](http://localhost:1337)
 
-### Front
+### Back
 
 Start the project
 
