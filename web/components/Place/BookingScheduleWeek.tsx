@@ -65,7 +65,7 @@ const BookingScheduleWeek = ({ place, events = [] }: Props) => {
       layerStyle="bluebox"
       px={4}
       id="calendar"
-      className="booking-calendar"
+      className="booking-calendar week"
       pos="relative"
     >
       <FullCalendar

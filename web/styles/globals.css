@@ -394,3 +394,10 @@ a {
 .md-renderer > :first-child {
   margin-top: 0 !important;
 }
+
+#calendar.booking-calendar.week .fc .fc-scroller-harness {
+  overflow: unset;
+}
+#calendar.booking-calendar.week .fc .fc-scrollgrid-section-liquid {
+  height: 1px;
+}
