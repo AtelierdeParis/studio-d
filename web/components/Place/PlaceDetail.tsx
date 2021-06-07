@@ -82,7 +82,11 @@ const PlaceDetail = ({ place }: Props) => {
             {place?.users_permissions_user?.website && (
               <Text pt={{ base: 1, lg: 2 }}>
                 <Link
-                  href={place?.users_permissions_user?.website}
+                  href={
+                    !place?.users_permissions_user?.website.includes('http')
+                      ? `http://${place?.users_permissions_user?.website}`
+                      : place?.users_permissions_user?.website
+                  }
                   isExternal
                   layerStyle="link"
                   fontSize={{ base: 'md', sm: 'lg' }}
