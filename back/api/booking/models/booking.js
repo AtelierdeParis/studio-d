@@ -141,7 +141,7 @@ module.exports = {
       );
     },
     beforeUpdate: async (params, data) => {
-      if (data.status && data.status !== "expired") {
+      if (data.status && data.status !== "expired" && data.status !== "past") {
         const booking = await strapi
           .query("booking")
           .findOne({ id: params.id });
