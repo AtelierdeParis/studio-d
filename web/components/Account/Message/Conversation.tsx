@@ -40,7 +40,7 @@ const Conversation = ({ id, user, back }: Props) => {
     },
   })
 
-  const { data: bookings } = useBookings({
+  const { data: bookings } = useBookings(id, {
     _sort: 'id:desc',
     ...(user.type === 'place'
       ? {
