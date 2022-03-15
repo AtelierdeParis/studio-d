@@ -54,10 +54,10 @@ const Conversation = ({ id, user, back }: Props) => {
   })
 
   useEffect(() => {
-    if (listRef.current) {
-      listRef.current.scrollTo(0, listRef.current.scrollHeight)
+    if (!isLoading) {
+      listRef.current?.scrollTo(0, listRef.current.scrollHeight)
     }
-  }, [id])
+  }, [id, isLoading])
 
   useEffect(() => {
     if (listRef.current && !hasScrolled) {
