@@ -54,6 +54,12 @@ const Conversation = ({ id, user, back }: Props) => {
   })
 
   useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTo(0, listRef.current.scrollHeight)
+    }
+  }, [id])
+
+  useEffect(() => {
     if (listRef.current && !hasScrolled) {
       listRef.current.scrollTo(0, listRef.current.scrollHeight)
       setScrolled(true)
