@@ -10,732 +10,781 @@
  */
 
 export interface Actuality {
-  id: string;
-  title: string;
-  content: string;
-  created_at?: string;
+  id: string
+  title: string
+  content: string
+  created_at?: string
   image: {
-    id: string;
-    name: string;
-    alternativeText?: string;
-    caption?: string;
-    width?: number;
-    height?: number;
-    formats?: object;
-    hash: string;
-    ext?: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl?: string;
-    provider: string;
-    provider_metadata?: object;
-    related?: string;
-    created_by?: string;
-    updated_by?: string;
-  };
-  slug?: string;
+    id: string
+    name: string
+    alternativeText?: string
+    caption?: string
+    width?: number
+    height?: number
+    formats?: object
+    hash: string
+    ext?: string
+    mime: string
+    size: number
+    url: string
+    previewUrl?: string
+    provider: string
+    provider_metadata?: object
+    related?: string
+    created_by?: string
+    updated_by?: string
+  }
+  slug?: string
 
   /** @format date-time */
-  published_at?: string;
+  published_at?: string
 }
 
 export interface NewActuality {
-  title: string;
-  content: string;
-  slug?: string;
+  title: string
+  content: string
+  slug?: string
 
   /** @format date-time */
-  published_at?: string;
-  created_by?: string;
-  updated_by?: string;
+  published_at?: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Booking {
-  id: string;
+  id: string
   status?:
-    | "requestcanceled"
-    | "requestcanceledbyplace"
-    | "bookingcanceledbyplace"
-    | "askcancel"
-    | "past"
-    | "accepted"
-    | "pending";
-  disponibilities?: Disponibility[];
-  espace?: Espace;
-  company?: UsersPermissionsUser;
-  place?: UsersPermissionsUser;
-  notifications?: NotifCount;
-  messages?: Message[];
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
+    | 'askcancel'
+    | 'past'
+    | 'accepted'
+    | 'pending'
+  disponibilities?: Disponibility[]
+  espace?: Espace
+  company?: UsersPermissionsUser
+  place?: UsersPermissionsUser
+  notifications?: NotifCount
+  messages?: Message[]
 }
 
 export interface NewBooking {
-  disponibilities?: string[];
+  disponibilities?: string[]
   status?:
-    | "requestcanceled"
-    | "requestcanceledbyplace"
-    | "bookingcanceledbyplace"
-    | "askcancel"
-    | "past"
-    | "accepted"
-    | "pending"
-    | "expired";
-  messages?: string[];
-  espace?: string;
-  place?: string;
-  company?: string;
-  created_by?: string;
-  updated_by?: string;
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
+    | 'askcancel'
+    | 'past'
+    | 'accepted'
+    | 'pending'
+    | 'expired'
+  messages?: string[]
+  espace?: string
+  place?: string
+  company?: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface City {
-  id: string;
-  name: string;
+  id: string
+  name: string
   espaces?: {
-    id: string;
-    name: string;
-    surface: number;
-    roomLength: number;
-    width: number;
-    height: number;
-    mirror: boolean;
-    danceBar: boolean;
-    accomodation: boolean;
-    technicalStaff: boolean;
-    floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
-    otherFloor?: string;
-    about?: string;
-    details?: string;
-    address: string;
-    files?: string[];
-    images?: string[];
-    users_permissions_user?: string;
-    disponibilities?: string[];
-    scheduleDetails?: string;
-    filledUntil?: string;
-    published?: boolean;
-    bookings?: string[];
-    country: string;
-    external_id?: number;
-    danceCarpet?: "true" | "false" | "possible";
-    slug?: string;
-    city?: string;
-    latitude: number;
-    longitude?: number;
-    deleted?: boolean;
-    created_by?: string;
-    updated_by?: string;
-  }[];
-  country: string;
-  latitude?: number;
-  longitude?: number;
+    id: string
+    name: string
+    surface: number
+    roomLength: number
+    width: number
+    height: number
+    mirror: boolean
+    danceBar: boolean
+    accomodation: boolean
+    technicalStaff: boolean
+    floor: 'plancherDanse' | 'parquetTraditionnel' | 'other' | 'todefine'
+    otherFloor?: string
+    about?: string
+    details?: string
+    address: string
+    files?: string[]
+    images?: string[]
+    users_permissions_user?: string
+    disponibilities?: string[]
+    scheduleDetails?: string
+    filledUntil?: string
+    published?: boolean
+    bookings?: string[]
+    country: string
+    external_id?: number
+    danceCarpet?: 'true' | 'false' | 'possible'
+    slug?: string
+    city?: string
+    latitude: number
+    longitude?: number
+    deleted?: boolean
+    created_by?: string
+    updated_by?: string
+  }[]
+  country: string
+  latitude?: number
+  longitude?: number
 }
 
 export interface NewCity {
-  name: string;
-  espaces?: string[];
-  country: string;
-  latitude?: number;
-  longitude?: number;
-  created_by?: string;
-  updated_by?: string;
+  name: string
+  espaces?: string[]
+  country: string
+  latitude?: number
+  longitude?: number
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Contact {
-  id: string;
-  name: string;
-  message: string;
-  from: string;
+  id: string
+  name: string
+  message: string
+  from: string
 }
 
 export interface NewContact {
-  name: string;
-  message: string;
-  from: string;
-  created_by?: string;
-  updated_by?: string;
+  name: string
+  message: string
+  from: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Disponibility {
-  id: string;
-  when?: "morning" | "afternoon" | "full";
+  id: string
+  when?: 'morning' | 'afternoon' | 'full'
 
   /** @format date-time */
-  start: string;
+  start: string
 
   /** @format date-time */
-  end: string;
+  end: string
   espace?: {
-    id: string;
-    name: string;
-    surface: number;
-    roomLength: number;
-    width: number;
-    height: number;
-    mirror: boolean;
-    danceBar: boolean;
-    accomodation: boolean;
-    technicalStaff: boolean;
-    floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
-    otherFloor?: string;
-    about?: string;
-    details?: string;
-    address: string;
-    files?: string[];
-    images?: string[];
-    users_permissions_user?: string;
-    disponibilities?: string[];
-    scheduleDetails?: string;
-    filledUntil?: string;
-    published?: boolean;
-    bookings?: string[];
-    country: string;
-    external_id?: number;
-    danceCarpet?: "true" | "false" | "possible";
-    slug?: string;
-    city?: string;
-    latitude: number;
-    longitude?: number;
-    deleted?: boolean;
-    created_by?: string;
-    updated_by?: string;
-  };
-  type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
+    id: string
+    name: string
+    surface: number
+    roomLength: number
+    width: number
+    height: number
+    mirror: boolean
+    danceBar: boolean
+    accomodation: boolean
+    technicalStaff: boolean
+    floor: 'plancherDanse' | 'parquetTraditionnel' | 'other' | 'todefine'
+    otherFloor?: string
+    about?: string
+    details?: string
+    address: string
+    files?: string[]
+    images?: string[]
+    users_permissions_user?: string
+    disponibilities?: string[]
+    scheduleDetails?: string
+    filledUntil?: string
+    published?: boolean
+    bookings?: string[]
+    country: string
+    external_id?: number
+    danceCarpet?: 'true' | 'false' | 'possible'
+    slug?: string
+    city?: string
+    latitude: number
+    longitude?: number
+    deleted?: boolean
+    created_by?: string
+    updated_by?: string
+  }
+  type: 'punctual' | 'day' | 'period'
+  status: 'available' | 'booked' | 'pending' | 'past' | 'canceled' | 'removed'
   booking?: {
-    id: string;
-    disponibilities?: string[];
+    id: string
+    disponibilities?: string[]
     status?:
-      | "requestcanceled"
-      | "requestcanceledbyplace"
-      | "bookingcanceledbyplace"
-      | "askcancel"
-      | "past"
-      | "accepted"
-      | "pending"
-      | "expired";
-    messages?: string[];
-    espace?: string;
-    place?: string;
-    company?: string;
-    created_by?: string;
-    updated_by?: string;
-  };
+      | 'requestcanceled'
+      | 'requestcanceledbyplace'
+      | 'bookingcanceledbyplace'
+      | 'askcancel'
+      | 'past'
+      | 'accepted'
+      | 'pending'
+      | 'expired'
+    messages?: string[]
+    espace?: string
+    place?: string
+    company?: string
+    created_by?: string
+    updated_by?: string
+  }
   dispositif?: {
-    id: string;
-    name: string;
-    disponibilities?: string[];
-    actif?: boolean;
-    expiration?: string;
-    users_permissions_users?: string[];
-    created_by?: string;
-    updated_by?: string;
-  };
+    id: string
+    name: string
+    disponibilities?: string[]
+    actif?: boolean
+    expiration?: string
+    places?: string[]
+    companies?: string[]
+    created_by?: string
+    updated_by?: string
+  }
   message?: {
-    id: string;
-    message?: string;
-    place?: string;
-    company?: string;
-    author?: "company" | "place";
+    id: string
+    message?: string
+    place?: string
+    company?: string
+    author?: 'company' | 'place'
     status:
-      | "accepted"
-      | "created"
-      | "requestcanceled"
-      | "requestcanceledbyplace"
-      | "bookingcanceledbyplace"
-      | "askcancel"
-      | "message"
-      | "requestdisporemovedbyplace"
-      | "bookingdisporemovedbyplace"
-      | "disporemovedbycompany";
-    booking?: string;
-    hasbeenread?: boolean;
-    notified?: boolean;
-    disponibilities?: string[];
-    created_by?: string;
-    updated_by?: string;
-  };
+      | 'accepted'
+      | 'created'
+      | 'requestcanceled'
+      | 'requestcanceledbyplace'
+      | 'bookingcanceledbyplace'
+      | 'askcancel'
+      | 'message'
+      | 'requestdisporemovedbyplace'
+      | 'bookingdisporemovedbyplace'
+      | 'disporemovedbycompany'
+    booking?: string
+    hasbeenread?: boolean
+    notified?: boolean
+    disponibilities?: string[]
+    created_by?: string
+    updated_by?: string
+  }
 
   /** @format date-time */
-  published_at?: string;
+  published_at?: string
 }
 
 export interface NewDisponibility {
-  when?: "morning" | "afternoon" | "full";
+  when?: 'morning' | 'afternoon' | 'full'
 
   /** @format date-time */
-  start: string;
+  start: string
 
   /** @format date-time */
-  end: string;
-  espace?: string;
-  type: "punctual" | "day" | "period";
-  status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
-  booking?: string;
-  dispositif?: string;
-  message?: string;
+  end: string
+  espace?: string
+  type: 'punctual' | 'day' | 'period'
+  status: 'available' | 'booked' | 'pending' | 'past' | 'canceled' | 'removed'
+  booking?: string
+  dispositif?: string
+  message?: string
 
   /** @format date-time */
-  published_at?: string;
-  created_by?: string;
-  updated_by?: string;
+  published_at?: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Dispositif {
-  id: string;
-  name: string;
+  id: string
+  name: string
   disponibilities?: {
-    id: string;
-    when?: "morning" | "afternoon" | "full";
-    start: string;
-    end: string;
-    espace?: string;
-    type: "punctual" | "day" | "period";
-    status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
-    booking?: string;
-    dispositif?: string;
-    message?: string;
-    published_at?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
-  actif?: boolean;
+    id: string
+    when?: 'morning' | 'afternoon' | 'full'
+    start: string
+    end: string
+    espace?: string
+    type: 'punctual' | 'day' | 'period'
+    status: 'available' | 'booked' | 'pending' | 'past' | 'canceled' | 'removed'
+    booking?: string
+    dispositif?: string
+    message?: string
+    published_at?: string
+    created_by?: string
+    updated_by?: string
+  }[]
+  actif?: boolean
 
   /** @format date */
-  expiration?: string;
-  users_permissions_users?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    accepted?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    siret: string;
-    ape: string;
-    phone: string;
-    license: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    external_id?: number;
-    dispositifs?: string[];
-    created_by?: string;
-    updated_by?: string;
-  }[];
+  expiration?: string
+  places?: {
+    id: string
+    email: string
+    provider?: string
+    password?: string
+    resetPasswordToken?: string
+    confirmationToken?: string
+    role?: string
+    username: string
+    confirmed?: boolean
+    blocked?: boolean
+    accepted?: boolean
+    firstname: string
+    lastname: string
+    structureName: string
+    socialReason?: string
+    address: string
+    zipCode: string
+    city: string
+    country: string
+    siret: string
+    ape: string
+    phone: string
+    license: string
+    website?: string
+    legalRepresentative?: string
+    statusRepresentative?: string
+    insuranceNumber?: string
+    insuranceName?: string
+    choreographer?: string
+    espaces?: string[]
+    type: 'company' | 'place'
+    external_id?: number
+    companyDispositifs?: string[]
+    placeDispositifs?: string[]
+    created_by?: string
+    updated_by?: string
+  }[]
+  companies?: {
+    id: string
+    email: string
+    provider?: string
+    password?: string
+    resetPasswordToken?: string
+    confirmationToken?: string
+    role?: string
+    username: string
+    confirmed?: boolean
+    blocked?: boolean
+    accepted?: boolean
+    firstname: string
+    lastname: string
+    structureName: string
+    socialReason?: string
+    address: string
+    zipCode: string
+    city: string
+    country: string
+    siret: string
+    ape: string
+    phone: string
+    license: string
+    website?: string
+    legalRepresentative?: string
+    statusRepresentative?: string
+    insuranceNumber?: string
+    insuranceName?: string
+    choreographer?: string
+    espaces?: string[]
+    type: 'company' | 'place'
+    external_id?: number
+    companyDispositifs?: string[]
+    placeDispositifs?: string[]
+    created_by?: string
+    updated_by?: string
+  }[]
 }
 
 export interface NewDispositif {
-  name: string;
-  disponibilities?: string[];
-  actif?: boolean;
+  name: string
+  disponibilities?: string[]
+  actif?: boolean
 
   /** @format date */
-  expiration?: string;
-  users_permissions_users?: string[];
-  created_by?: string;
-  updated_by?: string;
+  expiration?: string
+  places?: string[]
+  companies?: string[]
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Espace {
-  id: string;
-  name: string;
-  surface: number;
-  roomLength: number;
-  width: number;
-  height: number;
-  mirror: boolean;
-  danceBar: boolean;
-  accomodation: boolean;
-  technicalStaff: boolean;
-  floor: "plancherDanse" | "parquetTraditionnel" | "other";
-  otherFloor?: string;
-  about?: string;
-  details?: string;
-  address: string;
-  latitude: string;
-  longitude: string;
-  files?: UploadFile[];
-  images?: UploadFile[];
-  users_permissions_user?: UsersPermissionsUser;
-  disponibilities?: Disponibility[];
-  scheduleDetails?: string;
+  id: string
+  name: string
+  surface: number
+  roomLength: number
+  width: number
+  height: number
+  mirror: boolean
+  danceBar: boolean
+  accomodation: boolean
+  technicalStaff: boolean
+  floor: 'plancherDanse' | 'parquetTraditionnel' | 'other'
+  otherFloor?: string
+  about?: string
+  details?: string
+  address: string
+  latitude: string
+  longitude: string
+  files?: UploadFile[]
+  images?: UploadFile[]
+  users_permissions_user?: UsersPermissionsUser
+  disponibilities?: Disponibility[]
+  scheduleDetails?: string
 
   /** @format date */
-  filledUntil?: string;
-  published?: boolean;
-  city: City;
-  country?: string;
-  slug?: string;
-  external_id?: number;
-  danceCarpet: "true" | "false" | "possible";
+  filledUntil?: string
+  published?: boolean
+  city: City
+  country?: string
+  slug?: string
+  external_id?: number
+  danceCarpet: 'true' | 'false' | 'possible'
 }
 
 export interface NewEspace {
-  name: string;
-  surface: number;
-  roomLength: number;
-  width: number;
-  height: number;
-  mirror: boolean;
-  danceBar: boolean;
-  accomodation: boolean;
-  technicalStaff: boolean;
-  floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
-  otherFloor?: string;
-  about?: string;
-  details?: string;
-  address: string;
-  users_permissions_user?: string;
-  disponibilities?: string[];
-  scheduleDetails?: string;
+  name: string
+  surface: number
+  roomLength: number
+  width: number
+  height: number
+  mirror: boolean
+  danceBar: boolean
+  accomodation: boolean
+  technicalStaff: boolean
+  floor: 'plancherDanse' | 'parquetTraditionnel' | 'other' | 'todefine'
+  otherFloor?: string
+  about?: string
+  details?: string
+  address: string
+  users_permissions_user?: string
+  disponibilities?: string[]
+  scheduleDetails?: string
 
   /** @format date */
-  filledUntil?: string;
-  published?: boolean;
-  bookings?: string[];
-  country: string;
-  external_id?: number;
-  danceCarpet?: "true" | "false" | "possible";
-  slug?: string;
-  city?: string;
-  latitude: number;
-  longitude?: number;
-  deleted?: boolean;
-  created_by?: string;
-  updated_by?: string;
+  filledUntil?: string
+  published?: boolean
+  bookings?: string[]
+  country: string
+  external_id?: number
+  danceCarpet?: 'true' | 'false' | 'possible'
+  slug?: string
+  city?: string
+  latitude: number
+  longitude?: number
+  deleted?: boolean
+  created_by?: string
+  updated_by?: string
 }
 
 export interface FaqCategory {
-  id: string;
-  name: string;
+  id: string
+  name: string
   faq_questions?: {
-    id: string;
-    question: string;
-    answer: string;
-    faq_category?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
+    id: string
+    question: string
+    answer: string
+    faq_category?: string
+    created_by?: string
+    updated_by?: string
+  }[]
 }
 
 export interface NewFaqCategory {
-  name: string;
-  faq_questions?: string[];
-  created_by?: string;
-  updated_by?: string;
+  name: string
+  faq_questions?: string[]
+  created_by?: string
+  updated_by?: string
 }
 
 export interface FaqQuestion {
-  id: string;
-  question: string;
-  answer: string;
-  faq_category?: { id: string; name: string; faq_questions?: string[]; created_by?: string; updated_by?: string };
+  id: string
+  question: string
+  answer: string
+  faq_category?: {
+    id: string
+    name: string
+    faq_questions?: string[]
+    created_by?: string
+    updated_by?: string
+  }
 }
 
 export interface NewFaqQuestion {
-  question: string;
-  answer: string;
-  faq_category?: string;
-  created_by?: string;
-  updated_by?: string;
+  question: string
+  answer: string
+  faq_category?: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface HomeCarousel {
-  id: string;
+  id: string
   images: {
-    id: string;
-    name: string;
-    alternativeText?: string;
-    caption?: string;
-    width?: number;
-    height?: number;
-    formats?: object;
-    hash: string;
-    ext?: string;
-    mime: string;
-    size: number;
-    url: string;
-    previewUrl?: string;
-    provider: string;
-    provider_metadata?: object;
-    related?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
+    id: string
+    name: string
+    alternativeText?: string
+    caption?: string
+    width?: number
+    height?: number
+    formats?: object
+    hash: string
+    ext?: string
+    mime: string
+    size: number
+    url: string
+    previewUrl?: string
+    provider: string
+    provider_metadata?: object
+    related?: string
+    created_by?: string
+    updated_by?: string
+  }[]
 }
 
 export interface NewHomeCarousel {
-  created_by?: string;
-  updated_by?: string;
+  created_by?: string
+  updated_by?: string
 }
 
 export interface HomeMessage {
-  id: string;
-  text: string;
-  isVisible?: boolean;
-  title?: string;
+  id: string
+  text: string
+  isVisible?: boolean
+  title?: string
 }
 
 export interface NewHomeMessage {
-  text: string;
-  isVisible?: boolean;
-  title?: string;
-  created_by?: string;
-  updated_by?: string;
+  text: string
+  isVisible?: boolean
+  title?: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Message {
-  id: string;
-  message?: string;
-  created_at?: string;
-  place?: UsersPermissionsUser;
-  company?: UsersPermissionsUser;
-  disponibilities?: Disponibility[];
-  booking?: Booking;
+  id: string
+  message?: string
+  created_at?: string
+  place?: UsersPermissionsUser
+  company?: UsersPermissionsUser
+  disponibilities?: Disponibility[]
+  booking?: Booking
   status:
-    | "accepted"
-    | "created"
-    | "requestcanceled"
-    | "requestcanceledbyplace"
-    | "bookingcanceledbyplace"
-    | "askcancel"
-    | "message";
-  author?: "company" | "place";
+    | 'accepted'
+    | 'created'
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
+    | 'askcancel'
+    | 'message'
+  author?: 'company' | 'place'
 }
 
 export interface NewMessage {
-  message?: string;
-  place?: string;
-  company?: string;
-  author?: "company" | "place";
+  message?: string
+  place?: string
+  company?: string
+  author?: 'company' | 'place'
   status:
-    | "accepted"
-    | "created"
-    | "requestcanceled"
-    | "requestcanceledbyplace"
-    | "bookingcanceledbyplace"
-    | "askcancel"
-    | "message"
-    | "requestdisporemovedbyplace"
-    | "bookingdisporemovedbyplace"
-    | "disporemovedbycompany";
-  booking?: string;
-  hasbeenread?: boolean;
-  notified?: boolean;
-  disponibilities?: string[];
-  created_by?: string;
-  updated_by?: string;
+    | 'accepted'
+    | 'created'
+    | 'requestcanceled'
+    | 'requestcanceledbyplace'
+    | 'bookingcanceledbyplace'
+    | 'askcancel'
+    | 'message'
+    | 'requestdisporemovedbyplace'
+    | 'bookingdisporemovedbyplace'
+    | 'disporemovedbycompany'
+  booking?: string
+  hasbeenread?: boolean
+  notified?: boolean
+  disponibilities?: string[]
+  created_by?: string
+  updated_by?: string
 }
 
 export interface ReadNotif {
-  bookingId?: string;
-  targetId?: string;
-  status: "message" | "request" | "booking";
+  bookingId?: string
+  targetId?: string
+  status: 'message' | 'request' | 'booking'
 }
 
 export interface NotifCount {
-  request?: number;
-  booking?: number;
-  message?: number;
+  request?: number
+  booking?: number
+  message?: number
 }
 
 export interface Page {
-  id: string;
-  title?: string;
-  text?: string;
-  url: string;
+  id: string
+  title?: string
+  text?: string
+  url: string
 }
 
 export interface NewPage {
-  title?: string;
-  text?: string;
-  url: string;
-  created_by?: string;
-  updated_by?: string;
+  title?: string
+  text?: string
+  url: string
+  created_by?: string
+  updated_by?: string
 }
 
 export interface UploadFile {
-  id?: string;
-  caption?: string;
-  name?: string;
-  sha256?: string;
-  hash?: string;
-  ext?: string;
-  size?: number;
-  mime?: string;
-  url?: string;
-  provider?: string;
-  updatedAt?: string;
-  createdAt?: string;
-  related?: string[];
+  id?: string
+  caption?: string
+  name?: string
+  sha256?: string
+  hash?: string
+  ext?: string
+  size?: number
+  mime?: string
+  url?: string
+  provider?: string
+  updatedAt?: string
+  createdAt?: string
+  related?: string[]
 }
 
 export interface UsersPermissionsRole {
-  id: string;
-  name: string;
-  description?: string;
-  type?: string;
+  id: string
+  name: string
+  description?: string
+  type?: string
   permissions?: {
-    id: string;
-    type: string;
-    controller: string;
-    action: string;
-    enabled: boolean;
-    policy?: string;
-    role?: string;
-    created_by?: string;
-    updated_by?: string;
-  }[];
+    id: string
+    type: string
+    controller: string
+    action: string
+    enabled: boolean
+    policy?: string
+    role?: string
+    created_by?: string
+    updated_by?: string
+  }[]
   users?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    accepted?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    siret: string;
-    ape: string;
-    phone: string;
-    license: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    external_id?: number;
-    dispositifs?: string[];
-    created_by?: string;
-    updated_by?: string;
-  }[];
+    id: string
+    email: string
+    provider?: string
+    password?: string
+    resetPasswordToken?: string
+    confirmationToken?: string
+    role?: string
+    username: string
+    confirmed?: boolean
+    blocked?: boolean
+    accepted?: boolean
+    firstname: string
+    lastname: string
+    structureName: string
+    socialReason?: string
+    address: string
+    zipCode: string
+    city: string
+    country: string
+    siret: string
+    ape: string
+    phone: string
+    license: string
+    website?: string
+    legalRepresentative?: string
+    statusRepresentative?: string
+    insuranceNumber?: string
+    insuranceName?: string
+    choreographer?: string
+    espaces?: string[]
+    type: 'company' | 'place'
+    external_id?: number
+    companyDispositifs?: string[]
+    placeDispositifs?: string[]
+    created_by?: string
+    updated_by?: string
+  }[]
 }
 
 export interface NewUsersPermissionsRole {
-  name: string;
-  description?: string;
-  type?: string;
-  permissions?: string[];
-  users?: string[];
-  created_by?: string;
-  updated_by?: string;
+  name: string
+  description?: string
+  type?: string
+  permissions?: string[]
+  users?: string[]
+  created_by?: string
+  updated_by?: string
 }
 
 export interface UsersPermissionsUser {
-  id: string;
-  email: string;
-  provider?: string;
+  id: string
+  email: string
+  provider?: string
   role?: {
-    id: string;
-    name: string;
-    description?: string;
-    type?: string;
-    permissions?: string[];
-    users?: string[];
-    created_by?: string;
-    updated_by?: string;
-  };
-  username: string;
-  confirmed?: boolean;
-  accepted?: boolean;
-  blocked?: boolean;
-  firstname: string;
-  lastname: string;
-  structureName: string;
-  socialReason?: string;
-  address: string;
-  zipCode: string;
-  city: string;
-  country?: string;
-  siret: string;
-  ape: string;
-  phone?: string;
-  license?: string;
-  website?: string;
-  legalRepresentative?: string;
-  statusRepresentative?: string;
-  insuranceNumber?: string;
-  insuranceName?: string;
-  choreographer?: string;
-  espaces?: Espace[];
-  type: "company" | "place";
-  external_id?: string;
-  bookings?: Booking[];
-  dispositifs?: Dispositif[];
+    id: string
+    name: string
+    description?: string
+    type?: string
+    permissions?: string[]
+    users?: string[]
+    created_by?: string
+    updated_by?: string
+  }
+  username: string
+  confirmed?: boolean
+  accepted?: boolean
+  blocked?: boolean
+  firstname: string
+  lastname: string
+  structureName: string
+  socialReason?: string
+  address: string
+  zipCode: string
+  city: string
+  country?: string
+  siret: string
+  ape: string
+  phone?: string
+  license?: string
+  website?: string
+  legalRepresentative?: string
+  statusRepresentative?: string
+  insuranceNumber?: string
+  insuranceName?: string
+  choreographer?: string
+  espaces?: Espace[]
+  type: 'company' | 'place'
+  external_id?: string
+  bookings?: Booking[]
+  placeDispositifs?: Dispositif[]
+  companyDispositifs?: Dispositif[]
 }
 
 export interface NewUsersPermissionsUser {
-  email: string;
-  provider?: string;
+  email: string
+  provider?: string
 
   /** @format password */
-  password?: string;
-  resetPasswordToken?: string;
-  confirmationToken?: string;
-  role?: string;
-  username: string;
-  confirmed?: boolean;
-  blocked?: boolean;
-  firstname: string;
-  lastname: string;
-  structureName: string;
-  socialReason?: string;
-  address: string;
-  zipCode: string;
-  city: string;
-  country?: string;
-  siret: string;
-  ape: string;
-  phone?: string;
-  license?: string;
-  website?: string;
-  legalRepresentative?: string;
-  statusRepresentative?: string;
-  insuranceNumber?: string;
-  insuranceName?: string;
-  choreographer?: string;
-  espaces?: string[];
-  type: "company" | "place";
-  created_by?: string;
-  updated_by?: string;
+  password?: string
+  resetPasswordToken?: string
+  confirmationToken?: string
+  role?: string
+  username: string
+  confirmed?: boolean
+  blocked?: boolean
+  firstname: string
+  lastname: string
+  structureName: string
+  socialReason?: string
+  address: string
+  zipCode: string
+  city: string
+  country?: string
+  siret: string
+  ape: string
+  phone?: string
+  license?: string
+  website?: string
+  legalRepresentative?: string
+  statusRepresentative?: string
+  insuranceNumber?: string
+  insuranceName?: string
+  choreographer?: string
+  espaces?: string[]
+  type: 'company' | 'place'
+  created_by?: string
+  updated_by?: string
 }
 
 export interface Error {
   /** @format int32 */
-  code: number;
-  message: string;
+  code: number
+  message: string
 }
 
 export namespace Actualities {
@@ -747,25 +796,25 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Actuality[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Actuality[]
   }
   /**
    * @description Create a new record
@@ -775,11 +824,11 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewActuality;
-    export type RequestHeaders = {};
-    export type ResponseBody = Actuality;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewActuality
+    export type RequestHeaders = {}
+    export type ResponseBody = Actuality
   }
   /**
    * No description
@@ -789,11 +838,11 @@ export namespace Actualities {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -803,11 +852,11 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Actuality;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Actuality
   }
   /**
    * @description Update a record
@@ -817,11 +866,11 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewActuality;
-    export type RequestHeaders = {};
-    export type ResponseBody = Actuality;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewActuality
+    export type RequestHeaders = {}
+    export type ResponseBody = Actuality
   }
   /**
    * @description Delete a record
@@ -831,11 +880,11 @@ export namespace Actualities {
    * @secure
    */
   export namespace ActualitiesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -848,11 +897,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace GetMyBookings {
-    export type RequestParams = { bookingType: "all" | "request" | "booking" };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Booking[];
+    export type RequestParams = { bookingType: 'all' | 'request' | 'booking' }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Booking[]
   }
   /**
    * No description
@@ -862,25 +911,25 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Booking[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Booking[]
   }
   /**
    * @description Create a new record
@@ -890,11 +939,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewBooking;
-    export type RequestHeaders = {};
-    export type ResponseBody = Booking;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewBooking
+    export type RequestHeaders = {}
+    export type ResponseBody = Booking
   }
   /**
    * No description
@@ -904,11 +953,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -918,11 +967,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Booking;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Booking
   }
   /**
    * @description Update a record
@@ -932,11 +981,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewBooking;
-    export type RequestHeaders = {};
-    export type ResponseBody = Booking;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewBooking
+    export type RequestHeaders = {}
+    export type ResponseBody = Booking
   }
   /**
    * @description Delete a record
@@ -946,11 +995,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace BookingsDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
   /**
    * @description Update a record
@@ -960,11 +1009,11 @@ export namespace Bookings {
    * @secure
    */
   export namespace RemoveDispos {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = { dispos?: string[] };
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = { dispos?: string[] }
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
 }
 
@@ -977,25 +1026,25 @@ export namespace Cities {
    * @secure
    */
   export namespace CitiesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = City[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = City[]
   }
   /**
    * @description Create a new record
@@ -1005,11 +1054,11 @@ export namespace Cities {
    * @secure
    */
   export namespace CitiesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewCity;
-    export type RequestHeaders = {};
-    export type ResponseBody = City;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewCity
+    export type RequestHeaders = {}
+    export type ResponseBody = City
   }
   /**
    * No description
@@ -1019,11 +1068,11 @@ export namespace Cities {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1033,11 +1082,11 @@ export namespace Cities {
    * @secure
    */
   export namespace CitiesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = City;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = City
   }
   /**
    * @description Update a record
@@ -1047,11 +1096,11 @@ export namespace Cities {
    * @secure
    */
   export namespace CitiesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewCity;
-    export type RequestHeaders = {};
-    export type ResponseBody = City;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewCity
+    export type RequestHeaders = {}
+    export type ResponseBody = City
   }
   /**
    * @description Delete a record
@@ -1061,11 +1110,11 @@ export namespace Cities {
    * @secure
    */
   export namespace CitiesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1078,25 +1127,25 @@ export namespace Contacts {
    * @secure
    */
   export namespace ContactsList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Contact[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Contact[]
   }
   /**
    * @description Create a new record
@@ -1106,11 +1155,11 @@ export namespace Contacts {
    * @secure
    */
   export namespace ContactsCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewContact;
-    export type RequestHeaders = {};
-    export type ResponseBody = Contact;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewContact
+    export type RequestHeaders = {}
+    export type ResponseBody = Contact
   }
   /**
    * No description
@@ -1120,11 +1169,11 @@ export namespace Contacts {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1134,11 +1183,11 @@ export namespace Contacts {
    * @secure
    */
   export namespace ContactsDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Contact;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Contact
   }
   /**
    * @description Update a record
@@ -1148,11 +1197,11 @@ export namespace Contacts {
    * @secure
    */
   export namespace ContactsUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewContact;
-    export type RequestHeaders = {};
-    export type ResponseBody = Contact;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewContact
+    export type RequestHeaders = {}
+    export type ResponseBody = Contact
   }
   /**
    * @description Delete a record
@@ -1162,11 +1211,11 @@ export namespace Contacts {
    * @secure
    */
   export namespace ContactsDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1179,25 +1228,25 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace DisponibilitiesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility[]
   }
   /**
    * @description Create a new record
@@ -1207,11 +1256,11 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace DisponibilitiesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewDisponibility;
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewDisponibility
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility
   }
   /**
    * No description
@@ -1221,11 +1270,11 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1235,11 +1284,11 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace DisponibilitiesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility
   }
   /**
    * @description Update a record
@@ -1249,11 +1298,11 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace DisponibilitiesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewDisponibility;
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewDisponibility
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility
   }
   /**
    * @description Delete a record
@@ -1263,11 +1312,11 @@ export namespace Disponibilities {
    * @secure
    */
   export namespace DisponibilitiesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility
   }
 }
 
@@ -1280,11 +1329,11 @@ export namespace Bulk {
    * @secure
    */
   export namespace DisponibilitiesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = Disponibility[];
-    export type RequestHeaders = {};
-    export type ResponseBody = Disponibility[];
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = Disponibility[]
+    export type RequestHeaders = {}
+    export type ResponseBody = Disponibility[]
   }
 }
 
@@ -1297,25 +1346,25 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace DispositifsList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Dispositif[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Dispositif[]
   }
   /**
    * @description Create a new record
@@ -1325,11 +1374,11 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace DispositifsCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewDispositif;
-    export type RequestHeaders = {};
-    export type ResponseBody = Dispositif;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewDispositif
+    export type RequestHeaders = {}
+    export type ResponseBody = Dispositif
   }
   /**
    * No description
@@ -1339,11 +1388,11 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1353,11 +1402,11 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace DispositifsDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Dispositif;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Dispositif
   }
   /**
    * @description Update a record
@@ -1367,11 +1416,11 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace DispositifsUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewDispositif;
-    export type RequestHeaders = {};
-    export type ResponseBody = Dispositif;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewDispositif
+    export type RequestHeaders = {}
+    export type ResponseBody = Dispositif
   }
   /**
    * @description Delete a record
@@ -1381,11 +1430,11 @@ export namespace Dispositifs {
    * @secure
    */
   export namespace DispositifsDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1398,11 +1447,11 @@ export namespace Espaces {
    * @secure
    */
   export namespace MyPlaces {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Espace[];
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Espace[]
   }
   /**
    * No description
@@ -1412,25 +1461,25 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Espace[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Espace[]
   }
   /**
    * @description Create a new record
@@ -1440,11 +1489,11 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = object;
-    export type RequestHeaders = {};
-    export type ResponseBody = Espace;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = object
+    export type RequestHeaders = {}
+    export type ResponseBody = Espace
   }
   /**
    * No description
@@ -1454,25 +1503,25 @@ export namespace Espaces {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1482,11 +1531,11 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = { availableOnly?: boolean };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Espace;
+    export type RequestParams = { id: string }
+    export type RequestQuery = { availableOnly?: boolean }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Espace
   }
   /**
    * @description Update a record
@@ -1496,11 +1545,11 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = object;
-    export type RequestHeaders = {};
-    export type ResponseBody = Espace;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = object
+    export type RequestHeaders = {}
+    export type ResponseBody = Espace
   }
   /**
    * @description Delete a record
@@ -1510,11 +1559,11 @@ export namespace Espaces {
    * @secure
    */
   export namespace EspacesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1527,25 +1576,25 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace FaqCategoriesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = FaqCategory[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = FaqCategory[]
   }
   /**
    * @description Create a new record
@@ -1555,11 +1604,11 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace FaqCategoriesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewFaqCategory;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewFaqCategory
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * No description
@@ -1569,11 +1618,11 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * No description
@@ -1583,11 +1632,11 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace FaqCategoriesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Update a record
@@ -1597,11 +1646,11 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace FaqCategoriesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewFaqCategory;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewFaqCategory
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Delete a record
@@ -1611,11 +1660,11 @@ export namespace FaqCategories {
    * @secure
    */
   export namespace FaqCategoriesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1628,25 +1677,25 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace FaqQuestionsList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Create a new record
@@ -1656,11 +1705,11 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace FaqQuestionsCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewFaqQuestion;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewFaqQuestion
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * No description
@@ -1670,11 +1719,11 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * No description
@@ -1684,11 +1733,11 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace FaqQuestionsDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Update a record
@@ -1698,11 +1747,11 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace FaqQuestionsUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewFaqQuestion;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewFaqQuestion
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Delete a record
@@ -1712,11 +1761,11 @@ export namespace FaqQuestions {
    * @secure
    */
   export namespace FaqQuestionsDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1729,25 +1778,25 @@ export namespace HomeCarousel {
    * @secure
    */
   export namespace HomeCarouselList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = HomeCarousel;
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = HomeCarousel
   }
   /**
    * @description Update a single home-carousel record
@@ -1757,11 +1806,11 @@ export namespace HomeCarousel {
    * @secure
    */
   export namespace HomeCarouselUpdate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewHomeCarousel;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewHomeCarousel
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Delete a single home-carousel record
@@ -1771,11 +1820,11 @@ export namespace HomeCarousel {
    * @secure
    */
   export namespace HomeCarouselDelete {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1788,25 +1837,25 @@ export namespace HomeMessage {
    * @secure
    */
   export namespace GetHomeMessage {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = HomeMessage;
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = HomeMessage
   }
   /**
    * @description Update a single home-message record
@@ -1816,11 +1865,11 @@ export namespace HomeMessage {
    * @secure
    */
   export namespace HomeMessageUpdate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewHomeMessage;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewHomeMessage
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Delete a single home-message record
@@ -1830,11 +1879,11 @@ export namespace HomeMessage {
    * @secure
    */
   export namespace HomeMessageDelete {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -1847,11 +1896,11 @@ export namespace Conversation {
    * @secure
    */
   export namespace GetConversation {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser[];
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser[]
   }
   /**
    * No description
@@ -1861,25 +1910,25 @@ export namespace Conversation {
    * @secure
    */
   export namespace ConversationDetail {
-    export type RequestParams = { id: string };
+    export type RequestParams = { id: string }
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Message[]
   }
 }
 
@@ -1892,11 +1941,11 @@ export namespace Notifications {
    * @secure
    */
   export namespace ToggleNotif {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = ReadNotif;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = ReadNotif
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * No description
@@ -1906,11 +1955,11 @@ export namespace Notifications {
    * @secure
    */
   export namespace MyNotifications {
-    export type RequestParams = {};
-    export type RequestQuery = { id?: string };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = NotifCount;
+    export type RequestParams = {}
+    export type RequestQuery = { id?: string }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = NotifCount
   }
 }
 
@@ -1923,25 +1972,25 @@ export namespace Messages {
    * @secure
    */
   export namespace MessagesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Message[]
   }
   /**
    * @description Create a new record
@@ -1951,11 +2000,11 @@ export namespace Messages {
    * @secure
    */
   export namespace MessagesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewMessage;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewMessage
+    export type RequestHeaders = {}
+    export type ResponseBody = Message
   }
   /**
    * No description
@@ -1965,11 +2014,11 @@ export namespace Messages {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -1979,11 +2028,11 @@ export namespace Messages {
    * @secure
    */
   export namespace MessagesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Message
   }
   /**
    * @description Update a record
@@ -1993,11 +2042,11 @@ export namespace Messages {
    * @secure
    */
   export namespace MessagesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewMessage;
-    export type RequestHeaders = {};
-    export type ResponseBody = Message;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewMessage
+    export type RequestHeaders = {}
+    export type ResponseBody = Message
   }
   /**
    * @description Delete a record
@@ -2007,11 +2056,11 @@ export namespace Messages {
    * @secure
    */
   export namespace MessagesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -2024,25 +2073,25 @@ export namespace Pages {
    * @secure
    */
   export namespace PagesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Page[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Page[]
   }
   /**
    * @description Create a new record
@@ -2052,11 +2101,11 @@ export namespace Pages {
    * @secure
    */
   export namespace PagesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewPage;
-    export type RequestHeaders = {};
-    export type ResponseBody = Page;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewPage
+    export type RequestHeaders = {}
+    export type ResponseBody = Page
   }
   /**
    * No description
@@ -2066,11 +2115,11 @@ export namespace Pages {
    * @secure
    */
   export namespace CountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * No description
@@ -2080,11 +2129,11 @@ export namespace Pages {
    * @secure
    */
   export namespace PagesDetail {
-    export type RequestParams = { url: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = Page;
+    export type RequestParams = { url: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = Page
   }
   /**
    * @description Update a record
@@ -2094,11 +2143,11 @@ export namespace Pages {
    * @secure
    */
   export namespace PagesUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewPage;
-    export type RequestHeaders = {};
-    export type ResponseBody = Page;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewPage
+    export type RequestHeaders = {}
+    export type ResponseBody = Page
   }
   /**
    * @description Delete a record
@@ -2108,11 +2157,11 @@ export namespace Pages {
    * @secure
    */
   export namespace PagesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = number;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = number
   }
 }
 
@@ -2125,11 +2174,11 @@ export namespace Email {
    * @secure
    */
   export namespace EmailCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { foo?: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { foo?: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Send an test email
@@ -2139,11 +2188,11 @@ export namespace Email {
    * @secure
    */
   export namespace TestCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { foo?: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { foo?: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Get the email settings
@@ -2153,11 +2202,11 @@ export namespace Email {
    * @secure
    */
   export namespace SettingsList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
 }
 
@@ -2170,21 +2219,21 @@ export namespace Upload {
    * @secure
    */
   export namespace UploadCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = object;
-    export type RequestHeaders = {};
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = object
+    export type RequestHeaders = {}
     export type ResponseBody = {
-      name?: string;
-      hash?: string;
-      sha256?: string;
-      ext?: string;
-      mime?: string;
-      size?: number;
-      url?: string;
-      provider?: string;
-      related?: string[];
-    }[];
+      name?: string
+      hash?: string
+      sha256?: string
+      ext?: string
+      mime?: string
+      size?: number
+      url?: string
+      provider?: string
+      related?: string[]
+    }[]
   }
   /**
    * @description Retrieve the total number of uploaded files
@@ -2194,11 +2243,11 @@ export namespace Upload {
    * @secure
    */
   export namespace FilesCountList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { count?: number };
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { count?: number }
   }
   /**
    * @description Retrieve all file documents
@@ -2208,11 +2257,11 @@ export namespace Upload {
    * @secure
    */
   export namespace FilesList {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UploadFile[];
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UploadFile[]
   }
   /**
    * @description Retrieve a single file depending on its id
@@ -2222,11 +2271,11 @@ export namespace Upload {
    * @secure
    */
   export namespace FilesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UploadFile;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UploadFile
   }
   /**
    * @description Delete an uploaded file
@@ -2236,11 +2285,11 @@ export namespace Upload {
    * @secure
    */
   export namespace FilesDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UploadFile;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UploadFile
   }
   /**
    * @description Search for an uploaded file
@@ -2250,11 +2299,11 @@ export namespace Upload {
    * @secure
    */
   export namespace SearchDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UploadFile[];
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UploadFile[]
   }
 }
 
@@ -2267,11 +2316,11 @@ export namespace Users {
    * @secure
    */
   export namespace PutUsers {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = object;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = object
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser
   }
   /**
    * @description Retrieve the logged in user information
@@ -2281,11 +2330,11 @@ export namespace Users {
    * @secure
    */
   export namespace GetUsers {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser
   }
   /**
    * @description Check current password
@@ -2295,11 +2344,11 @@ export namespace Users {
    * @secure
    */
   export namespace CheckPasswordCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { password?: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = boolean;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { password?: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = boolean
   }
   /**
    * @description Retrieve all user documents
@@ -2309,25 +2358,25 @@ export namespace Users {
    * @secure
    */
   export namespace UsersList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser[]
   }
   /**
    * @description Retrieve a single user depending on his id
@@ -2337,11 +2386,11 @@ export namespace Users {
    * @secure
    */
   export namespace UsersDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser
   }
   /**
    * @description Update an existing user
@@ -2351,11 +2400,11 @@ export namespace Users {
    * @secure
    */
   export namespace UsersUpdate {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewUsersPermissionsUser;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewUsersPermissionsUser
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser
   }
   /**
    * @description Delete an existing user
@@ -2365,11 +2414,11 @@ export namespace Users {
    * @secure
    */
   export namespace UsersDelete {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
 }
 
@@ -2382,11 +2431,11 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace RolesDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsRole;
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsRole
   }
   /**
    * @description Retrieve all role documents
@@ -2396,25 +2445,25 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace RolesList {
-    export type RequestParams = {};
+    export type RequestParams = {}
     export type RequestQuery = {
-      _limit?: number;
-      _sort?: string;
-      _start?: number;
-      "="?: string;
-      _ne?: string;
-      _lt?: string;
-      _lte?: string;
-      _gt?: string;
-      _gte?: string;
-      _contains?: string;
-      _containss?: string;
-      _in?: string[];
-      _nin?: string[];
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsRole[];
+      _limit?: number
+      _sort?: string
+      _start?: number
+      '='?: string
+      _ne?: string
+      _lt?: string
+      _lte?: string
+      _gt?: string
+      _gte?: string
+      _contains?: string
+      _containss?: string
+      _in?: string[]
+      _nin?: string[]
+    }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsRole[]
   }
   /**
    * @description Create a new role
@@ -2424,11 +2473,11 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace RolesCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = NewUsersPermissionsRole;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsRole;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = NewUsersPermissionsRole
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsRole
   }
   /**
    * @description Update a role
@@ -2438,11 +2487,11 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace RolesUpdate {
-    export type RequestParams = { role: string };
-    export type RequestQuery = {};
-    export type RequestBody = NewUsersPermissionsRole;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsRole;
+    export type RequestParams = { role: string }
+    export type RequestQuery = {}
+    export type RequestBody = NewUsersPermissionsRole
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsRole
   }
   /**
    * @description Delete a role
@@ -2452,11 +2501,11 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace RolesDelete {
-    export type RequestParams = { role: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = { role: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Search for users
@@ -2467,11 +2516,11 @@ export namespace UsersPermissions {
    * @secure
    */
   export namespace SearchDetail {
-    export type RequestParams = { id: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = UsersPermissionsUser[];
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = UsersPermissionsUser[]
   }
 }
 
@@ -2485,11 +2534,11 @@ export namespace Connect {
    * @secure
    */
   export namespace GetConnect {
-    export type RequestParams = { provider: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
+    export type RequestParams = { provider: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = void
   }
 }
 
@@ -2502,11 +2551,11 @@ export namespace Auth {
    * @secure
    */
   export namespace Login {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { identifier: string; password: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = any;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { identifier: string; password: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = any
   }
   /**
    * @description Register a new user with the default role
@@ -2516,11 +2565,15 @@ export namespace Auth {
    * @secure
    */
   export namespace Signup {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { username: string; email: string; password: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = any;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = {
+      username: string
+      email: string
+      password: string
+    }
+    export type RequestHeaders = {}
+    export type ResponseBody = any
   }
   /**
    * @description Successfull redirection after approving a provider
@@ -2530,11 +2583,11 @@ export namespace Auth {
    * @secure
    */
   export namespace CallbackDetail {
-    export type RequestParams = { provider: string };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = any;
+    export type RequestParams = { provider: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = any
   }
   /**
    * @description Send the reset password email link
@@ -2545,11 +2598,11 @@ export namespace Auth {
    * @secure
    */
   export namespace ForgotPassword {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { email?: string; url?: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { email?: string; url?: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = void
   }
   /**
    * @description Reset user password with a code (resetToken)
@@ -2559,11 +2612,15 @@ export namespace Auth {
    * @secure
    */
   export namespace ResetPassword {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { code: string; password: string; passwordConfirmation: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = any;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = {
+      code: string
+      password: string
+      passwordConfirmation: string
+    }
+    export type RequestHeaders = {}
+    export type ResponseBody = any
   }
   /**
    * @description Validate a user account
@@ -2573,11 +2630,11 @@ export namespace Auth {
    * @secure
    */
   export namespace EmailConfirmationList {
-    export type RequestParams = {};
-    export type RequestQuery = { confirmation?: string };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = { foo?: string };
+    export type RequestParams = {}
+    export type RequestQuery = { confirmation?: string }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
   /**
    * @description Send a confirmation email to user
@@ -2587,65 +2644,89 @@ export namespace Auth {
    * @secure
    */
   export namespace SendEmailConfirmationCreate {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = { email: string };
-    export type RequestHeaders = {};
-    export type ResponseBody = void;
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { email: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = void
   }
 }
 
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, ResponseType } from "axios";
+import axios, {
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  ResponseType,
+} from 'axios'
 
-export type QueryParamsType = Record<string | number, any>;
+export type QueryParamsType = Record<string | number, any>
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
+export interface FullRequestParams
+  extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
-  secure?: boolean;
+  secure?: boolean
   /** request path */
-  path: string;
+  path: string
   /** content type of request body */
-  type?: ContentType;
+  type?: ContentType
   /** query params */
-  query?: QueryParamsType;
+  query?: QueryParamsType
   /** format of response (i.e. response.json() -> format: "json") */
-  format?: ResponseType;
+  format?: ResponseType
   /** request body */
-  body?: unknown;
+  body?: unknown
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  'body' | 'method' | 'query' | 'path'
+>
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
+export interface ApiConfig<SecurityDataType = unknown>
+  extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
   securityWorker?: (
     securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
-  secure?: boolean;
+  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void
+  secure?: boolean
+  format?: ResponseType
 }
 
 export enum ContentType {
-  Json = "application/json",
-  FormData = "multipart/form-data",
-  UrlEncoded = "application/x-www-form-urlencoded",
+  Json = 'application/json',
+  FormData = 'multipart/form-data',
+  UrlEncoded = 'application/x-www-form-urlencoded',
 }
 
 export class HttpClient<SecurityDataType = unknown> {
-  private instance: AxiosInstance;
-  private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
-  private secure?: boolean;
+  public instance: AxiosInstance
+  private securityData: SecurityDataType | null = null
+  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker']
+  private secure?: boolean
+  private format?: ResponseType
 
-  constructor({ securityWorker, secure, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
-    this.instance = axios.create({ ...axiosConfig, baseURL: axiosConfig.baseURL || "http://localhost:1337" });
-    this.secure = secure;
-    this.securityWorker = securityWorker;
+  constructor({
+    securityWorker,
+    secure,
+    format,
+    ...axiosConfig
+  }: ApiConfig<SecurityDataType> = {}) {
+    this.instance = axios.create({
+      ...axiosConfig,
+      baseURL: axiosConfig.baseURL || 'http://localhost:1337',
+    })
+    this.secure = secure
+    this.format = format
+    this.securityWorker = securityWorker
   }
 
   public setSecurityData = (data: SecurityDataType | null) => {
-    this.securityData = data;
-  };
+    this.securityData = data
+  }
 
-  private mergeRequestParams(params1: AxiosRequestConfig, params2?: AxiosRequestConfig): AxiosRequestConfig {
+  private mergeRequestParams(
+    params1: AxiosRequestConfig,
+    params2?: AxiosRequestConfig,
+  ): AxiosRequestConfig {
     return {
       ...this.instance.defaults,
       ...params1,
@@ -2655,37 +2736,68 @@ export class HttpClient<SecurityDataType = unknown> {
         ...(params1.headers || {}),
         ...((params2 && params2.headers) || {}),
       },
-    };
+    }
   }
 
-  public request = async <T = any, E = any>({
+  private createFormData(input: Record<string, unknown>): FormData {
+    return Object.keys(input || {}).reduce((formData, key) => {
+      const property = input[key]
+      formData.append(
+        key,
+        property instanceof Blob
+          ? property
+          : typeof property === 'object' && property !== null
+          ? JSON.stringify(property)
+          : `${property}`,
+      )
+      return formData
+    }, new FormData())
+  }
+
+  public request = async <T = any, _E = any>({
     secure,
     path,
     type,
     query,
-    format = "json",
+    format,
     body,
     ...params
   }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
+      ((typeof secure === 'boolean' ? secure : this.secure) &&
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
-      {};
-    const requestParams = this.mergeRequestParams(params, secureParams);
+      {}
+    const requestParams = this.mergeRequestParams(params, secureParams)
+    const responseFormat = (format && this.format) || void 0
+
+    if (
+      type === ContentType.FormData &&
+      body &&
+      body !== null &&
+      typeof body === 'object'
+    ) {
+      requestParams.headers.common = { Accept: '*/*' }
+      requestParams.headers.post = {}
+      requestParams.headers.put = {}
+
+      body = this.createFormData(body as Record<string, unknown>)
+    }
 
     return this.instance.request({
       ...requestParams,
       headers: {
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(type && type !== ContentType.FormData
+          ? { 'Content-Type': type }
+          : {}),
         ...(requestParams.headers || {}),
       },
       params: query,
-      responseType: format,
+      responseType: responseFormat,
       data: body,
       url: path,
-    });
-  };
+    })
+  }
 }
 
 /**
@@ -2697,7 +2809,9 @@ export class HttpClient<SecurityDataType = unknown> {
  * @externalDocs https://strapi.io/documentation/developer-docs/latest/getting-started/introduction.html
  * @contact TEAM <contact-email@something.io> (mywebsite.io)
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown
+> extends HttpClient<SecurityDataType> {
   actualities = {
     /**
      * No description
@@ -2709,28 +2823,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     actualitiesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Actuality[], Error>({
         path: `/actualities`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2745,11 +2859,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actualitiesCreate: (data: NewActuality, params: RequestParams = {}) =>
       this.request<Actuality, Error>({
         path: `/actualities`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2764,9 +2878,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/actualities/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2781,9 +2895,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actualitiesDetail: (id: string, params: RequestParams = {}) =>
       this.request<Actuality, Error>({
         path: `/actualities/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2795,14 +2909,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/actualities/{id}
      * @secure
      */
-    actualitiesUpdate: (id: string, data: NewActuality, params: RequestParams = {}) =>
+    actualitiesUpdate: (
+      id: string,
+      data: NewActuality,
+      params: RequestParams = {},
+    ) =>
       this.request<Actuality, Error>({
         path: `/actualities/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2817,12 +2935,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     actualitiesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/actualities/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   bookings = {
     /**
      * @description Get bookings related to current user
@@ -2832,12 +2950,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/bookings/me/{bookingType}
      * @secure
      */
-    getMyBookings: (bookingType: "all" | "request" | "booking", params: RequestParams = {}) =>
+    getMyBookings: (
+      bookingType: 'all' | 'request' | 'booking',
+      params: RequestParams = {},
+    ) =>
       this.request<Booking[], Error>({
         path: `/bookings/me/${bookingType}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2851,28 +2972,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     bookingsList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Booking[], Error>({
         path: `/bookings`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2887,11 +3008,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     bookingsCreate: (data: NewBooking, params: RequestParams = {}) =>
       this.request<Booking, Error>({
         path: `/bookings`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2906,9 +3027,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/bookings/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2923,9 +3044,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     bookingsDetail: (id: string, params: RequestParams = {}) =>
       this.request<Booking, Error>({
         path: `/bookings/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2937,14 +3058,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/bookings/{id}
      * @secure
      */
-    bookingsUpdate: (id: string, data: NewBooking, params: RequestParams = {}) =>
+    bookingsUpdate: (
+      id: string,
+      data: NewBooking,
+      params: RequestParams = {},
+    ) =>
       this.request<Booking, Error>({
         path: `/bookings/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2959,9 +3084,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     bookingsDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/bookings/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -2973,17 +3098,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/bookings/{id}/remove-dispo
      * @secure
      */
-    removeDispos: (id: string, data: { dispos?: string[] }, params: RequestParams = {}) =>
+    removeDispos: (
+      id: string,
+      data: { dispos?: string[] },
+      params: RequestParams = {},
+    ) =>
       this.request<{ foo?: string }, Error>({
         path: `/bookings/${id}/remove-dispo`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   cities = {
     /**
      * No description
@@ -2995,28 +3124,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     citiesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<City[], Error>({
         path: `/cities`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3031,11 +3160,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     citiesCreate: (data: NewCity, params: RequestParams = {}) =>
       this.request<City, Error>({
         path: `/cities`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3050,9 +3179,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/cities/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3067,9 +3196,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     citiesDetail: (id: string, params: RequestParams = {}) =>
       this.request<City, Error>({
         path: `/cities/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3084,11 +3213,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     citiesUpdate: (id: string, data: NewCity, params: RequestParams = {}) =>
       this.request<City, Error>({
         path: `/cities/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3103,12 +3232,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     citiesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/cities/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   contacts = {
     /**
      * No description
@@ -3120,28 +3249,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     contactsList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Contact[], Error>({
         path: `/contacts`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3156,11 +3285,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     contactsCreate: (data: NewContact, params: RequestParams = {}) =>
       this.request<Contact, Error>({
         path: `/contacts`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3175,9 +3304,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/contacts/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3192,9 +3321,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     contactsDetail: (id: string, params: RequestParams = {}) =>
       this.request<Contact, Error>({
         path: `/contacts/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3206,14 +3335,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/contacts/{id}
      * @secure
      */
-    contactsUpdate: (id: string, data: NewContact, params: RequestParams = {}) =>
+    contactsUpdate: (
+      id: string,
+      data: NewContact,
+      params: RequestParams = {},
+    ) =>
       this.request<Contact, Error>({
         path: `/contacts/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3228,12 +3361,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     contactsDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/contacts/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   disponibilities = {
     /**
      * No description
@@ -3245,28 +3378,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     disponibilitiesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Disponibility[], Error>({
         path: `/disponibilities`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3278,14 +3411,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/disponibilities
      * @secure
      */
-    disponibilitiesCreate: (data: NewDisponibility, params: RequestParams = {}) =>
+    disponibilitiesCreate: (
+      data: NewDisponibility,
+      params: RequestParams = {},
+    ) =>
       this.request<Disponibility, Error>({
         path: `/disponibilities`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3300,9 +3436,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/disponibilities/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3317,9 +3453,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     disponibilitiesDetail: (id: string, params: RequestParams = {}) =>
       this.request<Disponibility, Error>({
         path: `/disponibilities/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3331,14 +3467,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/disponibilities/{id}
      * @secure
      */
-    disponibilitiesUpdate: (id: string, data: NewDisponibility, params: RequestParams = {}) =>
+    disponibilitiesUpdate: (
+      id: string,
+      data: NewDisponibility,
+      params: RequestParams = {},
+    ) =>
       this.request<Disponibility, Error>({
         path: `/disponibilities/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3353,12 +3493,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     disponibilitiesDelete: (id: string, params: RequestParams = {}) =>
       this.request<Disponibility, Error>({
         path: `/disponibilities/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   bulk = {
     /**
      * @description Create a new record
@@ -3368,17 +3508,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/bulk/disponibilities
      * @secure
      */
-    disponibilitiesCreate: (data: Disponibility[], params: RequestParams = {}) =>
+    disponibilitiesCreate: (
+      data: Disponibility[],
+      params: RequestParams = {},
+    ) =>
       this.request<Disponibility[], Error>({
         path: `/bulk/disponibilities`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   dispositifs = {
     /**
      * No description
@@ -3390,28 +3533,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     dispositifsList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Dispositif[], Error>({
         path: `/dispositifs`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3426,11 +3569,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dispositifsCreate: (data: NewDispositif, params: RequestParams = {}) =>
       this.request<Dispositif, Error>({
         path: `/dispositifs`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3445,9 +3588,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/dispositifs/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3462,9 +3605,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dispositifsDetail: (id: string, params: RequestParams = {}) =>
       this.request<Dispositif, Error>({
         path: `/dispositifs/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3476,14 +3619,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/dispositifs/{id}
      * @secure
      */
-    dispositifsUpdate: (id: string, data: NewDispositif, params: RequestParams = {}) =>
+    dispositifsUpdate: (
+      id: string,
+      data: NewDispositif,
+      params: RequestParams = {},
+    ) =>
       this.request<Dispositif, Error>({
         path: `/dispositifs/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3498,12 +3645,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     dispositifsDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/dispositifs/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   espaces = {
     /**
      * @description Get places related to current user
@@ -3516,9 +3663,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     myPlaces: (params: RequestParams = {}) =>
       this.request<Espace[], Error>({
         path: `/espaces/me`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3532,28 +3679,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     espacesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Espace[], Error>({
         path: `/espaces`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3568,11 +3715,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesCreate: (data: object, params: RequestParams = {}) =>
       this.request<Espace, Error>({
         path: `/espaces`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.FormData,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3586,28 +3733,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     countList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<{ count?: number }, Error>({
         path: `/espaces/count`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3619,13 +3766,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/espaces/{id}
      * @secure
      */
-    espacesDetail: (id: string, query?: { availableOnly?: boolean }, params: RequestParams = {}) =>
+    espacesDetail: (
+      id: string,
+      query?: { availableOnly?: boolean },
+      params: RequestParams = {},
+    ) =>
       this.request<Espace, Error>({
         path: `/espaces/${id}`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3640,11 +3791,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesUpdate: (id: string, data: object, params: RequestParams = {}) =>
       this.request<Espace, Error>({
         path: `/espaces/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3659,12 +3810,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     espacesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/espaces/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   faqCategories = {
     /**
      * No description
@@ -3676,28 +3827,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     faqCategoriesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<FaqCategory[], Error>({
         path: `/faq-categories`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3712,11 +3863,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqCategoriesCreate: (data: NewFaqCategory, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-categories`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3731,9 +3882,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-categories/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3748,9 +3899,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqCategoriesDetail: (id: string, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-categories/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3762,14 +3913,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/faq-categories/{id}
      * @secure
      */
-    faqCategoriesUpdate: (id: string, data: NewFaqCategory, params: RequestParams = {}) =>
+    faqCategoriesUpdate: (
+      id: string,
+      data: NewFaqCategory,
+      params: RequestParams = {},
+    ) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-categories/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3784,12 +3939,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqCategoriesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/faq-categories/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   faqQuestions = {
     /**
      * No description
@@ -3801,28 +3956,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     faqQuestionsList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-questions`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3837,11 +3992,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqQuestionsCreate: (data: NewFaqQuestion, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-questions`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3856,9 +4011,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-questions/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3873,9 +4028,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqQuestionsDetail: (id: string, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-questions/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3887,14 +4042,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/faq-questions/{id}
      * @secure
      */
-    faqQuestionsUpdate: (id: string, data: NewFaqQuestion, params: RequestParams = {}) =>
+    faqQuestionsUpdate: (
+      id: string,
+      data: NewFaqQuestion,
+      params: RequestParams = {},
+    ) =>
       this.request<{ foo?: string }, Error>({
         path: `/faq-questions/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3909,12 +4068,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     faqQuestionsDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/faq-questions/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   homeCarousel = {
     /**
      * @description Find all the home-carousel's records
@@ -3926,28 +4085,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     homeCarouselList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<HomeCarousel, Error>({
         path: `/home-carousel`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3962,11 +4121,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     homeCarouselUpdate: (data: NewHomeCarousel, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/home-carousel`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -3981,12 +4140,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     homeCarouselDelete: (params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/home-carousel`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   homeMessage = {
     /**
      * @description Find all the home-message's records
@@ -3998,28 +4157,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     getHomeMessage: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<HomeMessage, Error>({
         path: `/home-message`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4034,11 +4193,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     homeMessageUpdate: (data: NewHomeMessage, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/home-message`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4053,12 +4212,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     homeMessageDelete: (params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/home-message`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   conversation = {
     /**
      * No description
@@ -4071,9 +4230,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getConversation: (params: RequestParams = {}) =>
       this.request<UsersPermissionsUser[], Error>({
         path: `/conversation/me`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4088,31 +4247,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     conversationDetail: (
       id: string,
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Message[], Error>({
         path: `/conversation/${id}`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   notifications = {
     /**
      * @description Create a new record
@@ -4125,11 +4284,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     toggleNotif: (data: ReadNotif, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/notifications/toggle`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4144,13 +4303,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     myNotifications: (query?: { id?: string }, params: RequestParams = {}) =>
       this.request<NotifCount, Error>({
         path: `/notifications/me`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   messages = {
     /**
      * No description
@@ -4162,28 +4321,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     messagesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Message[], Error>({
         path: `/messages`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4198,11 +4357,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     messagesCreate: (data: NewMessage, params: RequestParams = {}) =>
       this.request<Message, Error>({
         path: `/messages`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4217,9 +4376,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/messages/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4234,9 +4393,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     messagesDetail: (id: string, params: RequestParams = {}) =>
       this.request<Message, Error>({
         path: `/messages/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4248,14 +4407,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/messages/{id}
      * @secure
      */
-    messagesUpdate: (id: string, data: NewMessage, params: RequestParams = {}) =>
+    messagesUpdate: (
+      id: string,
+      data: NewMessage,
+      params: RequestParams = {},
+    ) =>
       this.request<Message, Error>({
         path: `/messages/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4270,12 +4433,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     messagesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/messages/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   pages = {
     /**
      * No description
@@ -4287,28 +4450,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     pagesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<Page[], Error>({
         path: `/pages`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4323,11 +4486,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pagesCreate: (data: NewPage, params: RequestParams = {}) =>
       this.request<Page, Error>({
         path: `/pages`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4342,9 +4505,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     countList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/pages/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4359,9 +4522,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pagesDetail: (url: string, params: RequestParams = {}) =>
       this.request<Page, Error>({
         path: `/pages/${url}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4376,11 +4539,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pagesUpdate: (id: string, data: NewPage, params: RequestParams = {}) =>
       this.request<Page, Error>({
         path: `/pages/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4395,12 +4558,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     pagesDelete: (id: string, params: RequestParams = {}) =>
       this.request<number, Error>({
         path: `/pages/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   email = {
     /**
      * @description Send an email
@@ -4413,11 +4576,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     emailCreate: (data: { foo?: string }, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/email/`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4432,11 +4595,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     testCreate: (data: { foo?: string }, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/email/test`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4451,12 +4614,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     settingsList: (params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/email/settings`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   upload = {
     /**
      * @description Upload one or multiple files
@@ -4469,24 +4632,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     uploadCreate: (data: object, params: RequestParams = {}) =>
       this.request<
         {
-          name?: string;
-          hash?: string;
-          sha256?: string;
-          ext?: string;
-          mime?: string;
-          size?: number;
-          url?: string;
-          provider?: string;
-          related?: string[];
+          name?: string
+          hash?: string
+          sha256?: string
+          ext?: string
+          mime?: string
+          size?: number
+          url?: string
+          provider?: string
+          related?: string[]
         }[],
         Error
       >({
         path: `/upload/`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.FormData,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4501,9 +4664,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     filesCountList: (params: RequestParams = {}) =>
       this.request<{ count?: number }, Error>({
         path: `/upload/files/count`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4518,9 +4681,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     filesList: (params: RequestParams = {}) =>
       this.request<UploadFile[], Error>({
         path: `/upload/files`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4535,9 +4698,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     filesDetail: (id: string, params: RequestParams = {}) =>
       this.request<UploadFile, Error>({
         path: `/upload/files/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4552,9 +4715,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     filesDelete: (id: string, params: RequestParams = {}) =>
       this.request<UploadFile, Error>({
         path: `/upload/files/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4569,12 +4732,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     searchDetail: (id: string, params: RequestParams = {}) =>
       this.request<UploadFile[], Error>({
         path: `/upload/search/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   users = {
     /**
      * @description Update current user
@@ -4587,11 +4750,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     putUsers: (data: object, params: RequestParams = {}) =>
       this.request<UsersPermissionsUser, Error>({
         path: `/users/me`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4606,9 +4769,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getUsers: (params: RequestParams = {}) =>
       this.request<UsersPermissionsUser, Error>({
         path: `/users/me`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4620,14 +4783,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/users/check-password
      * @secure
      */
-    checkPasswordCreate: (data: { password?: string }, params: RequestParams = {}) =>
+    checkPasswordCreate: (
+      data: { password?: string },
+      params: RequestParams = {},
+    ) =>
       this.request<boolean, Error>({
         path: `/users/check-password`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4641,28 +4807,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     usersList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<UsersPermissionsUser[], Error>({
         path: `/users`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4677,9 +4843,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     usersDetail: (id: string, params: RequestParams = {}) =>
       this.request<UsersPermissionsUser, Error>({
         path: `/users/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4691,14 +4857,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/users/{id}
      * @secure
      */
-    usersUpdate: (id: string, data: NewUsersPermissionsUser, params: RequestParams = {}) =>
+    usersUpdate: (
+      id: string,
+      data: NewUsersPermissionsUser,
+      params: RequestParams = {},
+    ) =>
       this.request<UsersPermissionsUser, Error>({
         path: `/users/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4713,12 +4883,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     usersDelete: (id: string, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/users/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   usersPermissions = {
     /**
      * @description Retrieve a role depending on its id
@@ -4731,9 +4901,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     rolesDetail: (id: string, params: RequestParams = {}) =>
       this.request<UsersPermissionsRole, Error>({
         path: `/users-permissions/roles/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4747,28 +4917,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     rolesList: (
       query?: {
-        _limit?: number;
-        _sort?: string;
-        _start?: number;
-        "="?: string;
-        _ne?: string;
-        _lt?: string;
-        _lte?: string;
-        _gt?: string;
-        _gte?: string;
-        _contains?: string;
-        _containss?: string;
-        _in?: string[];
-        _nin?: string[];
+        _limit?: number
+        _sort?: string
+        _start?: number
+        '='?: string
+        _ne?: string
+        _lt?: string
+        _lte?: string
+        _gt?: string
+        _gte?: string
+        _contains?: string
+        _containss?: string
+        _in?: string[]
+        _nin?: string[]
       },
       params: RequestParams = {},
     ) =>
       this.request<UsersPermissionsRole[], Error>({
         path: `/users-permissions/roles`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4783,11 +4953,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     rolesCreate: (data: NewUsersPermissionsRole, params: RequestParams = {}) =>
       this.request<UsersPermissionsRole, Error>({
         path: `/users-permissions/roles`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4799,14 +4969,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/users-permissions/roles/{role}
      * @secure
      */
-    rolesUpdate: (role: string, data: NewUsersPermissionsRole, params: RequestParams = {}) =>
+    rolesUpdate: (
+      role: string,
+      data: NewUsersPermissionsRole,
+      params: RequestParams = {},
+    ) =>
       this.request<UsersPermissionsRole, Error>({
         path: `/users-permissions/roles/${role}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4821,9 +4995,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     rolesDelete: (role: string, params: RequestParams = {}) =>
       this.request<{ foo?: string }, Error>({
         path: `/users-permissions/roles/${role}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4839,12 +5013,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     searchDetail: (id: string, params: RequestParams = {}) =>
       this.request<UsersPermissionsUser[], Error>({
         path: `/users-permissions/search/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
   connect = {
     /**
      * @description Connect a provider
@@ -4858,11 +5032,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getConnect: (provider: string, params: RequestParams = {}) =>
       this.request<void, Error>({
         path: `/connect/*`,
-        method: "GET",
+        method: 'GET',
         secure: true,
         ...params,
       }),
-  };
+  }
   auth = {
     /**
      * @description Login a user using the identifiers email and password
@@ -4872,14 +5046,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/auth/local
      * @secure
      */
-    login: (data: { identifier: string; password: string }, params: RequestParams = {}) =>
+    login: (
+      data: { identifier: string; password: string },
+      params: RequestParams = {},
+    ) =>
       this.request<any, Error>({
         path: `/auth/local`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4891,14 +5068,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/auth/local/register
      * @secure
      */
-    signup: (data: { username: string; email: string; password: string }, params: RequestParams = {}) =>
+    signup: (
+      data: { username: string; email: string; password: string },
+      params: RequestParams = {},
+    ) =>
       this.request<any, Error>({
         path: `/auth/local/register`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4913,9 +5093,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     callbackDetail: (provider: string, params: RequestParams = {}) =>
       this.request<any, Error>({
         path: `/auth/${provider}/callback`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4928,10 +5108,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/auth/forgot-password
      * @secure
      */
-    forgotPassword: (data: { email?: string; url?: string }, params: RequestParams = {}) =>
+    forgotPassword: (
+      data: { email?: string; url?: string },
+      params: RequestParams = {},
+    ) =>
       this.request<void, Error>({
         path: `/auth/forgot-password`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -4952,11 +5135,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     ) =>
       this.request<any, Error>({
         path: `/auth/reset-password`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4968,13 +5151,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/auth/email-confirmation
      * @secure
      */
-    emailConfirmationList: (query?: { confirmation?: string }, params: RequestParams = {}) =>
+    emailConfirmationList: (
+      query?: { confirmation?: string },
+      params: RequestParams = {},
+    ) =>
       this.request<{ foo?: string }, Error>({
         path: `/auth/email-confirmation`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
+        format: 'json',
         ...params,
       }),
 
@@ -4986,15 +5172,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/auth/send-email-confirmation
      * @secure
      */
-    sendEmailConfirmationCreate: (data: { email: string }, params: RequestParams = {}) =>
+    sendEmailConfirmationCreate: (
+      data: { email: string },
+      params: RequestParams = {},
+    ) =>
       this.request<void, Error>({
         path: `/auth/send-email-confirmation`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
+        format: 'json',
         ...params,
       }),
-  };
+  }
 }

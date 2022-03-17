@@ -7,7 +7,23 @@ const max = require("date-fns/max");
  * to customize this controller
  */
 
+const params = [
+  "dispositif",
+  "dispositif.companies",
+  "dispositif.users_permissions_users",
+];
+
 module.exports = {
+  async find(ctx) {
+    const entities = ctx.query._q
+      ? await strapi.services.disponibility.search(ctx.query, params)
+      : await strapi.services.disponibility.find(ctx.query, params);
+
+    return entities.map((entity) =>
+      sanitizeEntity(entity, { model: strapi.models.disponibility })
+    );
+  },
+
   createMany: async (ctx) => {
     const user = ctx.state.user;
     if (!Array.isArray(ctx.request.body))

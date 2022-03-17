@@ -849,7 +849,13 @@
               "expiration": {
                 "type": "string"
               },
-              "users_permissions_users": {
+              "places": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companies": {
                 "type": "array",
                 "items": {
                   "type": "string"

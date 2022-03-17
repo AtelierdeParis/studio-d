@@ -16,10 +16,10 @@ const ScheduleDispositif = ({ control }: Props) => {
   const { data: user } = useCurrentUser()
   const { register } = useFormContext()
 
-  const dispositifs = useMemo(() => {
-    if (!user || !user.dispositifs) return []
+  const placeDispositifs = useMemo(() => {
+    if (!user || !user.placeDispositifs) return []
 
-    return user.dispositifs.filter(({ actif, expiration }) => {
+    return user.placeDispositifs.filter(({ actif, expiration }) => {
       let isExpired = false
 
       if (
@@ -33,14 +33,14 @@ const ScheduleDispositif = ({ control }: Props) => {
     })
   }, [user])
 
-  if (dispositifs.length === 0) return null
+  if (placeDispositifs.length === 0) return null
 
   return (
     <Flex w="100%">
       <FormField label={t('schedule.dispositif.label')}>
         <Select name="dispositif" ref={register}>
           <option value="">{t('schedule.dispositif.placeholder')}</option>
-          {dispositifs.map(({ id, name }) => (
+          {placeDispositifs.map(({ id, name }) => (
             <option key={id} value={id}>
               {name}
             </option>

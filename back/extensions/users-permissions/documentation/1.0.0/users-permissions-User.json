@@ -1476,7 +1476,7 @@
           "external_id": {
             "type": "integer"
           },
-          "dispositifs": {
+          "companyDispositifs": {
             "type": "array",
             "items": {
               "required": [
@@ -1502,7 +1502,60 @@
                 "expiration": {
                   "type": "string"
                 },
-                "users_permissions_users": {
+                "places": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companies": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "placeDispositifs": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "disponibilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "actif": {
+                  "type": "boolean"
+                },
+                "expiration": {
+                  "type": "string"
+                },
+                "places": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companies": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -1644,7 +1697,13 @@
           "external_id": {
             "type": "integer"
           },
-          "dispositifs": {
+          "companyDispositifs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "placeDispositifs": {
             "type": "array",
             "items": {
               "type": "string"
