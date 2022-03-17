@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "02/11/2022 2:46:55 PM"
+    "x-generation-date": "03/16/2022 3:10:11 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10172,7 +10172,13 @@
               "expiration": {
                 "type": "string"
               },
-              "users_permissions_users": {
+              "places": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companies": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -10414,7 +10420,7 @@
             "type": "string",
             "format": "date"
           },
-          "users_permissions_users": {
+          "places": {
             "type": "array",
             "items": {
               "required": [
@@ -10538,7 +10544,158 @@
                 "external_id": {
                   "type": "integer"
                 },
-                "dispositifs": {
+                "companyDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "placeDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "email",
+                "username",
+                "firstname",
+                "lastname",
+                "structureName",
+                "address",
+                "zipCode",
+                "city",
+                "country",
+                "siret",
+                "ape",
+                "phone",
+                "license",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "accepted": {
+                  "type": "boolean"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "structureName": {
+                  "type": "string"
+                },
+                "socialReason": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "siret": {
+                  "type": "string"
+                },
+                "ape": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "license": {
+                  "type": "string"
+                },
+                "website": {
+                  "type": "string"
+                },
+                "legalRepresentative": {
+                  "type": "string"
+                },
+                "statusRepresentative": {
+                  "type": "string"
+                },
+                "insuranceNumber": {
+                  "type": "string"
+                },
+                "insuranceName": {
+                  "type": "string"
+                },
+                "choreographer": {
+                  "type": "string"
+                },
+                "espaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
+                },
+                "external_id": {
+                  "type": "integer"
+                },
+                "companyDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "placeDispositifs": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -10577,7 +10734,13 @@
             "type": "string",
             "format": "date"
           },
-          "users_permissions_users": {
+          "places": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "companies": {
             "type": "array",
             "items": {
               "type": "string"
@@ -11538,7 +11701,13 @@
                 "external_id": {
                   "type": "integer"
                 },
-                "dispositifs": {
+                "companyDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "placeDispositifs": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -11746,7 +11915,13 @@
               "$ref": "#/components/schemas/Booking"
             }
           },
-          "dispositifs": {
+          "placeDispositifs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dispositif"
+            }
+          },
+          "companyDispositifs": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dispositif"
