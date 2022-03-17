@@ -67,11 +67,12 @@ module.exports = {
         }));
       });
 
+    const userId = ctx.state.user ? ctx.state.user.id : undefined;
     places = places.map((place) => {
       place.disponibilities =
         strapi.services.espace.filterDisponibilitiesOnDispositif(
           place.disponibilities,
-          ctx.state.user?.id
+          userId
         );
 
       return place;
@@ -143,7 +144,7 @@ module.exports = {
       });
 
     // Filter on dispositifs
-    const userId = ctx.state.user?.id;
+    const userId = ctx.state.user ? ctx.state.user.id : undefined;
     if (userId !== espace.users_permissions_user.id) {
       espace.disponibilities =
         strapi.services.espace.filterDisponibilitiesOnDispositif(
