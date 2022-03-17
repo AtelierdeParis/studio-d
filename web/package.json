@@ -55,7 +55,7 @@
     "rehype-raw": "^5.1.0",
     "remark-gfm": "^1.0.0",
     "remove-markdown": "^0.3.0",
-    "swagger-typescript-api": "^9.3.1",
+    "swagger-typescript-api": "^7.0.1",
     "swiper": "^6.5.3",
     "tsconfig-paths": "^3.9.0",
     "yup": "^0.32.9"
