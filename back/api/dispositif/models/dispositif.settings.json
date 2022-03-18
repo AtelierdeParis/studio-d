@@ -26,10 +26,16 @@
     "expiration": {
       "type": "date"
     },
-    "users_permissions_users": {
+    "places": {
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "dispositifs",
+      "via": "placeDispositifs",
+      "dominant": true
+    },
+    "companies": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "companyDispositifs",
       "dominant": true
     }
   }

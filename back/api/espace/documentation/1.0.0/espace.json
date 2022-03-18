@@ -902,7 +902,13 @@
               "external_id": {
                 "type": "integer"
               },
-              "dispositifs": {
+              "companyDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "placeDispositifs": {
                 "type": "array",
                 "items": {
                   "type": "string"

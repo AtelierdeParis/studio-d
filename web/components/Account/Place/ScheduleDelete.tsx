@@ -141,6 +141,9 @@ const ScheduleDelete = () => {
                           : t(`schedule.type.${dispo.type}`)
                       })`}
                     </Text>
+                    {dispo.dispositif && (
+                      <Text pl={1.5}>{`- ${dispo.dispositif.name}`}</Text>
+                    )}
                   </Flex>
                 </Flex>
               </Box>

@@ -227,7 +227,8 @@ export interface Disponibility {
     disponibilities?: string[];
     actif?: boolean;
     expiration?: string;
-    users_permissions_users?: string[];
+    places?: string[];
+    companies?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -303,7 +304,7 @@ export interface Dispositif {
 
   /** @format date */
   expiration?: string;
-  users_permissions_users?: {
+  places?: {
     id: string;
     email: string;
     provider?: string;
@@ -336,7 +337,46 @@ export interface Dispositif {
     espaces?: string[];
     type: "company" | "place";
     external_id?: number;
-    dispositifs?: string[];
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
+    created_by?: string;
+    updated_by?: string;
+  }[];
+  companies?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -349,7 +389,8 @@ export interface NewDispositif {
 
   /** @format date */
   expiration?: string;
-  users_permissions_users?: string[];
+  places?: string[];
+  companies?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -637,7 +678,8 @@ export interface UsersPermissionsRole {
     espaces?: string[];
     type: "company" | "place";
     external_id?: number;
-    dispositifs?: string[];
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -693,7 +735,8 @@ export interface UsersPermissionsUser {
   type: "company" | "place";
   external_id?: string;
   bookings?: Booking[];
-  dispositifs?: Dispositif[];
+  placeDispositifs?: Dispositif[];
+  companyDispositifs?: Dispositif[];
 }
 
 export interface NewUsersPermissionsUser {

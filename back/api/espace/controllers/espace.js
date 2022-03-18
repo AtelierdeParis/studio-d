@@ -13,6 +13,7 @@ const populate = [
   "disponibilities",
   "disponibilities.booking",
   "disponibilities.booking.company",
+  "disponibilities.dispositif.companies",
   "images",
   "files",
   "users_permissions_user",
@@ -46,11 +47,14 @@ module.exports = {
       }
     }
 
-    const places = await strapi.services.espace
-      .find({
-        ...query,
-        ...(_sort && !isSortOnDisponibility ? { _sort } : {}),
-      })
+    let places = await strapi.services.espace
+      .find(
+        {
+          ...query,
+          ...(_sort && !isSortOnDisponibility ? { _sort } : {}),
+        },
+        populate
+      )
       .then((res) => {
         return res.map((place) => ({
           ...place,
@@ -62,6 +66,17 @@ module.exports = {
           ),
         }));
       });
+
+    const userId = ctx.state.user ? ctx.state.user.id : undefined;
+    places = places.map((place) => {
+      place.disponibilities =
+        strapi.services.espace.filterDisponibilitiesOnDispositif(
+          place.disponibilities,
+          userId
+        );
+
+      return place;
+    });
 
     if (isSortOnDisponibility) {
       if (_sort === "nbDispoDesc") {
@@ -114,7 +129,7 @@ module.exports = {
     const { id } = ctx.params;
     const { availableOnly } = ctx.query;
 
-    const entity = await strapi.services.espace
+    const espace = await strapi.services.espace
       .findOne({ slug: id }, populate)
       .then((res) => {
         if (availableOnly) {
@@ -127,6 +142,17 @@ module.exports = {
         }
         return res;
       });
-    return sanitizeEntity(entity, { model: strapi.models.espace });
+
+    // Filter on dispositifs
+    const userId = ctx.state.user ? ctx.state.user.id : undefined;
+    if (userId !== espace.users_permissions_user.id) {
+      espace.disponibilities =
+        strapi.services.espace.filterDisponibilitiesOnDispositif(
+          espace.disponibilities,
+          userId
+        );
+    }
+
+    return sanitizeEntity(espace, { model: strapi.models.espace });
   },
 };

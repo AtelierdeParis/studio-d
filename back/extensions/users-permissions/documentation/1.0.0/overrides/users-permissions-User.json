@@ -360,9 +360,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "_limit",
@@ -550,9 +548,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": []
       }
     },
@@ -603,9 +599,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -665,9 +659,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -742,9 +734,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "UsersPermissions - User"
-        ],
+        "tags": ["UsersPermissions - User"],
         "parameters": [
           {
             "name": "id",
@@ -789,10 +779,7 @@
             "type": "string"
           },
           "role": {
-            "required": [
-              "id",
-              "name"
-            ],
+            "required": ["id", "name"],
             "properties": {
               "id": {
                 "type": "string"
@@ -904,10 +891,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "company",
-              "place"
-            ]
+            "enum": ["company", "place"]
           },
           "external_id": {
             "type": "string"
@@ -918,7 +902,13 @@
               "$ref": "#/components/schemas/Booking"
             }
           },
-          "dispositifs": {
+          "placeDispositifs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Dispositif"
+            }
+          },
+          "companyDispositifs": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dispositif"
@@ -1036,10 +1026,7 @@
           },
           "type": {
             "type": "string",
-            "enum": [
-              "company",
-              "place"
-            ]
+            "enum": ["company", "place"]
           },
           "created_by": {
             "type": "string"

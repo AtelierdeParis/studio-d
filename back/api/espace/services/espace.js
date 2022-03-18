@@ -1,4 +1,5 @@
 "use strict";
+const isFuture = require("date-fns/isFuture");
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-services)
@@ -6,6 +7,22 @@
  */
 
 module.exports = {
+  filterDisponibilitiesOnDispositif(disponibilities, userId = null) {
+    return disponibilities
+      ?.filter((disponibility) => {
+        if (disponibility.dispositif?.companies.length) {
+          return disponibility.dispositif.companies.find(
+            (company) => userId === company.id
+          );
+        }
+
+        return true;
+      })
+      .map((disponibility) => {
+        const { dispositif, ...rest } = disponibility;
+        return rest;
+      });
+  },
   async getPlacesInPerimeter(perimeter, cityName) {
     const city = await strapi.query("city").findOne(
       {

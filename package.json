@@ -19,5 +19,8 @@
     "lint": "yarn workspaces run lint",
     "start:all": "yarn run-p dev:*",
     "get-types": "cd web && yarn get-types"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

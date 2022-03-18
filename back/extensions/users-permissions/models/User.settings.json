@@ -144,8 +144,12 @@
     "external_id": {
       "type": "integer"
     },
-    "dispositifs": {
-      "via": "users_permissions_users",
+    "companyDispositifs": {
+      "via": "companies",
+      "collection": "dispositif"
+    },
+    "placeDispositifs": {
+      "via": "places",
       "collection": "dispositif"
     }
   }
