@@ -11,13 +11,6 @@ module.exports = {
     return disponibilities
       ?.filter((disponibility) => {
         if (disponibility.dispositif?.companies.length) {
-          if (
-            !isFuture(new Date(disponibility.dispositif?.expiration)) ||
-            !disponibility.dispositif?.actif
-          ) {
-            return false;
-          }
-
           return disponibility.dispositif.companies.find(
             (company) => userId === company.id
           );
