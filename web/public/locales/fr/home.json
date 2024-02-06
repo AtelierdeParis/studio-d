@@ -21,8 +21,6 @@
     "campaign": {
       "tag": "Ouvert jusqu'au {{date}}",
       "title": "Dispositif {{title}} ",
-      "helper_title": "Le dispositif {{title}} ",
-      "helper": "est porté par une vingtaine de lieux partenaires. Reservé aux compagnie émergentes (5 créations max), l'appel à projet ouvre à candidature des résidences de 5 jours avec prise en charge technique si besoin et selon les espaces.",
       "cta": "Parcourir tous les espaces partenaires du dispositif {{title}}"
     },
     "show": "Découvrir"

@@ -65,14 +65,10 @@ const HomePlaces = ({ campaign }: Props) => {
         marginBottom={4}
       >
         <Text flex={4}>
-          <Text as="span" fontWeight="bold">
-            {campaign
-              ? t('places.campaign.helper_title', { title: campaign?.title })
-              : t('places.solidarity.helper_title')}
+          <Text as="span" fontWeight="bold" marginRight={1}>
+            {campaign ? campaign?.title : t('places.solidarity.helper_title')}
           </Text>
-          {campaign
-            ? t('places.campaign.helper')
-            : t('places.solidarity.helper')}
+          {campaign ? campaign.description : t('places.solidarity.helper')}
         </Text>
         <Flex flex={1} justifyContent="flex-end">
           <Button variant={campaign ? 'campaign' : 'blueFill'}>

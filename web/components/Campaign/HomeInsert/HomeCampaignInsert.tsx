@@ -30,7 +30,7 @@ const HomeCampaignInsert = ({
       <VStack alignItems="flex-start" spacing={4}>
         <Tag variant="campaign">{t('campaign.tag', { title })}</Tag>
         <Stack
-          paddingX={4}
+          paddingLeft={4}
           alignItems="flex-start"
           width="100%"
           direction={{ base: 'column', md: 'row' }}
