@@ -67,8 +67,7 @@ const Header = ({ colorMode }: Props) => {
             }}
           />
         </Link>
-
-        <Debug />
+        {process.env.NODE_ENV === 'development' && <Debug />}
         <HStack
           spacing={{ base: 0, md: 6 }}
           whiteSpace="nowrap"
