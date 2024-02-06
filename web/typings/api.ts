@@ -51,6 +51,79 @@ export interface NewActuality {
   updated_by?: string;
 }
 
+export interface Application {
+  id: string;
+  users_permissions_user?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
+    applications?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
+  disponibility?: {
+    id: string;
+    when?: "morning" | "afternoon" | "full";
+    start: string;
+    end: string;
+    espace?: string;
+    type: "punctual" | "day" | "period";
+    status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
+    booking?: string;
+    dispositif?: string;
+    message?: string;
+    campaign?: string;
+    applications?: string[];
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+
+  /** @format date-time */
+  published_at?: string;
+}
+
+export interface NewApplication {
+  users_permissions_user?: string;
+  disponibility?: string;
+
+  /** @format date-time */
+  published_at?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
 export interface Booking {
   id: string;
   status?:
@@ -84,6 +157,83 @@ export interface NewBooking {
   espace?: string;
   place?: string;
   company?: string;
+  created_by?: string;
+  updated_by?: string;
+}
+
+export interface Campaign {
+  id: string;
+  duration: number;
+
+  /** @format date */
+  disponibility_start: string;
+
+  /** @format date */
+  disponibility_end: string;
+
+  /** @format date */
+  application_start: string;
+
+  /** @format date */
+  application_end: string;
+
+  /** @format date */
+  preselection_start: string;
+
+  /** @format date */
+  preselection_end: string;
+  reminder_days?: number;
+  disponibilities?: {
+    id: string;
+    when?: "morning" | "afternoon" | "full";
+    start: string;
+    end: string;
+    espace?: string;
+    type: "punctual" | "day" | "period";
+    status: "available" | "booked" | "pending" | "past" | "canceled" | "removed";
+    booking?: string;
+    dispositif?: string;
+    message?: string;
+    campaign?: string;
+    applications?: string[];
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+  title?: string;
+  description?: string;
+
+  /** @format date-time */
+  published_at?: string;
+}
+
+export interface NewCampaign {
+  duration: number;
+
+  /** @format date */
+  disponibility_start: string;
+
+  /** @format date */
+  disponibility_end: string;
+
+  /** @format date */
+  application_start: string;
+
+  /** @format date */
+  application_end: string;
+
+  /** @format date */
+  preselection_start: string;
+
+  /** @format date */
+  preselection_end: string;
+  reminder_days?: number;
+  disponibilities?: string[];
+  title?: string;
+  description?: string;
+
+  /** @format date-time */
+  published_at?: string;
   created_by?: string;
   updated_by?: string;
 }
@@ -256,6 +406,31 @@ export interface Disponibility {
     created_by?: string;
     updated_by?: string;
   };
+  campaign?: {
+    id: string;
+    duration: number;
+    disponibility_start: string;
+    disponibility_end: string;
+    application_start: string;
+    application_end: string;
+    preselection_start: string;
+    preselection_end: string;
+    reminder_days?: number;
+    disponibilities?: string[];
+    title?: string;
+    description?: string;
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+  applications?: {
+    id: string;
+    users_permissions_user?: string;
+    disponibility?: string;
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
 
   /** @format date-time */
   published_at?: string;
@@ -275,6 +450,8 @@ export interface NewDisponibility {
   booking?: string;
   dispositif?: string;
   message?: string;
+  campaign?: string;
+  applications?: string[];
 
   /** @format date-time */
   published_at?: string;
@@ -296,6 +473,8 @@ export interface Dispositif {
     booking?: string;
     dispositif?: string;
     message?: string;
+    campaign?: string;
+    applications?: string[];
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -339,6 +518,7 @@ export interface Dispositif {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
+    applications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -377,6 +557,7 @@ export interface Dispositif {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
+    applications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -680,6 +861,7 @@ export interface UsersPermissionsRole {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
+    applications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -882,6 +1064,107 @@ export namespace Actualities {
   }
 }
 
+export namespace Applications {
+  /**
+   * No description
+   * @tags Application
+   * @name ApplicationsList
+   * @request GET:/applications
+   * @secure
+   */
+  export namespace ApplicationsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Application
+   * @name ApplicationsCreate
+   * @request POST:/applications
+   * @secure
+   */
+  export namespace ApplicationsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewApplication;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application;
+  }
+  /**
+   * No description
+   * @tags Application
+   * @name CountList
+   * @request GET:/applications/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Application
+   * @name ApplicationsDetail
+   * @request GET:/applications/{id}
+   * @secure
+   */
+  export namespace ApplicationsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application;
+  }
+  /**
+   * @description Update a record
+   * @tags Application
+   * @name ApplicationsUpdate
+   * @request PUT:/applications/{id}
+   * @secure
+   */
+  export namespace ApplicationsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewApplication;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application;
+  }
+  /**
+   * @description Delete a record
+   * @tags Application
+   * @name ApplicationsDelete
+   * @request DELETE:/applications/{id}
+   * @secure
+   */
+  export namespace ApplicationsDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
+  }
+}
+
 export namespace Bookings {
   /**
    * @description Get bookings related to current user
@@ -1008,6 +1291,107 @@ export namespace Bookings {
     export type RequestBody = { dispos?: string[] };
     export type RequestHeaders = {};
     export type ResponseBody = { foo?: string };
+  }
+}
+
+export namespace Campaigns {
+  /**
+   * No description
+   * @tags Campaign
+   * @name CampaignsList
+   * @request GET:/campaigns
+   * @secure
+   */
+  export namespace CampaignsList {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Campaign[];
+  }
+  /**
+   * @description Create a new record
+   * @tags Campaign
+   * @name CampaignsCreate
+   * @request POST:/campaigns
+   * @secure
+   */
+  export namespace CampaignsCreate {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = NewCampaign;
+    export type RequestHeaders = {};
+    export type ResponseBody = Campaign;
+  }
+  /**
+   * No description
+   * @tags Campaign
+   * @name CountList
+   * @request GET:/campaigns/count
+   * @secure
+   */
+  export namespace CountList {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = { count?: number };
+  }
+  /**
+   * No description
+   * @tags Campaign
+   * @name CampaignsDetail
+   * @request GET:/campaigns/{id}
+   * @secure
+   */
+  export namespace CampaignsDetail {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Campaign;
+  }
+  /**
+   * @description Update a record
+   * @tags Campaign
+   * @name CampaignsUpdate
+   * @request PUT:/campaigns/{id}
+   * @secure
+   */
+  export namespace CampaignsUpdate {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = NewCampaign;
+    export type RequestHeaders = {};
+    export type ResponseBody = Campaign;
+  }
+  /**
+   * @description Delete a record
+   * @tags Campaign
+   * @name CampaignsDelete
+   * @request DELETE:/campaigns/{id}
+   * @secure
+   */
+  export namespace CampaignsDelete {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = number;
   }
 }
 
@@ -2866,6 +3250,131 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
+  applications = {
+    /**
+     * No description
+     *
+     * @tags Application
+     * @name ApplicationsList
+     * @request GET:/applications
+     * @secure
+     */
+    applicationsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Application[], Error>({
+        path: `/applications`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Application
+     * @name ApplicationsCreate
+     * @request POST:/applications
+     * @secure
+     */
+    applicationsCreate: (data: NewApplication, params: RequestParams = {}) =>
+      this.request<Application, Error>({
+        path: `/applications`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Application
+     * @name CountList
+     * @request GET:/applications/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/applications/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Application
+     * @name ApplicationsDetail
+     * @request GET:/applications/{id}
+     * @secure
+     */
+    applicationsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Application, Error>({
+        path: `/applications/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Application
+     * @name ApplicationsUpdate
+     * @request PUT:/applications/{id}
+     * @secure
+     */
+    applicationsUpdate: (id: string, data: NewApplication, params: RequestParams = {}) =>
+      this.request<Application, Error>({
+        path: `/applications/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Application
+     * @name ApplicationsDelete
+     * @request DELETE:/applications/{id}
+     * @secure
+     */
+    applicationsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/applications/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   bookings = {
     /**
      * @description Get bookings related to current user
@@ -3023,6 +3532,131 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+  };
+  campaigns = {
+    /**
+     * No description
+     *
+     * @tags Campaign
+     * @name CampaignsList
+     * @request GET:/campaigns
+     * @secure
+     */
+    campaignsList: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Campaign[], Error>({
+        path: `/campaigns`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Campaign
+     * @name CampaignsCreate
+     * @request POST:/campaigns
+     * @secure
+     */
+    campaignsCreate: (data: NewCampaign, params: RequestParams = {}) =>
+      this.request<Campaign, Error>({
+        path: `/campaigns`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Campaign
+     * @name CountList
+     * @request GET:/campaigns/count
+     * @secure
+     */
+    countList: (params: RequestParams = {}) =>
+      this.request<{ count?: number }, Error>({
+        path: `/campaigns/count`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Campaign
+     * @name CampaignsDetail
+     * @request GET:/campaigns/{id}
+     * @secure
+     */
+    campaignsDetail: (id: string, params: RequestParams = {}) =>
+      this.request<Campaign, Error>({
+        path: `/campaigns/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Update a record
+     *
+     * @tags Campaign
+     * @name CampaignsUpdate
+     * @request PUT:/campaigns/{id}
+     * @secure
+     */
+    campaignsUpdate: (id: string, data: NewCampaign, params: RequestParams = {}) =>
+      this.request<Campaign, Error>({
+        path: `/campaigns/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Delete a record
+     *
+     * @tags Campaign
+     * @name CampaignsDelete
+     * @request DELETE:/campaigns/{id}
+     * @secure
+     */
+    campaignsDelete: (id: string, params: RequestParams = {}) =>
+      this.request<number, Error>({
+        path: `/campaigns/${id}`,
+        method: "DELETE",
+        secure: true,
         format: "json",
         ...params,
       }),

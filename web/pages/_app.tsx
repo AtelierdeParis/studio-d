@@ -17,6 +17,7 @@ import '../styles/globals.css'
 import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
+import CampaignProvider from '~components/Campaign/CampaignProvider'
 
 let ErrorBoundary: BugsnagErrorBoundary
 
@@ -64,9 +65,11 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Provider session={pageProps.session}>
         <QueryClientProvider client={client}>
           <ChakraProvider theme={theme}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <CampaignProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </CampaignProvider>
           </ChakraProvider>
         </QueryClientProvider>
       </Provider>

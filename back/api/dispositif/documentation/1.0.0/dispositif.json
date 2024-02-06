@@ -585,6 +585,15 @@
                 "message": {
                   "type": "string"
                 },
+                "campaign": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -741,6 +750,12 @@
                     "type": "string"
                   }
                 },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -881,6 +896,12 @@
                   }
                 },
                 "placeDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "applications": {
                   "type": "array",
                   "items": {
                     "type": "string"

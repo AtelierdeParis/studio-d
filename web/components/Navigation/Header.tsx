@@ -1,5 +1,15 @@
 import React from 'react'
-import { Container, Image, HStack, Text, Divider, Flex } from '@chakra-ui/react'
+import {
+  Container,
+  Image,
+  HStack,
+  Divider,
+  Flex,
+  MenuButton,
+  Menu,
+  MenuList,
+  Portal,
+} from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import AuthMenu from '~components/AuthMenu'
@@ -10,36 +20,22 @@ import {
   ROUTE_ACTU,
   ROUTE_FAQ,
 } from '~constants'
-import { useRouter } from 'next/router'
 
-const MenuItem = ({ href, text }) => {
-  const router = useRouter()
-  return (
-    <Link
-      href={href}
-      lineHeight="1.2"
-      borderBottom="1px solid"
-      borderBottomColor={
-        router.pathname === href ? 'orange.500' : 'transparent'
-      }
-      display={{
-        base: 'none',
-        lg: 'block',
-      }}
-      _hover={{
-        borderColor: 'orange.500',
-      }}
-    >
-      <Text>{text}</Text>
-    </Link>
-  )
-}
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import {
+  DropdownNavButton,
+  NavButton,
+} from '~components/Navigation/NavigationButtons'
+import Debug from '~components/Navigation/Debug'
+
 interface Props {
   colorMode: 'white' | 'black'
 }
 
 const Header = ({ colorMode }: Props) => {
   const { t } = useTranslation('common')
+  const { currentCampaign } = useCampaignContext()
+
   return (
     <Container
       pos={colorMode === 'white' ? 'absolute' : 'static'}
@@ -71,13 +67,32 @@ const Header = ({ colorMode }: Props) => {
             }}
           />
         </Link>
+
+        <Debug />
         <HStack
           spacing={{ base: 0, md: 6 }}
           whiteSpace="nowrap"
           color={colorMode}
           alignItems="center"
         >
-          <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
+          {currentCampaign?.mode === 'applications' ? (
+            <Menu>
+              <MenuButton>{t('nav.places')}</MenuButton>
+              <Portal>
+                <MenuList rootProps={{ zIndex: 100 }}>
+                  <DropdownNavButton href={ROUTE_PLACES}>
+                    {t('nav.places_regular')}
+                  </DropdownNavButton>
+                  <DropdownNavButton href={ROUTE_PLACES}>
+                    {t('nav.places_emergence')}
+                  </DropdownNavButton>
+                </MenuList>
+              </Portal>
+            </Menu>
+          ) : (
+            <NavButton href={ROUTE_PLACES} text={t('nav.places')} />
+          )}
+
           <Divider
             orientation="vertical"
             opacity={0.6}
@@ -87,10 +102,10 @@ const Header = ({ colorMode }: Props) => {
               lg: 'block',
             }}
           />
-          <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
-          <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
-          <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
-          <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
+          <NavButton href={ROUTE_PROJECT} text={t('nav.project')} />
+          <NavButton href={ROUTE_ACTU} text={t('nav.news')} />
+          <NavButton href={ROUTE_FAQ} text={t('nav.faq')} />
+          <NavButton href={ROUTE_CONTACT} text={t('nav.contact')} />
           <Divider
             orientation="vertical"
             opacity={0.6}

@@ -1569,6 +1569,34 @@
                 }
               }
             }
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "users_permissions_user": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1704,6 +1732,12 @@
             }
           },
           "placeDispositifs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "applications": {
             "type": "array",
             "items": {
               "type": "string"

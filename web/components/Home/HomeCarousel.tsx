@@ -1,11 +1,13 @@
 import React from 'react'
-import { Flex, Heading, Box } from '@chakra-ui/react'
+import { Flex, Heading, Box, Stack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useHomeCarousel } from '~hooks/useHomeCarousel'
 import Image from '~components/Image'
 import SwiperCore, { Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import HomeSearch from '~components/Home/HomeSearch'
+import HomeCampaignInsert from '~components/Campaign/HomeInsert/HomeCampaignInsert'
+import HomeActions from '~components/Home/HomeActions'
 
 SwiperCore.use([Autoplay])
 
@@ -65,7 +67,9 @@ const HomeCarousel = () => {
           {t('title')}
         </Heading>
       </Box>
-      <HomeSearch />
+
+      <HomeActions />
+
       <Box
         background="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%)"
         pos="absolute"

@@ -1,22 +1,52 @@
 {
-    "title": "Plateforme solidaire de mise\nà disposition de studios de danse",
-    "search": {
-        "where": {
-            "label": "Où cherchez-vous ?",
-            "placeholder": "Renseignez une ville..."
-        },
-        "when": {
-            "label": "Sur quelle période ?",
-            "placeholder": "Cliquer pour choisir des dates"
-        },
-        "btn": "Rechercher"
+  "title": "Plateforme solidaire de mise\nà disposition de studios de danse",
+  "search": {
+    "where": {
+      "label": "Où cherchez-vous ?",
+      "placeholder": "Renseignez une ville..."
     },
-    "places": {
-        "title": "Prochains créneaux disponibles",
-        "btn": "Parcourir tous les espaces"
+    "when": {
+      "label": "Sur quelle période ?",
+      "placeholder": "Cliquer pour choisir des dates"
     },
-    "news": {
-        "title": "Les actus de la communauté",
-        "btn": "Toutes les actus"
+    "btn": "Rechercher"
+  },
+  "places": {
+    "title": "Prochains créneaux disponibles",
+    "btn": "Parcourir tous les espaces",
+    "solidarity": {
+      "helper_title": "Les créneaux solidaires ",
+      "helper": " sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D"
+    },
+    "campaign": {
+      "tag": "Ouvert jusqu'au {{date}}",
+      "title": "Dispositif {{title}} ",
+      "helper_title": "Le dispositif {{title}} ",
+      "helper": "est porté par une vingtaine de lieux partenaires. Reservé aux compagnie émergentes (5 créations max), l'appel à projet ouvre à candidature des résidences de 5 jours avec prise en charge technique si besoin et selon les espaces.",
+      "cta": "Parcourir tous les espaces partenaires du dispositif {{title}}"
+    },
+    "show": "Découvrir"
+  },
+  "news": {
+    "title": "Les actus de la communauté",
+    "btn": "Toutes les actus"
+  },
+  "campaign": {
+    "tag": "Dispositif {{title}}",
+    "insert": {
+      "disponibilities": {
+        "title": "Inscrivez vos espaces !",
+        "subtitle": "La période d'inscription de vos espaces se clôture le {{date}}.",
+        "cta": "Mes espaces"
+      },
+      "applications": {
+        "title": "Les créneaux Émergence sont ouverts !",
+        "subtitle": "Candidatez avant le le {{date}}.",
+        "cta": "Parcourir"
+      }
     }
+  },
+  "solidarity": {
+    "tag": "Créneaux solidaires"
+  }
 }

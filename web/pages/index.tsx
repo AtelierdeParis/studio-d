@@ -9,9 +9,11 @@ import HomePlaces from '~components/Home/HomePlaces'
 import HomeActus from '~components/Home/HomeActus'
 import HomeMessage from '~components/Home/HomeMessage'
 import { useSession } from 'next-auth/client'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const Home: NextPage = () => {
   const [session, loading] = useSession()
+  const { currentCampaign } = useCampaignContext()
   return (
     <Box>
       <HomeCarousel />
@@ -19,6 +21,9 @@ const Home: NextPage = () => {
       <Container pb={{ base: 0, md: 20 }} pt={{ base: 5, md: 26 }}>
         <VStack alignItems="flex-start" w="100%" spacing={{ base: 6, md: 22 }}>
           {!loading && !session && <PlaceOrCompany />}
+          {currentCampaign?.mode === 'applications' && (
+            <HomePlaces campaign={currentCampaign} />
+          )}
           <HomePlaces />
           <HomeActus />
         </VStack>
