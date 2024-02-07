@@ -1,113 +1,126 @@
 {
-    "title": "Inscription",
-    "step": "Étape {{step}} sur 3",
-    "compagnie": "• Compagnie",
-    "lieu": "• Lieu",
-    "about": {
-        "compagnie" : {
-            "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (les lieux contributeurs) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles (vous) ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
-            "free": {
-                "title": "Gratuité du service",
-                "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits."
-            },
-            "reservation": {
-                "title": "Réservation des espaces",
-                "text": "StudioD vous permet de réserver des espaces de répétition sur des créneaux plus ou moins longs (d’une demi-journée à plusieurs jours) en fonction des disponibilités des lieux. Chaque demande de réservation vousengage et bloque le créneau sélectionné pour toute autre compagnie. Aussi vous ne pourrez pas faire de demande sur un même créneau auprès de plusieurs espaces."
-            },
-            "message": {
-                "title": "Échanges avec les lieux",
-                "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les espaces et suivre de près toutes vos réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux compagnies comme aux lieux de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
-            },
-            "confidentiality": {
-                "title": "Confidentialité",
-                "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations que vous y renseignerez seront réservées à la stricte confidentialité des lieux auprès de qui vous effectuerez des réservations, et de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Vos données ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
-            },
-            "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté!"
-        },
-        "lieu" : {
-            "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (vous) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
-            "free": {
-                "title": "Gratuité du service",
-                "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits. Aucune compensation financière se saurait être demandée à une compagnie pour une réservation d’espace effectuée via StudioD."
-            },
-            "reservation": {
-                "title": "Réservation des espaces",
-                "text": "StudioD vous permet de gérer et d’optimiser l’occupation de vos espaces. En tant que lieu contributeur, vous vous engagez à renseigner régulièrement vos créneaux disponibles sur les calendriers de chacun de vos espaces. Pour simplifier considérablement votre gestion des demandes de réservations, vous ne recevrez qu’une demande à la fois surchaque créneau."
-            },
-            "message": {
-                "title": "Échanges avec les compagnies",
-                "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les compagnies et suivre de près toutes leurs réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux lieux comme aux compagnies de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
-            },
-            "confidentiality": {
-                "title": "Confidentialité",
-                "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations qui concernent vos espaces seront accessibles aux utilisateur·rice·s. Vos données personnelles seront réservées à la stricte confidentialité de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Elles ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
-            },
-            "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté !"
-        },
-        "btn": "Poursuivre"
+  "title": "Inscription",
+  "step": "Étape {{step}} sur 3",
+  "compagnie": "• Compagnie",
+  "lieu": "• Lieu",
+  "about": {
+    "tabs": {
+      "platform": "La plateforme",
+      "solidarity": "Créneaux solidaires",
+      "projects": "Appels à projets et résidences"
     },
-    "form": {
-        "firstname": "Prénom",
-        "lastname": "Nom",
-        "email": {
-            "label": "Adresse email",
-            "placeholder": "contact@example.fr",
-            "info": "Cette adresse sera utilisée comme identifiant de connexion"
-        },
-        "password": {
-            "label": "Mot de passe",
-            "placeholder": "Saisir un mot de passe",
-            "info": "Choisissez un mot de passe de minimum 10 caractères"
-        },
-        "structure": "Nom de la structure",
-        "socialReason": {
-            "label": "Raison sociale",
-            "info": "Si différente du nom d’usage de la structure. Sinon, laissez vide."
-        },
-        "street": "Numéro et rue",
-        "zipCode": "Code postal",
-        "city": "Ville",
-        "address": "Adresse",
-        "country": {
-            "label": "Pays",
-            "info": "Le service n’est actuellement disponible qu’en France"
-        },
-        "compagnieInfo": "Informations sur la compagnie",
-        "lieuInfo": "Informations sur le lieu",
-        "siret": "Numéro de Siret",
-        "ape": "Code APE",
-        "referent": "Numéro de téléphone du contact référent",
-        "license":{
-            "label": "Licence(s) d'entrepreneur du spectacle",
-            "info": "Si vous disposez de plusieurs numéros de license, séparez-les par une virgule."
-        },
-        "website": "Lien vers votre site web",
-        "legalRepresentative": "Nom du· de la représentant·e légal·e",
-        "qualityRepresentative": "Qualité du·de la représentant·e légal·e",
-        "choreographer": "Nom du·de la chorégraphe",
-        "insuranceName": "Nom de la police d’assurance",
-        "insuranceNumber": "Numéro de la police d’assurance",
-        "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.",
-        "condition2": "Après inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
-        "btn": "Poursuivre",
-        "error": {
-            "default": "Impossible de procéder à l'inscription"
-        }
+    "compagnie": {
+      "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (les lieux contributeurs) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles (vous) ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+      "free": {
+        "title": "Gratuité du service",
+        "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits."
+      },
+      "reservation": {
+        "title": "Réservation des espaces",
+        "text": "StudioD vous permet de réserver des espaces de répétition sur des créneaux plus ou moins longs (d’une demi-journée à plusieurs jours) en fonction des disponibilités des lieux. Chaque demande de réservation vousengage et bloque le créneau sélectionné pour toute autre compagnie. Aussi vous ne pourrez pas faire de demande sur un même créneau auprès de plusieurs espaces."
+      },
+      "message": {
+        "title": "Échanges avec les lieux",
+        "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les espaces et suivre de près toutes vos réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux compagnies comme aux lieux de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
+      },
+      "confidentiality": {
+        "title": "Confidentialité",
+        "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations que vous y renseignerez seront réservées à la stricte confidentialité des lieux auprès de qui vous effectuerez des réservations, et de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Vos données ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
+      },
+      "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté!",
+      "projects": {
+        "title": "Appels à projet et résidences de création",
+        "text": "Retrouvez également des appels à projets et candidatez directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil dés leur ouverture. Suivez nos actus pour ne rien rater."
+      }
     },
-    "completed": {
-        "title": "Confirmez votre adresse email",
-        "text": "Afin de finaliser votre demande d’inscription, nous avons besoin que vous confirmiez votre adresse email. Vous recevrez sous peu un email de confirmation. Votre compte sera ensuite placé en attente de validation par StudioD.",
-        "btn": "Retour à l’accueil"
+    "lieu": {
+      "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (vous) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+      "free": {
+        "title": "Gratuité du service",
+        "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits. Aucune compensation financière se saurait être demandée à une compagnie pour une réservation d’espace effectuée via StudioD."
+      },
+      "reservation": {
+        "title": "Réservation des espaces",
+        "text": "StudioD vous permet de gérer et d’optimiser l’occupation de vos espaces. En tant que lieu contributeur, vous vous engagez à renseigner régulièrement vos créneaux disponibles sur les calendriers de chacun de vos espaces. Pour simplifier considérablement votre gestion des demandes de réservations, vous ne recevrez qu’une demande à la fois surchaque créneau."
+      },
+      "message": {
+        "title": "Échanges avec les compagnies",
+        "text": "Nous mettons à votre disposition une messagerie instantanée et sécuriséepour communiquer avec les compagnies et suivre de près toutes leurs réservations. Pour anticiper au mieux certaines questions et éviter de trop nombreux échanges, nous demandons aux lieux comme aux compagnies de prêter une attention toute particulière à leur inscription en renseignant toutes les informations demandées."
+      },
+      "confidentiality": {
+        "title": "Confidentialité",
+        "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations qui concernent vos espaces seront accessibles aux utilisateur·rice·s. Vos données personnelles seront réservées à la stricte confidentialité de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Elles ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
+      },
+      "projects": {
+        "title": "Ouverture d’espaces à appels à projet",
+        "text": "Proposez vos espaces dans le cadre d'appels à projets aidés et permettez aux compagnies inscrite de candidatez directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil. Suivez nos actus pour ne rien rater."
+      },
+      "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté !"
     },
+    "btn": "Poursuivre"
+  },
+  "form": {
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "email": {
+      "label": "Adresse email",
+      "placeholder": "contact@example.fr",
+      "info": "Cette adresse sera utilisée comme identifiant de connexion"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "placeholder": "Saisir un mot de passe",
+      "info": "Choisissez un mot de passe de minimum 10 caractères"
+    },
+    "structure": "Nom de la structure",
+    "socialReason": {
+      "label": "Raison sociale",
+      "info": "Si différente du nom d’usage de la structure. Sinon, laissez vide."
+    },
+    "street": "Numéro et rue",
+    "zipCode": "Code postal",
+    "city": "Ville",
+    "address": "Adresse",
+    "country": {
+      "label": "Pays",
+      "info": "Le service n’est actuellement disponible qu’en France"
+    },
+    "compagnieInfo": "Informations sur la compagnie",
+    "lieuInfo": "Informations sur le lieu",
+    "siret": "Numéro de Siret",
+    "ape": "Code APE",
+    "referent": "Numéro de téléphone du contact référent",
+    "license": {
+      "label": "Licence(s) d'entrepreneur du spectacle",
+      "info": "Si vous disposez de plusieurs numéros de license, séparez-les par une virgule."
+    },
+    "website": "Lien vers votre site web",
+    "legalRepresentative": "Nom du· de la représentant·e légal·e",
+    "qualityRepresentative": "Qualité du·de la représentant·e légal·e",
+    "choreographer": "Nom du·de la chorégraphe",
+    "insuranceName": "Nom de la police d’assurance",
+    "insuranceNumber": "Numéro de la police d’assurance",
+    "condition": "J’ai lu et accepte les <a>Conditions générales d’utilisation</a> de la plateforme.",
+    "condition2": "Après inscription, votre compte sera placé en attente de validation par StudioD. Il vous sera possible d'y accéder et de modifier vos informations.",
+    "btn": "Poursuivre",
     "error": {
-        "emailTaken": "Cet email est déjà utilisé",
-        "passwordProvide": "Vous devez renseigner un mot de passe",
-        "emailProvide": "Vous devez renseigner un email",
-        "passwordFormat": "Votre mot de passe ne peut pas contenir plus de 3 fois le caractère `$`",
-        "roleNotFound": "Impossible de procéder à l'inscription",
-        "emailFormat": "Le format de votre adresse email n'est pas valide",
-        "userPlace": "Impossible de procéder à l'inscription",
-        "userCompany": "Impossible de procéder à l'inscription",
-        "usernameTaken": "Impossible de procéder à l'inscription"
+      "default": "Impossible de procéder à l'inscription"
     }
+  },
+  "completed": {
+    "title": "Confirmez votre adresse email",
+    "text": "Afin de finaliser votre demande d’inscription, nous avons besoin que vous confirmiez votre adresse email. Vous recevrez sous peu un email de confirmation. Votre compte sera ensuite placé en attente de validation par StudioD.",
+    "btn": "Retour à l’accueil"
+  },
+  "error": {
+    "emailTaken": "Cet email est déjà utilisé",
+    "passwordProvide": "Vous devez renseigner un mot de passe",
+    "emailProvide": "Vous devez renseigner un email",
+    "passwordFormat": "Votre mot de passe ne peut pas contenir plus de 3 fois le caractère `$`",
+    "roleNotFound": "Impossible de procéder à l'inscription",
+    "emailFormat": "Le format de votre adresse email n'est pas valide",
+    "userPlace": "Impossible de procéder à l'inscription",
+    "userCompany": "Impossible de procéder à l'inscription",
+    "usernameTaken": "Impossible de procéder à l'inscription"
+  }
 }

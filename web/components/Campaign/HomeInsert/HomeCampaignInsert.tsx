@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { ROUTE_ACCOUNT_PLACES, ROUTE_PLACES } from '~constants'
 import { CampaignMode } from '~components/Campaign/CampaignContext'
 import Tag from '~components/Tag'
+import Link from '~components/Link'
 
 const HomeCampaignInsert = ({
   mode,
@@ -48,8 +49,11 @@ const HomeCampaignInsert = ({
           <Box>
             <Button
               variant="campaign"
+              as={Link}
               href={
-                mode === 'applications' ? ROUTE_PLACES : ROUTE_ACCOUNT_PLACES
+                mode === 'applications'
+                  ? `${ROUTE_PLACES}?tab=1`
+                  : ROUTE_ACCOUNT_PLACES
               }
             >
               {t(`campaign.insert.${mode}.cta`)}
