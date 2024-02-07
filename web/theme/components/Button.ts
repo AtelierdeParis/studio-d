@@ -71,6 +71,27 @@ const Button = {
         borderColor: 'black',
       },
     },
+    blueFill: {
+      bgColor: 'blue.500',
+      justifyContent: 'flex-start',
+      color: 'white',
+      whiteSpace: 'pre-line',
+      h: '40px',
+      minW: 0,
+      _hover: {
+        backgroundColor: 'blue.400',
+      },
+    },
+    campaign: {
+      justifyContent: 'flex-start',
+      bgColor: 'campaign.primary',
+      color: 'white',
+      whiteSpace: 'pre-line',
+      h: '40px',
+      _hover: {
+        bgColor: 'campaign.dark',
+      },
+    },
   },
   sizes: {
     md: {

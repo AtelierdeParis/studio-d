@@ -65,6 +65,14 @@
     "message": {
       "via": "disponibilities",
       "model": "message"
+    },
+    "campaign": {
+      "via": "disponibilities",
+      "model": "campaign"
+    },
+    "applications": {
+      "via": "disponibility",
+      "collection": "application"
     }
   }
 }

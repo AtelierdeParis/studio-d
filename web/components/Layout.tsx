@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect } from 'react'
 import { Container, Flex, Box } from '@chakra-ui/react'
 import AccountLayout from 'components/Account/AccountLayout'
-import Header from 'components/Header'
+import Header from '~components/Navigation/Header'
 import Footer from 'components/Footer'
 import { useRouter } from 'next/router'
 import { ROUTE_PLACE_DETAIL } from '~constants'

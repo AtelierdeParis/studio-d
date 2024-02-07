@@ -10,6 +10,7 @@ import {
   Textarea,
   Heading,
 } from './components'
+import { campaign } from './colors'
 
 const breakpoints = createBreakpoints({
   sm: '30em',
@@ -84,6 +85,7 @@ const theme = extendTheme({
       red: '#F2D8D8',
       grey: '#E0E0E0',
     },
+    campaign,
   },
   radii: {
     xs: '4px',

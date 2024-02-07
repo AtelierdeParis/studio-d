@@ -932,6 +932,96 @@
               }
             }
           },
+          "campaign": {
+            "required": [
+              "id",
+              "duration",
+              "disponibility_start",
+              "disponibility_end",
+              "application_start",
+              "application_end",
+              "preselection_start",
+              "preselection_end"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "integer"
+              },
+              "disponibility_start": {
+                "type": "string"
+              },
+              "disponibility_end": {
+                "type": "string"
+              },
+              "application_start": {
+                "type": "string"
+              },
+              "application_end": {
+                "type": "string"
+              },
+              "preselection_start": {
+                "type": "string"
+              },
+              "preselection_end": {
+                "type": "string"
+              },
+              "reminder_days": {
+                "type": "integer"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "users_permissions_user": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -993,6 +1083,15 @@
           },
           "message": {
             "type": "string"
+          },
+          "campaign": {
+            "type": "string"
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",

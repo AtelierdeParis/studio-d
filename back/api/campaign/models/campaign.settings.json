@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "campaigns",
+  "info": {
+    "name": "Campaign",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "duration": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "disponibility_start": {
+      "type": "date",
+      "required": true
+    },
+    "disponibility_end": {
+      "type": "date",
+      "required": true
+    },
+    "application_start": {
+      "type": "date",
+      "required": true
+    },
+    "application_end": {
+      "type": "date",
+      "required": true
+    },
+    "preselection_start": {
+      "type": "date",
+      "required": true
+    },
+    "preselection_end": {
+      "type": "date",
+      "required": true
+    },
+    "reminder_days": {
+      "type": "integer",
+      "required": false,
+      "min": 1
+    },
+    "disponibilities": {
+      "via": "campaign",
+      "collection": "disponibility"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

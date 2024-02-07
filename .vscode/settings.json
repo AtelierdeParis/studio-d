@@ -2,5 +2,6 @@
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "files.exclude": {
         "**/.next": true
-    }
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
