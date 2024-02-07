@@ -19,6 +19,7 @@ import Pin from 'public/assets/img/pin-outline.svg'
 import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import { SurfaceOptions, HeightOptions } from '~utils/search'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const selectProps = {
   variant: 'unstyled',
@@ -26,7 +27,13 @@ const selectProps = {
   pl: 3,
 }
 
-const PlaceSearch = ({ onSubmit }) => {
+const PlaceSearch = ({
+  onSubmit,
+  isCampaignTab,
+}: {
+  onSubmit: any
+  isCampaignTab?: boolean
+}) => {
   const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
   const [hasMoreFilters, setMoreFilter] = useState(false)
@@ -34,19 +41,21 @@ const PlaceSearch = ({ onSubmit }) => {
   const form = useFormContext()
   const isMobile = useBreakpointValue({ base: true, lg: false })
   const city = form.watch('city')
+  const { currentCampaign } = useCampaignContext()
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <Flex
-        bgColor="blue.100"
+        bgColor={isCampaignTab ? 'campaign.light' : 'blue.100'}
         px={{ base: 3, md: 5 }}
         py={{ base: 4, md: 6 }}
         borderRadius="md"
+        borderTopLeftRadius={currentCampaign ? 0 : 'md'}
         position="relative"
         zIndex={100}
         mb={{ base: 0, sm: 10 }}
-        mt={6}
         direction="column"
+        mt={currentCampaign ? 0 : 6}
       >
         <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} rowGap={0} w="100%">
           <Flex
@@ -261,8 +270,8 @@ const PlaceSearch = ({ onSubmit }) => {
             </Button>
             <Button
               type="submit"
-              colorScheme="blue"
               size="lg"
+              variant={isCampaignTab ? 'campaign' : 'blueFill'}
               // isDisabled={isDisabled}
               isLoading={isLoading}
             >

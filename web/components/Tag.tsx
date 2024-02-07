@@ -16,6 +16,8 @@ interface Props extends TagProps {
     | 'occupied'
     | 'nextweek'
     | 'expired'
+    | 'campaign'
+    | 'solidarity'
   children?: React.ReactNode
 }
 
@@ -74,6 +76,18 @@ const Tag = ({ status, children, ...rest }: Props) => {
         <ChakraTag bgColor="tag.green">
           <Circle size="6px" bgColor="green.500" ml={1} />
           <Text ml={2}>{children || t('tag.occupied')}</Text>
+        </ChakraTag>
+      )
+    case 'campaign':
+      return (
+        <ChakraTag bgColor="campaign.light" color="campaign.dark" {...rest}>
+          {children || t('tag.campaign')}
+        </ChakraTag>
+      )
+    case 'solidarity':
+      return (
+        <ChakraTag backgroundColor="blue.200" color="blue.500" {...rest}>
+          {children || t('tag.campaign')}
         </ChakraTag>
       )
   }

@@ -76,13 +76,20 @@ const Header = ({ colorMode }: Props) => {
         >
           {currentCampaign?.mode === 'applications' ? (
             <Menu>
-              <MenuButton>{t('nav.places')}</MenuButton>
+              <MenuButton
+                display={{
+                  base: 'none',
+                  lg: 'block',
+                }}
+              >
+                {t('nav.places')}
+              </MenuButton>
               <Portal>
                 <MenuList rootProps={{ zIndex: 100 }}>
-                  <DropdownNavButton href={ROUTE_PLACES}>
+                  <DropdownNavButton href={`${ROUTE_PLACES}?tab=0`}>
                     {t('nav.places_regular')}
                   </DropdownNavButton>
-                  <DropdownNavButton href={ROUTE_PLACES}>
+                  <DropdownNavButton href={`${ROUTE_PLACES}?tab=1`}>
                     {t('nav.places_emergence')}
                   </DropdownNavButton>
                 </MenuList>

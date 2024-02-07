@@ -1,9 +1,10 @@
-import { VStack, Text, Tag, Box, Button, Stack } from '@chakra-ui/react'
+import { VStack, Text, Box, Button, Stack } from '@chakra-ui/react'
 import Hands from 'public/assets/img/hands-outline.svg'
 import theme from '~theme'
 import { useTranslation } from 'next-i18next'
 import { ROUTE_ACCOUNT_PLACES, ROUTE_PLACES } from '~constants'
 import { CampaignMode } from '~components/Campaign/CampaignContext'
+import Tag from '~components/Tag'
 
 const HomeCampaignInsert = ({
   mode,
@@ -28,7 +29,7 @@ const HomeCampaignInsert = ({
       height="100%"
     >
       <VStack alignItems="flex-start" spacing={4}>
-        <Tag variant="campaign">{t('campaign.tag', { title })}</Tag>
+        <Tag status="campaign">{title}</Tag>
         <Stack
           paddingLeft={4}
           alignItems="flex-start"

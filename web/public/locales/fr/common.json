@@ -84,5 +84,16 @@
     "error": "Impossible de confirmer l'email",
     "success": "Merci ! Votre mail est validé et votre compte est maintenant en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
     "btn": "Retour à l’accueil"
-  }
+  },
+  "solidarity": {
+    "title": "Créneaux solidaires",
+    "tag": "Créneaux solidaires",
+    "helper_title": "Les créneaux solidaires ",
+    "helper": " sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D"
+  },
+  "campaign": {
+    "open": "Ouvert jusqu'au {{date}}",
+    "partner": "Partenaire {{title}}"
+  },
+  "show": "Découvrir"
 }

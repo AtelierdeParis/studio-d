@@ -6,7 +6,6 @@ import {
   Divider,
   useTheme,
   useBreakpointValue,
-  Tag,
   VStack,
   Stack,
   HStack,
@@ -21,11 +20,13 @@ import { formatSearchToQuery } from '~utils/search'
 import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import Tag from '~components/Tag'
 
 const HomeSearch = ({ hasActiveCampaign }: { hasActiveCampaign?: boolean }) => {
   const isMobile = useBreakpointValue({ base: true, md: false })
   const { control, handleSubmit } = useForm()
   const { t } = useTranslation('home')
+  const { t: tCommon } = useTranslation('common')
   const theme = useTheme()
   const router = useRouter()
 
@@ -50,7 +51,7 @@ const HomeSearch = ({ hasActiveCampaign }: { hasActiveCampaign?: boolean }) => {
     >
       {hasActiveCampaign && (
         <Box>
-          <Tag variant="blue">{t('solidarity.tag')}</Tag>
+          <Tag status="solidarity">{tCommon('solidarity.tag')}</Tag>
         </Box>
       )}
       <Box width="100%">
