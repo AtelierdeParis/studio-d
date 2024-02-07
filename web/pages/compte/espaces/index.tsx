@@ -10,6 +10,7 @@ import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
 import { NextSeo } from 'next-seo'
 import { useTranslation } from 'next-i18next'
+import PlacesCampaignHelper from '~components/Campaign/PlaceAdmin/PlacesCampaignHelper'
 interface Props {
   user: UsersPermissionsUser
 }
@@ -21,6 +22,7 @@ const AccountPlace = ({ user }: Props) => {
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.places')} />
+      <PlacesCampaignHelper />
       {!places || places?.length === 0 ? (
         <InfoPlace />
       ) : (

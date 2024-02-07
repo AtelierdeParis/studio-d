@@ -2,11 +2,9 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Box, Stack } from '@chakra-ui/react'
 import HomeSearch from '~components/Home/HomeSearch'
 import HomeCampaignInsert from '~components/Campaign/HomeInsert/HomeCampaignInsert'
-import { useRouter } from 'next/router'
 import { format } from '~utils/date'
 
 const HomeActions = () => {
-  const router = useRouter()
   const { currentCampaign } = useCampaignContext()
   const { mode, limitDate, title } = currentCampaign ?? {}
   const hasActiveCampaign = Boolean(mode && limitDate)

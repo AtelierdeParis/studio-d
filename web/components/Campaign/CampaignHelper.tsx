@@ -21,7 +21,9 @@ const CampaignHelper = ({
     >
       <Text flex={4}>
         <Text as="span" fontWeight="bold" marginRight={1}>
-          {campaign ? campaign?.title : t('solidarity.helper_title')}
+          {campaign
+            ? t('campaign.helper_title', { title: campaign?.title })
+            : t('solidarity.helper_title')}
         </Text>
         {campaign ? campaign.description : t('solidarity.helper')}
       </Text>

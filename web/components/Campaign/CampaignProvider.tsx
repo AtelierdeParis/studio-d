@@ -24,8 +24,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
   useEffect(() => {
     if (Boolean(campaigns?.length)) {
       const activeCampaigns = campaigns?.map((campaign) => {
-        //const mode = getCampaignMode(campaign)
-        const mode = 'applications'
+        const mode = getCampaignMode(campaign)
         const limitDate = getLimitDate(campaign, mode)
         return { ...campaign, mode, limitDate }
       })

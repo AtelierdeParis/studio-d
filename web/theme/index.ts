@@ -77,6 +77,7 @@ const theme = extendTheme({
     grayText: {
       '1': '#626782',
     },
+    grayBackground: '#F5F5F5',
     confirm: '#6EAE7F',
     tag: {
       blue: '#f2f3f8',
