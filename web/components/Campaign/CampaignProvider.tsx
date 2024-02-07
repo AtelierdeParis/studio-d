@@ -17,12 +17,15 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     }),
     [],
   )
-  const { data: campaigns } = useCampaigns(activeCampaignsQueryParameters)
+  const { data: campaigns, isLoading } = useCampaigns(
+    activeCampaignsQueryParameters,
+  )
 
   useEffect(() => {
     if (Boolean(campaigns?.length)) {
       const activeCampaigns = campaigns?.map((campaign) => {
         const mode = getCampaignMode(campaign)
+        // const mode = 'applications'
         const limitDate = getLimitDate(campaign, mode)
         return { ...campaign, mode, limitDate }
       })
@@ -72,6 +75,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
       value={{
         activeCampaigns,
         currentCampaign: activeCampaigns?.[0],
+        isLoading,
       }}
     >
       {children}

@@ -30,6 +30,7 @@ import { useRouter } from 'next/router'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import Squares from 'public/assets/img/squares.svg'
 import AuthenticatedMenu from '~components/AuthenticatedMenu'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const MenuItem = ({ href, text }) => {
   const router = useRouter()
@@ -42,7 +43,9 @@ const MenuItem = ({ href, text }) => {
       lineHeight="1.2"
       borderBottom="1px solid"
       borderBottomColor={
-        router.pathname === href ? 'orange.500' : 'transparent'
+        router.pathname === href || router?.asPath === href
+          ? 'orange.500'
+          : 'transparent'
       }
       _hover={{
         borderColor: 'orange.500',
@@ -62,6 +65,7 @@ const MobileMenu = ({ colorMode }: Props) => {
   const { t } = useTranslation('common')
   const { data: user } = useCurrentUser()
   const router = useRouter()
+  const { currentCampaign } = useCampaignContext()
 
   useEffect(() => {
     if (isOpen) {
@@ -102,7 +106,21 @@ const MobileMenu = ({ colorMode }: Props) => {
               flexDirection="column"
               py={6}
             >
-              <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
+              {currentCampaign?.mode === 'applications' ? (
+                <>
+                  <MenuItem
+                    href={`${ROUTE_PLACES}?tab=0`}
+                    text={t('nav.places_regular')}
+                  />
+                  <MenuItem
+                    href={`${ROUTE_PLACES}?tab=1`}
+                    text={t('nav.places_emergence')}
+                  />
+                </>
+              ) : (
+                <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
+              )}
+
               <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
               <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
               <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />

@@ -14,16 +14,10 @@
   "places": {
     "title": "Prochains créneaux disponibles",
     "btn": "Parcourir tous les espaces",
-    "solidarity": {
-      "helper_title": "Les créneaux solidaires ",
-      "helper": " sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D"
-    },
     "campaign": {
-      "tag": "Ouvert jusqu'au {{date}}",
       "title": "Dispositif {{title}} ",
-      "cta": "Parcourir tous les espaces partenaires du dispositif {{title}}"
-    },
-    "show": "Découvrir"
+      "cta": "Parcourir tous les espaces partenaires {{title}}"
+    }
   },
   "news": {
     "title": "Les actus de la communauté",
@@ -43,8 +37,5 @@
         "cta": "Parcourir"
       }
     }
-  },
-  "solidarity": {
-    "tag": "Créneaux solidaires"
   }
 }

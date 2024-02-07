@@ -15,10 +15,12 @@ export type ActiveCampaign = Campaign & {
 interface ICampaignContext {
   activeCampaigns?: ActiveCampaign[]
   currentCampaign?: ActiveCampaign
+  isLoading?: boolean
 }
 
 const CampaignContext = React.createContext<ICampaignContext>({
   activeCampaigns: undefined,
+  isLoading: false,
 })
 
 export default CampaignContext

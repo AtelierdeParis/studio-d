@@ -19,6 +19,7 @@ import { SearchQuery } from '~utils/search'
 import useDispoInRange from '~hooks/useDispoInRange'
 import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
 import addWeeks from 'date-fns/addWeeks'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 interface Props {
   place: Espace
@@ -26,7 +27,9 @@ interface Props {
 }
 
 const PlaceGridCard = ({ place, searchParams }: Props) => {
+  const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
+  const { t: tCommon } = useTranslation('common')
 
   const disposInRange = useDispoInRange(
     place?.disponibilities,
@@ -42,6 +45,13 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
     addWeeks(new Date(), 1),
     disposInRange || place?.disponibilities,
   )
+
+  const isCampaignPlace =
+    currentCampaign?.mode === 'applications' &&
+    place?.disponibilities?.some(
+      //@ts-expect-error
+      (d) => d?.campaign === currentCampaign?.id,
+    )
 
   return (
     <LinkBox>
@@ -60,6 +70,18 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
           h="100%"
           id={`place-${place.id}`}
         >
+          {isCampaignPlace && (
+            <Box position="relative">
+              <Tag
+                status="campaign"
+                style={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }}
+              >
+                {tCommon('campaign.partner', {
+                  title: currentCampaign?.title,
+                })}
+              </Tag>
+            </Box>
+          )}
           <AspectRatio
             w="100%"
             maxH="250px"
