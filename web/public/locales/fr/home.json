@@ -16,7 +16,7 @@
     "btn": "Parcourir tous les espaces",
     "campaign": {
       "title": "Dispositif {{title}} ",
-      "cta": "Parcourir tous les espaces partenaires {{title}}"
+      "cta": "Parcourir tous les espaces partenaires du dispositif {{title}}"
     }
   },
   "news": {
@@ -24,7 +24,7 @@
     "btn": "Toutes les actus"
   },
   "campaign": {
-    "tag": "Dispositif {{title}}",
+    "title": "Dispositif {{title}}",
     "insert": {
       "disponibilities": {
         "title": "Inscrivez vos espaces !",

@@ -55,7 +55,9 @@ const HomePlaces = ({ campaign }: Props) => {
           <Arrow />
         </Box>
         <Text textStyle="h2" mb={4} pl={3} lineHeight={1}>
-          {campaign ? campaign?.title : t('places.title')}
+          {campaign
+            ? t('campaign.title', { title: campaign?.title })
+            : t('places.title')}
         </Text>
         {campaign && (
           <Tag status="campaign">
