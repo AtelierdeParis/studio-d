@@ -765,6 +765,12 @@
                     "type": "string"
                   }
                 },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -911,6 +917,12 @@
                   }
                 },
                 "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaigns": {
                   "type": "array",
                   "items": {
                     "type": "string"

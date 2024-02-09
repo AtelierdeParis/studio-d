@@ -2,35 +2,28 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Box, Stack } from '@chakra-ui/react'
 import HomeSearch from '~components/Home/HomeSearch'
 import HomeCampaignInsert from '~components/Campaign/Home/HomeCampaignInsert'
-import { format } from '~utils/date'
 
 const HomeActions = () => {
-  const { currentCampaign } = useCampaignContext()
-  const { mode, limitDate, title } = currentCampaign ?? {}
-  const hasActiveCampaign = Boolean(mode && limitDate)
+  const { hasActiveCampaign } = useCampaignContext()
 
   return (
     <Stack
-      width="100%"
-      pos={'relative'}
-      zIndex={99}
       direction={{ base: 'column', lg: 'row' }}
-      transform={{ base: 'none', md: 'translateY(50%)' }}
       spacing={{ base: 0, lg: 4 }}
       maxW={hasActiveCampaign ? '1200px' : '750px'}
-      pb={hasActiveCampaign ? { base: 0, md: 30, lg: 8 } : { base: 0, md: 4 }}
-      paddingX={{ base: 0, lg: 4 }}
+      pos={{ base: 'static', lg: 'relative' }}
+      zIndex={99}
+      paddingX={{ base: 0, lg: 8 }}
     >
       <Box flex={hasActiveCampaign ? 3 : 1}>
         <HomeSearch hasActiveCampaign={hasActiveCampaign} />
       </Box>
       {hasActiveCampaign && (
-        <Box flex={2}>
-          <HomeCampaignInsert
-            mode={mode}
-            date={format(new Date(limitDate), 'd MMMM')}
-            title={title}
-          />
+        <Box
+          flex={2}
+          borderTop={{ base: '1px solid rgba(	211, 211, 211, 0.5)', lg: 'none' }}
+        >
+          <HomeCampaignInsert />
         </Box>
       )}
     </Stack>

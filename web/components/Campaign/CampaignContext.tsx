@@ -15,6 +15,8 @@ export type ActiveCampaign = Campaign & {
 interface ICampaignContext {
   activeCampaigns?: ActiveCampaign[]
   currentCampaign?: ActiveCampaign
+  isCampaignPlace?: boolean
+  hasActiveCampaign?: boolean
   isLoading?: boolean
 }
 
