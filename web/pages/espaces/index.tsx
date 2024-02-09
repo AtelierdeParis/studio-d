@@ -11,7 +11,8 @@ import PlacesTabs from '~components/Place/PlacesTab'
 const Places = () => {
   const { currentCampaign } = useCampaignContext()
 
-  if (!currentCampaign) return <PlacesPage />
+  if (!currentCampaign || currentCampaign?.mode !== 'applications')
+    return <PlacesPage />
 
   return <PlacesTabs />
 }
