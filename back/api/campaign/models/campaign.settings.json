@@ -71,6 +71,9 @@
       "collection": "user",
       "via": "campaigns",
       "dominant": true
+    },
+    "applications_max": {
+      "type": "integer"
     }
   }
 }
