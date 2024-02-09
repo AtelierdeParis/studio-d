@@ -75,9 +75,9 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
           excludeDates={excludeDates}
         />
       </FormField>
-
-      {/* @ts-expect-error */}
-      <Input {...register('end')} display="none" />
+      <Box display="none">
+        <InputDate name="end" control={control} />
+      </Box>
 
       <InputMultiSelect
         name="exclude_days"
