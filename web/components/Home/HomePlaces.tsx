@@ -15,7 +15,7 @@ import { ActiveCampaign } from '~components/Campaign/CampaignContext'
 import { format } from '~utils/date'
 import Link from '~components/Link'
 import { ROUTE_PLACES } from '~constants'
-import CampaignHelper from '~components/Campaign/CampaignHelper'
+import PlacesListCampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
 import Tag from '~components/Tag'
 
 interface Props {
@@ -68,7 +68,7 @@ const HomePlaces = ({ campaign }: Props) => {
         )}
       </HStack>
 
-      <CampaignHelper campaign={campaign} />
+      <PlacesListCampaignHelper campaign={campaign} />
 
       <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} />
       <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>

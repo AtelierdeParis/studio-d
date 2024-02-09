@@ -736,6 +736,15 @@
                   "type": "string"
                 }
               },
+              "staff": {
+                "type": "object"
+              },
+              "accomodation": {
+                "type": "integer"
+              },
+              "scene_grid": {
+                "type": "boolean"
+              },
               "published_at": {
                 "type": "string"
               },

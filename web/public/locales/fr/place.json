@@ -24,7 +24,10 @@
   "tabs": {
     "info": "Informations",
     "image": "Images",
-    "slot": "Disponibilités ({{nb}})"
+    "slot": "Disponibilités ({{nb}})",
+    "slot_solidarity": "Créneaux solidaires ({{nb}})",
+    "slot_campaign": "Créneaux {{title}} ({{nb}}/{{nbTotal}})",
+    "slot_campaign_applications": "Créneaux {{title}} ({{nb}})"
   },
   "form": {
     "migration": {
@@ -383,14 +386,69 @@
     "back": "Retour à l’accueil"
   },
   "campaign": {
+    "schedule": {
+      "duration": "La durée d’une résidence est fixée à {{duration}} jours, et doit se dérouler entre le {{campaign_start}} et le {{campaign_end}}.",
+      "days_exclude": {
+        "label": "Exclure les",
+        "placeholder": "Choisir",
+        "0": "Lundi",
+        "1": "Mardi",
+        "2": "Mercredi",
+        "3": "Jeudi",
+        "4": "Vendredi",
+        "5": "Samedi",
+        "6": "Dimanche"
+      },
+      "staff": {
+        "label": "Personnel technique",
+        "placeholder": "Choisir",
+        "no": "Non",
+        "light": "Création lumière",
+        "sound": "Création son",
+        "video": "Création vidéo",
+        "scene": "Création scénographique"
+      },
+      "accomodation": {
+        "label": "Hébergement",
+        "placeholder": "Choisir",
+        "0": "Non",
+        "1": "1 personne",
+        "2": "2 personnes",
+        "3": "3 personnes",
+        "4": "4 personnes",
+        "5": "5+ personnes"
+      },
+      "scene_grid": {
+        "label": "Grille scénique",
+        "placeholder": "Choisir",
+        "true": "Oui",
+        "false": "Non"
+      }
+    },
     "helpers": {
       "applications": {
-        "title": "La période de candidatures pour le dispositif {{title}} est en cours : ",
-        "description": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
+        "home": {
+          "title": "La période de candidatures pour le dispositif {{title}} est en cours : ",
+          "description": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
+        },
+        "schedule": {
+          "title": "La période de candidatures est en cours : ",
+          "description": " vous ne pouvez plus ajouter de créneau mais pouvez, en cas de nécessité, annuler un créneau existant.\n  Attention, toute annulation de créneau est définitive et, si des candidatures ont été déposées, doit s’accompagner d’un message d’annulation envoyé aux artistes ayant candidaté.",
+          "open_applications_one": "créneau renseigné",
+          "open_applications_many": "créneaux renseignés",
+          "see_applications": "Voir les candidatures pour cet espace"
+        }
       },
-      "disponibilites": {
-        "title": "Le dispositif {{title}} se prépare : ",
-        "description": "vous pouvez renseigner, pour vos espaces participants, les créneaux associés au dispositif avant le {{date}}"
+      "disponibilities": {
+        "home": {
+          "title": "Le dispositif {{title}} se prépare : ",
+          "description": "vous pouvez renseigner, pour vos espaces participants, les créneaux associés au dispositif avant le {{date}}"
+        },
+        "schedule": {
+          "title": "Ajoutez ou modifiez vos créneaux avant le {{disponibility_end}}. ",
+          "description": "\n Vous pouvez ajouter jusqu’à {{disponibilities_max}} créneaux dédiés au dispositif {{title}} pour un même espace. Les créneaux doivent impérativement faire {{duration}} jours, et se dérouler entre le {{campaign_start}} et le {{campaign_end}}",
+          "open_disponibilities": "créneaux ouverts à candidatures Émergence"
+        }
       }
     }
   }

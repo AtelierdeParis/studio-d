@@ -4,7 +4,7 @@ import { ActiveCampaign } from '~components/Campaign/CampaignContext'
 import Link from '~components/Link'
 import { ROUTE_PLACES } from '~constants'
 
-const CampaignHelper = ({
+const PlacesListCampaignHelper = ({
   campaign,
   ...props
 }: { campaign?: ActiveCampaign } & StackProps) => {
@@ -44,4 +44,4 @@ const CampaignHelper = ({
   )
 }
 
-export default CampaignHelper
+export default PlacesListCampaignHelper

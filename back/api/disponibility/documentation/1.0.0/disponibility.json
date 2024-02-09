@@ -941,7 +941,8 @@
               "application_start",
               "application_end",
               "preselection_start",
-              "preselection_end"
+              "preselection_end",
+              "disponibilities_max"
             ],
             "properties": {
               "id": {
@@ -983,6 +984,15 @@
               "description": {
                 "type": "string"
               },
+              "disponibilities_max": {
+                "type": "integer"
+              },
+              "campaign_start": {
+                "type": "string"
+              },
+              "campaign_end": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -1021,6 +1031,15 @@
                 }
               }
             }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
@@ -1092,6 +1111,15 @@
             "items": {
               "type": "string"
             }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",

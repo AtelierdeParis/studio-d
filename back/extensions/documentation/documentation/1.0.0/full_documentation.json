@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "02/07/2024 10:13:36 AM"
+    "x-generation-date": "02/09/2024 3:41:20 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -10814,6 +10814,15 @@
                   "type": "string"
                 }
               },
+              "staff": {
+                "type": "object"
+              },
+              "accomodation": {
+                "type": "integer"
+              },
+              "scene_grid": {
+                "type": "boolean"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -10951,7 +10960,8 @@
           "application_start",
           "application_end",
           "preselection_start",
-          "preselection_end"
+          "preselection_end",
+          "disponibilities_max"
         ],
         "properties": {
           "id": {
@@ -11055,6 +11065,15 @@
                     "type": "string"
                   }
                 },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -11073,6 +11092,17 @@
           "description": {
             "type": "string"
           },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -11087,7 +11117,8 @@
           "application_start",
           "application_end",
           "preselection_start",
-          "preselection_end"
+          "preselection_end",
+          "disponibilities_max"
         ],
         "properties": {
           "duration": {
@@ -11131,6 +11162,17 @@
           },
           "description": {
             "type": "string"
+          },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
@@ -11747,7 +11789,8 @@
               "application_start",
               "application_end",
               "preselection_start",
-              "preselection_end"
+              "preselection_end",
+              "disponibilities_max"
             ],
             "properties": {
               "id": {
@@ -11789,6 +11832,15 @@
               "description": {
                 "type": "string"
               },
+              "disponibilities_max": {
+                "type": "integer"
+              },
+              "campaign_start": {
+                "type": "string"
+              },
+              "campaign_end": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -11827,6 +11879,15 @@
                 }
               }
             }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
@@ -11898,6 +11959,15 @@
             "items": {
               "type": "string"
             }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
@@ -11990,6 +12060,15 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
                 },
                 "published_at": {
                   "type": "string"

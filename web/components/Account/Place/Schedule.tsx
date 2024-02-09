@@ -10,30 +10,31 @@ import { useFormContext } from 'react-hook-form'
 import isSameDay from 'date-fns/isSameDay'
 import isToday from 'date-fns/isToday'
 
-const view = createPlugin({
-  views: {
-    custom: {
-      type: 'dayGridMonth',
-      eventContent: ({ event }) => {
-        return (
-          // @ts-ignore
-          <ScheduleSlot
-            {...event._def.extendedProps}
-            range={event._instance.range}
-          />
-        )
-      },
-    },
-  },
-})
-
-const Schedule = () => {
+const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
   const { watch } = useFormContext()
   const { start } = watch(['start'])
   const { oldEvents, newEvents, setToDelete, eventsIdToDelete } = useContext(
     ScheduleContext,
   )
   const scheduleRef = useRef(null)
+
+  const view = createPlugin({
+    views: {
+      custom: {
+        type: 'dayGridMonth',
+        eventContent: ({ event }) => {
+          return (
+            // @ts-ignore
+            <ScheduleSlot
+              isCampaignMode={isCampaignMode}
+              {...event._def.extendedProps}
+              range={event._instance.range}
+            />
+          )
+        },
+      },
+    },
+  })
 
   useEffect(() => {
     if (!scheduleRef || !start) return
@@ -99,6 +100,7 @@ const Schedule = () => {
           const hasEvent = events.some((event) =>
             isSameDay(event.start, day.date),
           )
+
           return (
             <Box
               color={hasEvent && 'black'}

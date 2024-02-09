@@ -1,7 +1,7 @@
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Box, Stack } from '@chakra-ui/react'
 import HomeSearch from '~components/Home/HomeSearch'
-import HomeCampaignInsert from '~components/Campaign/HomeInsert/HomeCampaignInsert'
+import HomeCampaignInsert from '~components/Campaign/Home/HomeCampaignInsert'
 import { format } from '~utils/date'
 
 const HomeActions = () => {
