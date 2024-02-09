@@ -38,7 +38,7 @@ const PlaceTabList = ({
   isComplete,
   setIndex = null,
 }: Props) => {
-  const { currentCampaign } = useCampaignContext()
+  const { isCampaignPlace, currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
 
   const nbAvailable = useMemo(() => {
@@ -77,11 +77,11 @@ const PlaceTabList = ({
         isDisabled={!isComplete ? true : disabledIndexes.includes(2)}
         onClick={() => setIndex(2)}
       >
-        {currentCampaign
+        {isCampaignPlace
           ? t('tabs.slot_solidarity', { nb: nbAvailable })
           : t('tabs.slot', { nb: nbAvailable })}
       </TabPlace>
-      {currentCampaign && (
+      {isCampaignPlace && (
         <TabPlace
           isDisabled={!isComplete ? true : disabledIndexes.includes(3)}
           onClick={() => setIndex(3)}

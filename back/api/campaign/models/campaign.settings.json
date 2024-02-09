@@ -65,6 +65,12 @@
     },
     "campaign_end": {
       "type": "date"
+    },
+    "users_permissions_users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "campaigns",
+      "dominant": true
     }
   }
 }

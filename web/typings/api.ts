@@ -89,6 +89,7 @@ export interface Application {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     applications?: string[];
+    campaigns?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -215,6 +216,46 @@ export interface Campaign {
 
   /** @format date */
   campaign_end?: string;
+  users_permissions_users?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
+    applications?: string[];
+    campaigns?: string[];
+    created_by?: string;
+    updated_by?: string;
+  }[];
 
   /** @format date-time */
   published_at?: string;
@@ -251,6 +292,7 @@ export interface NewCampaign {
 
   /** @format date */
   campaign_end?: string;
+  users_permissions_users?: string[];
 
   /** @format date-time */
   published_at?: string;
@@ -442,6 +484,7 @@ export interface Disponibility {
     disponibilities_max: number;
     campaign_start?: string;
     campaign_end?: string;
+    users_permissions_users?: string[];
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -551,6 +594,7 @@ export interface Dispositif {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     applications?: string[];
+    campaigns?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -590,6 +634,7 @@ export interface Dispositif {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     applications?: string[];
+    campaigns?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -894,6 +939,7 @@ export interface UsersPermissionsRole {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     applications?: string[];
+    campaigns?: string[];
     created_by?: string;
     updated_by?: string;
   }[];

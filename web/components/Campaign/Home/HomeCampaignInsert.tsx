@@ -6,20 +6,13 @@ import { ROUTE_ACCOUNT_PLACES, ROUTE_PLACES } from '~constants'
 import { CampaignMode } from '~components/Campaign/CampaignContext'
 import Tag from '~components/Tag'
 import Link from '~components/Link'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { format } from '~utils/date'
 
-const HomeCampaignInsert = ({
-  mode,
-  date,
-  title,
-}: {
-  mode: CampaignMode
-  date: string
-  title: string
-}) => {
+const HomeCampaignInsert = () => {
+  const { currentCampaign } = useCampaignContext()
+  const { title, mode, limitDate } = currentCampaign || {}
   const { t } = useTranslation('home')
-
-  // No display provided for preselections
-  if (mode === 'preselections') return null
 
   return (
     <Box
@@ -44,7 +37,11 @@ const HomeCampaignInsert = ({
           />
           <Box flex={1}>
             <Text fontWeight="bold">{t(`campaign.insert.${mode}.title`)}</Text>
-            <Text>{t(`campaign.insert.${mode}.subtitle`, { date })}</Text>
+            <Text>
+              {t(`campaign.insert.${mode}.subtitle`, {
+                date: format(new Date(limitDate), 'd MMMM'),
+              })}
+            </Text>
           </Box>
           <Box>
             <Button

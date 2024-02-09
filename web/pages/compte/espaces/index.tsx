@@ -19,7 +19,7 @@ interface Props {
 }
 
 const AccountPlace = ({ user }: Props) => {
-  const { currentCampaign } = useCampaignContext()
+  const { currentCampaign, isCampaignPlace } = useCampaignContext()
   const { t } = useTranslation('account')
   const { t: TPlace } = useTranslation('place')
   const { data: places, isLoading } = useMyPlaces()
@@ -27,7 +27,7 @@ const AccountPlace = ({ user }: Props) => {
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.places')} />
-      {currentCampaign && (
+      {isCampaignPlace && (
         <Box paddingY={4}>
           <PlacesAdminCampaignHelper
             title={TPlace(

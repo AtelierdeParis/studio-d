@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import CampaignContext from '~components/Campaign/CampaignContext'
 import { useCampaigns } from '~hooks/useCampaigns'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface ICampaignProvider {
   children: React.ReactNode
@@ -8,6 +9,7 @@ interface ICampaignProvider {
 
 const CampaignProvider = ({ children }: ICampaignProvider) => {
   const today = new Date()
+  const { data: user } = useCurrentUser()
   const [activeCampaigns, setactiveCampaigns] = useState(null)
 
   const activeCampaignsQueryParameters = useMemo(
@@ -31,7 +33,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
 
       setactiveCampaigns(activeCampaigns)
     }
-  }, [campaigns])
+  }, [campaigns, user])
 
   const getCampaignMode = (campaign) => {
     if (
@@ -69,11 +71,21 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     }
   }
 
+  const currentCampaign = activeCampaigns?.[0]
+  const isCampaignPlace =
+    user?.type === 'place' &&
+    currentCampaign?.users_permissions_users.find((el) => el.id === user?.id)
+  const hasActiveCampaign =
+    (currentCampaign?.mode === 'disponibilities' && isCampaignPlace) ||
+    currentCampaign?.mode === 'applications'
+
   return (
     <CampaignContext.Provider
       value={{
         activeCampaigns,
-        currentCampaign: activeCampaigns?.[0],
+        currentCampaign,
+        isCampaignPlace,
+        hasActiveCampaign,
         isLoading,
       }}
     >
