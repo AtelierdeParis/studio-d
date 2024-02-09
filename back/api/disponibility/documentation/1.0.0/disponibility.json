@@ -999,6 +999,9 @@
                   "type": "string"
                 }
               },
+              "applications_max": {
+                "type": "integer"
+              },
               "published_at": {
                 "type": "string"
               },

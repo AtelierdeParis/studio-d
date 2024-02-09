@@ -823,6 +823,9 @@
               }
             }
           },
+          "applications_max": {
+            "type": "integer"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -899,6 +902,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "applications_max": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
