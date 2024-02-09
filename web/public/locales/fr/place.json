@@ -24,13 +24,10 @@
   "tabs": {
     "info": "Informations",
     "image": "Images",
-<<<<<<< HEAD
     "slot": "Disponibilités ({{nb}})",
     "slot_solidarity": "Créneaux solidaires ({{nb}})",
-    "slot_campaign": "Créneaux {{title}} ({{nb}}/{{nbTotal}})"
-=======
-    "slot": "Disponibilités ({{nb}})"
->>>>>>> develop
+    "slot_campaign": "Créneaux {{title}} ({{nb}}/{{nbTotal}})",
+    "slot_campaign_applications": "Créneaux {{title}} ({{nb}})"
   },
   "form": {
     "migration": {
@@ -436,7 +433,10 @@
         },
         "schedule": {
           "title": "La période de candidatures est en cours : ",
-          "description": " vous ne pouvez plus ajouter de créneau mais pouvez, en cas de nécessité, annuler un créneau existant.\n  Attention, toute annulation de créneau est définitive et, si des candidatures ont été déposées, doit s’accompagner d’un message d’annulation envoyé aux artistes ayant candidaté."
+          "description": " vous ne pouvez plus ajouter de créneau mais pouvez, en cas de nécessité, annuler un créneau existant.\n  Attention, toute annulation de créneau est définitive et, si des candidatures ont été déposées, doit s’accompagner d’un message d’annulation envoyé aux artistes ayant candidaté.",
+          "open_applications_one": "créneau renseigné",
+          "open_applications_many": "créneaux renseignés",
+          "see_applications": "Voir les candidatures pour cet espace"
         }
       },
       "disponibilities": {

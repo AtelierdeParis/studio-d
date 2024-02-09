@@ -86,11 +86,16 @@ const PlaceTabList = ({
           isDisabled={!isComplete ? true : disabledIndexes.includes(3)}
           onClick={() => setIndex(3)}
         >
-          {t('tabs.slot_campaign', {
-            title: currentCampaign?.title,
-            nb: campaignDispo,
-            nbTotal: currentCampaign?.disponibilities_max,
-          })}
+          {t(
+            currentCampaign?.mode === 'disponibilities'
+              ? 'tabs.slot_campaign'
+              : 'tabs.slot_campaign_applications',
+            {
+              title: currentCampaign?.title,
+              nb: campaignDispo,
+              nbTotal: currentCampaign?.disponibilities_max,
+            },
+          )}
         </TabPlace>
       )}
     </TabList>

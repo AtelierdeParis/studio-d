@@ -82,7 +82,7 @@ const EditPlace = ({ slug }: Props) => {
             </TabPanel>
             {currentCampaign && (
               <TabPanel px={0}>
-                <CampaignPlaceSchedule place={place} isCampaignTab />
+                <CampaignPlaceSchedule place={place} />
               </TabPanel>
             )}
           </TabPanels>

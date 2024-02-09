@@ -53,21 +53,46 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
 
       <Box width="100%">
         <Text fontFamily="mabry medium" fontSize="3xl" lineHeight="1">
-          {campaignDispo}/{currentCampaign?.disponibilities_max}
+          {currentCampaign?.mode === 'disponibilities'
+            ? `${campaignDispo}/${currentCampaign?.disponibilities_max}`
+            : campaignDispo}
         </Text>
         <Text>
-          {t(`campaign.helpers.disponibilities.schedule.open_disponibilities`)}
+          {currentCampaign?.mode === 'disponibilities'
+            ? t(
+                `campaign.helpers.disponibilities.schedule.open_disponibilities`,
+              )
+            : t(
+                `campaign.helpers.applications.schedule.${
+                  campaignDispo <= 1
+                    ? 'open_applications_one'
+                    : 'open_applications_many'
+                }`,
+              )}
         </Text>
       </Box>
-      <Button
-        size="lg"
-        alignSelf="flex-start"
-        mt={6}
-        onClick={showForm}
-        disabled={campaignDispo === currentCampaign?.disponibilities_max}
-      >
-        {isMobile ? t(`list.add`) : t(`schedule.add`)}
-      </Button>
+      {currentCampaign?.mode === 'disponibilities' ? (
+        <Button
+          size="lg"
+          alignSelf="flex-start"
+          mt={6}
+          onClick={showForm}
+          disabled={campaignDispo === currentCampaign?.disponibilities_max}
+        >
+          {isMobile ? t(`list.add`) : t(`schedule.add`)}
+        </Button>
+      ) : (
+        <Button
+          size="lg"
+          alignSelf="flex-start"
+          mt={6}
+          variant="outline"
+          colorScheme="blue"
+          onClick={showForm}
+        >
+          {t('campaign.helpers.applications.schedule.see_applications')}
+        </Button>
+      )}
     </VStack>
   )
 }
