@@ -51,7 +51,14 @@ const ScheduleForm = ({ place, hideForm }: Props) => {
   const [hideChoices, setHideChoices] = useState(false)
   const { errorToast, successToast } = useToast()
   const queryClient = useQueryClient()
-  const { register, errors, handleSubmit, watch, control } = useFormContext()
+  const {
+    register,
+    errors,
+    handleSubmit,
+    watch,
+    control,
+    getValues,
+  } = useFormContext()
   const { type, repeat, start, when } = watch([
     'type',
     'repeat',

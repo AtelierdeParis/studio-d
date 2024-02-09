@@ -73,6 +73,15 @@
     "applications": {
       "via": "disponibility",
       "collection": "application"
+    },
+    "staff": {
+      "type": "json"
+    },
+    "accomodation": {
+      "type": "integer"
+    },
+    "scene_grid": {
+      "type": "boolean"
     }
   }
 }

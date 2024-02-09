@@ -105,6 +105,9 @@ export interface Application {
     message?: string;
     campaign?: string;
     applications?: string[];
+    staff?: object;
+    accomodation?: number;
+    scene_grid?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -196,12 +199,22 @@ export interface Campaign {
     message?: string;
     campaign?: string;
     applications?: string[];
+    staff?: object;
+    accomodation?: number;
+    scene_grid?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
   }[];
   title?: string;
   description?: string;
+  disponibilities_max: number;
+
+  /** @format date */
+  campaign_start?: string;
+
+  /** @format date */
+  campaign_end?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -231,6 +244,13 @@ export interface NewCampaign {
   disponibilities?: string[];
   title?: string;
   description?: string;
+  disponibilities_max: number;
+
+  /** @format date */
+  campaign_start?: string;
+
+  /** @format date */
+  campaign_end?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -419,6 +439,9 @@ export interface Disponibility {
     disponibilities?: string[];
     title?: string;
     description?: string;
+    disponibilities_max: number;
+    campaign_start?: string;
+    campaign_end?: string;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -431,6 +454,9 @@ export interface Disponibility {
     created_by?: string;
     updated_by?: string;
   }[];
+  staff?: object;
+  accomodation?: number;
+  scene_grid?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -452,6 +478,9 @@ export interface NewDisponibility {
   message?: string;
   campaign?: string;
   applications?: string[];
+  staff?: object;
+  accomodation?: number;
+  scene_grid?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -475,6 +504,9 @@ export interface Dispositif {
     message?: string;
     campaign?: string;
     applications?: string[];
+    staff?: object;
+    accomodation?: number;
+    scene_grid?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;

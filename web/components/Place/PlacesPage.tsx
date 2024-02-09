@@ -28,7 +28,7 @@ import { NextSeo } from 'next-seo'
 import { formatSearchToQuery } from '~utils/search'
 import { ROUTE_PLACES } from '~constants'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import CampaignHelper from '~components/Campaign/CampaignHelper'
+import CampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
 
 const styleSelected = {
   color: 'blue.500',
@@ -111,8 +111,6 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
       query: formatSearchToQuery(data),
     })
   }
-
-  console.log(places, 'places')
 
   return (
     <Container px={0}>

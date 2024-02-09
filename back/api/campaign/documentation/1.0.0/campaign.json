@@ -523,7 +523,8 @@
           "application_start",
           "application_end",
           "preselection_start",
-          "preselection_end"
+          "preselection_end",
+          "disponibilities_max"
         ],
         "properties": {
           "id": {
@@ -627,6 +628,15 @@
                     "type": "string"
                   }
                 },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -645,6 +655,17 @@
           "description": {
             "type": "string"
           },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -659,7 +680,8 @@
           "application_start",
           "application_end",
           "preselection_start",
-          "preselection_end"
+          "preselection_end",
+          "disponibilities_max"
         ],
         "properties": {
           "duration": {
@@ -703,6 +725,17 @@
           },
           "description": {
             "type": "string"
+          },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",

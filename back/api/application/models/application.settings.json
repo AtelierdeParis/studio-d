@@ -17,8 +17,8 @@
       "via": "applications"
     },
     "disponibility": {
-      "model": "disponibility",
-      "via": "applications"
+      "via": "applications",
+      "model": "disponibility"
     }
   }
 }

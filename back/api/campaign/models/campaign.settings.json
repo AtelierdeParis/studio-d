@@ -54,6 +54,17 @@
     },
     "description": {
       "type": "text"
+    },
+    "disponibilities_max": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    },
+    "campaign_start": {
+      "type": "date"
+    },
+    "campaign_end": {
+      "type": "date"
     }
   }
 }

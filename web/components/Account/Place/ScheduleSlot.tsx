@@ -50,7 +50,14 @@ const getStyle = (status) => {
   }
 }
 
-const Event = ({ status = null, when = null, range = null, id = null }) => {
+const Event = ({
+  status = null,
+  when = null,
+  range = null,
+  id = null,
+  isCampaignEvent = false,
+  isCampaignMode = false,
+}) => {
   const { setToDelete, eventsIdToDelete, place } = useContext(ScheduleContext)
   const isPeriod = useMemo(() => {
     if (!range) return null
@@ -62,6 +69,9 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
     id,
   ])
 
+  const isDisabled =
+    (isCampaignMode && !isCampaignEvent) || (!isCampaignMode && isCampaignEvent)
+
   return (
     <Box
       className="scheduleEvent"
@@ -70,8 +80,9 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       borderWidth={{ base: '1px', sm: '2px' }}
       w="100%"
       borderRadius="md"
-      cursor={id && 'pointer'}
+      cursor={isDisabled ? 'not-allowed' : id ? 'pointer' : undefined}
       onClick={() => {
+        if (isDisabled) return
         if (!id) return setToDelete([])
         const dispo = place.disponibilities.find((dispo) => dispo.id === id)
         if (!dispo) return
@@ -103,6 +114,7 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       }}
       borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
+      opacity={isDisabled ? 0.2 : 1}
     >
       {isPeriod && <PeriodEvent isMonth start={range.start} end={range.end} />}
     </Box>
@@ -143,6 +155,8 @@ interface Props {
   status?: 'selected' | 'available'
   hasEventSameDay?: boolean
   range: { start: Date; end: Date }
+  isCampaignEvent?: boolean
+  isCampaignMode?: boolean
 }
 
 const ScheduleSlot = (props: Props) => {

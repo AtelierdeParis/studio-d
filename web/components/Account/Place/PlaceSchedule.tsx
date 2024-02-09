@@ -14,9 +14,10 @@ import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 
 interface Props {
   place: Espace
+  isCampaignTab?: boolean
 }
 
-const PlaceSchedule = ({ place }: Props) => {
+const PlaceSchedule = ({ place, isCampaignTab }: Props) => {
   const isLarge = useBreakpointValue({ base: false, xl: true })
   const form = useForm({
     resolver: yupResolver(schema),
@@ -29,7 +30,7 @@ const PlaceSchedule = ({ place }: Props) => {
           direction={{ base: 'column-reverse', schedule: 'row' }}
           pb={{ base: 8, lg: 4 }}
         >
-          {!isLarge && (
+          {!isLarge && !isCampaignTab && (
             <>
               <ScheduleAbout place={place} />
               <ScheduleRecap place={place} />

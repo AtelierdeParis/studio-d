@@ -6,7 +6,7 @@ import Image from '~components/Image'
 import SwiperCore, { Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import HomeSearch from '~components/Home/HomeSearch'
-import HomeCampaignInsert from '~components/Campaign/HomeInsert/HomeCampaignInsert'
+import HomeCampaignInsert from '~components/Campaign/Home/HomeCampaignInsert'
 import HomeActions from '~components/Home/HomeActions'
 
 SwiperCore.use([Autoplay])

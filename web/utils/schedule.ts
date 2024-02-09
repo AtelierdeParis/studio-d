@@ -21,6 +21,7 @@ export const createScheduleEventObj = ({
   status = 'selected',
   id = null,
   hasEventSameDay = false,
+  isCampaignEvent = false,
 }): ScheduleEvent => {
   return {
     start: new Date(start),
@@ -31,6 +32,7 @@ export const createScheduleEventObj = ({
       status,
       type,
       hasEventSameDay,
+      isCampaignEvent,
     },
   }
 }
@@ -103,6 +105,7 @@ export const createOldEvents = (
         status: dispo.status,
         type: dispo.type,
         hasEventSameDay: checkIfEventSameDay(dispo, array),
+        isCampaignEvent: Boolean(dispo?.campaign),
       })
     })
 }
@@ -144,6 +147,7 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
             start,
             when: form.when,
             type: form.type,
+            isCampaignEvent: form.isCampaignEvent,
           }),
         ),
       )
@@ -153,6 +157,7 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
           start: transformedStart,
           when: form.when,
           type: form.type,
+          isCampaignEvent: form.isCampaignEvent,
         }),
       )
     }
@@ -176,6 +181,7 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
         createScheduleEventObj({
           start,
           end,
+          isCampaignEvent: form.isCampaignEvent,
         }),
       )
     }
