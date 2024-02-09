@@ -49,6 +49,7 @@ const PlaceTabList = ({
   }, [place])
 
   const campaignDispo = useMemo(() => {
+    if (!place || !place.disponibilities) return 0
     return place.disponibilities.filter(
       //@ts-expect-error
       (dispo) => dispo.campaign === currentCampaign?.id,
