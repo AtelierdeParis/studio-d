@@ -60,7 +60,7 @@ const HomePlaces = ({ campaign }: Props) => {
             : t('places.title')}
         </Text>
         {campaign && (
-          <Tag status="campaign">
+          <Tag status="campaign" padding={2} fontSize="sm">
             {tCommon('campaign.open', {
               date: format(new Date(campaign?.limitDate), 'd MMMM yyyy'),
             })}

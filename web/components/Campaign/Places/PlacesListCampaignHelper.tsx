@@ -17,6 +17,7 @@ const PlacesListCampaignHelper = ({
       paddingX={8}
       paddingY={2}
       marginBottom={4}
+      spacing={'1rem'}
       {...props}
     >
       <Text flex={4}>
@@ -25,7 +26,9 @@ const PlacesListCampaignHelper = ({
             ? t('campaign.helper_title', { title: campaign?.title })
             : t('solidarity.helper_title')}
         </Text>
-        {campaign ? campaign.description : t('solidarity.helper')}
+        <Text noOfLines={{ base: 4, md: 3, lg: 2 }}>
+          {campaign ? campaign.description : t('solidarity.helper')}
+        </Text>
       </Text>
       <Flex flex={1} justifyContent="flex-end">
         <Button
