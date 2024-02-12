@@ -74,7 +74,9 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
             <Box position="relative">
               <Tag
                 status="campaign"
-                style={{ position: 'absolute', top: 0, right: 0, zIndex: 2 }}
+                style={{ position: 'absolute', top: 4, right: 4, zIndex: 2 }}
+                paddingX={'9px'}
+                paddingY={'5px'}
               >
                 {tCommon('campaign.partner', {
                   title: currentCampaign?.title,
