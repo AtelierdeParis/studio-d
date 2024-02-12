@@ -48,6 +48,7 @@ const InputMultiSelect = ({
         }}
         onChange={onChange}
         isDisabled={isDisabled}
+        value={options?.filter((el) => field.value?.includes(el.value))}
       />
     </FormField>
   )

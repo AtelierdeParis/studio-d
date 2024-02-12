@@ -38,6 +38,13 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
               end: event.end,
             }),
           )
+          // Prevent user from selecting a start day to close from other period
+          total.push(
+            eachDayOfInterval({
+              start: subDays(event.start, currentCampaign.duration - 1),
+              end: event.start,
+            }),
+          )
         } else if (event.extendedProps.type === 'day') {
           total.push(event.start)
         } else if (

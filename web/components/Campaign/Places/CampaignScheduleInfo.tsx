@@ -30,7 +30,9 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
   const isMobile = useBreakpointValue({ base: true, sm: false })
   const { eventsIdToDelete } = useContext(ScheduleContext)
 
-  if (eventsIdToDelete.length > 0) return <ScheduleDelete />
+  if (eventsIdToDelete.length > 0) {
+    return <ScheduleDelete />
+  }
 
   return (
     <VStack spacing={4}>

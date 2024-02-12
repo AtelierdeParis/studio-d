@@ -5,7 +5,7 @@ import Link from '~components/Link'
 import { Box, Button, Text, Flex, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Add from 'public/assets/img/add.svg'
-import PlaceListItem from '~components/Account/Place/PlaceListItem'
+import PlaceListItem from '~components/Account/Place/ListItem/PlaceListItem'
 import MigrationMessage from '~components/MigrationMessage'
 
 interface Props {
