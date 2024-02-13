@@ -1,19 +1,15 @@
-import {
-  Box,
-  VStack,
-  Text,
-  Flex,
-  Button,
-  Divider,
-  HStack,
-} from '@chakra-ui/react'
+import { Box, VStack, Text, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import useNbDisponibility from '~hooks/useNbDisponibility'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
 import Tag from '~components/Tag'
 import { DisponibilityStatus } from '~@types/disponibility.d'
-import { ROUTE_ACCOUNT_REQUEST, ROUTE_ACCOUNT_BOOKING } from '~constants'
+import {
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_ACCOUNT_PLACE_DETAIL,
+  ROUTE_ACCOUNT_BOOKING,
+} from '~constants'
 import Link from '~components/Link'
 import useNbBooking from '~hooks/useNbBooking'
 import NoContent from '~components/Account/Place/ListItem/NoContent'
@@ -24,7 +20,7 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
   const { coming, past, pending } = useNbBooking(place.disponibilities)
 
   return (
-    <VStack alignItems="flex-start">
+    <VStack alignItems="flex-start" width="100%">
       <HStack borderBottom="1px solid" borderColor={'gray.100'} width="100%">
         <Box
           width="auto"
@@ -39,7 +35,7 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
         </Box>
       </HStack>
 
-      <VStack alignItems="flex-start" spacing={0}>
+      <VStack alignItems="flex-start" spacing={0} width="100%">
         {/* Disponibilities */}
         <HStack
           alignItems="flex-start"
@@ -47,8 +43,17 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
           borderBottom="1px solid"
           borderColor="gray.100"
           paddingY={2}
+          width="100%"
         >
-          <Text color="gray.500" flex={1}>
+          <Text
+            color="gray.500"
+            flex={1}
+            as={Link}
+            href={{
+              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+              query: { id: place.slug, index: 2 },
+            }}
+          >
             <Text color="gray.500">{t('list.disponibility')}</Text>
           </Text>
 
@@ -88,7 +93,15 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
           paddingY={3}
         >
           <Box flex={1}>
-            <Text color="gray.500">{t('list.requests')}</Text>
+            <Text
+              color="gray.500"
+              as={Link}
+              href={{
+                pathname: ROUTE_ACCOUNT_REQUEST,
+              }}
+            >
+              {t('list.requests')}
+            </Text>
           </Box>
 
           <Box flex={2}>
@@ -106,7 +119,14 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
 
         {/* Bookings */}
         <HStack alignItems="stretch" width="100%" spacing={4} paddingY={3}>
-          <Text color="gray.500" flex={1}>
+          <Text
+            color="gray.500"
+            flex={1}
+            as={Link}
+            href={{
+              pathname: ROUTE_ACCOUNT_BOOKING,
+            }}
+          >
             {t('list.bookings')}
           </Text>
 
