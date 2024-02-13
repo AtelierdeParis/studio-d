@@ -29,14 +29,9 @@ const DeletePlaceModal = ({ placeId }: IDeletePlaceModal) => {
       w="100%"
       button={
         <Button
-          w="100%"
-          variant="line"
-          alignSelf="flex-start"
-          px={{ base: 3, lg: 0 }}
-          py={{ base: 1.5, lg: 0 }}
-          justifyContent={{ base: 'flex-start', lg: 'center' }}
-          _hover={{ borderBottomColor: { base: 'transparent', lg: 'black' } }}
-          borderBottomColor={{ base: 'transparent', lg: 'blue.500' }}
+          variant="grayLine"
+          paddingX="4px!important"
+          height="30px!important"
         >
           {t('list.delete')}
         </Button>

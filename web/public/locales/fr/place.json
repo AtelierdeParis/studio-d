@@ -144,7 +144,11 @@
     "filledUntil": "Renseignés jusqu’au {{date}}",
     "nbPending": "{{nb}} en attente",
     "nbBooking": "{{nb}} à venir",
-    "nbPassed": "{{nb}} passées"
+    "nbPassed": "{{nb}} passées",
+    "solidarity_slots": "Créneaux solidaires",
+    "campaign_slots": "Créneaux {{title}}",
+    "slots_filled": "{{nb}}/{{nbTotal}} créneaux renseignés",
+    "fill_before": "À remplir avant le {{date}}"
   },
   "search": {
     "noResult": {
