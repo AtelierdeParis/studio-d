@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Box, Stack } from '@chakra-ui/react'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -10,6 +10,8 @@ import CampaignScheduleForm from '~components/Campaign/Places/CampaignScheduleFo
 import CampaignScheduleInfo from '~components/Campaign/Places/CampaignScheduleInfo'
 import * as yup from 'yup'
 import { useTranslation } from 'next-i18next'
+import ScheduleContext from '~components/Account/Place/ScheduleContext'
+import { ScheduleEventWhen, ScheduleEventType } from '~@types/schedule-event.d'
 
 interface Props {
   place: Espace
@@ -31,7 +33,11 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
       .nullable()
       .required(),
     isCampaignEvent: yup.boolean().required(t('mixed.required')),
-    staff: yup.array().required(t('mixed.required')),
+    staff: yup
+      .array()
+      .of(yup.string())
+      .min(1, t('mixed.required'))
+      .required(t('mixed.required')),
     scene_grid: yup
       .boolean()
       .typeError(t('mixed.required'))
@@ -40,12 +46,20 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
   })
   const form = useForm<CampaignScheduleFormValues>({
     resolver: yupResolver(campaignScheduleSchema),
+    reValidateMode: 'onChange',
     defaultValues: {
-      type: 'period',
+      type: ScheduleEventType.PERIOD,
       isCampaignEvent: true,
     },
   })
+  const { eventsIdToDelete } = useContext(ScheduleContext)
   const [showForm, setShowForm] = useState(false)
+
+  useEffect(() => {
+    if (eventsIdToDelete.length > 0) {
+      setShowForm(false)
+    }
+  }, [eventsIdToDelete.length])
 
   return (
     <FormProvider {...form}>

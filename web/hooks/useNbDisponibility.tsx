@@ -30,7 +30,9 @@ const useNbDisponibility = (disponibilities: Disponibility[] = []) => {
         {
           nbDispo:
             disponibilities.filter(
-              (dispo) => !['past', 'canceled'].includes(dispo.status),
+              (dispo) =>
+                !['past', 'canceled'].includes(dispo.status) &&
+                dispo.campaign === null,
             ).length || 0,
           available: [],
           booked: [],

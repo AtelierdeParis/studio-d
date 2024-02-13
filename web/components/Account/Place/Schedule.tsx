@@ -9,8 +9,10 @@ import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useFormContext } from 'react-hook-form'
 import isSameDay from 'date-fns/isSameDay'
 import isToday from 'date-fns/isToday'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
+  const { currentCampaign } = useCampaignContext()
   const { watch } = useFormContext()
   const { start } = watch(['start'])
   const { oldEvents, newEvents, setToDelete, eventsIdToDelete } = useContext(
@@ -120,6 +122,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
         nextDayThreshold="00:00"
         events={events}
         locale={frLocale}
+        initialDate={isCampaignMode && currentCampaign?.campaign_start}
       />
     </Flex>
   )

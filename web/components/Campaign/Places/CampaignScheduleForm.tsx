@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'next-i18next'
 import {
   HStack,
@@ -8,6 +8,9 @@ import {
   Input,
   Select,
   Text,
+  InputGroup,
+  InputRightElement,
+  CloseButton,
 } from '@chakra-ui/react'
 import { useFormContext } from 'react-hook-form'
 import FormField from '~components/FormField'
@@ -37,12 +40,21 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
   const {
     errors,
     handleSubmit,
-    getValues,
     register,
     control,
     reset,
     clearErrors,
+    watch,
+    setValue,
   } = useFormContext()
+
+  const staff = watch('staff')
+
+  useEffect(() => {
+    if (staff?.includes('no') && staff?.length > 1) {
+      setValue('staff', ['no'])
+    }
+  }, [staff])
 
   const submitForm = async ({
     start,
@@ -52,25 +64,34 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
     scene_grid,
   }) => {
     setLoading(true)
-    client.disponibilities
-      .disponibilitiesCreate({
-        start: setHours(start, 6).toISOString(),
-        end: setHours(end, 23).toISOString(),
-        type: 'period',
-        when: null,
-        espace: place.id,
-        staff,
-        campaign: currentCampaign.id,
-        accomodation,
-        scene_grid,
-        status: 'available',
-      })
+
+    client.bulk
+      .disponibilitiesCreate([
+        {
+          start: setHours(start, 6).toISOString(),
+          end: setHours(end, 23).toISOString(),
+          type: 'period',
+          when: null,
+          //@ts-expect-error
+          espace: place.id,
+          staff,
+          //@ts-expect-error
+          campaign: currentCampaign.id,
+          accomodation,
+          scene_grid,
+          status: 'available',
+        },
+      ])
       .then((res) => {
+        console.log(res.data, 'RES DATA')
         queryClient.setQueryData(['place', place.slug], {
           ...place,
           disponibilities: [
             ...place.disponibilities,
-            { ...res.data, campaign: res.data?.campaign?.id },
+            ...res.data.map((el) => ({
+              ...el,
+              campaign: currentCampaign.id,
+            })),
           ],
         })
         successToast(t('schedule.success'))
@@ -109,15 +130,35 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
             </Text>
             <CampaignDatePicker control={control} />
 
-            <InputMultiSelect
-              name="staff"
-              label={t('campaign.schedule.staff.label')}
-              placeholder={t('campaign.schedule.staff.placeholder')}
-              options={STAFF_VALUES.map((el) => ({
-                value: el,
-                label: t(`campaign.schedule.staff.${el}`),
-              }))}
-            />
+            <Box display={staff?.includes('no') && 'none'} width="100%">
+              <InputMultiSelect
+                name="staff"
+                label={t('campaign.schedule.staff.label')}
+                placeholder={t('campaign.schedule.staff.placeholder')}
+                options={STAFF_VALUES.map((el) => ({
+                  value: el,
+                  label: t(`campaign.schedule.staff.${el}`),
+                }))}
+              />
+            </Box>
+            {staff?.includes('no') && (
+              <InputGroup size="md">
+                <Input
+                  pr="4.5rem"
+                  value={t(`campaign.schedule.staff.no`) as string}
+                  disabled
+                />
+                <InputRightElement width="4.5rem">
+                  <CloseButton
+                    backgroundColor="transparent!important"
+                    onClick={() => {
+                      setValue('staff', [])
+                    }}
+                  />
+                </InputRightElement>
+              </InputGroup>
+            )}
+
             <HStack width="100%" alignItems="flex-start">
               <FormField
                 label={t('campaign.schedule.accomodation.label')}
@@ -156,7 +197,6 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
                 </Select>
               </FormField>
             </HStack>
-
             <HStack justifyContent="flex-end" width="100%">
               <Button
                 variant="unstyled"
