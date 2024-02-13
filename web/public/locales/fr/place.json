@@ -160,6 +160,8 @@
     "nbPlaces": "{{nb}} espaces inscrits",
     "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
     "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
+    "nbCampaignPlaceWithDispo": "{{nb}} espace partenaire du dispositif",
+    "nbCampaignPlacesWithDispos": "{{nb}} espaces partenaires du dispositif",
     "where": {
       "label": "Où cherchez-vous ?",
       "placeholder": "Renseignez une ville…"
@@ -212,6 +214,7 @@
     }
   },
   "card": {
+    "to": "au",
     "city": "Ville",
     "surface": "Surface",
     "dim": "Dim.",
@@ -221,7 +224,8 @@
     "thisWeek": "{{nb}} créneau cette semaine",
     "thisWeeks": "{{nb}} créneaux cette semaine",
     "nextWeek": "{{nb}} créneau la semaine prochaine",
-    "nextWeeks": "{{nb}} créneaux la semaine prochaine"
+    "nextWeeks": "{{nb}} créneaux la semaine prochaine",
+    "dates": "Dates"
   },
   "schedule": {
     "nbDays": "{{nb}} jours",

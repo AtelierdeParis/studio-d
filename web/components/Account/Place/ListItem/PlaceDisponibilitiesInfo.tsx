@@ -69,13 +69,14 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
                 <Text color="red.600">{t('list.noDisponibility')}</Text>
               )}
             </Box>
-            {place.filledUntil ? (
+            {Boolean(place.filledUntil) && (
               <Text>
                 {t(`list.filledUntil`, {
                   date: format(place.filledUntil),
                 })}
               </Text>
-            ) : (
+            )}
+            {!Boolean(place.filledUntil) && !Boolean(place.published) && (
               <Text pt={2} color="red.600" fontSize="sm">
                 {t('list.needDispo')}
               </Text>

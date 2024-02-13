@@ -68,7 +68,7 @@ const HomePlaces = ({ campaign }: Props) => {
         )}
       </HStack>
 
-      <PlacesListCampaignHelper campaign={campaign} />
+      <PlacesListCampaignHelper campaign={campaign} limitLines />
 
       <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} />
       <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>

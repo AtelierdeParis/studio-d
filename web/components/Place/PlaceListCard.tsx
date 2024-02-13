@@ -13,13 +13,15 @@ import { ROUTE_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
 import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
+import { format } from '~utils/date'
 
 interface Props {
   place: Espace
   setFocus: (idPlace: string) => void
+  isCampaignTab?: boolean
 }
 
-const PlaceCard = ({ place, setFocus }: Props) => {
+const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
   const { t } = useTranslation('place')
 
   return (
@@ -77,6 +79,28 @@ const PlaceCard = ({ place, setFocus }: Props) => {
               <Text>{`${place.surface}m²`}</Text>
               <Text color="gray.500">{t('card.dim')}</Text>
               <Text>{`${place.roomLength} x ${place.width} m`}</Text>
+              {isCampaignTab && (
+                <>
+                  <Text color="gray.500" pr={9}>
+                    {t('card.dates')}
+                  </Text>
+                  <Box>
+                    {place?.disponibilities
+                      ?.filter((el) => Boolean(el?.campaign))
+                      .map((el) => (
+                        <Text>
+                          {`${format(el.start, 'dd/MM')} ${t('card.to')}
+                      ${format(el.end, 'dd/MM')}`}
+                        </Text>
+                      ))}
+                  </Box>
+                </>
+              )}
+              {isCampaignTab && (
+                <Flex w="100%">
+                  <Text isTruncated></Text>
+                </Flex>
+              )}
             </SimpleGrid>
           </Box>
         </Flex>
