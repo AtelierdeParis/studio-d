@@ -48,7 +48,6 @@ module.exports = {
       }
     }
 
-    console.log(query)
 
     let places = await strapi.services.espace
       .find(
