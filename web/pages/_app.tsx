@@ -18,6 +18,7 @@ import 'swiper/swiper-bundle.min.css'
 import '@fullcalendar/common/main.css'
 import '@fullcalendar/daygrid/main.css'
 import CampaignProvider from '~components/Campaign/CampaignProvider'
+// import './schedule.css'
 
 let ErrorBoundary: BugsnagErrorBoundary
 

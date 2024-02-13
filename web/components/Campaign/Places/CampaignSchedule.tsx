@@ -20,6 +20,8 @@ interface Props {
 interface CampaignScheduleFormValues {
   type: string
   isCampaignEvent: boolean
+  exclude_days: string[]
+  offWeekDays: number[]
 }
 
 const CampaignPlaceSchedule = ({ place }: Props) => {
@@ -43,6 +45,7 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
       .typeError(t('mixed.required'))
       .required(t('mixed.required')),
     exclude_days: yup.array(),
+    offWeekDays: yup.array(),
   })
   const form = useForm<CampaignScheduleFormValues>({
     resolver: yupResolver(campaignScheduleSchema),
@@ -50,6 +53,7 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
     defaultValues: {
       type: ScheduleEventType.PERIOD,
       isCampaignEvent: true,
+      offWeekDays: [],
     },
   })
   const { eventsIdToDelete } = useContext(ScheduleContext)
@@ -65,9 +69,9 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
         <Stack direction={{ base: 'column-reverse', lg: 'row' }} spacing={4}>
-          <Box flex={1}>
+          <Stack flex={1} alignItems="stretch">
             <Schedule isCampaignMode />
-          </Box>
+          </Stack>
 
           <Box flex={1}>
             {showForm ? (

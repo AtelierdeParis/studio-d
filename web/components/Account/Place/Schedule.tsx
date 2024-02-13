@@ -10,6 +10,26 @@ import { useFormContext } from 'react-hook-form'
 import isSameDay from 'date-fns/isSameDay'
 import isToday from 'date-fns/isToday'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { format } from '~utils/date'
+import styled from '@emotion/styled'
+
+export const StyleWrapper = styled.div`
+  ${(props) => props.className} {
+    background: repeating-linear-gradient(
+      -45deg,
+      white,
+      white 5px,
+      #ebecf2 5px,
+      #ebecf2 10px
+    );
+    inset: 0;
+    display: block;
+    position: absolute;
+    z-index: 20;
+    border-radius: 8px;
+    margin: 3px 2px 3px 2px;
+  }
+`
 
 const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
   const { currentCampaign } = useCampaignContext()
@@ -76,6 +96,40 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
       })
   }, [oldEvents, newEvents])
 
+  // useEffect(() => {
+  // const events = [...oldEvents, ...newEvents]
+
+  // events.forEach((event) => {
+  //   const dates = event?.extendedProps?.exclude_days?.map((el) =>
+  //     format(el, 'yyyy-MM-dd'),
+  //   )
+
+  //   dates?.map((date) => {
+  //     const elements = document.querySelectorAll(`[data-date="${date}"]`)
+  //     elements.forEach((element) => {
+  //       element.classList.add('my-custom-class')
+  //     })
+  //   })
+  // })
+  // }, [oldEvents, newEvents])
+
+  const excludedDaysClassName = useMemo(() => {
+    // td[data-date=“2024-02-16"]::after
+    let classNames = []
+    const events = [...oldEvents, ...newEvents]
+
+    events.forEach((event) => {
+      const dates = event?.extendedProps?.exclude_days?.map((el) =>
+        format(el, 'yyyy-MM-dd'),
+      )
+
+      dates?.map((date) => {
+        classNames.push(`[data-date='${date}'] .fc-daygrid-day-frame:after`)
+      })
+    })
+    return classNames.join(', ')
+  }, [oldEvents, newEvents])
+
   return (
     <Flex
       w={{ base: 'calc(100% + 1.5rem)', md: '100%', schedule: '600px' }}
@@ -89,41 +143,43 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
       id="calendar"
       className="account-schedule"
     >
-      <FullCalendar
-        ref={scheduleRef}
-        plugins={[dayGridPlugin, interactionPlugin, view]}
-        initialView="custom"
-        headerToolbar={{
-          start: 'prev',
-          center: 'title',
-          end: 'next',
-        }}
-        dayCellContent={(day) => {
-          const hasEvent = events.some((event) =>
-            isSameDay(event.start, day.date),
-          )
+      <StyleWrapper className={excludedDaysClassName}>
+        <FullCalendar
+          ref={scheduleRef}
+          plugins={[dayGridPlugin, interactionPlugin, view]}
+          initialView="custom"
+          headerToolbar={{
+            start: 'prev',
+            center: 'title',
+            end: 'next',
+          }}
+          initialDate={isCampaignMode && currentCampaign?.campaign_start}
+          dayCellContent={(day) => {
+            const hasEvent = events.some((event) =>
+              isSameDay(event.start, day.date),
+            )
 
-          return (
-            <Box
-              color={hasEvent && 'black'}
-              borderBottom={isToday(day.date) && '1px solid orange'}
-              lineHeight="1"
-              fontSize={{ base: '11px', sm: 'sm', md: 'md' }}
-              pt={{ base: 0, sm: 0.5 }}
-            >
-              {day.dayNumberText}
-            </Box>
-          )
-        }}
-        dateClick={() => {
-          if (eventsIdToDelete.length > 0) setToDelete([])
-        }}
-        fixedWeekCount={false}
-        nextDayThreshold="00:00"
-        events={events}
-        locale={frLocale}
-        initialDate={isCampaignMode && currentCampaign?.campaign_start}
-      />
+            return (
+              <Box
+                color={hasEvent && 'black'}
+                borderBottom={isToday(day.date) && '1px solid orange'}
+                lineHeight="1"
+                fontSize={{ base: '11px', sm: 'sm', md: 'md' }}
+                pt={{ base: 0, sm: 0.5 }}
+              >
+                {day.dayNumberText}
+              </Box>
+            )
+          }}
+          dateClick={() => {
+            if (eventsIdToDelete.length > 0) setToDelete([])
+          }}
+          fixedWeekCount={false}
+          nextDayThreshold="00:00"
+          events={events}
+          locale={frLocale}
+        />
+      </StyleWrapper>
     </Flex>
   )
 }

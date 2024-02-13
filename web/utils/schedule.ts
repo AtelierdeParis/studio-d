@@ -22,6 +22,7 @@ export const createScheduleEventObj = ({
   id = null,
   hasEventSameDay = false,
   isCampaignEvent = false,
+  ...props
 }): ScheduleEvent => {
   return {
     start: new Date(start),
@@ -33,6 +34,7 @@ export const createScheduleEventObj = ({
       type,
       hasEventSameDay,
       isCampaignEvent,
+      ...props,
     },
   }
 }
@@ -106,6 +108,7 @@ export const createOldEvents = (
         type: dispo.type,
         hasEventSameDay: checkIfEventSameDay(dispo, array),
         isCampaignEvent: Boolean(dispo?.campaign),
+        exclude_days: dispo?.exclude_days as string[],
       })
     })
 }
@@ -147,7 +150,6 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
             start,
             when: form.when,
             type: form.type,
-            isCampaignEvent: form.isCampaignEvent,
           }),
         ),
       )
@@ -157,7 +159,6 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
           start: transformedStart,
           when: form.when,
           type: form.type,
-          isCampaignEvent: form.isCampaignEvent,
         }),
       )
     }
@@ -182,6 +183,7 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
           start,
           end,
           isCampaignEvent: form.isCampaignEvent,
+          exclude_days: form.exclude_days,
         }),
       )
     }

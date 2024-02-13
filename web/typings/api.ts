@@ -109,6 +109,7 @@ export interface Application {
     staff?: object;
     accomodation?: number;
     scene_grid?: boolean;
+    exclude_days?: object;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -203,6 +204,7 @@ export interface Campaign {
     staff?: object;
     accomodation?: number;
     scene_grid?: boolean;
+    exclude_days?: object;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -256,6 +258,7 @@ export interface Campaign {
     created_by?: string;
     updated_by?: string;
   }[];
+  applications_max?: number;
 
   /** @format date-time */
   published_at?: string;
@@ -293,6 +296,7 @@ export interface NewCampaign {
   /** @format date */
   campaign_end?: string;
   users_permissions_users?: string[];
+  applications_max?: number;
 
   /** @format date-time */
   published_at?: string;
@@ -485,6 +489,7 @@ export interface Disponibility {
     campaign_start?: string;
     campaign_end?: string;
     users_permissions_users?: string[];
+    applications_max?: number;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -500,6 +505,7 @@ export interface Disponibility {
   staff?: object;
   accomodation?: number;
   scene_grid?: boolean;
+  exclude_days?: object;
 
   /** @format date-time */
   published_at?: string;
@@ -524,6 +530,7 @@ export interface NewDisponibility {
   staff?: object;
   accomodation?: number;
   scene_grid?: boolean;
+  exclude_days?: object;
 
   /** @format date-time */
   published_at?: string;
@@ -550,6 +557,7 @@ export interface Dispositif {
     staff?: object;
     accomodation?: number;
     scene_grid?: boolean;
+    exclude_days?: object;
     published_at?: string;
     created_by?: string;
     updated_by?: string;

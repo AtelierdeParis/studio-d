@@ -62,6 +62,7 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
     staff,
     accomodation,
     scene_grid,
+    exclude_days,
   }) => {
     setLoading(true)
 
@@ -80,10 +81,10 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
           accomodation,
           scene_grid,
           status: 'available',
+          exclude_days,
         },
       ])
       .then((res) => {
-        console.log(res.data, 'RES DATA')
         queryClient.setQueryData(['place', place.slug], {
           ...place,
           disponibilities: [
