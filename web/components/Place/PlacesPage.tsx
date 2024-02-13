@@ -149,12 +149,10 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                       {isCampaignTab
                         ? t(
                             `search.${
-                              Object.keys(router.query).filter(
-                                (k) => k !== 'sortBy',
-                              ).length > 0
-                                ? 'nbCampaignPlaceWithDispo'
-                                : 'nbCampaignPlacesWithDispos'
-                            }${isPlural ? 's' : ''}`,
+                              isPlural
+                                ? 'nbCampaignPlacesWithDispos'
+                                : 'nbCampaignPlaceWithDispo'
+                            }`,
                             {
                               nb: nbPlaces,
                             },
