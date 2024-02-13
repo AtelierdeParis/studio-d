@@ -24,8 +24,6 @@ const SubInfo = ({ place, available, isMobile = false, isComplete = true }) => {
   const { t } = useTranslation('place')
   const { coming, past, pending } = useNbBooking(place.disponibilities)
 
-  console.log(place?.filledUntil)
-
   return (
     <Stack
       direction={{ base: 'column', lg: 'row' }}

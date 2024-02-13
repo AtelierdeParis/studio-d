@@ -13,7 +13,7 @@ const InputMultiSelect = ({
   label: string
   name: string
   placeholder: string
-  options: { label: string; value: string }[]
+  options: { label: string; value: string | number }[]
   isDisabled?: boolean
 }) => {
   const { errors, control } = useFormContext()

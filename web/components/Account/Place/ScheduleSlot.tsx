@@ -52,7 +52,6 @@ const getStyle = (status) => {
 
 const Event = ({
   status = null,
-  when = null,
   range = null,
   id = null,
   isCampaignEvent = false,
@@ -116,7 +115,14 @@ const Event = ({
       {...getStyle(status)}
       opacity={isDisabled ? 0.2 : 1}
     >
-      {isPeriod && <PeriodEvent isMonth start={range.start} end={range.end} />}
+      {isPeriod && (
+        <PeriodEvent
+          isMonth
+          start={range.start}
+          end={range.end}
+          isCampaignEvent={isCampaignEvent}
+        />
+      )}
     </Box>
   )
 }
@@ -157,6 +163,7 @@ interface Props {
   range: { start: Date; end: Date }
   isCampaignEvent?: boolean
   isCampaignMode?: boolean
+  day: Date
 }
 
 const ScheduleSlot = (props: Props) => {

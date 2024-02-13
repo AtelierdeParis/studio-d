@@ -1,25 +1,51 @@
 import React, { useEffect, useContext, useMemo } from 'react'
-import { Box, HStack, Input, Text, VStack } from '@chakra-ui/react'
+import { Box, HStack, Input } from '@chakra-ui/react'
 import InputDate from '~components/InputDate'
 import FormField from '~components/FormField'
 import { useTranslation } from 'next-i18next'
-import { ScheduleEventType } from '~@types/schedule-event.d'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import isSameDay from 'date-fns/isSameDay'
 import addDays from 'date-fns/addDays'
 import subDays from 'date-fns/subDays'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { format } from '~utils/date'
 import InputMultiSelect from '~components/InputMultiSelect'
 import { Control } from 'react-hook-form'
+
+const getEndDate = (
+  startDate: Date,
+  offWeekDays: number[],
+  duration: number,
+) => {
+  let exclude_days = []
+  let endDate = new Date(startDate)
+  let addedDays = 0
+
+  while (addedDays < duration - 1) {
+    const nextDate = addDays(endDate, 1)
+
+    if (!offWeekDays.includes(endDate.getDay())) {
+      ++addedDays
+    } else {
+      exclude_days.push(endDate.toString())
+    }
+    endDate = nextDate
+  }
+
+  return { endDate, exclude_days }
+}
 
 const CampaignDatePicker = ({ control }: { control?: Control }) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
-  const { errors, watch, setValue, register, getValues } = useFormContext()
-  const { type, start, when } = watch(['type', 'start', 'end', 'when'])
+  const { errors, watch, setValue, getValues } = useFormContext()
+  const { type, start, when, offWeekDays } = watch([
+    'type',
+    'start',
+    'when',
+    'offWeekDays',
+  ])
 
   const { oldEvents } = useContext(ScheduleContext)
 
@@ -63,10 +89,16 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
 
   useEffect(() => {
     if (start) {
-      const startDate = new Date(start)
-      setValue('end', addDays(startDate, currentCampaign?.duration - 1))
+      const { endDate, exclude_days } = getEndDate(
+        new Date(start),
+        offWeekDays,
+        currentCampaign?.duration,
+      )
+
+      setValue('end', endDate)
+      setValue('exclude_days', exclude_days)
     }
-  }, [start])
+  }, [offWeekDays, start])
 
   return (
     <HStack spacing={5} w="100%" alignItems="flex-start">
@@ -87,15 +119,22 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
       </Box>
 
       <InputMultiSelect
-        name="exclude_days"
+        name="offWeekDays"
         label={t('campaign.schedule.days_exclude.label')}
         placeholder={t('campaign.schedule.days_exclude.placeholder')}
         options={Array.from({ length: 7 }, (v, i) => ({
-          value: i.toString(),
+          value: i + 1,
           label: t(`campaign.schedule.days_exclude.${i}`),
         }))}
-        isDisabled={true}
       />
+      <Box display="none">
+        <Controller
+          as={<input />}
+          name="exclude_days"
+          control={control}
+          defaultValue={[]}
+        />
+      </Box>
     </HStack>
   )
 }

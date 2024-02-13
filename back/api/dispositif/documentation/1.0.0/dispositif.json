@@ -603,6 +603,9 @@
                 "scene_grid": {
                   "type": "boolean"
                 },
+                "exclude_days": {
+                  "type": "object"
+                },
                 "published_at": {
                   "type": "string"
                 },

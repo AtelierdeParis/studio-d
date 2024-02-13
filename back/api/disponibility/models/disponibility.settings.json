@@ -82,6 +82,9 @@
     },
     "scene_grid": {
       "type": "boolean"
+    },
+    "exclude_days": {
+      "type": "json"
     }
   }
 }
