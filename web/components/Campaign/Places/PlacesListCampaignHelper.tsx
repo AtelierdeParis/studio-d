@@ -6,8 +6,9 @@ import { ROUTE_PLACES } from '~constants'
 
 const PlacesListCampaignHelper = ({
   campaign,
+  limitLines,
   ...props
-}: { campaign?: ActiveCampaign } & StackProps) => {
+}: { campaign?: ActiveCampaign; limitLines?: boolean } & StackProps) => {
   const { t } = useTranslation('common')
 
   return (
@@ -26,7 +27,7 @@ const PlacesListCampaignHelper = ({
             ? t('campaign.helper_title', { title: campaign?.title })
             : t('solidarity.helper_title')}
         </Text>
-        <Text noOfLines={{ base: 4, md: 3, lg: 2 }}>
+        <Text noOfLines={limitLines ? { base: 4, md: 3, lg: 2 } : undefined}>
           {campaign ? campaign.description : t('solidarity.helper')}
         </Text>
       </Text>

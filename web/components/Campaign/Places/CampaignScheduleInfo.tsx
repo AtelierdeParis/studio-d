@@ -14,6 +14,7 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
+import Link from 'next/link'
 
 interface Props {
   place: Espace
@@ -90,7 +91,6 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           mt={6}
           variant="outline"
           colorScheme="blue"
-          onClick={showForm}
         >
           {t('campaign.helpers.applications.schedule.see_applications')}
         </Button>

@@ -45,7 +45,7 @@ module.exports = {
     const place = newDispo[0].espace;
 
     if (!place.filledUntil || isAfter(maxDate, new Date(place.filledUntil))) {
-      const data = { filledUntil: maxDate };
+      const data = newDispo?.campaign ? {}:{ filledUntil: maxDate };
       if (!place.filledUntil) {
         data["published"] = true;
       }

@@ -17,6 +17,7 @@ const populate = [
   "images",
   "files",
   "users_permissions_user",
+  "city"
 ];
 
 module.exports = {
@@ -46,6 +47,7 @@ module.exports = {
         delete query["city.name_eq"];
       }
     }
+
 
     let places = await strapi.services.espace
       .find(
@@ -77,6 +79,7 @@ module.exports = {
 
       return place;
     });
+
 
     if (isSortOnDisponibility) {
       if (_sort === "nbDispoDesc") {

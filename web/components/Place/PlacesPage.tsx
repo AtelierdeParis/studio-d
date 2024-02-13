@@ -132,7 +132,7 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
           </Stack>
         ) : (
           <Box>
-            <PlaceSearch onSubmit={onSubmit} />
+            <PlaceSearch onSubmit={onSubmit} isCampaignTab={isCampaignTab} />
           </Box>
         )}
         {!isLoading && !isFetching && places?.pages?.flat().length === 0 ? (
@@ -146,18 +146,31 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                   <>
                     <Arrow />
                     <Text textStyle="h2" pl={4}>
-                      {t(
-                        `search.${
-                          Object.keys(router.query).filter(
-                            (k) => k !== 'sortBy',
-                          ).length > 0
-                            ? 'nbPlacesWithDispo'
-                            : 'nbPlace'
-                        }${isPlural ? 's' : ''}`,
-                        {
-                          nb: nbPlaces,
-                        },
-                      )}
+                      {isCampaignTab
+                        ? t(
+                            `search.${
+                              Object.keys(router.query).filter(
+                                (k) => k !== 'sortBy',
+                              ).length > 0
+                                ? 'nbCampaignPlaceWithDispo'
+                                : 'nbCampaignPlacesWithDispos'
+                            }${isPlural ? 's' : ''}`,
+                            {
+                              nb: nbPlaces,
+                            },
+                          )
+                        : t(
+                            `search.${
+                              Object.keys(router.query).filter(
+                                (k) => k !== 'sortBy',
+                              ).length > 0
+                                ? 'nbPlacesWithDispo'
+                                : 'nbPlace'
+                            }${isPlural ? 's' : ''}`,
+                            {
+                              nb: nbPlaces,
+                            },
+                          )}
                     </Text>
                   </>
                 )}
@@ -224,6 +237,7 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                 isFetching={isFetching}
                 isLoading={isLoading}
                 gridRef={ref}
+                isCampaignTab={isCampaignTab}
               />
             ) : (
               <PlaceList
@@ -231,6 +245,7 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                 isFetching={isFetching}
                 isLoading={isLoading}
                 listRef={ref}
+                isCampaignTab={isCampaignTab}
               />
             )}
           </>

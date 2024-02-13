@@ -57,7 +57,13 @@ const PlaceSearch = ({
         direction="column"
         mt={currentCampaign ? 0 : 6}
       >
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} rowGap={0} w="100%">
+        <SimpleGrid
+          columns={
+            isCampaignTab ? { base: 1, md: 3 } : { base: 1, md: 2, lg: 4 }
+          }
+          rowGap={0}
+          w="100%"
+        >
           <Flex
             alignItems="flex-start"
             direction={{ base: 'column', md: 'row' }}
@@ -100,42 +106,50 @@ const PlaceSearch = ({
                 </Flex>
               )}
             </Flex>
+
             <Divider
               orientation="vertical"
               mx={3.5}
               opacity={0.5}
-              display={{ base: 'none', sm: 'none', md: 'block' }}
+              display={
+                !isCampaignTab ? { base: 'none', sm: 'none', md: 'block' } : {}
+              }
             />
+
             <Divider
               orientation="horizontal"
               my={4}
               opacity={0.5}
-              display={{ base: 'block', md: 'none' }}
+              display={!isCampaignTab ? { base: 'block', md: 'none' } : 'none'}
             />
           </Flex>
-          <Flex alignItems="flex-start" pos="relative">
-            <Flex w="100%">
-              <Box pt={0.5}>
-                <Calendar stroke={theme.colors.blue['500']} />
-              </Box>
-              <Box pl={3.5} flex={1}>
-                <InputDateRange
-                  label={t('search.when.label')}
-                  control={form.control}
-                  placeholder={t('search.when.placeholder')}
-                />
-              </Box>
+          {!isCampaignTab && (
+            <Flex alignItems="flex-start" pos="relative">
+              <Flex w="100%">
+                <Box pt={0.5}>
+                  <Calendar stroke={theme.colors.blue['500']} />
+                </Box>
+                <Box pl={3.5} flex={1}>
+                  <InputDateRange
+                    label={t('search.when.label')}
+                    control={form.control}
+                    placeholder={t('search.when.placeholder')}
+                  />
+                </Box>
+              </Flex>
+              <Divider
+                orientation="vertical"
+                mx={3.5}
+                opacity={0.5}
+                display={{ base: 'none', lg: 'block' }}
+              />
             </Flex>
-            <Divider
-              orientation="vertical"
-              mx={3.5}
-              opacity={0.5}
-              display={{ base: 'none', lg: 'block' }}
-            />
-          </Flex>
+          )}
           <Flex
             alignItems="flex-start"
-            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+            display={
+              isMobile && !hasMoreFilters && !isCampaignTab ? 'none' : 'flex'
+            }
           >
             <Box flex={1} pt={{ base: 6, md: 0 }}>
               <FormField labelStyle={{ mb: 0 }}>
@@ -206,7 +220,9 @@ const PlaceSearch = ({
           </Flex>
           <Flex
             alignItems="flex-start"
-            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+            display={
+              isMobile && !hasMoreFilters && !isCampaignTab ? 'none' : 'flex'
+            }
           >
             <Box flex={1}>
               <Divider
