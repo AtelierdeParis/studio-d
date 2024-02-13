@@ -3,6 +3,8 @@ import { useTranslation } from 'next-i18next'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
+import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
+import Link from '~components/Link'
 
 const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
   const { t } = useTranslation('place')
@@ -28,7 +30,14 @@ const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
       </HStack>
 
       <HStack width={'100%'}>
-        <Box flex={1}>
+        <Box
+          flex={1}
+          as={Link}
+          href={{
+            pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+            query: { id: place.slug, index: 3 },
+          }}
+        >
           <Text color="gray.500">{t('list.campaign_slots')}</Text>
         </Box>
 
