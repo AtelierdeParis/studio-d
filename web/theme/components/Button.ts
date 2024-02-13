@@ -92,6 +92,16 @@ const Button = {
         bgColor: 'campaign.dark',
       },
     },
+    grayLine: {
+      justifyContent: 'flex-start',
+      bgColor: 'white',
+      color: '#626782',
+      borderRadius: '4px',
+      border: '1px solid rgba(98, 103, 130, 0.6)',
+      _hover: {
+        bgColor: 'gray.100',
+      },
+    },
   },
   sizes: {
     md: {

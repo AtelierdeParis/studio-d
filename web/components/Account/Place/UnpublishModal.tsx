@@ -36,14 +36,9 @@ const UnpublishModal = ({ place }: Props) => {
         w={{ base: '100%', lg: 'auto' }}
         button={
           <Button
-            variant="line"
-            display="flex"
-            px={{ base: 3, lg: 0 }}
-            py={{ base: 1.5, lg: 0 }}
-            w="100%"
-            justifyContent={{ base: 'flex-start', lg: 'center' }}
-            _hover={{ borderColor: { base: 'transparent', lg: 'black' } }}
-            borderColor={{ base: 'transparent', lg: 'black' }}
+            variant="grayLine"
+            paddingX="4px!important"
+            height="30px!important"
           >
             {t('list.unpublish')}
           </Button>
