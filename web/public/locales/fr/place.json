@@ -312,6 +312,30 @@
     }
   },
   "detail": {
+    "campaign": {
+      "solidarity_slot": "Créneaux solidaires",
+      "campaign_slot": "Créneaux {{title}}",
+      "calendar_title": "Calendrier – Dispositif {{title}}",
+      "slots_available": "Créneaux proposés :",
+      "campaign_about": "À propos du dispositif {{title}}",
+      "eligibility": "Conditions d’éligibilité :",
+      "switch_campaign_title": "Cet espace propose également des créneaux {{title}} :",
+      "switch_campaign_content": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent rutrum vulputate lectus. Sed et arcu nunc. Morbi sollicitudin quam arcu, quis tempor ligula ornare vitae.",
+      "switch_campaign_cta": "Basculer vers les créneaux solidaires",
+      "switch_solidarity_title": "Cet espace propose également des créneaux solidaires : ",
+      "switch_solidarity_content": "ces créneaux sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D.",
+      "switch_solidarity_cta": "Basculer vers le dispositif {{title}}",
+      "more": "En savoir plus",
+      "schedule_item": {
+        "accomodation": "Hébergement possible ({{nb}} personne).",
+        "accomodations": "Hébergement possible ({{nb}} personnes).",
+        "no_accomodation": "Pas d'hébergement possible.",
+        "no_staff": "Pas de personnel technique.",
+        "staff": "Personnel technique possible {{list}}",
+        "scene_grid": "Grille scénique possible.",
+        "no_scene_grid": "Pas de grille scénique possible."
+      }
+    },
     "back": "Retour à la recherche",
     "seeMap": "Voir sur la carte",
     "precise": "* précisez vos besoins lors de la réservation",
@@ -324,6 +348,7 @@
     "danceBar": "Barre de danse",
     "technicalStaff": "Personnel technique",
     "accomodation": "Hébergement",
+    "scene_grid": "Grille scénique",
     "yes": "Oui",
     "no": "Non",
     "true": "Oui",

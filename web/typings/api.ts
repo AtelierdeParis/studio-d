@@ -259,6 +259,7 @@ export interface Campaign {
     updated_by?: string;
   }[];
   applications_max?: number;
+  article_link?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -297,6 +298,7 @@ export interface NewCampaign {
   campaign_end?: string;
   users_permissions_users?: string[];
   applications_max?: number;
+  article_link?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -490,6 +492,7 @@ export interface Disponibility {
     campaign_end?: string;
     users_permissions_users?: string[];
     applications_max?: number;
+    article_link?: string;
     published_at?: string;
     created_by?: string;
     updated_by?: string;

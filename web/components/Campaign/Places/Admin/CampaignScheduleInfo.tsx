@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
-import PlacesAdminCampaignHelper from '~components/Campaign/Places/PlacesAdminCampaignHelper'
+import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesAdminCampaignHelper'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
