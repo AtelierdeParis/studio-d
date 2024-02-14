@@ -1002,6 +1002,9 @@
               "applications_max": {
                 "type": "integer"
               },
+              "article_link": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },

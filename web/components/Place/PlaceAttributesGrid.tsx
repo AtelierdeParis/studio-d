@@ -11,11 +11,13 @@ import { capitalize } from '~utils/string'
 import DanceBar from 'public/assets/img/danceBar.svg'
 import Staff from 'public/assets/img/staff.svg'
 import Bed from 'public/assets/img/accomodation.svg'
+import SceneGrid from 'public/assets/img/sceneGrid.svg'
 import { useTranslation } from 'next-i18next'
 
 interface Props {
   place: Espace
   displayPrecise: boolean
+  isCampaignTab?: boolean
 }
 
 const GridItem = ({ icon, label, text, withDivider = false }) => (
@@ -31,8 +33,32 @@ const GridItem = ({ icon, label, text, withDivider = false }) => (
   </Flex>
 )
 
-const PlaceAttributesGrid = ({ place, displayPrecise }: Props) => {
+const PlaceAttributesGrid = ({
+  place,
+  displayPrecise,
+  isCampaignTab,
+}: Props) => {
   const { t } = useTranslation('place')
+  const campaignDisponibilities = place?.disponibilities.filter(
+    (d) => d.campaign,
+  )
+
+  const getTechnicalStaff = () => {
+    if (isCampaignTab && campaignDisponibilities[0]) {
+      const staff = campaignDisponibilities[0]?.staff as string[]
+      return staff?.includes('no') ? t('detail.no') : t('detail.possible')
+    }
+    return place?.technicalStaff ? t('detail.possible') : t('detail.no')
+  }
+
+  const getAccomodation = () => {
+    if (isCampaignTab && campaignDisponibilities[0]) {
+      return campaignDisponibilities[0]?.accomodation === 0
+        ? t('detail.no')
+        : t('detail.possible')
+    }
+    return place?.accomodation ? t('detail.possible') : t('detail.no')
+  }
 
   return (
     <>
@@ -78,7 +104,7 @@ const PlaceAttributesGrid = ({ place, displayPrecise }: Props) => {
           withDivider
           label={t('detail.technicalStaff')}
           icon={<Staff />}
-          text={place?.technicalStaff ? t('detail.possible') : t('detail.no')}
+          text={getTechnicalStaff()}
         />
         <GridItem
           label={t('detail.height')}
@@ -95,8 +121,20 @@ const PlaceAttributesGrid = ({ place, displayPrecise }: Props) => {
           withDivider
           label={t('detail.accomodation')}
           icon={<Bed />}
-          text={place?.accomodation ? t('detail.possible') : t('detail.no')}
+          text={getAccomodation()}
         />
+        {isCampaignTab && campaignDisponibilities[0] && (
+          <GridItem
+            withDivider
+            label={t('detail.scene_grid')}
+            icon={<SceneGrid />}
+            text={
+              campaignDisponibilities[0]?.scene_grid
+                ? t('detail.yes')
+                : t('detail.no')
+            }
+          />
+        )}
       </SimpleGrid>
     </>
   )

@@ -17,7 +17,7 @@ import { useTranslation } from 'next-i18next'
 import MigrationMessage from '~components/MigrationMessage'
 import { NextSeo } from 'next-seo'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import CampaignPlaceSchedule from '~components/Campaign/Places/CampaignSchedule'
+import CampaignPlaceSchedule from '~components/Campaign/Places/Admin/CampaignSchedule'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),

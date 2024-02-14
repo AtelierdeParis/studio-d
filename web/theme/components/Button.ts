@@ -102,6 +102,14 @@ const Button = {
         bgColor: 'gray.100',
       },
     },
+    unSelected: {
+      borderColor: 'black',
+      px: 0,
+      pb: 0.5,
+      h: 'auto',
+      borderRadius: 0,
+      minW: 0,
+    },
   },
   sizes: {
     md: {

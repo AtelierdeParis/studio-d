@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import BookingScheduleWeek from '~components/Place/BookingScheduleWeek'
 import BookingScheduleMonth from '~components/Place/BookingScheduleMonth'
-import BookingRecap from '~components/Place/BookingRecap'
+import BookingRecap from '~components/Place/BookingRecapInsert/BookingRecap'
 import { createOldEvents } from '~utils/schedule'
 
 const styleSelected = {
@@ -20,9 +20,10 @@ const BookingScheduleContainer = ({ place }: Props) => {
   const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, lg: false })
   const [isMonthView, setMonthView] = useState<boolean>(isMobile)
-  const events = useMemo(() => createOldEvents(place?.disponibilities), [
-    place?.disponibilities,
-  ])
+  const events = useMemo(
+    () => createOldEvents(place?.disponibilities.filter((d) => !d.campaign)),
+    [place?.disponibilities],
+  )
   useEffect(() => {
     if (isMobile) setMonthView(true)
   }, [isMobile])

@@ -7,6 +7,7 @@ import { useTranslation } from 'next-i18next'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { ROUTE_SIGNUP } from '~constants'
 import SigninModal from '~components/Signin/SigninModal'
+import AuthInsert from '~components/Place/BookingRecapInsert/AuthInsert'
 
 const BookingRecap = () => {
   const { t } = useTranslation('place')
@@ -35,26 +36,7 @@ const BookingRecap = () => {
       direction={{ base: 'column', md: 'row' }}
     >
       {!user ? (
-        <>
-          <Box maxW="container.sm" pr={6}>
-            <Text>
-              {t(`detail.notAuth${isPlural}`, { nb: selected.length })}
-            </Text>
-          </Box>
-          <ButtonGroup
-            spacing={5}
-            alignSelf="center"
-            alignItems="center"
-            mt={{ base: 6, md: 0 }}
-          >
-            <Button variant="unstyled" fontSize="md">
-              <Link href={ROUTE_SIGNUP}>{t('common:nav.signup')}</Link>
-            </Button>
-            <SigninModal redirect={false}>
-              <Button size="lg">{t('common:nav.signin')}</Button>
-            </SigninModal>
-          </ButtonGroup>
-        </>
+        <AuthInsert nbSelected={selected?.length || 0} />
       ) : (
         <>
           {!user.confirmed || !user.accepted ? (

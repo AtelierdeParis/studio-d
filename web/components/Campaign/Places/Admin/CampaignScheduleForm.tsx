@@ -17,14 +17,14 @@ import FormField from '~components/FormField'
 import { Espace } from '~typings/api'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
-import CampaignDatePicker from '~components/Campaign/Places/CampaignDatePicker'
+import CampaignDatePicker from '~components/Campaign/Places/Admin/CampaignDatePicker'
 import InputMultiSelect from '~components/InputMultiSelect'
 import { client } from '~api/client-api'
 import { setHours } from 'date-fns'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 
-const STAFF_VALUES = ['no', 'light', 'sound', 'video', 'scene']
+export const STAFF_VALUES = ['no', 'light', 'sound', 'video', 'scene']
 
 interface Props {
   place: Espace
