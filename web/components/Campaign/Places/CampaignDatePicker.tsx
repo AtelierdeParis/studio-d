@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useMemo } from 'react'
-import { Box, HStack, Input } from '@chakra-ui/react'
+import { Box, HStack } from '@chakra-ui/react'
 import InputDate from '~components/InputDate'
 import FormField from '~components/FormField'
 import { useTranslation } from 'next-i18next'
@@ -12,25 +12,29 @@ import eachDayOfInterval from 'date-fns/eachDayOfInterval'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import InputMultiSelect from '~components/InputMultiSelect'
 import { Control } from 'react-hook-form'
+import { getDay } from 'date-fns'
 
 const getEndDate = (
   startDate: Date,
   offWeekDays: number[],
   duration: number,
 ) => {
-  let exclude_days = []
   let endDate = new Date(startDate)
-  let addedDays = 0
-
-  while (addedDays < duration - 1) {
-    const nextDate = addDays(endDate, 1)
-
-    if (!offWeekDays.includes(endDate.getDay())) {
-      ++addedDays
-    } else {
-      exclude_days.push(endDate.toString())
+  let selectedDays = 1
+  const exclude_days = []
+  if (offWeekDays.length < 7) {
+    {
+      while (selectedDays < duration + 1) {
+        if (offWeekDays.includes(getDay(endDate))) {
+          exclude_days.push(endDate.toString())
+        } else {
+          selectedDays++
+        }
+        if (selectedDays < duration + 1) {
+          endDate = addDays(endDate, 1)
+        }
+      }
     }
-    endDate = nextDate
   }
 
   return { endDate, exclude_days }
@@ -39,7 +43,7 @@ const getEndDate = (
 const CampaignDatePicker = ({ control }: { control?: Control }) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
-  const { errors, watch, setValue, getValues } = useFormContext()
+  const { errors, watch, setValue } = useFormContext()
   const { type, start, when, offWeekDays } = watch([
     'type',
     'start',
@@ -122,9 +126,9 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
         name="offWeekDays"
         label={t('campaign.schedule.days_exclude.label')}
         placeholder={t('campaign.schedule.days_exclude.placeholder')}
-        options={Array.from({ length: 7 }, (v, i) => ({
-          value: i + 1,
-          label: t(`campaign.schedule.days_exclude.${i}`),
+        options={[1, 2, 3, 4, 5, 6, 0].map((day) => ({
+          value: day,
+          label: t(`campaign.schedule.days_exclude.${day}`),
         }))}
       />
       <Box display="none">

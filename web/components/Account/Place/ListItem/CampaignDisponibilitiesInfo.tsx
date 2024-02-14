@@ -25,11 +25,19 @@ const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
           paddingX={6}
           paddingY={2}
         >
-          <Text>{t('list.campaign_slots')}</Text>
+          <Text
+            as={Link}
+            href={{
+              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+              query: { id: place.slug, index: 3 },
+            }}
+          >
+            {t('list.campaign_slots', { title: currentCampaign?.title })}
+          </Text>
         </Box>
       </HStack>
 
-      <HStack width={'100%'}>
+      <HStack width={'100%'} paddingLeft={{ base: 0, md: 6 }}>
         <Box
           flex={1}
           as={Link}

@@ -69,9 +69,7 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
         <Stack direction={{ base: 'column-reverse', lg: 'row' }} spacing={4}>
-          <Stack flex={1} alignItems="stretch">
-            <Schedule isCampaignMode />
-          </Stack>
+          <Schedule isCampaignMode />
 
           <Box flex={1}>
             {showForm ? (
