@@ -96,25 +96,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
       })
   }, [oldEvents, newEvents])
 
-  // useEffect(() => {
-  // const events = [...oldEvents, ...newEvents]
-
-  // events.forEach((event) => {
-  //   const dates = event?.extendedProps?.exclude_days?.map((el) =>
-  //     format(el, 'yyyy-MM-dd'),
-  //   )
-
-  //   dates?.map((date) => {
-  //     const elements = document.querySelectorAll(`[data-date="${date}"]`)
-  //     elements.forEach((element) => {
-  //       element.classList.add('my-custom-class')
-  //     })
-  //   })
-  // })
-  // }, [oldEvents, newEvents])
-
   const excludedDaysClassName = useMemo(() => {
-    // td[data-date=“2024-02-16"]::after
     let classNames = []
     const events = [...oldEvents, ...newEvents]
 
@@ -143,7 +125,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
       id="calendar"
       className="account-schedule"
     >
-      <StyleWrapper className={excludedDaysClassName}>
+      <StyleWrapper className={excludedDaysClassName} style={{ width: '100%' }}>
         <FullCalendar
           ref={scheduleRef}
           plugins={[dayGridPlugin, interactionPlugin, view]}

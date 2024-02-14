@@ -103,14 +103,14 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
   }
 
   return (
-    <Box>
+    <Box paddingX={6}>
       <form onSubmit={handleSubmit(submitForm)}>
         <Input ref={register} name="type" hidden />
         <Input ref={register} name="isCampaignEvent" hidden />
         <VStack spacing={5} alignItems="flex-start">
           <VStack
             justifyContent="flex-end"
-            alignItems="center"
+            alignItems="flex-start"
             w="100%"
             spacing={6}
           >

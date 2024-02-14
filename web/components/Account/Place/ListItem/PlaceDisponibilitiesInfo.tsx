@@ -31,11 +31,24 @@ const PlaceDisponibilitiesInfo = ({ place }: { place: Espace }) => {
           paddingX={6}
           paddingY={2}
         >
-          <Text>{t('list.solidarity_slots')}</Text>
+          <Text
+            as={Link}
+            href={{
+              pathname: ROUTE_ACCOUNT_PLACE_DETAIL,
+              query: { id: place.slug, index: 2 },
+            }}
+          >
+            {t('list.solidarity_slots')}
+          </Text>
         </Box>
       </HStack>
 
-      <VStack alignItems="flex-start" spacing={0} width="100%">
+      <VStack
+        alignItems="flex-start"
+        spacing={0}
+        width="100%"
+        paddingLeft={{ base: 0, md: 6 }}
+      >
         {/* Disponibilities */}
         <HStack
           alignItems="flex-start"
