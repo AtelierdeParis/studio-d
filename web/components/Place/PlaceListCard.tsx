@@ -14,6 +14,8 @@ import { useTranslation } from 'next-i18next'
 import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
 import { format } from '~utils/date'
+import CampaignTag from '~components/Campaign/CampaignTag'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 interface Props {
   place: Espace
@@ -22,7 +24,15 @@ interface Props {
 }
 
 const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
-  const { t } = useTranslation('place')
+  const { t } = useTranslation('common')
+  const { currentCampaign } = useCampaignContext()
+
+  const isCampaignPlace =
+    currentCampaign?.mode === 'applications' &&
+    place?.disponibilities?.some(
+      //@ts-expect-error
+      (d) => d?.campaign === currentCampaign?.id,
+    )
 
   return (
     <LinkBox
@@ -64,6 +74,7 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
           </Flex>
           <Box pl={5} flex={1}>
             <Box>
+              {isCampaignPlace && isCampaignTab && <CampaignTag />}
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}
               </Text>

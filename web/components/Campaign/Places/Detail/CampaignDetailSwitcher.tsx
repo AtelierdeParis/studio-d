@@ -9,6 +9,7 @@ const CampaignDetailSwitcher = ({
   isCampaignTab: boolean
 }) => {
   const router = useRouter()
+
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
 

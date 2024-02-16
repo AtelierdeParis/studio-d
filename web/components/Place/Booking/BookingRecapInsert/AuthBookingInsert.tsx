@@ -5,14 +5,29 @@ import { ROUTE_SIGNUP } from '~constants'
 import SigninModal from '~components/Signin/SigninModal'
 import { useTranslation } from 'next-i18next'
 
-const AuthInsert = ({ nbSelected }: { nbSelected: number }) => {
+const AuthBookingInsert = ({
+  nbSelected,
+  isCampaignMode,
+}: {
+  nbSelected: number
+  isCampaignMode?: boolean
+}) => {
   const { t } = useTranslation('place')
+
+  if (!nbSelected) return null
 
   return (
     <>
       <Box maxW="container.sm" pr={6}>
         <Text>
-          {t(`detail.notAuth${nbSelected > 1 ? 's' : ''}`, { nb: nbSelected })}
+          {t(
+            `detail.notAuth${nbSelected > 1 ? 's' : ''}${
+              isCampaignMode ? 'Campaign' : ''
+            }`,
+            {
+              nb: nbSelected,
+            },
+          )}
         </Text>
       </Box>
       <ButtonGroup
@@ -32,4 +47,4 @@ const AuthInsert = ({ nbSelected }: { nbSelected: number }) => {
   )
 }
 
-export default AuthInsert
+export default AuthBookingInsert

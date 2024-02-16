@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "applications",
   "info": {
-    "name": "Application"
+    "name": "Application",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -19,6 +20,52 @@
     "disponibility": {
       "via": "applications",
       "model": "disponibility"
+    },
+    "creation_dancers": {
+      "type": "biginteger"
+    },
+    "creation_title": {
+      "type": "string"
+    },
+    "creation_file": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "creation_summary": {
+      "type": "text"
+    },
+    "creation_partnerships": {
+      "type": "text"
+    },
+    "creation_techical_requirements": {
+      "type": "text"
+    },
+    "creation_accomodation": {
+      "type": "boolean"
+    },
+    "eligible": {
+      "type": "boolean"
+    },
+    "already_supported": {
+      "type": "boolean"
+    },
+    "cv": {
+      "type": "text"
+    },
+    "references": {
+      "type": "json"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "applications"
     }
   }
 }

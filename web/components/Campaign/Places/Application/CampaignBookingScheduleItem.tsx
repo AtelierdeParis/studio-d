@@ -1,13 +1,27 @@
 import { Checkbox, HStack, VStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import { useContext, useMemo } from 'react'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 import { Disponibility } from '~typings/api'
 import { format } from '~utils/date'
+import { createOldEvents } from '~utils/schedule'
 
-const DetailScheduleItem = ({
+export const checkBoxStyle = {
+  "span[class*='checkbox__control']": {
+    borderRadius: '50%',
+    width: '20px',
+    height: '20px',
+  },
+}
+
+const CampaignBookingScheduleItem = ({
   disponibility,
 }: {
   disponibility: Disponibility
 }) => {
+  const { data: user } = useCurrentUser()
+  const { selected, setSelected } = useContext(BookingScheduleContext)
   const { t } = useTranslation('place')
 
   const accomodationHelper =
@@ -35,6 +49,30 @@ const DetailScheduleItem = ({
     ? t('detail.campaign.schedule_item.scene_grid')
     : t('detail.campaign.schedule_item.no_scene_grid')
 
+  const event = createOldEvents([disponibility])[0]
+  const isSelected = useMemo(
+    //@ts-expect-error
+    () => selected.some((dispo) => dispo.extendedProps.id === disponibility.id),
+    [selected, disponibility],
+  )
+
+  const handleClick = () => {
+    if (isSelected) {
+      setSelected(
+        //@ts-expect-error
+        selected.filter((el) => el.extendedProps.id !== disponibility.id),
+      )
+    } else {
+      setSelected([
+        ...selected,
+        {
+          ...event,
+          extendedProps: { ...event?.extendedProps, isCampaignEvent: true },
+        },
+      ])
+    }
+  }
+
   return (
     <HStack
       p={4}
@@ -42,17 +80,16 @@ const DetailScheduleItem = ({
       width="100%"
       alignItems="flex-start"
       spacing={6}
+      border={isSelected ? '2px solid #6EAE7F' : '2px solid transparent'}
+      borderRadius="8px"
     >
       <Checkbox
         colorScheme="green"
         paddingTop={2}
-        sx={{
-          "span[class*='checkbox__control']:not([data-disabled])": {
-            borderRadius: '50%',
-            width: '20px',
-            height: '20px',
-          },
-        }}
+        sx={checkBoxStyle}
+        isChecked={isSelected}
+        onChange={handleClick}
+        isDisabled={user?.type === 'place'}
       />
       <VStack alignItems="flex-start" spacing={1}>
         <Text fontWeight="bold">{`${format(
@@ -65,4 +102,4 @@ const DetailScheduleItem = ({
   )
 }
 
-export default DetailScheduleItem
+export default CampaignBookingScheduleItem

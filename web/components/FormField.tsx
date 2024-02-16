@@ -21,6 +21,7 @@ interface Props extends Omit<FormControlProps, 'label'> {
   errors?: FieldError | null
   labelStyle?: StyleProps
   isComplete?: boolean
+  helper?: string
 }
 
 const FormField = ({
@@ -31,6 +32,7 @@ const FormField = ({
   isRequired,
   isComplete = true,
   labelStyle = {},
+  helper,
   ...rest
 }: Props) => {
   return (
@@ -45,6 +47,11 @@ const FormField = ({
           {...labelStyle}
         >
           {label}
+          {helper && (
+            <Text as="span" color="gray.300" pl={1}>
+              {helper}
+            </Text>
+          )}
           {isRequired && (
             <Box as="span" color="blue.500">
               *

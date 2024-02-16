@@ -765,6 +765,202 @@
               }
             }
           },
+          "creation_dancers": {
+            "type": "integer"
+          },
+          "creation_title": {
+            "type": "string"
+          },
+          "creation_file": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "creation_summary": {
+            "type": "string"
+          },
+          "creation_partnerships": {
+            "type": "string"
+          },
+          "creation_techical_requirements": {
+            "type": "string"
+          },
+          "creation_accomodation": {
+            "type": "boolean"
+          },
+          "eligible": {
+            "type": "boolean"
+          },
+          "already_supported": {
+            "type": "boolean"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "references": {
+            "type": "object"
+          },
+          "campaign": {
+            "required": [
+              "id",
+              "duration",
+              "disponibility_start",
+              "disponibility_end",
+              "application_start",
+              "application_end",
+              "preselection_start",
+              "preselection_end",
+              "disponibilities_max"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "integer"
+              },
+              "disponibility_start": {
+                "type": "string"
+              },
+              "disponibility_end": {
+                "type": "string"
+              },
+              "application_start": {
+                "type": "string"
+              },
+              "application_end": {
+                "type": "string"
+              },
+              "preselection_start": {
+                "type": "string"
+              },
+              "preselection_end": {
+                "type": "string"
+              },
+              "reminder_days": {
+                "type": "integer"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "disponibilities_max": {
+                "type": "integer"
+              },
+              "campaign_start": {
+                "type": "string"
+              },
+              "campaign_end": {
+                "type": "string"
+              },
+              "users_permissions_users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "applications_max": {
+                "type": "integer"
+              },
+              "article_link": {
+                "type": "string"
+              },
+              "eligibility": {
+                "type": "string"
+              },
+              "chart_url": {
+                "type": "string"
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -777,6 +973,39 @@
             "type": "string"
           },
           "disponibility": {
+            "type": "string"
+          },
+          "creation_dancers": {
+            "type": "integer"
+          },
+          "creation_title": {
+            "type": "string"
+          },
+          "creation_summary": {
+            "type": "string"
+          },
+          "creation_partnerships": {
+            "type": "string"
+          },
+          "creation_techical_requirements": {
+            "type": "string"
+          },
+          "creation_accomodation": {
+            "type": "boolean"
+          },
+          "eligible": {
+            "type": "boolean"
+          },
+          "already_supported": {
+            "type": "boolean"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "references": {
+            "type": "object"
+          },
+          "campaign": {
             "type": "string"
           },
           "published_at": {

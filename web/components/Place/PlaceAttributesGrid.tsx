@@ -125,7 +125,6 @@ const PlaceAttributesGrid = ({
         />
         {isCampaignTab && campaignDisponibilities[0] && (
           <GridItem
-            withDivider
             label={t('detail.scene_grid')}
             icon={<SceneGrid />}
             text={

@@ -10,14 +10,13 @@ import {
 import PlaceAttributesGridMobile from '~components/Place/PlaceAttributesGridMobile'
 import PlaceHeader from '~components/Place/PlaceHeader'
 import { Espace } from '~typings/api'
-import { useTranslation } from 'next-i18next'
 import PlaceDetailMainInfo from '~components/Place/PlaceDetailPage/PlaceDetailMainInfo'
 import PlaceDetailLocation from '~components/Place/PlaceDetailPage/PlaceDetailLocation'
 import PlaceDetailExtraInfo from '~components/Place/PlaceDetailPage/PlaceDetailExtraInfo'
 import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
 import CampaignDetailTabs from '~components/Campaign/Places/Detail/CampaignDetailTabs'
 import { useRouter } from 'next/router'
-import CampaignDetailCalendar from '~components/Campaign/Places/Detail/CampaignDetailCalendar'
+import CampaignBookingSchedule from '~components/Campaign/Places/Application/CampaignBookingSchedule'
 import PlaceDetailCalendar from '~components/Place/PlaceDetailPage/PlaceDetailCalendar'
 import CampaignDetailSwitcher from '~components/Campaign/Places/Detail/CampaignDetailSwitcher'
 
@@ -68,7 +67,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
         </Stack>
 
         {isCampaignTab ? (
-          <CampaignDetailCalendar
+          <CampaignBookingSchedule
             disponibilities={place?.disponibilities?.filter((d) =>
               Boolean(d?.campaign),
             )}

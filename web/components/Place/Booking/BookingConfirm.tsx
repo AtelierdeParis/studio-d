@@ -12,8 +12,8 @@ import {
   AspectRatio,
 } from '@chakra-ui/react'
 import { useTranslation, Trans } from 'next-i18next'
-import BookingSelection from '~components/Place/BookingSelection'
-import BookingConfirmed from '~components/Place/BookingConfirmed'
+import BookingSelection from '~components/Place/Booking/BookingSelection'
+import BookingConfirmed from '~components/Place/Booking/BookingConfirmed'
 import FormField from '~components/FormField'
 import Link from '~components/Link'
 import Image from '~components/Image'

@@ -2,9 +2,9 @@ import React, { useState, useMemo, useEffect } from 'react'
 import { Box, Flex, Button, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
-import BookingScheduleWeek from '~components/Place/BookingScheduleWeek'
-import BookingScheduleMonth from '~components/Place/BookingScheduleMonth'
-import BookingRecap from '~components/Place/BookingRecapInsert/BookingRecap'
+import BookingScheduleWeek from '~components/Place/Booking/BookingScheduleWeek'
+import BookingScheduleMonth from '~components/Place/Booking/BookingScheduleMonth'
+import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
 import { createOldEvents } from '~utils/schedule'
 
 const styleSelected = {

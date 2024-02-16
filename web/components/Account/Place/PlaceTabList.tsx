@@ -47,7 +47,7 @@ const PlaceTabList = ({
       (dispo) =>
         dispo.status === DisponibilityStatus.AVAILABLE && !dispo.campaign,
     ).length
-  }, [place.disponibilities])
+  }, [place?.disponibilities])
 
   const campaignDispo = useMemo(() => {
     if (!place || !place.disponibilities) return 0

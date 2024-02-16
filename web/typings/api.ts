@@ -114,6 +114,36 @@ export interface Application {
     created_by?: string;
     updated_by?: string;
   };
+  creation_dancers?: number;
+  creation_title?: string;
+  creation_file?: {
+    id: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: object;
+    hash: string;
+    ext?: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    provider_metadata?: object;
+    related?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
+  creation_summary?: string;
+  creation_partnerships?: string;
+  creation_techical_requirements?: string;
+  creation_accomodation?: boolean;
+  eligible?: boolean;
+  already_supported?: boolean;
+  cv?: string;
+  references?: object;
 
   /** @format date-time */
   published_at?: string;
@@ -122,6 +152,16 @@ export interface Application {
 export interface NewApplication {
   users_permissions_user?: string;
   disponibility?: string;
+  creation_dancers?: number;
+  creation_title?: string;
+  creation_summary?: string;
+  creation_partnerships?: string;
+  creation_techical_requirements?: string;
+  creation_accomodation?: boolean;
+  eligible?: boolean;
+  already_supported?: boolean;
+  cv?: string;
+  references?: object;
 
   /** @format date-time */
   published_at?: string;
@@ -260,6 +300,8 @@ export interface Campaign {
   }[];
   applications_max?: number;
   article_link?: string;
+  eligibility?: string;
+  chart_url?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -299,6 +341,8 @@ export interface NewCampaign {
   users_permissions_users?: string[];
   applications_max?: number;
   article_link?: string;
+  eligibility?: string;
+  chart_url?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -493,6 +537,8 @@ export interface Disponibility {
     users_permissions_users?: string[];
     applications_max?: number;
     article_link?: string;
+    eligibility?: string;
+    chart_url?: string;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -501,6 +547,17 @@ export interface Disponibility {
     id: string;
     users_permissions_user?: string;
     disponibility?: string;
+    creation_dancers?: number;
+    creation_title?: string;
+    creation_file?: string[];
+    creation_summary?: string;
+    creation_partnerships?: string;
+    creation_techical_requirements?: string;
+    creation_accomodation?: boolean;
+    eligible?: boolean;
+    already_supported?: boolean;
+    cv?: string;
+    references?: object;
     published_at?: string;
     created_by?: string;
     updated_by?: string;

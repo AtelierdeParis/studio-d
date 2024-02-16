@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import BookingScheduleContext from '~components/Place/BookingScheduleContext'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 
 interface IBookingScheduleProvider {
   children: React.ReactNode
@@ -8,6 +8,7 @@ interface IBookingScheduleProvider {
 const BookingScheduleProvider = ({ children }: IBookingScheduleProvider) => {
   const [selected, setSelected] = useState([])
   const [showConfirmView, setConfirmView] = useState(false)
+  const [showApplicationView, setApplicationView] = useState(false)
 
   return (
     <BookingScheduleContext.Provider
@@ -16,6 +17,8 @@ const BookingScheduleProvider = ({ children }: IBookingScheduleProvider) => {
         setSelected,
         showConfirmView,
         setConfirmView,
+        showApplicationView,
+        setApplicationView,
       }}
     >
       {children}

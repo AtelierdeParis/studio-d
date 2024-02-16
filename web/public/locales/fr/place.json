@@ -1,4 +1,13 @@
 {
+  "global": {
+    "file": {
+      "change": "Changer",
+      "tooBig": "Le fichier est trop volumineux"
+    },
+    "yes": "Oui",
+    "no": "Non",
+    "required": "Ce champs est requis"
+  },
   "header": {
     "edit": "Éditer la fiche",
     "noDispo": "Aucun créneau disponible, l’espace n’est pas visible"
@@ -381,8 +390,12 @@
     },
     "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
     "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+    "notAuthCampaign": "Vous avez sélectionné 1 créneau.  Les dépôts de candidatures ne sont possibles que pour les compagnies inscrites.",
+    "notAuthsCampaign": "Vous avez sélectionné {{nb}} créneaux.  Les dépôts de candidatures ne sont possibles que pour les compagnies inscrites.",
     "notConfirm": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
     "notConfirms": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
+    "notConfirmCampaign": "Vous avez sélectionné 1 créneau. Les dépôts de candidatures ne sont possibles que pour les utilisateurs vérifiés.",
+    "notConfirmsCampaign": "Vous avez sélectionné {{nb}} créneaux. Les dépôts de candidatures ne sont possibles que pour les utilisateurs vérifiés.",
     "nbSelected": "Vous avez sélectionné 1 créneau :",
     "nbSelecteds": "Vous avez sélectionné {{nb}} créneaux :",
     "submit": "Déposer une demande",
@@ -396,6 +409,67 @@
         "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",
         "default": "Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
       }
+    }
+  },
+  "campaignApplication": {
+    "tag": "Dispositif {{title}}",
+    "error": "Une erreur empêchant le dépôt de votre candidature",
+    "title": "Déposer votre candidature",
+    "message": {
+      "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
+      "placeholder": "Saisissez votre demande…"
+    },
+    "references": {
+      "title": "Références de créations",
+      "helper": "(5 maximum)",
+      "edit": "Éditer",
+      "delete": "Supprimer",
+      "add": "Ajouter",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "new_ref": "Nouvelle référence"
+    },
+    "general": {
+      "title": " Informations générales",
+      "subtitle": "Avez-vous déjà été soutenu·e par {{place}}?",
+      "bio": "C.V.  |  Biographie du / de la chorégraphe",
+      "bioHelper": "(3000 signes maximum)"
+    },
+    "creation": {
+      "title": "Informations sur la création en cours",
+      "field_title": "Titre",
+      "dancers": "Nombre de danseurs·ses",
+      "file": "Dossier artistique",
+      "file_helper": "(5 Mo maximum)",
+      "file_cta": "Uploadez votre dossier",
+      "change": "Changer",
+      "summary": "Résumé du dossier",
+      "summary_helper": "(Optionnel – 1000 signes maximum)",
+      "summary_placeholder": "Saisissez votre texte…",
+      "partnerships": "Soutiens ou partenaires déjà confirmés",
+      "partnerships_helper": "(Optionnel)",
+      "technical": "Besoins techniques",
+      "accomodation": "Avez-vous besoin d’un hébergement ?",
+      "yes": "oui",
+      "no": "non"
+    },
+    "eligibility": {
+      "title": "Éligibilité",
+      "chart_front": "Nous vous invitons à vous référer à ",
+      "chart": "la charte d'utilisation",
+      "chart_back": "si vous n’en avez pas encore pris connaissance.",
+      "label": "Êtes-vous éligible à ce dispositif ?"
+    },
+    "back": "Retour",
+    "submit": "Poursuivre",
+    "change": "Changer",
+    "recap": "Vous demandez le créneau suivant :",
+    "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :",
+    "confirm": "{{place}} sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre candidature.",
+    "confirmed": {
+      "title": "Votre candidature est enregistrée !",
+      "text": "Vous recevrez sous peu un email de confirmation. Votre candidature est actuellement en attente de validation par {{place}}. Vous recevrez un email lorsque votre candidature sera validée.",
+      "back": "Retour à l’accueil"
     }
   },
   "confirm": {
