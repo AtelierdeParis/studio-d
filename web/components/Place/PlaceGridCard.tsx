@@ -21,6 +21,7 @@ import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
 import addWeeks from 'date-fns/addWeeks'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
+import CampaignTag from '~components/Campaign/CampaignTag'
 
 interface Props {
   place: Espace
@@ -31,7 +32,6 @@ interface Props {
 const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
-  const { t: tCommon } = useTranslation('common')
 
   const disposInRange = useDispoInRange(
     place?.disponibilities,
@@ -60,7 +60,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
       <LinkOverlay
         href={{
           pathname: ROUTE_PLACE_DETAIL,
-          query: { id: place.slug },
+          query: { id: place.slug, ...(isCampaignTab && { tab: 1 }) },
         }}
       >
         <Flex
@@ -72,20 +72,8 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
           h="100%"
           id={`place-${place.id}`}
         >
-          {isCampaignPlace && (
-            <Box position="relative">
-              <Tag
-                status="campaign"
-                style={{ position: 'absolute', top: 4, right: 4, zIndex: 2 }}
-                paddingX={'9px'}
-                paddingY={'5px'}
-              >
-                {tCommon('campaign.partner', {
-                  title: currentCampaign?.title,
-                })}
-              </Tag>
-            </Box>
-          )}
+          {isCampaignPlace && !isCampaignTab && <CampaignTag isGrid />}
+
           <AspectRatio
             w="100%"
             maxH="250px"

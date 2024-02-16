@@ -6,7 +6,7 @@ import {
 } from '~@types/schedule-event.d'
 import { Flex, useBreakpointValue, Spacer, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import BookingScheduleContext from '~components/Place/BookingScheduleContext'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
 import PopoverOtherBooking from '~components/Place/PopoverOtherBooking'
 import Confirm from 'public/assets/img/confirm.svg'

@@ -184,16 +184,6 @@ const InputFile = ({ control, place }: IInputFile) => {
                     w={{ base: '100%', lg: '20rem' }}
                   />
                 </Box>
-                {/* <Circle
-                    size="15px"
-                    border="1px solid"
-                    borderColor="black"
-                    fontSize="22px"
-                    onClick={() => deleteFile(index, file?.id)}
-                    cursor="pointer"
-                  >
-                    -
-                  </Circle> */}
 
                 <Button
                   ml={{ base: 3, md: 0 }}

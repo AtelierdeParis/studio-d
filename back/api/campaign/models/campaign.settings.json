@@ -77,6 +77,16 @@
     },
     "article_link": {
       "type": "string"
+    },
+    "eligibility": {
+      "type": "text"
+    },
+    "chart_url": {
+      "type": "string"
+    },
+    "applications": {
+      "via": "campaign",
+      "collection": "application"
     }
   }
 }

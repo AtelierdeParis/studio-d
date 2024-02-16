@@ -80,7 +80,12 @@ const Tag = ({ status, children, ...rest }: Props) => {
       )
     case 'campaign':
       return (
-        <ChakraTag bgColor="campaign.light" color="campaign.dark" {...rest}>
+        <ChakraTag
+          bgColor="campaign.light"
+          paddingX={3}
+          color="campaign.dark"
+          {...rest}
+        >
           {children || t('tag.campaign')}
         </ChakraTag>
       )

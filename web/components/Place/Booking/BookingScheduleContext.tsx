@@ -6,6 +6,8 @@ interface IBookingScheduleContext {
   setSelected: (selected: ScheduleEvent[]) => void
   showConfirmView: boolean
   setConfirmView: (value: boolean) => void
+  showApplicationView: boolean
+  setApplicationView: (value: boolean) => void
 }
 
 const BookingScheduleContext = React.createContext<IBookingScheduleContext>({
@@ -13,6 +15,8 @@ const BookingScheduleContext = React.createContext<IBookingScheduleContext>({
   setSelected: null,
   showConfirmView: false,
   setConfirmView: null,
+  showApplicationView: false,
+  setApplicationView: null,
 })
 
 export default BookingScheduleContext

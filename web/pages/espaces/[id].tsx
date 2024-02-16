@@ -5,23 +5,39 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { usePlace } from '~hooks/usePlace'
 import Loading from '~components/Loading'
 import PlaceDetail from '~components/Place/PlaceDetailPage/PlaceDetail'
-import BookingScheduleProvider from '~components/Place/BookingScheduleProvider'
-import BookingScheduleContext from '~components/Place/BookingScheduleContext'
-import BookingConfirm from '~components/Place/BookingConfirm'
+import BookingScheduleProvider from '~components/Place/Booking/BookingScheduleProvider'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
+import BookingConfirm from '~components/Place/Booking/BookingConfirm'
 import { useRouter } from 'next/router'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { NextSeo } from 'next-seo'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import CampaignPlaceDetail from '~components/Campaign/Places/Detail/CampaignPlaceDetail'
+import CampaignApplication from '~components/Campaign/Places/Application/CampaignApplication'
 
 const ViewHandler = ({
   place,
   currentCampaign,
   hasCampaignDisponibilities,
 }) => {
-  const { showConfirmView, selected, setConfirmView } = useContext(
-    BookingScheduleContext,
-  )
+  const {
+    showConfirmView,
+    selected,
+    setConfirmView,
+    showApplicationView,
+    setApplicationView,
+  } = useContext(BookingScheduleContext)
+
+  if (showApplicationView) {
+    return (
+      <CampaignApplication
+        events={selected}
+        place={place}
+        back={() => setApplicationView(false)}
+      />
+    )
+  }
+
   if (showConfirmView)
     return (
       <BookingConfirm

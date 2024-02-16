@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
-import BookingScheduleContainer from '~components/Place/BookingScheduleContainer'
+import BookingScheduleContainer from '~components/Place/Booking/BookingScheduleContainer'
 import Calendar from 'public/assets/img/calendar.svg'
 import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'

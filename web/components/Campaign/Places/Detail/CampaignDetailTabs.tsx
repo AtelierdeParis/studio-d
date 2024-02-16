@@ -2,7 +2,8 @@ import { Button, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 
 const CampaignDetailTabs = () => {
   const { currentCampaign } = useCampaignContext()
@@ -10,10 +11,12 @@ const CampaignDetailTabs = () => {
   const router = useRouter()
   const [selectedTab, setSelectedTab] = useState<number>()
   const isCampaignTab = selectedTab === 1
+  const { setSelected } = useContext(BookingScheduleContext)
 
   useEffect(() => {
     if (router.query.tab) {
       setSelectedTab(parseInt(router.query.tab as string, 10) || 0)
+      setSelected([])
     }
   }, [router.query.tab])
 

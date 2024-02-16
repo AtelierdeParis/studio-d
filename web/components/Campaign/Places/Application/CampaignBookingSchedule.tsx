@@ -1,20 +1,14 @@
-import {
-  HStack,
-  VStack,
-  Flex,
-  Box,
-  Text,
-  Stack,
-  Button,
-  Link,
-} from '@chakra-ui/react'
+import { VStack, Flex, Box, Text, Stack, Button, Link } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Calendar from 'public/assets/img/calendar.svg'
-import DetailScheduleItem from '~components/Campaign/Places/Detail/DetailScheduleItem'
+import { useContext } from 'react'
+import CampaignBookingScheduleItem from '~components/Campaign/Places/Application/CampaignBookingScheduleItem'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import MarkdownRenderer from '~components/MarkdownRenderer'
+import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
 import { Disponibility } from '~typings/api'
 
-const CampaignDetailCalendar = ({
+const CampaignBookingSchedule = ({
   disponibilities,
 }: {
   disponibilities: Disponibility[]
@@ -35,7 +29,11 @@ const CampaignDetailCalendar = ({
         </Text>
       </Flex>
 
-      <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+      <Stack
+        direction={{ base: 'column', md: 'row' }}
+        spacing={4}
+        alignItems="flex-start"
+      >
         <VStack
           backgroundColor="blue.100"
           flex={1}
@@ -48,9 +46,10 @@ const CampaignDetailCalendar = ({
           <Text color="gray.500">{t('detail.campaign.slots_available')}</Text>
           <VStack width="100%">
             {disponibilities?.map((disponibility) => (
-              <DetailScheduleItem disponibility={disponibility} />
+              <CampaignBookingScheduleItem disponibility={disponibility} />
             ))}
           </VStack>
+          <BookingRecap />
         </VStack>
 
         <VStack
@@ -59,7 +58,7 @@ const CampaignDetailCalendar = ({
           borderRadius="4px"
           p={4}
           alignItems="flex-start"
-          spacing={6}
+          spacing={4}
           padding={8}
         >
           <Text color="gray.500">
@@ -69,6 +68,7 @@ const CampaignDetailCalendar = ({
           </Text>
           <Text>{currentCampaign?.description}</Text>
           <Text color="gray.500">{t('detail.campaign.eligibility')}</Text>
+          <MarkdownRenderer>{currentCampaign?.eligibility}</MarkdownRenderer>
           <Button
             variant="blueFill"
             as={Link}
@@ -82,4 +82,4 @@ const CampaignDetailCalendar = ({
   )
 }
 
-export default CampaignDetailCalendar
+export default CampaignBookingSchedule
