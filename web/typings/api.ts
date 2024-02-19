@@ -166,6 +166,7 @@ export interface Application {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -205,6 +206,7 @@ export interface Application {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -360,6 +362,7 @@ export interface Campaign {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -752,6 +755,7 @@ export interface Dispositif {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -791,6 +795,7 @@ export interface Dispositif {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -1095,6 +1100,7 @@ export interface UsersPermissionsRole {
     companyDispositifs?: string[];
     placeDispositifs?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];

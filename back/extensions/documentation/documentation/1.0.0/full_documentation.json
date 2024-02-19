@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "02/19/2024 4:58:09 PM"
+    "x-generation-date": "02/19/2024 6:50:37 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11025,6 +11025,12 @@
                   "type": "string"
                 }
               },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -11168,6 +11174,12 @@
                 }
               },
               "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -11626,6 +11638,12 @@
                   }
                 },
                 "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -12950,6 +12968,12 @@
                     "type": "string"
                   }
                 },
+                "companyApplications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -13096,6 +13120,12 @@
                   }
                 },
                 "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -14114,6 +14144,12 @@
                   }
                 },
                 "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"

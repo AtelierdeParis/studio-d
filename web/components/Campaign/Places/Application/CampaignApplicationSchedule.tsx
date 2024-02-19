@@ -45,7 +45,10 @@ const CampaignApplicationSchedule = ({
           <Text color="gray.500">{t('detail.campaign.slots_available')}</Text>
           <VStack width="100%">
             {disponibilities?.map((disponibility) => (
-              <CampaignApplicationScheduleItem disponibility={disponibility} />
+              <CampaignApplicationScheduleItem
+                disponibility={disponibility}
+                key={disponibility.id}
+              />
             ))}
           </VStack>
           <BookingRecap />

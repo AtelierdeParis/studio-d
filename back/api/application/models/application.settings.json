@@ -68,7 +68,8 @@
     },
     "company": {
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "companyApplications"
     }
   }
 }

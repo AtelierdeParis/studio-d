@@ -8,6 +8,7 @@ import {
   ROUTE_ACCOUNT_MESSAGE,
   ROUTE_ACCOUNT_PLACES,
   ROUTE_ACCOUNT_APPLICATIONS,
+  ROUTE_ACCOUNT_MY_APPLICATIONS,
 } from '~constants'
 import Link from '~components/Link'
 import Back from 'public/assets/img/back.svg'
@@ -64,7 +65,7 @@ const getApplicationsItems = ({
         : isPlace
         ? 'placeApplications'
         : 'companyApplications',
-      url: ROUTE_ACCOUNT_APPLICATIONS,
+      url: isPlace ? ROUTE_ACCOUNT_APPLICATIONS : ROUTE_ACCOUNT_MY_APPLICATIONS,
     },
   ],
 })

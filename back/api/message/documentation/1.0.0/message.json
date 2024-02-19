@@ -919,6 +919,12 @@
                   "type": "string"
                 }
               },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -1062,6 +1068,12 @@
                 }
               },
               "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
                 "type": "array",
                 "items": {
                   "type": "string"

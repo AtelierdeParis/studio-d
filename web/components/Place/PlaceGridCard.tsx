@@ -179,16 +179,16 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                     <Text color="gray.500" pr={9}>
                       {t('card.dates')}
                     </Text>
-                    <Text isTruncated>
+                    <Box isTruncated>
                       {place?.disponibilities
                         ?.filter((el) => Boolean(el?.campaign))
                         ?.map((el) => (
-                          <Text>
+                          <Text key={el?.id}>
                             {`${format(el.start, 'dd MMMM')} ${t('card.to')}
                       ${format(el.end, 'dd MMMM')}`}
                           </Text>
                         ))}
-                    </Text>
+                    </Box>
                   </Flex>
                 </>
               )}

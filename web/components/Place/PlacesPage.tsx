@@ -117,12 +117,14 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
       <NextSeo title={t('common:title.places')} />
       <FormProvider {...form}>
         {currentCampaign && isCampaignTab ? (
-          <Stack direction={{ base: 'column', xl: 'row' }} spacing={4}>
+          <Stack
+            direction={{ base: 'column', xl: 'row' }}
+            spacing={4}
+            paddingBottom={10}
+          >
             <Box flex={1}>
               <PlacesListCampaignHelper
                 campaign={currentCampaign}
-                paddingTop={8}
-                borderTopRadius={0}
                 marginBottom={0}
               />
             </Box>

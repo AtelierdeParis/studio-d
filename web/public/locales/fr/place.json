@@ -7,7 +7,8 @@
     "yes": "Oui",
     "no": "Non",
     "required": "Ce champs est requis",
-    "form_error": "Le formulaire contient des erreurs"
+    "form_error": "Le formulaire contient des erreurs",
+    "and": "et"
   },
   "header": {
     "edit": "Éditer la fiche",
@@ -343,7 +344,8 @@
         "no_staff": "Pas de personnel technique.",
         "staff": "Personnel technique possible {{list}}",
         "scene_grid": "Grille scénique possible.",
-        "no_scene_grid": "Pas de grille scénique possible."
+        "no_scene_grid": "Pas de grille scénique possible.",
+        "closed_on": "(fermeture le {{days}})"
       }
     },
     "back": "Retour à la recherche",
@@ -472,7 +474,7 @@
       "chart_front": "Nous vous invitons à vous référer à ",
       "chart": "la charte d'utilisation",
       "chart_back": "si vous n’en avez pas encore pris connaissance.",
-      "label": "Êtes-vous éligible à ce dispositif ?"
+      "label": "Je confirme accepter les CGU du dispositif {{title}} et respecter les critères d'éligibilité."
     },
     "back": "Retour",
     "submit": "Poursuivre",
@@ -508,6 +510,10 @@
     "back": "Retour à l’accueil"
   },
   "campaign": {
+    "applications_counter": {
+      "counter": "Candidatures déposées : ",
+      "see": "Voir"
+    },
     "schedule": {
       "duration": "La durée d’une résidence est fixée à {{duration}} jours, et doit se dérouler entre le {{campaign_start}} et le {{campaign_end}}.",
       "days_exclude": {

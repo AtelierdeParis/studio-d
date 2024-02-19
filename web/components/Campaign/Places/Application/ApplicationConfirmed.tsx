@@ -4,18 +4,16 @@ import {
   Heading,
   Text,
   Button,
-  Image,
   ButtonGroup,
   Center,
 } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { useTranslation } from 'next-i18next'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 
 const ApplicationConfirmed = ({ structureName }) => {
   const { t } = useTranslation('place')
-  const { currentCampaign } = useCampaignContext()
+
   return (
     <Flex maxW="38rem" m="0 auto" direction="column" px={3}>
       <Heading as="h1" textStyle="h1" layerStyle="mainTitle" textAlign="center">
@@ -23,7 +21,7 @@ const ApplicationConfirmed = ({ structureName }) => {
       </Heading>
       <Text mb={{ base: 6, md: 14 }}>
         {t('campaignApplication.confirmed.text', {
-          name: currentCampaign.title,
+          place: structureName,
         })}
       </Text>
       <Center>
