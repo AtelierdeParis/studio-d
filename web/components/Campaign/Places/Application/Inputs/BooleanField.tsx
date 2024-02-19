@@ -18,7 +18,6 @@ const BooleanField = ({ label, name }: { label: string; name: string }) => {
     <FormField label={label} errors={errors[name]} flex={1}>
       <RadioGroup
         onChange={(value) => {
-          console.log(value)
           field.onChange(value)
         }}
       >

@@ -6,7 +6,8 @@
     },
     "yes": "Oui",
     "no": "Non",
-    "required": "Ce champs est requis"
+    "required": "Ce champs est requis",
+    "form_error": "Le formulaire contient des erreurs"
   },
   "header": {
     "edit": "Éditer la fiche",
@@ -425,9 +426,22 @@
       "edit": "Éditer",
       "delete": "Supprimer",
       "add": "Ajouter",
+      "modify": "Modifier",
       "cancel": "Annuler",
-      "create": "Créer",
-      "new_ref": "Nouvelle référence"
+      "references_title": "Titre",
+      "references_title_placeholder": "Saisissez le titre de votre création…",
+      "references_year": "Année",
+      "references_year_placeholder": "Saisissez l'année de création…",
+      "references_coproducers": "Coproducteurs (partenaires du dispositif Émergence)",
+      "references_coproducers_placeholder": "Sélectionner un ou plusieurs partenaires",
+      "references_others": "Coproducteurs (autres)",
+      "references_others_placeholder": "Renseigner le nom d’un ou plusieurs coproducteurs si nécessaire",
+      "references_creation": "Création {{index}}",
+      "references_actor": "Nombre d’interprètes",
+      "references_actor_placeholder": "Interprètes",
+      "references_actors_display": "{{number}} interprètes",
+      "references_actor_display": "{{number}} interprète",
+      "no_references": "Aucune création n’a été renseignée."
     },
     "general": {
       "title": " Informations générales",

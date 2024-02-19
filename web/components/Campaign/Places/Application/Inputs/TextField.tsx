@@ -20,7 +20,7 @@ const TextField = ({
 
   return (
     <FormField label={label} errors={errors[name]} flex={1}>
-      <Input onChange={onChange} {...props} />
+      <Input onChange={onChange} value={field?.value} {...props} />
     </FormField>
   )
 }
