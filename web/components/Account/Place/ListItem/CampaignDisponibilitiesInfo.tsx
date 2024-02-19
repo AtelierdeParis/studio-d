@@ -56,11 +56,13 @@ const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
               nbTotal: currentCampaign?.disponibilities_max,
             })}`}
           </Text>
-          <Text color="gray.500">
-            {t('list.fill_before', {
-              date: format(new Date(currentCampaign?.limitDate)),
-            })}
-          </Text>
+          {currentCampaign?.mode === 'disponibilities' && (
+            <Text color="gray.500">
+              {t('list.fill_before', {
+                date: format(new Date(currentCampaign?.disponibility_end)),
+              })}
+            </Text>
+          )}
         </Box>
       </HStack>
     </VStack>

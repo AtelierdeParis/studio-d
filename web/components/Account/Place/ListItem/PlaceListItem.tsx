@@ -16,9 +16,10 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 interface Props {
   place: Espace
   setVisible: (type: boolean) => void
+  isFirst?: boolean
 }
 
-const PlaceListItem = ({ place, setVisible }: Props) => {
+const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   const isComplete = useIsComplete(place)
   const { hasActiveCampaign } = useCampaignContext()
 
@@ -32,7 +33,7 @@ const PlaceListItem = ({ place, setVisible }: Props) => {
     <Flex
       w="100%"
       paddingLeft={{ base: 0, md: 3 }}
-      borderBottom="1px solid"
+      borderTop={!isFirst ? '2px solid' : 'none'}
       borderColor="gray.100"
       _hover={{
         bgColor: 'gray.hover',
