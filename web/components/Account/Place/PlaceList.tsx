@@ -48,9 +48,14 @@ const PlaceList = ({ places }: Props) => {
           {t('list.addPlace')}
         </Button>
       </Flex>
-      <VStack alignItems="flex-start" spacing={0}>
-        {places.map((place) => (
-          <PlaceListItem place={place} key={place.id} setVisible={setVisible} />
+      <VStack alignItems="flex-start" spacing={8}>
+        {places.map((place, index) => (
+          <PlaceListItem
+            place={place}
+            key={place.id}
+            setVisible={setVisible}
+            isFirst={index === 0}
+          />
         ))}
       </VStack>
     </Box>

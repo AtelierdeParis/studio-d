@@ -83,7 +83,7 @@ const HomePlaces = ({ campaign }: Props) => {
             _hover={{ bg: 'campaign.light', textDecor: 'none' }}
           >
             {t('places.campaign.cta', {
-              title: campaign?.title.toLowerCase(),
+              title: campaign?.title,
             })}
           </Button>
         ) : (

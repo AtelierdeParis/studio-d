@@ -27,19 +27,16 @@ const AccountPlace = ({ user }: Props) => {
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.places')} />
-      {isCampaignPlace && (
+      {isCampaignPlace && currentCampaign?.mode === 'disponibilities' && (
         <Box paddingY={4}>
           <PlacesAdminCampaignHelper
-            title={TPlace(
-              `campaign.helpers.${currentCampaign?.mode}.home.title`,
-              {
-                title: currentCampaign?.title,
-              },
-            )}
+            title={TPlace(`campaign.helpers.disponibilities.home.title`, {
+              title: currentCampaign?.title,
+            })}
             description={TPlace(
-              `campaign.helpers.${currentCampaign?.mode}.home.description`,
+              `campaign.helpers.disponibilities.home.description`,
               {
-                date: format(currentCampaign?.limitDate, 'dd/MM/yyyy'),
+                date: format(currentCampaign?.disponibility_end, 'dd/MM/yyyy'),
               },
             )}
           />
