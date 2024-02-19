@@ -481,9 +481,10 @@
     "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :",
     "confirm": "{{place}} sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre candidature.",
     "confirmed": {
-      "title": "Votre candidature est enregistrée !",
-      "text": "Vous recevrez sous peu un email de confirmation. Votre candidature est actuellement en attente de validation par {{place}}. Vous recevrez un email lorsque votre candidature sera validée.",
-      "back": "Retour à l’accueil"
+      "title": "Votre candidature est déposée !",
+      "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{place}}. Vous recevrez un email lorsque votre réservation sera validée.",
+      "back": "Retour à l’accueil",
+      "see_applications": "Mes candidatures"
     }
   },
   "confirm": {

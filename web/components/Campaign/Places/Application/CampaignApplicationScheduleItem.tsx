@@ -15,7 +15,7 @@ export const checkBoxStyle = {
   },
 }
 
-const CampaignBookingScheduleItem = ({
+const CampaignApplicationScheduleItem = ({
   disponibility,
 }: {
   disponibility: Disponibility
@@ -102,4 +102,4 @@ const CampaignBookingScheduleItem = ({
   )
 }
 
-export default CampaignBookingScheduleItem
+export default CampaignApplicationScheduleItem

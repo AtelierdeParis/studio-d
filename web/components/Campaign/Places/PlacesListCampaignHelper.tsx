@@ -14,7 +14,8 @@ const PlacesListCampaignHelper = ({
   return (
     <HStack
       backgroundColor={campaign ? 'campaign.light' : 'blue.200'}
-      borderRadius="sm"
+      borderRadius="4px!important"
+      borderTopLeftRadius={'0px!important'}
       paddingX={8}
       paddingY={2}
       marginBottom={4}

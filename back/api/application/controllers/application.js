@@ -5,4 +5,34 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+  async myApplications(ctx) {
+    const { id, type } = ctx.state.user;
+    const query = type === "place" ? { place: id } : { company: id };
+
+    return strapi
+      .query("application")
+      .find(
+        {
+          ...query,
+          _sort: "disponibilities.start:desc",
+        },
+        populate
+      )
+      .then((res) => {
+        return Promise.all(
+          res.map(async (application) => {
+            return {
+              ...booking,
+              notifications: await strapi.services.message.getNbNotifications({
+                id,
+                type,
+                applicationId: application.id,
+              }),
+            };
+          })
+        );
+      });
+  },
+
+};

@@ -28,7 +28,7 @@ import { NextSeo } from 'next-seo'
 import { formatSearchToQuery } from '~utils/search'
 import { ROUTE_PLACES } from '~constants'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import CampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
+import PlacesListCampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
 
 const styleSelected = {
   color: 'blue.500',
@@ -119,7 +119,7 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
         {currentCampaign && isCampaignTab ? (
           <Stack direction={{ base: 'column', xl: 'row' }} spacing={4}>
             <Box flex={1}>
-              <CampaignHelper
+              <PlacesListCampaignHelper
                 campaign={currentCampaign}
                 paddingTop={8}
                 borderTopRadius={0}
@@ -208,15 +208,26 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                       onChange={(event) => {
                         form.setValue('sortBy', event.target.value)
                         onSubmit(form.getValues())
-                        queryClient.refetchQueries(['places'], { active: true })
+                        queryClient.refetchQueries(
+                          [
+                            isCampaignTab
+                              ? 'campaignPlaces'
+                              : 'solidarityPlaces',
+                          ],
+                          { active: true },
+                        )
                       }}
                     >
-                      <option value={SortOptions.DISPO_ASC}>
-                        {t('search.filterBy.dispo')}
-                      </option>
-                      <option value={SortOptions.NB_DISPO_DESC}>
-                        {t('search.filterBy.nbDispo')}
-                      </option>
+                      {!isCampaignTab && (
+                        <option value={SortOptions.DISPO_ASC}>
+                          {t('search.filterBy.dispo')}
+                        </option>
+                      )}
+                      {!isCampaignTab && (
+                        <option value={SortOptions.NB_DISPO_DESC}>
+                          {t('search.filterBy.nbDispo')}
+                        </option>
+                      )}
                       <option value={SortOptions.SURFACE_ASC}>
                         {t('search.filterBy.surfaceAsc')}
                       </option>

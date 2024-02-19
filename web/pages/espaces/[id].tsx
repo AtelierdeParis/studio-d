@@ -13,7 +13,7 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 import { NextSeo } from 'next-seo'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import CampaignPlaceDetail from '~components/Campaign/Places/Detail/CampaignPlaceDetail'
-import CampaignApplication from '~components/Campaign/Places/Application/CampaignApplication'
+import CampaignApplicationPopin from '~components/Campaign/Places/Application/CampaignApplicationPopin'
 
 const ViewHandler = ({
   place,
@@ -30,7 +30,7 @@ const ViewHandler = ({
 
   if (showApplicationView) {
     return (
-      <CampaignApplication
+      <CampaignApplicationPopin
         events={selected}
         place={place}
         back={() => setApplicationView(false)}

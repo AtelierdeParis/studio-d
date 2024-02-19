@@ -16,7 +16,7 @@ import PlaceDetailExtraInfo from '~components/Place/PlaceDetailPage/PlaceDetailE
 import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
 import CampaignDetailTabs from '~components/Campaign/Places/Detail/CampaignDetailTabs'
 import { useRouter } from 'next/router'
-import CampaignBookingSchedule from '~components/Campaign/Places/Application/CampaignBookingSchedule'
+import CampaignApplicationSchedule from '~components/Campaign/Places/Application/CampaignApplicationSchedule'
 import PlaceDetailCalendar from '~components/Place/PlaceDetailPage/PlaceDetailCalendar'
 import CampaignDetailSwitcher from '~components/Campaign/Places/Detail/CampaignDetailSwitcher'
 
@@ -67,7 +67,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
         </Stack>
 
         {isCampaignTab ? (
-          <CampaignBookingSchedule
+          <CampaignApplicationSchedule
             disponibilities={place?.disponibilities?.filter((d) =>
               Boolean(d?.campaign),
             )}

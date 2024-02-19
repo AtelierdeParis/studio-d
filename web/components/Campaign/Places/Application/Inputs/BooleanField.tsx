@@ -1,7 +1,7 @@
 import { Box, Text, HStack, Radio, RadioGroup } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useController, useFormContext } from 'react-hook-form'
-import { checkBoxStyle } from '~components/Campaign/Places/Application/CampaignBookingScheduleItem'
+import { checkBoxStyle } from '~components/Campaign/Places/Application/CampaignApplicationScheduleItem'
 import FormField from '~components/FormField'
 
 const BooleanField = ({ label, name }: { label: string; name: string }) => {

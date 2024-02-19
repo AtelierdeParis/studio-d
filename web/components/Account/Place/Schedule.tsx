@@ -29,6 +29,12 @@ export const StyleWrapper = styled.div`
     border-radius: 8px;
     margin: 3px 2px 3px 2px;
   }
+
+  #licorne:after {
+    position: absolute;
+    z-index: 20000000;
+    content: 'hello';
+  }
 `
 
 const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
