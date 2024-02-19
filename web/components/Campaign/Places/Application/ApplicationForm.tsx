@@ -2,17 +2,18 @@ import { Box, VStack, Text, ButtonGroup, Button } from '@chakra-ui/react'
 import ApplicationCreation from '~components/Campaign/Places/Application/ApplicationCreation'
 import ApplicationGeneral from '~components/Campaign/Places/Application/ApplicationGeneral'
 import ApplicationEligibility from '~components/Campaign/Places/Application/ApplicationEligibility'
-import ApplicationReferences from '~components/Campaign/Places/Application/ApplicationReferences'
+import ApplicationReferences from '~components/Campaign/Places/Application/References/ApplicationReferences'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useTranslation } from 'next-i18next'
 import useToast from '~hooks/useToast'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { client } from '~api/client-api'
 import { ScheduleEvent } from '~@types/schedule-event'
 import { useCurrentUser } from '~hooks/useCurrentUser'
+import { Reference } from '~@types/reference'
 
 const ApplicationForm = ({
   back,
@@ -34,6 +35,7 @@ const ApplicationForm = ({
       .min(1, t('global.required'))
       .required(t('global.required')),
     creation_summary: yup.string().required(t('global.required')),
+    creation_techical_requirements: yup.string().required(t('global.required')),
     eligibility: yup.boolean().required(t('global.required')),
   })
   const { data: user } = useCurrentUser()
@@ -45,6 +47,12 @@ const ApplicationForm = ({
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, errors, getValues } = form
+
+  useEffect(() => {
+    if (Object.keys(errors)?.length) {
+      errorToast(t('global.form_error'))
+    }
+  }, [Object.keys(errors)])
 
   const onSubmit = async (formValues) => {
     setLoading(true)

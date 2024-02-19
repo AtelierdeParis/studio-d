@@ -38,17 +38,20 @@ const ApplicationCreation = () => {
         name="creation_summary"
         label={t('campaignApplication.creation.summary')}
         helper={t('campaignApplication.creation.summary_helper')}
+        minHeight={180}
       />
 
       <TextAreaField
         name="creation_partnerships"
         label={t('campaignApplication.creation.partnerships')}
         helper={t('campaignApplication.creation.partnerships_helper')}
+        minHeight={180}
       />
 
       <TextAreaField
         name="creation_techical_requirements"
         label={t('campaignApplication.creation.technical')}
+        minHeight={180}
       />
     </VStack>
   )

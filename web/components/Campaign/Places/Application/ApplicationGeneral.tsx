@@ -26,6 +26,8 @@ const ApplicationGeneral = () => {
         name="cv"
         label={t('campaignApplication.general.bio')}
         helper={t('campaignApplication.general.bioHelper')}
+        maxLength={3000}
+        minHeight={180}
       />
     </VStack>
   )
