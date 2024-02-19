@@ -60,15 +60,15 @@ const HomeSearch = ({ hasActiveCampaign }: { hasActiveCampaign?: boolean }) => {
             mx="auto"
             width="100%"
             flexDirection={{ base: 'column', md: 'row' }}
-            alignItems={{ base: 'flex-start', md: 'center' }}
+            alignItems="flex-start"
           >
-            <HStack w="100%" p={2}>
+            <HStack w="100%" p={2} alignItems="flex-start">
               <Pin
                 stroke={theme.colors.blue['500']}
                 width="22px"
                 height="22px"
               />
-              <Box pl={3.5} flex={1}>
+              <Box flex={1}>
                 <FormField
                   label={t('search.where.label')}
                   labelStyle={{ mb: 0 }}
@@ -96,18 +96,17 @@ const HomeSearch = ({ hasActiveCampaign }: { hasActiveCampaign?: boolean }) => {
               )}
             </Box>
 
-            <HStack alignItems="flex-start" pos="relative" w="100%" p={2}>
-              <Flex w="100%">
-                <Calendar stroke={theme.colors.blue['500']} />
-                <Box pl={3.5} flex={1}>
-                  <InputDateRange
-                    label={t('search.when.label')}
-                    control={control}
-                    placeholder={t('search.when.placeholder')}
-                  />
-                </Box>
-              </Flex>
+            <HStack w="100%" alignItems="flex-start">
+              <Calendar stroke={theme.colors.blue['500']} />
+              <Box flex={1}>
+                <InputDateRange
+                  label={t('search.when.label')}
+                  control={control}
+                  placeholder={t('search.when.placeholder')}
+                />
+              </Box>
             </HStack>
+
             <Box>
               <Button
                 size="lg"
