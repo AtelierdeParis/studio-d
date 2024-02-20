@@ -74,7 +74,10 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
           </Flex>
           <Box pl={5} flex={1}>
             <Box>
-              {isCampaignPlace && !isCampaignTab && <CampaignTag />}
+              <CampaignTag
+                isCampaignTab={isCampaignTab}
+                disponibilitiesIds={place?.disponibilities?.map((d) => d?.id)}
+              />
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}
               </Text>

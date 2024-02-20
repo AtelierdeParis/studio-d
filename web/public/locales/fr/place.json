@@ -346,7 +346,11 @@
         "scene_grid": "Grille scénique possible.",
         "no_scene_grid": "Pas de grille scénique possible.",
         "closed_on": "(fermeture le {{days}})"
-      }
+      },
+      "locked_application_start": "Vous avez déjà postulé à {{nb}} créneaux",
+      "locked_application_middle": "pour cette session du dispositif {{title}}.",
+      "locked_application_cta": "Annulez l’une de vos candidatures en attente",
+      "locked_application_end": "pour pouvoir postuler aux créneaux de cet espace."
     },
     "back": "Retour à la recherche",
     "seeMap": "Voir sur la carte",

@@ -2,6 +2,7 @@ import { useQuery } from 'react-query'
 import { client } from '~api/client-api'
 import { useSession } from 'next-auth/client'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { useMemo } from 'react'
 
 export const useCurrentUser = () => {
   const [session, loading] = useSession()
@@ -15,11 +16,21 @@ export const useCurrentUser = () => {
     },
   )
 
+  const applications = useMemo(() => {
+    if (userData && currentCampaign) {
+      //@ts-expect-error
+      return userData?.data?.companyApplications?.filter(
+        (application) => application?.campaign === currentCampaign?.id,
+      )
+    }
+  }, [userData?.data, currentCampaign])
+
   return {
     ...userData,
-    //@ts-expect-error
-    applications: userData?.data?.companyApplications?.filter(
-      (application) => application?.campaign?.id === currentCampaign?.id,
-    ),
+    applications,
+    canApply:
+      userData?.data?.type === 'company' &&
+      currentCampaign?.applications_max &&
+      applications?.length < 2,
   }
 }

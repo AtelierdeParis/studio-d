@@ -94,7 +94,8 @@
   "campaign": {
     "open": "Ouvert jusqu'au {{date}}",
     "partner": "Participe au dispositif {{title}}",
-    "helper_title": "Le dispositif {{title}}"
+    "helper_title": "Le dispositif {{title}}",
+    "application": "Candidature déposée"
   },
   "show": "Découvrir"
 }
