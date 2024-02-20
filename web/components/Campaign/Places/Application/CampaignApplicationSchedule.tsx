@@ -2,9 +2,11 @@ import { VStack, Flex, Box, Text, Stack, Button, Link } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Calendar from 'public/assets/img/calendar.svg'
 import CampaignApplicationScheduleItem from '~components/Campaign/Places/Application/CampaignApplicationScheduleItem'
+import LockedApplications from '~components/Campaign/Places/Application/LockedApplications'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 import { Disponibility } from '~typings/api'
 
 const CampaignApplicationSchedule = ({
@@ -43,6 +45,9 @@ const CampaignApplicationSchedule = ({
           padding={8}
         >
           <Text color="gray.500">{t('detail.campaign.slots_available')}</Text>
+
+          <LockedApplications />
+
           <VStack width="100%">
             {disponibilities?.map((disponibility) => (
               <CampaignApplicationScheduleItem

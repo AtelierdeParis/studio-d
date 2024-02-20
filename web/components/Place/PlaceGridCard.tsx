@@ -22,6 +22,7 @@ import addWeeks from 'date-fns/addWeeks'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
+import { pl } from 'date-fns/locale'
 
 interface Props {
   place: Espace
@@ -72,7 +73,11 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
           h="100%"
           id={`place-${place.id}`}
         >
-          {isCampaignPlace && !isCampaignTab && <CampaignTag isGrid />}
+          <CampaignTag
+            isGrid
+            isCampaignTab={isCampaignTab}
+            disponibilitiesIds={place?.disponibilities?.map((d) => d?.id)}
+          />
 
           <AspectRatio
             w="100%"

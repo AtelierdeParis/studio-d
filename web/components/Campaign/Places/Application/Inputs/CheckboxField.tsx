@@ -16,7 +16,6 @@ const CheckboxField = ({
   })
 
   const onChange = (e) => {
-    console.log(e.target.checked)
     field.onChange(e.target.checked)
   }
 

@@ -20,7 +20,7 @@ const CampaignApplicationScheduleItem = ({
 }: {
   disponibility: Disponibility
 }) => {
-  const { data: user } = useCurrentUser()
+  const { canApply, applications, data: user } = useCurrentUser()
   const { selected, setSelected } = useContext(BookingScheduleContext)
   const { t } = useTranslation('place')
 
@@ -93,6 +93,13 @@ const CampaignApplicationScheduleItem = ({
     }
   }
 
+  const isDisabled =
+    !!user &&
+    (!canApply ||
+      applications?.find(
+        (application) => application?.disponibility === disponibility.id,
+      ))
+
   return (
     <HStack
       p={4}
@@ -102,6 +109,7 @@ const CampaignApplicationScheduleItem = ({
       spacing={6}
       border={isSelected ? '2px solid #6EAE7F' : '2px solid transparent'}
       borderRadius="8px"
+      opacity={isDisabled ? 0.5 : 1}
     >
       <Checkbox
         colorScheme="green"
@@ -109,7 +117,7 @@ const CampaignApplicationScheduleItem = ({
         sx={checkBoxStyle}
         isChecked={isSelected}
         onChange={handleClick}
-        isDisabled={user?.type === 'place'}
+        isDisabled={isDisabled}
       />
       <VStack alignItems="flex-start" spacing={1}>
         <Text>

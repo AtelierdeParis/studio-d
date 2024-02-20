@@ -133,7 +133,6 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const { data: notifs } = useMyNotifications()
 
   const { currentCampaign, isCampaignPlace } = useCampaignContext()
-  console.log(currentCampaign, isCampaignPlace)
 
   const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'

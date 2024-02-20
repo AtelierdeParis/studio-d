@@ -19,7 +19,7 @@ const PlacesTabs = () => {
   const router = useRouter()
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('common')
-  const [selectedTab, setSelectedTab] = useState<number>()
+  const [selectedTab, setSelectedTab] = useState<number>(0)
 
   useEffect(() => {
     if (router.query.tab) {
