@@ -4,8 +4,9 @@ import ApplicationFormTitle from '~components/Campaign/Places/Application/Applic
 import BooleanField from '~components/Campaign/Places/Application/Inputs/BooleanField'
 import TextAreaField from '~components/Campaign/Places/Application/Inputs/TextAreaField'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { Espace } from '~typings/api'
 
-const ApplicationGeneral = () => {
+const ApplicationGeneral = ({ place }: { place: Espace }) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
   return (
@@ -17,7 +18,7 @@ const ApplicationGeneral = () => {
 
       <BooleanField
         label={t('campaignApplication.general.subtitle', {
-          place: currentCampaign?.title,
+          place: place?.name,
         })}
         name="already_supported"
       />

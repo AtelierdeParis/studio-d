@@ -5,6 +5,7 @@ import {
   Button,
   StackProps,
   VStack,
+  Stack,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationCounter from '~components/Campaign/ApplicationCounter'
@@ -38,7 +39,7 @@ const PlacesListCampaignHelper = ({
       {campaign && !isHome && (
         <ApplicationCounter borderBottom="1px solid lightgray" />
       )}
-      <HStack width="100%" spacing={6}>
+      <Stack width="100%" spacing={6} direction={{ base: 'column', sm: 'row' }}>
         <VStack flex={4} justifyContent="flex-start" alignItems="flex-start">
           <Text as="span" fontWeight="bold" marginRight={1}>
             {campaign
@@ -49,7 +50,7 @@ const PlacesListCampaignHelper = ({
             {campaign ? campaign.description : t('solidarity.helper')}
           </Text>
         </VStack>
-        <Flex flex={1} justifyContent="flex-end">
+        <Flex flex={1} justifyContent={{ base: 'flex-start', sm: 'flex-end' }}>
           <Button
             variant={campaign ? 'campaign' : 'blueFill'}
             as={Link}
@@ -62,7 +63,7 @@ const PlacesListCampaignHelper = ({
             {t('show')}
           </Button>
         </Flex>
-      </HStack>
+      </Stack>
     </VStack>
   )
 }

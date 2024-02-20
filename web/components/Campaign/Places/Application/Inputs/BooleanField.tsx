@@ -20,6 +20,7 @@ const BooleanField = ({ label, name }: { label: string; name: string }) => {
         onChange={(value) => {
           field.onChange(value)
         }}
+        value={field.value}
       >
         <HStack>
           <Box

@@ -21,7 +21,7 @@ const TextAreaField = ({
 
   return (
     <FormField label={label} errors={errors[name]} flex={1} helper={helper}>
-      <Textarea onChange={onChange} size="lg" {...props} />
+      <Textarea onChange={onChange} size="lg" value={field.value} {...props} />
     </FormField>
   )
 }

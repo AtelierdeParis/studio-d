@@ -8,31 +8,54 @@ import * as yup from 'yup'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useTranslation } from 'next-i18next'
 import useToast from '~hooks/useToast'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { client } from '~api/client-api'
 import { ScheduleEvent } from '~@types/schedule-event'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import ApplicationReferences from '~components/Campaign/Places/Application/References/ApplicationReferences'
+import { Espace } from '~typings/api'
 
+const getDefaultValues = (applications) => {
+  if (applications?.length > 0) {
+    const lastApplication = applications[applications?.length - 1]
+
+    const data = {
+      ...lastApplication,
+      references:
+        lastApplication?.references.map((el) => ({
+          ...el,
+          coproducers: Array.isArray(el.coproducers)
+            ? el.coproducers
+            : el.coproducers.split(',').map((el) => +el),
+        })) || [],
+      already_supported: lastApplication?.already_supported.toString(),
+    }
+    return data
+  }
+  return {}
+}
 const ApplicationForm = ({
   back,
   setConfirmed,
   events,
+  place,
 }: {
   back: () => void
   setConfirmed: (value: boolean) => void
   events: ScheduleEvent[]
+  place: Espace
 }) => {
+  const { applications } = useCurrentUser()
   const { t } = useTranslation('place')
   const schema = yup.object().shape({
     already_supported: yup.boolean().required(t('global.required')),
     cv: yup.string().required(t('global.required')),
     creation_title: yup.string().required(t('global.required')),
     creation_dancers: yup.number().required(t('global.required')),
-    creation_file: yup
-      .array()
-      .min(1, t('global.required'))
-      .required(t('global.required')),
+    // creation_file: yup
+    //   .array()
+    //   .min(1, t('global.required'))
+    //   .required(t('global.required')),
     creation_summary: yup.string().required(t('global.required')),
     creation_techical_requirements: yup.string().required(t('global.required')),
     eligibility: yup.boolean().required(t('global.required')),
@@ -40,12 +63,14 @@ const ApplicationForm = ({
   const { data: user } = useCurrentUser()
 
   const { currentCampaign } = useCampaignContext()
+
   const form = useForm({
     resolver: yupResolver(schema),
+    defaultValues: getDefaultValues(applications),
   })
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
-  const { handleSubmit, errors, getValues } = form
+  const { handleSubmit, getValues } = form
 
   const onSubmit = async (formValues) => {
     setLoading(true)
@@ -63,6 +88,8 @@ const ApplicationForm = ({
                       : file,
                   ),
                 )
+              } else if (key === 'references') {
+                total.data[key] = JSON.stringify(formValues[key])
               } else {
                 total.data[key] = formValues[key]
               }
@@ -96,7 +123,7 @@ const ApplicationForm = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <VStack flex={2} spacing={14}>
             <ApplicationReferences />
-            <ApplicationGeneral />
+            <ApplicationGeneral place={place} />
             <ApplicationCreation />
             <ApplicationEligibility />
 
