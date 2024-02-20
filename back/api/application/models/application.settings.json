@@ -12,11 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "applications"
-    },
     "disponibility": {
       "via": "applications",
       "model": "disponibility"
@@ -66,6 +61,15 @@
     "campaign": {
       "model": "campaign",
       "via": "applications"
+    },
+    "place": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "company": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "companyApplications"
     }
   }
 }

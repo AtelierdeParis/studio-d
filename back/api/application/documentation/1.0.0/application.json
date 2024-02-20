@@ -522,160 +522,6 @@
           "id": {
             "type": "string"
           },
-          "users_permissions_user": {
-            "required": [
-              "id",
-              "email",
-              "username",
-              "firstname",
-              "lastname",
-              "structureName",
-              "address",
-              "zipCode",
-              "city",
-              "country",
-              "siret",
-              "ape",
-              "phone",
-              "license",
-              "type"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "role": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "accepted": {
-                "type": "boolean"
-              },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "structureName": {
-                "type": "string"
-              },
-              "socialReason": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "zipCode": {
-                "type": "string"
-              },
-              "city": {
-                "type": "string"
-              },
-              "country": {
-                "type": "string"
-              },
-              "siret": {
-                "type": "string"
-              },
-              "ape": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "license": {
-                "type": "string"
-              },
-              "website": {
-                "type": "string"
-              },
-              "legalRepresentative": {
-                "type": "string"
-              },
-              "statusRepresentative": {
-                "type": "string"
-              },
-              "insuranceNumber": {
-                "type": "string"
-              },
-              "insuranceName": {
-                "type": "string"
-              },
-              "choreographer": {
-                "type": "string"
-              },
-              "espaces": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "type": {
-                "type": "string",
-                "enum": [
-                  "company",
-                  "place"
-                ]
-              },
-              "external_id": {
-                "type": "integer"
-              },
-              "companyDispositifs": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "placeDispositifs": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "applications": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "campaigns": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "disponibility": {
             "required": [
               "id",
@@ -961,6 +807,314 @@
               }
             }
           },
+          "place": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "country",
+              "siret",
+              "ape",
+              "phone",
+              "license",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "companyDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "placeDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "company": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "country",
+              "siret",
+              "ape",
+              "phone",
+              "license",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "companyDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "placeDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -969,9 +1123,6 @@
       },
       "NewApplication": {
         "properties": {
-          "users_permissions_user": {
-            "type": "string"
-          },
           "disponibility": {
             "type": "string"
           },
@@ -1006,6 +1157,12 @@
             "type": "object"
           },
           "campaign": {
+            "type": "string"
+          },
+          "place": {
+            "type": "string"
+          },
+          "company": {
             "type": "string"
           },
           "published_at": {

@@ -24,7 +24,7 @@ interface Props {
 }
 
 const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
 
   const isCampaignPlace =
@@ -74,7 +74,7 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
           </Flex>
           <Box pl={5} flex={1}>
             <Box>
-              {isCampaignPlace && isCampaignTab && <CampaignTag />}
+              {isCampaignPlace && !isCampaignTab && <CampaignTag />}
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}
               </Text>

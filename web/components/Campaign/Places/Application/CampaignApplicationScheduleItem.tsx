@@ -15,7 +15,7 @@ export const checkBoxStyle = {
   },
 }
 
-const CampaignBookingScheduleItem = ({
+const CampaignApplicationScheduleItem = ({
   disponibility,
 }: {
   disponibility: Disponibility
@@ -48,6 +48,26 @@ const CampaignBookingScheduleItem = ({
   const sceneGridHelper = disponibility?.scene_grid
     ? t('detail.campaign.schedule_item.scene_grid')
     : t('detail.campaign.schedule_item.no_scene_grid')
+
+  const excludedDays = disponibility?.exclude_days as string[]
+  const excludedDaysHelper =
+    excludedDays &&
+    t('detail.campaign.schedule_item.closed_on', {
+      days:
+        excludedDays?.length === 1
+          ? format(new Date(excludedDays[0]), 'dd')
+          : excludedDays?.length === 2
+          ? excludedDays
+              .map((day) => format(new Date(day), 'dd'))
+              .join(` ${t('global.and')} `)
+          : `${excludedDays
+              .slice(0, -1)
+              .map((day) => format(new Date(day), 'dd'))
+              .join(', ')} ${t('global.and')} ${format(
+              new Date(excludedDays[excludedDays.length - 1]),
+              'dd',
+            )}`,
+    })
 
   const event = createOldEvents([disponibility])[0]
   const isSelected = useMemo(
@@ -92,14 +112,24 @@ const CampaignBookingScheduleItem = ({
         isDisabled={user?.type === 'place'}
       />
       <VStack alignItems="flex-start" spacing={1}>
-        <Text fontWeight="bold">{`${format(
-          disponibility?.start,
-          'dd MMMM',
-        )} → ${format(disponibility?.end, 'dd MMMM')}`}</Text>
+        <Text>
+          <Text fontWeight="bold" as="span">
+            {`${format(disponibility?.start, 'dd MMMM')} → ${format(
+              disponibility?.end,
+              'dd MMMM',
+            )}`}
+          </Text>
+          {excludedDaysHelper && (
+            <Text as="span" color="gray.500" pl={1} fontWeight="bold">
+              {excludedDaysHelper}
+            </Text>
+          )}
+        </Text>
+
         <Text color="gray.400">{`${accomodationHelper} ${staffHelper} ${sceneGridHelper}`}</Text>
       </VStack>
     </HStack>
   )
 }
 
-export default CampaignBookingScheduleItem
+export default CampaignApplicationScheduleItem

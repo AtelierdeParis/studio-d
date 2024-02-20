@@ -152,13 +152,13 @@
       "via": "places",
       "collection": "dispositif"
     },
-    "applications": {
-      "via": "users_permissions_user",
-      "collection": "application"
-    },
     "campaigns": {
       "via": "users_permissions_users",
       "collection": "campaign"
+    },
+    "companyApplications": {
+      "via": "company",
+      "collection": "application"
     }
   }
 }

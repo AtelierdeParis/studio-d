@@ -1038,9 +1038,6 @@
                 "id": {
                   "type": "string"
                 },
-                "users_permissions_user": {
-                  "type": "string"
-                },
                 "disponibility": {
                   "type": "string"
                 },
@@ -1081,6 +1078,12 @@
                   "type": "object"
                 },
                 "campaign": {
+                  "type": "string"
+                },
+                "place": {
+                  "type": "string"
+                },
+                "company": {
                   "type": "string"
                 },
                 "published_at": {

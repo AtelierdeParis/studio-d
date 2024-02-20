@@ -53,46 +53,6 @@ export interface NewActuality {
 
 export interface Application {
   id: string;
-  users_permissions_user?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    accepted?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    siret: string;
-    ape: string;
-    phone: string;
-    license: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    external_id?: number;
-    companyDispositifs?: string[];
-    placeDispositifs?: string[];
-    applications?: string[];
-    campaigns?: string[];
-    created_by?: string;
-    updated_by?: string;
-  };
   disponibility?: {
     id: string;
     when?: "morning" | "afternoon" | "full";
@@ -144,13 +104,118 @@ export interface Application {
   already_supported?: boolean;
   cv?: string;
   references?: object;
+  campaign?: {
+    id: string;
+    duration: number;
+    disponibility_start: string;
+    disponibility_end: string;
+    application_start: string;
+    application_end: string;
+    preselection_start: string;
+    preselection_end: string;
+    reminder_days?: number;
+    disponibilities?: string[];
+    title?: string;
+    description?: string;
+    disponibilities_max: number;
+    campaign_start?: string;
+    campaign_end?: string;
+    users_permissions_users?: string[];
+    applications_max?: number;
+    article_link?: string;
+    eligibility?: string;
+    chart_url?: string;
+    applications?: string[];
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  };
+  place?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
+    campaigns?: string[];
+    companyApplications?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
+  company?: {
+    id: string;
+    email: string;
+    provider?: string;
+    password?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    role?: string;
+    username: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    accepted?: boolean;
+    firstname: string;
+    lastname: string;
+    structureName: string;
+    socialReason?: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    country: string;
+    siret: string;
+    ape: string;
+    phone: string;
+    license: string;
+    website?: string;
+    legalRepresentative?: string;
+    statusRepresentative?: string;
+    insuranceNumber?: string;
+    insuranceName?: string;
+    choreographer?: string;
+    espaces?: string[];
+    type: "company" | "place";
+    external_id?: number;
+    companyDispositifs?: string[];
+    placeDispositifs?: string[];
+    campaigns?: string[];
+    companyApplications?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
 
   /** @format date-time */
   published_at?: string;
 }
 
 export interface NewApplication {
-  users_permissions_user?: string;
   disponibility?: string;
   creation_dancers?: number;
   creation_title?: string;
@@ -162,6 +227,9 @@ export interface NewApplication {
   already_supported?: boolean;
   cv?: string;
   references?: object;
+  campaign?: string;
+  place?: string;
+  company?: string;
 
   /** @format date-time */
   published_at?: string;
@@ -293,8 +361,8 @@ export interface Campaign {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
-    applications?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -302,6 +370,27 @@ export interface Campaign {
   article_link?: string;
   eligibility?: string;
   chart_url?: string;
+  applications?: {
+    id: string;
+    disponibility?: string;
+    creation_dancers?: number;
+    creation_title?: string;
+    creation_file?: string[];
+    creation_summary?: string;
+    creation_partnerships?: string;
+    creation_techical_requirements?: string;
+    creation_accomodation?: boolean;
+    eligible?: boolean;
+    already_supported?: boolean;
+    cv?: string;
+    references?: object;
+    campaign?: string;
+    place?: string;
+    company?: string;
+    published_at?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
 
   /** @format date-time */
   published_at?: string;
@@ -343,6 +432,7 @@ export interface NewCampaign {
   article_link?: string;
   eligibility?: string;
   chart_url?: string;
+  applications?: string[];
 
   /** @format date-time */
   published_at?: string;
@@ -539,13 +629,13 @@ export interface Disponibility {
     article_link?: string;
     eligibility?: string;
     chart_url?: string;
+    applications?: string[];
     published_at?: string;
     created_by?: string;
     updated_by?: string;
   };
   applications?: {
     id: string;
-    users_permissions_user?: string;
     disponibility?: string;
     creation_dancers?: number;
     creation_title?: string;
@@ -558,6 +648,9 @@ export interface Disponibility {
     already_supported?: boolean;
     cv?: string;
     references?: object;
+    campaign?: string;
+    place?: string;
+    company?: string;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -661,8 +754,8 @@ export interface Dispositif {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
-    applications?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -701,8 +794,8 @@ export interface Dispositif {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
-    applications?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -1006,8 +1099,8 @@ export interface UsersPermissionsRole {
     external_id?: number;
     companyDispositifs?: string[];
     placeDispositifs?: string[];
-    applications?: string[];
     campaigns?: string[];
+    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];

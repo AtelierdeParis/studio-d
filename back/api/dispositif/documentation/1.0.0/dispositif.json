@@ -762,13 +762,13 @@
                     "type": "string"
                   }
                 },
-                "applications": {
+                "campaigns": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "campaigns": {
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -919,13 +919,13 @@
                     "type": "string"
                   }
                 },
-                "applications": {
+                "campaigns": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "campaigns": {
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"

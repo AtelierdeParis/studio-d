@@ -1,14 +1,15 @@
 import { VStack, Text, Button } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import Link from '~components/Link'
 import ApplicationFormTitle from '~components/Campaign/Places/Application/ApplicationFormTitle'
-import BooleanField from '~components/Campaign/Places/Application/Inputs/BooleanField'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import MarkdownRenderer from '~components/MarkdownRenderer'
+import { useTranslation } from 'next-i18next'
+import CheckboxField from '~components/Campaign/Places/Application/Inputs/CheckboxField'
 
 const ApplicationEligibility = () => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
+
   return (
     <VStack width="100%" alignItems="stretch" spacing={8}>
       <ApplicationFormTitle
@@ -37,7 +38,7 @@ const ApplicationEligibility = () => {
 
       <MarkdownRenderer>{currentCampaign?.eligibility}</MarkdownRenderer>
 
-      <BooleanField
+      <CheckboxField
         name="eligibility"
         label={t('campaignApplication.eligibility.label')}
       />

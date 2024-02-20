@@ -2,7 +2,6 @@ import { Box, VStack, Text, ButtonGroup, Button } from '@chakra-ui/react'
 import ApplicationCreation from '~components/Campaign/Places/Application/ApplicationCreation'
 import ApplicationGeneral from '~components/Campaign/Places/Application/ApplicationGeneral'
 import ApplicationEligibility from '~components/Campaign/Places/Application/ApplicationEligibility'
-import ApplicationReferences from '~components/Campaign/Places/Application/References/ApplicationReferences'
 import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -13,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { client } from '~api/client-api'
 import { ScheduleEvent } from '~@types/schedule-event'
 import { useCurrentUser } from '~hooks/useCurrentUser'
-import { Reference } from '~@types/reference'
+import ApplicationReferences from '~components/Campaign/Places/Application/References/ApplicationReferences'
 
 const ApplicationForm = ({
   back,
@@ -48,12 +47,6 @@ const ApplicationForm = ({
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, errors, getValues } = form
 
-  useEffect(() => {
-    if (Object.keys(errors)?.length) {
-      errorToast(t('global.form_error'))
-    }
-  }, [Object.keys(errors)])
-
   const onSubmit = async (formValues) => {
     setLoading(true)
     try {
@@ -64,7 +57,7 @@ const ApplicationForm = ({
               if (key === 'creation_file') {
                 Array.from(formValues[key]).map((file: any, index) =>
                   total.form.append(
-                    `creation_file.files`,
+                    `files.creation_file`,
                     file?.caption
                       ? new File([file], file.caption, { type: file.type })
                       : file,
@@ -78,7 +71,7 @@ const ApplicationForm = ({
             {
               form: new FormData(),
               data: {
-                users_permissions_user: user.id,
+                company: user.id,
                 disponibility: event?.extendedProps?.id,
                 campaign: currentCampaign?.id,
               },

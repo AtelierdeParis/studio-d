@@ -1570,73 +1570,6 @@
               }
             }
           },
-          "applications": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "users_permissions_user": {
-                  "type": "string"
-                },
-                "disponibility": {
-                  "type": "string"
-                },
-                "creation_dancers": {
-                  "type": "integer"
-                },
-                "creation_title": {
-                  "type": "string"
-                },
-                "creation_file": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "creation_summary": {
-                  "type": "string"
-                },
-                "creation_partnerships": {
-                  "type": "string"
-                },
-                "creation_techical_requirements": {
-                  "type": "string"
-                },
-                "creation_accomodation": {
-                  "type": "boolean"
-                },
-                "eligible": {
-                  "type": "boolean"
-                },
-                "already_supported": {
-                  "type": "boolean"
-                },
-                "cv": {
-                  "type": "string"
-                },
-                "references": {
-                  "type": "object"
-                },
-                "campaign": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "campaigns": {
             "type": "array",
             "items": {
@@ -1723,6 +1656,76 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "companyApplications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "place": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
                 },
                 "published_at": {
                   "type": "string"
@@ -1875,13 +1878,13 @@
               "type": "string"
             }
           },
-          "applications": {
+          "campaigns": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "campaigns": {
+          "companyApplications": {
             "type": "array",
             "items": {
               "type": "string"

@@ -805,13 +805,13 @@
                     "type": "string"
                   }
                 },
-                "applications": {
+                "campaigns": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
                 },
-                "campaigns": {
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -846,9 +846,6 @@
               ],
               "properties": {
                 "id": {
-                  "type": "string"
-                },
-                "users_permissions_user": {
                   "type": "string"
                 },
                 "disponibility": {
@@ -891,6 +888,12 @@
                   "type": "object"
                 },
                 "campaign": {
+                  "type": "string"
+                },
+                "place": {
+                  "type": "string"
+                },
+                "company": {
                   "type": "string"
                 },
                 "published_at": {

@@ -7,7 +7,7 @@ import Tag from '~components/Tag'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import ApplicationRecap from '~components/Campaign/Places/Application/ApplicationRecap'
 import ApplicationForm from '~components/Campaign/Places/Application/ApplicationForm'
-import ApplicationConfirmed from '~components/Campaign/Places/Application/ApplicationConfirm'
+import ApplicationConfirmed from '~components/Campaign/Places/Application/ApplicationConfirmed'
 
 interface Props {
   events: ScheduleEvent[]
@@ -15,7 +15,7 @@ interface Props {
   back: () => void
 }
 
-const CampaignApplication = ({ events, place, back }: Props) => {
+const CampaignApplicationPopin = ({ events, place, back }: Props) => {
   const { currentCampaign } = useCampaignContext()
   const [isConfirmed, setConfirmed] = useState(false)
   const { t } = useTranslation('place')
@@ -63,4 +63,4 @@ const CampaignApplication = ({ events, place, back }: Props) => {
   )
 }
 
-export default CampaignApplication
+export default CampaignApplicationPopin

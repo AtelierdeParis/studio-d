@@ -1,167 +1,172 @@
 {
-    "title": {
-        "actus": "Les actualités",
-        "info": "Mes informations",
-        "dashboard": "Tableau de bord",
-        "requests": "Mes demandes",
-        "bookings": "Mes réservations",
-        "message": "Messagerie",
-        "createPlace": "Créer un espace",
-        "places": "Mes espaces"
-    },
-    "error": {
-        "emailTaken": "Cet email est déjà utilisé"
-    },
-    "myAccount": "Mon compte",
-    "dashboard": "Tableau de bord",
+  "title": {
+    "actus": "Les actualités",
     "info": "Mes informations",
-    "logout": "Déconnexion",
-    "place":{
-        "home": "Mes espaces",
-        "question": "Demandes",
-        "calendar": "Réservations",
-        "message": "Messagerie"
-    },
-    "company":{
-        "question": "Mes demandes",
-        "calendar": "Mes réservations",
-        "message": "Messagerie"
-    },
+    "dashboard": "Tableau de bord",
+    "requests": "Mes demandes",
+    "bookings": "Mes réservations",
+    "message": "Messagerie",
+    "createPlace": "Créer un espace",
+    "places": "Mes espaces"
+  },
+  "error": {
+    "emailTaken": "Cet email est déjà utilisé"
+  },
+  "myAccount": "Mon compte",
+  "dashboard": "Tableau de bord",
+  "solidarity": "Créneaux solidaires",
+  "info": "Mes informations",
+  "applications": "Dispositif {{title}}",
+  "placeApplications": "Candidatures",
+  "companyApplications": "Mes candidatures",
+  "next": "Prochainement",
+  "logout": "Déconnexion",
+  "place": {
     "home": "Mes espaces",
-    "charte": "Charte d'utilisation",
-    "pending": "En attente",
-    "pendingText": "Votre compte est actuellement en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
-    "backWebsite": "Retour à l’accueil du site",
-    "welcome": "Bienvenue !",
-    "welcomeText": {
-        "company": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les lieux par messagerie. Commencez par faire un tour des espaces disponibles, ou jetez un oeil <a>à notre charte d’utilisation</a>.",
-        "place": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les compagnies par messagerie. Commencez par inscrire un premier espace de répétition, ou jetez un oeil <a>à notre charte d’utilisation</a>."
+    "question": "Demandes",
+    "calendar": "Réservations",
+    "message": "Messagerie"
+  },
+  "company": {
+    "question": "Mes demandes",
+    "calendar": "Mes réservations",
+    "message": "Messagerie"
+  },
+  "home": "Mes espaces",
+  "charte": "Charte d'utilisation",
+  "pending": "En attente",
+  "pendingText": "Votre compte est actuellement en attente d’activation par StudioD. Vous recevrez une notification par mail dès qu’elle sera effective. Vous pouvez, en attendant, modifier vos informations.",
+  "backWebsite": "Retour à l’accueil du site",
+  "welcome": "Bienvenue !",
+  "welcomeText": {
+    "company": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les lieux par messagerie. Commencez par faire un tour des espaces disponibles, ou jetez un oeil <a>à notre charte d’utilisation</a>.",
+    "place": "Nous sommes ravis de vous accueillir dans la communauté StudioD ! Votre tableau de bord vous permettra de gérer vos réservations et d’échanger avec les compagnies par messagerie. Commencez par inscrire un premier espace de répétition, ou jetez un oeil <a>à notre charte d’utilisation</a>."
+  },
+  "seePlaces": "Voir les espaces",
+  "seeMyPlaces": "Voir mes espaces",
+  "information": {
+    "migration": {
+      "title": "Bienvenue sur le nouveau StudioD",
+      "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
     },
-    "seePlaces": "Voir les espaces",
-    "seeMyPlaces": "Voir mes espaces",
-    "information": {
-        "migration": {
-            "title": "Bienvenue sur le nouveau StudioD",
-            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
-        },
-        "username": "Identifiants",
-        "email": {
-            "label": "Votre adresse email"
-        },
-        "password": {
-            "label": "Mot de passe",
-            "placeholder": "Choisir un nouveau mot de passe",
-            "info": "Minimum de 10 caractères"
-        },
-        "address": {
-            "title": "Adresse",
-            "label": "Numéro et rue"
-        },
-        "zipCode": {
-            "label": "Code postal"
-        },
-        "city": {
-            "label": "Ville"
-        },
-        "info": "Mes informations",
-        "desactivate": {
-            "title": "Désactivation",
-            "btn": "Désactiver le compte"
-        },
-        "phone": {
-            "label": "Numéro de téléphone"
-        },
-        "firstname": "Prénom",
-        "lastname": "Nom",
-        "structure": "Nom de la structure",
-        "socialReason": {
-            "label": "Raison sociale",
-            "info": "Si différente du nom d’usage de la structure. Sinon, laissez vide."
-        },
-        "street": "Numéro et rue",
-        "country": {
-            "label": "Pays",
-            "info": "Le service n’est actuellement disponible qu’en France"
-        },
-        "compagnieInfo": "Informations sur la compagnie",
-        "lieuInfo": "Informations sur le lieu",
-        "siret": "Numéro de Siret",
-        "ape": "Code APE",
-        "referent": "Numéro de téléphone du contact référent",
-        "license":{
-            "label": "Licence(s) d'entrepreneur du spectacle",
-            "info": "Si vous disposez de plusieurs numéros de license, séparez-les par une virgule."
-        },
-        "website": "Lien vers votre site web",
-        "legalRepresentative": "Nom du· de la représentant·e légal·e",
-        "qualityRepresentative": "Qualité du·de la représentant·e légal·e",
-        "choreographer": "Nom du·de la chorégraphe",
-        "insuranceName": "Nom de la police d’assurance",
-        "insuranceNumber": "Numéro de la police d’assurance",
-        "submit": "Enregistrer les modifications",
-        "success": "Les informations ont bien été mise à jour",
-        "error": "Impossible de mettre à jour les informations",
-        "modal": {
-            "title": "Indiquer votre mot de passe",
-            "text": "Veuillez renseigner votre mot de passe actuel afin de mettre à jour vos informations",
-            "btn": "Confirmer",
-            "back": "Annuler",
-            "required": "Mot de passe requis",
-            "error": "Le mot de passe ne correspond pas"
-        }
+    "username": "Identifiants",
+    "email": {
+      "label": "Votre adresse email"
     },
+    "password": {
+      "label": "Mot de passe",
+      "placeholder": "Choisir un nouveau mot de passe",
+      "info": "Minimum de 10 caractères"
+    },
+    "address": {
+      "title": "Adresse",
+      "label": "Numéro et rue"
+    },
+    "zipCode": {
+      "label": "Code postal"
+    },
+    "city": {
+      "label": "Ville"
+    },
+    "info": "Mes informations",
     "desactivate": {
-        "title": "Désactiver le compter",
-        "text": "Vous êtes sur le point de désactiver votre compte, il ne sera plus visible par les autres utilisateurs. Voulez-vous continuer ?",
-        "btn": "Confirmer",
-        "back": "Annuler",
-        "success": "Votre compte a bien été désactivé",
-        "error": "Une erreur est survenue en voulant désactiver votre compte"
+      "title": "Désactivation",
+      "btn": "Désactiver le compte"
     },
-    "message": {
-        "info": {
-            "title": "Aucun message",
-            "text": "Vous n’avez aucune discussion pour le moment.",
-            "link": "Voir les espaces"
-        }
+    "phone": {
+      "label": "Numéro de téléphone"
     },
-    "requests": {
-        "info": {
-            "title": "Aucune demande",
-            "text": {
-                "company": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
-                "place": "Vous n’avez aucune demande en attente. Parcourez la liste de vos espaces inscrits ainsi que leur disponibilités pour commencer à recevoir des demandes"
-            },
-            "link": {
-                "place": "Voir mes espaces",
-                "company": "Voir les espaces"
-            }
-        }
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "structure": "Nom de la structure",
+    "socialReason": {
+      "label": "Raison sociale",
+      "info": "Si différente du nom d’usage de la structure. Sinon, laissez vide."
     },
-    "bookings": {
-        "info": {
-            "title": "Aucune réservation",
-            "text": "Vous n’avez aucune réservation confirmée pour le moment.",
-            "link1": "Voir mes demandes",
-            "link2": {
-                "place": "Voir mes espaces",
-                "company": "Voir les espaces"
-            }
-        }
+    "street": "Numéro et rue",
+    "country": {
+      "label": "Pays",
+      "info": "Le service n’est actuellement disponible qu’en France"
     },
-    "tag": {
-        "pending": "En attente",
-        "booked": "A venir",
-        "canceled": "Annulée",
-        "past": "Passée",
-        "occupied": "En cours",
-        "askcancel": "Ann. demandée",
-        "expired": "Expirée",
-        "newtweek": "Le semaine prochaine"
+    "compagnieInfo": "Informations sur la compagnie",
+    "lieuInfo": "Informations sur le lieu",
+    "siret": "Numéro de Siret",
+    "ape": "Code APE",
+    "referent": "Numéro de téléphone du contact référent",
+    "license": {
+      "label": "Licence(s) d'entrepreneur du spectacle",
+      "info": "Si vous disposez de plusieurs numéros de license, séparez-les par une virgule."
     },
-    "errors": {
-        "required": "Champs requis",
-        "min": "La taille minimale doit être de {{ min }}",
-        "max": "La taille maximale doit être de {{ max }}"
+    "website": "Lien vers votre site web",
+    "legalRepresentative": "Nom du· de la représentant·e légal·e",
+    "qualityRepresentative": "Qualité du·de la représentant·e légal·e",
+    "choreographer": "Nom du·de la chorégraphe",
+    "insuranceName": "Nom de la police d’assurance",
+    "insuranceNumber": "Numéro de la police d’assurance",
+    "submit": "Enregistrer les modifications",
+    "success": "Les informations ont bien été mise à jour",
+    "error": "Impossible de mettre à jour les informations",
+    "modal": {
+      "title": "Indiquer votre mot de passe",
+      "text": "Veuillez renseigner votre mot de passe actuel afin de mettre à jour vos informations",
+      "btn": "Confirmer",
+      "back": "Annuler",
+      "required": "Mot de passe requis",
+      "error": "Le mot de passe ne correspond pas"
     }
+  },
+  "desactivate": {
+    "title": "Désactiver le compter",
+    "text": "Vous êtes sur le point de désactiver votre compte, il ne sera plus visible par les autres utilisateurs. Voulez-vous continuer ?",
+    "btn": "Confirmer",
+    "back": "Annuler",
+    "success": "Votre compte a bien été désactivé",
+    "error": "Une erreur est survenue en voulant désactiver votre compte"
+  },
+  "message": {
+    "info": {
+      "title": "Aucun message",
+      "text": "Vous n’avez aucune discussion pour le moment.",
+      "link": "Voir les espaces"
+    }
+  },
+  "requests": {
+    "info": {
+      "title": "Aucune demande",
+      "text": {
+        "company": "Vous n’avez aucune demande en attente. Parcourez la liste des espaces inscrits pour commencer à déposer des demandes.",
+        "place": "Vous n’avez aucune demande en attente. Parcourez la liste de vos espaces inscrits ainsi que leur disponibilités pour commencer à recevoir des demandes"
+      },
+      "link": {
+        "place": "Voir mes espaces",
+        "company": "Voir les espaces"
+      }
+    }
+  },
+  "bookings": {
+    "info": {
+      "title": "Aucune réservation",
+      "text": "Vous n’avez aucune réservation confirmée pour le moment.",
+      "link1": "Voir mes demandes",
+      "link2": {
+        "place": "Voir mes espaces",
+        "company": "Voir les espaces"
+      }
+    }
+  },
+  "tag": {
+    "pending": "En attente",
+    "booked": "A venir",
+    "canceled": "Annulée",
+    "past": "Passée",
+    "occupied": "En cours",
+    "askcancel": "Ann. demandée",
+    "expired": "Expirée",
+    "newtweek": "Le semaine prochaine"
+  },
+  "errors": {
+    "required": "Champs requis",
+    "min": "La taille minimale doit être de {{ min }}",
+    "max": "La taille maximale doit être de {{ max }}"
+  }
 }

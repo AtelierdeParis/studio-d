@@ -1,18 +1,21 @@
 import React from 'react'
 import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
 import {
-  ROUTE_ACCOUNT,
   ROUTE_USE_POLICY,
   ROUTE_ACCOUNT_INFORMATION,
   ROUTE_ACCOUNT_REQUEST,
   ROUTE_ACCOUNT_BOOKING,
   ROUTE_ACCOUNT_MESSAGE,
   ROUTE_ACCOUNT_PLACES,
+  ROUTE_ACCOUNT_APPLICATIONS,
+  ROUTE_ACCOUNT_MY_APPLICATIONS,
 } from '~constants'
 import Link from '~components/Link'
 import Back from 'public/assets/img/back.svg'
 import Notif from '~components/Notif'
 import Profile from 'public/assets/img/user.svg'
+import Applications from 'public/assets/img/applicationsSmall.svg'
+import ApplicationsLoading from 'public/assets/img/applicationsSmallLoading.svg'
 import Charte from 'public/assets/img/charte.svg'
 import Logout from 'public/assets/img/logout.svg'
 import Home from 'public/assets/img/home.svg'
@@ -25,6 +28,7 @@ import { useRouter } from 'next/router'
 import { UsersPermissionsUser } from '~typings/api'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import { useUserIsComplete } from '~hooks/useUserIsComplete'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const accountItems = {
   title: 'myAccount',
@@ -42,8 +46,32 @@ const accountItems = {
   ],
 }
 
-const placeItems = {
-  title: 'dashboard',
+const getApplicationsItems = ({
+  isNext,
+  isPlace,
+  translationParams,
+}: {
+  isNext: boolean
+  translationParams: { title: string }
+  isPlace: boolean
+}) => ({
+  title: 'applications',
+  translationParams,
+  items: [
+    {
+      icon: isNext ? <ApplicationsLoading /> : <Applications />,
+      label: isNext
+        ? 'next'
+        : isPlace
+        ? 'placeApplications'
+        : 'companyApplications',
+      url: isPlace ? ROUTE_ACCOUNT_APPLICATIONS : ROUTE_ACCOUNT_MY_APPLICATIONS,
+    },
+  ],
+})
+
+const getPlaceItems = (isCampaignMode) => ({
+  title: isCampaignMode ? 'solidarity' : 'dashboard',
   items: [
     {
       icon: <Home />,
@@ -66,10 +94,10 @@ const placeItems = {
       url: ROUTE_ACCOUNT_MESSAGE,
     },
   ],
-}
+})
 
-const companyItems = {
-  title: 'dashboard',
+const getCompanyItems = (isCampaignMode: boolean) => ({
+  title: isCampaignMode ? 'solidarity' : 'dashboard',
   items: [
     {
       icon: <Question />,
@@ -87,7 +115,7 @@ const companyItems = {
       url: ROUTE_ACCOUNT_MESSAGE,
     },
   ],
-}
+})
 
 const styleActive: BoxProps = {
   backgroundColor: 'blue.200',
@@ -104,7 +132,10 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
 
-  const displayMenu = ({ title, items }) => {
+  const { currentCampaign, isCampaignPlace } = useCampaignContext()
+  console.log(currentCampaign, isCampaignPlace)
+
+  const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'
     return (
       <Box w="100%" opacity={isDisactivated ? 0.5 : 1}>
@@ -117,7 +148,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           fontWeight="500"
           fontFamily="mabry medium"
         >
-          {t(title)}
+          {t(title, translationParams)}
         </Text>
         {items.map(({ icon, label, url = '#', onClick = null }) => (
           <Link
@@ -190,7 +221,21 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         <VStack spacing={12}>
           {user?.confirmed &&
             user?.accepted &&
-            displayMenu(user.type === 'company' ? companyItems : placeItems)}
+            displayMenu(
+              user?.type === 'company'
+                ? getCompanyItems(Boolean(currentCampaign))
+                : getPlaceItems(isCampaignPlace),
+            )}
+          {((user?.type === 'place' && isCampaignPlace) || currentCampaign) &&
+            displayMenu(
+              getApplicationsItems({
+                isNext:
+                  user?.type === 'company' &&
+                  currentCampaign?.mode === 'disponibilities',
+                translationParams: { title: currentCampaign?.title },
+                isPlace: user?.type === 'place',
+              }),
+            )}
           {displayMenu(accountItems)}
         </VStack>
       </Box>
