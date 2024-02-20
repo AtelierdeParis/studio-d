@@ -104,7 +104,7 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
     }
     const newSearch = formatSearch(data, forceSort)
 
-    setSearchParams(newSearch)
+    setSearchParams({ ...newSearch, ...initialFilters })
 
     router.push({
       pathname: ROUTE_PLACES,
