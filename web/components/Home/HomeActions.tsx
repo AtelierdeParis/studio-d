@@ -14,6 +14,7 @@ const HomeActions = () => {
       pos={{ base: 'static', lg: 'relative' }}
       zIndex={99}
       paddingX={{ base: 0, lg: 8 }}
+      width="100%"
     >
       <Box flex={hasActiveCampaign ? 3 : 1}>
         <HomeSearch hasActiveCampaign={hasActiveCampaign} />

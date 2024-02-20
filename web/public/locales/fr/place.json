@@ -306,12 +306,16 @@
       "success": "Les créneaux sélectionnés ont été supprimés",
       "title": "Vous avez sélectionné {{nb}} créneau.",
       "titles": "Vous avez sélectionné {{nb}} créneaux.",
+      "titleCampaign": "Vous avez sélectionné le créneau suivant :",
+      "titlesCampaign": "Vous avez sélectionné les créneaux suivants :",
       "slotAvailable": "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
       "slotAvailables": "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
       "slotNotAvailable": "Ce créneau ne peut pas être supprimé :",
       "slotNotAvailables": "Plusieurs créneaux ne peuvent pas être supprimés :",
       "delete": "Supprimer le créneau disponible",
       "deletes": "Supprimer les créneaux disponibles",
+      "deleteCampaign": "Supprimer le créneau",
+      "deletesCampaign": "Supprimer les créneaux",
       "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",
       "notBooked": "Le créneau ne fait l’objet d’aucune demande ou réservation.",
       "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
@@ -579,7 +583,7 @@
         "schedule": {
           "title": "Ajoutez ou modifiez vos créneaux avant le {{disponibility_end}}. ",
           "description": "\n Vous pouvez ajouter jusqu’à {{disponibilities_max}} créneaux dédiés au dispositif {{title}} pour un même espace. Les créneaux doivent impérativement faire {{duration}} jours, et se dérouler entre le {{campaign_start}} et le {{campaign_end}}",
-          "open_disponibilities": "créneaux ouverts à candidatures Émergence"
+          "open_disponibilities": "créneaux qui seront ouverts à candidatures {{title}}"
         }
       }
     }
