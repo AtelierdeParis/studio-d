@@ -11,9 +11,7 @@ const ApplicationCounter = ({
 }: { isFullButton?: boolean } & StackProps) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
-  const { data: user } = useCurrentUser()
-
-  console.log(user)
+  const { data: user, applications } = useCurrentUser()
 
   if (user?.type === 'company' && currentCampaign?.applications_max > 0) {
     return (
@@ -22,12 +20,10 @@ const ApplicationCounter = ({
           <Text fontWeight="bold">
             {t('campaign.applications_counter.counter')}
           </Text>
-          <Text pl={1} color={'campaign.dark'}>{`${
-            //@ts-expect-error
-            user?.companyApplications?.filter(
-              (el) => el?.campaign === currentCampaign.id,
-            )?.length
-          }/${currentCampaign.applications_max}`}</Text>
+          <Text
+            pl={1}
+            color={'campaign.dark'}
+          >{`${applications?.length}/${currentCampaign.applications_max}`}</Text>
         </Flex>
         {isFullButton ? (
           <Button

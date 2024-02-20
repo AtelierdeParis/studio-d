@@ -26,7 +26,6 @@ import {
   DropdownNavButton,
   NavButton,
 } from '~components/Navigation/NavigationButtons'
-import Debug from '~components/Navigation/Debug'
 
 interface Props {
   colorMode: 'white' | 'black'
@@ -67,7 +66,7 @@ const Header = ({ colorMode }: Props) => {
             }}
           />
         </Link>
-        {process.env.NODE_ENV === 'development' && <Debug />}
+
         <HStack
           spacing={{ base: 0, md: 6 }}
           whiteSpace="nowrap"

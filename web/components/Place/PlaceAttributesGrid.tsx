@@ -45,15 +45,17 @@ const PlaceAttributesGrid = ({
 
   const getTechnicalStaff = () => {
     if (isCampaignTab && campaignDisponibilities[0]) {
-      const staff = campaignDisponibilities[0]?.staff as string[]
-      return staff?.includes('no') ? t('detail.no') : t('detail.possible')
+      const staff = campaignDisponibilities?.map((el) => el?.staff as string[])
+      return staff?.every((el) => el?.includes('no'))
+        ? t('detail.no')
+        : t('detail.possible')
     }
     return place?.technicalStaff ? t('detail.possible') : t('detail.no')
   }
 
   const getAccomodation = () => {
     if (isCampaignTab && campaignDisponibilities[0]) {
-      return campaignDisponibilities[0]?.accomodation === 0
+      return campaignDisponibilities.every((el) => el.accomodation === 0)
         ? t('detail.no')
         : t('detail.possible')
     }
@@ -123,12 +125,12 @@ const PlaceAttributesGrid = ({
           icon={<Bed />}
           text={getAccomodation()}
         />
-        {isCampaignTab && campaignDisponibilities[0] && (
+        {isCampaignTab && campaignDisponibilities?.length && (
           <GridItem
             label={t('detail.scene_grid')}
             icon={<SceneGrid />}
             text={
-              campaignDisponibilities[0]?.scene_grid
+              campaignDisponibilities.some((el) => el?.scene_grid)
                 ? t('detail.yes')
                 : t('detail.no')
             }
