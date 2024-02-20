@@ -73,7 +73,9 @@ const HomeCarousel = () => {
           position="relative"
           top="40px"
           zIndex={10}
-          display={{ base: 'none', lg: 'block' }}
+          display={{ base: 'none', lg: 'flex' }}
+          width="100%"
+          justifyContent={'center'}
         >
           <HomeActions />
         </Box>

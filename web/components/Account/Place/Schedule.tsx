@@ -25,7 +25,7 @@ export const StyleWrapper = styled.div`
     inset: 0;
     display: block;
     position: absolute;
-    z-index: 20;
+    z-index: 11;
     border-radius: 8px;
     margin: 3px 2px 3px 2px;
   }
@@ -111,7 +111,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
     })
     return classNames.join(', ')
   }, [oldEvents, newEvents])
-
+  console.log(excludedDaysClassName)
   return (
     <Flex
       w={{ base: 'calc(100% + 1.5rem)', md: '100%', schedule: '600px' }}
@@ -137,9 +137,14 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
           }}
           initialDate={isCampaignMode && currentCampaign?.campaign_start}
           dayCellContent={(day) => {
-            const hasEvent = events.some((event) =>
+            const event = events.find((event) =>
               isSameDay(event.start, day.date),
             )
+            const hasEvent = Boolean(event)
+            const isCampaignEvent = event?.extendedProps?.isCampaignEvent
+            const isDisabled =
+              (isCampaignMode && !isCampaignEvent) ||
+              (!isCampaignMode && isCampaignEvent)
 
             return (
               <Box
@@ -148,6 +153,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
                 lineHeight="1"
                 fontSize={{ base: '11px', sm: 'sm', md: 'md' }}
                 pt={{ base: 0, sm: 0.5 }}
+                opacity={isDisabled ? 0.6 : 1}
               >
                 {day.dayNumberText}
               </Box>

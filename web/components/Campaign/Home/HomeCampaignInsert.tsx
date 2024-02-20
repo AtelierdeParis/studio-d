@@ -31,7 +31,7 @@ const HomeCampaignInsert = () => {
             height="22px"
           />
           <VStack width="100%">
-            <HStack>
+            <HStack width="100%">
               <Box flex={1}>
                 <Text fontWeight="bold">
                   {t(`campaign.insert.${mode}.title`)}

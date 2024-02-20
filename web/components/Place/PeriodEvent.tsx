@@ -47,7 +47,6 @@ const PeriodEvent = ({ isMonth, start, end, isCampaignEvent }: Props) => {
       fontSize={{ base: '11px', sm: 'sm' }}
       {...(isMonth && stylePeriodMonth)}
       {...(isLastDay && styleLastDay)}
-      id="licorne"
     >
       <Box color={status === 'selected' ? 'blue.500' : 'black'}>
         {`${formattedStart} - ${formattedEnd}`}

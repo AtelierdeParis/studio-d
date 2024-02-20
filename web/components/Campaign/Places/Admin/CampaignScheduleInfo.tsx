@@ -32,7 +32,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
   const { eventsIdToDelete } = useContext(ScheduleContext)
 
   if (eventsIdToDelete.length > 0) {
-    return <ScheduleDelete />
+    return <ScheduleDelete isCampaignTab />
   }
 
   return (
@@ -64,6 +64,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           {currentCampaign?.mode === 'disponibilities'
             ? t(
                 `campaign.helpers.disponibilities.schedule.open_disponibilities`,
+                { title: currentCampaign?.title },
               )
             : t(
                 `campaign.helpers.applications.schedule.${

@@ -113,7 +113,7 @@ const Event = ({
       }}
       borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
-      opacity={isDisabled ? 0.2 : 1}
+      opacity={isDisabled ? 0.6 : 1}
     >
       {isPeriod && (
         <PeriodEvent
