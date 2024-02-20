@@ -111,7 +111,7 @@ const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
     })
     return classNames.join(', ')
   }, [oldEvents, newEvents])
-  console.log(excludedDaysClassName)
+
   return (
     <Flex
       w={{ base: 'calc(100% + 1.5rem)', md: '100%', schedule: '600px' }}
