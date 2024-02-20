@@ -54,6 +54,7 @@ const CampaignApplicationPopin = ({ events, place, back }: Props) => {
             back={back}
             setConfirmed={setConfirmed}
             events={events}
+            place={place}
           />
 
           <ApplicationRecap place={place} events={events} back={back} />

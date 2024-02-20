@@ -31,6 +31,6 @@ export const useCurrentUser = () => {
     canApply:
       userData?.data?.type === 'company' &&
       currentCampaign?.applications_max &&
-      applications?.length < 2,
+      applications?.length < currentCampaign?.applications_max,
   }
 }

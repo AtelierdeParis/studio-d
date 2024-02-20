@@ -81,13 +81,14 @@ const HomePlaces = ({ campaign }: Props) => {
             href={ROUTE_PLACES}
             variant="outline"
             colorScheme="campaign"
-            size="xl"
             color={'campaign.dark'}
             _hover={{ bg: 'campaign.light', textDecor: 'none' }}
             whiteSpace="normal"
             textAlign="center"
-            p={6}
             lineHeight="inherit"
+            height="auto"
+            size="xl"
+            p={2}
           >
             {t('places.campaign.cta', {
               title: campaign?.title,

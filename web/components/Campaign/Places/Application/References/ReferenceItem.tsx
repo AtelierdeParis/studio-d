@@ -18,6 +18,7 @@ const ReferenceItem = ({
 }) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
+
   return (
     <VStack
       border="1px solid blue"
@@ -73,7 +74,10 @@ const ReferenceItem = ({
           </Text>
           <Text as="span" pl={1} color="gray.500">
             {[
-              ...(reference?.coproducers?.map(
+              ...((Array.isArray(reference?.coproducers)
+                ? reference.coproducers
+                : reference.coproducers.split(',')
+              ).map(
                 (coproducer) =>
                   currentCampaign.users_permissions_users.find(
                     (user) => user?.id === coproducer,

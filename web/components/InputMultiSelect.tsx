@@ -24,7 +24,9 @@ const InputMultiSelect = ({
   })
 
   const onChange = (value) => {
-    field.onChange(value?.map((el) => el.value) || [])
+    field.onChange(
+      Array.isArray(value) ? value?.map((el) => el.value) : [value.value] || [],
+    )
   }
 
   return (
