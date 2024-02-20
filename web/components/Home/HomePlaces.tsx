@@ -6,6 +6,7 @@ import {
   Button,
   useBreakpointValue,
   HStack,
+  Stack,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'public/assets/img/arrow-bottom.svg'
@@ -50,25 +51,27 @@ const HomePlaces = ({ campaign }: Props) => {
 
   return (
     <Box py={4} w="100%">
-      <HStack alignItems="flex-start" pl={{ base: 0, md: 2 }}>
+      <HStack alignItems="flex-start" pl={{ base: 0, md: 2 }} paddingY={4}>
         <Box w="18px">
           <Arrow />
         </Box>
-        <Text textStyle="h2" mb={4} pl={3} lineHeight={1}>
-          {campaign
-            ? t('campaign.title', { title: campaign?.title })
-            : t('places.title')}
-        </Text>
-        {campaign && (
-          <Tag status="campaign" padding={2} fontSize="sm">
-            {tCommon('campaign.open', {
-              date: format(new Date(campaign?.limitDate), 'd MMMM yyyy'),
-            })}
-          </Tag>
-        )}
+        <Stack direction={{ base: 'column-reverse', sm: 'row' }}>
+          <Text textStyle="h2" mb={4} pl={3} lineHeight={1}>
+            {campaign
+              ? t('campaign.title', { title: campaign?.title })
+              : t('places.title')}
+          </Text>
+          {campaign && (
+            <Tag status="campaign" padding={2} fontSize="sm">
+              {tCommon('campaign.open', {
+                date: format(new Date(campaign?.limitDate), 'd MMMM yyyy'),
+              })}
+            </Tag>
+          )}
+        </Stack>
       </HStack>
 
-      <PlacesListCampaignHelper campaign={campaign} limitLines />
+      <PlacesListCampaignHelper campaign={campaign} limitLines isHome />
 
       <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} />
       <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>
@@ -81,6 +84,10 @@ const HomePlaces = ({ campaign }: Props) => {
             size="xl"
             color={'campaign.dark'}
             _hover={{ bg: 'campaign.light', textDecor: 'none' }}
+            whiteSpace="normal"
+            textAlign="center"
+            p={6}
+            lineHeight="inherit"
           >
             {t('places.campaign.cta', {
               title: campaign?.title,
