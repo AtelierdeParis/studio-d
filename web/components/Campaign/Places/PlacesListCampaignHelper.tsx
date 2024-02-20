@@ -15,24 +15,30 @@ import { ROUTE_PLACES } from '~constants'
 const PlacesListCampaignHelper = ({
   campaign,
   limitLines,
+  isHome,
   ...props
-}: { campaign?: ActiveCampaign; limitLines?: boolean } & StackProps) => {
+}: {
+  campaign?: ActiveCampaign
+  limitLines?: boolean
+  isHome?: boolean
+} & StackProps) => {
   const { t } = useTranslation('common')
 
   return (
     <VStack
       backgroundColor={campaign ? 'campaign.light' : 'blue.200'}
       borderRadius="4px"
-      borderTopLeftRadius={0}
+      borderTopLeftRadius={isHome ? undefined : 0}
       paddingX={8}
       paddingY={4}
       marginBottom={4}
       spacing={'1rem'}
-      id="hello"
       {...props}
     >
-      {campaign && <ApplicationCounter borderBottom="1px solid lightgray" />}
-      <HStack>
+      {campaign && !isHome && (
+        <ApplicationCounter borderBottom="1px solid lightgray" />
+      )}
+      <HStack width="100%" spacing={6}>
         <VStack flex={4} justifyContent="flex-start" alignItems="flex-start">
           <Text as="span" fontWeight="bold" marginRight={1}>
             {campaign
