@@ -23,7 +23,7 @@ module.exports = {
         return Promise.all(
           res.map(async (application) => {
             return {
-              ...booking,
+              ...application,
               notifications: await strapi.services.message.getNbNotifications({
                 id,
                 type,
