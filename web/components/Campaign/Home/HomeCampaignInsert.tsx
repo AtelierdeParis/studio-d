@@ -36,7 +36,7 @@ const HomeCampaignInsert = () => {
                 <Text fontWeight="bold">
                   {t(`campaign.insert.${mode}.title`)}
                 </Text>
-                <Text>
+                <Text opacity={0.5}>
                   {t(`campaign.insert.${mode}.subtitle`, {
                     date: format(new Date(limitDate), 'd MMMM'),
                   })}
