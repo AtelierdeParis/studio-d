@@ -45,7 +45,6 @@ const ApplicationForm = ({
   events: ScheduleEvent[]
   place: Espace
 }) => {
-  console.log(place)
   const { applications } = useCurrentUser()
   const { t } = useTranslation('place')
   const schema = yup.object().shape({
@@ -100,7 +99,7 @@ const ApplicationForm = ({
               form: new FormData(),
               data: {
                 company: user.id,
-                place: place.users_permissions_user.id,
+                place: place.id,
                 disponibility: event?.extendedProps?.id,
                 campaign: currentCampaign?.id,
               },

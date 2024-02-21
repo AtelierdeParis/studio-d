@@ -890,10 +890,10 @@
                 "campaign": {
                   "type": "string"
                 },
-                "place": {
+                "company": {
                   "type": "string"
                 },
-                "company": {
+                "espace": {
                   "type": "string"
                 },
                 "published_at": {

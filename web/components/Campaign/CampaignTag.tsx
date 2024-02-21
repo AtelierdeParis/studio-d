@@ -9,13 +9,15 @@ const CampaignTag = ({
   isGrid,
   isCampaignTab,
   disponibilitiesIds,
+  hasCampaignDispo,
 }: {
   isGrid?: boolean
   isCampaignTab?: boolean
   disponibilitiesIds?: string[]
+  hasCampaignDispo?: boolean
 }) => {
   const { applications } = useCurrentUser()
-  const { currentCampaign, isCampaignPlace } = useCampaignContext()
+  const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('common')
 
   if (
@@ -42,7 +44,7 @@ const CampaignTag = ({
     )
   }
 
-  if (isCampaignPlace && !isCampaignTab) {
+  if (hasCampaignDispo && !isCampaignTab) {
     return (
       <Box position={isGrid ? 'relative' : undefined}>
         <Tag

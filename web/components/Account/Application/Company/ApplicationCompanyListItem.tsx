@@ -34,7 +34,13 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
         <Text>{application?.id}</Text>
       </Cell>
       <Cell>
-        <Text>{application?.place?.structureName}</Text>
+        <Text>
+          {
+            //@ts-expect-error
+            application.disponibility.espace.users_permissions_user
+              .structureName
+          }
+        </Text>
       </Cell>
       <Cell>
         {/* @ts-expect-error */}

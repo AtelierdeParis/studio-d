@@ -11,9 +11,9 @@ import { useTranslation } from 'next-i18next'
 import { Application } from '~typings/api'
 import Chevron from 'public/assets/img/chevron-down.svg'
 import Cell from '~components/Account/Booking/Cell'
-import ApplicationCompanyListItem from '~components/Account/Application/Company/ApplicationCompanyListItem'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import ApplicationCompanyHelper from '~components/Account/Application/Company/ApplicationCompanyHelper'
+import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
+import ApplicationSelector from '~components/Account/Application/Place/ApplicationSelector'
 
 interface Props {
   applications: Application[]
@@ -58,17 +58,14 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
           {t('place.title', { title: currentCampaign?.title })}
         </Text>
       </Flex>
-      <SimpleGrid gridTemplateColumns="fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
+      <ApplicationSelector />
+      <SimpleGrid
+        gridTemplateColumns={`fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto)${
+          currentCampaign?.mode === 'preselections' ? 'minmax(auto, auto)' : ''
+        }`}
+      >
         <Cell isHeader>
           <Text pl="9px">{t('place.table.head.number')}</Text>
-        </Cell>
-        <Cell isHeader>
-          <Divider />
-          <Text>{t('place.table.head.place')}</Text>
-        </Cell>
-        <Cell isHeader>
-          <Divider />
-          <Text>{t('place.table.head.space')}</Text>
         </Cell>
         <Cell isHeader>
           <Divider />
@@ -79,7 +76,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
             cursor="pointer"
             onClick={sortByDate}
           >
-            <Text color="black">{t('place.table.head.slot')}</Text>
+            <Text color="black">{t('place.table.head.artist')}</Text>
             <Box transform={`rotate(${isDesc ? '0' : '180'}deg)`}>
               <Chevron />
             </Box>
@@ -87,20 +84,24 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
         </Cell>
         <Cell isHeader>
           <Divider />
-          <Text>{t('place.table.head.creation')}</Text>
+          <Text>{t('place.table.head.email')}</Text>
         </Cell>
         <Cell isHeader>
           <Divider />
+          <Text>{t('place.table.head.creation')}</Text>
         </Cell>
-
+        {currentCampaign?.mode === 'preselections' && (
+          <Cell isHeader>
+            <Divider />
+          </Cell>
+        )}
         {list.map((application) => (
-          <ApplicationCompanyListItem
+          <ApplicationPlaceListItem
             key={application.id}
             application={application}
           />
         ))}
       </SimpleGrid>
-      <ApplicationCompanyHelper />
     </Box>
   )
 }

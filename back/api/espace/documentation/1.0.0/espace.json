@@ -1152,6 +1152,76 @@
           "deleted": {
             "type": "boolean",
             "default": false
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1275,6 +1345,12 @@
           "deleted": {
             "type": "boolean",
             "default": false
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

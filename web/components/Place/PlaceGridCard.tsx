@@ -22,7 +22,6 @@ import addWeeks from 'date-fns/addWeeks'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
-import { pl } from 'date-fns/locale'
 
 interface Props {
   place: Espace
@@ -49,7 +48,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
     disposInRange || place?.disponibilities,
   )
 
-  const isCampaignPlace =
+  const hasCampaignDispo =
     currentCampaign?.mode === 'applications' &&
     place?.disponibilities?.some(
       //@ts-expect-error
@@ -76,7 +75,10 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
           <CampaignTag
             isGrid
             isCampaignTab={isCampaignTab}
-            disponibilitiesIds={place?.disponibilities?.map((d) => d?.id)}
+            disponibilitiesIds={place?.disponibilities
+              ?.filter((el) => el?.campaign)
+              .map((d) => d?.id)}
+            hasCampaignDispo={hasCampaignDispo}
           />
 
           <AspectRatio
@@ -177,7 +179,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                 </Flex>
               </Flex>
 
-              {isCampaignPlace && (
+              {hasCampaignDispo && isCampaignTab && (
                 <>
                   <Divider my={2} borderColor="gray.100" />
                   <Flex w="100%">

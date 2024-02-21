@@ -62,14 +62,14 @@
       "model": "campaign",
       "via": "applications"
     },
-    "place": {
-      "plugin": "users-permissions",
-      "model": "user"
-    },
     "company": {
       "plugin": "users-permissions",
       "model": "user",
       "via": "companyApplications"
+    },
+    "espace": {
+      "model": "espace",
+      "via": "applications"
     }
   }
 }

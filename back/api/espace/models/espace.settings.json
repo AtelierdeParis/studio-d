@@ -150,6 +150,10 @@
     "deleted": {
       "type": "boolean",
       "default": false
+    },
+    "applications": {
+      "via": "espace",
+      "collection": "application"
     }
   }
 }

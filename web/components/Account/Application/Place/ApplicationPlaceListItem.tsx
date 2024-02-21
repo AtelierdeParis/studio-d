@@ -8,12 +8,15 @@ import ConfirmButton from '~components/Account/Application/ConfirmButton'
 import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
+import Link from '~components/Link'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 interface Props {
   application: Application
 }
 
 const ApplicationPlaceListItem = ({ application }: Props) => {
+  const { currentCampaign } = useCampaignContext()
   const { errorToast, successToast } = useToast()
   const { t } = useTranslation('application')
   const queryClient = useQueryClient()
@@ -34,41 +37,38 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
         <Text>{application?.id}</Text>
       </Cell>
       <Cell>
-        <Text>{application?.place?.structureName}</Text>
+        <Text>{`${application?.company?.structureName} (${application.company.firstname} ${application.company.lastname})`}</Text>
       </Cell>
       <Cell>
-        {/* @ts-expect-error */}
-        <Text>{application?.disponibility?.espace?.name}</Text>
-      </Cell>
-      <Cell>
-        <Text>{`${format(application?.disponibility.start, 'dd/MM')} → ${format(
-          application?.disponibility.end,
-          'dd/MM',
-        )}`}</Text>
+        <Link href={`mailto:${application?.company?.email}`} target="_blank">
+          <Text>{application?.company?.email}</Text>
+        </Link>
       </Cell>
       <Cell>
         <Text>{application?.creation_title}</Text>
       </Cell>
-      <Cell>
-        <ConfirmButton
-          helper={t('company.table.delete_helper')}
-          handleConfirm={onDelete}
-          confirmLabel={t('company.table.delete')}
-        >
-          <Button
-            px={2}
-            py={1}
-            variant="outline"
-            color="grayText.1"
-            colorScheme="gray"
-            size="sm"
-            borderRadius="sm"
-            fontSize="md"
+      {currentCampaign?.mode === 'preselections' && (
+        <Cell>
+          <ConfirmButton
+            helper={t('company.table.delete_helper')}
+            handleConfirm={onDelete}
+            confirmLabel={t('company.table.delete')}
           >
-            {t('company.table.delete')}
-          </Button>
-        </ConfirmButton>
-      </Cell>
+            <Button
+              px={2}
+              py={1}
+              variant="outline"
+              color="grayText.1"
+              colorScheme="gray"
+              size="sm"
+              borderRadius="sm"
+              fontSize="md"
+            >
+              {t('company.table.delete')}
+            </Button>
+          </ConfirmButton>
+        </Cell>
+      )}
     </Fragment>
   )
 }

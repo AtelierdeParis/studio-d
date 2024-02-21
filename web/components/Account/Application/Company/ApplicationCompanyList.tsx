@@ -39,6 +39,8 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
     setList(list.reverse())
   }
 
+  console.log(applications)
+
   return (
     <Box>
       <Flex
