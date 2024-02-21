@@ -8,7 +8,8 @@
 module.exports = {
   async myApplications(ctx) {
     const { id, type } = ctx.state.user;
-    const query = type === "place" ? { place: id } : { company: id };
+    const query = type === "place" ? { 'disponibility.espace.users_permissions_user.id':id} : { company: id };
+    const populate = type==="place"? ['disponibility.espace','company']:['disponibility.espace', 'place','disponibility.espace.users_permissions_user']
 
     return strapi
       .query("application")
@@ -17,7 +18,7 @@ module.exports = {
           ...query,
           _sort: "disponibility.start:desc",
         },
-        ['disponibility.espace', 'place']
+        populate
       )
       .then((res) => {
         return Promise.all(

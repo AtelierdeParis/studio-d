@@ -7,7 +7,9 @@
     "bookings": "Mes réservations",
     "message": "Messagerie",
     "createPlace": "Créer un espace",
-    "places": "Mes espaces"
+    "places": "Mes espaces",
+    "applications": "Candidatures",
+    "my_applications": "Mes candidatures"
   },
   "error": {
     "emailTaken": "Cet email est déjà utilisé"

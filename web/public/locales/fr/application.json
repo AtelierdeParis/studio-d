@@ -25,7 +25,7 @@
   "place": {
     "title": "Candidatures – Dispositif {{title}}",
     "table": {
-      "header": {
+      "head": {
         "number": "No.",
         "artist": "Artiste",
         "email": "Email",
