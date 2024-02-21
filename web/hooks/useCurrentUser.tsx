@@ -32,5 +32,7 @@ export const useCurrentUser = () => {
       userData?.data?.type === 'company' &&
       currentCampaign?.applications_max &&
       applications?.length < currentCampaign?.applications_max,
+    remainingApplications:
+      currentCampaign?.applications_max - applications?.length,
   }
 }

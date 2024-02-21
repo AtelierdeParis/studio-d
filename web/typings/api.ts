@@ -1305,6 +1305,20 @@ export namespace Actualities {
 
 export namespace Applications {
   /**
+   * @description Get applications related to current user
+   * @tags Application
+   * @name GetMyApplications
+   * @request GET:/applications/me
+   * @secure
+   */
+  export namespace GetMyApplications {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application[];
+  }
+  /**
    * No description
    * @tags Application
    * @name ApplicationsList
@@ -3490,6 +3504,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   applications = {
+    /**
+     * @description Get applications related to current user
+     *
+     * @tags Application
+     * @name GetMyApplications
+     * @request GET:/applications/me
+     * @secure
+     */
+    getMyApplications: (params: RequestParams = {}) =>
+      this.request<Application[], Error>({
+        path: `/applications/me`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * No description
      *

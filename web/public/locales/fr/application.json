@@ -1,0 +1,36 @@
+{
+  "company": {
+    "title": "Mes candidatures – {{title}}",
+    "table": {
+      "head": {
+        "number": "No.",
+        "place": "Lieu",
+        "space": "Espace",
+        "slot": "Créneau",
+        "creation": "Création"
+      },
+      "delete": "Supprimer",
+      "cancel": "Annuler",
+      "delete_helper": "Être sûr de vouloir supprimer cette candidature ?"
+    },
+    "helper": {
+      "start": "Il est encore possible de déposer {{num}} candidature,",
+      "starts": "Il est encore possible de déposer {{num}} candidatures,",
+      "end": " avant le {{date}}.",
+      "cta": "Voir les espaces partenaires"
+    },
+    "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
+    "delete_success": "Votre candidature a bien été supprimée"
+  },
+  "place": {
+    "title": "Candidatures – Dispositif {{title}}",
+    "table": {
+      "header": {
+        "number": "No.",
+        "artist": "Artiste",
+        "email": "Email",
+        "creation": "Nom de la création"
+      }
+    }
+  }
+}

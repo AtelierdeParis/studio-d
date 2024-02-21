@@ -15,9 +15,9 @@ module.exports = {
       .find(
         {
           ...query,
-          _sort: "disponibilities.start:desc",
+          _sort: "disponibility.start:desc",
         },
-        populate
+        ['disponibility.espace', 'place']
       )
       .then((res) => {
         return Promise.all(
