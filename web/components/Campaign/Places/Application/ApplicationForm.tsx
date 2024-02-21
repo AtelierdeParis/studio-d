@@ -22,7 +22,7 @@ const getDefaultValues = (applications) => {
     const data = {
       ...lastApplication,
       references:
-        lastApplication?.references.map((el) => ({
+        lastApplication?.references?.map((el) => ({
           ...el,
           coproducers: Array.isArray(el.coproducers)
             ? el.coproducers
@@ -70,7 +70,7 @@ const ApplicationForm = ({
   })
   const { errorToast } = useToast()
   const [isLoading, setLoading] = useState(false)
-  const { handleSubmit, getValues } = form
+  const { handleSubmit } = form
 
   const onSubmit = async (formValues) => {
     setLoading(true)
@@ -99,6 +99,7 @@ const ApplicationForm = ({
               form: new FormData(),
               data: {
                 company: user.id,
+                place: place.id,
                 disponibility: event?.extendedProps?.id,
                 campaign: currentCampaign?.id,
               },

@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import Link from '~components/Link'
 import { useTranslation } from 'next-i18next'
-import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
+import { ROUTE_ACCOUNT_MY_APPLICATIONS } from '~constants'
 
 const ApplicationConfirmed = ({ structureName }) => {
   const { t } = useTranslation('place')
@@ -41,7 +41,7 @@ const ApplicationConfirmed = ({ structureName }) => {
           </Button>
           <Button
             as={Link}
-            href={ROUTE_ACCOUNT_APPLICATIONS}
+            href={ROUTE_ACCOUNT_MY_APPLICATIONS}
             alignSelf="center"
             mb={{ base: 0, md: 20 }}
             variant="lineBlue"

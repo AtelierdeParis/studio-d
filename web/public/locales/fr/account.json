@@ -16,7 +16,23 @@
   "dashboard": "Tableau de bord",
   "solidarity": "Créneaux solidaires",
   "info": "Mes informations",
-  "applications": "Dispositif {{title}}",
+  "applications": {
+    "menu_title": "Dispositif {{title}}",
+    "info": {
+      "title": {
+        "next": "Prochainement",
+        "no_applications": "Aucune candidature"
+      },
+      "text": {
+        "next": "Le dispositif {{title}} se prépare : l’appel à candidatures sera ouvert du {{application_start}} au {{application_end}}. Encore un peu de patience !",
+        "no_applications": "Vous n’avez déposé aucune candidature {{title}} cette saison. Candidatez jusqu’au {{application_end}} auprès de nos espaces partenaires ({{applications_max}} candidatures maximum)"
+      },
+      "cta": {
+        "next": "Découvrir le dispositif Émergence",
+        "no_applications": "Voir les espaces partenaires"
+      }
+    }
+  },
   "placeApplications": "Candidatures",
   "companyApplications": "Mes candidatures",
   "next": "Prochainement",

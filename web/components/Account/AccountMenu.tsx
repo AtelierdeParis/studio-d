@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
 import {
   ROUTE_USE_POLICY,
@@ -55,7 +55,7 @@ const getApplicationsItems = ({
   translationParams: { title: string }
   isPlace: boolean
 }) => ({
-  title: 'applications',
+  title: 'applications.menu_title',
   translationParams,
   items: [
     {
@@ -133,6 +133,25 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const { data: notifs } = useMyNotifications()
 
   const { currentCampaign, isCampaignPlace } = useCampaignContext()
+  const applicationItems = useMemo(
+    () =>
+      getApplicationsItems({
+        isNext:
+          user?.type === 'company' &&
+          currentCampaign?.mode === 'disponibilities',
+        translationParams: { title: currentCampaign?.title },
+        isPlace: user?.type === 'place',
+      }),
+    [currentCampaign, user?.type],
+  )
+
+  const placeItems = useMemo(() => getPlaceItems(isCampaignPlace), [
+    isCampaignPlace,
+  ])
+  const companyItems = useMemo(
+    () => getCompanyItems(Boolean(currentCampaign)),
+    [currentCampaign],
+  )
 
   const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'
@@ -192,6 +211,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
       </Box>
     )
   }
+
   return (
     <Flex
       direction="column"
@@ -220,21 +240,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         <VStack spacing={12}>
           {user?.confirmed &&
             user?.accepted &&
-            displayMenu(
-              user?.type === 'company'
-                ? getCompanyItems(Boolean(currentCampaign))
-                : getPlaceItems(isCampaignPlace),
-            )}
+            displayMenu(user?.type === 'company' ? companyItems : placeItems)}
           {((user?.type === 'place' && isCampaignPlace) || currentCampaign) &&
-            displayMenu(
-              getApplicationsItems({
-                isNext:
-                  user?.type === 'company' &&
-                  currentCampaign?.mode === 'disponibilities',
-                translationParams: { title: currentCampaign?.title },
-                isPlace: user?.type === 'place',
-              }),
-            )}
+            displayMenu(applicationItems)}
           {displayMenu(accountItems)}
         </VStack>
       </Box>

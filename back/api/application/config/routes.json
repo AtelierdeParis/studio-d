@@ -2,6 +2,16 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/applications/me",
+      "handler": "application.myApplications",
+      "config": {
+          "policies": ["global::is-authenticated"],
+          "operationId": "myApplications",
+          "description": "Get applications related to current user"
+      }
+    },
+    {
+      "method": "GET",
       "path": "/applications",
       "handler": "application.find",
       "config": {
@@ -45,8 +55,9 @@
       "path": "/applications/:id",
       "handler": "application.delete",
       "config": {
-        "policies": []
+        "policies": ["is-concerned"]
       }
     }
   ]
 }
+

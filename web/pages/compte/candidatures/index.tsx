@@ -10,21 +10,24 @@ import Loading from '~components/Loading'
 import { useMyBookings } from '~hooks/useMyBookings'
 import { NextSeo } from 'next-seo'
 import { useTranslation } from 'next-i18next'
+import ApplicationPlaceList from '~components/Account/Application/Place/ApplicationPlaceList'
+import InfoPlaceApplications from '~components/Account/Info/InfoPlaceApplications'
+import { useMyApplications } from '~hooks/useMyApplications'
 interface Props {
   user: UsersPermissionsUser
 }
 
 const AccountApplications = ({ user }: Props) => {
   const { t } = useTranslation('account')
-  const { data: requests, isLoading } = useMyBookings('request')
+  const { data: applications, isLoading } = useMyApplications()
 
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.requests')} />
-      {requests?.length === 0 ? (
-        <InfoRequest user={user} />
+      {applications?.length === 0 ? (
+        <InfoPlaceApplications user={user} />
       ) : (
-        <BookingList bookings={requests} type="request" />
+        <ApplicationPlaceList applications={applications} />
       )}
     </Loading>
   )
