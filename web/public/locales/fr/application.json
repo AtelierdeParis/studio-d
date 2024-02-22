@@ -17,7 +17,9 @@
       "start": "Il est encore possible de déposer {{num}} candidature,",
       "starts": "Il est encore possible de déposer {{num}} candidatures,",
       "end": " avant le {{date}}.",
-      "cta": "Voir les espaces partenaires"
+      "cta": "Voir les espaces partenaires",
+      "closed_start": "Le créneau de candidatures pour le dispositif {{title}} est maintenant clôturé,",
+      "closed_end": "la décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous hors de cette plateforme."
     },
     "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
     "delete_success": "Votre candidature a bien été supprimée"
@@ -42,7 +44,9 @@
       "confirm_preselection": "Vous avez pré-sélectionné {{num}} candidatures.",
       "confirm_preselections": "Vous avez pré-sélectionné {{num}} candidatures.",
       "confirm_cta": "Confirmer et transmettre la pré-selection à StudioD",
-      "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !"
+      "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !",
+      "open_applications_start": "La période de candidatures pour le dispositif {{title}} est en cours :",
+      "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
     }
   }
 }

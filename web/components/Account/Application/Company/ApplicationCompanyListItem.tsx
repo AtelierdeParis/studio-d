@@ -8,12 +8,14 @@ import ConfirmButton from '~components/Account/Application/ConfirmButton'
 import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 interface Props {
   application: Application
 }
 
 const ApplicationCompanyListItem = ({ application }: Props) => {
+  const { currentCampaign } = useCampaignContext()
   const { errorToast, successToast } = useToast()
   const { t } = useTranslation('application')
   const queryClient = useQueryClient()
@@ -60,24 +62,26 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
         <Text>{application?.creation_title}</Text>
       </Cell>
       <Cell>
-        <ConfirmButton
-          helper={t('company.table.delete_helper')}
-          handleConfirm={onDelete}
-          confirmLabel={t('company.table.delete')}
-        >
-          <Button
-            px={2}
-            py={1}
-            variant="outline"
-            color="grayText.1"
-            colorScheme="gray"
-            size="sm"
-            borderRadius="sm"
-            fontSize="md"
+        {currentCampaign?.mode === 'applications' && (
+          <ConfirmButton
+            helper={t('company.table.delete_helper')}
+            handleConfirm={onDelete}
+            confirmLabel={t('company.table.delete')}
           >
-            {t('company.table.delete')}
-          </Button>
-        </ConfirmButton>
+            <Button
+              px={2}
+              py={1}
+              variant="outline"
+              color="grayText.1"
+              colorScheme="gray"
+              size="sm"
+              borderRadius="sm"
+              fontSize="md"
+            >
+              {t('company.table.delete')}
+            </Button>
+          </ConfirmButton>
+        )}
       </Cell>
     </Fragment>
   )

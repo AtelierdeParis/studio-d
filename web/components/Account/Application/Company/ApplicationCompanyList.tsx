@@ -13,7 +13,7 @@ import Chevron from 'public/assets/img/chevron-down.svg'
 import Cell from '~components/Account/Booking/Cell'
 import ApplicationCompanyListItem from '~components/Account/Application/Company/ApplicationCompanyListItem'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import ApplicationCompanyHelper from '~components/Account/Application/Company/ApplicationCompanyHelper'
+import ApplicationCompanyHelper from '~components/Account/Application/Company/ApplicationsHelpers/ApplicationCompanyHelper'
 
 interface Props {
   applications: Application[]

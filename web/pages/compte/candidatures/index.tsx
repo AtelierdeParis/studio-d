@@ -6,11 +6,13 @@ import { requireAuth } from '~utils/auth'
 import { NextSeo } from 'next-seo'
 import { useTranslation } from 'next-i18next'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { Flex, Text } from '@chakra-ui/react'
-import ApplicationSelector from '~components/Account/Application/Place/ApplicationSelector'
+import { Box, Flex, HStack, Text } from '@chakra-ui/react'
+import ApplicationSelector from '~components/Account/Application/Place/Selectors/ApplicationSelector'
 import ApplicationPlaceData from '~components/Account/Application/Place/ApplicationPlaceData'
 import { useRouter } from 'next/router'
 import { useMyPlaces } from '~hooks/useMyPlaces'
+import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesAdminCampaignHelper'
+import { format } from '~utils/date'
 
 const PlaceApplications = () => {
   const { t } = useTranslation('application')
@@ -41,6 +43,16 @@ const PlaceApplications = () => {
     return (
       <>
         <NextSeo title={tAccount('title.requests')} />
+        {currentCampaign?.mode === 'applications' && (
+          <Box paddingY={4}>
+            <PlacesAdminCampaignHelper
+              title={t(`place.helper.open_applications_start`, {
+                title: currentCampaign?.title,
+              })}
+              description={t(`place.helper.open_applications_end`)}
+            />
+          </Box>
+        )}
         <Flex
           alignItems="center"
           pt={{ base: 4, md: 8 }}
@@ -59,15 +71,17 @@ const PlaceApplications = () => {
           </Text>
         </Flex>
         {Boolean(places?.length) && (
-          <ApplicationSelector
-            places={places?.map((p) => ({
-              ...p,
-              disponibilities: p.disponibilities?.filter(
-                //@ts-expect-error
-                (d) => d.campaign === currentCampaign?.id,
-              ),
-            }))}
-          />
+          <HStack>
+            <ApplicationSelector
+              places={places?.map((p) => ({
+                ...p,
+                disponibilities: p.disponibilities?.filter(
+                  //@ts-expect-error
+                  (d) => d.campaign === currentCampaign?.id,
+                ),
+              }))}
+            />
+          </HStack>
         )}
 
         {Boolean(searchParams && Object.keys(searchParams)?.length) && (
