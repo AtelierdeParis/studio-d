@@ -13,7 +13,11 @@ const ApplicationCounter = ({
   const { currentCampaign } = useCampaignContext()
   const { data: user, applications } = useCurrentUser()
 
-  if (user?.type === 'company' && currentCampaign?.applications_max > 0) {
+  if (
+    user?.type === 'company' &&
+    currentCampaign?.applications_max > 0 &&
+    applications?.length > 0
+  ) {
     return (
       <HStack width="100%" paddingY={3} {...props}>
         <Flex>

@@ -73,7 +73,7 @@ const HomePlaces = ({ campaign }: Props) => {
 
       <PlacesListCampaignHelper campaign={campaign} limitLines isHome />
 
-      <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} />
+      <PlaceGrid places={places.slice(0, isLgOrSm ? 4 : 3)} isCampaignTab />
       <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>
         {campaign?.mode === 'applications' ? (
           <Button

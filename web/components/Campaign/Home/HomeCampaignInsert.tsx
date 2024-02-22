@@ -21,6 +21,12 @@ const HomeCampaignInsert = () => {
       p={4}
       paddingBottom={{ base: 8, md: 2 }}
       height="100%"
+      _hover={{ lg: { borderColor: 'rgba(235, 164, 10, 0.3)' } }}
+      border={{
+        base: 'none',
+        lg: '2px solid transparent',
+      }}
+      transition="border 0.3s ease-in-out"
     >
       <VStack alignItems="flex-start" spacing={4}>
         <Tag status="campaign">{title}</Tag>

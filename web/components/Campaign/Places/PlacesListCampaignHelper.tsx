@@ -52,6 +52,7 @@ const PlacesListCampaignHelper = ({
           justifyContent={
             isHome ? { base: 'flex-start', sm: 'flex-end' } : 'flex-end'
           }
+          alignItems="center"
         >
           <Button
             variant={campaign ? 'campaign' : 'blueFill'}

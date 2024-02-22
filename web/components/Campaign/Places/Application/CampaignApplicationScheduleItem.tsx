@@ -118,6 +118,7 @@ const CampaignApplicationScheduleItem = ({
         handleClick(e)
       }}
       _hover={{ border: '2px solid #6EAE7F' }}
+      transition="border 0.3s ease-in-out"
     >
       <Checkbox
         colorScheme="green"
