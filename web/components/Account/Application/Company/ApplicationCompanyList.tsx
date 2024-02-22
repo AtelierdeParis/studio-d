@@ -39,8 +39,6 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
     setList(list.reverse())
   }
 
-  console.log(applications)
-
   return (
     <Box>
       <Flex
@@ -60,7 +58,7 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
           {t('company.title', { title: currentCampaign?.title })}
         </Text>
       </Flex>
-      <SimpleGrid gridTemplateColumns="fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
+      <SimpleGrid gridTemplateColumns="fit-content(300px) minmax(auto, 300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
         <Cell isHeader>
           <Text pl="9px">{t('company.table.head.number')}</Text>
         </Cell>
@@ -91,9 +89,7 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
           <Divider />
           <Text>{t('company.table.head.creation')}</Text>
         </Cell>
-        <Cell isHeader>
-          <Divider />
-        </Cell>
+        <Cell isHeader>{}</Cell>
 
         {list.map((application) => (
           <ApplicationCompanyListItem

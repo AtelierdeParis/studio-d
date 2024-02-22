@@ -10,14 +10,19 @@ import { useTranslation } from 'next-i18next'
 import { useMyApplications } from '~hooks/useMyApplications'
 import InfoCompanyApplications from '~components/Account/Info/InfoCompanyApplications'
 import ApplicationCompanyList from '~components/Account/Application/Company/ApplicationCompanyList'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 interface Props {
   user: UsersPermissionsUser
 }
 
 const CompanyApplications = ({ user }: Props) => {
   const { t } = useTranslation('account')
-  const { data: applications, isLoading } = useMyApplications()
-
+  const { currentCampaign } = useCampaignContext()
+  const { data: applications, isLoading } = useMyApplications({
+    campaignId: currentCampaign?.id,
+    options: { enabled: !!currentCampaign?.id },
+  })
+  if (!currentCampaign) return null
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.requests')} />

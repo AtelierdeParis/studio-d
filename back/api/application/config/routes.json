@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/applications/me",
+      "path": "/applications/me/:campaignId",
       "handler": "application.myApplications",
       "config": {
           "policies": ["global::is-authenticated"],

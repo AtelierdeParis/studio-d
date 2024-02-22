@@ -896,6 +896,13 @@
                 "espace": {
                   "type": "string"
                 },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -907,6 +914,9 @@
                 }
               }
             }
+          },
+          "preselections_max": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -1002,6 +1012,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "preselections_max": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",

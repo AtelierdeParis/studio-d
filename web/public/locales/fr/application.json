@@ -30,7 +30,19 @@
         "artist": "Artiste",
         "email": "Email",
         "creation": "Nom de la création"
+      },
+      "buttons": {
+        "details": "Détails"
       }
+    },
+    "helper": {
+      "preselection_start": "Établissez votre présélection avant le {{date}}.",
+      "missing_preselections": "{{num}} manquantes.",
+      "missing_preselection": "{{num}} manquante.",
+      "confirm_preselection": "Vous avez pré-sélectionné {{num}} candidatures.",
+      "confirm_preselections": "Vous avez pré-sélectionné {{num}} candidatures.",
+      "confirm_cta": "Confirmer et transmettre la pré-selection à StudioD",
+      "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !"
     }
   }
 }

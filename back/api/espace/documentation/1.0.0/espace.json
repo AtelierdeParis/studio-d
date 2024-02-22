@@ -1211,6 +1211,13 @@
                 "espace": {
                   "type": "string"
                 },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
                 "published_at": {
                   "type": "string"
                 },

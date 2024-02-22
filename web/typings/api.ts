@@ -126,47 +126,8 @@ export interface Application {
     eligibility?: string;
     chart_url?: string;
     applications?: string[];
+    preselections_max?: number;
     published_at?: string;
-    created_by?: string;
-    updated_by?: string;
-  };
-  place?: {
-    id: string;
-    email: string;
-    provider?: string;
-    password?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    role?: string;
-    username: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    accepted?: boolean;
-    firstname: string;
-    lastname: string;
-    structureName: string;
-    socialReason?: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    siret: string;
-    ape: string;
-    phone: string;
-    license: string;
-    website?: string;
-    legalRepresentative?: string;
-    statusRepresentative?: string;
-    insuranceNumber?: string;
-    insuranceName?: string;
-    choreographer?: string;
-    espaces?: string[];
-    type: "company" | "place";
-    external_id?: number;
-    companyDispositifs?: string[];
-    placeDispositifs?: string[];
-    campaigns?: string[];
-    companyApplications?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -210,6 +171,43 @@ export interface Application {
     created_by?: string;
     updated_by?: string;
   };
+  espace?: {
+    id: string;
+    name: string;
+    surface: number;
+    roomLength: number;
+    width: number;
+    height: number;
+    mirror: boolean;
+    danceBar: boolean;
+    accomodation: boolean;
+    technicalStaff: boolean;
+    floor: "plancherDanse" | "parquetTraditionnel" | "other" | "todefine";
+    otherFloor?: string;
+    about?: string;
+    details?: string;
+    address: string;
+    files?: string[];
+    images?: string[];
+    users_permissions_user?: string;
+    disponibilities?: string[];
+    scheduleDetails?: string;
+    filledUntil?: string;
+    published?: boolean;
+    bookings?: string[];
+    country: string;
+    external_id?: number;
+    danceCarpet?: "true" | "false" | "possible";
+    slug?: string;
+    city?: string;
+    latitude: number;
+    longitude?: number;
+    deleted?: boolean;
+    applications?: string[];
+    created_by?: string;
+    updated_by?: string;
+  };
+  status?: "preselected" | "confirmed";
 
   /** @format date-time */
   published_at?: string;
@@ -228,8 +226,9 @@ export interface NewApplication {
   cv?: string;
   references?: object;
   campaign?: string;
-  place?: string;
   company?: string;
+  espace?: string;
+  status?: "preselected" | "confirmed";
 
   /** @format date-time */
   published_at?: string;
@@ -385,12 +384,14 @@ export interface Campaign {
     cv?: string;
     references?: object;
     campaign?: string;
-    place?: string;
     company?: string;
+    espace?: string;
+    status?: "preselected" | "confirmed";
     published_at?: string;
     created_by?: string;
     updated_by?: string;
   }[];
+  preselections_max?: number;
 
   /** @format date-time */
   published_at?: string;
@@ -433,6 +434,7 @@ export interface NewCampaign {
   eligibility?: string;
   chart_url?: string;
   applications?: string[];
+  preselections_max?: number;
 
   /** @format date-time */
   published_at?: string;
@@ -475,6 +477,7 @@ export interface City {
     latitude: number;
     longitude?: number;
     deleted?: boolean;
+    applications?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -549,6 +552,7 @@ export interface Disponibility {
     latitude: number;
     longitude?: number;
     deleted?: boolean;
+    applications?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -630,6 +634,7 @@ export interface Disponibility {
     eligibility?: string;
     chart_url?: string;
     applications?: string[];
+    preselections_max?: number;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -649,8 +654,9 @@ export interface Disponibility {
     cv?: string;
     references?: object;
     campaign?: string;
-    place?: string;
     company?: string;
+    espace?: string;
+    status?: "preselected" | "confirmed";
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -879,6 +885,7 @@ export interface NewEspace {
   latitude: number;
   longitude?: number;
   deleted?: boolean;
+  applications?: string[];
   created_by?: string;
   updated_by?: string;
 }
@@ -1308,12 +1315,26 @@ export namespace Applications {
    * @description Get applications related to current user
    * @tags Application
    * @name GetMyApplications
-   * @request GET:/applications/me
+   * @request GET:/applications/me/{campaignId}
    * @secure
    */
   export namespace GetMyApplications {
-    export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestParams = { campaignId: string };
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Application[];
@@ -2079,7 +2100,21 @@ export namespace Espaces {
    */
   export namespace MyPlaces {
     export type RequestParams = {};
-    export type RequestQuery = {};
+    export type RequestQuery = {
+      _limit?: number;
+      _sort?: string;
+      _start?: number;
+      "="?: string;
+      _ne?: string;
+      _lt?: string;
+      _lte?: string;
+      _gt?: string;
+      _gte?: string;
+      _contains?: string;
+      _containss?: string;
+      _in?: string[];
+      _nin?: string[];
+    };
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = Espace[];
@@ -3509,13 +3544,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Application
      * @name GetMyApplications
-     * @request GET:/applications/me
+     * @request GET:/applications/me/{campaignId}
      * @secure
      */
-    getMyApplications: (params: RequestParams = {}) =>
+    getMyApplications: (
+      campaignId: string,
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Application[], Error>({
-        path: `/applications/me`,
+        path: `/applications/me/${campaignId}`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,
@@ -4460,10 +4514,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/espaces/me
      * @secure
      */
-    myPlaces: (params: RequestParams = {}) =>
+    myPlaces: (
+      query?: {
+        _limit?: number;
+        _sort?: string;
+        _start?: number;
+        "="?: string;
+        _ne?: string;
+        _lt?: string;
+        _lte?: string;
+        _gt?: string;
+        _gte?: string;
+        _contains?: string;
+        _containss?: string;
+        _in?: string[];
+        _nin?: string[];
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Espace[], Error>({
         path: `/espaces/me`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,

@@ -13,7 +13,7 @@ import Chevron from 'public/assets/img/chevron-down.svg'
 import Cell from '~components/Account/Booking/Cell'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
-import ApplicationSelector from '~components/Account/Application/Place/ApplicationSelector'
+import ApplicationPlaceHelper from '~components/Account/Application/Place/SelectionHelpers/ApplicationPlaceHelper'
 
 interface Props {
   applications: Application[]
@@ -41,26 +41,9 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
 
   return (
     <Box>
-      <Flex
-        alignItems="center"
-        pt={{ base: 4, md: 8 }}
-        pb={4}
-        justifyContent={{ base: 'flex-end', md: 'space-between' }}
-      >
-        <Text
-          textStyle="accountTitle"
-          pl={4}
-          display={{ base: 'none', md: 'block' }}
-          fontSize="24px"
-          fontWeight="400"
-          fontFamily="mabry"
-        >
-          {t('place.title', { title: currentCampaign?.title })}
-        </Text>
-      </Flex>
-      <ApplicationSelector />
+      <ApplicationPlaceHelper applications={applications} />
       <SimpleGrid
-        gridTemplateColumns={`fit-content(300px) fit-content(300px) minmax(auto, auto) minmax(auto, auto)${
+        gridTemplateColumns={`fit-content(300px) minmax(200px, auto) minmax(auto, auto) minmax(auto, auto)${
           currentCampaign?.mode === 'preselections' ? 'minmax(auto, auto)' : ''
         }`}
       >

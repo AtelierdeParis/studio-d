@@ -82,6 +82,7 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
           scene_grid,
           status: 'available',
           exclude_days,
+          isCampaign: true,
         },
       ])
       .then((res) => {

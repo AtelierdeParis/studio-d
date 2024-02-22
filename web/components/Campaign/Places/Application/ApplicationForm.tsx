@@ -99,7 +99,7 @@ const ApplicationForm = ({
               form: new FormData(),
               data: {
                 company: user.id,
-                place: place.id,
+                espace: place.id,
                 disponibility: event?.extendedProps?.id,
                 campaign: currentCampaign?.id,
               },
