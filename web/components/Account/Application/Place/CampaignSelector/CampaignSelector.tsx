@@ -25,6 +25,8 @@ const CampaignSelector = ({ children }) => {
     (c) => c.id?.toString() === campaign?.toString(),
   )
 
+  if (!selectedCampaign) return null
+
   return (
     <>
       <HStack pt={{ base: 4, md: 8 }} pb={4}>
