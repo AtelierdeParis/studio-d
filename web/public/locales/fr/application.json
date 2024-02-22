@@ -25,7 +25,8 @@
     "delete_success": "Votre candidature a bien été supprimée"
   },
   "place": {
-    "title": "Candidatures – Dispositif {{title}}",
+    "title": "Candidatures – ",
+    "title_single_tag": "Dispositif {{title}}",
     "table": {
       "head": {
         "number": "No.",
@@ -46,7 +47,9 @@
       "confirm_cta": "Confirmer et transmettre la pré-selection à StudioD",
       "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !",
       "open_applications_start": "La période de candidatures pour le dispositif {{title}} est en cours :",
-      "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
-    }
+      "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci.",
+      "closed_campaign": "Cette campagne est terminée."
+    },
+    "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif"
   }
 }

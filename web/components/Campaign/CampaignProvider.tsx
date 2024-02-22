@@ -1,5 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import CampaignContext from '~components/Campaign/CampaignContext'
+import React, { useMemo } from 'react'
+import CampaignContext, {
+  CampaignMode,
+} from '~components/Campaign/CampaignContext'
 import { useCampaigns } from '~hooks/useCampaigns'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 
@@ -10,12 +12,12 @@ interface ICampaignProvider {
 const CampaignProvider = ({ children }: ICampaignProvider) => {
   const today = new Date()
   const { data: user } = useCurrentUser()
-  const [activeCampaigns, setactiveCampaigns] = useState(null)
 
   const activeCampaignsQueryParameters = useMemo(
     () => ({
       disponibility_start_lte: today.toISOString(),
       preselection_end_gte: today.toISOString(),
+      _sort: 'id:desc',
     }),
     [],
   )
@@ -23,17 +25,18 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     activeCampaignsQueryParameters,
   )
 
-  useEffect(() => {
-    if (Boolean(campaigns?.length)) {
-      const activeCampaigns = campaigns?.map((campaign) => {
-        const mode = getCampaignMode(campaign)
-        const limitDate = getLimitDate(campaign, mode)
-        return { ...campaign, mode, limitDate }
-      })
-
-      setactiveCampaigns(activeCampaigns)
-    }
-  }, [campaigns, user])
+  const {
+    data: campaignsAll,
+    isLoading: isLoadingAllPlaceCampaigns,
+  } = useCampaigns(
+    {
+      users_permissions_users: user?.id,
+      _sort: 'id:desc',
+    },
+    {
+      enabled: user?.type === 'place',
+    },
+  )
 
   const getCampaignMode = (campaign) => {
     if (
@@ -51,6 +54,8 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
       today <= new Date(campaign.preselection_end)
     ) {
       return 'preselections'
+    } else if (today >= new Date(campaign.preselection_end)) {
+      return 'closed'
     }
     return null
   }
@@ -71,10 +76,32 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     }
   }
 
+  const activeCampaigns = useMemo(
+    () =>
+      campaigns?.map((campaign) => {
+        const mode = getCampaignMode(campaign) as CampaignMode
+        const limitDate = getLimitDate(campaign, mode)
+        return { ...campaign, mode, limitDate }
+      }) || null,
+    [campaigns],
+  )
+
+  const allPlaceCampaigns = useMemo(
+    () =>
+      campaignsAll?.map((campaign) => {
+        const mode = getCampaignMode(campaign) as CampaignMode
+        const limitDate = getLimitDate(campaign, mode)
+        return { ...campaign, mode, limitDate }
+      }) || null,
+    [campaignsAll],
+  )
+
   const currentCampaign = activeCampaigns?.[0]
   const isCampaignPlace =
     user?.type === 'place' &&
-    currentCampaign?.users_permissions_users.find((el) => el.id === user?.id)
+    Boolean(
+      currentCampaign?.users_permissions_users.find((el) => el.id === user?.id),
+    )
   const hasActiveCampaign =
     (currentCampaign?.mode === 'disponibilities' && isCampaignPlace) ||
     currentCampaign?.mode === 'applications'
@@ -87,6 +114,8 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
         isCampaignPlace,
         hasActiveCampaign,
         isLoading,
+        allPlaceCampaigns,
+        isLoadingAllPlaceCampaigns,
       }}
     >
       {children}

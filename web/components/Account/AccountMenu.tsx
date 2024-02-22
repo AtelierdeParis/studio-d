@@ -70,8 +70,8 @@ const getApplicationsItems = ({
   ],
 })
 
-const getPlaceItems = (isCampaignMode) => ({
-  title: isCampaignMode ? 'solidarity' : 'dashboard',
+const getPlaceItems = (hasCampaigns) => ({
+  title: hasCampaigns ? 'solidarity' : 'dashboard',
   items: [
     {
       icon: <Home />,
@@ -132,7 +132,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
 
-  const { currentCampaign, isCampaignPlace } = useCampaignContext()
+  const { currentCampaign, allPlaceCampaigns } = useCampaignContext()
   const applicationItems = useMemo(
     () =>
       getApplicationsItems({
@@ -145,13 +145,16 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     [currentCampaign, user?.type],
   )
 
-  const placeItems = useMemo(() => getPlaceItems(isCampaignPlace), [
-    isCampaignPlace,
+  const placeItems = useMemo(() => getPlaceItems(allPlaceCampaigns?.length), [
+    allPlaceCampaigns?.length,
   ])
   const companyItems = useMemo(
     () => getCompanyItems(Boolean(currentCampaign)),
     [currentCampaign],
   )
+  const displayApplications =
+    (user?.type === 'place' && allPlaceCampaigns?.length) ||
+    (user?.type === 'company' && currentCampaign)
 
   const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'
@@ -241,8 +244,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           {user?.confirmed &&
             user?.accepted &&
             displayMenu(user?.type === 'company' ? companyItems : placeItems)}
-          {((user?.type === 'place' && isCampaignPlace) || currentCampaign) &&
-            displayMenu(applicationItems)}
+          {displayApplications && displayMenu(applicationItems)}
           {displayMenu(accountItems)}
         </VStack>
       </Box>

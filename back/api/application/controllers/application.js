@@ -15,10 +15,7 @@ module.exports = {
     return strapi
       .query("application")
       .find(
-        {
-          ...query,
-          _sort: "disponibility.start:desc",
-        },
+        query,
         populate
       )
       .then((res) => {

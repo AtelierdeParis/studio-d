@@ -1,15 +1,7 @@
-import {
-  HStack,
-  Text,
-  Flex,
-  Button,
-  StackProps,
-  VStack,
-  Stack,
-} from '@chakra-ui/react'
+import { Text, Flex, Button, StackProps, VStack, Stack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationCounter from '~components/Campaign/ApplicationCounter'
-import { ActiveCampaign } from '~components/Campaign/CampaignContext'
+import { CampaignDetailed } from '~components/Campaign/CampaignContext'
 import Link from '~components/Link'
 import { ROUTE_PLACES } from '~constants'
 
@@ -19,7 +11,7 @@ const PlacesListCampaignHelper = ({
   isHome,
   ...props
 }: {
-  campaign?: ActiveCampaign
+  campaign?: CampaignDetailed
   limitLines?: boolean
   isHome?: boolean
 } & StackProps) => {

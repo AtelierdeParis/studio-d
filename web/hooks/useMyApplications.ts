@@ -6,13 +6,15 @@ export const useMyApplications = ({
   searchParams = {},
   options = {},
   campaignId,
+  name = ['myApplications'],
 }: {
   searchParams?: Applications.ApplicationsList.RequestQuery
   campaignId: string
   options?: UseQueryOptions<Application[]>
+  name?: string[]
 }) => {
   return useQuery(
-    ['myApplications'],
+    name,
     () =>
       client.applications
         .getMyApplications(campaignId, searchParams)
