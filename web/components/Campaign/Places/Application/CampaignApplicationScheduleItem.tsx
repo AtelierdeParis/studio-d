@@ -77,7 +77,8 @@ const CampaignApplicationScheduleItem = ({
     [selected, disponibility],
   )
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    console.log('click')
     if (isSelected) {
       setSelected(
         //@ts-expect-error
@@ -111,13 +112,23 @@ const CampaignApplicationScheduleItem = ({
       border={isSelected ? '2px solid #6EAE7F' : '2px solid transparent'}
       borderRadius="8px"
       opacity={isDisabled ? 0.5 : 1}
+      cursor="pointer"
+      onClick={(e) => {
+        e.stopPropagation()
+        handleClick(e)
+      }}
+      _hover={{ border: '2px solid #6EAE7F' }}
     >
       <Checkbox
         colorScheme="green"
         paddingTop={2}
         sx={checkBoxStyle}
         isChecked={isSelected}
-        onChange={handleClick}
+        onClick={(e) => {
+          e.stopPropagation()
+          e.preventDefault()
+          handleClick(e)
+        }}
         isDisabled={isDisabled}
       />
       <VStack alignItems="flex-start" spacing={1}>

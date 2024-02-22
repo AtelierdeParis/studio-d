@@ -74,15 +74,23 @@ const CampaignApplicationSchedule = ({
             })}
           </Text>
           <Text>{currentCampaign?.description}</Text>
-          <Text color="gray.500">{t('detail.campaign.eligibility')}</Text>
-          <MarkdownRenderer>{currentCampaign?.eligibility}</MarkdownRenderer>
-          <Button
-            variant="blueFill"
-            as={Link}
-            href={currentCampaign?.article_link ?? ''}
-          >
-            {t('detail.campaign.more')}
-          </Button>
+          {currentCampaign?.eligibility && (
+            <>
+              <Text color="gray.500">{t('detail.campaign.eligibility')}</Text>
+              <MarkdownRenderer>
+                {currentCampaign?.eligibility}
+              </MarkdownRenderer>
+            </>
+          )}
+          {currentCampaign?.article_link && (
+            <Button
+              variant="blueFill"
+              as={Link}
+              href={currentCampaign?.article_link ?? ''}
+            >
+              {t('detail.campaign.more')}
+            </Button>
+          )}
         </VStack>
       </Stack>
     </VStack>
