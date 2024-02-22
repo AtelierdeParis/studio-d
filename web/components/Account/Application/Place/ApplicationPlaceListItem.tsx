@@ -1,34 +1,24 @@
 import React, { Fragment } from 'react'
 import { Application } from '~typings/api'
-import { Text, Button, IconButton, ButtonGroup, HStack } from '@chakra-ui/react'
+import { Text, Button, IconButton, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
-import { client } from '~api/client-api'
-import useToast from '~hooks/useToast'
-import { useQueryClient } from 'react-query'
 import Link from '~components/Link'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import DownloadApplication from 'public/assets/img/downloadApplication.svg'
+import { useRouter } from 'next/router'
 
 interface Props {
   application: Application
 }
 
 const ApplicationPlaceListItem = ({ application }: Props) => {
-  const { currentCampaign } = useCampaignContext()
-  const { errorToast, successToast } = useToast()
+  const { allPlaceCampaigns } = useCampaignContext()
+  const { query } = useRouter()
+  const selectedCampaign = allPlaceCampaigns?.find(
+    (c) => c.id.toString() === query.campaign.toString(),
+  )
   const { t } = useTranslation('application')
-  const queryClient = useQueryClient()
-
-  const onDelete = async () => {
-    try {
-      await client.applications.applicationsDelete(application.id)
-      successToast(t('company.delete_success'))
-      queryClient.refetchQueries(['myApplications'])
-    } catch (e) {
-      errorToast(t('company.delete_error'))
-    }
-  }
 
   return (
     <Fragment key={application?.id}>
@@ -55,8 +45,9 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
           {application?.creation_title}
         </Text>
       </Cell>
-      {currentCampaign?.mode === 'preselections' && (
-        <Cell>
+
+      <Cell>
+        {['preselections', 'closed']?.includes(selectedCampaign?.mode) ? (
           <HStack spacing={2}>
             <IconButton
               px={2}
@@ -70,6 +61,7 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
               aria-label="dowload"
               borderColor="rgba(98,103,130, 0.6)"
               icon={<DownloadApplication />}
+              isDisabled={selectedCampaign?.mode === 'closed'}
             />
             <Button
               px={2}
@@ -81,12 +73,15 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
               borderRadius="sm"
               fontSize="md"
               borderColor="rgba(98,103,130, 0.6)"
+              isDisabled={selectedCampaign?.mode === 'closed'}
             >
               {t('place.table.buttons.details')}
             </Button>
           </HStack>
-        </Cell>
-      )}
+        ) : (
+          ''
+        )}
+      </Cell>
     </Fragment>
   )
 }

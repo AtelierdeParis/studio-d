@@ -1,5 +1,4 @@
 import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react'
-import { format } from '~utils/date'
 import PreselectionsWarning from 'public/assets/img/preselectionsWarning.svg'
 import { useTranslation } from 'next-i18next'
 

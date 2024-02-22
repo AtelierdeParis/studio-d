@@ -1,31 +1,29 @@
 import { HStack, Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 import { Espace } from '~typings/api'
 import { format } from '~utils/date'
 
 const ApplicationSelector = ({ places }: { places: Espace[] }) => {
-  const { currentCampaign } = useCampaignContext()
-
   const router = useRouter()
   const {
     espace: queryEspace,
     disponibility: queryDisponibility,
+    campaign,
   } = router.query
   const [espace, setEspace] = useState(queryEspace)
   const [disponibility, setDisponibility] = useState(queryDisponibility)
 
   const initState = () => {
-    const espace = queryEspace || places?.[0]?.id
-    const disponibility = places?.[0]?.id
+    const espace = places?.[0]?.id
+    const disponibility = places?.[0]?.disponibilities[0]?.id
     setEspace(espace)
     setDisponibility(disponibility)
     if (!queryEspace || !queryDisponibility) {
       router.push({
         pathname: router.pathname,
-        query: { espace, disponibility },
+        query: { ...router.query, espace, disponibility },
       })
     }
   }
@@ -42,15 +40,16 @@ const ApplicationSelector = ({ places }: { places: Espace[] }) => {
 
   const getDispoOptions = (espace) => {
     if (espace) {
-      return places
-        ?.find((p) => p.id.toString() === espace.toString())
-        ?.disponibilities //@ts-expect-error
-        ?.filter((d) => d?.campaign === currentCampaign?.id)
+      return places?.find((p) => p.id.toString() === espace.toString())
+        ?.disponibilities
     }
     return []
   }
 
-  const dispoOptions = useMemo(() => getDispoOptions(espace), [espace])
+  const dispoOptions = useMemo(() => getDispoOptions(espace), [
+    espace,
+    campaign,
+  ])
 
   return (
     <HStack paddingBottom={4}>
@@ -65,7 +64,7 @@ const ApplicationSelector = ({ places }: { places: Espace[] }) => {
           const disponibility = getDispoOptions(e.target.value)[0]?.id
           router.push({
             pathname: router.pathname,
-            query: { espace: e.target.value, disponibility },
+            query: { ...router.query, espace: e.target.value, disponibility },
           })
         }}
       >

@@ -5,19 +5,22 @@ export type CampaignMode =
   | 'disponibilities'
   | 'applications'
   | 'preselections'
+  | 'closed'
   | null
 
-export type ActiveCampaign = Campaign & {
+export type CampaignDetailed = Campaign & {
   mode: CampaignMode
   limitDate: string | null
 }
 
 interface ICampaignContext {
-  activeCampaigns?: ActiveCampaign[]
-  currentCampaign?: ActiveCampaign
+  activeCampaigns?: CampaignDetailed[]
+  allPlaceCampaigns?: CampaignDetailed[]
+  currentCampaign?: CampaignDetailed
   isCampaignPlace?: boolean
   hasActiveCampaign?: boolean
   isLoading?: boolean
+  isLoadingAllPlaceCampaigns?: boolean
 }
 
 const CampaignContext = React.createContext<ICampaignContext>({

@@ -1,23 +1,23 @@
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useMyApplications } from '~hooks/useMyApplications'
 import ApplicationPlaceList from '~components/Account/Application/Place/ApplicationPlaceList'
 import InfoPlaceApplications from '~components/Account/Info/InfoPlaceApplications'
 import Loading from '~components/Loading'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-const ApplicationPlaceData = ({ searchParams }) => {
+const ApplicationPlaceFetcher = ({ searchParams }) => {
   const { data: user } = useCurrentUser()
-  const { currentCampaign } = useCampaignContext()
-
+  const { query } = useRouter()
   const {
     data: applications,
     isLoading,
     refetch,
     isFetching,
   } = useMyApplications({
-    campaignId: currentCampaign?.id,
-    searchParams,
+    name: ['myApplications', searchParams.disponibility_eq as string],
+    campaignId: query.campaign as string,
+    searchParams: { ...searchParams, _sort: 'company.structureName:asc' },
     options: {
       enabled:
         Boolean(searchParams?.disponibility_eq) &&
@@ -40,4 +40,4 @@ const ApplicationPlaceData = ({ searchParams }) => {
   )
 }
 
-export default ApplicationPlaceData
+export default ApplicationPlaceFetcher
