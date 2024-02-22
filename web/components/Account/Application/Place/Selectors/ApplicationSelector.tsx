@@ -1,7 +1,6 @@
 import { HStack, Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
-import SelectMenu from '~components/Account/Application/Place/Selectors/SelectMenu'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 import { Espace } from '~typings/api'
@@ -11,25 +10,24 @@ const ApplicationSelector = ({ places }: { places: Espace[] }) => {
   const { currentCampaign } = useCampaignContext()
 
   const router = useRouter()
-  const { queryEspace, queryDisponibility } = router.query
+  const {
+    espace: queryEspace,
+    disponibility: queryDisponibility,
+  } = router.query
   const [espace, setEspace] = useState(queryEspace)
   const [disponibility, setDisponibility] = useState(queryDisponibility)
 
-  useEffect(() => {
-    if (queryEspace) {
-      setEspace(queryEspace)
-    }
-  }, [queryEspace])
-
   const initState = () => {
-    const espace = places?.[0]?.id
+    const espace = queryEspace || places?.[0]?.id
     const disponibility = places?.[0]?.id
     setEspace(espace)
     setDisponibility(disponibility)
-    router.push({
-      pathname: router.pathname,
-      query: { espace, disponibility },
-    })
+    if (!queryEspace || !queryDisponibility) {
+      router.push({
+        pathname: router.pathname,
+        query: { espace, disponibility },
+      })
+    }
   }
 
   useEffect(() => {
@@ -56,22 +54,6 @@ const ApplicationSelector = ({ places }: { places: Espace[] }) => {
 
   return (
     <HStack paddingBottom={4}>
-      <SelectMenu
-        options={places.map((place) => ({
-          value: place.id,
-          label: place.name,
-        }))}
-        onChange={(data) => {
-          console.log(data)
-
-          // const disponibility = getDispoOptions(e.target.value)[0]?.id
-          // router.push({
-          //   pathname: router.pathname,
-          //   query: { espace: e.target.value, disponibility },
-          // })
-        }}
-        value={espace as string}
-      />
       <Select
         width="auto"
         borderRadius="18px"
