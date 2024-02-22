@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next'
 import Arrow from 'public/assets/img/arrow-bottom.svg'
 import { usePlaces } from '~hooks/usePlaces'
 import PlaceGrid from '~components/Place/PlaceGrid'
-import { ActiveCampaign } from '~components/Campaign/CampaignContext'
+import { CampaignDetailed } from '~components/Campaign/CampaignContext'
 import { format } from '~utils/date'
 import Link from '~components/Link'
 import { ROUTE_PLACES } from '~constants'
@@ -20,7 +20,7 @@ import PlacesListCampaignHelper from '~components/Campaign/Places/PlacesListCamp
 import Tag from '~components/Tag'
 
 interface Props {
-  campaign?: ActiveCampaign
+  campaign?: CampaignDetailed
 }
 
 const HomePlaces = ({ campaign }: Props) => {
