@@ -1,6 +1,7 @@
 import { HStack, Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useState } from 'react'
+import SelectMenu from '~components/Account/Application/Place/Selectors/SelectMenu'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 import { Espace } from '~typings/api'
@@ -54,7 +55,23 @@ const ApplicationSelector = ({ places }: { places: Espace[] }) => {
   const dispoOptions = useMemo(() => getDispoOptions(espace), [espace])
 
   return (
-    <HStack paddingY={4}>
+    <HStack paddingBottom={4}>
+      <SelectMenu
+        options={places.map((place) => ({
+          value: place.id,
+          label: place.name,
+        }))}
+        onChange={(data) => {
+          console.log(data)
+
+          // const disponibility = getDispoOptions(e.target.value)[0]?.id
+          // router.push({
+          //   pathname: router.pathname,
+          //   query: { espace: e.target.value, disponibility },
+          // })
+        }}
+        value={espace as string}
+      />
       <Select
         width="auto"
         borderRadius="18px"
