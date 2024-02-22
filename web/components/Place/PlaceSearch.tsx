@@ -44,7 +44,10 @@ const PlaceSearch = ({
   const { currentCampaign } = useCampaignContext()
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      style={isCampaignTab ? { width: '100%' } : {}}
+    >
       <Flex
         bgColor={isCampaignTab ? 'campaign.light' : 'blue.100'}
         px={{ base: 3, md: 5 }}
@@ -56,6 +59,7 @@ const PlaceSearch = ({
         mb={{ base: 0, sm: 10 }}
         direction="column"
         mt={currentCampaign ? 0 : 6}
+        height={isCampaignTab ? '100%' : 'auto'}
       >
         <SimpleGrid
           columns={
