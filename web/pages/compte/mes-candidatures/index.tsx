@@ -21,7 +21,11 @@ const CompanyApplications = ({ user }: Props) => {
   const { data: applications, isLoading } = useMyApplications({
     campaignId: currentCampaign?.id,
     options: { enabled: !!currentCampaign?.id },
-    searchParams: { _sort: 'disponibility.start:asc' },
+    searchParams: {
+      _sort: 'disponibility.start:asc',
+      //@ts-expect-error
+      'disponibility.campaign': currentCampaign?.id,
+    },
   })
   if (!currentCampaign) return null
   return (

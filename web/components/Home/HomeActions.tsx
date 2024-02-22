@@ -22,7 +22,8 @@ const HomeActions = () => {
       {hasActiveCampaign && (
         <Box
           flex={2}
-          borderTop={{ base: '1px solid rgba(	211, 211, 211, 0.5)', lg: 'none' }}
+          id="licorne"
+          borderTop={{ base: '1px solid rgba(211, 211, 211, 0.5)', lg: 'none' }}
         >
           <HomeCampaignInsert />
         </Box>

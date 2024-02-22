@@ -26,12 +26,17 @@ const PlacesListCampaignHelper = ({
       paddingY={4}
       marginBottom={4}
       spacing={'1rem'}
+      height={!isHome ? '100%' : 'auto'}
       {...props}
     >
       {campaign && !isHome && (
         <ApplicationCounter borderBottom="1px solid lightgray" />
       )}
-      <Stack width="100%" spacing={6} direction={{ base: 'column', sm: 'row' }}>
+      <Stack
+        width="100%"
+        spacing={6}
+        direction={isHome ? { base: 'column', sm: 'row' } : 'column'}
+      >
         <VStack flex={4} justifyContent="flex-start" alignItems="flex-start">
           <Text as="span" fontWeight="bold" marginRight={1}>
             {campaign
@@ -42,13 +47,21 @@ const PlacesListCampaignHelper = ({
             {campaign ? campaign.description : t('solidarity.helper')}
           </Text>
         </VStack>
-        <Flex flex={1} justifyContent={{ base: 'flex-start', sm: 'flex-end' }}>
+        <Flex
+          flex={1}
+          justifyContent={
+            isHome ? { base: 'flex-start', sm: 'flex-end' } : 'flex-end'
+          }
+          alignItems="center"
+        >
           <Button
             variant={campaign ? 'campaign' : 'blueFill'}
             as={Link}
             href={
-              campaign?.mode === 'applications'
-                ? `${ROUTE_PLACES}?tab=1`
+              campaign
+                ? campaign?.article_link
+                  ? campaign?.article_link
+                  : `${ROUTE_PLACES}?tab=1`
                 : `${ROUTE_PLACES}?tab=0`
             }
           >

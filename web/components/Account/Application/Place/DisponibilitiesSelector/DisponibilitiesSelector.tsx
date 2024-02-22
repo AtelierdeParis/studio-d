@@ -18,8 +18,6 @@ const DisponibilitiesSelector = () => {
     ['myPlaces', query.campaign as string],
   )
 
-  console.log(query.campaign, places)
-
   useEffect(() => {
     const search = {}
     if (query.disponibility) {

@@ -27,13 +27,6 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
 
-  const isCampaignPlace =
-    currentCampaign?.mode === 'applications' &&
-    place?.disponibilities?.some(
-      //@ts-expect-error
-      (d) => d?.campaign === currentCampaign?.id,
-    )
-
   return (
     <LinkBox
       w="100%"
@@ -100,7 +93,11 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
                   </Text>
                   <Box>
                     {place?.disponibilities
-                      ?.filter((el) => Boolean(el?.campaign))
+                      ?.filter(
+                        (d) =>
+                          d.campaign?.toString() ===
+                          currentCampaign?.id?.toString(),
+                      )
                       .map((el) => (
                         <Text>
                           {`${format(el.start, 'dd/MM')} ${t('card.to')}

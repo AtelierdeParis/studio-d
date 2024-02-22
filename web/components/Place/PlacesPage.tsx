@@ -128,9 +128,9 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                 marginBottom={0}
               />
             </Box>
-            <Box flex={1}>
+            <Flex flex={1} alignItems="stretch">
               <PlaceSearch onSubmit={onSubmit} isCampaignTab={isCampaignTab} />
-            </Box>
+            </Flex>
           </Stack>
         ) : (
           <Box>
