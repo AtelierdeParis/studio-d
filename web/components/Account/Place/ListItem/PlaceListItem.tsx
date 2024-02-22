@@ -21,13 +21,20 @@ interface Props {
 
 const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   const isComplete = useIsComplete(place)
-  const { hasActiveCampaign } = useCampaignContext()
+  const { currentCampaign } = useCampaignContext()
 
   useEffect(() => {
     if (!isComplete) {
       setVisible(true)
     }
   }, [isComplete])
+
+  const showCampaignDisponibilities =
+    currentCampaign?.mode === 'disponibilities' ||
+    (place?.disponibilities &&
+      place?.disponibilities?.some(
+        (d) => d?.campaign?.toString() === currentCampaign?.id.toString(),
+      ))
 
   return (
     <Flex
@@ -57,7 +64,7 @@ const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
 
             <VStack flex={1} spacing={8} alignItems="stretch">
               <PlaceDisponibilitiesInfo place={place} />
-              {hasActiveCampaign && (
+              {showCampaignDisponibilities && (
                 <CampaignDisponibilitiesInfo place={place} />
               )}
             </VStack>

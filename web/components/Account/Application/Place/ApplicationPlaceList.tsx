@@ -12,8 +12,8 @@ import { Application } from '~typings/api'
 import Chevron from 'public/assets/img/chevron-down.svg'
 import Cell from '~components/Account/Booking/Cell'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
 import ApplicationPlaceHelper from '~components/Account/Application/Place/ApplicationsHelpers/ApplicationPlaceHelper'
+import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
 
 interface Props {
   applications: Application[]
