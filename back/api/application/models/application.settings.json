@@ -59,8 +59,8 @@
       "type": "json"
     },
     "campaign": {
-      "model": "campaign",
-      "via": "applications"
+      "via": "applications",
+      "model": "campaign"
     },
     "company": {
       "plugin": "users-permissions",
@@ -70,6 +70,13 @@
     "espace": {
       "model": "espace",
       "via": "applications"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "preselected",
+        "confirmed"
+      ]
     }
   }
 }

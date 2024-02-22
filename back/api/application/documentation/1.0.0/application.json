@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/applications/me": {
+    "/applications/me/{campaignId}": {
       "get": {
         "deprecated": false,
         "description": "Get applications related to current user",
@@ -54,7 +54,18 @@
         "tags": [
           "Application"
         ],
-        "parameters": []
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/applications": {
@@ -853,6 +864,9 @@
                   "type": "string"
                 }
               },
+              "preselections_max": {
+                "type": "integer"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -1166,6 +1180,13 @@
               }
             }
           },
+          "status": {
+            "type": "string",
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -1215,6 +1236,13 @@
           },
           "espace": {
             "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
           },
           "published_at": {
             "type": "string",

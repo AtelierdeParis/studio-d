@@ -87,6 +87,9 @@
     "applications": {
       "via": "campaign",
       "collection": "application"
+    },
+    "preselections_max": {
+      "type": "integer"
     }
   }
 }

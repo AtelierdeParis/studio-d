@@ -1023,6 +1023,9 @@
                   "type": "string"
                 }
               },
+              "preselections_max": {
+                "type": "integer"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -1091,6 +1094,13 @@
                 },
                 "espace": {
                   "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
                 },
                 "published_at": {
                   "type": "string"

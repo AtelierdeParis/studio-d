@@ -22,9 +22,11 @@ const populate = [
 
 module.exports = {
   async myPlaces(ctx) {
+    const {query}=ctx.request;
     const { id } = ctx.state.user;
     return strapi.query("espace").find(
       {
+        ...query,
         users_permissions_user: id,
         deleted: false,
         _sort: "name:asc",

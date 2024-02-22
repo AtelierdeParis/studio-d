@@ -31,10 +31,12 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
   return (
     <Fragment key={application?.id}>
       <Cell>
-        <Text>{application?.id}</Text>
+        <Text fontFamily="mabry medium" fontWeight="500">
+          {application?.id}
+        </Text>
       </Cell>
       <Cell>
-        <Text>
+        <Text fontFamily="mabry medium" fontWeight="500">
           {
             //@ts-expect-error
             application.disponibility.espace.users_permissions_user
@@ -43,14 +45,16 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
         </Text>
       </Cell>
       <Cell>
-        {/* @ts-expect-error */}
-        <Text>{application?.disponibility?.espace?.name}</Text>
+        <Text fontFamily="mabry medium" fontWeight="500">
+          {/* @ts-expect-error */}
+          {application?.disponibility?.espace?.name}
+        </Text>
       </Cell>
       <Cell>
-        <Text>{`${format(application?.disponibility.start, 'dd/MM')} → ${format(
-          application?.disponibility.end,
+        <Text fontFamily="mabry medium" fontWeight="500">{`${format(
+          application?.disponibility.start,
           'dd/MM',
-        )}`}</Text>
+        )} → ${format(application?.disponibility.end, 'dd/MM')}`}</Text>
       </Cell>
       <Cell>
         <Text>{application?.creation_title}</Text>
