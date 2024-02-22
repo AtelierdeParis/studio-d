@@ -52,6 +52,7 @@ const CampaignApplicationScheduleItem = ({
   const excludedDays = disponibility?.exclude_days as string[]
   const excludedDaysHelper =
     excludedDays &&
+    excludedDays?.length &&
     t('detail.campaign.schedule_item.closed_on', {
       days:
         excludedDays?.length === 1
@@ -127,7 +128,7 @@ const CampaignApplicationScheduleItem = ({
               'dd MMMM',
             )}`}
           </Text>
-          {excludedDaysHelper && (
+          {Boolean(excludedDaysHelper) && (
             <Text as="span" color="gray.500" pl={1} fontWeight="bold">
               {excludedDaysHelper}
             </Text>
