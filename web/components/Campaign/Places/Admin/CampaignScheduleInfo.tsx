@@ -1,12 +1,5 @@
 import React, { useContext } from 'react'
-import {
-  Flex,
-  Box,
-  Text,
-  Button,
-  useBreakpointValue,
-  VStack,
-} from '@chakra-ui/react'
+import { Box, Text, Button, useBreakpointValue, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesAdminCampaignHelper'
@@ -14,7 +7,8 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
-import Link from 'next/link'
+import Link from '~components/Link'
+import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 
 interface Props {
   place: Espace
@@ -27,7 +21,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
   const campaignDispo = place?.disponibilities?.filter(
     //@ts-expect-error
     (d) => d.campaign === currentCampaign?.id,
-  )?.length
+  )
   const isMobile = useBreakpointValue({ base: true, sm: false })
   const { eventsIdToDelete } = useContext(ScheduleContext)
 
@@ -57,8 +51,8 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
       <Box width="100%">
         <Text fontFamily="mabry medium" fontSize="3xl" lineHeight="1">
           {currentCampaign?.mode === 'disponibilities'
-            ? `${campaignDispo}/${currentCampaign?.disponibilities_max}`
-            : campaignDispo}
+            ? `${campaignDispo?.length}/${currentCampaign?.disponibilities_max}`
+            : campaignDispo?.length}
         </Text>
         <Text>
           {currentCampaign?.mode === 'disponibilities'
@@ -68,7 +62,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
               )
             : t(
                 `campaign.helpers.applications.schedule.${
-                  campaignDispo <= 1
+                  campaignDispo?.length <= 1
                     ? 'open_applications_one'
                     : 'open_applications_many'
                 }`,
@@ -81,21 +75,25 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           alignSelf="flex-start"
           mt={6}
           onClick={showForm}
-          disabled={campaignDispo === currentCampaign?.disponibilities_max}
+          disabled={
+            campaignDispo?.length === currentCampaign?.disponibilities_max
+          }
         >
           {isMobile ? t(`list.add`) : t(`schedule.add`)}
         </Button>
-      ) : (
+      ) : campaignDispo?.length > 0 ? (
         <Button
           size="lg"
           alignSelf="flex-start"
           mt={6}
           variant="outline"
           colorScheme="blue"
+          as={Link}
+          href={`${ROUTE_ACCOUNT_APPLICATIONS}?espace=${place.id}&disponibility=${campaignDispo[0]?.id}`}
         >
           {t('campaign.helpers.applications.schedule.see_applications')}
         </Button>
-      )}
+      ) : null}
     </VStack>
   )
 }
