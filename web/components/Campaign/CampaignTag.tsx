@@ -43,7 +43,7 @@ const CampaignTag = ({
       </Box>
     )
   }
-  console.log(hasCampaignDispo && !isCampaignTab)
+
   if (hasCampaignDispo && !isCampaignTab) {
     return (
       <Box position={isGrid ? 'relative' : undefined}>

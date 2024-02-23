@@ -28,7 +28,7 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
   const { campaignDispos } = useCampaignDispo(place?.disponibilities)
-  console.log(place?.disponibilities, currentCampaign?.mode)
+
   const hasCampaignDispo =
     currentCampaign?.mode === 'applications' && !!campaignDispos?.length
   return (
