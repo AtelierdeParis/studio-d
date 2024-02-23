@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import CampaignSelectorField from '~components/Account/Application/Place/CampaignSelector/CampaignSelectorField'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 const CampaignSelector = ({ children }) => {
   const router = useRouter()
@@ -21,9 +22,7 @@ const CampaignSelector = ({ children }) => {
     }
   }, [allPlaceCampaigns])
 
-  const selectedCampaign = allPlaceCampaigns?.find(
-    (c) => c.id?.toString() === campaign?.toString(),
-  )
+  const { selectedCampaign } = useSelectedCampaign()
 
   if (!selectedCampaign) return null
 

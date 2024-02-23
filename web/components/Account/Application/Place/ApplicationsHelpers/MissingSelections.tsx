@@ -1,8 +1,8 @@
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import PreselectionsWarning from 'public/assets/img/preselectionsWarning.svg'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 const MissingSelections = ({
   missingPreselections,
@@ -10,7 +10,7 @@ const MissingSelections = ({
   missingPreselections: number
 }) => {
   const { t } = useTranslation('application')
-  const { currentCampaign } = useCampaignContext()
+  const { selectedCampaign } = useSelectedCampaign()
 
   return (
     <Box paddingY={2}>
@@ -20,7 +20,7 @@ const MissingSelections = ({
           <Box color="orange.600" pl={1}>
             <Text as="span">
               {t('place.helper.preselection_start', {
-                date: format(currentCampaign?.preselection_end),
+                date: format(selectedCampaign?.preselection_end),
               })}
             </Text>
             <Text as="span" fontWeight="bold" pl={1}>

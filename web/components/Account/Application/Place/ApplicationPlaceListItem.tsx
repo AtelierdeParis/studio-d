@@ -4,20 +4,15 @@ import { Text, Button, IconButton, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
 import Link from '~components/Link'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import DownloadApplication from 'public/assets/img/downloadApplication.svg'
-import { useRouter } from 'next/router'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 interface Props {
   application: Application
 }
 
 const ApplicationPlaceListItem = ({ application }: Props) => {
-  const { allPlaceCampaigns } = useCampaignContext()
-  const { query } = useRouter()
-  const selectedCampaign = allPlaceCampaigns?.find(
-    (c) => c.id.toString() === query.campaign.toString(),
-  )
+  const { selectedCampaign } = useSelectedCampaign()
   const { t } = useTranslation('application')
 
   return (
@@ -45,9 +40,8 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
           {application?.creation_title}
         </Text>
       </Cell>
-
-      <Cell>
-        {['preselections', 'closed']?.includes(selectedCampaign?.mode) ? (
+      {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
+        <Cell>
           <HStack spacing={2}>
             <IconButton
               px={2}
@@ -78,10 +72,8 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
               {t('place.table.buttons.details')}
             </Button>
           </HStack>
-        ) : (
-          ''
-        )}
-      </Cell>
+        </Cell>
+      )}
     </Fragment>
   )
 }
