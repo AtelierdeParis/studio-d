@@ -111,11 +111,13 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
   )
 
   const currentCampaign = activeCampaigns?.[0]
+
   const isCampaignPlace =
     user?.type === 'place' &&
     Boolean(
       currentCampaign?.users_permissions_users.find((el) => el.id === user?.id),
     )
+
   const hasActiveCampaign =
     (currentCampaign?.mode === 'disponibilities' && isCampaignPlace) ||
     currentCampaign?.mode === 'applications'

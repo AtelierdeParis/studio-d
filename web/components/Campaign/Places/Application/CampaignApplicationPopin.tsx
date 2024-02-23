@@ -20,12 +20,7 @@ const CampaignApplicationPopin = ({ events, place, back }: Props) => {
   const [isConfirmed, setConfirmed] = useState(false)
   const { t } = useTranslation('place')
 
-  if (isConfirmed)
-    return (
-      <ApplicationConfirmed
-        structureName={place.users_permissions_user.structureName}
-      />
-    )
+  if (isConfirmed) return <ApplicationConfirmed />
 
   return (
     <Box

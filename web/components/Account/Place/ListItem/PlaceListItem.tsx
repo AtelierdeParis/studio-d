@@ -22,7 +22,7 @@ interface Props {
 
 const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   const isComplete = useIsComplete(place)
-  const { currentCampaign } = useCampaignContext()
+  const { currentCampaign, isCampaignPlace } = useCampaignContext()
 
   useEffect(() => {
     if (!isComplete) {
@@ -32,7 +32,8 @@ const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
 
   const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
   const showCampaignDisponibilities =
-    currentCampaign?.mode === 'disponibilities' || campaignDisposNum
+    (currentCampaign?.mode === 'disponibilities' || campaignDisposNum) &&
+    isCampaignPlace
 
   return (
     <Flex

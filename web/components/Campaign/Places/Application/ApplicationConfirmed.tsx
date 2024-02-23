@@ -10,9 +10,12 @@ import {
 import Link from '~components/Link'
 import { useTranslation } from 'next-i18next'
 import { ROUTE_ACCOUNT_MY_APPLICATIONS } from '~constants'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { format } from '~utils/date'
 
-const ApplicationConfirmed = ({ structureName }) => {
+const ApplicationConfirmed = () => {
   const { t } = useTranslation('place')
+  const { currentCampaign } = useCampaignContext()
 
   return (
     <Flex maxW="38rem" m="0 auto" direction="column" px={3}>
@@ -21,7 +24,12 @@ const ApplicationConfirmed = ({ structureName }) => {
       </Heading>
       <Text mb={{ base: 6, md: 14 }}>
         {t('campaignApplication.confirmed.text', {
-          place: structureName,
+          campaign: currentCampaign?.title,
+          preselection_start: format(
+            currentCampaign?.preselection_start,
+            'dd/MM',
+          ),
+          preselection_end: format(currentCampaign?.preselection_end, 'dd/MM'),
         })}
       </Text>
       <Center>

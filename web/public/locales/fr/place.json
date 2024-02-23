@@ -2,7 +2,7 @@
   "global": {
     "file": {
       "change": "Changer",
-      "tooBig": "Le fichier est trop volumineux"
+      "file-too-large": "Le fichier est trop volumineux"
     },
     "yes": "Oui",
     "no": "Non",
@@ -465,7 +465,7 @@
       "dancers": "Nombre de danseurs·ses",
       "file": "Dossier artistique",
       "file_helper": "(5 Mo maximum)",
-      "file_cta": "Uploadez votre dossier",
+      "file_cta": "Déposer mon fichier PDF",
       "change": "Changer",
       "summary": "Résumé du dossier",
       "summary_helper": "(Optionnel – 1000 signes maximum)",
@@ -478,11 +478,14 @@
       "no": "non"
     },
     "eligibility": {
-      "title": "Éligibilité",
+      "title": "Rappel des règles d'éligibilité",
       "chart_front": "Nous vous invitons à vous référer à ",
       "chart": "la charte d'utilisation",
       "chart_back": "si vous n’en avez pas encore pris connaissance.",
-      "label": "Je confirme accepter les CGU du dispositif {{title}} et respecter les critères d'éligibilité."
+      "label_start": "Je confirme respecter les critères d'éligibilité et",
+      "no_eligibility_label_start": "Je confirme ",
+      "label_cgu": "accepter les CGU",
+      "label_end": "du dispositif {{title}}."
     },
     "back": "Retour",
     "submit": "Poursuivre",
@@ -492,7 +495,7 @@
     "confirm": "{{place}} sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre candidature.",
     "confirmed": {
       "title": "Votre candidature est déposée !",
-      "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{place}}. Vous recevrez un email lorsque votre réservation sera validée.",
+      "text": "Vous recevrez sous peu un email de confirmation. La période de présélection du côté des lieux partenaires au dispositif {{campaign}} est prévue du {{preselection_start}} au {{preselection_end}}. En cas de sélection, le lieu vous contactera directement par email.",
       "back": "Retour à l’accueil",
       "see_applications": "Mes candidatures"
     }

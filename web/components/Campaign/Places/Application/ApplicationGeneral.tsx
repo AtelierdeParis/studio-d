@@ -1,13 +1,11 @@
-import { VStack, Text, Box, Textarea } from '@chakra-ui/react'
+import { VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationFormTitle from '~components/Campaign/Places/Application/ApplicationFormTitle'
 import BooleanField from '~components/Campaign/Places/Application/Inputs/BooleanField'
 import TextAreaField from '~components/Campaign/Places/Application/Inputs/TextAreaField'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Espace } from '~typings/api'
 
 const ApplicationGeneral = ({ place }: { place: Espace }) => {
-  const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
   return (
     <VStack width="100%" alignItems="stretch" spacing={6}>
@@ -18,7 +16,7 @@ const ApplicationGeneral = ({ place }: { place: Espace }) => {
 
       <BooleanField
         label={t('campaignApplication.general.subtitle', {
-          place: place?.name,
+          place: place.users_permissions_user.structureName,
         })}
         name="already_supported"
       />

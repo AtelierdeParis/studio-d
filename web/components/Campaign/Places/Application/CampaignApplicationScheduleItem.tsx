@@ -78,7 +78,6 @@ const CampaignApplicationScheduleItem = ({
   )
 
   const handleClick = (e) => {
-    console.log('click')
     if (isSelected) {
       setSelected(
         //@ts-expect-error

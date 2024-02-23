@@ -1,4 +1,4 @@
-import { Checkbox, InputProps } from '@chakra-ui/react'
+import { Box, Checkbox, InputProps } from '@chakra-ui/react'
 import { useController, useFormContext } from 'react-hook-form'
 import { ReactNode } from 'react-markdown'
 import FormField from '~components/FormField'
@@ -7,7 +7,7 @@ const CheckboxField = ({
   label,
   name,
   ...props
-}: { label: string; name: string } & InputProps) => {
+}: { label: string | ReactNode; name: string } & InputProps) => {
   const { errors, control } = useFormContext()
 
   const { field } = useController({
@@ -25,9 +25,14 @@ const CheckboxField = ({
         onChange={onChange}
         value={field?.value}
         color={errors[name] ? 'red.500' : undefined}
+        display="flex"
+        alignItems={'flex-start'}
+        flexDir="row"
         {...props}
       >
-        {label}
+        <Box pl={2} flex={1} mt={-1}>
+          {label}
+        </Box>
       </Checkbox>
     </FormField>
   )

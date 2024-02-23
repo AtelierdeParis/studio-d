@@ -12,7 +12,9 @@ const ConfirmBookingInsert = ({
   isCampaignMode?: boolean
   selected: ScheduleEvent[]
 }) => {
-  const { setSelected, setApplicationView } = useContext(BookingScheduleContext)
+  const { setSelected, setApplicationView, setConfirmView } = useContext(
+    BookingScheduleContext,
+  )
 
   const { t } = useTranslation('place')
 
@@ -46,7 +48,7 @@ const ConfirmBookingInsert = ({
           size="lg"
           onClick={() => {
             window.scrollTo(0, 0)
-            setApplicationView(true)
+            isCampaignMode ? setApplicationView(true) : setConfirmView(true)
           }}
         >
           {t('detail.submit')}
