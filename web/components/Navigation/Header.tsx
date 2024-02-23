@@ -89,7 +89,9 @@ const Header = ({ colorMode }: Props) => {
                     {t('nav.places_regular')}
                   </DropdownNavButton>
                   <DropdownNavButton href={`${ROUTE_PLACES}?tab=1`}>
-                    {t('nav.places_emergence')}
+                    {t('nav.places_emergence', {
+                      title: currentCampaign?.title,
+                    })}
                   </DropdownNavButton>
                 </MenuList>
               </Portal>
@@ -108,6 +110,12 @@ const Header = ({ colorMode }: Props) => {
             }}
           />
           <NavButton href={ROUTE_PROJECT} text={t('nav.project')} />
+          {currentCampaign && currentCampaign?.article_link && (
+            <NavButton
+              href={currentCampaign?.article_link}
+              text={t('nav.campaign', { title: currentCampaign?.title })}
+            />
+          )}
           <NavButton href={ROUTE_ACTU} text={t('nav.news')} />
           <NavButton href={ROUTE_FAQ} text={t('nav.faq')} />
           <NavButton href={ROUTE_CONTACT} text={t('nav.contact')} />

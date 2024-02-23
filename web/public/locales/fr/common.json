@@ -21,8 +21,10 @@
     "signin": "Connexion",
     "cgu": "Conditions générales d'utilisation",
     "policy": "Chartes StudioD",
-    "places_emergence": "Dispositif émergence",
-    "places_regular": "Créneaux solidaires"
+    "places_emergence": "Créneaux {{title}}",
+    "places_regular": "Créneaux solidaires",
+    "campaign": "Dispositif {{title}}",
+    "campaign_chart": "Charte StudioD – {{title}}"
   },
   "error": "Une erreur est survenue",
   "success": "Enregistrement réussi",
