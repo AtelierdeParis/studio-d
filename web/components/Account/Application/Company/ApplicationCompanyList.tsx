@@ -58,7 +58,10 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
           {t('company.title', { title: currentCampaign?.title })}
         </Text>
       </Flex>
-      <SimpleGrid gridTemplateColumns="fit-content(300px) minmax(auto, 300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)">
+      <SimpleGrid
+        gridTemplateColumns="fit-content(300px) minmax(auto, 300px) minmax(auto, auto) minmax(auto, auto) minmax(auto, auto) fit-content(300px)"
+        overflowX="auto"
+      >
         <Cell isHeader>
           <Text pl="9px">{t('company.table.head.number')}</Text>
         </Cell>

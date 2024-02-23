@@ -18,8 +18,11 @@
       "starts": "Il est encore possible de déposer {{num}} candidatures,",
       "end": " avant le {{date}}.",
       "cta": "Voir les espaces partenaires",
-      "closed_start": "Le créneau de candidatures pour le dispositif {{title}} est maintenant clôturé,",
-      "closed_end": "la décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous hors de cette plateforme."
+      "closed_start": "La période de candidature au dispositif {{title}} est maintenant clôturée.",
+      "closed_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous hors de cette plateforme.",
+      "full_start": "Votre candidature est déposée pour le dispositif {{title}}.",
+      "full_starts": "Vos candidatures sont déposées pour le dispositif {{title}}.",
+      "full_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous par email. Merci pour votre participation."
     },
     "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
     "delete_success": "Votre candidature a bien été supprimée"

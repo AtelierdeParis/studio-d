@@ -9,6 +9,20 @@ interface ICampaignProvider {
   children: React.ReactNode
 }
 
+export const getStartDateTime = (date) => {
+  const newDate = new Date(date)
+  newDate.setHours(0)
+  newDate.setMinutes(1)
+  return newDate
+}
+
+export const getEndDateTime = (date) => {
+  const newDate = new Date(date)
+  newDate.setHours(23)
+  newDate.setMinutes(59)
+  return newDate
+}
+
 const CampaignProvider = ({ children }: ICampaignProvider) => {
   const today = new Date()
   const { data: user } = useCurrentUser()
@@ -40,21 +54,21 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
 
   const getCampaignMode = (campaign) => {
     if (
-      today >= new Date(campaign.disponibility_start) &&
-      today <= new Date(campaign.disponibility_end)
+      today >= getStartDateTime(campaign.disponibility_start) &&
+      today <= getEndDateTime(campaign.disponibility_end)
     ) {
       return 'disponibilities'
     } else if (
-      today >= new Date(campaign.application_start) &&
-      today <= new Date(campaign.application_end)
+      today >= getStartDateTime(campaign.application_start) &&
+      today <= getEndDateTime(campaign.application_end)
     ) {
       return 'applications'
     } else if (
-      today >= new Date(campaign.preselection_start) &&
-      today <= new Date(campaign.preselection_end)
+      today >= getStartDateTime(campaign.preselection_start) &&
+      today <= getEndDateTime(campaign.preselection_end)
     ) {
       return 'preselections'
-    } else if (today >= new Date(campaign.preselection_end)) {
+    } else if (today >= getEndDateTime(campaign.preselection_end)) {
       return 'closed'
     }
     return null
@@ -106,15 +120,15 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     (currentCampaign?.mode === 'disponibilities' && isCampaignPlace) ||
     currentCampaign?.mode === 'applications'
 
-  console.log(
-    activeCampaigns,
-    currentCampaign,
-    isCampaignPlace,
-    hasActiveCampaign,
-    isLoading,
-    allPlaceCampaigns,
-    isLoadingAllPlaceCampaigns,
-  )
+  // console.log(
+  //   activeCampaigns,
+  //   currentCampaign,
+  //   isCampaignPlace,
+  //   hasActiveCampaign,
+  //   isLoading,
+  //   allPlaceCampaigns,
+  //   isLoadingAllPlaceCampaigns,
+  // )
   return (
     <CampaignContext.Provider
       value={{

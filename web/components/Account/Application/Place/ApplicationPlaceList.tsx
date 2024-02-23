@@ -48,6 +48,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
             ? 'minmax(auto, auto)'
             : ''
         }`}
+        overflowX="auto"
       >
         <Cell isHeader>
           <Text pl="9px">{t('place.table.head.number')}</Text>
