@@ -16,6 +16,7 @@ import LinkOverlay from '~components/LinkOverlay'
 import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
@@ -26,7 +27,10 @@ interface Props {
 const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
-
+  const { campaignDispos } = useCampaignDispo(place?.disponibilities)
+  console.log(place?.disponibilities, currentCampaign?.mode)
+  const hasCampaignDispo =
+    currentCampaign?.mode === 'applications' && !!campaignDispos?.length
   return (
     <LinkBox
       w="100%"
@@ -69,7 +73,8 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
             <Box>
               <CampaignTag
                 isCampaignTab={isCampaignTab}
-                disponibilitiesIds={place?.disponibilities?.map((d) => d?.id)}
+                disponibilitiesIds={campaignDispos?.map((d) => d.id)}
+                hasCampaignDispo={hasCampaignDispo}
               />
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}

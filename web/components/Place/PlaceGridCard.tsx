@@ -22,6 +22,7 @@ import addWeeks from 'date-fns/addWeeks'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
@@ -48,12 +49,11 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
     disposInRange || place?.disponibilities,
   )
 
+  const { campaignDisposNum, campaignDispos } = useCampaignDispo(
+    place?.disponibilities,
+  )
   const hasCampaignDispo =
-    currentCampaign?.mode === 'applications' &&
-    place?.disponibilities?.some(
-      //@ts-expect-error
-      (d) => d?.campaign === currentCampaign?.id,
-    )
+    currentCampaign?.mode === 'applications' && !!campaignDisposNum
 
   return (
     <LinkBox>
@@ -75,9 +75,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
           <CampaignTag
             isGrid
             isCampaignTab={isCampaignTab}
-            disponibilitiesIds={place?.disponibilities
-              ?.filter((el) => el?.campaign)
-              .map((d) => d?.id)}
+            disponibilitiesIds={campaignDispos?.map((d) => d.id)}
             hasCampaignDispo={hasCampaignDispo}
           />
 

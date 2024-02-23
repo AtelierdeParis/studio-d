@@ -19,7 +19,7 @@ import { useRouter } from 'next/router'
 import CampaignApplicationSchedule from '~components/Campaign/Places/Application/CampaignApplicationSchedule'
 import PlaceDetailCalendar from '~components/Place/PlaceDetailPage/PlaceDetailCalendar'
 import CampaignDetailSwitcher from '~components/Campaign/Places/Detail/CampaignDetailSwitcher'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
@@ -29,7 +29,6 @@ const CampaignPlaceDetail = ({ place }: Props) => {
   const isMobile = useBreakpointValue({ base: true, lg: false })
   const router = useRouter()
   const isCampaignTab = router.query.tab === '1'
-  const { currentCampaign } = useCampaignContext()
 
   const displayPrecise = useMemo(() => {
     if (!place) return false
@@ -39,6 +38,8 @@ const CampaignPlaceDetail = ({ place }: Props) => {
       place.danceCarpet === 'possible'
     )
   }, [place])
+
+  const { campaignDispos } = useCampaignDispo(place?.disponibilities)
 
   return (
     <Box>
@@ -69,11 +70,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
         </Stack>
 
         {isCampaignTab ? (
-          <CampaignApplicationSchedule
-            disponibilities={place?.disponibilities?.filter(
-              (d) => d?.campaign?.toString() === currentCampaign?.id.toString(),
-            )}
-          />
+          <CampaignApplicationSchedule disponibilities={campaignDispos} />
         ) : (
           <PlaceDetailCalendar place={place} />
         )}

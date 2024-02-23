@@ -5,7 +5,7 @@ const useSelectedCampaign = () => {
   const { allPlaceCampaigns } = useCampaignContext()
   const { query } = useRouter()
   const selectedCampaign = allPlaceCampaigns?.find(
-    (c) => c.id.toString() === query.campaign.toString(),
+    (c) => c?.id?.toString() === query?.campaign?.toString(),
   )
 
   return { selectedCampaign }

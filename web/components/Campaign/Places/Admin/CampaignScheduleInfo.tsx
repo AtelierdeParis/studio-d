@@ -9,6 +9,7 @@ import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 import Link from '~components/Link'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
@@ -18,10 +19,10 @@ interface Props {
 const CampaignScheduleInfo = ({ place, showForm }: Props) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
-  const campaignDispo = place?.disponibilities?.filter(
-    //@ts-expect-error
-    (d) => d.campaign === currentCampaign?.id,
+  const { campaignDisposNum, campaignDispos } = useCampaignDispo(
+    place?.disponibilities,
   )
+
   const isMobile = useBreakpointValue({ base: true, sm: false })
   const { eventsIdToDelete } = useContext(ScheduleContext)
 
@@ -51,8 +52,8 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
       <Box width="100%">
         <Text fontFamily="mabry medium" fontSize="3xl" lineHeight="1">
           {currentCampaign?.mode === 'disponibilities'
-            ? `${campaignDispo?.length}/${currentCampaign?.disponibilities_max}`
-            : campaignDispo?.length}
+            ? `${campaignDisposNum}/${currentCampaign?.disponibilities_max}`
+            : campaignDisposNum}
         </Text>
         <Text>
           {currentCampaign?.mode === 'disponibilities'
@@ -62,7 +63,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
               )
             : t(
                 `campaign.helpers.applications.schedule.${
-                  campaignDispo?.length <= 1
+                  campaignDisposNum <= 1
                     ? 'open_applications_one'
                     : 'open_applications_many'
                 }`,
@@ -76,12 +77,13 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           mt={6}
           onClick={showForm}
           disabled={
-            campaignDispo?.length === currentCampaign?.disponibilities_max
+            currentCampaign &&
+            campaignDisposNum === currentCampaign?.disponibilities_max
           }
         >
           {isMobile ? t(`list.add`) : t(`schedule.add`)}
         </Button>
-      ) : campaignDispo?.length > 0 ? (
+      ) : campaignDisposNum > 0 ? (
         <Button
           size="lg"
           alignSelf="flex-start"
@@ -89,7 +91,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           variant="outline"
           colorScheme="blue"
           as={Link}
-          href={`${ROUTE_ACCOUNT_APPLICATIONS}?espace=${place.id}&disponibility=${campaignDispo[0]?.id}`}
+          href={`${ROUTE_ACCOUNT_APPLICATIONS}?espace=${place.id}&disponibility=${campaignDispos[0]?.id}`}
         >
           {t('campaign.helpers.applications.schedule.see_applications')}
         </Button>

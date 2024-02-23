@@ -20,7 +20,8 @@ export const useCurrentUser = () => {
     if (userData && currentCampaign) {
       //@ts-expect-error
       return userData?.data?.companyApplications?.filter(
-        (application) => application?.campaign === currentCampaign?.id,
+        (application) =>
+          currentCampaign && application?.campaign === currentCampaign?.id,
       )
     }
   }, [userData?.data, currentCampaign])
