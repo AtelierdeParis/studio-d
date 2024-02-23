@@ -5,14 +5,12 @@ import { Espace } from '~typings/api'
 import { format } from '~utils/date'
 import { ROUTE_ACCOUNT_PLACE_DETAIL } from '~constants'
 import Link from '~components/Link'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
-  const campaignDispo = place?.disponibilities?.filter(
-    //@ts-expect-error
-    (d) => d.campaign === currentCampaign?.id,
-  )?.length
+  const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
 
   return (
     <VStack>
@@ -52,7 +50,7 @@ const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
         <Box flex={2}>
           <Text>
             {`${t(`list.slots_filled`, {
-              nb: campaignDispo,
+              nb: campaignDisposNum,
               nbTotal: currentCampaign?.disponibilities_max,
             })}`}
           </Text>

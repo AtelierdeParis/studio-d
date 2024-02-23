@@ -4,6 +4,7 @@ import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 const TabPlace = ({ isDisabled, onClick = null, children }) => {
   return (
@@ -49,13 +50,7 @@ const PlaceTabList = ({
     ).length
   }, [place?.disponibilities])
 
-  const campaignDispo = useMemo(() => {
-    if (!place || !place.disponibilities) return 0
-    return place.disponibilities.filter(
-      //@ts-expect-error
-      (dispo) => dispo.campaign === currentCampaign?.id,
-    ).length
-  }, [place])
+  const { campaignDisposNum } = useCampaignDispo(place.disponibilities)
 
   return (
     <TabList
@@ -94,7 +89,7 @@ const PlaceTabList = ({
               : 'tabs.slot_campaign_applications',
             {
               title: currentCampaign?.title,
-              nb: campaignDispo,
+              nb: campaignDisposNum,
               nbTotal: currentCampaign?.disponibilities_max,
             },
           )}

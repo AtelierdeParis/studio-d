@@ -16,25 +16,24 @@ const PlaceApplications = () => {
   const { t: tAccount } = useTranslation('account')
   const { selectedCampaign } = useSelectedCampaign()
 
-  if (selectedCampaign)
-    return (
-      <>
-        <NextSeo title={tAccount('title.requests')} />
-        {selectedCampaign?.mode === 'applications' && (
-          <Box paddingY={4}>
-            <PlacesAdminCampaignHelper
-              title={t(`place.helper.open_applications_start`, {
-                title: selectedCampaign?.title,
-              })}
-              description={t(`place.helper.open_applications_end`)}
-            />
-          </Box>
-        )}
-        <CampaignSelector>
-          <DisponibilitiesSelector />
-        </CampaignSelector>
-      </>
-    )
+  return (
+    <>
+      <NextSeo title={tAccount('title.requests')} />
+      {selectedCampaign?.mode === 'applications' && (
+        <Box paddingY={4}>
+          <PlacesAdminCampaignHelper
+            title={t(`place.helper.open_applications_start`, {
+              title: selectedCampaign?.title,
+            })}
+            description={t(`place.helper.open_applications_end`)}
+          />
+        </Box>
+      )}
+      <CampaignSelector>
+        <DisponibilitiesSelector />
+      </CampaignSelector>
+    </>
+  )
 
   return null
 }

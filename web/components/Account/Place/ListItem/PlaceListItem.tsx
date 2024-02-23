@@ -12,6 +12,7 @@ import PlaceListItemInfo from '~components/Account/Place/ListItem/PlaceListItemI
 import PlaceListItemImage from '~components/Account/Place/ListItem/PlaceListItemImage'
 import CampaignDisponibilitiesInfo from '~components/Account/Place/ListItem/CampaignDisponibilitiesInfo'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
@@ -29,12 +30,9 @@ const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
     }
   }, [isComplete])
 
+  const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
   const showCampaignDisponibilities =
-    currentCampaign?.mode === 'disponibilities' ||
-    (place?.disponibilities &&
-      place?.disponibilities?.some(
-        (d) => d?.campaign?.toString() === currentCampaign?.id.toString(),
-      ))
+    currentCampaign?.mode === 'disponibilities' || campaignDisposNum
 
   return (
     <Flex
