@@ -14,6 +14,7 @@ import Cell from '~components/Account/Booking/Cell'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import ApplicationPlaceHelper from '~components/Account/Application/Place/ApplicationsHelpers/ApplicationPlaceHelper'
 import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 interface Props {
   applications: Application[]
@@ -24,11 +25,10 @@ const Divider = (props: DividerProps) => (
 )
 
 const ApplicationPlaceList = ({ applications = [] }: Props) => {
-  const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('application')
   const [list, setList] = useState<Application[]>([])
   const [isDesc, setDesc] = useState<boolean>(true)
-
+  const { selectedCampaign } = useSelectedCampaign()
   useEffect(() => {
     setList(applications)
     setDesc(true)
@@ -44,8 +44,11 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
       <ApplicationPlaceHelper applications={applications} />
       <SimpleGrid
         gridTemplateColumns={`fit-content(300px) minmax(200px, auto) minmax(auto, auto) minmax(auto, auto)${
-          currentCampaign?.mode === 'preselections' ? 'minmax(auto, auto)' : ''
+          ['preselections', 'closed']?.includes(selectedCampaign?.mode)
+            ? 'minmax(auto, auto)'
+            : ''
         }`}
+        overflowX="auto"
       >
         <Cell isHeader>
           <Text pl="9px">{t('place.table.head.number')}</Text>
@@ -73,7 +76,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
           <Divider />
           <Text>{t('place.table.head.creation')}</Text>
         </Cell>
-        {currentCampaign?.mode === 'preselections' && (
+        {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
           <Cell isHeader>
             <Divider />
           </Cell>

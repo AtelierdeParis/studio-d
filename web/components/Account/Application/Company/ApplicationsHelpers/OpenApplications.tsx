@@ -43,6 +43,8 @@ const OpenApplications = ({
           size="lg"
           whiteSpace={'break-spaces'}
           textAlign="center"
+          p={4}
+          height="auto"
         >
           {t('company.helper.cta')}
         </Button>

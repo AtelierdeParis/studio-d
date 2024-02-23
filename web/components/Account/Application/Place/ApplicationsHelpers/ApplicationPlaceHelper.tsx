@@ -1,25 +1,20 @@
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import MissingSelections from '~components/Account/Application/Place/ApplicationsHelpers/MissingSelections'
 import ConfirmSelections from '~components/Account/Application/Place/ApplicationsHelpers/ConfirmSelections'
 import ValidatedSelections from '~components/Account/Application/Place/ApplicationsHelpers/ValidatedSelections'
 import { Application } from '~typings/api'
-import { useRouter } from 'next/router'
 import ClosedCampaign from '~components/Account/Application/Place/ApplicationsHelpers/ClosedCampaign'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 const ApplicationPlaceHelper = ({
   applications,
 }: {
   applications: Application[]
 }) => {
-  const { allPlaceCampaigns } = useCampaignContext()
   const preselections = applications?.filter(
     (application) => application?.status === 'preselected',
   ).length
 
-  const { query } = useRouter()
-  const selectedCampaign = allPlaceCampaigns?.find(
-    (c) => c.id.toString() === query.campaign.toString(),
-  )
+  const { selectedCampaign } = useSelectedCampaign()
   const missingPreselections =
     selectedCampaign?.preselections_max - preselections
 

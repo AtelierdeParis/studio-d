@@ -14,6 +14,7 @@ import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import SigninModal from '~components/Signin/SigninModal'
 import { useSession } from 'next-auth/client'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const MenuItem = ({ href, text }) => {
   return (
@@ -26,6 +27,7 @@ const MenuItem = ({ href, text }) => {
 const FooterMenu = () => {
   const [session, loading] = useSession()
   const { t } = useTranslation()
+  const { currentCampaign } = useCampaignContext()
   return (
     <Box>
       <Flex pr={12}>
@@ -54,6 +56,12 @@ const FooterMenu = () => {
       <Box>
         <MenuItem href={ROUTE_CGU} text={t('nav.cgu')} />
         <MenuItem href={ROUTE_USE_POLICY} text={t('nav.policy')} />
+        {currentCampaign && currentCampaign?.chart_url && (
+          <MenuItem
+            href={currentCampaign?.chart_url}
+            text={t('nav.campaign_chart', { title: currentCampaign?.title })}
+          />
+        )}
       </Box>
     </Box>
   )

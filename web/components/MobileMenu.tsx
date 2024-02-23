@@ -114,7 +114,9 @@ const MobileMenu = ({ colorMode }: Props) => {
                   />
                   <MenuItem
                     href={`${ROUTE_PLACES}?tab=1`}
-                    text={t('nav.places_emergence')}
+                    text={t('nav.places_emergence', {
+                      title: currentCampaign?.title,
+                    })}
                   />
                 </>
               ) : (
@@ -122,6 +124,12 @@ const MobileMenu = ({ colorMode }: Props) => {
               )}
 
               <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
+              {currentCampaign && currentCampaign?.article_link && (
+                <MenuItem
+                  href={currentCampaign?.article_link}
+                  text={t('nav.campaign', { title: currentCampaign?.title })}
+                />
+              )}
               <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
               <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
               <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />

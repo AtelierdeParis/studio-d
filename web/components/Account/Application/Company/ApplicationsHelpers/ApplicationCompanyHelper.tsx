@@ -1,21 +1,30 @@
-import { Box, Button, Stack, Text } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { ROUTE_PLACES } from '~constants'
 import { useCurrentUser } from '~hooks/useCurrentUser'
-import { format } from '~utils/date'
-import Link from '~components/Link'
 import OpenApplications from '~components/Account/Application/Company/ApplicationsHelpers/OpenApplications'
 import ClosedApplications from '~components/Account/Application/Company/ApplicationsHelpers/ClosedApplications'
+import { getEndDateTime } from '~components/Campaign/CampaignProvider'
+import FullApplications from '~components/Account/Application/Company/ApplicationsHelpers/FullApplications'
 
 const ApplicationCompanyHelper = () => {
-  const { remainingApplications } = useCurrentUser()
+  const { remainingApplications, applications } = useCurrentUser()
   const { currentCampaign } = useCampaignContext()
-  const { t } = useTranslation('application')
+  const today = new Date()
+
+  if (
+    applications.length > 0 &&
+    !remainingApplications &&
+    currentCampaign.mode === 'applications'
+  ) {
+    return <FullApplications numApplications={applications?.length} />
+  }
+
   if (remainingApplications > 0 && currentCampaign.mode === 'applications')
     return <OpenApplications remainingApplications={remainingApplications} />
 
-  if (currentCampaign.mode === 'preselections') {
+  if (
+    today <= getEndDateTime(currentCampaign.preselection_end) &&
+    today >= getEndDateTime(currentCampaign.application_end)
+  ) {
     return <ClosedApplications />
   }
   return null

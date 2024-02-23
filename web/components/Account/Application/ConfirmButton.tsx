@@ -27,7 +27,7 @@ const ConfirmButton = ({
   const { isOpen, onClose, onToggle } = useDisclosure()
 
   return (
-    <Popover isOpen={isOpen} onClose={onClose}>
+    <Popover isOpen={isOpen} onClose={onClose} placement="bottom-end">
       <PopoverTrigger>
         <Box onClick={onToggle}>{children}</Box>
       </PopoverTrigger>
