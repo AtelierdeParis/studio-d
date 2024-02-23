@@ -18,7 +18,7 @@ const OtherPages = ({ page }: Props) => {
   const { t } = useTranslation('common')
   return (
     <>
-      <NextSeo title={t('title.charte')} />
+      <NextSeo title={page.title} />
       <Heading
         as="h1"
         textStyle="h1"
