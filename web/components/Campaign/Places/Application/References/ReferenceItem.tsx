@@ -18,6 +18,20 @@ const ReferenceItem = ({
 }) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
+  const { coproducers, actors, other, title, year } = reference
+
+  const coproducersValues = Array.isArray(coproducers)
+    ? coproducers
+    : typeof coproducers === 'string'
+    ? coproducers.split(',')
+    : []
+
+  const partners = coproducersValues.map(
+    (coproducer) =>
+      currentCampaign.users_permissions_users.find(
+        (user) => user?.id?.toString() === coproducer?.toString(),
+      )?.structureName,
+  )
 
   return (
     <VStack
@@ -59,32 +73,21 @@ const ReferenceItem = ({
 
       <VStack width="100%" alignItems={'flex-start'} spacing={0}>
         <Text fontWeight={'bold'}>
-          {reference.title}, {reference.year}
+          {title}, {year}
         </Text>
         <Text>
           <Text as="span">
             {t(
               `campaignApplication.references.references_actor${
-                reference?.actors > 1 ? 's' : ''
+                actors > 1 ? 's' : ''
               }_display`,
               {
-                number: reference?.actors,
+                number: actors,
               },
             )}
           </Text>
           <Text as="span" pl={1} color="gray.500">
-            {[
-              ...((Array.isArray(reference?.coproducers)
-                ? reference.coproducers
-                : reference.coproducers.split(',')
-              ).map(
-                (coproducer) =>
-                  currentCampaign.users_permissions_users.find(
-                    (user) => user?.id === coproducer,
-                  )?.structureName,
-              ) || []),
-              reference.other,
-            ]?.join(', ')}
+            {(Boolean(other) ? [partners, other] : partners)?.join(', ')}
           </Text>
         </Text>
       </VStack>

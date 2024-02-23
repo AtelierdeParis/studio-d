@@ -136,7 +136,7 @@ const ApplicationForm = ({
             >
               <Text>
                 {t('campaignApplication.confirm', {
-                  place: currentCampaign?.title,
+                  place: place?.users_permissions_user?.structureName,
                 })}
               </Text>
 

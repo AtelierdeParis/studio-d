@@ -8,15 +8,10 @@ import ConfirmBookingInsert from '~components/Place/Booking/BookingRecapInsert/C
 import { is } from 'date-fns/locale'
 import NotConfirmedBookingInsert from '~components/Place/Booking/BookingRecapInsert/NotConfirmedBookingInsert'
 
-const BookingRecap = () => {
+const BookingRecap = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
   const { t } = useTranslation('place')
   const { selected: fullSelected } = useContext(BookingScheduleContext)
   const { data: user, isLoading } = useCurrentUser()
-
-  const isCampaignMode = useMemo(
-    () => fullSelected.some((e) => e.extendedProps.isCampaignEvent),
-    [fullSelected],
-  )
 
   const selected = useMemo(
     () =>

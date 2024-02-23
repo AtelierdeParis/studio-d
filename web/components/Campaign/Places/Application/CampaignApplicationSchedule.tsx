@@ -56,7 +56,7 @@ const CampaignApplicationSchedule = ({
               />
             ))}
           </VStack>
-          <BookingRecap />
+          <BookingRecap isCampaignMode />
         </VStack>
 
         <VStack

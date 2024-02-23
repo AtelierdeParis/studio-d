@@ -32,6 +32,7 @@ const ApplicationCreation = () => {
         helper={t('campaignApplication.creation.file_helper')}
         acceptableTypes={['application/pdf']}
         maxSize={5}
+        cta={t('campaignApplication.creation.file_cta')}
       />
 
       <TextAreaField
