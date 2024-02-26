@@ -11,7 +11,7 @@ import CampaignScheduleInfo from '~components/Campaign/Places/Admin/CampaignSche
 import * as yup from 'yup'
 import { useTranslation } from 'next-i18next'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
-import { ScheduleEventWhen, ScheduleEventType } from '~@types/schedule-event.d'
+import { ScheduleEventType } from '~@types/schedule-event.d'
 
 interface Props {
   place: Espace
@@ -69,7 +69,9 @@ const CampaignPlaceSchedule = ({ place }: Props) => {
     <FormProvider {...form}>
       <ScheduleProvider place={place}>
         <Stack direction={{ base: 'column-reverse', lg: 'row' }} spacing={4}>
-          <Schedule isCampaignMode />
+          <Box display={{ base: 'none', lg: 'block' }}>
+            <Schedule isCampaignMode />
+          </Box>
 
           <Box flex={1}>
             {showForm ? (

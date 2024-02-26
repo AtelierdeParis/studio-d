@@ -586,7 +586,8 @@
         "schedule": {
           "title": "Ajoutez ou modifiez vos créneaux avant le {{disponibility_end}}. ",
           "description": "\n Vous pouvez ajouter jusqu’à {{disponibilities_max}} créneaux dédiés au dispositif {{title}} pour un même espace. Les créneaux doivent impérativement faire {{duration}} jours, et se dérouler entre le {{campaign_start}} et le {{campaign_end}}",
-          "open_disponibilities": "créneaux qui seront ouverts à candidatures {{title}}"
+          "open_disponibilities": "créneaux qui seront ouverts à candidatures {{title}}",
+          "open_disponibility": "créneau qui sera ouvert à candidatures {{title}}"
         }
       }
     }

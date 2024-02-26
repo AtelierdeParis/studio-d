@@ -23,6 +23,7 @@ import { client } from '~api/client-api'
 import { setHours } from 'date-fns'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
+import Schedule from '~components/Account/Place/Schedule'
 
 export const STAFF_VALUES = ['no', 'light', 'sound', 'video', 'scene']
 
@@ -131,6 +132,10 @@ const CampaignScheduleForm = ({ place, hideForm }: Props) => {
               })}
             </Text>
             <CampaignDatePicker control={control} />
+
+            <Box display={{ base: 'block', lg: 'none' }} width="100%">
+              <Schedule isCampaignMode />
+            </Box>
 
             <Box display={staff?.includes('no') && 'none'} width="100%">
               <InputMultiSelect

@@ -28,6 +28,7 @@ export const StyleWrapper = styled.div`
     z-index: 11;
     border-radius: 8px;
     margin: 3px 2px 3px 2px;
+    mix-blend-mode: multiply;
   }
 `
 
