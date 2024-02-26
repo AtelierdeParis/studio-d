@@ -42,6 +42,7 @@
         "details": "Détails"
       }
     },
+    "search": "Recherche",
     "helper": {
       "preselection_start": "Établissez votre présélection avant le {{date}}.",
       "missing_preselections": "{{num}} manquantes.",

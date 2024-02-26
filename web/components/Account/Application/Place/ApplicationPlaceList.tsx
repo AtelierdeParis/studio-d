@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
   Flex,
   Text,
@@ -9,13 +9,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Application, Applications } from '~typings/api'
+import { Application } from '~typings/api'
 import Chevron from 'public/assets/img/chevron-down.svg'
 import Cell from '~components/Account/Booking/Cell'
 import ApplicationPlaceHelper from '~components/Account/Application/Place/ApplicationsHelpers/ApplicationPlaceHelper'
 import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 import ApplicationDetailDrawer from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailDrawer'
+import { useRouter } from 'next/router'
 
 interface Props {
   applications: Application[]
@@ -31,8 +32,10 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
   const [isDesc, setDesc] = useState<boolean>(true)
   const [selectedApplication, onApplicationSelect] = useState<Application>()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { query } = useRouter()
 
   const { selectedCampaign } = useSelectedCampaign()
+
   useEffect(() => {
     setList(applications)
     setDesc(true)
@@ -45,6 +48,19 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
 
   const preselectedApplications = applications?.filter(
     (application) => application?.status === 'preselected',
+  )
+
+  const filteredList = useMemo(
+    () =>
+      list.filter((application) => {
+        return (
+          !query.search?.length ||
+          `${application?.company?.structureName} (${application.company.firstname} ${application.company.lastname})`
+            .toLowerCase()
+            ?.includes((query.search as string)?.toLowerCase())
+        )
+      }),
+    [list, query.search],
   )
 
   return (
@@ -89,7 +105,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
             <Divider />
           </Cell>
         )}
-        {list.map((application) => (
+        {filteredList.map((application) => (
           <ApplicationPlaceListItem
             key={application.id}
             application={application}
