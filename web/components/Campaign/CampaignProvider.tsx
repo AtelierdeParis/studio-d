@@ -122,15 +122,6 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     (currentCampaign?.mode === 'disponibilities' && isCampaignPlace) ||
     currentCampaign?.mode === 'applications'
 
-  // console.log(
-  //   activeCampaigns,
-  //   currentCampaign,
-  //   isCampaignPlace,
-  //   hasActiveCampaign,
-  //   isLoading,
-  //   allPlaceCampaigns,
-  //   isLoadingAllPlaceCampaigns,
-  // )
   return (
     <CampaignContext.Provider
       value={{
