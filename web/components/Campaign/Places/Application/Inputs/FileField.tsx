@@ -68,7 +68,6 @@ const FileInput = ({
       onDropAccepted={onChange}
       onDropRejected={(files) => {
         const errors = files?.map((file) => file?.errors?.map((e) => e?.code))
-        console.log(files)
         errors.map((e) => {
           errorToast(t('global.file.' + e))
         })

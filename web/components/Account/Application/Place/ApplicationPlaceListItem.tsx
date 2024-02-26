@@ -9,9 +9,10 @@ import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 interface Props {
   application: Application
+  onSelect: () => void
 }
 
-const ApplicationPlaceListItem = ({ application }: Props) => {
+const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
   const { selectedCampaign } = useSelectedCampaign()
   const { t } = useTranslation('application')
 
@@ -68,6 +69,7 @@ const ApplicationPlaceListItem = ({ application }: Props) => {
               fontSize="md"
               borderColor="rgba(98,103,130, 0.6)"
               isDisabled={selectedCampaign?.mode === 'closed'}
+              onClick={onSelect}
             >
               {t('place.table.buttons.details')}
             </Button>

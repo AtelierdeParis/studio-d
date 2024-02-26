@@ -7,10 +7,11 @@
 
 module.exports = {
   async myApplications(ctx) {
+    const populateCommon = ['disponibility.espace', ]
     const { id, type } = ctx.state.user;
      const {query: initialQuery}=ctx.request;
     const query = type === "place" ? {...initialQuery, 'disponibility.espace.users_permissions_user.id':id} : {...initialQuery, company: id };
-    const populate = type==="place"? ['disponibility.espace','company']:['disponibility.espace', 'place','disponibility.espace.users_permissions_user']
+    const populate = type==="place"? [...populateCommon,'company']:[...populateCommon,'place', 'disponibility.espace.users_permissions_user']
 
     return strapi
       .query("application")

@@ -53,6 +53,25 @@
       "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci.",
       "closed_campaign": "Cette campagne est terminée."
     },
-    "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif"
+    "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",
+    "detail": {
+      "title": "Candidature n°{{id}}",
+      "header": {
+        "slot": "Créneau",
+        "space": "Espace",
+        "company": "Compagnie"
+      },
+      "right_panel": {
+        "phone": "Tél :",
+        "email": "Email :",
+        "siret": "SIRET :",
+        "ape": "APE :",
+        "insurance_name": "Assurance :",
+        "insurance_number": "N° assurance :",
+        "license": "Licence(s) :"
+      },
+      "download_pdf": "Télécharger le pdf",
+      "preselect": "Marquer comme sélectionnée"
+    }
   }
 }
