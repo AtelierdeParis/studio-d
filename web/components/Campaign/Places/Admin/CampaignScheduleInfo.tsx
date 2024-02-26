@@ -58,7 +58,11 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
         <Text>
           {currentCampaign?.mode === 'disponibilities'
             ? t(
-                `campaign.helpers.disponibilities.schedule.open_disponibilities`,
+                `campaign.helpers.disponibilities.schedule.${
+                  currentCampaign?.disponibilities_max === 1
+                    ? 'open_disponibility'
+                    : 'open_disponibilities'
+                }`,
                 { title: currentCampaign?.title },
               )
             : t(
@@ -91,7 +95,7 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           variant="outline"
           colorScheme="blue"
           as={Link}
-          href={`${ROUTE_ACCOUNT_APPLICATIONS}?espace=${place.id}&disponibility=${campaignDispos[0]?.id}`}
+          href={`${ROUTE_ACCOUNT_APPLICATIONS}?campaign=${currentCampaign?.id}&espace=${place.id}&disponibility=${campaignDispos[0]?.id}`}
         >
           {t('campaign.helpers.applications.schedule.see_applications')}
         </Button>

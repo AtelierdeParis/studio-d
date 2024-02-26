@@ -4,6 +4,7 @@ import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const styleSelected = {
   border: '1px dashed',
@@ -58,6 +59,7 @@ const Event = ({
   isCampaignMode = false,
 }) => {
   const { setToDelete, eventsIdToDelete, place } = useContext(ScheduleContext)
+  const { currentCampaign } = useCampaignContext()
   const isPeriod = useMemo(() => {
     if (!range) return null
     return !isSameDay(range.start, range.end)
@@ -68,8 +70,14 @@ const Event = ({
     id,
   ])
 
-  const isDisabled =
+  const isFromOtherTab =
     (isCampaignMode && !isCampaignEvent) || (!isCampaignMode && isCampaignEvent)
+  const isClosedDispoMode =
+    isCampaignMode &&
+    isCampaignEvent &&
+    currentCampaign.mode !== 'disponibilities'
+
+  const isDisabled = isFromOtherTab || isClosedDispoMode
 
   return (
     <Box
@@ -113,7 +121,7 @@ const Event = ({
       }}
       borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
-      opacity={isDisabled ? 0.6 : 1}
+      opacity={isFromOtherTab ? 0.6 : 1}
     >
       {isPeriod && (
         <PeriodEvent
