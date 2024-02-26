@@ -21,10 +21,12 @@ const ApplicationDetailDrawer = ({
   isOpen,
   onClose,
   application,
+  canPreselect,
 }: {
   isOpen: boolean
   onClose: () => void
   application: Application
+  canPreselect: boolean
 }) => {
   const { t } = useTranslation('application')
   const { id } = application ?? {}
@@ -52,7 +54,10 @@ const ApplicationDetailDrawer = ({
             </GridItem>
 
             <GridItem colSpan={{ base: 3, md: 1 }}>
-              <ApplicationRightPanel application={application} />
+              <ApplicationRightPanel
+                application={application}
+                canPreselect={canPreselect}
+              />
             </GridItem>
           </Grid>
         </VStack>

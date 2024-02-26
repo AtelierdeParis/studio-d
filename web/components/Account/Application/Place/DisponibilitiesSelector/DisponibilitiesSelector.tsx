@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ApplicationPlaceFetcher from '~components/Account/Application/Place/ApplicationPlaceFetcher'
+import ApplicationsSearch from '~components/Account/Application/Place/ApplicationsSearch'
 import ApplicationSelector from '~components/Account/Application/Place/DisponibilitiesSelector/DisponibilitiesSelectorFields'
 import { useMyApplications } from '~hooks/useMyApplications'
 import { useMyPlaces } from '~hooks/useMyPlaces'
@@ -56,7 +57,7 @@ const DisponibilitiesSelector = () => {
   return (
     <>
       {Boolean(places?.length) && !isLoading && !isFetching && (
-        <HStack>
+        <HStack justifyContent="space-between">
           <ApplicationSelector
             places={places?.map((p) => ({
               ...p,
@@ -66,6 +67,7 @@ const DisponibilitiesSelector = () => {
             }))}
             hasConfirmedSelection={hasConfirmedSelection}
           />
+          <ApplicationsSearch />
         </HStack>
       )}
 

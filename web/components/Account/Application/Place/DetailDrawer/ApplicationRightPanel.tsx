@@ -4,12 +4,14 @@ import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
 
 import ApplicationPreselectButton from '~components/Account/Application/Place/DetailDrawer/ApplicationPreselectButton'
 import ApplicationDetailInfos from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailInfos'
-import { Application, Espace } from '~typings/api'
+import { Application } from '~typings/api'
 
 const ApplicationRightPanel = ({
   application,
+  canPreselect,
 }: {
   application: Application
+  canPreselect: boolean
 }) => {
   const { t } = useTranslation('application')
 
@@ -39,7 +41,10 @@ const ApplicationRightPanel = ({
         >
           <Text pl={1}>{t('place.detail.download_pdf')}</Text>
         </Button>
-        <ApplicationPreselectButton application={application} />
+        <ApplicationPreselectButton
+          application={application}
+          canPreselect={canPreselect}
+        />
       </VStack>
 
       <Divider />
