@@ -43,6 +43,10 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
     setList(list.reverse())
   }
 
+  const preselectedApplications = applications?.filter(
+    (application) => application?.status === 'preselected',
+  )
+
   return (
     <Box>
       <ApplicationPlaceHelper applications={applications} />
@@ -100,6 +104,11 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
         isOpen={isOpen}
         onClose={onClose}
         application={selectedApplication}
+        canPreselect={
+          preselectedApplications?.length <
+            selectedCampaign?.preselections_max &&
+          selectedCampaign?.mode === 'preselections'
+        }
       />
     </Box>
   )
