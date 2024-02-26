@@ -1,4 +1,5 @@
 {
+  "error": "Une erreur est survenue",
   "company": {
     "title": "Mes candidatures – {{title}}",
     "table": {
@@ -51,7 +52,8 @@
       "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !",
       "open_applications_start": "La période de candidatures pour le dispositif {{title}} est en cours :",
       "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci.",
-      "closed_campaign": "Cette campagne est terminée."
+      "closed_campaign": "Cette campagne est terminée.",
+      "confirm_success": "Vos pré-sélections ont bien été transmises à StudioD"
     },
     "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",
     "detail": {
@@ -71,7 +73,14 @@
         "license": "Licence(s) :"
       },
       "download_pdf": "Télécharger le pdf",
-      "preselect": "Marquer comme sélectionnée"
+      "preselect": "Marquer comme sélectionnée",
+      "deselect": "Déselectionner",
+      "error": "Une erreur est survenue",
+      "preselected_success": "Cette candidature a bien été pré-sélectionnée",
+      "deselected_success": "Cette candidature a bien été dé-sélectionnée",
+      "confirmed_helper_start": "Votre pré-sélection a bien été prise en compte pour ce créneau, il ne vous est plus possible de la modifier.",
+      "confirmed_helper_cta": "Contactez l’Atelier de Paris",
+      "confirmed_helper_end": "pour toute question."
     }
   }
 }

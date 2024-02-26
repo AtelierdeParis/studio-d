@@ -47,7 +47,7 @@
       "path": "/applications/:id",
       "handler": "application.update",
       "config": {
-        "policies": []
+        "policies": ["can-update"]
       }
     },
     {
