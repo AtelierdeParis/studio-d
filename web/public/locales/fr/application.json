@@ -52,7 +52,7 @@
       "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau !",
       "open_applications_start": "La période de candidatures pour le dispositif {{title}} est en cours :",
       "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci.",
-      "closed_campaign": "Cette campagne est terminée.",
+      "closed_campaign": "Cet appel a projet est clôturé, la page désormais est en lecture seule.",
       "confirm_success": "Vos pré-sélections ont bien été transmises à StudioD"
     },
     "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",

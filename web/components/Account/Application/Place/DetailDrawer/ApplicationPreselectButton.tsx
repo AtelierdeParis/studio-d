@@ -9,12 +9,14 @@ import { useRouter } from 'next/router'
 import RemoveIcon from '~public/assets/icons/RemoveIcon'
 import Link from '~components/Link'
 import { ROUTE_CONTACT } from '~constants'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 const ApplicationPreselectButton = ({
   application,
 }: {
   application: Application
 }) => {
+  const { selectedCampaign } = useSelectedCampaign()
   const { t } = useTranslation('application')
   const { errorToast, successToast } = useToast()
   const queryClient = useQueryClient()
@@ -83,7 +85,10 @@ const ApplicationPreselectButton = ({
             application.status === 'preselected' ? null : 'preselected',
           )
         }}
-        isDisabled={application?.status === 'confirmed'}
+        isDisabled={
+          application?.status === 'confirmed' ||
+          selectedCampaign?.mode === 'closed'
+        }
       >
         <Text pl={1}>
           {application?.status === 'preselected'

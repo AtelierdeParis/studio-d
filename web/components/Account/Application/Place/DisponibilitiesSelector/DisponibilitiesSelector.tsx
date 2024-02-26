@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ApplicationPlaceFetcher from '~components/Account/Application/Place/ApplicationPlaceFetcher'
 import ApplicationSelector from '~components/Account/Application/Place/DisponibilitiesSelector/DisponibilitiesSelectorFields'
+import { useMyApplications } from '~hooks/useMyApplications'
 import { useMyPlaces } from '~hooks/useMyPlaces'
 
 const DisponibilitiesSelector = () => {
@@ -16,6 +17,21 @@ const DisponibilitiesSelector = () => {
     },
     { enabled: Boolean(query.campaign) },
     ['myPlaces', query.campaign as string],
+  )
+
+  const { data: applications } = useMyApplications({
+    name: ['myApplications', searchParams?.disponibility_eq as string],
+    campaignId: query.campaign as string,
+    searchParams: { ...searchParams, _sort: 'company.structureName:asc' },
+    options: {
+      enabled:
+        Boolean(searchParams?.disponibility_eq) &&
+        Boolean(searchParams?.espace_eq),
+    },
+  })
+
+  const hasConfirmedSelection = applications?.some(
+    (application) => application?.status === 'confirmed',
   )
 
   useEffect(() => {
@@ -48,6 +64,7 @@ const DisponibilitiesSelector = () => {
                 (d) => d.campaign?.toString() === query.campaign.toString(),
               ),
             }))}
+            hasConfirmedSelection={hasConfirmedSelection}
           />
         </HStack>
       )}

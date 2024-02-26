@@ -60,7 +60,6 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
               aria-label="dowload"
               borderColor="rgba(98,103,130, 0.6)"
               icon={<DownloadApplication />}
-              isDisabled={selectedCampaign?.mode === 'closed'}
             />
             <Button
               px={2}
@@ -72,7 +71,6 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
               borderRadius="sm"
               fontSize="md"
               borderColor="rgba(98,103,130, 0.6)"
-              isDisabled={selectedCampaign?.mode === 'closed'}
               onClick={onSelect}
             >
               {t('place.table.buttons.details')}

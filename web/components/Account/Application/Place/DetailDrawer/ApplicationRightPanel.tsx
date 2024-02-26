@@ -2,7 +2,7 @@ import { VStack, Divider, Button, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
 
-import ApplicationPreselectButton from '~components/Account/Application/Place/ApplicationPreselectButton'
+import ApplicationPreselectButton from '~components/Account/Application/Place/DetailDrawer/ApplicationPreselectButton'
 import ApplicationDetailInfos from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailInfos'
 import { Application, Espace } from '~typings/api'
 

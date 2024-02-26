@@ -7,7 +7,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 const ApplicationPlaceFetcher = ({ searchParams }) => {
-  const { data: user } = useCurrentUser()
   const { query } = useRouter()
   const {
     data: applications,
@@ -15,7 +14,7 @@ const ApplicationPlaceFetcher = ({ searchParams }) => {
     refetch,
     isFetching,
   } = useMyApplications({
-    name: ['myApplications', searchParams.disponibility_eq as string],
+    name: ['myApplications', searchParams?.disponibility_eq as string],
     campaignId: query.campaign as string,
     searchParams: { ...searchParams, _sort: 'company.structureName:asc' },
     options: {
@@ -31,11 +30,7 @@ const ApplicationPlaceFetcher = ({ searchParams }) => {
 
   return (
     <Loading isLoading={isLoading || isFetching} isCentered>
-      {applications?.length === 0 ? (
-        <InfoPlaceApplications user={user} />
-      ) : (
-        <ApplicationPlaceList applications={applications} />
-      )}
+      <ApplicationPlaceList applications={applications} />
     </Loading>
   )
 }
