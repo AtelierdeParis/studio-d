@@ -14,18 +14,39 @@ import InputMultiSelect from '~components/InputMultiSelect'
 import { Control } from 'react-hook-form'
 import { getDay } from 'date-fns'
 
+const getExcludedDates = (events) => {
+  const dates = []
+  events.map((event) => {
+    if (event?.extendedProps?.type === 'period') {
+      const start = new Date(event.start)
+      const end = new Date(event.end)
+      const interval = { start, end }
+      const days = eachDayOfInterval(interval)
+      dates.push(...days)
+    } else {
+      dates.push(new Date(event.start))
+    }
+  })
+  return dates
+}
+
 const getEndDate = (
   startDate: Date,
   offWeekDays: number[],
   duration: number,
+  excludedDates: Date[],
 ) => {
+  console.log(excludedDates)
   let endDate = new Date(startDate)
   let selectedDays = 1
   const exclude_days = []
   if (offWeekDays.length < 7) {
     {
       while (selectedDays < duration + 1) {
-        if (offWeekDays.includes(getDay(endDate))) {
+        if (
+          offWeekDays.includes(getDay(endDate)) ||
+          excludedDates.some((date) => isSameDay(date, endDate))
+        ) {
           exclude_days.push(endDate.toString())
         } else {
           selectedDays++
@@ -68,13 +89,6 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
               end: event.end,
             }),
           )
-          // Prevent user from selecting a start day to close from other period
-          total.push(
-            eachDayOfInterval({
-              start: subDays(event.start, currentCampaign.duration - 1),
-              end: event.start,
-            }),
-          )
         } else if (event.extendedProps.type === 'day') {
           total.push(event.start)
         } else if (
@@ -97,6 +111,7 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
         new Date(start),
         offWeekDays,
         currentCampaign?.duration,
+        getExcludedDates(oldEvents),
       )
 
       setValue('end', endDate)

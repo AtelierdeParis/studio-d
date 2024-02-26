@@ -30,6 +30,9 @@ export const StyleWrapper = styled.div`
     margin: 3px 2px 3px 2px;
     mix-blend-mode: multiply;
   }
+  .fc-daygrid-event-harness {
+    top: 0 !important;
+  }
 `
 
 const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
