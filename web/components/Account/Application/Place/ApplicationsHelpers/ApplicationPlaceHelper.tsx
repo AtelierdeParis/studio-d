@@ -10,9 +10,10 @@ const ApplicationPlaceHelper = ({
 }: {
   applications: Application[]
 }) => {
-  const preselections = applications?.filter(
+  const preselectedApplications = applications?.filter(
     (application) => application?.status === 'preselected',
-  ).length
+  )
+  const preselections = preselectedApplications?.length
 
   const { selectedCampaign } = useSelectedCampaign()
   const missingPreselections =
@@ -33,7 +34,9 @@ const ApplicationPlaceHelper = ({
     selectedCampaign?.mode === 'preselections' &&
     missingPreselections === 0
   ) {
-    return <ConfirmSelections preselections={preselections} />
+    return (
+      <ConfirmSelections preselectedApplications={preselectedApplications} />
+    )
   }
 
   if (selectedCampaign?.mode === 'closed') {

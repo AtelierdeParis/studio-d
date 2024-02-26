@@ -1,7 +1,8 @@
 import { VStack, Divider, Button, Text, Box } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
-import ApplicationSelected from 'public/assets/img/applicationSelected.svg'
+
+import ApplicationPreselectButton from '~components/Account/Application/Place/ApplicationPreselectButton'
 import ApplicationDetailInfos from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailInfos'
 import { Application, Espace } from '~typings/api'
 
@@ -11,6 +12,7 @@ const ApplicationRightPanel = ({
   application: Application
 }) => {
   const { t } = useTranslation('application')
+
   return (
     <VStack
       p={{ base: 0, md: 4 }}
@@ -37,25 +39,7 @@ const ApplicationRightPanel = ({
         >
           <Text pl={1}>{t('place.detail.download_pdf')}</Text>
         </Button>
-        <Button
-          isFullWidth
-          borderRadius={0}
-          leftIcon={<ApplicationSelected />}
-          display="flex"
-          justifyContent={'flex-start'}
-          p={3}
-          backgroundColor="rgba(110, 174, 127, 0.25)"
-          color="black"
-          _hover={{
-            backgroundColor: 'rgba(110, 174, 127, 0.4)',
-          }}
-          _active={{
-            backgroundColor: 'rgba(110, 174, 127, 0.6)',
-          }}
-          height="auto!important"
-        >
-          <Text pl={1}>{t('place.detail.preselect')}</Text>
-        </Button>
+        <ApplicationPreselectButton application={application} />
       </VStack>
 
       <Divider />

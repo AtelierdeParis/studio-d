@@ -1,9 +1,46 @@
 import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react'
 import PreselectionsWarning from 'public/assets/img/preselectionsWarning.svg'
 import { useTranslation } from 'next-i18next'
+import useToast from '~hooks/useToast'
+import { client } from '~api/client-api'
+import { Application } from '~typings/api'
+import { useQueryClient } from 'react-query'
+import { useRouter } from 'next/router'
 
-const ConfirmSelections = ({ preselections }: { preselections: number }) => {
+const ConfirmSelections = ({
+  preselectedApplications,
+}: {
+  preselectedApplications: Application[]
+}) => {
+  const { query } = useRouter()
+  const queryClient = useQueryClient()
+  const preselections = preselectedApplications?.length
   const { t } = useTranslation('application')
+  const { errorToast, successToast } = useToast()
+
+  const confirmSelections = async () => {
+    try {
+      await Promise.all(
+        preselectedApplications.map(async (application) => {
+          return client.applications.applicationsUpdate(
+            application.id,
+            // @ts-expect-error
+            {
+              ...application,
+              status: 'confirmed',
+            },
+          )
+        }),
+      )
+      queryClient.refetchQueries([
+        'myApplications',
+        query.disponibility_eq as string,
+      ])
+      successToast(t('place.helper.confirm_success'))
+    } catch (e) {
+      errorToast(t('error'))
+    }
+  }
 
   return (
     <Box paddingY={2}>
@@ -34,6 +71,7 @@ const ConfirmSelections = ({ preselections }: { preselections: number }) => {
           height="auto!important"
           size="xl"
           p={2}
+          onClick={confirmSelections}
         >
           {t('place.helper.confirm_cta')}
         </Button>
