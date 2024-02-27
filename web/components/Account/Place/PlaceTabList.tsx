@@ -43,14 +43,14 @@ const PlaceTabList = ({
   const { t } = useTranslation('place')
 
   const nbAvailable = useMemo(() => {
-    if (!place || !place.disponibilities) return 0
-    return place.disponibilities.filter(
+    if (!place || !place?.disponibilities) return 0
+    return place?.disponibilities.filter(
       (dispo) =>
         dispo.status === DisponibilityStatus.AVAILABLE && !dispo.campaign,
     ).length
   }, [place?.disponibilities])
 
-  const { campaignDisposNum } = useCampaignDispo(place.disponibilities)
+  const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
 
   return (
     <TabList
@@ -89,7 +89,7 @@ const PlaceTabList = ({
               : 'tabs.slot_campaign_applications',
             {
               title: currentCampaign?.title,
-              nb: campaignDisposNum,
+              nb: campaignDisposNum ?? 0,
               nbTotal: currentCampaign?.disponibilities_max,
             },
           )}
