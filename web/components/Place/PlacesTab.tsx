@@ -104,7 +104,7 @@ const PlacesTabs = () => {
           <PlacesPage />
         </TabPanel>
         <TabPanel padding={0}>
-          <PlacesPage isCampaignTab />
+          <PlacesPage />
         </TabPanel>
       </TabPanels>
     </Tabs>

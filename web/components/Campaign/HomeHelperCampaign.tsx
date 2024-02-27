@@ -1,10 +1,10 @@
 import { Text, Flex, Button, StackProps, VStack, Stack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import ApplicationCounter from '~components/Campaign/ApplicationCounter'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import Link from '~components/Link'
+import { ROUTE_PLACES } from '~constants'
 
-const PlacesListCampaignHelper = (props: StackProps) => {
+const HomeHelperCampaign = (props: StackProps) => {
   const { t } = useTranslation('common')
   const { currentCampaign } = useCampaignContext()
 
@@ -12,27 +12,32 @@ const PlacesListCampaignHelper = (props: StackProps) => {
     <VStack
       backgroundColor={'campaign.light'}
       borderRadius="4px"
-      borderTopLeftRadius={0}
+      borderTopLeftRadius={undefined}
       paddingX={8}
       paddingY={4}
       marginBottom={4}
       spacing={'1rem'}
-      height="100%"
+      height={'auto'}
       {...props}
     >
-      <ApplicationCounter borderBottom="1px solid lightgray" />
-      <Stack width="100%" spacing={6} direction={'column'}>
+      <Stack width="100%" spacing={6} direction={{ base: 'column', sm: 'row' }}>
         <VStack flex={4} justifyContent="flex-start" alignItems="flex-start">
           <Text as="span" fontWeight="bold" marginRight={1}>
             {t('campaign.helper_title', { title: currentCampaign?.title })}
           </Text>
-          <Text>{currentCampaign.description}</Text>
+          <Text noOfLines={{ base: 4, md: 3, lg: 2 }}>
+            {currentCampaign.description}
+          </Text>
         </VStack>
-        <Flex flex={1} justifyContent={'flex-end'} alignItems="center">
+        <Flex
+          flex={1}
+          justifyContent={{ base: 'flex-start', sm: 'flex-end' }}
+          alignItems="center"
+        >
           <Button
             variant={'campaign'}
             as={Link}
-            href={currentCampaign?.article_link}
+            href={currentCampaign?.article_link || `${ROUTE_PLACES}?tab=1`}
           >
             {t('show')}
           </Button>
@@ -42,4 +47,4 @@ const PlacesListCampaignHelper = (props: StackProps) => {
   )
 }
 
-export default PlacesListCampaignHelper
+export default HomeHelperCampaign

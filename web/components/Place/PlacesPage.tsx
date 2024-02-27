@@ -35,15 +35,22 @@ const styleSelected = {
   borderBottomColor: 'blue.500',
 }
 
-const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
-  const { currentCampaign, isLoading: campaignLoading } = useCampaignContext()
+const PlacesPage = () => {
+  const {
+    currentCampaign,
+    isLoading: campaignLoading,
+    hasActiveCampaign,
+  } = useCampaignContext()
+  const router = useRouter()
+  const isCampaignTab = (router.query.tab as string) === '1'
+
   const initialFilters =
-    currentCampaign && isCampaignTab
+    hasActiveCampaign && isCampaignTab
       ? {
           'disponibilities.campaign': currentCampaign?.id,
         }
       : {}
-  const router = useRouter()
+
   const isMobile = useBreakpointValue({ base: true, md: false })
   const { t } = useTranslation('place')
   const ref = useRef(null)
@@ -116,17 +123,14 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
     <Container px={0}>
       <NextSeo title={t('common:title.places')} />
       <FormProvider {...form}>
-        {currentCampaign && isCampaignTab ? (
+        {hasActiveCampaign && isCampaignTab ? (
           <Stack
             direction={{ base: 'column', xl: 'row' }}
             spacing={4}
             paddingBottom={10}
           >
             <Box flex={1}>
-              <PlacesListCampaignHelper
-                campaign={currentCampaign}
-                marginBottom={0}
-              />
+              <PlacesListCampaignHelper marginBottom={0} />
             </Box>
             <Flex flex={1} alignItems="stretch">
               <PlaceSearch onSubmit={onSubmit} isCampaignTab={isCampaignTab} />
@@ -248,7 +252,13 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                 isFetching={isFetching}
                 isLoading={isLoading}
                 gridRef={ref}
-                isCampaignTab={isCampaignTab}
+                gridMode={
+                  isCampaignTab
+                    ? 'campaign'
+                    : hasActiveCampaign
+                    ? 'solidarity'
+                    : undefined
+                }
               />
             ) : (
               <PlaceList
@@ -256,7 +266,13 @@ const PlacesPage = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
                 isFetching={isFetching}
                 isLoading={isLoading}
                 listRef={ref}
-                isCampaignTab={isCampaignTab}
+                listMode={
+                  isCampaignTab
+                    ? 'campaign'
+                    : hasActiveCampaign
+                    ? 'solidarity'
+                    : undefined
+                }
               />
             )}
           </>

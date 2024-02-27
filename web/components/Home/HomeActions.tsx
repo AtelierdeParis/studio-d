@@ -1,10 +1,15 @@
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { Box, Stack } from '@chakra-ui/react'
 import HomeSearch from '~components/Home/HomeSearch'
-import HomeCampaignInsert from '~components/Campaign/Home/HomeCampaignInsert'
+import ApplicationsCampaignInsert from '~components/Campaign/Home/ApplicationsCampaignInsert'
+import DisponibilitiesCampaingInsert from '~components/Campaign/Home/DisponibilitiesCampaignInsert'
 
 const HomeActions = () => {
-  const { hasActiveCampaign } = useCampaignContext()
+  const {
+    hasActiveCampaign,
+    currentCampaign,
+    isCampaignPlace,
+  } = useCampaignContext()
 
   return (
     <Stack
@@ -22,10 +27,14 @@ const HomeActions = () => {
       {hasActiveCampaign && (
         <Box
           flex={2}
-          id="licorne"
           borderTop={{ base: '1px solid rgba(211, 211, 211, 0.5)', lg: 'none' }}
         >
-          <HomeCampaignInsert />
+          {currentCampaign?.mode === 'applications' && (
+            <ApplicationsCampaignInsert />
+          )}
+          {currentCampaign?.mode === 'disponibilities' && isCampaignPlace && (
+            <DisponibilitiesCampaingInsert />
+          )}
         </Box>
       )}
     </Stack>

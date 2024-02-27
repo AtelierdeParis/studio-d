@@ -27,10 +27,10 @@ import useCampaignDispo from '~hooks/useCampaignDispo'
 interface Props {
   place: Espace
   searchParams?: SearchQuery
-  isCampaignTab?: boolean
+  gridMode?: 'solidarity' | 'campaign' | null
 }
 
-const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
+const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
 
@@ -60,7 +60,14 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
       <LinkOverlay
         href={{
           pathname: ROUTE_PLACE_DETAIL,
-          query: { id: place.slug, ...(isCampaignTab && { tab: 1 }) },
+          query: {
+            id: place.slug,
+            ...(gridMode === 'campaign'
+              ? { tab: 1 }
+              : gridMode === 'solidarity'
+              ? { tab: 0 }
+              : {}),
+          },
         }}
       >
         <Flex
@@ -74,7 +81,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
         >
           <CampaignTag
             isGrid
-            isCampaignTab={isCampaignTab}
+            mode={gridMode}
             disponibilitiesIds={campaignDispos?.map((d) => d.id)}
             hasCampaignDispo={hasCampaignDispo}
           />
@@ -109,7 +116,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                 {place.users_permissions_user.structureName}
               </Text>
             </Box>
-            {place?.disponibilities?.length === 0 && !isCampaignTab && (
+            {place?.disponibilities?.length === 0 && gridMode !== 'campaign' && (
               <Tag
                 status={DisponibilityStatus.PAST}
                 alignSelf="flex-start"
@@ -118,7 +125,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                 {t('card.noDispo')}
               </Tag>
             )}
-            {disposInRange?.length > 0 && !isCampaignTab && (
+            {disposInRange?.length > 0 && gridMode !== 'campaign' && (
               <Tag
                 status={disposInRange?.length <= 4 ? 'nextweek' : 'available'}
                 alignSelf="flex-start"
@@ -129,17 +136,19 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                 })}
               </Tag>
             )}
-            {!disposInRange && disposThisWeek?.length > 0 && !isCampaignTab && (
-              <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
-                {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
-                  nb: disposThisWeek.length,
-                })}
-              </Tag>
-            )}
+            {!disposInRange &&
+              disposThisWeek?.length > 0 &&
+              gridMode !== 'campaign' && (
+                <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
+                  {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
+                    nb: disposThisWeek.length,
+                  })}
+                </Tag>
+              )}
             {!disposInRange &&
               disposThisWeek?.length === 0 &&
               disposNextWeek?.length > 0 &&
-              !isCampaignTab && (
+              gridMode !== 'campaign' && (
                 <Tag status={'nextweek'} alignSelf="flex-start" mt={1.5}>
                   {t(`card.nextWeek${disposNextWeek?.length > 1 ? 's' : ''}`, {
                     nb: disposNextWeek.length,
@@ -177,7 +186,7 @@ const PlaceGridCard = ({ place, searchParams, isCampaignTab }: Props) => {
                 </Flex>
               </Flex>
 
-              {hasCampaignDispo && isCampaignTab && (
+              {hasCampaignDispo && gridMode === 'campaign' && (
                 <>
                   <Divider my={2} borderColor="gray.100" />
                   <Flex w="100%">
