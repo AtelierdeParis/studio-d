@@ -18,6 +18,7 @@ import MigrationMessage from '~components/MigrationMessage'
 import { NextSeo } from 'next-seo'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import CampaignPlaceSchedule from '~components/Campaign/Places/Admin/CampaignSchedule'
+import CampaignFileUpload from '~components/Campaign/Places/Admin/CampaignFileUpload'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),
@@ -83,6 +84,7 @@ const EditPlace = ({ slug }: Props) => {
             {currentCampaign && (
               <TabPanel px={0}>
                 <CampaignPlaceSchedule place={place} />
+                <CampaignFileUpload place={place} />
               </TabPanel>
             )}
           </TabPanels>

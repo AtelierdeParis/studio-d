@@ -68,8 +68,8 @@
       "via": "companyApplications"
     },
     "espace": {
-      "model": "espace",
-      "via": "applications"
+      "via": "applications",
+      "model": "espace"
     },
     "status": {
       "type": "enumeration",

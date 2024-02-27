@@ -22,7 +22,6 @@ interface Props {
 }
 
 const PlaceDetail = ({ place }: Props) => {
-  const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, lg: false })
 
   const displayPrecise = useMemo(() => {

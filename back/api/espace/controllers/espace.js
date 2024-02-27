@@ -17,7 +17,8 @@ const populate = [
   "images",
   "files",
   "users_permissions_user",
-  "city"
+  "city",
+  "campaign_files"
 ];
 
 module.exports = {
