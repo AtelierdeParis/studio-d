@@ -75,7 +75,7 @@ const InputDateRange = ({ control, placeholder, label }: Props) => {
                     )}
                 </HStack>
               ) : (
-                <Text color="gray.500" mt={1}>
+                <Text color="gray.500" mt={1} cursor="pointer">
                   {placeholder}
                 </Text>
               )}

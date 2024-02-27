@@ -21,10 +21,10 @@ import useCampaignDispo from '~hooks/useCampaignDispo'
 interface Props {
   place: Espace
   setFocus: (idPlace: string) => void
-  isCampaignTab?: boolean
+  listMode?: 'solidarity' | 'campaign'
 }
 
-const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
+const PlaceCard = ({ place, setFocus, listMode }: Props) => {
   const { t } = useTranslation('place')
   const { currentCampaign } = useCampaignContext()
   const { campaignDispos } = useCampaignDispo(place?.disponibilities)
@@ -72,7 +72,7 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
           <Box pl={5} flex={1}>
             <Box>
               <CampaignTag
-                isCampaignTab={isCampaignTab}
+                mode={listMode}
                 disponibilitiesIds={campaignDispos?.map((d) => d.id)}
                 hasCampaignDispo={hasCampaignDispo}
               />
@@ -91,7 +91,7 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
               <Text>{`${place.surface}m²`}</Text>
               <Text color="gray.500">{t('card.dim')}</Text>
               <Text>{`${place.roomLength} x ${place.width} m`}</Text>
-              {isCampaignTab && (
+              {listMode === 'campaign' && (
                 <>
                   <Text color="gray.500" pr={9}>
                     {t('card.dates')}
@@ -111,11 +111,6 @@ const PlaceCard = ({ place, setFocus, isCampaignTab }: Props) => {
                       ))}
                   </Box>
                 </>
-              )}
-              {isCampaignTab && (
-                <Flex w="100%">
-                  <Text isTruncated></Text>
-                </Flex>
               )}
             </SimpleGrid>
           </Box>

@@ -12,7 +12,7 @@ const PlaceList = ({
   isFetching,
   isLoading,
   listRef,
-  isCampaignTab = false,
+  listMode,
 }) => {
   const [focusedPlace, setFocus] = useState(null)
   const markers = useMemo(
@@ -36,7 +36,7 @@ const PlaceList = ({
                   place={place}
                   key={place.id}
                   setFocus={setFocus}
-                  isCampaignTab={isCampaignTab}
+                  listMode={listMode}
                 />
               ))}
             </Loading>

@@ -13,7 +13,7 @@ interface Props {
   isFetching?: boolean
   isLoading?: boolean
   searchParams?: SearchQuery
-  isCampaignTab?: boolean
+  gridMode?: 'solidarity' | 'campaign'
 }
 
 const PlaceGrid = ({
@@ -22,7 +22,7 @@ const PlaceGrid = ({
   isFetching = false,
   gridRef = null,
   searchParams = null,
-  isCampaignTab = false,
+  gridMode,
 }: Props) => {
   return (
     <Box>
@@ -38,7 +38,7 @@ const PlaceGrid = ({
               place={place}
               key={place.id}
               searchParams={searchParams}
-              isCampaignTab={isCampaignTab}
+              gridMode={gridMode}
             />
           ))}
         </Loading>

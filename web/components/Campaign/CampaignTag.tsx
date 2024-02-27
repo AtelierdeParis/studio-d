@@ -7,23 +7,25 @@ import ApplicationCheck from 'public/assets/img/applicationCheck.svg'
 
 const CampaignTag = ({
   isGrid,
-  isCampaignTab,
+  mode,
   disponibilitiesIds,
   hasCampaignDispo,
 }: {
   isGrid?: boolean
-  isCampaignTab?: boolean
+  mode?: 'solidarity' | 'campaign'
   disponibilitiesIds?: string[]
   hasCampaignDispo?: boolean
 }) => {
   const { applications } = useCurrentUser()
-  const { currentCampaign } = useCampaignContext()
+  const { currentCampaign, hasActiveCampaign } = useCampaignContext()
   const { t } = useTranslation('common')
 
   if (
     applications
       ?.map((el) => el?.disponibility)
-      .some((el) => disponibilitiesIds?.includes(el))
+      .some((el) => disponibilitiesIds?.includes(el)) &&
+    hasActiveCampaign &&
+    mode === 'campaign'
   ) {
     return (
       <Box position={isGrid ? 'relative' : undefined}>
@@ -44,7 +46,7 @@ const CampaignTag = ({
     )
   }
 
-  if (hasCampaignDispo && !isCampaignTab) {
+  if (hasCampaignDispo && mode === 'solidarity') {
     return (
       <Box position={isGrid ? 'relative' : undefined}>
         <Tag
@@ -54,10 +56,20 @@ const CampaignTag = ({
           }
           paddingX={'9px'}
           paddingY={'5px'}
+          maxW="90%"
         >
-          {t('campaign.partner', {
-            title: currentCampaign?.title,
-          })}
+          <Box
+            style={{
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              maxWidth: '100%', // Adjust this value as needed
+            }}
+          >
+            {t('campaign.partner', {
+              title: currentCampaign?.title,
+            })}
+          </Box>
         </Tag>
       </Box>
     )
