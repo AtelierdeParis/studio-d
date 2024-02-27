@@ -1,7 +1,6 @@
 import { Box, HStack, Select } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useEffect, useMemo, useState } from 'react'
-import { CampaignMode } from '~components/Campaign/CampaignContext'
+import { useEffect, useMemo } from 'react'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 import { Espace } from '~typings/api'
@@ -15,21 +14,13 @@ const ApplicationSelector = ({
   hasConfirmedSelection?: boolean
 }) => {
   const router = useRouter()
-  const {
-    espace: queryEspace,
-    disponibility: queryDisponibility,
-    campaign,
-  } = router.query
+  const { espace, disponibility, campaign } = router.query
   const { selectedCampaign } = useSelectedCampaign()
-  const [espace, setEspace] = useState(queryEspace)
-  const [disponibility, setDisponibility] = useState(queryDisponibility)
 
   const initState = () => {
-    const espace = places?.[0]?.id
-    const disponibility = places?.[0]?.disponibilities[0]?.id
-    setEspace(espace)
-    setDisponibility(disponibility)
-    if (!queryEspace || !queryDisponibility) {
+    if (!espace || !disponibility) {
+      const espace = places?.[0]?.id
+      const disponibility = places?.[0]?.disponibilities[0]?.id
       router.push({
         pathname: router.pathname,
         query: { ...router.query, espace, disponibility },
@@ -42,9 +33,7 @@ const ApplicationSelector = ({
   }, [])
 
   useEffect(() => {
-    if (!espace) {
-      initState()
-    }
+    initState()
   }, [places])
 
   const getDispoOptions = (espace) => {
@@ -73,7 +62,6 @@ const ApplicationSelector = ({
           color="white"
           value={espace}
           onChange={(e) => {
-            setEspace(e.target.value)
             const disponibility = getDispoOptions(e.target.value)[0]?.id
             router.push({
               pathname: router.pathname,
@@ -105,7 +93,6 @@ const ApplicationSelector = ({
             color="white"
             value={disponibility}
             onChange={(e) => {
-              setDisponibility(e.target.value)
               router.push({
                 pathname: ROUTE_ACCOUNT_APPLICATIONS,
                 query: { ...router.query, disponibility: e.target.value },

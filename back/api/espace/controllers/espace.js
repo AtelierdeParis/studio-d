@@ -17,7 +17,8 @@ const populate = [
   "images",
   "files",
   "users_permissions_user",
-  "city"
+  "city",
+  "campaign_files"
 ];
 
 module.exports = {
@@ -110,9 +111,11 @@ module.exports = {
 
     let entity;
     if (ctx.is("multipart")) {
-      const { data, files } = parseMultipartData(ctx);
+      console.log(parseMultipartData(ctx))
+      const { data, files, campaign_files } = parseMultipartData(ctx);
       entity = await strapi.services.espace.update({ id }, data, {
         files,
+        campaign_files
       });
     } else {
       const { files, ...body } = ctx.request.body;

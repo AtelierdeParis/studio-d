@@ -20,6 +20,7 @@ import CampaignApplicationSchedule from '~components/Campaign/Places/Application
 import PlaceDetailCalendar from '~components/Place/PlaceDetailPage/PlaceDetailCalendar'
 import CampaignDetailSwitcher from '~components/Campaign/Places/Detail/CampaignDetailSwitcher'
 import useCampaignDispo from '~hooks/useCampaignDispo'
+import CampaignPlaceFiles from '~components/Campaign/Places/Detail/CampaignPlaceFiles'
 
 interface Props {
   place: Espace
@@ -66,6 +67,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
               isMobile={isMobile}
               isCampaignTab={isCampaignTab}
             />
+            <CampaignPlaceFiles place={place} />
           </VStack>
         </Stack>
 

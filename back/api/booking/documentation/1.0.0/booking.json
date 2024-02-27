@@ -984,6 +984,12 @@
                   "type": "string"
                 }
               },
+              "campaign_files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },

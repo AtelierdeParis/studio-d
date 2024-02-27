@@ -500,6 +500,12 @@
       "see_applications": "Mes candidatures"
     }
   },
+  "campaignSchedule": {
+    "title": "Documents à destination des candidat·e·s",
+    "helper": "Fiche technique, appel à projet, conditions d'accès...",
+    "files_error": "Une erreur est survenue lors du téléchargement de vos fichiers",
+    "files_success": "Vos fichiers ont été modifiés avec succès"
+  },
   "confirm": {
     "error": "Une erreur empêchant la création de votre demande de réservation",
     "title": "Demande de réservation",

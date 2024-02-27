@@ -36,7 +36,6 @@ const getEndDate = (
   duration: number,
   excludedDates: Date[],
 ) => {
-  console.log(excludedDates)
   let endDate = new Date(startDate)
   let selectedDays = 1
   const exclude_days = []

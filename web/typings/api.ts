@@ -204,6 +204,7 @@ export interface Application {
     longitude?: number;
     deleted?: boolean;
     applications?: string[];
+    campaign_files?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -478,6 +479,7 @@ export interface City {
     longitude?: number;
     deleted?: boolean;
     applications?: string[];
+    campaign_files?: string[];
     created_by?: string;
     updated_by?: string;
   }[];
@@ -553,6 +555,7 @@ export interface Disponibility {
     longitude?: number;
     deleted?: boolean;
     applications?: string[];
+    campaign_files?: string[];
     created_by?: string;
     updated_by?: string;
   };
@@ -852,6 +855,26 @@ export interface Espace {
   slug?: string;
   external_id?: number;
   danceCarpet: "true" | "false" | "possible";
+  campaign_files?: {
+    id: string;
+    name: string;
+    alternativeText?: string;
+    caption?: string;
+    width?: number;
+    height?: number;
+    formats?: object;
+    hash: string;
+    ext?: string;
+    mime: string;
+    size: number;
+    url: string;
+    previewUrl?: string;
+    provider: string;
+    provider_metadata?: object;
+    related?: string;
+    created_by?: string;
+    updated_by?: string;
+  }[];
 }
 
 export interface NewEspace {
