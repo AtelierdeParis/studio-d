@@ -33,7 +33,7 @@ const ApplicationDownloadAll = () => {
         backgroundColor={
           selectedCampaign?.mode === 'closed' ? 'gray.700' : undefined
         }
-        color={selectedCampaign?.mode === 'closed' ? 'white' : undefined}
+        color={'white'}
         size="lg"
         onClick={() => {
           setDownloadedApplications([])
