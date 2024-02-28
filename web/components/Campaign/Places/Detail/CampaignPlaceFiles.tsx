@@ -9,28 +9,30 @@ const CampaignPlaceFiles = ({ place }: { place: Espace }) => {
     return (
       <VStack width="100%" spacing={6} paddingY={4}>
         <Divider />
-        <VStack alignItems="flex-start">
-          {place?.campaign_files.map((file) => (
-            <Button
-              key={file.id}
-              mb={4}
-              mr={4}
-              leftIcon={<Download />}
-              colorScheme="gray"
-              fontSize="md"
-              onClick={() => {
-                axios({
-                  url: file.url,
-                  method: 'GET',
-                  responseType: 'blob',
-                }).then(() => {
-                  saveAs(file.url, file.name)
-                })
-              }}
-            >
-              {file.caption ? `${file.caption} (${file.ext})` : file.name}
-            </Button>
-          ))}
+        <VStack alignItems="flex-start" width="100%">
+          {place?.campaign_files.map((file) => {
+            return (
+              <Button
+                key={file.id}
+                mb={4}
+                mr={4}
+                leftIcon={<Download />}
+                colorScheme="gray"
+                fontSize="md"
+                onClick={() => {
+                  axios({
+                    url: file.url,
+                    method: 'GET',
+                    responseType: 'blob',
+                  }).then(() => {
+                    saveAs(file.url, file.name)
+                  })
+                }}
+              >
+                {file.caption ? `${file.caption} (${file.ext})` : file.name}
+              </Button>
+            )
+          })}
         </VStack>
       </VStack>
     )

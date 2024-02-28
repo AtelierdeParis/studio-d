@@ -10,6 +10,7 @@ import ScheduleDelete from '~components/Account/Place/ScheduleDelete'
 import Link from '~components/Link'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
 import useCampaignDispo from '~hooks/useCampaignDispo'
+import Schedule from '~components/Account/Place/Schedule'
 
 interface Props {
   place: Espace
@@ -100,6 +101,9 @@ const CampaignScheduleInfo = ({ place, showForm }: Props) => {
           {t('campaign.helpers.applications.schedule.see_applications')}
         </Button>
       ) : null}
+      <Box display={{ base: 'block', lg: 'none' }} width="100%">
+        <Schedule isCampaignMode />
+      </Box>
     </VStack>
   )
 }

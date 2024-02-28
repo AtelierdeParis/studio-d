@@ -19,7 +19,7 @@ module.exports = ({ env }) => ({
     },
   },
   upload: {
-    provider: "do",
+    provider: env('NODE_ENV') === 'development' ? 'local' : "do",
     providerOptions: {
       key: process.env.DO_SPACE_ACCESS_KEY,
       secret: process.env.DO_SPACE_SECRET_KEY,

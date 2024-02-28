@@ -111,23 +111,22 @@ module.exports = {
 
     let entity;
     if (ctx.is("multipart")) {
-      console.log(parseMultipartData(ctx))
       const { data, files, campaign_files } = parseMultipartData(ctx);
-      entity = await strapi.services.espace.update({ id }, data, {
-        files,
-        campaign_files
-      });
+      entity = await strapi.services.espace.update({ id }, data, {files, campaign_files});
     } else {
-      const { files, ...body } = ctx.request.body;
-      if (files && files.length > 0) {
-        await Promise.all(
-          files.map((file) => {
-            strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
-              caption: file.caption,
-            });
-          })
-        );
-      }
+      const { files,campaign_files, ...body } = ctx.request.body;
+      await Promise.all([files, campaign_files].map(async(fileList)=>{
+        if (fileList && fileList.length > 0) {
+          await Promise.all(
+            fileList.map(async(file) => {
+              await strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
+                caption: file.caption,
+              });
+            })
+          );
+        }
+      }))
+
       entity = await strapi.services.espace.update({ id }, body);
     }
 
