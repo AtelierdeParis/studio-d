@@ -7,7 +7,6 @@ import {
   Box,
   Spacer,
   useBreakpointValue,
-  Circle,
 } from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'

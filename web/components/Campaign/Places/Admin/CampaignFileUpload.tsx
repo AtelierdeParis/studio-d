@@ -8,22 +8,27 @@ import { Espace } from '~typings/api'
 import Check from 'public/assets/img/check.svg'
 import { client } from '~api/client-api'
 import { addFilesWithInfo } from '~utils/file'
+import { useQueryClient } from 'react-query'
 
 const CampaignFileUpload = ({ place }: { place: Espace }) => {
   const { t } = useTranslation('place')
   const [isLoading, setLoading] = useState(false)
   const { errorToast, successToast } = useToast()
+  const queryClient = useQueryClient()
 
-  const submitForm = async (values) => {
+  const submitForm = async ({
+    removedCampaign_files,
+    campaign_files,
+    ...values
+  }) => {
     setLoading(true)
     let createdFiles = null
-    if (values.removedCampaign_files.length > 0) {
-      await Promise.all(
-        values.removedCampaign_files.map(client.upload.filesDelete),
-      )
+    if (removedCampaign_files.length > 0) {
+      await Promise.all(removedCampaign_files.map(client.upload.filesDelete))
     }
 
-    const newFiles = values?.campaign_files?.filter((file) => !file.id)
+    const newFiles = campaign_files.filter((file) => !file.id)
+
     if (newFiles.length > 0) {
       createdFiles = await Promise.all(
         addFilesWithInfo(newFiles, {
@@ -35,9 +40,14 @@ const CampaignFileUpload = ({ place }: { place: Espace }) => {
     }
 
     try {
-      await client.espaces.espacesUpdate(place.id, {
+      const res = await client.espaces.espacesUpdate(place.id, {
         ...values,
-        files: values.campaign_files.filter((file) => file.id),
+        campaign_files: campaign_files.filter((file) => file.id),
+      })
+      queryClient.setQueryData(['place', place.slug], res.data)
+      reset({
+        campaign_files: res.data.campaign_files,
+        removedCampaign_files: [],
       })
       successToast(t('campaignSchedule.files_success'))
     } catch (e) {
@@ -47,7 +57,10 @@ const CampaignFileUpload = ({ place }: { place: Espace }) => {
   }
 
   const methods = useForm({
-    defaultValues: {},
+    defaultValues: {
+      removedCampaign_files: [],
+      campaign_files: [],
+    },
     mode: 'onChange',
   })
 
