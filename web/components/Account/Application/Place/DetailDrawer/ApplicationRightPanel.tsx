@@ -1,4 +1,4 @@
-import { VStack, Divider, Button, Text, Box } from '@chakra-ui/react'
+import { VStack, Divider, Button, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
 
@@ -9,18 +9,18 @@ import { Application } from '~typings/api'
 const ApplicationRightPanel = ({
   application,
   canPreselect,
+  handleDownload,
+  isDownloading,
 }: {
   application: Application
   canPreselect: boolean
+  handleDownload: () => void
+  isDownloading?: boolean
 }) => {
   const { t } = useTranslation('application')
 
   return (
-    <VStack
-      p={{ base: 0, md: 4 }}
-      borderLeft={{ base: 'none', md: '1px solid lightgray' }}
-      spacing={4}
-    >
+    <VStack p={{ base: 0, md: 4 }} spacing={4}>
       <VStack maxW="100%" overflow="hidden" width="100%">
         <Button
           isFullWidth
@@ -38,6 +38,9 @@ const ApplicationRightPanel = ({
             backgroundColor: 'blue.300',
           }}
           height="auto!important"
+          onClick={handleDownload}
+          isLoading={isDownloading}
+          loadingText={t('place.detail.downloading_pdf')}
         >
           <Text pl={1}>{t('place.detail.download_pdf')}</Text>
         </Button>

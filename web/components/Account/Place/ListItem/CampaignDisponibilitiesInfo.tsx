@@ -35,7 +35,7 @@ const CampaignDisponibilitiesInfo = ({ place }: { place: Espace }) => {
         </Box>
       </HStack>
 
-      <HStack width={'100%'} paddingLeft={{ base: 0, md: 6 }}>
+      <HStack width="100%" paddingLeft={{ base: 0, md: 6 }}>
         <Box
           flex={1}
           as={Link}

@@ -57,6 +57,7 @@ const DisponibilitiesCampaingInsert = () => {
               variant="campaign"
               as={Link}
               href={ROUTE_ACCOUNT_PLACES}
+              whiteSpace="nowrap"
             >
               {t(`campaign.insert.disponibilities.cta`)}
             </Button>

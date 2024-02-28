@@ -4,9 +4,9 @@ import { Text, Button, IconButton, HStack, Flex } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
 import Link from '~components/Link'
-import DownloadApplication from 'public/assets/img/downloadApplication.svg'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 import ApplicationStatusIcon from '~components/Account/Application/Place/ApplicationStatusIcon'
+import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationsPdf/ApplicationDownloadButton'
 
 interface Props {
   application: Application
@@ -48,19 +48,7 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
       {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
         <Cell>
           <HStack spacing={2}>
-            <IconButton
-              px={2}
-              py={1}
-              variant="outline"
-              color="grayText.1"
-              colorScheme="gray"
-              size="sm"
-              borderRadius="sm"
-              fontSize="md"
-              aria-label="dowload"
-              borderColor="rgba(98,103,130, 0.6)"
-              icon={<DownloadApplication />}
-            />
+            <ApplicationDownloadButton application={application} />
             <Button
               px={2}
               py={1}

@@ -1,8 +1,6 @@
 import { useMyApplications } from '~hooks/useMyApplications'
 import ApplicationPlaceList from '~components/Account/Application/Place/ApplicationPlaceList'
-import InfoPlaceApplications from '~components/Account/Info/InfoPlaceApplications'
 import Loading from '~components/Loading'
-import { useCurrentUser } from '~hooks/useCurrentUser'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
