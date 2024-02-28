@@ -13,7 +13,7 @@ const SingleApplication = forwardRef(
       handleDownload,
     }: {
       application: Application
-      handleDownload: (ref: any) => void
+      handleDownload?: (ref: any) => void
     },
     ref: any,
   ) => {
