@@ -25,9 +25,9 @@ const ApplicationsSearch = () => {
           placeholder={t('place.search')}
           onChange={(e) => handleSearch(e.target.value)}
           width="auto"
-          p={2}
+          height="30px"
         />
-        <InputRightElement>
+        <InputRightElement height="30px">
           <SearchIcon />
         </InputRightElement>
       </InputGroup>

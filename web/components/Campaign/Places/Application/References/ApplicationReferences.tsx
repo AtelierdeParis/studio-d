@@ -26,7 +26,7 @@ const ApplicationReferences = () => {
         position="1."
         helper={t('campaignApplication.references.helper')}
       />
-      <VStack width={'100%'} spacing={4}>
+      <VStack width="100%" spacing={4}>
         {references?.length ? (
           references.map((reference, i) => (
             <>

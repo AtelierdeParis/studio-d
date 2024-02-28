@@ -2,6 +2,7 @@ import { HStack, Box, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import ApplicationDownloadAll from '~components/Account/Application/Place/ApplicationDownloadAll'
 import ApplicationPlaceFetcher from '~components/Account/Application/Place/ApplicationPlaceFetcher'
 import ApplicationsSearch from '~components/Account/Application/Place/ApplicationsSearch'
 import ApplicationSelector from '~components/Account/Application/Place/DisponibilitiesSelector/DisponibilitiesSelectorFields'
@@ -57,7 +58,7 @@ const DisponibilitiesSelector = () => {
   return (
     <>
       {Boolean(places?.length) && !isLoading && !isFetching && (
-        <HStack justifyContent="space-between">
+        <HStack justifyContent="space-between" alignItems="baseline">
           <ApplicationSelector
             places={places?.map((p) => ({
               ...p,
@@ -67,7 +68,10 @@ const DisponibilitiesSelector = () => {
             }))}
             hasConfirmedSelection={hasConfirmedSelection}
           />
-          <ApplicationsSearch />
+          <HStack>
+            <ApplicationsSearch />
+            <ApplicationDownloadAll />
+          </HStack>
         </HStack>
       )}
 

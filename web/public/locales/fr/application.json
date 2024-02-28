@@ -43,6 +43,7 @@
       }
     },
     "search": "Recherche",
+    "download": "Télécharger",
     "helper": {
       "preselection_start": "Établissez votre présélection avant le {{date}}.",
       "missing_preselections": "{{num}} manquantes.",
@@ -74,6 +75,7 @@
         "license": "Licence(s) :"
       },
       "download_pdf": "Télécharger le pdf",
+      "downloading_pdf": "Création du pdf",
       "preselect": "Marquer comme sélectionnée",
       "deselect": "Déselectionner",
       "error": "Une erreur est survenue",

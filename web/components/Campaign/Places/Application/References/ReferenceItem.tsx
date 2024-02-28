@@ -11,8 +11,8 @@ const ReferenceItem = ({
   isEdited,
 }: {
   reference: Reference
-  handleDelete: () => void
-  handleEdit: () => void
+  handleDelete?: () => void
+  handleEdit?: () => void
   index: number
   isEdited?: boolean
 }) => {
@@ -28,7 +28,7 @@ const ReferenceItem = ({
 
   const partners = coproducersValues.map(
     (coproducer) =>
-      currentCampaign.users_permissions_users.find(
+      currentCampaign?.users_permissions_users?.find(
         (user) => user?.id?.toString() === coproducer?.toString(),
       )?.structureName,
   )
@@ -36,7 +36,9 @@ const ReferenceItem = ({
   return (
     <VStack
       border="1px solid blue"
-      borderColor="blue.500"
+      borderColor={
+        Boolean(handleDelete && handleEdit) ? 'blue.500' : 'transparent'
+      }
       width="100%"
       p={4}
       borderRadius="4px"
@@ -49,26 +51,28 @@ const ReferenceItem = ({
             index: index + 1,
           })}
         </Text>
-        <ButtonGroup>
-          <Button
-            variant="outline"
-            colorScheme="blue"
-            size="md"
-            onClick={handleEdit}
-            isDisabled={isEdited}
-          >
-            {t('campaignApplication.references.edit')}
-          </Button>
-          <Button
-            onClick={handleDelete}
-            variant="outline"
-            colorScheme="blue"
-            size="md"
-            isDisabled={isEdited}
-          >
-            {t('campaignApplication.references.delete')}
-          </Button>
-        </ButtonGroup>
+        {Boolean(handleDelete && handleEdit) && (
+          <ButtonGroup>
+            <Button
+              variant="outline"
+              colorScheme="blue"
+              size="md"
+              onClick={handleEdit}
+              isDisabled={isEdited}
+            >
+              {t('campaignApplication.references.edit')}
+            </Button>
+            <Button
+              onClick={handleDelete}
+              variant="outline"
+              colorScheme="blue"
+              size="md"
+              isDisabled={isEdited}
+            >
+              {t('campaignApplication.references.delete')}
+            </Button>
+          </ButtonGroup>
+        )}
       </HStack>
 
       <VStack width="100%" alignItems={'flex-start'} spacing={0}>

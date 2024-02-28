@@ -20,13 +20,18 @@ const ApplicationDetailInfos = ({
     ape,
     insuranceNumber,
     license,
+    zipCode,
+    city,
   } = company ?? {}
 
   return (
     <VStack alignItems="stretch" fontWeight="600" spacing={4} width="100%">
       <Box>
         <Text>{structureName}</Text>
-        <Text>{address}</Text>
+        <Text>{address} </Text>
+        <Text>
+          {zipCode} {city}
+        </Text>
       </Box>
 
       <Box>
