@@ -34,7 +34,7 @@ const ConfirmSelections = ({
       )
       queryClient.refetchQueries([
         'myApplications',
-        query.disponibility_eq as string,
+        query?.disponibility as string,
       ])
       successToast(t('place.helper.confirm_success'))
     } catch (e) {

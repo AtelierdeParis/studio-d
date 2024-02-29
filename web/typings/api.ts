@@ -127,6 +127,7 @@ export interface Application {
     chart_url?: string;
     applications?: string[];
     preselections_max?: number;
+    is_active?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -393,6 +394,7 @@ export interface Campaign {
     updated_by?: string;
   }[];
   preselections_max?: number;
+  is_active?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -436,6 +438,7 @@ export interface NewCampaign {
   chart_url?: string;
   applications?: string[];
   preselections_max?: number;
+  is_active?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -638,6 +641,7 @@ export interface Disponibility {
     chart_url?: string;
     applications?: string[];
     preselections_max?: number;
+    is_active?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;

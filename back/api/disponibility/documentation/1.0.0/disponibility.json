@@ -1032,6 +1032,9 @@
               "preselections_max": {
                 "type": "integer"
               },
+              "is_active": {
+                "type": "boolean"
+              },
               "published_at": {
                 "type": "string"
               },
