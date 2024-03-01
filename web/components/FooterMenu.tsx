@@ -34,9 +34,16 @@ const FooterMenu = () => {
         <Box>
           <MenuItem href="/" text={t('nav.home')} />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
+          {currentCampaign?.article_link && (
+            <MenuItem
+              href={ROUTE_PLACES}
+              text={t('nav.campaign', { title: currentCampaign?.title })}
+            />
+          )}
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
+          <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
         </Box>
         {!loading && !session && (
