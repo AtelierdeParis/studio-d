@@ -24,11 +24,11 @@ module.exports = {
       },
       {
         date_end: format(
-          new Date(campaign.application_end),
+          new Date(campaign.preselection_end),
           'dd/MM/yyyy',
           locale,
         ),
-        url_btn: `${process.env.FRONT_URL}/compte/candidatures/campaign=${campaign.id}`,
+        url_btn: `${process.env.FRONT_URL}/compte/candidatures?campaign=${campaign.id}`,
       },
     )
   },
@@ -53,7 +53,7 @@ module.exports = {
           reminder_days: `${campaign?.reminder_days} ${
             campaign?.reminder_days > 1 ? 'jours' : 'jour'
           }`,
-          url_btn: `${process.env.FRONT_URL}/compte/candidatures/campaign=${campaign.id}`,
+          url_btn: `${process.env.FRONT_URL}/compte/candidatures?campaign=${campaign.id}`,
         },
       )
     }
@@ -71,7 +71,7 @@ module.exports = {
           },
           {
             templateId: 'place-preselections-end',
-            subject: `La période de candidature est terminée`,
+            subject: `La date limite de pré-sélection a été atteinte`,
           },
           {
             missing_selections: place_missing_selections,

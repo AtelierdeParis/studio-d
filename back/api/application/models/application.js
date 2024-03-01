@@ -55,7 +55,7 @@ module.exports = {
             user_name: created.company.firstname,
             applications_end_date: format(
               new Date(campaign.application_end),
-              'dd/MM',
+              'dd MMMM yyyy',
               locale,
             ),
             nb_applications,

@@ -20,7 +20,7 @@ const ConfirmSelections = ({
   const { campaign } = query
   const confirmSelections = async () => {
     try {
-      client.disponibilities.campaignConfirmCreate(
+      await client.disponibilities.campaignConfirmCreate(
         preselectedApplications[0]?.disponibility.id as string,
         campaign as string,
         //@ts-expect-error

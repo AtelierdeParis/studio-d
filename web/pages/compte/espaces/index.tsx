@@ -3,7 +3,6 @@ import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import InfoPlace from '~components/Account/Info/InfoPlace'
-import PlaceList from '~components/Account/Place/PlaceList'
 import Loading from '~components/Loading'
 import { useMyPlaces } from '~hooks/useMyPlaces'
 import { UsersPermissionsUser } from '~typings/api'
@@ -14,6 +13,7 @@ import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesA
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import { Box } from '@chakra-ui/react'
+import AdminPlaceList from '~components/Account/Place/AdminPlaceList'
 interface Props {
   user: UsersPermissionsUser
 }
@@ -45,7 +45,7 @@ const AccountPlace = ({ user }: Props) => {
       {!places || places?.length === 0 ? (
         <InfoPlace />
       ) : (
-        <PlaceList places={places} />
+        <AdminPlaceList places={places} />
       )}
     </Loading>
   )

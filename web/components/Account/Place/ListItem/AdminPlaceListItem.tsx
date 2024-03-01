@@ -20,7 +20,7 @@ interface Props {
   isFirst?: boolean
 }
 
-const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
+const AdminPlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   const isComplete = useIsComplete(place)
   const { currentCampaign, isCampaignPlace } = useCampaignContext()
 
@@ -31,6 +31,7 @@ const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   }, [isComplete])
 
   const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
+
   const showCampaignDisponibilities =
     (currentCampaign?.mode === 'disponibilities' || campaignDisposNum) &&
     isCampaignPlace
@@ -93,4 +94,4 @@ const PlaceListItem = ({ place, setVisible, isFirst }: Props) => {
   )
 }
 
-export default PlaceListItem
+export default AdminPlaceListItem

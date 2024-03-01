@@ -29,7 +29,7 @@ module.exports = () => {
   }
 
   // Every night check for campaigns emails to send
-  cron.schedule(cronSchedule, async () => {
+  cron.schedule(testCron, async () => {
     const activeCampaigns = await strapi.services.campaign.find({
       is_active: true,
     })
