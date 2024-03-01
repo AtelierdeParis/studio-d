@@ -77,29 +77,31 @@ const CampaignApplicationScheduleItem = ({
     [selected, disponibility],
   )
 
-  const handleClick = (e) => {
-    if (isSelected) {
-      setSelected(
-        //@ts-expect-error
-        selected.filter((el) => el.extendedProps.id !== disponibility.id),
-      )
-    } else {
-      setSelected([
-        ...selected,
-        {
-          ...event,
-          extendedProps: { ...event?.extendedProps, isCampaignEvent: true },
-        },
-      ])
-    }
-  }
-
   const isDisabled =
     !!user &&
     (!canApply ||
       applications?.find(
         (application) => application?.disponibility === disponibility.id,
       ))
+
+  const handleClick = (e) => {
+    if (!isDisabled) {
+      if (isSelected) {
+        setSelected(
+          //@ts-expect-error
+          selected.filter((el) => el.extendedProps.id !== disponibility.id),
+        )
+      } else {
+        setSelected([
+          ...selected,
+          {
+            ...event,
+            extendedProps: { ...event?.extendedProps, isCampaignEvent: true },
+          },
+        ])
+      }
+    }
+  }
 
   return (
     <HStack
@@ -111,12 +113,12 @@ const CampaignApplicationScheduleItem = ({
       border={isSelected ? '2px solid #6EAE7F' : '2px solid transparent'}
       borderRadius="8px"
       opacity={isDisabled ? 0.5 : 1}
-      cursor="pointer"
+      cursor={isDisabled ? 'not-allowed' : 'pointer'}
       onClick={(e) => {
         e.stopPropagation()
         handleClick(e)
       }}
-      _hover={{ border: '2px solid #6EAE7F' }}
+      _hover={!isDisabled && { border: '2px solid #6EAE7F' }}
       transition="border 0.3s ease-in-out"
     >
       <Checkbox

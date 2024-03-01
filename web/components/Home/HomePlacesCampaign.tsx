@@ -19,11 +19,7 @@ import Tag from '~components/Tag'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import HomeHelperCampaign from '~components/Campaign/HomeHelperCampaign'
 
-interface Props {
-  isCampaignListing?: boolean
-}
-
-const HomePlacesCampaign = ({ isCampaignListing }: Props) => {
+const HomePlacesCampaign = () => {
   const isLgOrSm = useBreakpointValue({
     base: false,
     sm: true,

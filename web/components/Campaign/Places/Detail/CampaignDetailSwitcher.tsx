@@ -34,7 +34,7 @@ const CampaignDetailSwitcher = ({
             { title: currentCampaign?.title },
           )}
         </Text>
-        <Text as="span">
+        <Text as="span" pl={1}>
           {t(
             `detail.campaign.${
               isCampaignTab

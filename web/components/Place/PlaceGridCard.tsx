@@ -66,7 +66,7 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
             id: place?.slug,
             ...(gridMode === 'campaign'
               ? { tab: 1 }
-              : gridMode === 'solidarity'
+              : gridMode === 'solidarity' && hasCampaignDispo
               ? { tab: 0 }
               : {}),
           },
