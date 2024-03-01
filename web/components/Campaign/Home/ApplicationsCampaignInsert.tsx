@@ -8,6 +8,7 @@ import Link from '~components/Link'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import ApplicationCounter from '~components/Campaign/ApplicationCounter'
+import { motion } from 'framer-motion'
 
 const ApplicationsCampaignInsert = () => {
   const { currentCampaign } = useCampaignContext()
@@ -19,8 +20,12 @@ const ApplicationsCampaignInsert = () => {
       bgColor="white"
       borderRadius={{ base: 'none', lg: 'lg' }}
       p={4}
+      as={motion.div}
       alignItems="flex-start"
       height={'100%'}
+      initial={{ boxShadow: 'inset 0 0 0px 0px rgba(235, 164, 10, 0)' }}
+      animate={{ boxShadow: 'inset 0 0 2px 4px rgba(235, 164, 10, 0.3)' }}
+      transition="3s linear"
     >
       <Box>
         <Tag status="campaign">{title}</Tag>
