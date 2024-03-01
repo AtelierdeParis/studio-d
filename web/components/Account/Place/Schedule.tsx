@@ -33,6 +33,9 @@ export const StyleWrapper = styled.div`
   .fc-daygrid-event-harness {
     top: 0 !important;
   }
+  .fc-daygrid-event-harness:nth-child(2):before {
+    top: 0 !important;
+  }
 `
 
 const Schedule = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
