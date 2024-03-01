@@ -13,6 +13,7 @@ interface Props {
 const InfoCompanyApplications = ({ user }: Props) => {
   const { t } = useTranslation('account')
   const { currentCampaign } = useCampaignContext()
+
   if (!currentCampaign) return null
 
   return (
