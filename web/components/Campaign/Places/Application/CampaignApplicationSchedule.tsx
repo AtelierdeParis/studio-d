@@ -46,7 +46,7 @@ const CampaignApplicationSchedule = ({
         >
           <Text color="gray.500">{t('detail.campaign.slots_available')}</Text>
 
-          <LockedApplications />
+          <LockedApplications disponibilities={disponibilities} />
 
           <VStack width="100%">
             {disponibilities?.map((disponibility) => (
