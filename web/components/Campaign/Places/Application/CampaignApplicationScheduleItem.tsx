@@ -1,6 +1,7 @@
 import { Checkbox, HStack, VStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useContext, useMemo } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { Disponibility } from '~typings/api'
@@ -20,6 +21,7 @@ const CampaignApplicationScheduleItem = ({
 }: {
   disponibility: Disponibility
 }) => {
+  const { currentCampaign } = useCampaignContext()
   const { canApply, applications, data: user } = useCurrentUser()
   const { selected, setSelected } = useContext(BookingScheduleContext)
   const { t } = useTranslation('place')
@@ -77,12 +79,17 @@ const CampaignApplicationScheduleItem = ({
     [selected, disponibility],
   )
 
-  const isDisabled =
-    !!user &&
-    (!canApply ||
-      applications?.find(
-        (application) => application?.disponibility === disponibility.id,
-      ))
+  const hasAlreadyApplied = applications?.find(
+    (application) => application?.disponibility === disponibility.id,
+  )
+
+  const hasReachedMax =
+    !selected
+      ?.map((s) => s?.extendedProps?.id.toString())
+      ?.includes(disponibility.id.toString()) &&
+    selected?.length + applications?.length >= currentCampaign?.applications_max
+
+  const isDisabled = !!user && (!canApply || hasAlreadyApplied || hasReachedMax)
 
   const handleClick = (e) => {
     if (!isDisabled) {

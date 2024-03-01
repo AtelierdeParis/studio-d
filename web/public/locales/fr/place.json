@@ -351,10 +351,15 @@
         "no_scene_grid": "Pas de grille scénique possible.",
         "closed_on": "(fermeture le {{days}})"
       },
-      "locked_application_start": "Vous avez déjà postulé à {{nb}} créneaux",
+      "locked_application_start_plural": "Vous avez déjà postulé à {{nb}} créneaux",
+      "locked_application_start_remaining_plural": "Vous pouvez encore postuler à {{nb}} créneaux",
+      "locked_application_start_singular": "Vous avez déjà postulé à {{nb}} créneau",
+      "locked_application_start_remaining_singular": "Vous pouvez encore postuler à {{nb}} créneau",
       "locked_application_middle": "pour cette session du dispositif {{title}}.",
-      "locked_application_cta": "Annulez l’une de vos candidatures en attente",
-      "locked_application_end": "pour pouvoir postuler aux créneaux de cet espace."
+      "locked_application_cta_plural": "Annulez l’une de vos candidatures en attente",
+      "locked_application_cta_singular": "Annulez votre candidature en attente",
+      "locked_application_end": "pour pouvoir postuler à un ou plusieurs des créneaux de cet espace.",
+      "locked_application_remaining_end": "pour pouvoir postuler à plus de créneaux de cet espace."
     },
     "back": "Retour à la recherche",
     "seeMap": "Voir sur la carte",
