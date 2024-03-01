@@ -33,7 +33,14 @@ const HomePlacesSolidarity = () => {
     _sort: 'dispoAsc',
   })
 
-  if (!places || places.length === 0) return null
+  // We should only display places that have solidarity slots available
+  const filteredPlaces = places?.filter((place) =>
+    place.disponibilities.some((disponibility) => {
+      return disponibility.campaign === null
+    }),
+  )
+
+  if (!filteredPlaces || filteredPlaces.length === 0) return null
 
   return (
     <Box py={4} w="100%">
@@ -51,7 +58,7 @@ const HomePlacesSolidarity = () => {
       {currentCampaign?.mode === 'applications' && <HomeHelperSolidarity />}
 
       <PlaceGrid
-        places={places.slice(0, isLgOrSm ? 4 : 3)}
+        places={filteredPlaces.slice(0, isLgOrSm ? 4 : 3)}
         gridMode={
           currentCampaign?.mode === 'applications' ? 'solidarity' : null
         }

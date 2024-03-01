@@ -15,9 +15,16 @@ const useCampaignDispo = (disponibilities?: Disponibility[]) => {
     [disponibilities, currentCampaign],
   )
 
+  const solidarityDispos = useMemo(
+    () => disponibilities?.filter((d) => !d?.campaign),
+    [disponibilities, currentCampaign],
+  )
+
   return {
     campaignDispos,
-    campaignDisposNum: campaignDispos?.length,
+    campaignDisposNum: campaignDispos?.length || 0,
+    solidarityDispos,
+    solidarityDisposNum: solidarityDispos?.length || 0,
   }
 }
 

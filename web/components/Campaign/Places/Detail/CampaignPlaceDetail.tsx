@@ -40,7 +40,9 @@ const CampaignPlaceDetail = ({ place }: Props) => {
     )
   }, [place])
 
-  const { campaignDispos } = useCampaignDispo(place?.disponibilities)
+  const { campaignDispos, solidarityDisposNum } = useCampaignDispo(
+    place?.disponibilities,
+  )
 
   return (
     <Box>
@@ -60,7 +62,9 @@ const CampaignPlaceDetail = ({ place }: Props) => {
           </Box>
 
           <VStack spacing={2}>
-            <CampaignDetailTabs />
+            <CampaignDetailTabs
+              hasSolidarityDispo={Boolean(solidarityDisposNum)}
+            />
             <PlaceDetailMainInfo
               place={place}
               displayPrecise={displayPrecise}

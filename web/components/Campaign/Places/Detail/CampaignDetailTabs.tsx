@@ -5,7 +5,11 @@ import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 
-const CampaignDetailTabs = () => {
+const CampaignDetailTabs = ({
+  hasSolidarityDispo,
+}: {
+  hasSolidarityDispo: boolean
+}) => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
   const router = useRouter()
@@ -34,15 +38,17 @@ const CampaignDetailTabs = () => {
       borderRadius="18px"
       padding={2}
     >
-      <Button
-        height="auto"
-        variant={isCampaignTab ? 'unSelected' : 'blueFill'}
-        onClick={() => handleTabClick('0')}
-        padding="9px 15px 9px 15px"
-        borderRadius="12px"
-      >
-        {t('detail.campaign.solidarity_slot')}
-      </Button>
+      {hasSolidarityDispo && (
+        <Button
+          height="auto"
+          variant={isCampaignTab ? 'unSelected' : 'blueFill'}
+          onClick={() => handleTabClick('0')}
+          padding="9px 15px 9px 15px"
+          borderRadius="12px"
+        >
+          {t('detail.campaign.solidarity_slot')}
+        </Button>
+      )}
       <Button
         height="auto"
         variant={isCampaignTab ? 'campaign' : 'unSelected'}
