@@ -19,13 +19,13 @@ const ApplicationsSearch = () => {
   }
 
   return (
-    <Box p={4}>
-      <InputGroup>
+    <Box p={{ base: 2, sm: 4 }} width={{ base: '100%', sm: 'auto' }}>
+      <InputGroup width={{ base: '100%', sm: 'auto' }}>
         <Input
           placeholder={t('place.search')}
           onChange={(e) => handleSearch(e.target.value)}
-          width="auto"
           height="30px"
+          width={{ base: '100%', sm: 'auto' }}
         />
         <InputRightElement height="30px">
           <SearchIcon />

@@ -1,4 +1,4 @@
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Stack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
@@ -28,7 +28,11 @@ const CampaignSelector = ({ children }) => {
 
   return (
     <>
-      <HStack pt={{ base: 4, md: 8 }} pb={4}>
+      <Stack
+        pt={{ base: 4, md: 8 }}
+        pb={4}
+        direction={{ base: 'column', sm: 'row' }}
+      >
         <Text
           textStyle="accountTitle"
           pl={4}
@@ -39,7 +43,7 @@ const CampaignSelector = ({ children }) => {
           {t('place.title')}
         </Text>
         <CampaignSelectorField />
-      </HStack>
+      </Stack>
       {selectedCampaign && children}
     </>
   )

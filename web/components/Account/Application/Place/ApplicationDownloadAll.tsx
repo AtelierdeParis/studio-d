@@ -1,8 +1,6 @@
-import { Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationsPdf/ApplicationDownloadButton'
 import { useMyApplications } from '~hooks/useMyApplications'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
@@ -23,11 +21,9 @@ const ApplicationDownloadAll = () => {
   if (['disponibilities', 'applications']?.includes(selectedCampaign?.mode)) {
     return null
   }
-  const { onOpen, onClose, isOpen } = useDisclosure()
-  const [downloadedApplications, setDownloadedApplications] = useState([])
 
   return (
-    <>
+    <Box p={{ base: 2, sm: 4 }}>
       <Button
         colorScheme={selectedCampaign?.mode === 'closed' ? 'gray' : 'blue'}
         backgroundColor={
@@ -35,30 +31,14 @@ const ApplicationDownloadAll = () => {
         }
         color={'white'}
         size="lg"
-        onClick={() => {
-          setDownloadedApplications([])
-          onOpen()
-        }}
-        isLoading={
-          isLoading ||
-          isFetching ||
-          (isOpen && applications?.length !== downloadedApplications.length)
-        }
+        onClick={() => console.log('clicked')}
+        isLoading={isLoading || isFetching}
+        isDisabled
+        isFullWidth
       >
         {t('place.download')}
       </Button>
-      {applications?.map((application) => (
-        <ApplicationDownloadButton
-          application={application}
-          controlledOnClose={onClose}
-          controlledIsOpen={isOpen}
-          key={application?.id}
-          onDownloadFinish={(id) => {
-            setDownloadedApplications([...downloadedApplications, id])
-          }}
-        />
-      ))}
-    </>
+    </Box>
   )
 }
 
