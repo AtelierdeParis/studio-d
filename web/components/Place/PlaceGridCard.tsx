@@ -55,13 +55,15 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
   const hasCampaignDispo =
     currentCampaign?.mode === 'applications' && !!campaignDisposNum
 
+  if (!place) return null
+
   return (
     <LinkBox>
       <LinkOverlay
         href={{
           pathname: ROUTE_PLACE_DETAIL,
           query: {
-            id: place.slug,
+            id: place?.slug,
             ...(gridMode === 'campaign'
               ? { tab: 1 }
               : gridMode === 'solidarity'
@@ -77,7 +79,7 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
           className="placeCard"
           role="group"
           h="100%"
-          id={`place-${place.id}`}
+          id={`place-${place?.id}`}
         >
           <CampaignTag
             isGrid
@@ -93,8 +95,8 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
             overflow="hidden"
             pos="relative"
           >
-            {place.images.length > 0 ? (
-              <PlaceCardCarousel images={place.images} />
+            {place?.images.length > 0 ? (
+              <PlaceCardCarousel images={place?.images} />
             ) : (
               <FallbackImage />
             )}
@@ -110,10 +112,10 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
           >
             <Box fontSize="md">
               <Text fontFamily="mabry medium" isTruncated>
-                {place.name}
+                {place?.name}
               </Text>
               <Text color="gray.500" isTruncated>
-                {place.users_permissions_user.structureName}
+                {place?.users_permissions_user?.structureName}
               </Text>
             </Box>
             {place?.disponibilities?.length === 0 && gridMode !== 'campaign' && (
@@ -161,7 +163,7 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
                   {t('card.city')}
                 </Text>
                 <Text isTruncated textTransform="capitalize">
-                  {place.city?.name}
+                  {place?.city?.name}
                 </Text>
               </Flex>
 
@@ -182,7 +184,7 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
                   <Text color="gray.500" px={3}>
                     {t('card.dim')}
                   </Text>
-                  <Text whiteSpace="pre">{`${place.roomLength} x ${place.width} m`}</Text>
+                  <Text whiteSpace="pre">{`${place?.roomLength} x ${place?.width} m`}</Text>
                 </Flex>
               </Flex>
 

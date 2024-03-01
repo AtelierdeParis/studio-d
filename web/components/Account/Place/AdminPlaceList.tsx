@@ -5,14 +5,15 @@ import Link from '~components/Link'
 import { Box, Button, Text, Flex, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Add from 'public/assets/img/add.svg'
-import PlaceListItem from '~components/Account/Place/ListItem/PlaceListItem'
+
 import MigrationMessage from '~components/MigrationMessage'
+import AdminPlaceListItem from '~components/Account/Place/ListItem/AdminPlaceListItem'
 
 interface Props {
   places: Espace[]
 }
 
-const PlaceList = ({ places }: Props) => {
+const AdminPlaceList = ({ places }: Props) => {
   const { t } = useTranslation('place')
   const [isVisible, setVisible] = useState(false)
 
@@ -50,7 +51,7 @@ const PlaceList = ({ places }: Props) => {
       </Flex>
       <VStack alignItems="flex-start" spacing={8}>
         {places.map((place, index) => (
-          <PlaceListItem
+          <AdminPlaceListItem
             place={place}
             key={place.id}
             setVisible={setVisible}
@@ -62,4 +63,4 @@ const PlaceList = ({ places }: Props) => {
   )
 }
 
-export default PlaceList
+export default AdminPlaceList

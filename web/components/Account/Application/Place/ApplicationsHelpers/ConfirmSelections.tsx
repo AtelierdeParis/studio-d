@@ -3,7 +3,7 @@ import PreselectionsWarning from 'public/assets/img/preselectionsWarning.svg'
 import { useTranslation } from 'next-i18next'
 import useToast from '~hooks/useToast'
 import { client } from '~api/client-api'
-import { Application } from '~typings/api'
+import { Application, Disponibility } from '~typings/api'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
 
@@ -17,24 +17,19 @@ const ConfirmSelections = ({
   const preselections = preselectedApplications?.length
   const { t } = useTranslation('application')
   const { errorToast, successToast } = useToast()
-
+  const { campaign } = query
   const confirmSelections = async () => {
     try {
-      await Promise.all(
-        preselectedApplications.map(async (application) => {
-          return client.applications.applicationsUpdate(
-            application.id,
-            // @ts-expect-error
-            {
-              ...application,
-              status: 'confirmed',
-            },
-          )
-        }),
+      await client.disponibilities.campaignConfirmCreate(
+        preselectedApplications[0]?.disponibility.id as string,
+        campaign as string,
+        //@ts-expect-error
+        preselectedApplications[0]?.disponibility,
       )
+
       queryClient.refetchQueries([
         'myApplications',
-        query.disponibility_eq as string,
+        query?.disponibility as string,
       ])
       successToast(t('place.helper.confirm_success'))
     } catch (e) {

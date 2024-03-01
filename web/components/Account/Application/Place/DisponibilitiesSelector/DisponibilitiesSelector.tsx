@@ -22,7 +22,7 @@ const DisponibilitiesSelector = () => {
   )
 
   const { data: applications } = useMyApplications({
-    name: ['myApplications', searchParams?.disponibility_eq as string],
+    name: ['myApplications', query?.disponibility as string],
     campaignId: query.campaign as string,
     searchParams: { ...searchParams, _sort: 'company.structureName:asc' },
     options: {

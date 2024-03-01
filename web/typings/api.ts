@@ -127,6 +127,7 @@ export interface Application {
     chart_url?: string;
     applications?: string[];
     preselections_max?: number;
+    is_active?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -393,6 +394,7 @@ export interface Campaign {
     updated_by?: string;
   }[];
   preselections_max?: number;
+  is_active?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -436,6 +438,7 @@ export interface NewCampaign {
   chart_url?: string;
   applications?: string[];
   preselections_max?: number;
+  is_active?: boolean;
 
   /** @format date-time */
   published_at?: string;
@@ -638,6 +641,7 @@ export interface Disponibility {
     chart_url?: string;
     applications?: string[];
     preselections_max?: number;
+    is_active?: boolean;
     published_at?: string;
     created_by?: string;
     updated_by?: string;
@@ -1990,6 +1994,21 @@ export namespace Disponibilities {
     export type RequestParams = { id: string };
     export type RequestQuery = {};
     export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Disponibility;
+  }
+  /**
+   * @description Confirm a campaign for a disponibility
+   * @tags Disponibility
+   * @name CampaignConfirmCreate
+   * @summary Confirm Campaign
+   * @request POST:/disponibilities/{id}/campaign/{campaignId}/confirm
+   * @secure
+   */
+  export namespace CampaignConfirmCreate {
+    export type RequestParams = { id: string; campaignId: string };
+    export type RequestQuery = {};
+    export type RequestBody = Disponibility;
     export type RequestHeaders = {};
     export type ResponseBody = Disponibility;
   }
@@ -4379,6 +4398,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/disponibilities/${id}`,
         method: "DELETE",
         secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Confirm a campaign for a disponibility
+     *
+     * @tags Disponibility
+     * @name CampaignConfirmCreate
+     * @summary Confirm Campaign
+     * @request POST:/disponibilities/{id}/campaign/{campaignId}/confirm
+     * @secure
+     */
+    campaignConfirmCreate: (id: string, campaignId: string, data: Disponibility, params: RequestParams = {}) =>
+      this.request<Disponibility, void | Error>({
+        path: `/disponibilities/${id}/campaign/${campaignId}/confirm`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),

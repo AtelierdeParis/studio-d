@@ -31,7 +31,7 @@ const ApplicationPreselectButton = ({
       })
       queryClient.refetchQueries([
         'myApplications',
-        query.disponibility_eq as string,
+        query?.disponibility as string,
       ])
       successToast(
         t(

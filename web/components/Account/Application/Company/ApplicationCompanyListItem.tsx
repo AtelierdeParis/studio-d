@@ -9,6 +9,7 @@ import { client } from '~api/client-api'
 import useToast from '~hooks/useToast'
 import { useQueryClient } from 'react-query'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { useRouter } from 'next/router'
 
 interface Props {
   application: Application
@@ -19,12 +20,16 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
   const { errorToast, successToast } = useToast()
   const { t } = useTranslation('application')
   const queryClient = useQueryClient()
+  const { query } = useRouter()
 
   const onDelete = async () => {
     try {
       await client.applications.applicationsDelete(application.id)
       successToast(t('company.delete_success'))
-      queryClient.refetchQueries(['myApplications'])
+      queryClient.refetchQueries([
+        'myApplications',
+        query?.disponibility as string,
+      ])
     } catch (e) {
       errorToast(t('company.delete_error'))
     }

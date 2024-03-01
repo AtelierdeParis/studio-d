@@ -29,8 +29,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
 
   const activeCampaignsQueryParameters = useMemo(
     () => ({
-      disponibility_start_lte: today.toISOString(),
-      preselection_end_gte: today.toISOString(),
+      is_active: true,
       _sort: 'id:desc',
     }),
     [],
