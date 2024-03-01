@@ -50,9 +50,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "parameters": [
           {
             "name": "_limit",
@@ -238,9 +236,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -251,6 +247,62 @@
               }
             }
           }
+        }
+      }
+    },
+    "/disponibilities/{id}/campaign/{campaignId}/confirm": {
+      "post": {
+        "deprecated": false,
+        "description": "Confirm a campaign for a disponibility",
+        "summary": "Confirm Campaign",
+        "tags": ["Disponibility"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Disponibility ID"
+          },
+          {
+            "in": "path",
+            "name": "campaignId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Campaign ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Disponibility"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, object invalid"
+          },
+          "404": {
+            "description": "Disponibility not found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Disponibility"
+              }
+            }
+          },
+          "required": true
         }
       }
     },
@@ -305,9 +357,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "parameters": []
       }
     },
@@ -358,9 +408,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "parameters": [
           {
             "name": "id",
@@ -420,9 +468,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -493,9 +539,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "parameters": [
           {
             "name": "id",
@@ -560,9 +604,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Disponibility"
-        ],
+        "tags": ["Disponibility"],
         "requestBody": {
           "description": "",
           "required": true,

@@ -55,6 +55,14 @@
       "config": {
         "policies": ["global::is-place", "is-owner"]
       }
+    },
+    {
+      "method": "POST",
+      "path": "/disponibilities/:id/campaign/:campaignId/confirm",
+      "handler": "disponibility.campaignConfirm",
+      "config": {
+        "policies": ["global::is-place", "is-owner"]
+      }
     }
   ]
 }
