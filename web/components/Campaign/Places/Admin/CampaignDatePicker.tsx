@@ -119,7 +119,13 @@ const CampaignDatePicker = ({ control }: { control?: Control }) => {
   }, [offWeekDays, start])
 
   return (
-    <HStack spacing={5} w="100%" alignItems="flex-start">
+    <HStack
+      spacing={5}
+      w="100%"
+      alignItems="flex-start"
+      position="relative"
+      zIndex={100}
+    >
       <FormField label={t('schedule.startDate')} errors={errors.start} flex={1}>
         <InputDate
           name="start"
