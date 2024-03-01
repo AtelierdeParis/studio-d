@@ -23,6 +23,7 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
 import useCampaignDispo from '~hooks/useCampaignDispo'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface Props {
   place: Espace
@@ -32,6 +33,7 @@ interface Props {
 
 const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
   const { currentCampaign } = useCampaignContext()
+  const { applications } = useCurrentUser()
   const { t } = useTranslation('place')
 
   const disposInRange = useDispoInRange(
@@ -203,7 +205,14 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
                             currentCampaign?.id?.toString(),
                         )
                         ?.map((el) => (
-                          <Text key={el?.id}>
+                          <Text
+                            key={el?.id}
+                            color={
+                              applications
+                                ?.map((a) => a?.disponibility)
+                                ?.includes(el?.id) && 'campaign.primary'
+                            }
+                          >
                             {`${format(el.start, 'dd MMMM')} ${t('card.to')}
                       ${format(el.end, 'dd MMMM')}`}
                           </Text>
