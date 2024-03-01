@@ -19,12 +19,12 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
 
   return (
     <Fragment key={application?.id}>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">
           {application?.id}
         </Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text
           fontFamily="mabry medium"
           fontWeight="500"
@@ -33,20 +33,20 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
         >{`${application?.company?.structureName} (${application.company.firstname} ${application.company.lastname})`}</Text>
         <ApplicationStatusIcon status={application?.status} />
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Link href={`mailto:${application?.company?.email}`} target="_blank">
           <Text color="grayText.1" textDecoration="underline">
             {application?.company?.email}
           </Text>
         </Link>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">
           {application?.creation_title}
         </Text>
       </Cell>
       {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
-        <Cell>
+        <Cell cursor="default">
           <HStack spacing={2}>
             <ApplicationDownloadButton application={application} />
             <Button

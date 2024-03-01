@@ -4,7 +4,7 @@ import Loading from '~components/Loading'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-const ApplicationPlaceFetcher = ({ searchParams }) => {
+const ApplicationPlaceData = ({ searchParams }) => {
   const { query } = useRouter()
   const {
     data: applications,
@@ -33,4 +33,4 @@ const ApplicationPlaceFetcher = ({ searchParams }) => {
   )
 }
 
-export default ApplicationPlaceFetcher
+export default ApplicationPlaceData

@@ -1,9 +1,9 @@
-import { HStack, Box, Text } from '@chakra-ui/react'
+import { Box, Text, Stack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import ApplicationDownloadAll from '~components/Account/Application/Place/ApplicationDownloadAll'
-import ApplicationPlaceFetcher from '~components/Account/Application/Place/ApplicationPlaceFetcher'
+import ApplicationPlaceData from '~components/Account/Application/Place/ApplicationPlaceData'
 import ApplicationsSearch from '~components/Account/Application/Place/ApplicationsSearch'
 import ApplicationSelector from '~components/Account/Application/Place/DisponibilitiesSelector/DisponibilitiesSelectorFields'
 import { useMyApplications } from '~hooks/useMyApplications'
@@ -58,7 +58,11 @@ const DisponibilitiesSelector = () => {
   return (
     <>
       {Boolean(places?.length) && !isLoading && !isFetching && (
-        <HStack justifyContent="space-between" alignItems="baseline">
+        <Stack
+          direction={{ base: 'column-reverse', lg: 'row' }}
+          justifyContent="space-between"
+          alignItems="baseline"
+        >
           <ApplicationSelector
             places={places?.map((p) => ({
               ...p,
@@ -68,15 +72,19 @@ const DisponibilitiesSelector = () => {
             }))}
             hasConfirmedSelection={hasConfirmedSelection}
           />
-          <HStack>
+          <Stack
+            direction={{ base: 'column', sm: 'row' }}
+            width={{ base: '100%', sm: 'auto' }}
+            spacing={{ base: 0, sm: '' }}
+          >
             <ApplicationsSearch />
             <ApplicationDownloadAll />
-          </HStack>
-        </HStack>
+          </Stack>
+        </Stack>
       )}
 
       {Boolean(searchParams && Object.keys(searchParams)?.length) && (
-        <ApplicationPlaceFetcher searchParams={searchParams} />
+        <ApplicationPlaceData searchParams={searchParams} />
       )}
     </>
   )

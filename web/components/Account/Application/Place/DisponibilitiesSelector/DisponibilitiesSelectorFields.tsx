@@ -1,4 +1,4 @@
-import { Box, HStack, Select } from '@chakra-ui/react'
+import { Box, HStack, Select, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo } from 'react'
 import { ROUTE_ACCOUNT_APPLICATIONS } from '~constants'
@@ -50,7 +50,11 @@ const ApplicationSelector = ({
   ])
 
   return (
-    <HStack paddingBottom={4}>
+    <Stack
+      paddingBottom={4}
+      direction={{ base: 'column', sm: 'row' }}
+      width={{ base: '100%', sm: 'auto' }}
+    >
       <Box background="#F4F5F9" p={1} borderRadius="18px">
         <Select
           width="auto"
@@ -107,7 +111,7 @@ const ApplicationSelector = ({
           </Select>
         </Box>
       )}
-    </HStack>
+    </Stack>
   )
 }
 

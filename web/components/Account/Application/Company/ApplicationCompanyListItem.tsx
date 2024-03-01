@@ -37,12 +37,12 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
 
   return (
     <Fragment key={application?.id}>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">
           {application?.id}
         </Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">
           {
             //@ts-expect-error
@@ -51,22 +51,22 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
           }
         </Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">
           {/* @ts-expect-error */}
           {application?.disponibility?.espace?.name}
         </Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text fontFamily="mabry medium" fontWeight="500">{`${format(
           application?.disponibility.start,
           'dd/MM',
         )} → ${format(application?.disponibility.end, 'dd/MM')}`}</Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         <Text>{application?.creation_title}</Text>
       </Cell>
-      <Cell>
+      <Cell cursor="default">
         {currentCampaign?.mode === 'applications' && (
           <ConfirmButton
             helper={t('company.table.delete_helper')}
