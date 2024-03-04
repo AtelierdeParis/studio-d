@@ -54,7 +54,7 @@ const ApplicationPreselectButton = ({
         borderRadius={0}
         leftIcon={
           application?.status === 'preselected' ? (
-            <RemoveIcon stroke="black" />
+            <RemoveIcon stroke="#b62525" />
           ) : (
             <ApplicationSelected />
           )
@@ -64,17 +64,15 @@ const ApplicationPreselectButton = ({
         p={3}
         backgroundColor={
           application?.status === 'preselected'
-            ? 'transparent'
+            ? 'rgba(182,37,37, 0.18)'
             : 'rgba(110, 174, 127, 0.25)'
-        }
-        border={
-          application?.status === 'preselected'
-            ? '2px solid rgba(110, 174, 127, 0.25)'
-            : 'none'
         }
         color="black"
         _hover={{
-          backgroundColor: 'rgba(110, 174, 127, 0.4)',
+          backgroundColor:
+            application?.status === 'preselected'
+              ? 'rgba(182,37,37, 0.28)'
+              : 'rgba(110, 174, 127, 0.4)',
         }}
         _active={{
           backgroundColor: 'rgba(110, 174, 127, 0.6)',

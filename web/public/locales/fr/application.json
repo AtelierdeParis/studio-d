@@ -78,7 +78,7 @@
       "download_pdf": "Télécharger le pdf",
       "downloading_pdf": "Création du pdf",
       "preselect": "Marquer comme sélectionnée",
-      "deselect": "Déselectionner",
+      "deselect": "Annuler la sélection",
       "error": "Une erreur est survenue",
       "preselected_success": "Cette candidature a bien été pré-sélectionnée",
       "deselected_success": "Cette candidature a bien été dé-sélectionnée",
