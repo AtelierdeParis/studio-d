@@ -73,7 +73,7 @@ const HomePlacesCampaign = () => {
       <Flex justifyContent="center" pt={10} pb={{ base: 6, md: 0 }}>
         <Button
           as={Link}
-          href={ROUTE_PLACES}
+          href={`${ROUTE_PLACES}?tab=1`}
           variant="outline"
           colorScheme="campaign"
           color={'campaign.dark'}

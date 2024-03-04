@@ -49,7 +49,7 @@ const DisponibilitiesSelector = () => {
 
   if (!places?.length) {
     return (
-      <Box p={4}>
+      <Box p={4} backgroundColor="gray.50" borderRadius={4}>
         <Text>{t('place.no_places')}</Text>
       </Box>
     )
