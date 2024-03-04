@@ -26,7 +26,7 @@
         "no_applications": "Aucune candidature"
       },
       "text": {
-        "next": "Le dispositif {{title}} se prépare : l’appel à candidatures sera ouvert du {{application_start}} au {{application_end}}. Encore un peu de patience !",
+        "next": "Le dispositif {{title}} se prépare : l’appel à candidatures sera ouvert du {{application_start}} au {{application_end}}.\nEncore un peu de patience !",
         "no_applications": "Vous n’avez déposé aucune candidature {{title}} cette saison. Candidatez jusqu’au {{application_end}} auprès de nos espaces partenaires ({{applications_max}} candidatures maximum)",
         "no_applications_company": "Vous n'avez pas reçu de candidature pour le dispositif {{title}} pour le moment. La période de candidature se termine le {{date}}."
       },
