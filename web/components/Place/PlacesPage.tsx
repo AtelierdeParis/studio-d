@@ -66,7 +66,7 @@ const PlacesPage = () => {
 
   useEffect(() => {
     setSearchParams({ ...initialFilters, ...formatSearch(router.query) })
-  }, [])
+  }, [hasActiveCampaign, isCampaignTab])
   const queryClient = useQueryClient()
 
   const {
@@ -83,7 +83,10 @@ const PlacesPage = () => {
     isCampaignTab ? 'campaignPlaces' : 'solidarityPlaces',
     !campaignLoading,
   )
-  const nbPlaces = useMemo(() => places?.pages?.flat().length, [places?.pages])
+  const nbPlaces = useMemo(() => places?.pages?.flat().length, [
+    places?.pages,
+    searchParams,
+  ])
   const isPlural = useMemo(() => nbPlaces > 1, [nbPlaces])
 
   useEffect(() => {
