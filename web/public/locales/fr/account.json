@@ -16,10 +16,10 @@
   },
   "myAccount": "Mon compte",
   "dashboard": "Tableau de bord",
-  "solidarity": "Créneaux solidaires",
+  "solidarity": "StudioD Solidaire",
   "info": "Mes informations",
   "applications": {
-    "menu_title": "Dispositif {{title}}",
+    "menu_title": "StudioD EMERGENCE",
     "info": {
       "title": {
         "next": "Prochainement",
