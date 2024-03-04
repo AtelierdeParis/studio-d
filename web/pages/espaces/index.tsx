@@ -6,7 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import PlacesPage from '~components/Place/PlacesPage'
 
-import PlacesTabs from '~components/Place/PlacesTab'
+import PlacesCampaignTabs from '~components/Place/PlacesCampaignTabs'
 
 const Places = () => {
   const { currentCampaign } = useCampaignContext()
@@ -14,7 +14,7 @@ const Places = () => {
   if (!currentCampaign || currentCampaign?.mode !== 'applications')
     return <PlacesPage />
 
-  return <PlacesTabs />
+  return <PlacesCampaignTabs />
 }
 
 export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({

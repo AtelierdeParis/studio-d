@@ -83,7 +83,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
           <PlaceDetailCalendar place={place} />
         )}
 
-        {Boolean(solidarityDisposNum && campaignDispos) && (
+        {Boolean(solidarityDisposNum && campaignDisposNum) && (
           <CampaignDetailSwitcher isCampaignTab={isCampaignTab} />
         )}
 
