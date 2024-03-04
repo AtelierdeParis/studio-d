@@ -26,13 +26,18 @@ const ApplicationPlaceHelper = ({
   if (selectedCampaign?.mode === 'preselections' && validatedApplications > 0) {
     return <ValidatedSelections />
   }
-  if (selectedCampaign?.mode === 'preselections' && missingPreselections > 0) {
+  if (
+    selectedCampaign?.mode === 'preselections' &&
+    missingPreselections > 0 &&
+    applications?.length > 0
+  ) {
     return <MissingSelections missingPreselections={missingPreselections} />
   }
 
   if (
     selectedCampaign?.mode === 'preselections' &&
-    missingPreselections === 0
+    missingPreselections === 0 &&
+    preselections > 0
   ) {
     return (
       <ConfirmSelections preselectedApplications={preselectedApplications} />
