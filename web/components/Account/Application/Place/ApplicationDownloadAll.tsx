@@ -1,6 +1,7 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useDownloadApplication } from '~hooks/useDownloadApplication'
 import { useMyApplications } from '~hooks/useMyApplications'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
@@ -22,6 +23,9 @@ const ApplicationDownloadAll = () => {
     return null
   }
 
+  // test single application pdf generation
+  const { downloadApplication } = useDownloadApplication(applications[0]?.id)
+
   return (
     <Box p={{ base: 2, sm: 4 }}>
       <Button
@@ -31,10 +35,9 @@ const ApplicationDownloadAll = () => {
         }
         color={'white'}
         size="lg"
-        onClick={() => console.log('clicked')}
         isLoading={isLoading || isFetching}
-        isDisabled
         isFullWidth
+        onClick={downloadApplication}
       >
         {t('place.download')}
       </Button>

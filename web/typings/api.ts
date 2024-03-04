@@ -1464,6 +1464,20 @@ export namespace Applications {
     export type RequestHeaders = {};
     export type ResponseBody = number;
   }
+  /**
+   * @description Generate a PDF from application data
+   * @tags Application
+   * @name GeneratePdf
+   * @request GET:/applications/{id}/generate-pdf
+   * @secure
+   */
+  export namespace GeneratePdf {
+    export type RequestParams = { id: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = File;
+  }
 }
 
 export namespace Bookings {
@@ -3738,6 +3752,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "DELETE",
         secure: true,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Generate a PDF from application data
+     *
+     * @tags Application
+     * @name GeneratePdf
+     * @request GET:/applications/{id}/generate-pdf
+     * @secure
+     */
+    generatePdf: (id: string, params: RequestParams = {}) =>
+      this.request<File, Error>({
+        path: `/applications/${id}/generate-pdf`,
+        method: "GET",
+        secure: true,
         ...params,
       }),
   };
