@@ -40,9 +40,11 @@ const CampaignPlaceDetail = ({ place }: Props) => {
     )
   }, [place])
 
-  const { campaignDispos, solidarityDisposNum } = useCampaignDispo(
-    place?.disponibilities,
-  )
+  const {
+    campaignDispos,
+    solidarityDisposNum,
+    campaignDisposNum,
+  } = useCampaignDispo(place?.disponibilities)
 
   return (
     <Box>
@@ -81,7 +83,9 @@ const CampaignPlaceDetail = ({ place }: Props) => {
           <PlaceDetailCalendar place={place} />
         )}
 
-        <CampaignDetailSwitcher isCampaignTab={isCampaignTab} />
+        {Boolean(solidarityDisposNum && campaignDispos) && (
+          <CampaignDetailSwitcher isCampaignTab={isCampaignTab} />
+        )}
 
         {isMobile && (
           <PlaceAttributesGridMobile
