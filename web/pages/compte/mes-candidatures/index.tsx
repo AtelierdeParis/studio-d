@@ -41,7 +41,10 @@ const CompanyApplications = ({ user }: Props) => {
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.requests')} />
-      {applications?.length === 0 ? (
+      {Boolean(
+        applications?.length === 0 ||
+          currentCampaign?.mode === 'disponibilities',
+      ) ? (
         <InfoCompanyApplications user={user} />
       ) : (
         <ApplicationCompanyList applications={applications} />

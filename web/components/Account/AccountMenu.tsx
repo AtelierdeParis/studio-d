@@ -74,11 +74,6 @@ const getPlaceItems = (hasCampaigns) => ({
   title: hasCampaigns ? 'solidarity' : 'dashboard',
   items: [
     {
-      icon: <Home />,
-      label: 'place.home',
-      url: ROUTE_ACCOUNT_PLACES,
-    },
-    {
       icon: <Question />,
       label: 'place.question',
       url: ROUTE_ACCOUNT_REQUEST,
@@ -241,6 +236,19 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           </Link>
         </Flex>
         <VStack spacing={12}>
+          {user?.confirmed &&
+            user?.accepted &&
+            user?.type === 'place' &&
+            displayMenu({
+              title: '',
+              items: [
+                {
+                  icon: <Home />,
+                  label: 'place.home',
+                  url: ROUTE_ACCOUNT_PLACES,
+                },
+              ],
+            })}
           {user?.confirmed &&
             user?.accepted &&
             displayMenu(user?.type === 'company' ? companyItems : placeItems)}

@@ -66,56 +66,65 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
   return (
     <Box>
       <ApplicationPlaceHelper applications={applications} />
-      <SimpleGrid
-        gridTemplateColumns={`fit-content(300px) minmax(200px, auto) minmax(auto, auto) minmax(auto, auto)${
-          ['preselections', 'closed']?.includes(selectedCampaign?.mode)
-            ? 'minmax(auto, auto)'
-            : ''
-        }`}
-        overflowX="auto"
-      >
-        <Cell isHeader>
-          <Text pl="9px">{t('place.table.head.number')}</Text>
-        </Cell>
-        <Cell isHeader>
-          <Divider />
-          <Flex
-            justifyContent="space-between"
-            alignItems="center"
-            flex={1}
-            cursor="pointer"
-            onClick={sortByDate}
-          >
-            <Text color="black">{t('place.table.head.artist')}</Text>
-            <Box transform={`rotate(${isDesc ? '0' : '180'}deg)`}>
-              <Chevron />
-            </Box>
-          </Flex>
-        </Cell>
-        <Cell isHeader>
-          <Divider />
-          <Text>{t('place.table.head.email')}</Text>
-        </Cell>
-        <Cell isHeader>
-          <Divider />
-          <Text>{t('place.table.head.creation')}</Text>
-        </Cell>
-        {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
+
+      {filteredList.length ? (
+        <SimpleGrid
+          gridTemplateColumns={`fit-content(300px) minmax(200px, auto) minmax(auto, auto) minmax(auto, auto)${
+            ['preselections', 'closed']?.includes(selectedCampaign?.mode)
+              ? 'minmax(auto, auto)'
+              : ''
+          }`}
+          overflowX="auto"
+        >
+          <Cell isHeader>
+            <Text pl="9px">{t('place.table.head.number')}</Text>
+          </Cell>
           <Cell isHeader>
             <Divider />
+            <Flex
+              justifyContent="space-between"
+              alignItems="center"
+              flex={1}
+              cursor="pointer"
+              onClick={sortByDate}
+            >
+              <Text color="black">{t('place.table.head.artist')}</Text>
+              <Box transform={`rotate(${isDesc ? '0' : '180'}deg)`}>
+                <Chevron />
+              </Box>
+            </Flex>
           </Cell>
-        )}
-        {filteredList.map((application) => (
-          <ApplicationPlaceListItem
-            key={application.id}
-            application={application}
-            onSelect={() => {
-              onApplicationSelect(application)
-              onOpen()
-            }}
-          />
-        ))}
-      </SimpleGrid>
+          <Cell isHeader>
+            <Divider />
+            <Text>{t('place.table.head.email')}</Text>
+          </Cell>
+          <Cell isHeader>
+            <Divider />
+            <Text>{t('place.table.head.creation')}</Text>
+          </Cell>
+          {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
+            <Cell isHeader>
+              <Divider />
+            </Cell>
+          )}
+
+          {filteredList.map((application) => (
+            <ApplicationPlaceListItem
+              key={application.id}
+              application={application}
+              onSelect={() => {
+                onApplicationSelect(application)
+                onOpen()
+              }}
+            />
+          ))}
+        </SimpleGrid>
+      ) : (
+        <Box p={4} backgroundColor="gray.50" borderRadius={4} width="100%">
+          <Text>{t('place.no_applications')}</Text>
+        </Box>
+      )}
+
       <ApplicationDetailDrawer
         isOpen={isOpen}
         onClose={onClose}

@@ -44,7 +44,6 @@ const FooterMenu = () => {
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
           <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
-          <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />
         </Box>
         {!loading && !session && (
           <Box pl={14}>

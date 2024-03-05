@@ -59,7 +59,7 @@ const CampaignFileUpload = ({ place }: { place: Espace }) => {
   const methods = useForm({
     defaultValues: {
       removedCampaign_files: [],
-      campaign_files: [],
+      campaign_files: place?.campaign_files || [],
     },
     mode: 'onChange',
   })
