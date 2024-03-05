@@ -5,8 +5,10 @@ import { format } from '~utils/date'
 
 const ApplicationDetailHeader = ({
   application,
+  isCompany,
 }: {
   application: Application
+  isCompany?: boolean
 }) => {
   const { t } = useTranslation('application')
 
@@ -36,13 +38,27 @@ const ApplicationDetailHeader = ({
       </VStack>
 
       <VStack
-        justifyContent="space-between"
+        borderLeft={{ base: 'none', sm: '1px solid lightgray' }}
         alignItems="flex-start"
         p={2}
-        borderLeft={{ base: 'none', sm: '1px solid lightgray' }}
       >
-        <Text fontWeight="bold">{t('place.detail.header.company')}</Text>
-        <Text>{application?.company?.structureName}</Text>
+        {isCompany ? (
+          <>
+            <Text fontWeight="bold">{t('place.detail.header.place')}</Text>
+            <Text>
+              {
+                // @ts-expect-error
+                application?.disponibility?.espace?.users_permissions_user
+                  ?.structureName
+              }
+            </Text>
+          </>
+        ) : (
+          <>
+            <Text fontWeight="bold">{t('place.detail.header.company')}</Text>
+            <Text>{application?.company?.structureName}</Text>
+          </>
+        )}
       </VStack>
     </SimpleGrid>
   )

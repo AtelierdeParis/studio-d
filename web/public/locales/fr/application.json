@@ -11,6 +11,7 @@
         "creation": "Création"
       },
       "delete": "Supprimer",
+      "edit": "Modifier",
       "cancel": "Annuler",
       "delete_helper": "Être sûr de vouloir supprimer cette candidature ?"
     },
@@ -26,7 +27,15 @@
       "full_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous par email. Merci pour votre participation."
     },
     "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
-    "delete_success": "Votre candidature a bien été supprimée"
+    "delete_success": "Votre candidature a bien été supprimée",
+    "detail": {
+      "back": "Retour",
+      "cancel": "Annuler cette candidature",
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement en cours",
+      "saved": "Vos modifications ont bien été enregistrées",
+      "error_saved": "Une erreur est survenue lors de l'enregistrement de vos modifications"
+    }
   },
   "place": {
     "title": "Candidatures – ",
@@ -64,7 +73,8 @@
       "header": {
         "slot": "Créneau",
         "space": "Espace",
-        "company": "Compagnie"
+        "company": "Compagnie",
+        "place": "Lieu"
       },
       "right_panel": {
         "phone": "Tél :",

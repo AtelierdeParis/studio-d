@@ -1,39 +1,25 @@
 import React, { Fragment } from 'react'
 import { format } from '~utils/date'
 import { Application } from '~typings/api'
-import { Text, Button } from '@chakra-ui/react'
+import { Text, Button, ButtonGroup } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
 import ConfirmButton from '~components/Account/Application/ConfirmButton'
-import { client } from '~api/client-api'
-import useToast from '~hooks/useToast'
-import { useQueryClient } from 'react-query'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { useRouter } from 'next/router'
 
 interface Props {
   application: Application
+  onSelect: () => void
+  handleDelete: () => void
 }
 
-const ApplicationCompanyListItem = ({ application }: Props) => {
+const ApplicationCompanyListItem = ({
+  application,
+  onSelect,
+  handleDelete,
+}: Props) => {
   const { currentCampaign } = useCampaignContext()
-  const { errorToast, successToast } = useToast()
   const { t } = useTranslation('application')
-  const queryClient = useQueryClient()
-  const { query } = useRouter()
-
-  const onDelete = async () => {
-    try {
-      await client.applications.applicationsDelete(application.id)
-      successToast(t('company.delete_success'))
-      queryClient.refetchQueries([
-        'myApplications',
-        query?.disponibility as string,
-      ])
-    } catch (e) {
-      errorToast(t('company.delete_error'))
-    }
-  }
 
   return (
     <Fragment key={application?.id}>
@@ -68,11 +54,7 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
       </Cell>
       <Cell cursor="default">
         {currentCampaign?.mode === 'applications' && (
-          <ConfirmButton
-            helper={t('company.table.delete_helper')}
-            handleConfirm={onDelete}
-            confirmLabel={t('company.table.delete')}
-          >
+          <ButtonGroup>
             <Button
               px={2}
               py={1}
@@ -82,10 +64,30 @@ const ApplicationCompanyListItem = ({ application }: Props) => {
               size="sm"
               borderRadius="sm"
               fontSize="md"
+              onClick={onSelect}
             >
-              {t('company.table.delete')}
+              {t('company.table.edit')}
             </Button>
-          </ConfirmButton>
+
+            <ConfirmButton
+              helper={t('company.table.delete_helper')}
+              handleConfirm={handleDelete}
+              confirmLabel={t('company.table.delete')}
+            >
+              <Button
+                px={2}
+                py={1}
+                variant="outline"
+                color="grayText.1"
+                colorScheme="gray"
+                size="sm"
+                borderRadius="sm"
+                fontSize="md"
+              >
+                {t('company.table.delete')}
+              </Button>
+            </ConfirmButton>
+          </ButtonGroup>
         )}
       </Cell>
     </Fragment>
