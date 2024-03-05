@@ -11,7 +11,7 @@ const ApplicationCompanyHelper = () => {
   const today = new Date()
 
   if (
-    applications.length > 0 &&
+    applications?.length > 0 &&
     !remainingApplications &&
     currentCampaign.mode === 'applications'
   ) {

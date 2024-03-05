@@ -32,7 +32,7 @@ const ApplicationReferences = () => {
             <>
               {REFERENCE_FIELDS.map((field) => (
                 <Input
-                  key={reference.id}
+                  key={`references[${i}].${field}`}
                   name={`references[${i}].${field}`}
                   ref={register()}
                   defaultValue={reference[field]}

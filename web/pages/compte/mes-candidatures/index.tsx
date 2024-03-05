@@ -57,7 +57,11 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = requireAuth(
   async ({ locale }) => {
     return {
       props: {
-        ...(await serverSideTranslations(locale, ['account', 'application'])),
+        ...(await serverSideTranslations(locale, [
+          'account',
+          'application',
+          'place',
+        ])),
       },
     }
   },

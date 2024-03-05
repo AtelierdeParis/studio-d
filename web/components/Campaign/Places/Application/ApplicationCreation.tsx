@@ -5,7 +5,7 @@ import FileField from '~components/Campaign/Places/Application/Inputs/FileField'
 import TextAreaField from '~components/Campaign/Places/Application/Inputs/TextAreaField'
 import TextField from '~components/Campaign/Places/Application/Inputs/TextField'
 
-const ApplicationCreation = () => {
+const ApplicationCreation = (isUpdate: { isUpdate?: boolean }) => {
   const { t } = useTranslation('place')
   return (
     <VStack width="100%" alignItems="stretch" spacing={8}>

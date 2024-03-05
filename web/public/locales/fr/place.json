@@ -2,7 +2,8 @@
   "global": {
     "file": {
       "change": "Changer",
-      "file-too-large": "Le fichier est trop volumineux"
+      "file-too-large": "Le fichier est trop volumineux",
+      "delete_error": "Une erreur est survenue lors de la suppression de votre fichier"
     },
     "yes": "Oui",
     "no": "Non",
