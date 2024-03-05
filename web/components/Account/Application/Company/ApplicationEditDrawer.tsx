@@ -93,7 +93,6 @@ const ApplicationEditDrawer = ({
         place: application.disponibility?.espace,
         disponibilityId: application.disponibility.id,
       })
-      console.log(formData.entries, formValues)
 
       //@ts-expect-error
       await client.applications.applicationsUpdate(application.id, formData)
