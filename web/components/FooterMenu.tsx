@@ -36,7 +36,7 @@ const FooterMenu = () => {
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
           {currentCampaign?.article_link && (
             <MenuItem
-              href={ROUTE_PLACES}
+              href={currentCampaign?.article_link}
               text={t('nav.campaign', { title: currentCampaign?.title })}
             />
           )}
