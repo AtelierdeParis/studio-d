@@ -6,6 +6,7 @@ import {
   Box,
   Divider as ChakraDivider,
   DividerProps,
+  useDisclosure,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Application } from '~typings/api'
@@ -14,6 +15,11 @@ import Cell from '~components/Account/Booking/Cell'
 import ApplicationCompanyListItem from '~components/Account/Application/Company/ApplicationCompanyListItem'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import ApplicationCompanyHelper from '~components/Account/Application/Company/ApplicationsHelpers/ApplicationCompanyHelper'
+import ApplicationEditDrawer from '~components/Account/Application/Company/ApplicationEditDrawer'
+import useToast from '~hooks/useToast'
+import { client } from '~api/client-api'
+import { useQueryClient } from 'react-query'
+import { useRouter } from 'next/router'
 
 interface Props {
   applications: Application[]
@@ -28,6 +34,9 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
   const { t } = useTranslation('application')
   const [list, setList] = useState<Application[]>([])
   const [isDesc, setDesc] = useState<boolean>(true)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [selectedApplication, setSelectedApplication] = useState<Application>()
+  const { query } = useRouter()
 
   useEffect(() => {
     setList(applications)
@@ -37,6 +46,21 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
   const sortByDate = () => {
     setDesc(!isDesc)
     setList(list.reverse())
+  }
+
+  const { successToast, errorToast } = useToast()
+  const queryClient = useQueryClient()
+  const handleDelete = async (applicationId) => {
+    try {
+      await client.applications.applicationsDelete(applicationId)
+      successToast(t('company.delete_success'))
+      queryClient.refetchQueries([
+        'myApplications',
+        query?.disponibility as string,
+      ])
+    } catch (e) {
+      errorToast(t('company.delete_error'))
+    }
   }
 
   return (
@@ -98,10 +122,23 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
           <ApplicationCompanyListItem
             key={application.id}
             application={application}
+            onSelect={() => {
+              setSelectedApplication(application)
+              onOpen()
+            }}
+            handleDelete={() => handleDelete(application?.id)}
           />
         ))}
       </SimpleGrid>
       <ApplicationCompanyHelper />
+      <ApplicationEditDrawer
+        isOpen={isOpen}
+        onClose={onClose}
+        application={selectedApplication}
+        handleDelete={() => {
+          handleDelete(selectedApplication?.id)
+        }}
+      />
     </Box>
   )
 }

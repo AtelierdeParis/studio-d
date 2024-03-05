@@ -123,7 +123,11 @@ const FileInput = ({
                         {file?.name}
                       </Text>
                       <Text flex={1} color="gray.500">
-                        {(file?.size / (1000 * 1000)).toFixed(1)}mo
+                        {(file?.id
+                          ? file.size / 1000
+                          : file?.size / (1000 * 1000)
+                        ).toFixed(1)}
+                        mo
                       </Text>
                     </VStack>
                   </HStack>
