@@ -27,7 +27,11 @@ const Footer = () => {
         >
           <Box maxW={{ base: 'auto', lg: '26rem' }}>
             <Text fontFamily="mabry medium">{t('footer.title')}</Text>
-            <Text mb={7}>{t('footer.subtitle')}</Text>
+            <Text mt={4}>{t('footer.subtitle_first')}</Text>
+            <Image src="/assets/img/partners/cdd.svg" width={'170px'} />
+            <Text mt={4} mb={7}>
+              {t('footer.subtitle_second')}
+            </Text>
             <SimpleGrid
               columns={3}
               maxW="20rem"
