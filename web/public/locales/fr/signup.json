@@ -6,11 +6,11 @@
   "about": {
     "tabs": {
       "platform": "La plateforme",
-      "solidarity": "Créneaux solidaires",
-      "projects": "Appels à projets et résidences"
+      "solidarity": "Créneaux StudioD",
+      "projects": "Appels à projets et dispositifs"
     },
     "compagnie": {
-      "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (les lieux contributeurs) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles (vous) ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+      "description": "StudioD est une plateforme de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\n\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (les lieux contributeurs) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles (vous) ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition. Vous pourrez également postuler à des appels à projets tels que StudioD Emergence.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
       "free": {
         "title": "Gratuité du service",
         "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits."
@@ -27,14 +27,14 @@
         "title": "Confidentialité",
         "text": "StudioD s’inscrit dans une démarche responsable de protection de vos données. Les informations que vous y renseignerez seront réservées à la stricte confidentialité des lieux auprès de qui vous effectuerez des réservations, et de l’Atelier de Paris / CDCN en tant qu’éditeur et modérateur de la plateforme. Vos données ne seront ni rendues accessibles à tout·e autre utilisateur·rice ou tiers, ni utilisées à des fins étrangères au fonctionnement de la plateforme."
       },
-      "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté!",
       "projects": {
-        "title": "Appels à projet et résidences de création",
+        "title": "Appels à projet et dispositifs de création",
         "text": "Retrouvez également des appels à projets et candidatez directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil dés leur ouverture. Suivez nos actus pour ne rien rater."
-      }
+      },
+      "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté !"
     },
     "lieu": {
-      "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (vous) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition.\n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
+      "description": "StudioD est une plateforme solidaire de mise à disposition de studios de danse, conçue et portée par l’Atelier de Paris / CDCN avec le soutien de ses partenaires.\n\nStudioD met en relation des établissements culturels, artistiques ou socioculturels (vous) ayant des disponibilités de studios de danse, avec des compagnies de danse professionnelles ayant besoin d’espaces pour leur travail de création, de recherche ou de répétition. \n\nAvant votre inscription, merci de prendre connaissance de ces quelques principes clés d’utilisation de la plateforme.",
       "free": {
         "title": "Gratuité du service",
         "text": "L’utilisation de la plateforme est réservée à des fins professionnelles mais non commerciales. La plateforme s’adresse donc à des utilisateur·rice·s professessionnel·le·s et les services de réservations auxquels elle donne accès sont entièrement gratuits. Aucune compensation financière se saurait être demandée à une compagnie pour une réservation d’espace effectuée via StudioD."
@@ -53,7 +53,7 @@
       },
       "projects": {
         "title": "Ouverture d’espaces à appels à projet",
-        "text": "Proposez vos espaces dans le cadre d'appels à projets aidés et permettez aux compagnies inscrite de candidater directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil. Suivez nos actus pour ne rien rater."
+        "text": "Proposez vos espaces dans le cadre d'appels à projets et permettez aux compagnies inscrites de candidater directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil. Suivez nos actus pour ne rien rater."
       },
       "condition": "Votre inscription vous engage à accepter et respecter les principes d’utilisation de la plateforme évoqués ci-dessus. Vous pouvez maintenant poursuivre pour rejoindre la communauté !"
     },
