@@ -1,11 +1,13 @@
 const { i18n } = require('./next-i18next.config')
+const withFonts = require('next-fonts');
 const withTM = require('next-transpile-modules')([
   '@fullcalendar/common',
   '@fullcalendar/daygrid',
 ])
 
-module.exports = withTM({
+module.exports = withFonts(withTM({
   i18n,
+  inlineFontLimit: 300000, // 300ko
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -17,4 +19,4 @@ module.exports = withTM({
   env: {
     BUGSNAG_API_KEY: process.env.BUGSNAG_API_KEY,
   },
-})
+}))

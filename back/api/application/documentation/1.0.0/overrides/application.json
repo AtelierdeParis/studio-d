@@ -51,9 +51,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": [
           {
             "name": "campaignId",
@@ -65,145 +63,199 @@
               "type": "string"
             }
           },
-            {
-              "name": "_limit",
-              "in": "query",
-              "required": false,
-              "description": "Maximum number of results possible",
-              "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
             },
-            {
-              "name": "_sort",
-              "in": "query",
-              "required": false,
-              "description": "Sort according to a specific field.",
-              "schema": {
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string"
-              },
-              "deprecated": false
+              }
             },
-            {
-              "name": "_start",
-              "in": "query",
-              "required": false,
-              "description": "Skip a specific number of entries (especially useful for pagination)",
-              "schema": {
-                "type": "integer"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "=",
-              "in": "query",
-              "required": false,
-              "description": "Get entries that matches exactly your input",
-              "schema": {
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string"
-              },
-              "deprecated": false
+              }
             },
-            {
-              "name": "_ne",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are not equals to something",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lt",
-              "in": "query",
-              "required": false,
-              "description": "Get record that are lower than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_lte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are lower than or equal to a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gt",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_gte",
-              "in": "query",
-              "required": false,
-              "description": "Get records that are greater than  or equal a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_contains",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_containss",
-              "in": "query",
-              "required": false,
-              "description": "Get records that contains (case sensitive) a value",
-              "schema": {
-                "type": "string"
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_in",
-              "in": "query",
-              "required": false,
-              "description": "Get records that matches any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            },
-            {
-              "name": "_nin",
-              "in": "query",
-              "required": false,
-              "description": "Get records that doesn't match any value in the array of values",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "deprecated": false
-            }
-
-
+            "deprecated": false
+          }
         ]
+      }
+    },
+    "/applications/confirmed/{campaignId}": {
+      "get": {
+        "deprecated": false,
+        "description": "Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user",
+        "operationId": "getConfirmedApplicationsByCampaign",
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "ID of the campaign",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Application"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User is not a super admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

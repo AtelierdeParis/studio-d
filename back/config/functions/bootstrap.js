@@ -38,7 +38,7 @@ module.exports = () => {
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
 
-    activeCampaigns.map((campaign) => {
+    activeCampaigns.map(async (campaign) => {
       // APPLICATIONS END
       if (campaign?.application_end) {
         if (
@@ -78,7 +78,10 @@ module.exports = () => {
       // PRESELECTIONS END
       if (Boolean(campaign?.preselection_end)) {
         const preselectionsEndDate = new Date(campaign.preselection_end)
+
         if (preselectionsEndDate.toDateString() === yesterday.toDateString()) {
+          await strapi.services.campaign.sendAdminPreselectionsEmail(campaign)
+
           Promise.all(
             campaign.users_permissions_users.map(async (user) => {
               await strapi.services.campaign.sendPreselectionsEnd(

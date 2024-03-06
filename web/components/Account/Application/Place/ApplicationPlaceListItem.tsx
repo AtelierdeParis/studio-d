@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react'
 import { Application } from '~typings/api'
-import { Text, Button, IconButton, HStack, Flex } from '@chakra-ui/react'
+import { Text, Button, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Cell from '~components/Account/Booking/Cell'
 import Link from '~components/Link'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
 import ApplicationStatusIcon from '~components/Account/Application/Place/ApplicationStatusIcon'
-import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationsPdf/ApplicationDownloadButton'
+import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationDownloadButton'
 
 interface Props {
   application: Application

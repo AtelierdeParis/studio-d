@@ -94,7 +94,6 @@ const ApplicationEditRightPanel = ({
           }}
           color="white"
           height="auto!important"
-          //   isDisabled={isLoading}
           isLoading={isLoading}
           loadingText={t('company.detail.saving')}
           type="submit"

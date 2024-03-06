@@ -9,15 +9,19 @@ import {
   Grid,
   GridItem,
   Box,
+  Text,
+  Skeleton,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDetailHeader from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailHeader'
 import { Application } from '~typings/api'
 import ApplicationRightPanel from '~components/Account/Application/Place/DetailDrawer/ApplicationRightPanel'
-import SingleApplication from '~components/Account/Application/Place/SingleApplication'
-import { downloadPdf } from '~components/Account/Application/Place/ApplicationsPdf/pdfUtils'
-import { useRef, useState } from 'react'
-import useSelectedCampaign from '~hooks/useSelectedCampaign'
+
+import { useState } from 'react'
+import { Document, Page } from 'react-pdf'
+
+import useToast from '~hooks/useToast'
+import { handleApplicationDownload } from '~utils/pdf'
 
 const ApplicationDetailDrawer = ({
   isOpen,
@@ -32,13 +36,30 @@ const ApplicationDetailDrawer = ({
 }) => {
   const { t } = useTranslation('application')
   const { id } = application ?? {}
-  const pdfRef = useRef()
-  const [isLoading, setIsLoading] = useState(false)
-  const { selectedCampaign } = useSelectedCampaign()
+  const [isDownloading, setIsDownloading] = useState(false)
+  const [scales, setScales] = useState([])
+  const { errorToast } = useToast()
+  const [numPages, setNumPages] = useState(0)
+
+  const handleDownload = async () => {
+    setIsDownloading(true)
+    try {
+      await handleApplicationDownload({
+        application,
+        onError: () => errorToast(t('error')),
+      })
+    } catch (err) {
+      console.log(err)
+      errorToast(t('error'))
+    } finally {
+      setIsDownloading(false)
+    }
+  }
 
   if (!application) {
     return null
   }
+
   return (
     <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
       <DrawerOverlay />
@@ -52,7 +73,7 @@ const ApplicationDetailDrawer = ({
           <ApplicationDetailHeader application={application} />
           <Divider />
 
-          <Box paddingBottom={4}>
+          <Box paddingBottom={4} width="100%">
             <Grid templateColumns={'repeat(3, 1fr)'} gap={4} width="100%">
               <GridItem
                 colSpan={{ base: 3, md: 2 }}
@@ -60,7 +81,46 @@ const ApplicationDetailDrawer = ({
                 maxHeight="90vh"
                 overflowY="auto"
               >
-                <SingleApplication application={application} ref={pdfRef} />
+                <Box overflowX="auto">
+                  <Document
+                    file={`/api/pdfs/single/${application.id}`}
+                    onLoadSuccess={({ numPages }) => {
+                      setNumPages(numPages)
+                    }}
+                    loading={
+                      <Skeleton
+                        height="100vh"
+                        width="100vw"
+                        variant="rectangle"
+                      />
+                    }
+                  >
+                    {Array.from(new Array(numPages), (el, index) => (
+                      <Page
+                        key={`page_${index + 1}`}
+                        pageNumber={index + 1}
+                        onRenderSuccess={(page) => {
+                          const viewport = page.getViewport({ scale: 1 })
+                          if (viewport) {
+                            const orientation =
+                              viewport.width > viewport.height
+                                ? 'landscape'
+                                : 'portrait'
+                            // Adjust the scale based on the orientation
+                            const scale =
+                              orientation === 'landscape' ? 0.7 : 1.0
+                            setScales((prevScales) => {
+                              const newScales = [...prevScales]
+                              newScales[index] = scale
+                              return newScales
+                            })
+                          }
+                        }}
+                        scale={scales[index] || 1.0}
+                      />
+                    ))}
+                  </Document>
+                </Box>
               </GridItem>
 
               <GridItem
@@ -70,20 +130,8 @@ const ApplicationDetailDrawer = ({
                 <ApplicationRightPanel
                   application={application}
                   canPreselect={canPreselect}
-                  handleDownload={async () => {
-                    setIsLoading(true)
-                    await downloadPdf(
-                      pdfRef.current,
-                      `application_${id}_${application?.company?.structureName
-                        ?.split(' ')
-                        ?.join('_')}_${selectedCampaign?.title
-                        ?.split(' ')
-                        ?.join('_')}`,
-                      application?.creation_file[0]?.url,
-                    )
-                    setIsLoading(false)
-                  }}
-                  isDownloading={isLoading}
+                  handleDownload={handleDownload}
+                  isDownloading={isDownloading}
                 />
               </GridItem>
             </Grid>
