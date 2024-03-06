@@ -63,7 +63,7 @@ const ApplicationHeader = ({ application }: { application: Application }) => {
           <Text>Tél. : {application?.company?.phone}</Text>
           <Text>Email : {application?.company?.email}</Text>
           <Link
-            src="mailto:hofesch-schechter.fr"
+            src={`mailto:${application?.company?.email}`}
             style={{ textDecoration: 'underline', color: 'black' }}
           >
             {application?.company?.website}

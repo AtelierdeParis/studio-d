@@ -123,7 +123,7 @@ module.exports = {
       }))
     return place_missing_selections
   },
-  async sednAdminPreselectionsEmail(campaign) {
+  async sendAdminPreselectionsEmail(campaign) {
     // Send email to administration
     strapi.plugins['email'].services.email.sendEmail(
       {

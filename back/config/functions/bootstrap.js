@@ -80,7 +80,7 @@ module.exports = () => {
         const preselectionsEndDate = new Date(campaign.preselection_end)
 
         if (preselectionsEndDate.toDateString() === yesterday.toDateString()) {
-          await strapi.services.campaign.sednAdminPreselectionsEmail(campaign)
+          await strapi.services.campaign.sendAdminPreselectionsEmail(campaign)
 
           Promise.all(
             campaign.users_permissions_users.map(async (user) => {

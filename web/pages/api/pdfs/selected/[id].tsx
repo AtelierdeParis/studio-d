@@ -52,20 +52,10 @@ const SelectedCampaignApplications = async (req, res) => {
     // Group by espace AND disponibility
     for (const userId in groupedApplications) {
       groupedApplications[userId].sort((a, b) => {
-        console.log(a.disponibility?.id, b.disponibility?.id)
         const aId = a.disponibility?.id || 0
         const bId = b.disponibility?.id || 0
         return aId - bId
       })
-    }
-
-    for (const userId in groupedApplications) {
-      console.log(
-        groupedApplications[userId]?.map((el) => [
-          el.disponibility?.id,
-          el?.id,
-        ]),
-      )
     }
 
     const merger = new PDFMerger()
