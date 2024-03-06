@@ -37,9 +37,9 @@
     "info": "Informations",
     "image": "Images",
     "slot": "Disponibilités ({{nb}})",
-    "slot_solidarity": "Créneaux solidaires ({{nb}})",
-    "slot_campaign": "Créneaux {{title}} ({{nb}}/{{nbTotal}})",
-    "slot_campaign_applications": "Créneaux {{title}} ({{nb}})"
+    "slot_solidarity": "Créneaux StudioD ({{nb}})",
+    "slot_campaign": "Créneaux StudioD {{title}} ({{nb}}/{{nbTotal}})",
+    "slot_campaign_applications": "Créneaux StudioD {{title}} ({{nb}})"
   },
   "form": {
     "migration": {
@@ -157,8 +157,8 @@
     "nbPending": "{{nb}} en attente",
     "nbBooking": "{{nb}} à venir",
     "nbPassed": "{{nb}} passées",
-    "solidarity_slots": "Créneaux solidaires",
-    "campaign_slots": "Créneaux {{title}}",
+    "solidarity_slots": "Créneaux StudioD",
+    "campaign_slots": "Créneaux StudioD {{title}}",
     "slots_filled": "{{nb}}/{{nbTotal}} créneaux renseignés",
     "fill_before": "À remplir avant le {{date}}"
   },
@@ -329,18 +329,18 @@
   },
   "detail": {
     "campaign": {
-      "solidarity_slot": "Créneaux solidaires",
-      "campaign_slot": "Créneaux {{title}}",
+      "solidarity_slot": "Créneaux StudioD",
+      "campaign_slot": "Créneaux StudioD {{title}}",
       "calendar_title": "Calendrier – Dispositif {{title}}",
       "slots_available": "Créneaux proposés :",
       "campaign_about": "À propos du dispositif {{title}}",
       "eligibility": "Conditions d’éligibilité :",
-      "switch_campaign_title": "Cet espace propose également des créneaux {{title}} :",
+      "switch_campaign_title": "Cet espace propose également des créneaux StudioD {{title}} :",
       "switch_campaign_content": "ces créneaux sont proposés sur candidature par des lieux partenaires lors d'appels à projets. Découvrez-les et n'hésitez pas à candidater si votre compagnie respecte les règles d'éligibilité.",
-      "switch_campaign_cta": "Basculer vers les créneaux solidaires",
-      "switch_solidarity_title": "Cet espace propose également des créneaux solidaires : ",
+      "switch_campaign_cta": "Basculer vers les créneaux StudioD",
+      "switch_solidarity_title": "Cet espace propose également des créneaux StudioD : ",
       "switch_solidarity_content": "ces créneaux sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D.",
-      "switch_solidarity_cta": "Basculer vers le dispositif {{title}}",
+      "switch_solidarity_cta": "Basculer vers les créneaux StudioD {{title}}",
       "more": "En savoir plus",
       "schedule_item": {
         "accomodation": "Hébergement possible ({{nb}} personne).",
@@ -477,7 +477,6 @@
       "summary_helper": "(Optionnel – 1000 signes maximum)",
       "summary_placeholder": "Saisissez votre texte…",
       "partnerships": "Soutiens ou partenaires déjà confirmés",
-      "partnerships_helper": "(Optionnel)",
       "technical": "Besoins techniques",
       "accomodation": "Avez-vous besoin d’un hébergement ?",
       "yes": "oui",
@@ -583,8 +582,8 @@
           "description": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
         },
         "schedule": {
-          "title": "La période de candidatures est en cours : ",
-          "description": " vous ne pouvez plus ajouter de créneau mais pouvez, en cas de nécessité, annuler un créneau existant.\n  Attention, toute annulation de créneau est définitive et, si des candidatures ont été déposées, doit s’accompagner d’un message d’annulation envoyé aux artistes ayant candidaté.",
+          "title": "Les candidatures sont en cours : ",
+          "description": " les créneaux ne sont plus modifiables.",
           "open_applications_one": "créneau renseigné",
           "open_applications_many": "créneaux renseignés",
           "see_applications": "Voir les candidatures pour cet espace"
