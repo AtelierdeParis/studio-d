@@ -55,27 +55,27 @@ const ApplicationHeader = ({ application }: { application: Application }) => {
       </View>
       <View style={{ paddingHorizontal: 10, width: '33%' }}>
         <View style={{ fontSize: FONT_SIZE, lineHeight: 1.2 }}>
-          <Text>Hofesch Schechter Company</Text>
-          <Text>74 rue de Ménilmontant</Text>
-          <Text>75020 Paris</Text>
+          <Text>{application?.company?.structureName}</Text>
+          <Text>{application?.company?.address}</Text>
+          <Text>{`${application?.company?.zipCode} ${application?.company?.city}`}</Text>
         </View>
         <View style={{ marginTop: 14, fontSize: FONT_SIZE, lineHeight: 1.2 }}>
-          <Text>Tél. : +33 (0)9 87 89 82 02</Text>
-          <Text>Email : contact@compagnie.fr</Text>
+          <Text>Tél. : {application?.company?.phone}</Text>
+          <Text>Email : {application?.company?.email}</Text>
           <Link
             src="mailto:hofesch-schechter.fr"
             style={{ textDecoration: 'underline', color: 'black' }}
           >
-            hofesch-schechter.fr
+            {application?.company?.website}
           </Link>
         </View>
       </View>
       <View style={{ fontSize: FONT_SIZE, lineHeight: 1.2, width: '33%' }}>
-        <Text>SIRET : 800 452 575 00062</Text>
-        <Text>APE : 75012Z</Text>
-        <Text>Assurance : Maif</Text>
-        <Text>N° assurance : 75012Z</Text>
-        <Text>Licence(s) : 57500062, 57500063</Text>
+        <Text>SIRET : {application?.company?.siret}</Text>
+        <Text>APE : {application?.company?.ape}</Text>
+        <Text>Assurance : {application?.company?.insuranceName}</Text>
+        <Text>N° assurance : {application?.company?.insuranceNumber}</Text>
+        <Text>Licence(s) : {application?.company?.license}</Text>
       </View>
     </View>
   )
