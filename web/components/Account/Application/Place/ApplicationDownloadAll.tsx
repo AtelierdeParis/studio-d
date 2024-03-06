@@ -1,14 +1,18 @@
 import { Box, Button } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useMyApplications } from '~hooks/useMyApplications'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
+import useToast from '~hooks/useToast'
+import { handleDisponibilityDownload } from '~utils/pdf'
 
 const ApplicationDownloadAll = () => {
   const { selectedCampaign } = useSelectedCampaign()
+  const { errorToast } = useToast()
   const { t } = useTranslation('application')
   const { query } = useRouter()
-
+  const [isDownloading, setIsDownloading] = useState(false)
   const { data: applications, isLoading, isFetching } = useMyApplications({
     name: ['myApplications', query?.disponibility as string],
     campaignId: query.campaign as string,
@@ -31,10 +35,24 @@ const ApplicationDownloadAll = () => {
         }
         color={'white'}
         size="lg"
-        onClick={() => console.log('clicked')}
-        isLoading={isLoading || isFetching}
-        isDisabled
+        isLoading={isLoading || isFetching || isDownloading}
+        isDisabled={!applications?.length}
         isFullWidth
+        onClick={async () => {
+          setIsDownloading(true)
+          try {
+            await handleDisponibilityDownload({
+              //@ts-expect-error
+              disponibility: applications[0]?.disponibility,
+              onError: () => errorToast(t('error')),
+            })
+          } catch (err) {
+            console.log(err)
+            errorToast(t('error'))
+          } finally {
+            setIsDownloading(false)
+          }
+        }}
       >
         {t('place.download')}
       </Button>

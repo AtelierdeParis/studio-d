@@ -1,5 +1,5 @@
 import { Stream } from 'stream'
-import { Application } from '~typings/api'
+import { Application, Campaign, Disponibility } from '~typings/api'
 import { format } from '~utils/date'
 
 export const getBufferFromStream = (stream: Stream): Promise<Buffer> => {
@@ -42,6 +42,40 @@ export const handleApplicationDownload = async ({
   const link = document.createElement('a')
   link.href = url
   link.setAttribute('download', formatApplicationPdfName(application))
+  document.body.appendChild(link)
+  link.click()
+  link.parentNode?.removeChild(link)
+}
+
+export const formatDisponibilityPdfName = (disponibility: Disponibility) => {
+  return `${disponibility?.espace?.name?.split(' ').join('_')}_${format(
+    disponibility?.start,
+    'dd-MM-yyyy',
+  )}_${format(
+    disponibility?.end,
+    'dd-MM-yyyy',
+    //@ts-expect-error
+  )}_${disponibility?.espace?.users_permissions_user?.structureName
+    ?.split(' ')
+    .join('_')}_${disponibility?.campaign?.title?.split(' ').join('_')}.pdf`
+}
+
+export const handleDisponibilityDownload = async ({
+  disponibility,
+  onError,
+}: {
+  disponibility: Disponibility
+  onError: () => void
+}) => {
+  const res = await fetch(`/api/pdfs/all/${disponibility.id}`)
+  if (!res.ok) {
+    onError()
+  }
+  const blob = await res.blob()
+  const url = window.URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', formatDisponibilityPdfName(disponibility))
   document.body.appendChild(link)
   link.click()
   link.parentNode?.removeChild(link)

@@ -5,7 +5,6 @@ import ApplicationDocument from '~components/pdfs/ApplicationDocument'
 import { getSession } from 'next-auth/client'
 import PDFMerger from 'pdf-merger-js'
 import { formatApplicationPdfName, getBufferFromStream } from '~utils/pdf'
-import { format } from 'path'
 
 const SingleApplication = async (req, res) => {
   const { id } = req.query
