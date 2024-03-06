@@ -21,9 +21,9 @@
     "signin": "Connexion",
     "cgu": "Conditions générales d'utilisation",
     "policy": "Chartes StudioD",
-    "places_emergence": "Créneaux {{title}}",
-    "places_regular": "Créneaux solidaires",
-    "campaign": "Dispositif {{title}}",
+    "places_emergence": "StudioD {{title}}",
+    "places_regular": "Créneaux StudioD",
+    "campaign": "StudioD {{title}}",
     "campaign_chart": "Charte StudioD – {{title}}"
   },
   "error": "Une erreur est survenue",
@@ -31,12 +31,12 @@
   "signup": {
     "place": {
       "title": "Vous êtes un lieu ?",
-      "description": "StudioD existe grâce à la solidarité de structures partenaires, qui proposent des créneaux horaires dans leurs espaces. En cliquant sur le bouton ci-dessous, vous arez la possibilité de vous inscrire sur la plateforme et de proposer des espaces pour accueillir des compagnies.",
+      "description": "StudioD existe grâce à la solidarité de structures partenaires, qui proposent des créneaux horaires dans leurs espaces. En cliquant sur le bouton ci-dessous, vous aurez la possibilité de vous inscrire sur la plateforme et de proposer des espaces pour accueillir des compagnies ou de participer à des dispositifs spécifiques tels que StudioD Emergence",
       "btn": "Inscrire un lieu"
     },
     "company": {
       "title": "Vous êtes une compagnie ?",
-      "description": "Depuis son lancement, vous êtes nombreuses à rejoindre la plateforme. En raison de la crise sanitaire, StudioD est prioritairement dédié aux compagnies dont les répétitions ont été annulées ces derniers mois. Vous pourrez commencer à déposer des demandes dès validation de votre compte.",
+      "description": "StudioD permet de déposer des demandes de mise à disposition d’espaces auprès de structures partenaires. Retrouvez également des appels à projets tels que Studio D Emergence et candidatez directement via la plateforme. Ceux-ci seront facilement identifiables depuis la page d'accueil dès leur ouverture. Suivez nos actus pour ne rien rater.",
       "btn": "Inscrire une compagnie"
     }
   },
@@ -89,15 +89,15 @@
     "btn": "Retour à l’accueil"
   },
   "solidarity": {
-    "title": "Créneaux solidaires",
-    "tag": "Créneaux solidaires",
-    "helper_title": "Les créneaux solidaires ",
-    "helper": "sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D"
+    "title": "Créneaux StudioD",
+    "tag": "Créneaux StudioD",
+    "helper_title": "Les créneaux studioD",
+    "helper": "Ces créneaux sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D"
   },
   "campaign": {
     "open": "Ouvert jusqu'au {{date}}",
-    "partner": "Participe au dispositif {{title}}",
-    "helper_title": "Le dispositif {{title}}",
+    "partner": "Participe à StudioD {{title}}",
+    "helper_title": "StudioD {{title}}",
     "application": "Candidature déposée"
   },
   "show": "Découvrir"

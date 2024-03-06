@@ -88,6 +88,7 @@ export const getApplicationSchema = (t, isUpdate = false) =>
     //   .min(1, t('global.required'))
     //   .required(t('global.required')),
     creation_summary: yup.string().required(t('global.required')),
+    creation_partnerships: yup.string().required(t('global.required')),
     creation_techical_requirements: yup.string().required(t('global.required')),
     eligibility: isUpdate
       ? yup.boolean()

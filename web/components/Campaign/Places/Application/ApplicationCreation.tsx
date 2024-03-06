@@ -45,7 +45,6 @@ const ApplicationCreation = (isUpdate: { isUpdate?: boolean }) => {
       <TextAreaField
         name="creation_partnerships"
         label={t('campaignApplication.creation.partnerships')}
-        helper={t('campaignApplication.creation.partnerships_helper')}
         minHeight={180}
       />
 

@@ -12,11 +12,11 @@
     "btn": "Rechercher"
   },
   "places": {
-    "title": "Prochains créneaux disponibles",
-    "btn": "Parcourir tous les espaces",
+    "title": "Prochains créneaux StudioD disponibles",
+    "btn": "Parcourir tous les espaces de StudioD",
     "campaign": {
-      "title": "Dispositif {{title}} ",
-      "cta": "Parcourir tous les espaces partenaires du dispositif {{title}}"
+      "title": "StudioD {{title}} ",
+      "cta": "Parcourir tous les espaces partenaires de StudioD {{title}}"
     }
   },
   "news": {
@@ -24,7 +24,7 @@
     "btn": "Toutes les actus"
   },
   "campaign": {
-    "title": "Dispositif {{title}}",
+    "title": "StudioD {{title}}",
     "insert": {
       "disponibilities": {
         "title": "Inscrivez vos espaces !",
@@ -33,7 +33,7 @@
       },
       "applications": {
         "title": "Les créneaux sont ouverts !",
-        "subtitle": "Candidatez avant le le {{date}}.",
+        "subtitle": "Candidatez avant le {{date}}.",
         "cta": "Parcourir"
       }
     }
