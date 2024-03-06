@@ -10,6 +10,12 @@ const MultipleApplication = async (req, res) => {
   const { id: disponibilityId } = req.query
   const session = await getSession({ req })
 
+  // If the session is not defined, refuse access
+  if (!session) {
+    res.status(401).json({ error: 'Unauthorized' })
+    return
+  }
+
   const { data: applications } = await client.applications.getMyApplications(
     null,
     {
@@ -22,27 +28,26 @@ const MultipleApplication = async (req, res) => {
       },
     },
   )
-  console.log(applications)
+
   const disponibility = applications?.[0]?.disponibility
 
   const merger = new PDFMerger()
   let finalPDF
-  await Promise.all(
-    applications?.map(async (application) => {
-      const stream = await renderToStream(
-        <ApplicationDocument application={application} />,
-      )
-      const streamBuffer = await getBufferFromStream(stream)
-      await merger.add(streamBuffer)
 
-      if (application?.creation_file?.[0]?.url) {
-        const creationFile = await fetch(application?.creation_file?.[0]?.url)
-        const creationFileArrayBuffer = await creationFile.arrayBuffer()
+  for (const application of applications) {
+    const stream = await renderToStream(
+      <ApplicationDocument application={application} />,
+    )
+    const streamBuffer = await getBufferFromStream(stream)
+    await merger.add(streamBuffer)
 
-        await merger.add(creationFileArrayBuffer)
-      }
-    }),
-  )
+    if (application?.creation_file?.[0]?.url) {
+      const creationFile = await fetch(application?.creation_file?.[0]?.url)
+      const creationFileArrayBuffer = await creationFile.arrayBuffer()
+
+      await merger.add(creationFileArrayBuffer)
+    }
+  }
 
   finalPDF = await merger.saveAsBuffer()
 

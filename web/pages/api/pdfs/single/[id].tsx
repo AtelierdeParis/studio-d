@@ -9,6 +9,13 @@ import { formatApplicationPdfName, getBufferFromStream } from '~utils/pdf'
 const SingleApplication = async (req, res) => {
   const { id } = req.query
   const session = await getSession({ req })
+
+  // If the session is not defined, refuse access
+  if (!session) {
+    res.status(401).json({ error: 'Unauthorized' })
+    return
+  }
+
   const { data: application } = await client.applications.getMyApplications(
     null,
     {

@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import RemoveIcon from '~public/assets/icons/RemoveIcon'
 import Link from '~components/Link'
 import { ROUTE_CONTACT } from '~constants'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
 
 const ApplicationPreselectButton = ({
   application,
@@ -21,6 +22,7 @@ const ApplicationPreselectButton = ({
   const { errorToast, successToast } = useToast()
   const queryClient = useQueryClient()
   const { query } = useRouter()
+  const { selectedCampaign } = useSelectedCampaign()
 
   const handleStatusChange = async (status) => {
     try {
@@ -49,49 +51,61 @@ const ApplicationPreselectButton = ({
 
   return (
     <VStack spacing={4} width="100%">
-      <Button
-        isFullWidth
-        borderRadius={0}
-        leftIcon={
-          application?.status === 'preselected' ? (
-            <RemoveIcon stroke="#b62525" />
-          ) : (
-            <ApplicationSelected />
-          )
-        }
-        display="flex"
-        justifyContent={'flex-start'}
-        p={3}
-        backgroundColor={
-          application?.status === 'preselected'
-            ? 'rgba(182,37,37, 0.18)'
-            : 'rgba(110, 174, 127, 0.25)'
-        }
-        color="black"
-        _hover={{
-          backgroundColor:
-            application?.status === 'preselected'
-              ? 'rgba(182,37,37, 0.28)'
-              : 'rgba(110, 174, 127, 0.4)',
-        }}
-        _active={{
-          backgroundColor: 'rgba(110, 174, 127, 0.6)',
-        }}
-        height="auto!important"
-        onClick={() => {
-          handleStatusChange(
-            application.status === 'preselected' ? null : 'preselected',
-          )
-        }}
-        isDisabled={!canPreselect || application?.status === 'confirmed'}
-      >
-        <Text pl={1}>
-          {application?.status === 'preselected' ||
-          application?.status === 'confirmed'
-            ? t('place.detail.deselect')
-            : t('place.detail.preselect')}
-        </Text>
-      </Button>
+      {(application?.status === 'preselected' ||
+        application?.status === 'confirmed') && (
+        <Button
+          isFullWidth
+          borderRadius={0}
+          leftIcon={<RemoveIcon stroke="#b62525" />}
+          display="flex"
+          justifyContent={'flex-start'}
+          p={3}
+          backgroundColor={'rgba(182,37,37, 0.18)'}
+          color="black"
+          _hover={{
+            backgroundColor: 'rgba(182,37,37, 0.28)',
+          }}
+          _active={{
+            backgroundColor: 'rgba(182,37,37, 0.38)',
+          }}
+          height="auto!important"
+          onClick={() => {
+            handleStatusChange(null)
+          }}
+          isDisabled={
+            selectedCampaign?.mode !== 'preselections' ||
+            application?.status === 'confirmed'
+          }
+        >
+          <Text pl={1}>{t('place.detail.deselect')}</Text>
+        </Button>
+      )}
+
+      {application?.status === null && (
+        <Button
+          isFullWidth
+          borderRadius={0}
+          leftIcon={<ApplicationSelected />}
+          display="flex"
+          justifyContent={'flex-start'}
+          p={3}
+          backgroundColor={'rgba(110, 174, 127, 0.25)'}
+          color="black"
+          _hover={{
+            backgroundColor: 'rgba(110, 174, 127, 0.4)',
+          }}
+          _active={{
+            backgroundColor: 'rgba(110, 174, 127, 0.6)',
+          }}
+          height="auto!important"
+          onClick={() => {
+            handleStatusChange('preselected')
+          }}
+          isDisabled={!canPreselect || application?.status === 'confirmed'}
+        >
+          <Text pl={1}>{t('place.detail.preselect')}</Text>
+        </Button>
+      )}
 
       {application?.status === 'confirmed' && (
         <Box color="gray.500">

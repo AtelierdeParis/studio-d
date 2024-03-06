@@ -1464,6 +1464,20 @@ export namespace Applications {
     export type RequestHeaders = {};
     export type ResponseBody = number;
   }
+  /**
+   * @description Get confirmed applications related to a specific campaign
+   * @tags Application
+   * @name GetConfirmedApplicationsByCampaign
+   * @request GET:/applications/confirmed/{campaignId}
+   * @secure
+   */
+  export namespace GetConfirmedApplicationsByCampaign {
+    export type RequestParams = { campaignId: string };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = Application[];
+  }
 }
 
 export namespace Bookings {
@@ -3736,6 +3750,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<number, Error>({
         path: `/applications/${id}`,
         method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Get confirmed applications related to a specific campaign
+     *
+     * @tags Application
+     * @name GetConfirmedApplicationsByCampaign
+     * @request GET:/applications/confirmed/{campaignId}
+     * @secure
+     */
+    getConfirmedApplicationsByCampaign: (campaignId: string, params: RequestParams = {}) =>
+      this.request<Application[], Error>({
+        path: `/applications/confirmed/${campaignId}`,
+        method: "GET",
         secure: true,
         format: "json",
         ...params,

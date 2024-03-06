@@ -80,3 +80,7 @@ export const handleDisponibilityDownload = async ({
   link.click()
   link.parentNode?.removeChild(link)
 }
+
+export const formatCampaignPdfName = (campaign: Campaign) => {
+  return `${campaign?.title?.split(' ').join('_')}.pdf`
+}

@@ -5,9 +5,9 @@
       "path": "/applications/me/:campaignId",
       "handler": "application.myApplications",
       "config": {
-          "policies": ["global::is-authenticated"],
-          "operationId": "myApplications",
-          "description": "Get applications related to current user"
+        "policies": ["global::is-authenticated"],
+        "operationId": "myApplications",
+        "description": "Get applications related to current user"
       }
     },
     {
@@ -57,7 +57,14 @@
       "config": {
         "policies": ["is-concerned"]
       }
+    },
+    {
+      "method": "GET",
+      "path": "/applications/confirmed/:campaignId",
+      "handler": "application.getConfirmedApplications",
+      "config": {
+        "policies": ["is-admin"]
+      }
     }
   ]
 }
-
