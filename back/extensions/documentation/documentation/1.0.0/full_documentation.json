@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/05/2024 1:43:37 PM"
+    "x-generation-date": "03/06/2024 5:01:32 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -95,7 +95,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -281,7 +283,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -346,7 +350,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "parameters": []
       }
     },
@@ -397,7 +403,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -457,7 +465,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -529,7 +539,9 @@
           }
         },
         "summary": "",
-        "tags": ["Actuality"],
+        "tags": [
+          "Actuality"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -594,7 +606,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "parameters": [
           {
             "name": "campaignId",
@@ -796,7 +810,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -982,7 +998,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1047,7 +1065,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "parameters": []
       }
     },
@@ -1098,7 +1118,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1158,7 +1180,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1230,7 +1254,9 @@
           }
         },
         "summary": "",
-        "tags": ["Application"],
+        "tags": [
+          "Application"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1295,7 +1321,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "parameters": [
           {
             "name": "bookingType",
@@ -1305,7 +1333,11 @@
             "required": true,
             "schema": {
               "type": "string",
-              "enum": ["all", "request", "booking"]
+              "enum": [
+                "all",
+                "request",
+                "booking"
+              ]
             }
           }
         ],
@@ -1362,7 +1394,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -1548,7 +1582,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1613,7 +1649,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "parameters": []
       }
     },
@@ -1664,7 +1702,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1724,7 +1764,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1796,7 +1838,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1862,7 +1906,9 @@
           }
         },
         "summary": "",
-        "tags": ["Booking"],
+        "tags": [
+          "Booking"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1946,7 +1992,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -2132,7 +2180,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2197,7 +2247,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "parameters": []
       }
     },
@@ -2248,7 +2300,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2308,7 +2362,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2380,7 +2436,9 @@
           }
         },
         "summary": "",
-        "tags": ["Campaign"],
+        "tags": [
+          "Campaign"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2445,7 +2503,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -2631,7 +2691,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2696,7 +2758,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "parameters": []
       }
     },
@@ -2747,7 +2811,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2807,7 +2873,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2879,7 +2947,9 @@
           }
         },
         "summary": "",
-        "tags": ["City"],
+        "tags": [
+          "City"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2944,7 +3014,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -3130,7 +3202,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3195,7 +3269,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "parameters": []
       }
     },
@@ -3246,7 +3322,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3306,7 +3384,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3378,7 +3458,9 @@
           }
         },
         "summary": "",
-        "tags": ["Contact"],
+        "tags": [
+          "Contact"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3443,7 +3525,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -3629,7 +3713,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3694,7 +3780,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "parameters": []
       }
     },
@@ -3745,7 +3833,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3805,7 +3895,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3876,7 +3968,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3941,7 +4035,9 @@
           }
         },
         "summary": "",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4001,7 +4097,9 @@
           }
         },
         "summary": "Confirm Campaign",
-        "tags": ["Disponibility"],
+        "tags": [
+          "Disponibility"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4085,7 +4183,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -4271,7 +4371,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4336,7 +4438,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "parameters": []
       }
     },
@@ -4387,7 +4491,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4447,7 +4553,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -4519,7 +4627,9 @@
           }
         },
         "summary": "",
-        "tags": ["Dispositif"],
+        "tags": [
+          "Dispositif"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4584,7 +4694,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -4776,7 +4888,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -4962,7 +5076,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5027,7 +5143,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -5215,7 +5333,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -5285,7 +5405,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5357,7 +5479,9 @@
           }
         },
         "summary": "",
-        "tags": ["Espace"],
+        "tags": [
+          "Espace"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -5422,7 +5546,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -5612,7 +5738,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5677,7 +5805,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "parameters": []
       }
     },
@@ -5732,7 +5862,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -5796,7 +5928,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -5868,7 +6002,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-category"],
+        "tags": [
+          "Faq-category"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -5934,7 +6070,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -6124,7 +6262,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6189,7 +6329,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "parameters": []
       }
     },
@@ -6244,7 +6386,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -6308,7 +6452,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6380,7 +6526,9 @@
           }
         },
         "summary": "",
-        "tags": ["Faq-question"],
+        "tags": [
+          "Faq-question"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -6442,7 +6590,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-carousel"],
+        "tags": [
+          "Home-carousel"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -6632,7 +6782,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-carousel"],
+        "tags": [
+          "Home-carousel"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6693,7 +6845,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-carousel"],
+        "tags": [
+          "Home-carousel"
+        ],
         "parameters": []
       }
     },
@@ -6744,7 +6898,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-message"],
+        "tags": [
+          "Home-message"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -6935,7 +7091,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-message"],
+        "tags": [
+          "Home-message"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -6996,7 +7154,9 @@
           }
         },
         "summary": "",
-        "tags": ["Home-message"],
+        "tags": [
+          "Home-message"
+        ],
         "parameters": []
       }
     },
@@ -7050,7 +7210,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": []
       }
     },
@@ -7105,7 +7267,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7167,7 +7331,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -7232,7 +7398,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -7433,7 +7601,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -7619,7 +7789,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7684,7 +7856,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": []
       }
     },
@@ -7735,7 +7909,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -7795,7 +7971,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -7867,7 +8045,9 @@
           }
         },
         "summary": "",
-        "tags": ["Message"],
+        "tags": [
+          "Message"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -7932,7 +8112,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -8118,7 +8300,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8183,7 +8367,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "parameters": []
       }
     },
@@ -8234,7 +8420,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "parameters": [
           {
             "name": "url",
@@ -8296,7 +8484,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8368,7 +8558,9 @@
           }
         },
         "summary": "",
-        "tags": ["Page"],
+        "tags": [
+          "Page"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -8434,7 +8626,9 @@
           }
         },
         "summary": "",
-        "tags": ["Email - Email"],
+        "tags": [
+          "Email - Email"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8503,7 +8697,9 @@
           }
         },
         "summary": "",
-        "tags": ["Email - Email"],
+        "tags": [
+          "Email - Email"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8572,7 +8768,9 @@
           }
         },
         "summary": "",
-        "tags": ["Email - Email"],
+        "tags": [
+          "Email - Email"
+        ],
         "parameters": []
       }
     },
@@ -8660,7 +8858,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -8725,7 +8925,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": []
       }
     },
@@ -8779,7 +8981,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": []
       }
     },
@@ -8830,7 +9034,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -8890,7 +9096,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -8955,7 +9163,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -9017,7 +9227,9 @@
           }
         },
         "summary": "",
-        "tags": ["Unclassified"],
+        "tags": [
+          "Unclassified"
+        ],
         "parameters": [],
         "requestBody": {
           "description": "",
@@ -9077,7 +9289,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": []
       }
     },
@@ -9128,7 +9342,9 @@
           }
         },
         "summary": "",
-        "tags": ["Unclassified"],
+        "tags": [
+          "Unclassified"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9193,7 +9409,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -9258,7 +9476,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -9444,7 +9664,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -9505,7 +9727,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "role",
@@ -9580,7 +9804,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "role",
@@ -9645,7 +9871,9 @@
           }
         },
         "summary": "Retrieve a list of users by searching for their username or email",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -9700,7 +9928,9 @@
           }
         },
         "summary": "Authenticate your user with a custom provider",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "parameters": [
           {
             "name": "provider",
@@ -9767,14 +9997,19 @@
           }
         },
         "summary": "",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "The identifier param can either be an email or a username",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "required": ["identifier", "password"],
+                "required": [
+                  "identifier",
+                  "password"
+                ],
                 "properties": {
                   "identifier": {
                     "type": "string"
@@ -9846,14 +10081,20 @@
           }
         },
         "summary": "",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "required": ["username", "email", "password"],
+                "required": [
+                  "username",
+                  "email",
+                  "password"
+                ],
                 "properties": {
                   "username": {
                     "type": "string",
@@ -9927,7 +10168,9 @@
           }
         },
         "summary": "",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "parameters": [
           {
             "name": "provider",
@@ -9986,7 +10229,9 @@
           }
         },
         "summary": "Send an email to reset your password",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -10064,14 +10309,20 @@
           }
         },
         "summary": "",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "required": ["code", "password", "passwordConfirmation"],
+                "required": [
+                  "code",
+                  "password",
+                  "passwordConfirmation"
+                ],
                 "properties": {
                   "code": {
                     "type": "string"
@@ -10142,7 +10393,9 @@
           }
         },
         "summary": "",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "parameters": [
           {
             "name": "confirmation",
@@ -10208,14 +10461,18 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "required": ["email"],
+                "required": [
+                  "email"
+                ],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -10283,7 +10540,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -10471,7 +10730,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -10531,7 +10792,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -10606,7 +10869,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -10625,7 +10890,12 @@
   "components": {
     "schemas": {
       "Actuality": {
-        "required": ["id", "title", "content", "image"],
+        "required": [
+          "id",
+          "title",
+          "content",
+          "image"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -10716,7 +10986,10 @@
         }
       },
       "NewActuality": {
-        "required": ["title", "content"],
+        "required": [
+          "title",
+          "content"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -10740,20 +11013,32 @@
         }
       },
       "Application": {
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
           },
           "disponibility": {
-            "required": ["id", "start", "end", "type", "status"],
+            "required": [
+              "id",
+              "start",
+              "end",
+              "type",
+              "status"
+            ],
             "properties": {
               "id": {
                 "type": "string"
               },
               "when": {
                 "type": "string",
-                "enum": ["morning", "afternoon", "full"]
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "full"
+                ]
               },
               "start": {
                 "type": "string"
@@ -10766,7 +11051,11 @@
               },
               "type": {
                 "type": "string",
-                "enum": ["punctual", "day", "period"]
+                "enum": [
+                  "punctual",
+                  "day",
+                  "period"
+                ]
               },
               "status": {
                 "type": "string",
@@ -11136,7 +11425,10 @@
               },
               "type": {
                 "type": "string",
-                "enum": ["company", "place"]
+                "enum": [
+                  "company",
+                  "place"
+                ]
               },
               "external_id": {
                 "type": "integer"
@@ -11286,7 +11578,11 @@
               },
               "danceCarpet": {
                 "type": "string",
-                "enum": ["true", "false", "possible"]
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
               },
               "slug": {
                 "type": "string"
@@ -11325,7 +11621,10 @@
           },
           "status": {
             "type": "string",
-            "enum": ["preselected", "confirmed"]
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
           },
           "published_at": {
             "type": "string",
@@ -11379,7 +11678,10 @@
           },
           "status": {
             "type": "string",
-            "enum": ["preselected", "confirmed"]
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
           },
           "published_at": {
             "type": "string",
@@ -11394,7 +11696,9 @@
         }
       },
       "Booking": {
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -11531,14 +11835,24 @@
           "disponibilities": {
             "type": "array",
             "items": {
-              "required": ["id", "start", "end", "type", "status"],
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
                 "when": {
                   "type": "string",
-                  "enum": ["morning", "afternoon", "full"]
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
                 },
                 "start": {
                   "type": "string"
@@ -11551,7 +11865,11 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["punctual", "day", "period"]
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
                 },
                 "status": {
                   "type": "string",
@@ -11739,7 +12057,10 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["company", "place"]
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
                 },
                 "external_id": {
                   "type": "integer"
@@ -11792,7 +12113,9 @@
           "applications": {
             "type": "array",
             "items": {
-              "required": ["id"],
+              "required": [
+                "id"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -11847,7 +12170,10 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["preselected", "confirmed"]
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
@@ -11981,7 +12307,11 @@
         }
       },
       "City": {
-        "required": ["id", "name", "country"],
+        "required": [
+          "id",
+          "name",
+          "country"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -12104,7 +12434,11 @@
                 },
                 "danceCarpet": {
                   "type": "string",
-                  "enum": ["true", "false", "possible"]
+                  "enum": [
+                    "true",
+                    "false",
+                    "possible"
+                  ]
                 },
                 "slug": {
                   "type": "string"
@@ -12154,7 +12488,10 @@
         }
       },
       "NewCity": {
-        "required": ["name", "country"],
+        "required": [
+          "name",
+          "country"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -12183,7 +12520,12 @@
         }
       },
       "Contact": {
-        "required": ["id", "name", "message", "from"],
+        "required": [
+          "id",
+          "name",
+          "message",
+          "from"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -12200,7 +12542,11 @@
         }
       },
       "NewContact": {
-        "required": ["name", "message", "from"],
+        "required": [
+          "name",
+          "message",
+          "from"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -12220,14 +12566,24 @@
         }
       },
       "Disponibility": {
-        "required": ["id", "start", "end", "type", "status"],
+        "required": [
+          "id",
+          "start",
+          "end",
+          "type",
+          "status"
+        ],
         "properties": {
           "id": {
             "type": "string"
           },
           "when": {
             "type": "string",
-            "enum": ["morning", "afternoon", "full"]
+            "enum": [
+              "morning",
+              "afternoon",
+              "full"
+            ]
           },
           "start": {
             "type": "string",
@@ -12350,7 +12706,11 @@
               },
               "danceCarpet": {
                 "type": "string",
-                "enum": ["true", "false", "possible"]
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
               },
               "slug": {
                 "type": "string"
@@ -12389,7 +12749,11 @@
           },
           "type": {
             "type": "string",
-            "enum": ["punctual", "day", "period"]
+            "enum": [
+              "punctual",
+              "day",
+              "period"
+            ]
           },
           "status": {
             "type": "string",
@@ -12404,7 +12768,9 @@
             ]
           },
           "booking": {
-            "required": ["id"],
+            "required": [
+              "id"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -12452,7 +12818,10 @@
             }
           },
           "dispositif": {
-            "required": ["id", "name"],
+            "required": [
+              "id",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -12493,7 +12862,10 @@
             }
           },
           "message": {
-            "required": ["id", "status"],
+            "required": [
+              "id",
+              "status"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -12509,7 +12881,10 @@
               },
               "author": {
                 "type": "string",
-                "enum": ["company", "place"]
+                "enum": [
+                  "company",
+                  "place"
+                ]
               },
               "status": {
                 "type": "string",
@@ -12654,7 +13029,9 @@
           "applications": {
             "type": "array",
             "items": {
-              "required": ["id"],
+              "required": [
+                "id"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -12709,7 +13086,10 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["preselected", "confirmed"]
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
                 },
                 "published_at": {
                   "type": "string"
@@ -12742,11 +13122,20 @@
         }
       },
       "NewDisponibility": {
-        "required": ["start", "end", "type", "status"],
+        "required": [
+          "start",
+          "end",
+          "type",
+          "status"
+        ],
         "properties": {
           "when": {
             "type": "string",
-            "enum": ["morning", "afternoon", "full"]
+            "enum": [
+              "morning",
+              "afternoon",
+              "full"
+            ]
           },
           "start": {
             "type": "string",
@@ -12761,7 +13150,11 @@
           },
           "type": {
             "type": "string",
-            "enum": ["punctual", "day", "period"]
+            "enum": [
+              "punctual",
+              "day",
+              "period"
+            ]
           },
           "status": {
             "type": "string",
@@ -12818,7 +13211,10 @@
         }
       },
       "Dispositif": {
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -12829,14 +13225,24 @@
           "disponibilities": {
             "type": "array",
             "items": {
-              "required": ["id", "start", "end", "type", "status"],
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
                 "when": {
                   "type": "string",
-                  "enum": ["morning", "afternoon", "full"]
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
                 },
                 "start": {
                   "type": "string"
@@ -12849,7 +13255,11 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["punctual", "day", "period"]
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
                 },
                 "status": {
                   "type": "string",
@@ -13028,7 +13438,10 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["company", "place"]
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
                 },
                 "external_id": {
                   "type": "integer"
@@ -13182,7 +13595,10 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["company", "place"]
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
                 },
                 "external_id": {
                   "type": "integer"
@@ -13223,7 +13639,9 @@
         }
       },
       "NewDispositif": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -13314,7 +13732,11 @@
           },
           "floor": {
             "type": "string",
-            "enum": ["plancherDanse", "parquetTraditionnel", "other"]
+            "enum": [
+              "plancherDanse",
+              "parquetTraditionnel",
+              "other"
+            ]
           },
           "otherFloor": {
             "type": "string"
@@ -13380,7 +13802,11 @@
           },
           "danceCarpet": {
             "type": "string",
-            "enum": ["true", "false", "possible"]
+            "enum": [
+              "true",
+              "false",
+              "possible"
+            ]
           },
           "campaign_files": {
             "type": "array",
@@ -13553,7 +13979,11 @@
           },
           "danceCarpet": {
             "type": "string",
-            "enum": ["true", "false", "possible"]
+            "enum": [
+              "true",
+              "false",
+              "possible"
+            ]
           },
           "slug": {
             "type": "string"
@@ -13586,7 +14016,10 @@
         }
       },
       "Faq-category": {
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13597,7 +14030,11 @@
           "faq_questions": {
             "type": "array",
             "items": {
-              "required": ["id", "question", "answer"],
+              "required": [
+                "id",
+                "question",
+                "answer"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -13623,7 +14060,9 @@
         }
       },
       "NewFaq-category": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -13643,7 +14082,11 @@
         }
       },
       "Faq-question": {
-        "required": ["id", "question", "answer"],
+        "required": [
+          "id",
+          "question",
+          "answer"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13655,7 +14098,10 @@
             "type": "string"
           },
           "faq_category": {
-            "required": ["id", "name"],
+            "required": [
+              "id",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -13680,7 +14126,10 @@
         }
       },
       "NewFaq-question": {
-        "required": ["question", "answer"],
+        "required": [
+          "question",
+          "answer"
+        ],
         "properties": {
           "question": {
             "type": "string"
@@ -13700,7 +14149,10 @@
         }
       },
       "Home-carousel": {
-        "required": ["id", "images"],
+        "required": [
+          "id",
+          "images"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13788,7 +14240,10 @@
         }
       },
       "Home-message": {
-        "required": ["id", "text"],
+        "required": [
+          "id",
+          "text"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13806,7 +14261,9 @@
         }
       },
       "NewHome-message": {
-        "required": ["text"],
+        "required": [
+          "text"
+        ],
         "properties": {
           "text": {
             "type": "string"
@@ -13827,7 +14284,10 @@
         }
       },
       "Message": {
-        "required": ["id", "status"],
+        "required": [
+          "id",
+          "status"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13867,12 +14327,17 @@
           },
           "author": {
             "type": "string",
-            "enum": ["company", "place"]
+            "enum": [
+              "company",
+              "place"
+            ]
           }
         }
       },
       "NewMessage": {
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "properties": {
           "message": {
             "type": "string"
@@ -13885,7 +14350,10 @@
           },
           "author": {
             "type": "string",
-            "enum": ["company", "place"]
+            "enum": [
+              "company",
+              "place"
+            ]
           },
           "status": {
             "type": "string",
@@ -13928,7 +14396,9 @@
         }
       },
       "ReadNotif": {
-        "required": ["status"],
+        "required": [
+          "status"
+        ],
         "properties": {
           "bookingId": {
             "type": "string"
@@ -13938,7 +14408,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["message", "request", "booking"]
+            "enum": [
+              "message",
+              "request",
+              "booking"
+            ]
           }
         }
       },
@@ -13956,7 +14430,10 @@
         }
       },
       "Page": {
-        "required": ["id", "url"],
+        "required": [
+          "id",
+          "url"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -13974,7 +14451,9 @@
         }
       },
       "NewPage": {
-        "required": ["url"],
+        "required": [
+          "url"
+        ],
         "properties": {
           "title": {
             "type": "string"
@@ -14041,7 +14520,10 @@
         }
       },
       "UsersPermissionsRole": {
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -14059,7 +14541,13 @@
           "permissions": {
             "type": "array",
             "items": {
-              "required": ["id", "type", "controller", "action", "enabled"],
+              "required": [
+                "id",
+                "type",
+                "controller",
+                "action",
+                "enabled"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -14207,7 +14695,10 @@
                 },
                 "type": {
                   "type": "string",
-                  "enum": ["company", "place"]
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
                 },
                 "external_id": {
                   "type": "integer"
@@ -14248,7 +14739,9 @@
         }
       },
       "NewUsersPermissionsRole": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -14307,7 +14800,10 @@
             "type": "string"
           },
           "role": {
-            "required": ["id", "name"],
+            "required": [
+              "id",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -14419,7 +14915,10 @@
           },
           "type": {
             "type": "string",
-            "enum": ["company", "place"]
+            "enum": [
+              "company",
+              "place"
+            ]
           },
           "external_id": {
             "type": "string"
@@ -14554,7 +15053,10 @@
           },
           "type": {
             "type": "string",
-            "enum": ["company", "place"]
+            "enum": [
+              "company",
+              "place"
+            ]
           },
           "created_by": {
             "type": "string"
@@ -14565,7 +15067,10 @@
         }
       },
       "Error": {
-        "required": ["code", "message"],
+        "required": [
+          "code",
+          "message"
+        ],
         "properties": {
           "code": {
             "type": "integer",

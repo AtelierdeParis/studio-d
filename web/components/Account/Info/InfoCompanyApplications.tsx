@@ -38,7 +38,9 @@ const InfoCompanyApplications = ({ user }: Props) => {
           : currentCampaign?.article_link
           ? {
               text: t('applications.info.cta.next'),
-              url: currentCampaign?.article_link,
+              url: `${
+                currentCampaign?.article_link?.startsWith('/') ? '' : '/'
+              }${currentCampaign?.article_link}`,
             }
           : []
       }
