@@ -123,4 +123,20 @@ module.exports = {
       }))
     return place_missing_selections
   },
+  async sednAdminPreselectionsEmail(campaign) {
+    // Send email to administration
+    strapi.plugins['email'].services.email.sendEmail(
+      {
+        to: process.env.EMAIL_RECIPIENT,
+      },
+      {
+        templateId: 'admin-campaign-end',
+      },
+      {
+        campaing_title: campaign.title,
+        url_btn: `${process.env.FRONT_URL}/api/pdfs/selected/${campaign.id}`,
+      },
+      true,
+    )
+  },
 }
