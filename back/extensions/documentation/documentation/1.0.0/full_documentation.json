@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/07/2024 4:00:36 PM"
+    "x-generation-date": "03/07/2024 4:20:17 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -1271,12 +1271,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Application"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
                   }
                 }
               }

@@ -1476,7 +1476,7 @@ export namespace Applications {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = Record<string, Application[]>;
+    export type ResponseBody = Application[];
   }
 }
 
@@ -3763,7 +3763,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getConfirmedApplicationsByCampaign: (campaignId: string, params: RequestParams = {}) =>
-      this.request<Record<string, Application[]>, Error>({
+      this.request<Application[], Error>({
         path: `/applications/confirmed/${campaignId}`,
         method: "GET",
         secure: true,

@@ -214,12 +214,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Application"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
                   }
                 }
               }

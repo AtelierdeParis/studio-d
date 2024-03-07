@@ -17,7 +17,6 @@ const SingleApplication = async (req, res) => {
   }
 
   const { data: application } = await client.applications.getMyApplications(
-    null,
     {
       //@ts-expect-error
       id,
