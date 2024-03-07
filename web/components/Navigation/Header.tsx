@@ -26,6 +26,7 @@ import {
   DropdownNavButton,
   NavButton,
 } from '~components/Navigation/NavigationButtons'
+import { usePages } from '~hooks/usePages'
 
 interface Props {
   colorMode: 'white' | 'black'
@@ -34,6 +35,7 @@ interface Props {
 const Header = ({ colorMode }: Props) => {
   const { t } = useTranslation('common')
   const { currentCampaign } = useCampaignContext()
+  const { data: pages } = usePages({ show_in_header: true })
 
   return (
     <Container
@@ -110,12 +112,11 @@ const Header = ({ colorMode }: Props) => {
             }}
           />
           <NavButton href={ROUTE_PROJECT} text={t('nav.project')} />
-          {currentCampaign && currentCampaign?.article_link && (
-            <NavButton
-              href={currentCampaign?.article_link}
-              text={t('nav.campaign', { title: currentCampaign?.title })}
-            />
-          )}
+
+          {pages?.map((page) => (
+            <NavButton key={page.id} href={page.url} text={page.link_title} />
+          ))}
+
           <NavButton href={ROUTE_ACTU} text={t('nav.news')} />
           <NavButton href={ROUTE_FAQ} text={t('nav.faq')} />
           <NavButton href={ROUTE_CONTACT} text={t('nav.contact')} />

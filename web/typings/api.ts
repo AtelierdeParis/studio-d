@@ -1056,12 +1056,18 @@ export interface Page {
   title?: string;
   text?: string;
   url: string;
+  link_title?: string;
+  show_in_header?: boolean;
+  show_in_footer?: boolean;
 }
 
 export interface NewPage {
   title?: string;
   text?: string;
   url: string;
+  link_title?: string;
+  show_in_header?: boolean;
+  show_in_footer?: boolean;
   created_by?: string;
   updated_by?: string;
 }
