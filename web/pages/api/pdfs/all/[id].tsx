@@ -30,6 +30,7 @@ const MultipleApplication = async (req, res) => {
   )
 
   const disponibility = applications?.[0]?.disponibility
+  const campaign = applications?.[0]?.campaign
 
   const merger = new PDFMerger()
   let finalPDF
@@ -54,8 +55,9 @@ const MultipleApplication = async (req, res) => {
   res.setHeader('Content-Type', 'application/pdf')
   res.setHeader(
     'Content-Disposition',
-    // @ts-expect-error
-    'attachment; filename=' + formatDisponibilityPdfName(disponibility),
+    'attachment; filename=' +
+      // @ts-expect-error
+      formatDisponibilityPdfName(disponibility, campaign),
   )
   res.send(finalPDF)
 }

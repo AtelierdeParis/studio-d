@@ -58,6 +58,7 @@ const ApplicationCompanyList = ({ applications = [] }: Props) => {
         'myApplications',
         query?.disponibility as string,
       ])
+      queryClient.refetchQueries(['me'])
     } catch (e) {
       errorToast(t('company.delete_error'))
     }
