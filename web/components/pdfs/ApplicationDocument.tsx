@@ -7,11 +7,11 @@ import ApplicationReference from '~components/pdfs/ApplicationReference'
 import { BRAND_COLOR, styles } from '~components/pdfs/pdfStyleUtils'
 import { Application } from '~typings/api'
 
-const Mabry = require('./../../public/assets/fonts/mabry-pro.otf')
-const MabryMedium = require('./../../public/assets/fonts/mabry-pro-medium.otf')
+// const Mabry = require('./../../public/assets/fonts/mabry-pro.otf')
+// const MabryMedium = require('./../../public/assets/fonts/mabry-pro-medium.otf')
 
-Font.register({ family: 'Mabry', src: Mabry.default })
-Font.register({ family: 'MabryMedium', src: MabryMedium.default })
+// Font.register({ family: 'Mabry', src: Mabry.default })
+// Font.register({ family: 'MabryMedium', src: MabryMedium.default })
 
 const ApplicationDocument = ({ application }: { application: Application }) => {
   const creations = application?.references as any[]

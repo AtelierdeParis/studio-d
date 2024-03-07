@@ -6,7 +6,7 @@ export const FONT_SIZE_BIG = 14
 
 export const styles = StyleSheet.create({
   page: {
-    fontFamily: 'Mabry',
+    // fontFamily: 'Mabry',
     padding: 20,
   },
   title: {

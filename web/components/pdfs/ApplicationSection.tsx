@@ -31,7 +31,14 @@ const ApplicationSection = ({
       paddingVertical: 12,
     }}
   >
-    <Text style={{ marginBottom: 6, fontFamily: 'MabryMedium' }}>{label}</Text>
+    <Text
+      style={{
+        marginBottom: 6,
+        // fontFamily: 'MabryMedium'
+      }}
+    >
+      {label}
+    </Text>
     <Text> {children}</Text>
   </View>
 )

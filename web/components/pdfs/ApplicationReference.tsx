@@ -35,7 +35,7 @@ const ApplicationReference = ({
     >
       <Text style={{ color: BRAND_COLOR }}>Création {index + 1}</Text>
       <Text
-        style={{ fontFamily: 'MabryMedium' }}
+      // style={{ fontFamily: 'MabryMedium' }}
       >{`${reference?.title}, ${reference?.year}`}</Text>
       <Text>
         {`${reference?.actors} ${
