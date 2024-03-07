@@ -39,7 +39,7 @@ const ApplicationHeader = ({ application }: { application: Application }) => {
         <Text
           style={{
             fontSize: FONT_SIZE_BIG,
-            fontFamily: 'MabryMedium',
+            // fontFamily: 'MabryMedium',
             marginBottom: 10,
           }}
         >
