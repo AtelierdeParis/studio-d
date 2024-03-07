@@ -15,7 +15,7 @@ export type CampaignDetailed = Campaign & {
 
 interface ICampaignContext {
   activeCampaigns?: CampaignDetailed[]
-  allPlaceCampaigns?: CampaignDetailed[]
+  placeCampaigns?: CampaignDetailed[]
   currentCampaign?: CampaignDetailed
   isCampaignPlace?: boolean
   hasActiveCampaign?: boolean

@@ -6,12 +6,12 @@ import useCampaignContext from '~components/Campaign/useCampaignContext'
 const CampaignSelectorField = () => {
   const { t } = useTranslation('application')
   const router = useRouter()
-  const { allPlaceCampaigns, isLoadingAllPlaceCampaigns } = useCampaignContext()
-  if (isLoadingAllPlaceCampaigns || !allPlaceCampaigns) {
+  const { placeCampaigns, isLoadingAllPlaceCampaigns } = useCampaignContext()
+  if (isLoadingAllPlaceCampaigns || !placeCampaigns) {
     return null
   }
 
-  if (allPlaceCampaigns.length === 1) {
+  if (placeCampaigns.length === 1) {
     return (
       <Text
         backgroundColor="blue.100"
@@ -20,7 +20,7 @@ const CampaignSelectorField = () => {
         borderRadius="18px"
         paddingX={4}
       >
-        {t('place.title_single_tag', { title: allPlaceCampaigns[0]?.title })}
+        {t('place.title_single_tag', { title: placeCampaigns[0]?.title })}
       </Text>
     )
   }
@@ -39,7 +39,7 @@ const CampaignSelectorField = () => {
         })
       }}
     >
-      {allPlaceCampaigns.map((campaign) => (
+      {placeCampaigns.map((campaign) => (
         <option key={campaign.id} value={campaign.id}>
           {campaign.title}
         </option>

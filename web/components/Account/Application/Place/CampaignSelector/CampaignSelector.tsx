@@ -10,17 +10,17 @@ import useSelectedCampaign from '~hooks/useSelectedCampaign'
 const CampaignSelector = ({ children }) => {
   const router = useRouter()
   const { campaign } = router.query
-  const { allPlaceCampaigns } = useCampaignContext()
+  const { placeCampaigns } = useCampaignContext()
   const { t } = useTranslation('application')
 
   // If no campaign defined in url select last one
   useEffect(() => {
-    if (!campaign && allPlaceCampaigns) {
+    if (!campaign && placeCampaigns) {
       router.push(
-        `${ROUTE_ACCOUNT_APPLICATIONS}?campaign=${allPlaceCampaigns?.[0]?.id}`,
+        `${ROUTE_ACCOUNT_APPLICATIONS}?campaign=${placeCampaigns?.[0]?.id}`,
       )
     }
-  }, [allPlaceCampaigns])
+  }, [placeCampaigns])
 
   const { selectedCampaign } = useSelectedCampaign()
 

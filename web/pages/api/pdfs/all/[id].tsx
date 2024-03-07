@@ -17,7 +17,6 @@ const MultipleApplication = async (req, res) => {
   }
 
   const { data: applications } = await client.applications.getMyApplications(
-    null,
     {
       //@ts-expect-error
       disponibility: disponibilityId,

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/07/2024 9:13:27 AM"
+    "x-generation-date": "03/07/2024 4:20:17 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -556,7 +556,7 @@
         ]
       }
     },
-    "/applications/me/{campaignId}": {
+    "/applications/me": {
       "get": {
         "deprecated": false,
         "description": "Get applications related to current user",
@@ -610,16 +610,6 @@
           "Application"
         ],
         "parameters": [
-          {
-            "name": "campaignId",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "_limit",
             "in": "query",
@@ -1281,12 +1271,9 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Application"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
                   }
                 }
               }

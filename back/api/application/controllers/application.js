@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  async myApplications(ctx) {
+  async getMyApplications(ctx) {
     const populateCommon = [
       'disponibility.espace',
       'disponibility.espace.users_permissions_user',
