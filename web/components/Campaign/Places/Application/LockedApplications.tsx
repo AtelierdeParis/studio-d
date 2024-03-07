@@ -7,6 +7,7 @@ import BookingScheduleContext from '~components/Place/Booking/BookingScheduleCon
 import { ROUTE_ACCOUNT_MY_APPLICATIONS } from '~constants'
 import { useCurrentUser } from '~hooks/useCurrentUser'
 import { Disponibility } from '~typings/api'
+import { format } from '~utils/date'
 
 const LockedApplications = ({
   disponibilities,
@@ -36,11 +37,37 @@ const LockedApplications = ({
         ),
     [disponibilities, selected],
   )
-  const hasReachedMax =
+
+  const hasReachedMaxWithSelected =
     selected?.length + applications?.length >=
       currentCampaign?.applications_max && unselectedDisponibilities?.length > 0
 
-  if (hasReachedMax) {
+  if (remainingApplications === 0) {
+    return (
+      <Box backgroundColor="gray.100" p={6} width="100%" borderRadius="8px">
+        <Text as="span" fontWeight="bold">
+          {t('detail.campaign.locked_max_start')}
+        </Text>
+        <Text as="span" pl={1}>
+          {t(`detail.campaign.locked_max_middle`, {
+            title: currentCampaign?.title,
+          })}
+        </Text>
+        <Link href={ROUTE_ACCOUNT_MY_APPLICATIONS}>
+          <Text as="span" pl={1} textDecoration="underline">
+            {t(`detail.campaign.locked_max_cta`, {
+              end_applications_date: format(currentCampaign?.application_end),
+            })}
+          </Text>
+        </Link>
+        <Text as="span" pl={1}>
+          {t(`detail.campaign.locked_max_end`)}
+        </Text>
+      </Box>
+    )
+  }
+
+  if (hasReachedMaxWithSelected) {
     const plural = remainingApplications === 1 ? 'singular' : 'plural'
     return (
       <Box backgroundColor="gray.100" p={6} width="100%" borderRadius="8px">

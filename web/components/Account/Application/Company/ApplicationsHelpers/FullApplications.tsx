@@ -24,7 +24,8 @@ const FullApplications = ({ numApplications }: { numApplications: number }) => {
           </Text>
           <Text as="span" pl={1}>
             {t('company.helper.full_end', {
-              date: format(currentCampaign.preselection_end),
+              end_applications_date: format(currentCampaign.application_end),
+              end_preselections_date: format(currentCampaign.preselection_end),
             })}
           </Text>
         </Box>

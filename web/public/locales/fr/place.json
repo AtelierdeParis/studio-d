@@ -360,7 +360,11 @@
       "locked_application_cta_plural": "Annulez l’une de vos candidatures en attente",
       "locked_application_cta_singular": "Annulez votre candidature en attente",
       "locked_application_end": "pour pouvoir postuler à un ou plusieurs des créneaux de cet espace.",
-      "locked_application_remaining_end": "pour pouvoir postuler à plus de créneaux de cet espace."
+      "locked_application_remaining_end": "pour pouvoir postuler à plus de créneaux de cet espace.",
+      "locked_max_start": "Vous avez atteint le nombre maximal de candidature déposées",
+      "locked_max_middle": "pour cette session du dispositif {{title}}.",
+      "locked_max_cta": "Annulez l’une de vos candidatures d'ici le {{end_applications_date}}",
+      "locked_max_end": "pour pouvoir postuler à un ou plusieurs des créneaux de cet espace."
     },
     "back": "Retour à la recherche",
     "seeMap": "Voir sur la carte",

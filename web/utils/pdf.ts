@@ -47,7 +47,10 @@ export const handleApplicationDownload = async ({
   link.parentNode?.removeChild(link)
 }
 
-export const formatDisponibilityPdfName = (disponibility: Disponibility) => {
+export const formatDisponibilityPdfName = (
+  disponibility: Disponibility,
+  campaign: Campaign,
+) => {
   return `${disponibility?.espace?.name?.split(' ').join('_')}_${format(
     disponibility?.start,
     'dd-MM-yyyy',
@@ -57,14 +60,16 @@ export const formatDisponibilityPdfName = (disponibility: Disponibility) => {
     //@ts-expect-error
   )}_${disponibility?.espace?.users_permissions_user?.structureName
     ?.split(' ')
-    .join('_')}_${disponibility?.campaign?.title?.split(' ').join('_')}.pdf`
+    .join('_')}_${campaign?.title?.split(' ').join('_')}.pdf`
 }
 
 export const handleDisponibilityDownload = async ({
   disponibility,
+  campaign,
   onError,
 }: {
   disponibility: Disponibility
+  campaign: Campaign
   onError: () => void
 }) => {
   const res = await fetch(`/api/pdfs/all/${disponibility.id}`)
@@ -75,7 +80,10 @@ export const handleDisponibilityDownload = async ({
   const url = window.URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = url
-  link.setAttribute('download', formatDisponibilityPdfName(disponibility))
+  link.setAttribute(
+    'download',
+    formatDisponibilityPdfName(disponibility, campaign),
+  )
   document.body.appendChild(link)
   link.click()
   link.parentNode?.removeChild(link)

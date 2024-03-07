@@ -22,9 +22,9 @@
       "cta": "Voir les espaces partenaires",
       "closed_start": "La période de candidature au dispositif {{title}} est maintenant clôturée.",
       "closed_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous hors de cette plateforme.",
-      "full_start": "Votre candidature est déposée pour le dispositif {{title}}.",
-      "full_starts": "Vos candidatures sont déposées pour le dispositif {{title}}.",
-      "full_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous par email. Merci pour votre participation."
+      "full_start": "Votre candidature est déposée pour le dispositif.",
+      "full_starts": "Vos candidatures sont déposées pour le dispositif.",
+      "full_end": "Vous pouvez changer d'avis et revoir vos choix d'ici le {{end_applications_date}}. Une fois cette date passée, les lieux partenaires recevront l'ensemble des candidatures et leurs décisions seront connues d'ici au {{end_preselections_date}}. En cas de sélection, le lieu prendra contact directement avec vous par email. Merci pour votre participation."
     },
     "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
     "delete_success": "Votre candidature a bien été supprimée",
@@ -67,7 +67,8 @@
       "confirm_success": "Vos pré-sélections ont bien été transmises à StudioD"
     },
     "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",
-    "no_applications": "Aucune candidature n'a été déposée pour ce créneau.",
+    "no_applications": "Aucune candidature déposée pour ce créneau pour le moment.",
+    "no_applications_past": "Aucune candidature n'a été déposée pour ce créneau.",
     "detail": {
       "title": "Candidature n°{{id}}",
       "header": {

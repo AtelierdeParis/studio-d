@@ -121,7 +121,17 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
         </SimpleGrid>
       ) : (
         <Box p={4} backgroundColor="gray.50" borderRadius={4} width="100%">
-          <Text>{t('place.no_applications')}</Text>
+          <Text>
+            {t(
+              `place.no_applications${
+                Boolean(
+                  ['closed', 'preselections']?.includes(selectedCampaign?.mode),
+                )
+                  ? '_past'
+                  : ''
+              }`,
+            )}
+          </Text>
         </Box>
       )}
 

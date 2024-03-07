@@ -45,6 +45,7 @@ const ApplicationDownloadAll = () => {
               //@ts-expect-error
               disponibility: applications[0]?.disponibility,
               onError: () => errorToast(t('error')),
+              campaign: selectedCampaign,
             })
           } catch (err) {
             console.log(err)

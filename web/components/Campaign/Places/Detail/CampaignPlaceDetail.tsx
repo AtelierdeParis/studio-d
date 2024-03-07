@@ -73,7 +73,7 @@ const CampaignPlaceDetail = ({ place }: Props) => {
               isMobile={isMobile}
               isCampaignTab={isCampaignTab}
             />
-            <CampaignPlaceFiles place={place} />
+            {isCampaignTab && <CampaignPlaceFiles place={place} />}
           </VStack>
         </Stack>
 
