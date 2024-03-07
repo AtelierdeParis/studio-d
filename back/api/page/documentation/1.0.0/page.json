@@ -534,6 +534,15 @@
           "url": {
             "type": "string",
             "minLength": 1
+          },
+          "link_title": {
+            "type": "string"
+          },
+          "show_in_header": {
+            "type": "boolean"
+          },
+          "show_in_footer": {
+            "type": "boolean"
           }
         }
       },
@@ -551,6 +560,15 @@
           "url": {
             "type": "string",
             "minLength": 1
+          },
+          "link_title": {
+            "type": "string"
+          },
+          "show_in_header": {
+            "type": "boolean"
+          },
+          "show_in_footer": {
+            "type": "boolean"
           },
           "created_by": {
             "type": "string"

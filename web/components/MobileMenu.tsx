@@ -31,6 +31,7 @@ import { useCurrentUser } from '~hooks/useCurrentUser'
 import Squares from 'public/assets/img/squares.svg'
 import AuthenticatedMenu from '~components/AuthenticatedMenu'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { usePages } from '~hooks/usePages'
 
 const MenuItem = ({ href, text }) => {
   const router = useRouter()
@@ -66,6 +67,7 @@ const MobileMenu = ({ colorMode }: Props) => {
   const { data: user } = useCurrentUser()
   const router = useRouter()
   const { currentCampaign } = useCampaignContext()
+  const { data: pages } = usePages({ show_in_header: true })
 
   useEffect(() => {
     if (isOpen) {
@@ -124,12 +126,15 @@ const MobileMenu = ({ colorMode }: Props) => {
               )}
 
               <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
-              {currentCampaign && currentCampaign?.article_link && (
+
+              {pages?.map((page) => (
                 <MenuItem
-                  href={currentCampaign?.article_link}
-                  text={t('nav.campaign', { title: currentCampaign?.title })}
+                  key={page.id}
+                  href={page.url}
+                  text={page.link_title}
                 />
-              )}
+              ))}
+
               <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
               <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
               <MenuItem href={ROUTE_CONTACT} text={t('nav.contact')} />

@@ -15,6 +15,7 @@ import { useTranslation } from 'next-i18next'
 import SigninModal from '~components/Signin/SigninModal'
 import { useSession } from 'next-auth/client'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { usePages } from '~hooks/usePages'
 
 const MenuItem = ({ href, text }) => {
   return (
@@ -28,18 +29,19 @@ const FooterMenu = () => {
   const [session, loading] = useSession()
   const { t } = useTranslation()
   const { currentCampaign } = useCampaignContext()
+  const { data: pages } = usePages({ show_in_footer: true })
+
   return (
     <Box>
       <Flex pr={12}>
         <Box>
           <MenuItem href="/" text={t('nav.home')} />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
-          {currentCampaign?.article_link && (
-            <MenuItem
-              href={currentCampaign?.article_link}
-              text={t('nav.campaign', { title: currentCampaign?.title })}
-            />
-          )}
+
+          {pages?.map((page) => (
+            <MenuItem key={page.id} href={page.url} text={page.link_title} />
+          ))}
+
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
