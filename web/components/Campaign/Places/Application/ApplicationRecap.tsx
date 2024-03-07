@@ -6,6 +6,7 @@ import {
   Text,
   Divider,
   Button,
+  VStack,
 } from '@chakra-ui/react'
 import { Espace } from '~typings/api'
 import Pin from 'public/assets/img/pin-outline.svg'
@@ -13,18 +14,23 @@ import BookingSelection from '~components/Place/Booking/BookingSelection'
 import { useTranslation, Trans } from 'next-i18next'
 import { ScheduleEvent } from '~@types/schedule-event'
 import { useMemo } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { useCurrentUser } from '~hooks/useCurrentUser'
+import { format } from '~utils/date'
 
 const ApplicationRecap = ({
   place,
   events,
-  back,
 }: {
   place: Espace
   events: ScheduleEvent[]
-  back: () => void
 }) => {
   const isPlural = useMemo(() => (events.length > 1 ? 's' : ''), [events])
   const { t } = useTranslation('place')
+  const { currentCampaign } = useCampaignContext()
+  const { applications } = useCurrentUser()
+  const remainingApplications =
+    currentCampaign?.applications_max - events.length - applications?.length
 
   return (
     <Box minW={{ base: 'auto', lg: '350px' }} flex={1}>
@@ -77,15 +83,27 @@ const ApplicationRecap = ({
           isCampaignMode
         />
       </Box>
-      <Button
-        mt={4}
-        variant="line"
-        onClick={() => back()}
-        borderBottomColor="blue.500"
-      >
-        {t('confirm.change')}
-      </Button>
-      <Divider my={6} display={{ base: 'block', lg: 'none' }} opacity="0.5" />
+
+      <VStack alignItems={'flex-start'}>
+        {remainingApplications > 0 && (
+          <Text color="gray.400">
+            {t(
+              `campaign.helpers.applications.recap_remaining_application${
+                remainingApplications > 1 ? 's' : ''
+              }`,
+              {
+                num: remainingApplications,
+              },
+            )}
+          </Text>
+        )}
+
+        <Text color="gray.400">
+          {t('campaign.helpers.applications.recap_helper_date', {
+            application_end_date: format(currentCampaign?.application_end),
+          })}
+        </Text>
+      </VStack>
     </Box>
   )
 }

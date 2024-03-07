@@ -52,7 +52,7 @@ const CampaignApplicationPopin = ({ events, place, back }: Props) => {
             place={place}
           />
 
-          <ApplicationRecap place={place} events={events} back={back} />
+          <ApplicationRecap place={place} events={events} />
         </Stack>
       </VStack>
     </Box>

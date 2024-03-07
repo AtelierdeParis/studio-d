@@ -591,7 +591,10 @@
           "open_applications_one": "créneau renseigné",
           "open_applications_many": "créneaux renseignés",
           "see_applications": "Voir les candidatures pour cet espace"
-        }
+        },
+        "recap_helper_date": "Vous pouvez annuler tout dépôt d'ici la fin des candidatures, soit le {{application_end_date}} à minuit.",
+        "recap_remaining_application": "Après ce dépôt, vous pourrez encore candidater à 1 autre créneau au sein des lieux partenaires de l'appel à projet.",
+        "recap_remaining_applications": "Après ce dépôt, vous pourrez encore candidater à {{num}} autres créneaux au sein des lieux partenaires de l'appel à projet."
       },
       "disponibilities": {
         "home": {
