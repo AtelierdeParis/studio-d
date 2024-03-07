@@ -29,6 +29,7 @@ import { UsersPermissionsUser } from '~typings/api'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import { useUserIsComplete } from '~hooks/useUserIsComplete'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { useMyApplications } from '~hooks/useMyApplications'
 
 const accountItems = {
   title: 'myAccount',
@@ -127,7 +128,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
 
-  const { currentCampaign, allPlaceCampaigns } = useCampaignContext()
+  const { currentCampaign, placeCampaigns } = useCampaignContext()
   const applicationItems = useMemo(
     () =>
       getApplicationsItems({
@@ -140,15 +141,20 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     [currentCampaign, user?.type],
   )
 
-  const placeItems = useMemo(() => getPlaceItems(allPlaceCampaigns?.length), [
-    allPlaceCampaigns?.length,
+  const { data: applications } = useMyApplications({})
+
+  const placeItems = useMemo(() => getPlaceItems(placeCampaigns?.length), [
+    placeCampaigns?.length,
   ])
+
   const companyItems = useMemo(
     () => getCompanyItems(Boolean(currentCampaign)),
     [currentCampaign],
   )
   const displayApplications =
-    (user?.type === 'place' && allPlaceCampaigns?.length) ||
+    (user?.type === 'place' &&
+      placeCampaigns?.length &&
+      applications?.length) ||
     (user?.type === 'company' && currentCampaign)
 
   const displayMenu = ({ title, items, translationParams = {} }) => {

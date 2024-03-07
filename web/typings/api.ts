@@ -1342,11 +1342,11 @@ export namespace Applications {
    * @description Get applications related to current user
    * @tags Application
    * @name GetMyApplications
-   * @request GET:/applications/me/{campaignId}
+   * @request GET:/applications/me
    * @secure
    */
   export namespace GetMyApplications {
-    export type RequestParams = { campaignId: string };
+    export type RequestParams = {};
     export type RequestQuery = {
       _limit?: number;
       _sort?: string;
@@ -1465,7 +1465,7 @@ export namespace Applications {
     export type ResponseBody = number;
   }
   /**
-   * @description Get confirmed applications related to a specific campaign
+   * @description Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user
    * @tags Application
    * @name GetConfirmedApplicationsByCampaign
    * @request GET:/applications/confirmed/{campaignId}
@@ -1476,7 +1476,7 @@ export namespace Applications {
     export type RequestQuery = {};
     export type RequestBody = never;
     export type RequestHeaders = {};
-    export type ResponseBody = Application[];
+    export type ResponseBody = Record<string, Application[]>;
   }
 }
 
@@ -3600,11 +3600,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Application
      * @name GetMyApplications
-     * @request GET:/applications/me/{campaignId}
+     * @request GET:/applications/me
      * @secure
      */
     getMyApplications: (
-      campaignId: string,
       query?: {
         _limit?: number;
         _sort?: string;
@@ -3623,7 +3622,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       params: RequestParams = {},
     ) =>
       this.request<Application[], Error>({
-        path: `/applications/me/${campaignId}`,
+        path: `/applications/me`,
         method: "GET",
         query: query,
         secure: true,
@@ -3756,7 +3755,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Get confirmed applications related to a specific campaign
+     * @description Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user
      *
      * @tags Application
      * @name GetConfirmedApplicationsByCampaign
@@ -3764,7 +3763,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     getConfirmedApplicationsByCampaign: (campaignId: string, params: RequestParams = {}) =>
-      this.request<Application[], Error>({
+      this.request<Record<string, Application[]>, Error>({
         path: `/applications/confirmed/${campaignId}`,
         method: "GET",
         secure: true,

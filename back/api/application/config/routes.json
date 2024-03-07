@@ -2,11 +2,11 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/applications/me/:campaignId",
-      "handler": "application.myApplications",
+      "path": "/applications/me",
+      "handler": "application.getMyApplications",
       "config": {
         "policies": ["global::is-authenticated"],
-        "operationId": "myApplications",
+        "operationId": "getMyApplications",
         "description": "Get applications related to current user"
       }
     },

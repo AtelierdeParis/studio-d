@@ -27,19 +27,13 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
   const today = new Date()
   const { data: user } = useCurrentUser()
 
-  const activeCampaignsQueryParameters = useMemo(
-    () => ({
-      is_active: true,
-      _sort: 'id:desc',
-    }),
-    [],
-  )
-  const { data: campaigns, isLoading } = useCampaigns(
-    activeCampaignsQueryParameters,
-  )
+  const { data: activeCampaignsData, isLoading } = useCampaigns({
+    is_active: true,
+    _sort: 'id:desc',
+  })
 
   const {
-    data: campaignsAll,
+    data: placeCampaignData,
     isLoading: isLoadingAllPlaceCampaigns,
   } = useCampaigns(
     {
@@ -91,22 +85,22 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
 
   const activeCampaigns = useMemo(
     () =>
-      campaigns?.map((campaign) => {
+      activeCampaignsData?.map((campaign) => {
         const mode = getCampaignMode(campaign) as CampaignMode
         const limitDate = getLimitDate(campaign, mode)
         return { ...campaign, mode, limitDate }
       }) || null,
-    [campaigns],
+    [activeCampaignsData],
   )
 
-  const allPlaceCampaigns = useMemo(
+  const placeCampaigns = useMemo(
     () =>
-      campaignsAll?.map((campaign) => {
+      placeCampaignData?.map((campaign) => {
         const mode = getCampaignMode(campaign) as CampaignMode
         const limitDate = getLimitDate(campaign, mode)
         return { ...campaign, mode, limitDate }
       }) || null,
-    [campaignsAll],
+    [placeCampaignData],
   )
 
   const currentCampaign = activeCampaigns?.[0]
@@ -129,7 +123,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
         isCampaignPlace,
         hasActiveCampaign,
         isLoading,
-        allPlaceCampaigns,
+        placeCampaigns,
         isLoadingAllPlaceCampaigns,
       }}
     >

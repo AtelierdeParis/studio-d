@@ -15,7 +15,6 @@ const ApplicationDownloadAll = () => {
   const [isDownloading, setIsDownloading] = useState(false)
   const { data: applications, isLoading, isFetching } = useMyApplications({
     name: ['myApplications', query?.disponibility as string],
-    campaignId: query.campaign as string,
     searchParams: { ...query, _sort: 'company.structureName:asc' },
     options: {
       enabled: Boolean(query?.disponibility) && Boolean(query?.espace),

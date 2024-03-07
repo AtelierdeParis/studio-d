@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/applications/me/{campaignId}": {
+    "/applications/me": {
       "get": {
         "deprecated": false,
         "description": "Get applications related to current user",
@@ -53,16 +53,6 @@
         "summary": "",
         "tags": ["Application"],
         "parameters": [
-          {
-            "name": "campaignId",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "_limit",
             "in": "query",

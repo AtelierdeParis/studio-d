@@ -5,11 +5,9 @@ import { Application, Applications } from '~typings/api'
 export const useMyApplications = ({
   searchParams = {},
   options = {},
-  campaignId,
   name = ['myApplications'],
 }: {
   searchParams?: Applications.ApplicationsList.RequestQuery
-  campaignId: string
   options?: UseQueryOptions<Application[]>
   name?: string[]
 }) => {
@@ -17,7 +15,7 @@ export const useMyApplications = ({
     name,
     () =>
       client.applications
-        .getMyApplications(campaignId, searchParams)
+        .getMyApplications(searchParams)
         .then((res) => res.data),
     options,
   )
