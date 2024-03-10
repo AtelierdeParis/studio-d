@@ -16,11 +16,12 @@ import ApplicationDetailHeader from '~components/Account/Application/Place/Detai
 import { Application } from '~typings/api'
 import ApplicationRightPanel from '~components/Account/Application/Place/DetailDrawer/ApplicationRightPanel'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Document, Page } from 'react-pdf'
 
 import useToast from '~hooks/useToast'
 import { handleApplicationDownload } from '~utils/pdf'
+import ApplicationDetails from '~components/Account/Application/Place/DetailDrawer/ApplicationDetails'
 
 const ApplicationDetailDrawer = ({
   isOpen,
@@ -35,6 +36,7 @@ const ApplicationDetailDrawer = ({
 }) => {
   const { t } = useTranslation('application')
   const { id } = application ?? {}
+  const [displayPdf, setDisplayPdf] = useState(false)
   const [isDownloading, setIsDownloading] = useState(false)
   const [scales, setScales] = useState([])
   const { errorToast } = useToast()
@@ -55,27 +57,38 @@ const ApplicationDetailDrawer = ({
     }
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDisplayPdf(true)
+    }, 1500)
+  }, [id, isOpen])
+
   if (!application) {
     return null
   }
 
   return (
-    <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xl">
+    <Drawer
+      isOpen={isOpen}
+      placement="right"
+      onClose={() => {
+        setDisplayPdf(false)
+        onClose()
+      }}
+      size="xl"
+    >
       <DrawerOverlay />
       <DrawerContent p={6} height="100%" overflowY="auto">
         <DrawerCloseButton />
         <DrawerHeader paddingY={0} paddingLeft={0}>
           {t('place.detail.title', { id })}
         </DrawerHeader>
-
         <VStack paddingY={4} height="100%">
           <ApplicationDetailHeader application={application} />
           <Divider />
-
           <Box width="100%" height="100%" paddingBottom={'100px'}>
             <Grid
               templateColumns={'repeat(3, 1fr)'}
-              gap={4}
               width="100%"
               height="100%"
             >
@@ -86,47 +99,52 @@ const ApplicationDetailDrawer = ({
                 display="flex"
                 height="100%"
                 width="100%"
+                flexDirection="column"
               >
-                <Document
-                  file={`/api/pdfs/single/${application.id}`}
-                  onLoadSuccess={({ numPages }) => {
-                    setNumPages(numPages)
-                  }}
-                  loading={
-                    <Skeleton
-                      height="100vh"
-                      width="100vw"
-                      variant="rectangle"
-                    />
-                  }
-                  style={{ height: '100%' }}
-                >
-                  {Array.from(new Array(numPages), (el, index) => (
-                    <Page
-                      key={`page_${index + 1}`}
-                      pageNumber={index + 1}
-                      onRenderSuccess={(page) => {
-                        const viewport = page.getViewport({ scale: 1 })
-                        if (viewport) {
-                          const orientation =
-                            viewport.width > viewport.height
-                              ? 'landscape'
-                              : 'portrait'
-                          // Adjust the scale based on the orientation
-                          const scale = orientation === 'landscape' ? 0.7 : 1.0
-                          setScales((prevScales) => {
-                            const newScales = [...prevScales]
-                            newScales[index] = scale
-                            return newScales
-                          })
-                        }
-                      }}
-                      scale={scales[index] || 1.0}
-                    />
-                  ))}
-                </Document>
+                <ApplicationDetails application={application} />
+                <Divider opacity={0.4} />
+                {displayPdf && (
+                  <Document
+                    file={application?.creation_file?.[0]?.url}
+                    onLoadSuccess={({ numPages }) => {
+                      setNumPages(numPages)
+                    }}
+                    loading={
+                      <Skeleton
+                        height="100vh"
+                        width="100vw"
+                        variant="rectangle"
+                      />
+                    }
+                    style={{ height: '100%' }}
+                  >
+                    {Array.from(new Array(numPages), (_el, index) => (
+                      <Page
+                        key={`page_${index + 1}`}
+                        pageNumber={index + 1}
+                        onRenderSuccess={(page) => {
+                          const viewport = page.getViewport({ scale: 1 })
+                          if (viewport) {
+                            const orientation =
+                              viewport.width > viewport.height
+                                ? 'landscape'
+                                : 'portrait'
+                            // Adjust the scale based on the orientation
+                            const scale =
+                              orientation === 'landscape' ? 0.7 : 1.0
+                            setScales((prevScales) => {
+                              const newScales = [...prevScales]
+                              newScales[index] = scale
+                              return newScales
+                            })
+                          }
+                        }}
+                        scale={scales[index] || 1.0}
+                      />
+                    ))}
+                  </Document>
+                )}
               </GridItem>
-
               <GridItem
                 colSpan={{ base: 3, md: 1 }}
                 borderLeft={{ base: 'none', md: '1px solid lightgray' }}

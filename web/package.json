@@ -25,6 +25,7 @@
     "@mapbox/mapbox-sdk": "^0.12.1",
     "@react-pdf/renderer": "1.6.17",
     "@svgr/webpack": "^6.2.1",
+    "adm-zip": "^0.5.10",
     "axios": "^0.21.1",
     "babel-plugin-transform-require-ignore": "^0.1.1",
     "date-fns": "^2.19.0",

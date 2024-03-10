@@ -36,7 +36,15 @@ const CompanyApplications = ({ user }: Props) => {
     }
   }, [currentCampaign])
 
-  if (!currentCampaign) return null
+  if (!currentCampaign) {    
+    return null
+  }
+
+  if (currentCampaign?.mode === "closed") {
+    router.push(ROUTE_ACCOUNT)
+    return null
+  }
+  
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.requests')} />

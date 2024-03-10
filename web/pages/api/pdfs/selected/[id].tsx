@@ -3,9 +3,8 @@ import { renderToStream } from '@react-pdf/renderer'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
 import { getSession } from 'next-auth/client'
-import PDFMerger from 'pdf-merger-js'
-import { formatCampaignPdfName, getBufferFromStream } from '~utils/pdf'
-import DividerPage from '~components/pdfs/DividerPage'
+import { formatCampaignZipName, getBufferFromStream } from '~utils/pdf'
+import AdmZip  from "adm-zip"
 
 const SelectedCampaignApplications = async (req, res) => {
   const { id: campaignId } = req.query
@@ -17,7 +16,7 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  let finalPDF
+  const zip = new AdmZip();
   const { data: campaign } = await client.campaigns.campaignsDetail(campaignId)
 
   try {
@@ -54,11 +53,10 @@ const SelectedCampaignApplications = async (req, res) => {
       groupedApplications[userId].sort((a, b) => {
         const aId = a.disponibility?.id || 0
         const bId = b.disponibility?.id || 0
+
         return aId - bId
       })
     }
-
-    const merger = new PDFMerger()
 
     const userIds = Object.keys(groupedApplications)
 
@@ -66,30 +64,26 @@ const SelectedCampaignApplications = async (req, res) => {
       const applications = groupedApplications[userId]
       const place =
         applications[0]?.disponibility?.espace?.users_permissions_user
-
-      const dividerStream = await renderToStream(
-        <DividerPage place={place} campaign={campaign} />,
-      )
-      const dividerStreamBufffer = await getBufferFromStream(dividerStream)
-      await merger.add(dividerStreamBufffer)
-
+      const name =  place?.structureName
+      
+      
       for (const application of applications) {
         const stream = await renderToStream(
           <ApplicationDocument application={application} />,
-        )
+          )
+          
         const streamBuffer = await getBufferFromStream(stream)
-        await merger.add(streamBuffer)
+        await zip.addFile(`${name}/candidature.pdf`, streamBuffer);
 
         if (application?.creation_file?.[0]?.url) {
           const creationFile = await fetch(application?.creation_file?.[0]?.url)
-          const creationFileArrayBuffer = await creationFile.arrayBuffer()
-
-          await merger.add(creationFileArrayBuffer)
+          // @ts-ignore
+          const creationFileArrayBuffer = await creationFile.buffer()
+          
+          await zip.addFile(`${name}/dossier-artistique.pdf`, creationFileArrayBuffer);
         }
       }
     }
-
-    finalPDF = await merger.saveAsBuffer()
   } catch (error) {
     console.error(error)
     res
@@ -98,12 +92,14 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  res.setHeader('Content-Type', 'application/pdf')
+  const zipBuffer = zip.toBuffer();
+
+  res.setHeader('Content-Type', 'application/zip')
   res.setHeader(
     'Content-Disposition',
-    'attachment; filename=' + formatCampaignPdfName(campaign),
+    'attachment; filename=' + formatCampaignZipName(campaign),
   )
-  res.send(finalPDF)
+  res.send(zipBuffer)
 }
 
 export default SelectedCampaignApplications

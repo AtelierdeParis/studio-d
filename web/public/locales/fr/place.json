@@ -465,7 +465,7 @@
     },
     "general": {
       "title": " Informations générales",
-      "subtitle": "Avez-vous déjà été soutenu·e par {{place}}?",
+      "subtitle": "Avez-vous déjà été soutenu·e par {{place}} ?",
       "bio": "C.V.  |  Biographie du / de la chorégraphe",
       "bioHelper": "(3000 signes maximum)"
     },
