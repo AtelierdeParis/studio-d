@@ -47,7 +47,7 @@ export const handleApplicationDownload = async ({
   link.parentNode?.removeChild(link)
 }
 
-export const formatDisponibilityPdfName = (
+export const formatDisponibilityZipName = (
   disponibility: Disponibility,
   campaign: Campaign,
 ) => {
@@ -60,35 +60,9 @@ export const formatDisponibilityPdfName = (
     //@ts-expect-error
   )}_${disponibility?.espace?.users_permissions_user?.structureName
     ?.split(' ')
-    .join('_')}_${campaign?.title?.split(' ').join('_')}.pdf`
+    .join('_')}_${campaign?.title?.split(' ').join('_')}.zip`
 }
 
-export const handleDisponibilityDownload = async ({
-  disponibility,
-  campaign,
-  onError,
-}: {
-  disponibility: Disponibility
-  campaign: Campaign
-  onError: () => void
-}) => {
-  const res = await fetch(`/api/pdfs/all/${disponibility.id}`)
-  if (!res.ok) {
-    onError()
-  }
-  const blob = await res.blob()
-  const url = window.URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.setAttribute(
-    'download',
-    formatDisponibilityPdfName(disponibility, campaign),
-  )
-  document.body.appendChild(link)
-  link.click()
-  link.parentNode?.removeChild(link)
-}
-
-export const formatCampaignPdfName = (campaign: Campaign) => {
-  return `${campaign?.title?.split(' ').join('_')}.pdf`
+export const formatCampaignZipName = (campaign: Campaign) => {
+  return `${campaign?.title?.split(' ').join('_')}.zip`
 }

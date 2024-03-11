@@ -155,7 +155,8 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     (user?.type === 'place' &&
       placeCampaigns?.length &&
       applications?.length) ||
-    (user?.type === 'company' && currentCampaign)
+    (user?.type === 'company' && currentCampaign && currentCampaign.mode !== "closed")
+
 
   const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'

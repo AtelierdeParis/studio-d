@@ -3,8 +3,8 @@ import { renderToStream } from '@react-pdf/renderer'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
 import { getSession } from 'next-auth/client'
-import PDFMerger from 'pdf-merger-js'
-import { formatDisponibilityPdfName, getBufferFromStream } from '~utils/pdf'
+import { formatDisponibilityZipName, getBufferFromStream } from '~utils/pdf'
+import AdmZip  from "adm-zip"
 
 const MultipleApplication = async (req, res) => {
   const { id: disponibilityId } = req.query
@@ -31,34 +31,34 @@ const MultipleApplication = async (req, res) => {
   const disponibility = applications?.[0]?.disponibility
   const campaign = applications?.[0]?.campaign
 
-  const merger = new PDFMerger()
-  let finalPDF
+  const zip = new AdmZip();
 
   for (const application of applications) {
+    const name = application.company?.structureName;
     const stream = await renderToStream(
       <ApplicationDocument application={application} />,
     )
     const streamBuffer = await getBufferFromStream(stream)
-    await merger.add(streamBuffer)
+    await zip.addFile(`${name}/candidature.pdf`, streamBuffer);
 
     if (application?.creation_file?.[0]?.url) {
       const creationFile = await fetch(application?.creation_file?.[0]?.url)
-      const creationFileArrayBuffer = await creationFile.arrayBuffer()
-
-      await merger.add(creationFileArrayBuffer)
+      
+      // @ts-ignore
+      const creationFileArrayBuffer = await creationFile.buffer()
+      await zip.addFile(`${name}/dossier-artistique.pdf`, creationFileArrayBuffer);
     }
   }
 
-  finalPDF = await merger.saveAsBuffer()
+  const zipBuffer = zip.toBuffer();
 
-  res.setHeader('Content-Type', 'application/pdf')
+  res.setHeader('Content-Type', 'application/zip')
   res.setHeader(
     'Content-Disposition',
-    'attachment; filename=' +
-      // @ts-expect-error
-      formatDisponibilityPdfName(disponibility, campaign),
+    // @ts-expect-error
+    'attachment; filename=' + formatDisponibilityZipName(disponibility, campaign),
   )
-  res.send(finalPDF)
+  res.send(zipBuffer)
 }
 
 export default MultipleApplication

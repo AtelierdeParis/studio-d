@@ -104,6 +104,11 @@ const theme = extendTheme({
     Divider,
     Input,
     Textarea,
+    Drawer: {
+      sizes: {
+        xl: { dialog: { maxW: '65rem' } },
+      },
+    },
   },
   textStyles: {
     h1: {
