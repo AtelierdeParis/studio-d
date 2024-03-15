@@ -348,8 +348,8 @@
         "no_accomodation": "Pas d'hébergement possible.",
         "no_staff": "Pas de personnel technique.",
         "staff": "Personnel technique possible {{list}}",
-        "scene_grid": "Grille scénique possible.",
-        "no_scene_grid": "Pas de grille scénique possible.",
+        "scene_grid": "Gril scénique possible.",
+        "no_scene_grid": "Pas de gril scénique possible.",
         "closed_on": "(fermeture le {{days}})"
       },
       "locked_application_start_plural": "Vous avez déjà postulé à {{nb}} créneaux",
@@ -378,7 +378,7 @@
     "danceBar": "Barre de danse",
     "technicalStaff": "Personnel technique",
     "accomodation": "Hébergement",
-    "scene_grid": "Grille scénique",
+    "scene_grid": "Gril scénique",
     "yes": "Oui",
     "no": "Non",
     "true": "Oui",
@@ -573,7 +573,7 @@
         "5": "5+ personnes"
       },
       "scene_grid": {
-        "label": "Grille scénique",
+        "label": "Gril scénique",
         "placeholder": "Choisir",
         "true": "Oui",
         "false": "Non"
