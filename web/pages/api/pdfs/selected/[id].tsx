@@ -1,10 +1,10 @@
 // @ts-ignore
 import { renderToStream } from '@react-pdf/renderer'
+import AdmZip from 'adm-zip'
+import { getSession } from 'next-auth/client'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
-import { getSession } from 'next-auth/client'
 import { formatCampaignZipName, getBufferFromStream } from '~utils/pdf'
-import AdmZip  from "adm-zip"
 
 const SelectedCampaignApplications = async (req, res) => {
   const { id: campaignId } = req.query
@@ -16,21 +16,22 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  const zip = new AdmZip();
+  const zip = new AdmZip()
   const { data: campaign } = await client.campaigns.campaignsDetail(campaignId)
+  console.log({jwt:session.user.jwt})
 
   try {
     const {
       data: selectedApplications,
     } = await client.applications.getConfirmedApplicationsByCampaign(
       campaignId,
-
       {
         headers: {
           Authorization: `Bearer ${session.user.jwt}`,
         },
       },
     )
+
 
     // Group by place
     const groupedApplications = selectedApplications.reduce(
@@ -48,6 +49,7 @@ const SelectedCampaignApplications = async (req, res) => {
       },
       {},
     )
+
     // Group by espace AND disponibility
     for (const userId in groupedApplications) {
       groupedApplications[userId].sort((a, b) => {
@@ -64,23 +66,31 @@ const SelectedCampaignApplications = async (req, res) => {
       const applications = groupedApplications[userId]
       const place =
         applications[0]?.disponibility?.espace?.users_permissions_user
-      const name =  place?.structureName
-      
-      
+      const name = place?.structureName
+
       for (const application of applications) {
+        const structureName = application.company?.structureName
+
         const stream = await renderToStream(
           <ApplicationDocument application={application} />,
-          )
-          
+        )
+
+        const refLabel = `Ref. ${application.id}`
         const streamBuffer = await getBufferFromStream(stream)
-        await zip.addFile(`${name}/candidature.pdf`, streamBuffer);
+        await zip.addFile(
+          `${name}/${refLabel} - ${structureName}/${refLabel} - Candidature.pdf`,
+          streamBuffer,
+        )
 
         if (application?.creation_file?.[0]?.url) {
           const creationFile = await fetch(application?.creation_file?.[0]?.url)
           // @ts-ignore
           const creationFileArrayBuffer = await creationFile.buffer()
-          
-          await zip.addFile(`${name}/dossier-artistique.pdf`, creationFileArrayBuffer);
+
+          await zip.addFile(
+            `${name}/${refLabel} - ${structureName}/${refLabel} - Dossier artistique.pdf`,
+            creationFileArrayBuffer,
+          )
         }
       }
     }
@@ -92,7 +102,7 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  const zipBuffer = zip.toBuffer();
+  const zipBuffer = zip.toBuffer()
 
   res.setHeader('Content-Type', 'application/zip')
   res.setHeader(

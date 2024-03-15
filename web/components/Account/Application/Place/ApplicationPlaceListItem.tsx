@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react'
-import { Application } from '~typings/api'
-import { Text, Button, HStack } from '@chakra-ui/react'
+import { Button, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import { Fragment } from 'react'
+import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationDownloadButton'
+import ApplicationStatusIcon from '~components/Account/Application/Place/ApplicationStatusIcon'
 import Cell from '~components/Account/Booking/Cell'
 import Link from '~components/Link'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
-import ApplicationStatusIcon from '~components/Account/Application/Place/ApplicationStatusIcon'
-import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationDownloadButton'
+import { Application } from '~typings/api'
 
 interface Props {
   application: Application
@@ -30,7 +30,7 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
           fontWeight="500"
           pr={2}
           as="span"
-        >{`${application?.company?.structureName} (${application.company.firstname} ${application.company.lastname})`}</Text>
+        >{`${application?.company?.structureName} (${application.company?.firstname} ${application.company?.lastname})`}</Text>
         <ApplicationStatusIcon status={application?.status} />
       </Cell>
       <Cell cursor="default">

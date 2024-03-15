@@ -1,35 +1,35 @@
-import React, { useMemo } from 'react'
-import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
-import {
-  ROUTE_USE_POLICY,
-  ROUTE_ACCOUNT_INFORMATION,
-  ROUTE_ACCOUNT_REQUEST,
-  ROUTE_ACCOUNT_BOOKING,
-  ROUTE_ACCOUNT_MESSAGE,
-  ROUTE_ACCOUNT_PLACES,
-  ROUTE_ACCOUNT_APPLICATIONS,
-  ROUTE_ACCOUNT_MY_APPLICATIONS,
-} from '~constants'
-import Link from '~components/Link'
-import Back from 'public/assets/img/back.svg'
-import Notif from '~components/Notif'
-import Profile from 'public/assets/img/user.svg'
+import { Box, BoxProps, Flex, Image, Text, VStack } from '@chakra-ui/react'
+import { signOut } from 'next-auth/client'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
 import Applications from 'public/assets/img/applicationsSmall.svg'
 import ApplicationsLoading from 'public/assets/img/applicationsSmallLoading.svg'
-import Charte from 'public/assets/img/charte.svg'
-import Logout from 'public/assets/img/logout.svg'
-import Home from 'public/assets/img/home.svg'
+import Back from 'public/assets/img/back.svg'
 import Calendar from 'public/assets/img/calendar.svg'
+import Charte from 'public/assets/img/charte.svg'
+import Home from 'public/assets/img/home.svg'
+import Logout from 'public/assets/img/logout.svg'
 import Message from 'public/assets/img/message.svg'
 import Question from 'public/assets/img/question.svg'
-import { useTranslation } from 'next-i18next'
-import { signOut } from 'next-auth/client'
-import { useRouter } from 'next/router'
-import { UsersPermissionsUser } from '~typings/api'
+import Profile from 'public/assets/img/user.svg'
+import { useMemo } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import Link from '~components/Link'
+import Notif from '~components/Notif'
+import {
+  ROUTE_ACCOUNT_APPLICATIONS,
+  ROUTE_ACCOUNT_BOOKING,
+  ROUTE_ACCOUNT_INFORMATION,
+  ROUTE_ACCOUNT_MESSAGE,
+  ROUTE_ACCOUNT_MY_APPLICATIONS,
+  ROUTE_ACCOUNT_PLACES,
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_USE_POLICY,
+} from '~constants'
+import { useMyApplications } from '~hooks/useMyApplications'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import { useUserIsComplete } from '~hooks/useUserIsComplete'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { useMyApplications } from '~hooks/useMyApplications'
+import { UsersPermissionsUser } from '~typings/api'
 
 const accountItems = {
   title: 'myAccount',
@@ -155,8 +155,14 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
     (user?.type === 'place' &&
       placeCampaigns?.length &&
       applications?.length) ||
-    (user?.type === 'company' && currentCampaign && currentCampaign.mode !== "closed")
+    (user?.type === 'company' &&
+      currentCampaign &&
+      currentCampaign.mode !== 'closed')
 
+  const hideApplication =
+    currentCampaign?.mode === 'preselections' &&
+    !applications?.length &&
+    user?.type === 'company'
 
   const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'
@@ -259,7 +265,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           {user?.confirmed &&
             user?.accepted &&
             displayMenu(user?.type === 'company' ? companyItems : placeItems)}
-          {displayApplications && displayMenu(applicationItems)}
+          {displayApplications &&
+            !hideApplication &&
+            displayMenu(applicationItems)}
           {displayMenu(accountItems)}
         </VStack>
       </Box>

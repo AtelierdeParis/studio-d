@@ -1,18 +1,17 @@
-import React, { useEffect } from 'react'
-import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
+import { SSRConfig, useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import ApplicationCompanyList from '~components/Account/Application/Company/ApplicationCompanyList'
+import InfoCompanyApplications from '~components/Account/Info/InfoCompanyApplications'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import Loading from '~components/Loading'
+import { ROUTE_ACCOUNT } from '~constants'
+import { useMyApplications } from '~hooks/useMyApplications'
 import { UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
-import Loading from '~components/Loading'
-import { NextSeo } from 'next-seo'
-import { useTranslation } from 'next-i18next'
-import { useMyApplications } from '~hooks/useMyApplications'
-import InfoCompanyApplications from '~components/Account/Info/InfoCompanyApplications'
-import ApplicationCompanyList from '~components/Account/Application/Company/ApplicationCompanyList'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { useRouter } from 'next/router'
-import { ROUTE_ACCOUNT } from '~constants'
 interface Props {
   user: UsersPermissionsUser
 }
@@ -23,6 +22,7 @@ const CompanyApplications = ({ user }: Props) => {
   const { currentCampaign, isLoading: isLoadingCampaign } = useCampaignContext()
   const { data: applications, isLoading } = useMyApplications({
     options: { enabled: !!currentCampaign?.id },
+    name: ['myApplications', currentCampaign?.id],
     searchParams: {
       _sort: 'disponibility.start:asc',
       //@ts-expect-error
@@ -36,15 +36,20 @@ const CompanyApplications = ({ user }: Props) => {
     }
   }, [currentCampaign])
 
-  if (!currentCampaign) {    
+  if (!currentCampaign) {
     return null
   }
 
-  if (currentCampaign?.mode === "closed") {
+  if (currentCampaign?.mode === 'closed') {
     router.push(ROUTE_ACCOUNT)
     return null
   }
-  
+
+  if (currentCampaign?.mode === 'preselections' && applications?.length === 0) {
+    router.push(ROUTE_ACCOUNT)
+    return null
+  }
+
   return (
     <Loading isLoading={isLoading} isCentered>
       <NextSeo title={t('title.requests')} />
