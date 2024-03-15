@@ -47,22 +47,13 @@ export const handleApplicationDownload = async ({
   link.parentNode?.removeChild(link)
 }
 
-export const formatDisponibilityZipName = (
-  disponibility: Disponibility,
-  campaign: Campaign,
-) => {
-  return `${disponibility?.espace?.name?.split(' ').join('_')}_${format(
+export const formatDisponibilityZipName = (disponibility: Disponibility) => {
+  return `${disponibility?.espace?.name} - Candidatures période du ${format(
     disponibility?.start,
     'dd-MM-yyyy',
-  )}_${format(
-    disponibility?.end,
-    'dd-MM-yyyy',
-    //@ts-expect-error
-  )}_${disponibility?.espace?.users_permissions_user?.structureName
-    ?.split(' ')
-    .join('_')}_${campaign?.title?.split(' ').join('_')}.zip`
+  )} au ${format(disponibility?.end, 'dd-MM-yyyy')}.zip`
 }
 
 export const formatCampaignZipName = (campaign: Campaign) => {
-  return `${campaign?.title?.split(' ').join('_')}.zip`
+  return `${campaign?.title}.zip`
 }

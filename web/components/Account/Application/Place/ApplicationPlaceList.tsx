@@ -1,22 +1,22 @@
-import React, { useEffect, useMemo, useState } from 'react'
 import {
-  Flex,
-  Text,
-  SimpleGrid,
   Box,
   Divider as ChakraDivider,
   DividerProps,
+  Flex,
+  SimpleGrid,
+  Text,
   useDisclosure,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Application } from '~typings/api'
-import Chevron from 'public/assets/img/chevron-down.svg'
-import Cell from '~components/Account/Booking/Cell'
-import ApplicationPlaceHelper from '~components/Account/Application/Place/ApplicationsHelpers/ApplicationPlaceHelper'
-import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
-import useSelectedCampaign from '~hooks/useSelectedCampaign'
-import ApplicationDetailDrawer from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailDrawer'
 import { useRouter } from 'next/router'
+import Chevron from 'public/assets/img/chevron-down.svg'
+import { useEffect, useMemo, useState } from 'react'
+import ApplicationPlaceListItem from '~components/Account/Application/Place/ApplicationPlaceListItem'
+import ApplicationPlaceHelper from '~components/Account/Application/Place/ApplicationsHelpers/ApplicationPlaceHelper'
+import ApplicationDetailDrawer from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailDrawer'
+import Cell from '~components/Account/Booking/Cell'
+import useSelectedCampaign from '~hooks/useSelectedCampaign'
+import { Application } from '~typings/api'
 
 interface Props {
   applications: Application[]
@@ -55,7 +55,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
       list.filter((application) => {
         return (
           !query.search?.length ||
-          `${application?.company?.structureName} (${application.company.firstname} ${application.company.lastname})`
+          `${application?.company?.structureName} (${application.company?.firstname} ${application.company?.lastname})`
             .toLowerCase()
             ?.includes((query.search as string)?.toLowerCase())
         )

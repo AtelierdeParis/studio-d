@@ -1,10 +1,10 @@
 // @ts-ignore
 import { renderToStream } from '@react-pdf/renderer'
+import AdmZip from 'adm-zip'
+import { getSession } from 'next-auth/client'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
-import { getSession } from 'next-auth/client'
 import { formatDisponibilityZipName, getBufferFromStream } from '~utils/pdf'
-import AdmZip  from "adm-zip"
 
 const MultipleApplication = async (req, res) => {
   const { id: disponibilityId } = req.query
@@ -29,34 +29,36 @@ const MultipleApplication = async (req, res) => {
   )
 
   const disponibility = applications?.[0]?.disponibility
-  const campaign = applications?.[0]?.campaign
-
-  const zip = new AdmZip();
+  const zip = new AdmZip()
 
   for (const application of applications) {
-    const name = application.company?.structureName;
+    const refLabel = `Ref. ${application.id}`
+    const name = `${refLabel} - ${application.company?.structureName}`
     const stream = await renderToStream(
       <ApplicationDocument application={application} />,
     )
     const streamBuffer = await getBufferFromStream(stream)
-    await zip.addFile(`${name}/candidature.pdf`, streamBuffer);
+    await zip.addFile(`${name}/${refLabel} - Candidature.pdf`, streamBuffer)
 
     if (application?.creation_file?.[0]?.url) {
       const creationFile = await fetch(application?.creation_file?.[0]?.url)
-      
+
       // @ts-ignore
       const creationFileArrayBuffer = await creationFile.buffer()
-      await zip.addFile(`${name}/dossier-artistique.pdf`, creationFileArrayBuffer);
+      await zip.addFile(
+        `${name}/${refLabel} - Dossier artistique.pdf`,
+        creationFileArrayBuffer,
+      )
     }
   }
 
-  const zipBuffer = zip.toBuffer();
+  const zipBuffer = zip.toBuffer()
 
   res.setHeader('Content-Type', 'application/zip')
   res.setHeader(
     'Content-Disposition',
     // @ts-expect-error
-    'attachment; filename=' + formatDisponibilityZipName(disponibility, campaign),
+    'attachment; filename=' + formatDisponibilityZipName(disponibility),
   )
   res.send(zipBuffer)
 }

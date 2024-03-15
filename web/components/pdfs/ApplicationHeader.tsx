@@ -47,7 +47,7 @@ const ApplicationHeader = ({ application }: { application: Application }) => {
           {application?.disponibility?.espace?.name}
         </Text>
         <Text style={{ fontSize: FONT_SIZE_BIG }}>
-          {`${format(application?.disponibility?.start, 'dd/MM')} → ${format(
+          {`${format(application?.disponibility?.start, 'dd/MM')} - ${format(
             application?.disponibility?.end,
             'dd/MM',
           )}`}
