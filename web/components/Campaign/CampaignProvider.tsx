@@ -57,6 +57,11 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     ) {
       return 'applications'
     } else if (
+      today > getEndDateTime(campaign.application_end) &&
+      today < getStartDateTime(campaign.preselection_start)
+    ) {
+      return 'waiting_preselections'
+    } else if (
       today >= getStartDateTime(campaign.preselection_start) &&
       today <= getEndDateTime(campaign.preselection_end)
     ) {
@@ -64,6 +69,7 @@ const CampaignProvider = ({ children }: ICampaignProvider) => {
     } else if (today >= getEndDateTime(campaign.preselection_end)) {
       return 'closed'
     }
+
     return null
   }
 

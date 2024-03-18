@@ -18,9 +18,9 @@ module.exports = {
     const query =
       type === 'place'
         ? {
-            ...initialQuery,
-            'disponibility.espace.users_permissions_user.id': id,
-          }
+          ...initialQuery,
+          'disponibility.espace.users_permissions_user.id': id,
+        }
         : { ...initialQuery, company: id }
     const populate =
       type === 'place'
@@ -59,6 +59,7 @@ module.exports = {
         'creation_file',
         'campaign',
         'company',
+        'espace',
       ],
     )
 

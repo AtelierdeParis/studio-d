@@ -160,7 +160,9 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
       currentCampaign.mode !== 'closed')
 
   const hideApplication =
-    currentCampaign?.mode === 'preselections' &&
+    ['waiting_preselections', 'preselections'].includes(
+      currentCampaign?.mode,
+    ) &&
     !applications?.length &&
     user?.type === 'company'
 
