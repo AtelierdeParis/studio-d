@@ -21,7 +21,7 @@ const ClosedApplications = () => {
         <Box>
           <Text as="span" fontWeight="bold">
             {t(`company.helper.closed_start`, {
-              title: currentCampaign.title,
+              title: currentCampaign?.title,
             })}
           </Text>
           <Text as="span" pl={1}>

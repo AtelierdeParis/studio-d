@@ -157,8 +157,8 @@
     "nbPending": "{{nb}} en attente",
     "nbBooking": "{{nb}} à venir",
     "nbPassed": "{{nb}} passées",
-    "solidarity_slots": "Créneaux StudioD",
-    "campaign_slots": "Créneaux StudioD {{title}}",
+    "solidarity_slots": "StudioD",
+    "campaign_slots": "StudioD {{title}}",
     "slots_filled": "{{nb}}/{{nbTotal}} créneaux renseignés",
     "fill_before": "À remplir avant le {{date}}"
   },
@@ -172,8 +172,8 @@
     "nbPlaces": "{{nb}} espaces inscrits",
     "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
     "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
-    "nbCampaignPlaceWithDispo": "{{nb}} espace partenaire du dispositif",
-    "nbCampaignPlacesWithDispos": "{{nb}} espaces partenaires du dispositif",
+    "nbCampaignPlaceWithDispo": "{{nb}} espace partenaire de l'appel à projet",
+    "nbCampaignPlacesWithDispos": "{{nb}} espaces partenaires de l'appel à projet",
     "where": {
       "label": "Où cherchez-vous ?",
       "placeholder": "Renseignez une ville…"
@@ -329,11 +329,11 @@
   },
   "detail": {
     "campaign": {
-      "solidarity_slot": "Créneaux StudioD",
-      "campaign_slot": "Créneaux StudioD {{title}}",
-      "calendar_title": "Calendrier – Dispositif {{title}}",
+      "solidarity_slot": "StudioD",
+      "campaign_slot": "StudioD {{title}}",
+      "calendar_title": "Calendrier - {{title}}",
       "slots_available": "Créneaux proposés :",
-      "campaign_about": "À propos du dispositif {{title}}",
+      "campaign_about": "À propos de l'appel à projet {{title}}",
       "eligibility": "Conditions d’éligibilité :",
       "switch_campaign_title": "Cet espace propose également des créneaux StudioD {{title}} :",
       "switch_campaign_content": "ces créneaux sont proposés sur candidature par des lieux partenaires lors d'appels à projets. Découvrez-les et n'hésitez pas à candidater si votre compagnie respecte les règles d'éligibilité.",
@@ -491,7 +491,7 @@
       "chart_front": "Nous vous invitons à vous référer à ",
       "chart": "la charte d'utilisation",
       "chart_back": "si vous n’en avez pas encore pris connaissance.",
-      "label_start": "Je confirme respecter les critères d'éligibilité et",
+      "label_start": "Je confirme respecter les critères d'éligibilité et ",
       "no_eligibility_label_start": "Je confirme ",
       "label_cgu": "accepter les CGU",
       "label_end": "du dispositif {{title}}."

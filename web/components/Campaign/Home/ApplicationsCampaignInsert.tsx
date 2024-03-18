@@ -28,7 +28,7 @@ const ApplicationsCampaignInsert = () => {
       transition="3s linear"
     >
       <Box>
-        <Tag status="campaign">{title}</Tag>
+        <Tag status="campaign">{t(`campaign.title`,{title: currentCampaign?.title})}</Tag>
       </Box>
 
       <Box width="100%">
