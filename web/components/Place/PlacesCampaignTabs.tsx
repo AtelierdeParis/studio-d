@@ -87,7 +87,7 @@ const PlacesCampaignTabs = () => {
                   paddingY={2}
                   borderRadius="12px"
                 >
-                  {currentCampaign?.title}
+                  {t(`campaign.title`,{title: currentCampaign?.title})}
                 </Text>
 
                 <Tag status="campaign" display={{ base: 'none', md: 'block' }}>
