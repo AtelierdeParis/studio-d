@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
 import {
-  Tabs,
-  TabPanels,
-  TabPanel,
-  TabList,
-  Tab,
-  HStack,
-  Text,
   Box,
+  HStack,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from '@chakra-ui/react'
-import { format } from '~utils/date'
-import Tag from '~components/Tag'
 import { useTranslation } from 'next-i18next'
-import PlacesPage from '~components/Place/PlacesPage'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import PlacesPage from '~components/Place/PlacesPage'
+import Tag from '~components/Tag'
+import { format } from '~utils/date'
 
 const PlacesCampaignTabs = () => {
   const router = useRouter()
@@ -87,7 +87,7 @@ const PlacesCampaignTabs = () => {
                   paddingY={2}
                   borderRadius="12px"
                 >
-                  {t(`campaign.title`,{title: currentCampaign?.title})}
+                  {t(`campaign.title`, { title: currentCampaign?.title })}
                 </Text>
 
                 <Tag status="campaign" display={{ base: 'none', md: 'block' }}>

@@ -4,6 +4,7 @@ import AdmZip from 'adm-zip'
 import { getSession } from 'next-auth/client'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
+import { format } from '~utils/date'
 import { formatCampaignZipName, getBufferFromStream } from '~utils/pdf'
 
 const SelectedCampaignApplications = async (req, res) => {
@@ -18,7 +19,6 @@ const SelectedCampaignApplications = async (req, res) => {
 
   const zip = new AdmZip()
   const { data: campaign } = await client.campaigns.campaignsDetail(campaignId)
-  console.log({jwt:session.user.jwt})
 
   try {
     const {
@@ -31,7 +31,6 @@ const SelectedCampaignApplications = async (req, res) => {
         },
       },
     )
-
 
     // Group by place
     const groupedApplications = selectedApplications.reduce(
@@ -64,6 +63,7 @@ const SelectedCampaignApplications = async (req, res) => {
 
     for (const userId of userIds) {
       const applications = groupedApplications[userId]
+
       const place =
         applications[0]?.disponibility?.espace?.users_permissions_user
       const name = place?.structureName
@@ -76,9 +76,17 @@ const SelectedCampaignApplications = async (req, res) => {
         )
 
         const refLabel = `Ref. ${application.id}`
+
+        const disponibilityLabel = `${format(
+          application.disponibility?.start,
+          'dd-MM',
+        )} au ${format(application.disponibility?.end, 'dd-MM')}`
+
+        const subFolder = `${application?.espace?.name} - ${disponibilityLabel} - ${refLabel} - ${structureName}`
+
         const streamBuffer = await getBufferFromStream(stream)
         await zip.addFile(
-          `${name}/${refLabel} - ${structureName}/${refLabel} - Candidature.pdf`,
+          `${name}/${subFolder}/${refLabel} - Candidature.pdf`,
           streamBuffer,
         )
 
@@ -88,7 +96,7 @@ const SelectedCampaignApplications = async (req, res) => {
           const creationFileArrayBuffer = await creationFile.buffer()
 
           await zip.addFile(
-            `${name}/${refLabel} - ${structureName}/${refLabel} - Dossier artistique.pdf`,
+            `${name}/${subFolder}/${refLabel} - Dossier artistique.pdf`,
             creationFileArrayBuffer,
           )
         }

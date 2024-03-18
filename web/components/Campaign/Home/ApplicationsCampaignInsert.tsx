@@ -1,14 +1,14 @@
-import { VStack, Text, Box, Button, HStack, Stack } from '@chakra-ui/react'
-import Hands from 'public/assets/img/hands-outline.svg'
-import theme from '~theme'
-import { useTranslation } from 'next-i18next'
-import { ROUTE_PLACES } from '~constants'
-import Tag from '~components/Tag'
-import Link from '~components/Link'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { format } from '~utils/date'
-import ApplicationCounter from '~components/Campaign/ApplicationCounter'
+import { Box, Button, HStack, Stack, Text, VStack } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'next-i18next'
+import Hands from 'public/assets/img/hands-outline.svg'
+import ApplicationCounter from '~components/Campaign/ApplicationCounter'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import Link from '~components/Link'
+import Tag from '~components/Tag'
+import { ROUTE_PLACES } from '~constants'
+import theme from '~theme'
+import { format } from '~utils/date'
 
 const ApplicationsCampaignInsert = () => {
   const { currentCampaign } = useCampaignContext()
@@ -28,7 +28,9 @@ const ApplicationsCampaignInsert = () => {
       transition="3s linear"
     >
       <Box>
-        <Tag status="campaign">{t(`campaign.title`,{title: currentCampaign?.title})}</Tag>
+        <Tag status="campaign">
+          {t(`campaign.title`, { title: currentCampaign?.title })}
+        </Tag>
       </Box>
 
       <Box width="100%">

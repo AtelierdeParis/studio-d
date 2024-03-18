@@ -45,7 +45,12 @@ const CompanyApplications = ({ user }: Props) => {
     return null
   }
 
-  if (currentCampaign?.mode === 'preselections' && applications?.length === 0) {
+  if (
+    ['preselections', 'waiting_preselections'].includes(
+      currentCampaign?.mode,
+    ) &&
+    applications?.length === 0
+  ) {
     router.push(ROUTE_ACCOUNT)
     return null
   }
