@@ -7,7 +7,13 @@ import PlaceListCard from '~components/Place/PlaceListCard'
 import PlaceListCardSkeleton from '~components/Place/PlaceListCardSkeleton'
 const Map = dynamic(() => import('~components/Map'), { ssr: false })
 
-const PlaceList = ({ places = [], isFetching, isLoading, listRef }) => {
+const PlaceList = ({
+  places = [],
+  isFetching,
+  isLoading,
+  listRef,
+  listMode,
+}) => {
   const [focusedPlace, setFocus] = useState(null)
   const markers = useMemo(
     () =>
@@ -30,6 +36,7 @@ const PlaceList = ({ places = [], isFetching, isLoading, listRef }) => {
                   place={place}
                   key={place.id}
                   setFocus={setFocus}
+                  listMode={listMode}
                 />
               ))}
             </Loading>

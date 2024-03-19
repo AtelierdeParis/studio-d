@@ -1,30 +1,35 @@
-import React from 'react'
-import { Box, Image, Flex, Text, VStack, BoxProps } from '@chakra-ui/react'
-import {
-  ROUTE_ACCOUNT,
-  ROUTE_USE_POLICY,
-  ROUTE_ACCOUNT_INFORMATION,
-  ROUTE_ACCOUNT_REQUEST,
-  ROUTE_ACCOUNT_BOOKING,
-  ROUTE_ACCOUNT_MESSAGE,
-  ROUTE_ACCOUNT_PLACES,
-} from '~constants'
-import Link from '~components/Link'
+import { Box, BoxProps, Flex, Image, Text, VStack } from '@chakra-ui/react'
+import { signOut } from 'next-auth/client'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
+import Applications from 'public/assets/img/applicationsSmall.svg'
+import ApplicationsLoading from 'public/assets/img/applicationsSmallLoading.svg'
 import Back from 'public/assets/img/back.svg'
-import Notif from '~components/Notif'
-import Profile from 'public/assets/img/user.svg'
-import Charte from 'public/assets/img/charte.svg'
-import Logout from 'public/assets/img/logout.svg'
-import Home from 'public/assets/img/home.svg'
 import Calendar from 'public/assets/img/calendar.svg'
+import Charte from 'public/assets/img/charte.svg'
+import Home from 'public/assets/img/home.svg'
+import Logout from 'public/assets/img/logout.svg'
 import Message from 'public/assets/img/message.svg'
 import Question from 'public/assets/img/question.svg'
-import { useTranslation } from 'next-i18next'
-import { signOut } from 'next-auth/client'
-import { useRouter } from 'next/router'
-import { UsersPermissionsUser } from '~typings/api'
+import Profile from 'public/assets/img/user.svg'
+import { useMemo } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import Link from '~components/Link'
+import Notif from '~components/Notif'
+import {
+  ROUTE_ACCOUNT_APPLICATIONS,
+  ROUTE_ACCOUNT_BOOKING,
+  ROUTE_ACCOUNT_INFORMATION,
+  ROUTE_ACCOUNT_MESSAGE,
+  ROUTE_ACCOUNT_MY_APPLICATIONS,
+  ROUTE_ACCOUNT_PLACES,
+  ROUTE_ACCOUNT_REQUEST,
+  ROUTE_USE_POLICY,
+} from '~constants'
+import { useMyApplications } from '~hooks/useMyApplications'
 import { useMyNotifications } from '~hooks/useMyNotifications'
 import { useUserIsComplete } from '~hooks/useUserIsComplete'
+import { UsersPermissionsUser } from '~typings/api'
 
 const accountItems = {
   title: 'myAccount',
@@ -42,14 +47,33 @@ const accountItems = {
   ],
 }
 
-const placeItems = {
-  title: 'dashboard',
+const getApplicationsItems = ({
+  isNext,
+  isPlace,
+  translationParams,
+}: {
+  isNext: boolean
+  translationParams: { title: string }
+  isPlace: boolean
+}) => ({
+  title: 'applications.menu_title',
+  translationParams,
   items: [
     {
-      icon: <Home />,
-      label: 'place.home',
-      url: ROUTE_ACCOUNT_PLACES,
+      icon: isNext ? <ApplicationsLoading /> : <Applications />,
+      label: isNext
+        ? 'next'
+        : isPlace
+        ? 'placeApplications'
+        : 'companyApplications',
+      url: isPlace ? ROUTE_ACCOUNT_APPLICATIONS : ROUTE_ACCOUNT_MY_APPLICATIONS,
     },
+  ],
+})
+
+const getPlaceItems = (hasCampaigns) => ({
+  title: hasCampaigns ? 'solidarity' : 'dashboard',
+  items: [
     {
       icon: <Question />,
       label: 'place.question',
@@ -66,10 +90,10 @@ const placeItems = {
       url: ROUTE_ACCOUNT_MESSAGE,
     },
   ],
-}
+})
 
-const companyItems = {
-  title: 'dashboard',
+const getCompanyItems = (isCampaignMode: boolean) => ({
+  title: isCampaignMode ? 'solidarity' : 'dashboard',
   items: [
     {
       icon: <Question />,
@@ -87,7 +111,7 @@ const companyItems = {
       url: ROUTE_ACCOUNT_MESSAGE,
     },
   ],
-}
+})
 
 const styleActive: BoxProps = {
   backgroundColor: 'blue.200',
@@ -104,7 +128,45 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
   const isComplete = useUserIsComplete(user)
   const { data: notifs } = useMyNotifications()
 
-  const displayMenu = ({ title, items }) => {
+  const { currentCampaign, placeCampaigns } = useCampaignContext()
+  const applicationItems = useMemo(
+    () =>
+      getApplicationsItems({
+        isNext:
+          user?.type === 'company' &&
+          currentCampaign?.mode === 'disponibilities',
+        translationParams: { title: currentCampaign?.title },
+        isPlace: user?.type === 'place',
+      }),
+    [currentCampaign, user?.type],
+  )
+
+  const { data: applications } = useMyApplications({})
+
+  const placeItems = useMemo(() => getPlaceItems(placeCampaigns?.length), [
+    placeCampaigns?.length,
+  ])
+
+  const companyItems = useMemo(
+    () => getCompanyItems(Boolean(currentCampaign)),
+    [currentCampaign],
+  )
+  const displayApplications =
+    (user?.type === 'place' &&
+      placeCampaigns?.length &&
+      applications?.length) ||
+    (user?.type === 'company' &&
+      currentCampaign &&
+      currentCampaign.mode !== 'closed')
+
+  const hideApplication =
+    ['waiting_preselections', 'preselections'].includes(
+      currentCampaign?.mode,
+    ) &&
+    !applications?.length &&
+    user?.type === 'company'
+
+  const displayMenu = ({ title, items, translationParams = {} }) => {
     const isDisactivated = !isComplete && title === 'dashboard'
     return (
       <Box w="100%" opacity={isDisactivated ? 0.5 : 1}>
@@ -117,7 +179,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
           fontWeight="500"
           fontFamily="mabry medium"
         >
-          {t(title)}
+          {t(title, translationParams)}
         </Text>
         {items.map(({ icon, label, url = '#', onClick = null }) => (
           <Link
@@ -162,6 +224,7 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
       </Box>
     )
   }
+
   return (
     <Flex
       direction="column"
@@ -190,7 +253,23 @@ const AccountMenu = ({ user }: { user: UsersPermissionsUser }) => {
         <VStack spacing={12}>
           {user?.confirmed &&
             user?.accepted &&
-            displayMenu(user.type === 'company' ? companyItems : placeItems)}
+            user?.type === 'place' &&
+            displayMenu({
+              title: '',
+              items: [
+                {
+                  icon: <Home />,
+                  label: 'place.home',
+                  url: ROUTE_ACCOUNT_PLACES,
+                },
+              ],
+            })}
+          {user?.confirmed &&
+            user?.accepted &&
+            displayMenu(user?.type === 'company' ? companyItems : placeItems)}
+          {displayApplications &&
+            !hideApplication &&
+            displayMenu(applicationItems)}
           {displayMenu(accountItems)}
         </VStack>
       </Box>

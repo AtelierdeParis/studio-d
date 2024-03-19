@@ -19,13 +19,21 @@ import { SearchQuery } from '~utils/search'
 import useDispoInRange from '~hooks/useDispoInRange'
 import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
 import addWeeks from 'date-fns/addWeeks'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import { format } from '~utils/date'
+import CampaignTag from '~components/Campaign/CampaignTag'
+import useCampaignDispo from '~hooks/useCampaignDispo'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 interface Props {
   place: Espace
   searchParams?: SearchQuery
+  gridMode?: 'solidarity' | 'campaign' | null
 }
 
-const PlaceGridCard = ({ place, searchParams }: Props) => {
+const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
+  const { currentCampaign } = useCampaignContext()
+  const { applications } = useCurrentUser()
   const { t } = useTranslation('place')
 
   const disposInRange = useDispoInRange(
@@ -43,12 +51,27 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
     disposInRange || place?.disponibilities,
   )
 
+  const { campaignDisposNum, campaignDispos } = useCampaignDispo(
+    place?.disponibilities,
+  )
+  const hasCampaignDispo =
+    currentCampaign?.mode === 'applications' && !!campaignDisposNum
+
+  if (!place) return null
+
   return (
     <LinkBox>
       <LinkOverlay
         href={{
           pathname: ROUTE_PLACE_DETAIL,
-          query: { id: place.slug },
+          query: {
+            id: place?.slug,
+            ...(gridMode === 'campaign'
+              ? { tab: 1 }
+              : gridMode === 'solidarity' && hasCampaignDispo
+              ? { tab: 0 }
+              : {}),
+          },
         }}
       >
         <Flex
@@ -58,8 +81,15 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
           className="placeCard"
           role="group"
           h="100%"
-          id={`place-${place.id}`}
+          id={`place-${place?.id}`}
         >
+          <CampaignTag
+            isGrid
+            mode={gridMode}
+            disponibilitiesIds={campaignDispos?.map((d) => d.id)}
+            hasCampaignDispo={hasCampaignDispo}
+          />
+
           <AspectRatio
             w="100%"
             maxH="250px"
@@ -67,8 +97,8 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
             overflow="hidden"
             pos="relative"
           >
-            {place.images.length > 0 ? (
-              <PlaceCardCarousel images={place.images} />
+            {place?.images.length > 0 ? (
+              <PlaceCardCarousel images={place?.images} />
             ) : (
               <FallbackImage />
             )}
@@ -84,13 +114,13 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
           >
             <Box fontSize="md">
               <Text fontFamily="mabry medium" isTruncated>
-                {place.name}
+                {place?.name}
               </Text>
               <Text color="gray.500" isTruncated>
-                {place.users_permissions_user.structureName}
+                {place?.users_permissions_user?.structureName}
               </Text>
             </Box>
-            {place?.disponibilities?.length === 0 && (
+            {place?.disponibilities?.length === 0 && gridMode !== 'campaign' && (
               <Tag
                 status={DisponibilityStatus.PAST}
                 alignSelf="flex-start"
@@ -99,7 +129,7 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                 {t('card.noDispo')}
               </Tag>
             )}
-            {disposInRange?.length > 0 && (
+            {disposInRange?.length > 0 && gridMode !== 'campaign' && (
               <Tag
                 status={disposInRange?.length <= 4 ? 'nextweek' : 'available'}
                 alignSelf="flex-start"
@@ -110,16 +140,19 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                 })}
               </Tag>
             )}
-            {!disposInRange && disposThisWeek?.length > 0 && (
-              <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
-                {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
-                  nb: disposThisWeek.length,
-                })}
-              </Tag>
-            )}
+            {!disposInRange &&
+              disposThisWeek?.length > 0 &&
+              gridMode !== 'campaign' && (
+                <Tag status={'available'} alignSelf="flex-start" mt={1.5}>
+                  {t(`card.thisWeek${disposThisWeek?.length > 1 ? 's' : ''}`, {
+                    nb: disposThisWeek.length,
+                  })}
+                </Tag>
+              )}
             {!disposInRange &&
               disposThisWeek?.length === 0 &&
-              disposNextWeek?.length > 0 && (
+              disposNextWeek?.length > 0 &&
+              gridMode !== 'campaign' && (
                 <Tag status={'nextweek'} alignSelf="flex-start" mt={1.5}>
                   {t(`card.nextWeek${disposNextWeek?.length > 1 ? 's' : ''}`, {
                     nb: disposNextWeek.length,
@@ -132,9 +165,10 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                   {t('card.city')}
                 </Text>
                 <Text isTruncated textTransform="capitalize">
-                  {place.city?.name}
+                  {place?.city?.name}
                 </Text>
               </Flex>
+
               <Divider my={2} borderColor="gray.100" />
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex flex={1}>
@@ -152,9 +186,41 @@ const PlaceGridCard = ({ place, searchParams }: Props) => {
                   <Text color="gray.500" px={3}>
                     {t('card.dim')}
                   </Text>
-                  <Text whiteSpace="pre">{`${place.roomLength} x ${place.width} m`}</Text>
+                  <Text whiteSpace="pre">{`${place?.roomLength} x ${place?.width} m`}</Text>
                 </Flex>
               </Flex>
+
+              {hasCampaignDispo && gridMode === 'campaign' && (
+                <>
+                  <Divider my={2} borderColor="gray.100" />
+                  <Flex w="100%">
+                    <Text color="gray.500" pr={9}>
+                      {t('card.dates')}
+                    </Text>
+                    <Box isTruncated>
+                      {place?.disponibilities
+                        ?.filter(
+                          (d) =>
+                            d?.campaign?.toString() ===
+                            currentCampaign?.id?.toString(),
+                        )
+                        ?.map((el) => (
+                          <Text
+                            key={el?.id}
+                            color={
+                              applications
+                                ?.map((a) => a?.disponibility)
+                                ?.includes(el?.id) && 'campaign.primary'
+                            }
+                          >
+                            {`${format(el.start, 'dd MMMM')} ${t('card.to')}
+                      ${format(el.end, 'dd MMMM')}`}
+                          </Text>
+                        ))}
+                    </Box>
+                  </Flex>
+                </>
+              )}
             </Box>
           </Flex>
         </Flex>

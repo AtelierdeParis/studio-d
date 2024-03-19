@@ -1,8 +1,10 @@
 import { useQuery } from 'react-query'
 import { client } from '~api/client-api'
 
-export const useMyPlaces = () => {
-  return useQuery('myPlaces', () =>
-    client.espaces.myPlaces().then((res) => res.data),
+export const useMyPlaces = (params = {}, options = {}, name = ['myPlaces']) => {
+  return useQuery(
+    name,
+    () => client.espaces.myPlaces(params).then((res) => res.data),
+    options,
   )
 }

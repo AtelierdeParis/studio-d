@@ -151,6 +151,14 @@
     "placeDispositifs": {
       "via": "places",
       "collection": "dispositif"
+    },
+    "campaigns": {
+      "via": "users_permissions_users",
+      "collection": "campaign"
+    },
+    "companyApplications": {
+      "via": "company",
+      "collection": "application"
     }
   }
 }

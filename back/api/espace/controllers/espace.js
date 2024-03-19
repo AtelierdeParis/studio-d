@@ -17,13 +17,17 @@ const populate = [
   "images",
   "files",
   "users_permissions_user",
+  "city",
+  "campaign_files"
 ];
 
 module.exports = {
   async myPlaces(ctx) {
+    const {query}=ctx.request;
     const { id } = ctx.state.user;
     return strapi.query("espace").find(
       {
+        ...query,
         users_permissions_user: id,
         deleted: false,
         _sort: "name:asc",
@@ -46,6 +50,7 @@ module.exports = {
         delete query["city.name_eq"];
       }
     }
+
 
     let places = await strapi.services.espace
       .find(
@@ -78,6 +83,7 @@ module.exports = {
       return place;
     });
 
+
     if (isSortOnDisponibility) {
       if (_sort === "nbDispoDesc") {
         return places.sort(
@@ -105,21 +111,22 @@ module.exports = {
 
     let entity;
     if (ctx.is("multipart")) {
-      const { data, files } = parseMultipartData(ctx);
-      entity = await strapi.services.espace.update({ id }, data, {
-        files,
-      });
+      const { data, files, campaign_files } = parseMultipartData(ctx);
+      entity = await strapi.services.espace.update({ id }, data, {files, campaign_files});
     } else {
-      const { files, ...body } = ctx.request.body;
-      if (files && files.length > 0) {
-        await Promise.all(
-          files.map((file) => {
-            strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
-              caption: file.caption,
-            });
-          })
-        );
-      }
+      const { files,campaign_files, ...body } = ctx.request.body;
+      await Promise.all([files, campaign_files].map(async(fileList)=>{
+        if (fileList && fileList.length > 0) {
+          await Promise.all(
+            fileList.map(async(file) => {
+              await strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
+                caption: file.caption,
+              });
+            })
+          );
+        }
+      }))
+
       entity = await strapi.services.espace.update({ id }, body);
     }
 

@@ -19,5 +19,7 @@ export interface ScheduleEvent {
     status: string
     hasEventSameDay?: boolean
     type: ScheduleEventType
+    isCampaignEvent?: boolean
+    exclude_days?: string[]
   }
 }

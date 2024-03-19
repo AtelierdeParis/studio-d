@@ -19,7 +19,7 @@ import Delete from 'public/assets/img/delete.svg'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import { useQueryClient } from 'react-query'
 
-const ScheduleDelete = () => {
+const ScheduleDelete = ({ isCampaignTab }: { isCampaignTab?: boolean }) => {
   const { place, setToDelete, eventsIdToDelete } = useContext(ScheduleContext)
   const { available, booked } = useMemo(
     () =>
@@ -110,17 +110,21 @@ const ScheduleDelete = () => {
       borderColor="gray.100"
     >
       <Text fontFamily="mabry medium" pb={2}>
-        {t(`schedule.delete.title${isPlural}`, {
-          nb: eventsIdToDelete.length,
-        })}
+        {isCampaignTab
+          ? t(`schedule.delete.title${isAvailablePlural}Campaign`)
+          : t(`schedule.delete.title${isPlural}`, {
+              nb: eventsIdToDelete.length,
+            })}
       </Text>
       {available.length > 0 && (
         <>
-          <Text pt={5} fontFamily="mabry medium" pb={1.5}>
-            {t(`schedule.delete.slotAvailable${isAvailablePlural}`, {
-              nb: available.length,
-            })}
-          </Text>
+          {!isCampaignTab && (
+            <Text pt={5} fontFamily="mabry medium" pb={1.5}>
+              {t(`schedule.delete.slotAvailable${isAvailablePlural}`, {
+                nb: available.length,
+              })}
+            </Text>
+          )}
           <VStack spacing={1} alignItems="flex-start">
             {available.map((dispo) => (
               <Box key={dispo.id} fontSize={{ base: 'sm', sm: 'md' }}>
@@ -134,15 +138,20 @@ const ScheduleDelete = () => {
                         {format(dispo.end)}
                       </Text>
                     )}
-                    <Text textTransform="lowercase" pl={1.5}>
-                      {`(${
-                        dispo.when
-                          ? t(`schedule.${dispo.when}`)
-                          : t(`schedule.type.${dispo.type}`)
-                      })`}
-                    </Text>
-                    {dispo.dispositif && (
-                      <Text pl={1.5}>{`- ${dispo.dispositif.name}`}</Text>
+
+                    {!isCampaignTab && (
+                      <>
+                        <Text textTransform="lowercase" pl={1.5}>
+                          {`(${
+                            dispo.when
+                              ? t(`schedule.${dispo.when}`)
+                              : t(`schedule.type.${dispo.type}`)
+                          })`}
+                        </Text>
+                        {dispo.dispositif && (
+                          <Text pl={1.5}>{`- ${dispo.dispositif.name}`}</Text>
+                        )}
+                      </>
                     )}
                   </Flex>
                 </Flex>
@@ -157,7 +166,9 @@ const ScheduleDelete = () => {
               isLoading={isLoading}
             >
               <Text ml={2}>
-                {t(`schedule.delete.delete${isAvailablePlural}`)}
+                {isCampaignTab
+                  ? t(`schedule.delete.delete${isAvailablePlural}Campaign`)
+                  : t(`schedule.delete.delete${isAvailablePlural}`)}
               </Text>
             </Button>
             <Button

@@ -914,6 +914,18 @@
                   "type": "string"
                 }
               },
+              "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -980,6 +992,27 @@
                 },
                 "message": {
                   "type": "string"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
+                "exclude_days": {
+                  "type": "object"
                 },
                 "published_at": {
                   "type": "string"
@@ -1119,6 +1152,153 @@
           "deleted": {
             "type": "boolean",
             "default": false
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "campaign_files": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1242,6 +1422,12 @@
           "deleted": {
             "type": "boolean",
             "default": false
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

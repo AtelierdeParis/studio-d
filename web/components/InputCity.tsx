@@ -18,6 +18,7 @@ const getStyle = (theme) => {
       height: '26px',
       flexWrap: 'wrap',
       alignItems: 'center',
+      cursor: 'pointer',
       ...(state.isFocused && {
         border: `1px solid ${theme.colors.blue['500']}!important`,
         boxShadow: '0 0 0 2px rgb(95 105 162 / 27%)',

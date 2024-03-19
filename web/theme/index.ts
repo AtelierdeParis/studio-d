@@ -10,6 +10,7 @@ import {
   Textarea,
   Heading,
 } from './components'
+import { campaign } from './colors'
 
 const breakpoints = createBreakpoints({
   sm: '30em',
@@ -76,6 +77,7 @@ const theme = extendTheme({
     grayText: {
       '1': '#626782',
     },
+    grayBackground: '#F5F5F5',
     confirm: '#6EAE7F',
     tag: {
       blue: '#f2f3f8',
@@ -84,6 +86,7 @@ const theme = extendTheme({
       red: '#F2D8D8',
       grey: '#E0E0E0',
     },
+    campaign,
   },
   radii: {
     xs: '4px',
@@ -101,6 +104,11 @@ const theme = extendTheme({
     Divider,
     Input,
     Textarea,
+    Drawer: {
+      sizes: {
+        xl: { dialog: { maxW: '65rem' } },
+      },
+    },
   },
   textStyles: {
     h1: {

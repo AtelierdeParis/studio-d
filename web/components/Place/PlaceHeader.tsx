@@ -15,10 +15,6 @@ const BackSearch = ({ hasSearch }) => {
   const { t } = useTranslation('place')
   const prevPath = sessionStorage.getItem('sd-prevPath')
 
-  if (!hasSearch) {
-    return <Spacer />
-  }
-
   const sentence = useMemo(() => {
     const url = new URL(prevPath, process.env.NEXT_PUBLIC_FRONT_URL)
     const words = []
@@ -51,6 +47,10 @@ const BackSearch = ({ hasSearch }) => {
     }
     return words.length > 0 ? words.join(' ') : ''
   }, [prevPath])
+
+  if (!hasSearch) {
+    return <Spacer />
+  }
 
   return (
     <Flex alignItems="center">

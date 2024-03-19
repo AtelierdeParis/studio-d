@@ -3,6 +3,8 @@ import { Tab, TabList } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Espace } from '~typings/api'
 import { DisponibilityStatus } from '~@types/disponibility.d'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 const TabPlace = ({ isDisabled, onClick = null, children }) => {
   return (
@@ -31,20 +33,24 @@ interface Props {
   setIndex?: (index: number) => void
 }
 
-const PriceTabList = ({
+const PlaceTabList = ({
   disabledIndexes = [],
   place = null,
   isComplete,
   setIndex = null,
 }: Props) => {
+  const { isCampaignPlace, currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
 
   const nbAvailable = useMemo(() => {
-    if (!place || !place.disponibilities) return 0
-    return place.disponibilities.filter(
-      (dispo) => dispo.status === DisponibilityStatus.AVAILABLE,
+    if (!place || !place?.disponibilities) return 0
+    return place?.disponibilities.filter(
+      (dispo) =>
+        dispo.status === DisponibilityStatus.AVAILABLE && !dispo.campaign,
     ).length
-  }, [place])
+  }, [place?.disponibilities])
+
+  const { campaignDisposNum } = useCampaignDispo(place?.disponibilities)
 
   return (
     <TabList
@@ -68,10 +74,29 @@ const PriceTabList = ({
         isDisabled={!isComplete ? true : disabledIndexes.includes(2)}
         onClick={() => setIndex(2)}
       >
-        {t('tabs.slot', { nb: nbAvailable })}
+        {isCampaignPlace
+          ? t('tabs.slot_solidarity', { nb: nbAvailable })
+          : t('tabs.slot', { nb: nbAvailable })}
       </TabPlace>
+      {isCampaignPlace && (
+        <TabPlace
+          isDisabled={!isComplete ? true : disabledIndexes.includes(3)}
+          onClick={() => setIndex(3)}
+        >
+          {t(
+            currentCampaign?.mode === 'disponibilities'
+              ? 'tabs.slot_campaign'
+              : 'tabs.slot_campaign_applications',
+            {
+              title: currentCampaign?.title,
+              nb: campaignDisposNum ?? 0,
+              nbTotal: currentCampaign?.disponibilities_max,
+            },
+          )}
+        </TabPlace>
+      )}
     </TabList>
   )
 }
 
-export default PriceTabList
+export default PlaceTabList

@@ -1,385 +1,613 @@
 {
-    "header": {
-        "edit": "Éditer la fiche",
-        "noDispo": "Aucun créneau disponible, l’espace n’est pas visible"
+  "global": {
+    "file": {
+      "change": "Changer",
+      "file-too-large": "Le fichier est trop volumineux",
+      "delete_error": "Une erreur est survenue lors de la suppression de votre fichier"
     },
-    "notAvailable": "La fiche n'est pas encore complète. Renseignez vos informations, et au moins une disponibilité pour rendre votre espace visible",
-    "cancel": "Annuler les changements",
-    "save": "Enregistrer",
-    "addImg": "Ajouter une image",
-    "successImg": "Vos images ont été mises à jour avec succès",
-    "dropzone": {
-        "placeholder": "Déposez ou cliquer pour ajouter des fichiers",
-        "subtitle": "Seulement .jpg et .png",
-        "rejected": {
-            "file-invalid-type": "Type de fichier non accepté",
-            "too-many-files": "Vous ne pouvez pas uploader plus de {{nb}} fichiers"
-        }
+    "yes": "Oui",
+    "no": "Non",
+    "required": "Ce champs est requis",
+    "form_error": "Le formulaire contient des erreurs",
+    "and": "et"
+  },
+  "header": {
+    "edit": "Éditer la fiche",
+    "noDispo": "Aucun créneau disponible, l’espace n’est pas visible"
+  },
+  "notAvailable": "La fiche n'est pas encore complète. Renseignez vos informations, et au moins une disponibilité pour rendre votre espace visible",
+  "cancel": "Annuler les changements",
+  "save": "Enregistrer",
+  "addImg": "Ajouter une image",
+  "successImg": "Vos images ont été mises à jour avec succès",
+  "dropzone": {
+    "placeholder": "Déposez ou cliquer pour ajouter des fichiers",
+    "subtitle": "Seulement .jpg et .png",
+    "rejected": {
+      "file-invalid-type": "Type de fichier non accepté",
+      "too-many-files": "Vous ne pouvez pas uploader plus de {{nb}} fichiers"
+    }
+  },
+  "info": {
+    "title": "Aucun espace",
+    "text": "Vous n’avez aucun espace inscrit pour le moment.",
+    "link": "Ajouter un espace"
+  },
+  "tabs": {
+    "info": "Informations",
+    "image": "Images",
+    "slot": "Disponibilités ({{nb}})",
+    "slot_solidarity": "Créneaux StudioD ({{nb}})",
+    "slot_campaign": "Créneaux StudioD {{title}} ({{nb}}/{{nbTotal}})",
+    "slot_campaign_applications": "Créneaux StudioD {{title}} ({{nb}})"
+  },
+  "form": {
+    "migration": {
+      "title": "Finalisez votre migration de compte",
+      "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
     },
-    "info": {
-        "title": "Aucun espace",
-        "text": "Vous n’avez aucun espace inscrit pour le moment.",
-        "link": "Ajouter un espace"
+    "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
+    "error": "Une erreur est survenue en lors de l'enregistrement",
+    "yes": "Oui",
+    "no": "Non",
+    "possible": "Possible",
+    "choose": "Choisir",
+    "detailsLabel": "Détails du lieu",
+    "textsLabel": "Textes",
+    "filesLabel": "Fichiers joints",
+    "location": "Localisation",
+    "submit": "Enregistrer et ajouter des images",
+    "name": {
+      "label": "Nom de l'espace"
     },
-    "tabs": {
-        "info": "Informations",
-        "image": "Images",
-        "slot": "Disponibilités ({{nb}})"
+    "surface": {
+      "label": "Surface (m²)"
     },
-    "form": {
-        "migration": {
-            "title": "Finalisez votre migration de compte",
-            "message": "Nous avons fait notre possible pour préserver vos informations de compte lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés ci-dessous en orange. Ils nous sont indispensables avant de vous donner un accès complet à la nouvelle interface."
-        },
-        "notComplete": "En raison de la refonte de StudioD et du changement de certaines données, merci de saisir les valeurs manquantes.",
-        "error": "Une erreur est survenue en lors de l'enregistrement",
-        "yes": "Oui",
-        "no": "Non",
-        "possible": "Possible",
-        "choose": "Choisir",
-        "detailsLabel": "Détails du lieu",
-        "textsLabel": "Textes",
-        "filesLabel": "Fichiers joints",
-        "location": "Localisation",
-        "submit": "Enregistrer et ajouter des images",
-        "name": {
-            "label": "Nom de l'espace"
-        },
-        "surface": {
-            "label": "Surface (m²)"
-        },
-        "length": {
-            "label": "Longueur de la salle (m)"
-        },
-        "width": {
-            "label": "Largeur de la salle (m)"
-        },
-        "height": {
-            "label": "Hauteur sous plafond (m)"
-        },
-        "mirror": {
-            "label": "Miroir"
-        },
-        "danceCarpet": {
-            "label": "Tapis de danse"
-        },
-        "danceBar": {
-            "label": "Barre de danse"
-        },
-        "accomodation": {
-            "label": "Hébergement possible"
-        },
-        "technicalStaff": {
-            "label": "Personnel technique possible"
-        },
-        "floor": {
-            "label": "Type de sol",
-            "traditional": "Parquet traditionnel",
-            "dance": "Plancher de danse",
-            "other": "Autre"
-        },
-        "otherFloor": {
-            "label": "Renseignez votre type de sol",
-            "info": "Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton"
-        },
-        "about": {
-            "label": "À propos de l’espace",
-            "placeholder": "# Le lieu et l’espace\n\nPrécisions sur le lieu et l’espace\n\n# Conditions d'accueil \n\n- L'accès'\n- Les possibilités d'hébergement 2\n- Personnel technique"
-        },
-        "details": {
-            "label": "Détails techniques",
-            "placeholder": "# Système son\n\nEnceinte/puissance\n\n# Lumière\n\n- Nombre de lumière\n- Type de lumière\n- Précisions techniques particulières"
-        },
-        "files": {
-            "noFile": "Aucun fichier à afficher",
-            "name": "Nom de fichier",
-            "displayName": "Nom affiché sur la page",
-            "add": "Ajouter",
-            "delete": "Supprimer"
-        },
-        "geolocation": {
-            "label": "Géolocalisation",
-            "placeholder": "Géolocalisez votre espace…"
-        },
-        "address": {
-            "label": "Adresse écrite",
-            "placeholder": "Renseignez votre adresse…"
-        }
+    "length": {
+      "label": "Longueur de la salle (m)"
     },
-    "list": {
-        "migration": {
-            "title": "Finalisez votre migration de compte",
-            "message": "Nous avons fait notre possible pour préserver vos informations d’espaces lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés sur chaque page en orange. Ils nous sont indispensables avant de pouvoir lister vos espaces de nouveau.",
-            "error": "Des informations sont manquantes suite à la migration. <a>Compléter</a>"
-        },
-        "openWebpage": "Ouvrir sur le site",
-        "needDispo": "Définissez au-moins une disponibilité pour que cet espace soit publié",
-        "title": "Espaces",
-        "add": "Ajouter",
-        "addPlace": "Ajouter un espace",
-        "publish": "Publier à nouveau",
-        "unpublish": "Dépublier",
-        "unpublishModal": "Êtes-vous sur de vouloir dépublier votre espace ? Il ne sera plus visible sur le site et ne pourra plus recevoir de demandes de réservations",
-        "publishModal": "Êtes-vous sur de vouloir publier votre espace ? Il sera visible sur le site et pourra recevoir des demandes de réservations",
-        "deleteModal": "Êtes-vous sur de vouloir supprimer cet espace ? Cette action est irréversible et les informations liées à cet espace seront perdues",
-        "errorUnpublish": "Une erreur est survenue rendant impossible la dépublication",
-        "errorPublish": "Une erreur est survenue rendant impossible la publication",
-        "successDelete": "Votre espace a bien été supprimé",
-        "errorDelete": "Une erreur est survenue rendant impossible la suppression de l'espace",
-        "successPublish": "Votre espace a bien été publié",
-        "successUnpublish": "Votre espace a bien été dépublié",
-        "delete": "Supprimer",
-        "disponibility": "Disponibilités",
-        "requests": "Demandes",
-        "bookings": "Réservations",
-        "noDisponibility": "Aucun créneau disponible",
-        "occupied": "Occupé par une compagnie",
-        "edit": "Éditer",
-        "see": "voir",
-        "available": "{{nb}} créneau disponible",
-        "availables": "{{nb}} créneaux disponibles",
-        "filledUntil": "Renseignés jusqu’au {{date}}",
-        "nbPending": "{{nb}} en attente",
-        "nbBooking": "{{nb}} à venir",
-        "nbPassed": "{{nb}} passées"
+    "width": {
+      "label": "Largeur de la salle (m)"
     },
-    "search": {
-        "noResult": {
-            "title": "0 espace disponible",
-            "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
-            "btn": "Réinitialiser les filtres"
-        },
-        "nbPlace": "{{nb}} espace inscrit",
-        "nbPlaces": "{{nb}} espaces inscrits",
-        "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
-        "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
-        "where": {
-            "label": "Où cherchez-vous ?",
-            "placeholder": "Renseignez une ville…"
-        },
-        "perimeter": {
-            "label": "Dans quel rayon ?"
-        },
-        "when": {
-            "label": "Sur quelle période ?",
-            "placeholder": "Cliquer pour choisir des dates"
-        },
-        "hide": "Masquer la carte",
-        "show": "Afficher la carte",
-        "surface": "Superficie",
-        "surfaceBetween": "Entre {{min}} et {{max}} m²",
-        "heightBetween": "Entre {{min}} et {{max}} mètres",
-        "floorType": "Type de sol",
-        "height": "Hauteur sous plafond",
-        "accomodation": {
-            "placeholder": "Hébergement",
-            "yes": "Hébergement possible",
-            "no": "Pas d'hébergement"
-        },
-        "mirror": {
-            "placeholder": "Miroir",
-            "yes": "Avec miroir",
-            "no": "Sans miroir"
-        },
-        "danceBar": {
-            "placeholder": "Barre de danse",
-            "yes": "Avec barre de danse",
-            "no": "Sans barre de danse"
-        },
-        "technicalStaff": {
-            "placeholder": "Personnel technique",
-            "yes": "Avec personnel technique",
-            "no": "Sans personnel technique"
-        },
-        "more": "+ de filtres",
-        "less": "- de filtres",
-        "submit": "Rechercher",
-        "grid": "Grille",
-        "list": "Liste",
-        "filterBy": {
-            "label": "Trier par",
-            "dispo": "Prochaine disponibilité",
-            "nbDispo": "Nombre de créneaux",
-            "surfaceAsc": "Surface (ordre croissant)",
-            "surfaceDesc": "Surface (ordre décroissant)"
-        }
+    "height": {
+      "label": "Hauteur sous plafond (m)"
     },
-    "card": {
-        "city": "Ville",
-        "surface": "Surface",
-        "dim": "Dim.",
-        "noDispo": "Aucun créneau disponible",
-        "searchDispo": "{{nb}} créneau correpondant",
-        "searchDispos": "{{nb}} créneaux correpondants",
-        "thisWeek": "{{nb}} créneau cette semaine",
-        "thisWeeks": "{{nb}} créneaux cette semaine",
-        "nextWeek": "{{nb}} créneau la semaine prochaine",
-        "nextWeeks": "{{nb}} créneaux la semaine prochaine"
+    "mirror": {
+      "label": "Miroir"
+    },
+    "danceCarpet": {
+      "label": "Tapis de danse"
+    },
+    "danceBar": {
+      "label": "Barre de danse"
+    },
+    "accomodation": {
+      "label": "Hébergement possible"
+    },
+    "technicalStaff": {
+      "label": "Personnel technique possible"
+    },
+    "floor": {
+      "label": "Type de sol",
+      "traditional": "Parquet traditionnel",
+      "dance": "Plancher de danse",
+      "other": "Autre"
+    },
+    "otherFloor": {
+      "label": "Renseignez votre type de sol",
+      "info": "Merci d'indiquer si vous ne disposez pas d'un sol de danse, ex : sol en béton"
+    },
+    "about": {
+      "label": "À propos de l’espace",
+      "placeholder": "# Le lieu et l’espace\n\nPrécisions sur le lieu et l’espace\n\n# Conditions d'accueil \n\n- L'accès'\n- Les possibilités d'hébergement 2\n- Personnel technique"
+    },
+    "details": {
+      "label": "Détails techniques",
+      "placeholder": "# Système son\n\nEnceinte/puissance\n\n# Lumière\n\n- Nombre de lumière\n- Type de lumière\n- Précisions techniques particulières"
+    },
+    "files": {
+      "noFile": "Aucun fichier à afficher",
+      "name": "Nom de fichier",
+      "displayName": "Nom affiché sur la page",
+      "add": "Ajouter",
+      "delete": "Supprimer"
+    },
+    "geolocation": {
+      "label": "Géolocalisation",
+      "placeholder": "Géolocalisez votre espace…"
+    },
+    "address": {
+      "label": "Adresse écrite",
+      "placeholder": "Renseignez votre adresse…"
+    }
+  },
+  "list": {
+    "migration": {
+      "title": "Finalisez votre migration de compte",
+      "message": "Nous avons fait notre possible pour préserver vos informations d’espaces lors de notre migration mais avons besoin de vous pour remplir quelques nouveaux champs que vous trouverez listés sur chaque page en orange. Ils nous sont indispensables avant de pouvoir lister vos espaces de nouveau.",
+      "error": "Des informations sont manquantes suite à la migration. <a>Compléter</a>"
+    },
+    "openWebpage": "Ouvrir sur le site",
+    "needDispo": "Définissez au-moins une disponibilité pour que cet espace soit publié",
+    "title": "Espaces",
+    "add": "Ajouter",
+    "addPlace": "Ajouter un espace",
+    "publish": "Publier à nouveau",
+    "unpublish": "Dépublier",
+    "unpublishModal": "Êtes-vous sur de vouloir dépublier votre espace ? Il ne sera plus visible sur le site et ne pourra plus recevoir de demandes de réservations",
+    "publishModal": "Êtes-vous sur de vouloir publier votre espace ? Il sera visible sur le site et pourra recevoir des demandes de réservations",
+    "deleteModal": "Êtes-vous sur de vouloir supprimer cet espace ? Cette action est irréversible et les informations liées à cet espace seront perdues",
+    "errorUnpublish": "Une erreur est survenue rendant impossible la dépublication",
+    "errorPublish": "Une erreur est survenue rendant impossible la publication",
+    "successDelete": "Votre espace a bien été supprimé",
+    "errorDelete": "Une erreur est survenue rendant impossible la suppression de l'espace",
+    "successPublish": "Votre espace a bien été publié",
+    "successUnpublish": "Votre espace a bien été dépublié",
+    "delete": "Supprimer",
+    "disponibility": "Disponibilités",
+    "requests": "Demandes",
+    "bookings": "Réservations",
+    "noDisponibility": "Aucun créneau disponible",
+    "occupied": "Occupé par une compagnie",
+    "edit": "Éditer",
+    "see": "voir",
+    "available": "{{nb}} créneau disponible",
+    "availables": "{{nb}} créneaux disponibles",
+    "filledUntil": "Renseignés jusqu’au {{date}}",
+    "nbPending": "{{nb}} en attente",
+    "nbBooking": "{{nb}} à venir",
+    "nbPassed": "{{nb}} passées",
+    "solidarity_slots": "StudioD",
+    "campaign_slots": "StudioD {{title}}",
+    "slots_filled": "{{nb}}/{{nbTotal}} créneaux renseignés",
+    "fill_before": "À remplir avant le {{date}}"
+  },
+  "search": {
+    "noResult": {
+      "title": "0 espace disponible",
+      "text": "Nous n’avons actuellement aucun espace correspondant à votre recherche. Essayez d’élargir votre rayon ou votre période de recherche.",
+      "btn": "Réinitialiser les filtres"
+    },
+    "nbPlace": "{{nb}} espace inscrit",
+    "nbPlaces": "{{nb}} espaces inscrits",
+    "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
+    "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
+    "nbCampaignPlaceWithDispo": "{{nb}} espace partenaire de l'appel à projet",
+    "nbCampaignPlacesWithDispos": "{{nb}} espaces partenaires de l'appel à projet",
+    "where": {
+      "label": "Où cherchez-vous ?",
+      "placeholder": "Renseignez une ville…"
+    },
+    "perimeter": {
+      "label": "Dans quel rayon ?"
+    },
+    "when": {
+      "label": "Sur quelle période ?",
+      "placeholder": "Cliquer pour choisir des dates"
+    },
+    "hide": "Masquer la carte",
+    "show": "Afficher la carte",
+    "surface": "Superficie",
+    "surfaceBetween": "Entre {{min}} et {{max}} m²",
+    "heightBetween": "Entre {{min}} et {{max}} mètres",
+    "floorType": "Type de sol",
+    "height": "Hauteur sous plafond",
+    "accomodation": {
+      "placeholder": "Hébergement",
+      "yes": "Hébergement possible",
+      "no": "Pas d'hébergement"
+    },
+    "mirror": {
+      "placeholder": "Miroir",
+      "yes": "Avec miroir",
+      "no": "Sans miroir"
+    },
+    "danceBar": {
+      "placeholder": "Barre de danse",
+      "yes": "Avec barre de danse",
+      "no": "Sans barre de danse"
+    },
+    "technicalStaff": {
+      "placeholder": "Personnel technique",
+      "yes": "Avec personnel technique",
+      "no": "Sans personnel technique"
+    },
+    "more": "+ de filtres",
+    "less": "- de filtres",
+    "submit": "Rechercher",
+    "grid": "Grille",
+    "list": "Liste",
+    "filterBy": {
+      "label": "Trier par",
+      "dispo": "Prochaine disponibilité",
+      "nbDispo": "Nombre de créneaux",
+      "surfaceAsc": "Surface (ordre croissant)",
+      "surfaceDesc": "Surface (ordre décroissant)"
+    }
+  },
+  "card": {
+    "to": "au",
+    "city": "Ville",
+    "surface": "Surface",
+    "dim": "Dim.",
+    "noDispo": "Aucun créneau disponible",
+    "searchDispo": "{{nb}} créneau correpondant",
+    "searchDispos": "{{nb}} créneaux correpondants",
+    "thisWeek": "{{nb}} créneau cette semaine",
+    "thisWeeks": "{{nb}} créneaux cette semaine",
+    "nextWeek": "{{nb}} créneau la semaine prochaine",
+    "nextWeeks": "{{nb}} créneaux la semaine prochaine",
+    "dates": "Dates"
+  },
+  "schedule": {
+    "nbDays": "{{nb}} jours",
+    "nbDays()": "({{nb}} jours)",
+    "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
+    "success": "Une nouvelle disponibilité a été ajoutée",
+    "type": {
+      "label": "Ajouter une disponibilité :",
+      "placeholder": "Choisir le type de disponibilité",
+      "punctual": "Demi-journée",
+      "day": "Journée entière",
+      "period": "Période continue"
+    },
+    "when": {
+      "label": "Matin / Après-midi",
+      "placeholder": "Choisir une période"
+    },
+    "morning": "Matin",
+    "afternoon": "Après-midi",
+    "both": "Matin et après-midi",
+    "date": "Date du créneau",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "repeat": "Répéter",
+    "dispositif": {
+      "label": "Dispositifs disponibles",
+      "placeholder": "Choisir un dispositif"
+    },
+    "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
+    "repeatNb": "Répéter les",
+    "repeatType": {
+      "label": "Prochain.e.s",
+      "placeholder": "Choisir une fréquence de répétition",
+      "day": "jours",
+      "week": "semaines",
+      "month": "mois"
+    },
+    "cancel": "retour",
+    "add": "Ajouter un créneau",
+    "slotsFilled": "créneau renseigné",
+    "slotsFilleds": "créneaux renseignés",
+    "filledUntil": "Les créneaux sont renseignés jusqu’au :",
+    "filledText": "Les visiteurs seront informés que vous avez rempli le calendrier des disponibilités jusqu’au {{date}}.",
+    "notFilledText": "Le dernier créneau renseigné est le {{date}}. Les visiteurs seront informés que vous n’avez pas encore rempli le calendrier des disponibilités ultérieures.",
+    "modifyDate": "Modifier cette date",
+    "available": "{{nb}} disponible",
+    "availables": "{{nb}} disponibles",
+    "bookings": "Réservations",
+    "requests": "Demandes",
+    "see": "voir",
+    "nbPending": "{{nb}} en attente",
+    "pending": "En attente",
+    "nbComing": "{{nb}} à venir",
+    "coming": "À venir",
+    "nbPassed": "{{nb}} passées",
+    "passed": "Passée",
+    "canceled": "Annulée",
+    "scheduleDetails": {
+      "label": "Précisions sur les horaires de l’espace",
+      "placeholder": "Renseignez votre texte",
+      "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
+    },
+    "delete": {
+      "request": "Demande réf. {{ref}}",
+      "booking": "Réservation réf. {{ref}}",
+      "error": "Une erreur est survenue pendant la suppression",
+      "success": "Les créneaux sélectionnés ont été supprimés",
+      "title": "Vous avez sélectionné {{nb}} créneau.",
+      "titles": "Vous avez sélectionné {{nb}} créneaux.",
+      "titleCampaign": "Vous avez sélectionné le créneau suivant :",
+      "titlesCampaign": "Vous avez sélectionné les créneaux suivants :",
+      "slotAvailable": "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
+      "slotAvailables": "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
+      "slotNotAvailable": "Ce créneau ne peut pas être supprimé :",
+      "slotNotAvailables": "Plusieurs créneaux ne peuvent pas être supprimés :",
+      "delete": "Supprimer le créneau disponible",
+      "deletes": "Supprimer les créneaux disponibles",
+      "deleteCampaign": "Supprimer le créneau",
+      "deletesCampaign": "Supprimer les créneaux",
+      "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",
+      "notBooked": "Le créneau ne fait l’objet d’aucune demande ou réservation.",
+      "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
+      "see": {
+        "pending": "Voir la demande.",
+        "accepted": "Voir la réservation.",
+        "booked": "Voir la réservation."
+      }
+    }
+  },
+  "detail": {
+    "campaign": {
+      "solidarity_slot": "StudioD",
+      "campaign_slot": "StudioD {{title}}",
+      "calendar_title": "Calendrier - {{title}}",
+      "slots_available": "Créneaux proposés :",
+      "campaign_about": "À propos de l'appel à projet {{title}}",
+      "eligibility": "Conditions d’éligibilité :",
+      "switch_campaign_title": "Cet espace propose également des créneaux StudioD {{title}} :",
+      "switch_campaign_content": "ces créneaux sont proposés sur candidature par des lieux partenaires lors d'appels à projets. Découvrez-les et n'hésitez pas à candidater si votre compagnie respecte les règles d'éligibilité.",
+      "switch_campaign_cta": "Basculer vers les créneaux StudioD",
+      "switch_solidarity_title": "Cet espace propose également des créneaux StudioD : ",
+      "switch_solidarity_content": "ces créneaux sont proposés par les lieux inscrits sur la plateforme et sont réservables toute l'année selon les disponibilités proposées. La réservation est ouverte à toute compagnie inscrite sur Studio D.",
+      "switch_solidarity_cta": "Basculer vers les créneaux StudioD {{title}}",
+      "more": "En savoir plus",
+      "schedule_item": {
+        "accomodation": "Hébergement possible ({{nb}} personne).",
+        "accomodations": "Hébergement possible ({{nb}} personnes).",
+        "no_accomodation": "Pas d'hébergement possible.",
+        "no_staff": "Pas de personnel technique.",
+        "staff": "Personnel technique possible {{list}}",
+        "scene_grid": "Gril scénique possible.",
+        "no_scene_grid": "Pas de gril scénique possible.",
+        "closed_on": "(fermeture le {{days}})"
+      },
+      "locked_application_start_plural": "Vous avez déjà postulé à {{nb}} créneaux",
+      "locked_application_start_remaining_plural": "Vous pouvez encore postuler à {{nb}} créneaux",
+      "locked_application_start_singular": "Vous avez déjà postulé à {{nb}} créneau",
+      "locked_application_start_remaining_singular": "Vous pouvez encore postuler à {{nb}} créneau",
+      "locked_application_middle": "pour cette session du dispositif {{title}}.",
+      "locked_application_cta_plural": "Annulez l’une de vos candidatures en attente",
+      "locked_application_cta_singular": "Annulez votre candidature en attente",
+      "locked_application_end": "pour pouvoir postuler à un ou plusieurs des créneaux de cet espace.",
+      "locked_application_remaining_end": "pour pouvoir postuler à plus de créneaux de cet espace.",
+      "locked_max_start": "Vous avez atteint le nombre maximal de candidature déposées",
+      "locked_max_middle": "pour cette session du dispositif {{title}}.",
+      "locked_max_cta": "Annulez l’une de vos candidatures d'ici le {{end_applications_date}}",
+      "locked_max_end": "pour pouvoir postuler à un ou plusieurs des créneaux de cet espace."
+    },
+    "back": "Retour à la recherche",
+    "seeMap": "Voir sur la carte",
+    "precise": "* précisez vos besoins lors de la réservation",
+    "surface": "Superficie",
+    "dimension": "Dimensions",
+    "height": "Hauteur sous plafond",
+    "floor": "Type de sol",
+    "danceCarpet": "Tapis de danse",
+    "mirror": "Miroir",
+    "danceBar": "Barre de danse",
+    "technicalStaff": "Personnel technique",
+    "accomodation": "Hébergement",
+    "scene_grid": "Gril scénique",
+    "yes": "Oui",
+    "no": "Non",
+    "true": "Oui",
+    "false": "Non",
+    "cancel": "Annuler",
+    "possible": "Possible *",
+    "available": "Possible *",
+    "calendar": "Calendrier des disponibilités",
+    "about": "À propos de l’espace",
+    "details": "Détails techniques",
+    "onlyCompany": "Les lieux ne sont pas autorisés à faire des réservations",
+    "howToGo": "Comment s’y rendre ?",
+    "located": "L’espace se situe au {{address}}.",
+    "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
+    "notEnabled": "La localisation est désactivé, cliquer pour demander l'autorisation",
+    "otherPlaces": "Autres espaces de {{name}}",
+    "week": "Semaine",
+    "month": "Mois",
+    "parquetTraditionnel": "Parquet traditionnel",
+    "plancherDanse": "Plancher de danse",
+    "other": "Autre",
+    "dispo": {
+      "morning": "Matin",
+      "afternoon": "Après-midi",
+      "day": "Journée"
+    },
+    "tooltip": {
+      "request": "Vous avez déjà une demande de réservation en attente pour cette période auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
+      "booking": "Vous avez déjà une réservation accepté sur à cette même période auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
+    },
+    "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+    "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
+    "notAuthCampaign": "Vous avez sélectionné 1 créneau.  Les dépôts de candidatures ne sont possibles que pour les compagnies inscrites.",
+    "notAuthsCampaign": "Vous avez sélectionné {{nb}} créneaux.  Les dépôts de candidatures ne sont possibles que pour les compagnies inscrites.",
+    "notConfirm": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
+    "notConfirms": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
+    "notConfirmCampaign": "Vous avez sélectionné 1 créneau. Les dépôts de candidatures ne sont possibles que pour les utilisateurs vérifiés.",
+    "notConfirmsCampaign": "Vous avez sélectionné {{nb}} créneaux. Les dépôts de candidatures ne sont possibles que pour les utilisateurs vérifiés.",
+    "nbSelected": "Vous avez sélectionné 1 créneau :",
+    "nbSelecteds": "Vous avez sélectionné {{nb}} créneaux :",
+    "submit": "Déposer une demande",
+    "infoPlace": "Information sur les horaires de l’espace :",
+    "filledUntil": {
+      "title": {
+        "empty": "L'espace n'a pas de créneaux disponibles",
+        "default": "L’espace n’a pas de créneaux renseignés au-delà du {{date}} pour le moment."
+      },
+      "text": {
+        "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",
+        "default": "Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
+      }
+    }
+  },
+  "campaignApplication": {
+    "tag": "Dispositif {{title}}",
+    "error": "Une erreur empêchant le dépôt de votre candidature",
+    "title": "Déposer votre candidature",
+    "message": {
+      "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
+      "placeholder": "Saisissez votre demande…"
+    },
+    "references": {
+      "title": "Références de créations",
+      "helper": "(5 maximum)",
+      "edit": "Éditer",
+      "delete": "Supprimer",
+      "add": "Ajouter",
+      "modify": "Modifier",
+      "cancel": "Annuler",
+      "references_title": "Titre",
+      "references_title_placeholder": "Saisissez le titre de votre création…",
+      "references_year": "Année",
+      "references_year_placeholder": "Saisissez l'année de création…",
+      "references_coproducers": "Coproducteurs (partenaires du dispositif Émergence)",
+      "references_coproducers_placeholder": "Sélectionner un ou plusieurs partenaires",
+      "references_others": "Coproducteurs (autres)",
+      "references_others_placeholder": "Renseigner le nom d’un ou plusieurs coproducteurs si nécessaire",
+      "references_creation": "Création {{index}}",
+      "references_actor": "Nombre d’interprètes",
+      "references_actor_placeholder": "Interprètes",
+      "references_actors_display": "{{number}} interprètes",
+      "references_actor_display": "{{number}} interprète",
+      "no_references": "Aucune création n’a été renseignée."
+    },
+    "general": {
+      "title": " Informations générales",
+      "subtitle": "Avez-vous déjà été soutenu·e par {{place}} ?",
+      "bio": "C.V.  |  Biographie du / de la chorégraphe",
+      "bioHelper": "(3000 signes maximum)"
+    },
+    "creation": {
+      "title": "Informations sur la création en cours",
+      "field_title": "Titre",
+      "dancers": "Nombre de danseurs·ses",
+      "file": "Dossier artistique",
+      "file_helper": "(5 Mo maximum)",
+      "file_cta": "Déposer mon fichier PDF",
+      "change": "Changer",
+      "summary": "Résumé du dossier",
+      "summary_helper": "(Optionnel – 1000 signes maximum)",
+      "summary_placeholder": "Saisissez votre texte…",
+      "partnerships": "Soutiens ou partenaires déjà confirmés",
+      "technical": "Besoins techniques",
+      "accomodation": "Avez-vous besoin d’un hébergement ?",
+      "yes": "oui",
+      "no": "non"
+    },
+    "eligibility": {
+      "title": "Rappel des règles d'éligibilité",
+      "chart_front": "Nous vous invitons à vous référer à ",
+      "chart": "la charte d'utilisation",
+      "chart_back": "si vous n’en avez pas encore pris connaissance.",
+      "label_start": "Je confirme respecter les critères d'éligibilité et ",
+      "no_eligibility_label_start": "Je confirme ",
+      "label_cgu": "accepter les CGU",
+      "label_end": "du dispositif {{title}}."
+    },
+    "back": "Retour",
+    "submit": "Poursuivre",
+    "change": "Changer",
+    "recap": "Vous demandez le créneau suivant :",
+    "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :",
+    "confirm": "{{place}} sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre candidature.",
+    "confirmed": {
+      "title": "Votre candidature est déposée !",
+      "text": "Vous recevrez sous peu un email de confirmation. La période de présélection du côté des lieux partenaires au dispositif {{campaign}} est prévue du {{preselection_start}} au {{preselection_end}}. En cas de sélection, le lieu vous contactera directement par email.",
+      "back": "Retour à l’accueil",
+      "see_applications": "Mes candidatures"
+    }
+  },
+  "campaignSchedule": {
+    "title": "Documents à destination des candidat·e·s",
+    "helper": "Fiche technique, appel à projet, conditions d'accès...",
+    "files_error": "Une erreur est survenue lors du téléchargement de vos fichiers",
+    "files_success": "Vos fichiers ont été modifiés avec succès"
+  },
+  "confirm": {
+    "error": "Une erreur empêchant la création de votre demande de réservation",
+    "title": "Demande de réservation",
+    "message": {
+      "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
+      "placeholder": "Saisissez votre demande…"
+    },
+    "textCharte": "Nous vous invitons à vous référer à la <a>charte d’utilisation</a> si vous n’en avez pas encore pris connaissance.",
+    "textConfirm": "<div>{{name}}</div> sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre réservation.",
+    "back": "Retour",
+    "submit": "Poursuivre",
+    "change": "Changer",
+    "recap": "Vous demandez le créneau suivant :",
+    "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :"
+  },
+  "confirmed": {
+    "title": "Votre demande est enregistrée !",
+    "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{name}}. Vous recevrez un email lorsque votre réservation sera validée.",
+    "back": "Retour à l’accueil"
+  },
+  "campaign": {
+    "applications_counter": {
+      "counter": "Candidatures déposées : ",
+      "see": "Voir"
     },
     "schedule": {
-        "nbDays" : "{{nb}} jours",
-        "nbDays()" : "({{nb}} jours)",
-        "error": "Une erreur est survenue en voulant ajouter une nouvelle disponibilité",
-        "success": "Une nouvelle disponibilité a été ajoutée",
-        "type": {
-            "label": "Ajouter une disponibilité :",
-            "placeholder": "Choisir le type de disponibilité",
-            "punctual": "Demi-journée",
-            "day": "Journée entière",
-            "period": "Période continue"
-        },
-        "when":{
-            "label": "Matin / Après-midi",
-            "placeholder": "Choisir une période"
-        },
-        "morning": "Matin",
-        "afternoon": "Après-midi",
-        "both": "Matin et après-midi",
-        "date": "Date du créneau",
-        "startDate": "Date de début",
-        "endDate": "Date de fin",
-        "repeat": "Répéter",
-        "dispositif": {
-            "label" :"Dispositifs disponibles",
-            "placeholder": "Choisir un dispositif"
-        },
-        "repeatError": "La répétition n'est pas valide car elle vient se répéter sur une disponibilité déjà existante",
-        "repeatNb": "Répéter les",
-        "repeatType": {
-            "label": "Prochain.e.s",
-            "placeholder": "Choisir une fréquence de répétition",
-            "day": "jours",
-            "week": "semaines",
-            "month": "mois"
-        },
-        "cancel": "retour",
-        "add": "Ajouter un créneau",
-        "slotsFilled": "créneau renseigné",
-        "slotsFilleds": "créneaux renseignés",
-        "filledUntil": "Les créneaux sont renseignés jusqu’au :",
-        "filledText": "Les visiteurs seront informés que vous avez rempli le calendrier des disponibilités jusqu’au {{date}}.",
-        "notFilledText": "Le dernier créneau renseigné est le {{date}}. Les visiteurs seront informés que vous n’avez pas encore rempli le calendrier des disponibilités ultérieures.",
-        "modifyDate": "Modifier cette date",
-        "available": "{{nb}} disponible",
-        "availables": "{{nb}} disponibles",
-        "bookings": "Réservations",
-        "requests": "Demandes",
-        "see": "voir",
-        "nbPending": "{{nb}} en attente",
-        "pending": "En attente",
-        "nbComing": "{{nb}} à venir",
-        "coming": "À venir",
-        "nbPassed": "{{nb}} passées",
-        "passed": "Passée",
-        "canceled": "Annulée",
-        "scheduleDetails": {
-            "label": "Précisions sur les horaires de l’espace",
-            "placeholder": "Renseignez votre texte",
-            "info": "Exemple : Les créneaux du matin commencent à 9h et se terminent à 12h30 (possibilité de se garer à partir de 8h30). Les créneaux de l’après-midi de 14h à 17h30."
-        },
-        "delete": {
-            "request": "Demande réf. {{ref}}",
-            "booking": "Réservation réf. {{ref}}",
-            "error": "Une erreur est survenue pendant la suppression",
-            "success": "Les créneaux sélectionnés ont été supprimés",
-            "title": "Vous avez sélectionné {{nb}} créneau.",
-            "titles": "Vous avez sélectionné {{nb}} créneaux.",
-            "slotAvailable" : "Ce créneau ne fait l’objet d’aucune demande ou réservation :",
-            "slotAvailables" : "{{nb}} créneaux ne font l’objet d’aucune demande ou réservation :",
-            "slotNotAvailable" : "Ce créneau ne peut pas être supprimé :",
-            "slotNotAvailables" : "Plusieurs créneaux ne peuvent pas être supprimés :",
-            "delete": "Supprimer le créneau disponible",
-            "deletes": "Supprimer les créneaux disponibles",
-            "booked": "Une demande de réservation a été déposée par la Compagnie {{name}}.",
-            "notBooked": "Le créneau ne fait l’objet d’aucune demande ou réservation.",
-            "notBookeds": "Les créneaux ne font l’objet d’aucune demande ou réservation.",
-            "see": {
-                "pending": "Voir la demande.",
-                "accepted": "Voir la réservation.",
-                "booked": "Voir la réservation."
-            }
-        }
-    },
-    "detail": {
-        "back": "Retour à la recherche",
-        "seeMap": "Voir sur la carte",
-        "precise": "* précisez vos besoins lors de la réservation",
-        "surface": "Superficie",
-        "dimension": "Dimensions",
-        "height": "Hauteur sous plafond",
-        "floor": "Type de sol",
-        "danceCarpet": "Tapis de danse",
-        "mirror": "Miroir",
-        "danceBar": "Barre de danse",
-        "technicalStaff": "Personnel technique",
-        "accomodation": "Hébergement",
-        "yes": "Oui",
+      "duration": "La durée d’une résidence est fixée à {{duration}} jours, et doit se dérouler entre le {{campaign_start}} et le {{campaign_end}}.",
+      "days_exclude": {
+        "label": "Exclure les",
+        "placeholder": "Choisir",
+        "0": "Dimanche",
+        "1": "Lundi",
+        "2": "Mardi",
+        "3": "Mercredi",
+        "4": "Jeudi",
+        "5": "Vendredi",
+        "6": "Samedi"
+      },
+      "staff": {
+        "label": "Personnel technique",
+        "placeholder": "Choisir",
         "no": "Non",
+        "light": "Création lumière",
+        "sound": "Création son",
+        "video": "Création vidéo",
+        "scene": "Création scénographique"
+      },
+      "accomodation": {
+        "label": "Hébergement",
+        "placeholder": "Choisir",
+        "0": "Non",
+        "1": "1 personne",
+        "2": "2 personnes",
+        "3": "3 personnes",
+        "4": "4 personnes",
+        "5": "5+ personnes"
+      },
+      "scene_grid": {
+        "label": "Gril scénique",
+        "placeholder": "Choisir",
         "true": "Oui",
-        "false": "Non",
-        "cancel": "Annuler",
-        "possible":"Possible *",
-        "available":"Possible *",
-        "calendar": "Calendrier des disponibilités",
-        "about": "À propos de l’espace",
-        "details": "Détails techniques",
-        "onlyCompany": "Les lieux ne sont pas autorisés à faire des réservations",
-        "howToGo": "Comment s’y rendre ?",
-        "located": "L’espace se situe au {{address}}.",
-        "itinerary": "Calculez votre itinéraire sur OpenstreetMap",
-        "notEnabled": "La localisation est désactivé, cliquer pour demander l'autorisation",
-        "otherPlaces": "Autres espaces de {{name}}",
-        "week": "Semaine",
-        "month": "Mois",
-        "parquetTraditionnel": "Parquet traditionnel",
-        "plancherDanse": "Plancher de danse",
-        "other": "Autre",
-        "dispo": {
-            "morning": "Matin",
-            "afternoon": "Après-midi",
-            "day": "Journée"
+        "false": "Non"
+      }
+    },
+    "helpers": {
+      "applications": {
+        "home": {
+          "title": "La période de candidatures pour le dispositif {{title}} est en cours : ",
+          "description": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci."
         },
-        "tooltip": {
-            "request": "Vous avez déjà une demande de réservation en attente pour cette période auprès de l’espace <i>{{name}}</i>. <a>Voir la demande</a>",
-            "booking": "Vous avez déjà une réservation accepté sur à cette même période auprès de l’espace <i>{{name}}</i>. <a>Voir la réservation</a>"
+        "schedule": {
+          "title": "Les candidatures sont en cours : ",
+          "description": " les créneaux ne sont plus modifiables.",
+          "open_applications_one": "créneau renseigné",
+          "open_applications_many": "créneaux renseignés",
+          "see_applications": "Voir les candidatures pour cet espace"
         },
-        "notAuth": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
-        "notAuths": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les compagnies inscrites.",
-        "notConfirm": "Vous avez sélectionné 1 créneau. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
-        "notConfirms": "Vous avez sélectionné {{nb}} créneaux. Les demandes de  réservation ne sont possibles que pour les utilisateurs vérifiés.",
-        "nbSelected": "Vous avez sélectionné 1 créneau :",
-        "nbSelecteds": "Vous avez sélectionné {{nb}} créneaux :",
-        "submit": "Déposer une demande",
-        "infoPlace": "Information sur les horaires de l’espace :",
-        "filledUntil": {
-            "title": {
-                "empty" : "L'espace n'a pas de créneaux disponibles",
-                "default" : "L’espace n’a pas de créneaux renseignés au-delà du {{date}} pour le moment."
-            },
-            "text": {
-                "empty": "Les créneaux à venir n'ont pas encore été renseignés, nous vous invitons à revenir ultérieurement.",
-                "default":"Les créneaux au delà de cette date n’ont pas encore été renseignés, nous vous invitons à revenir ultérieurement."
-            }
+        "recap_helper_date": "Vous pouvez annuler tout dépôt d'ici la fin des candidatures, soit le {{application_end_date}} à minuit.",
+        "recap_remaining_application": "Après ce dépôt, vous pourrez encore candidater à 1 autre créneau au sein des lieux partenaires de l'appel à projet.",
+        "recap_remaining_applications": "Après ce dépôt, vous pourrez encore candidater à {{num}} autres créneaux au sein des lieux partenaires de l'appel à projet."
+      },
+      "disponibilities": {
+        "home": {
+          "title": "Le dispositif {{title}} se prépare : ",
+          "description": "vous pouvez renseigner, pour vos espaces participants, les créneaux associés au dispositif avant le {{date}}"
+        },
+        "schedule": {
+          "title": "Ajoutez ou modifiez vos créneaux avant le {{disponibility_end}}. ",
+          "description": "\n Vous pouvez ajouter jusqu’à {{disponibilities_max}} créneaux dédiés au dispositif {{title}} pour un même espace. Les créneaux doivent impérativement faire {{duration}} jours, et se dérouler entre le {{campaign_start}} et le {{campaign_end}}",
+          "open_disponibilities": "créneaux qui seront ouverts à candidatures {{title}}",
+          "open_disponibility": "créneau qui sera ouvert à candidatures {{title}}"
         }
-    },
-    "confirm": {
-        "error": "Une erreur empêchant la création de votre demande de réservation",
-       "title": "Demande de réservation",
-       "message": {
-           "label": "Précisez votre demande en rédigeant un message à l’attention du lieu :",
-           "placeholder": "Saisissez votre demande…"
-        },
-        "textCharte": "Nous vous invitons à vous référer à la <a>charte d’utilisation</a> si vous n’en avez pas encore pris connaissance.",
-        "textConfirm": "<div>{{name}}</div> sera notifié de votre demande. Vous recevrez un email vous informant de la confirmation de votre réservation.",
-        "back": "Retour",
-        "submit": "Poursuivre",
-        "change": "Changer",
-        "recap": "Vous demandez le créneau suivant :",
-        "recaps": "Vous demandez les <b>{{nb}} créneaux</b> suivants :"
-    },
-    "confirmed": {
-        "title": "Votre demande est enregistrée !",
-        "text": "Vous recevrez sous peu un email de confirmation. Votre demande est actuellement en attente de validation par {{name}}. Vous recevrez un email lorsque votre réservation sera validée.",
-        "back": "Retour à l’accueil"
+      }
     }
+  }
 }

@@ -1,0 +1,105 @@
+{
+  "error": "Une erreur est survenue",
+  "company": {
+    "title": "Mes candidatures – {{title}}",
+    "table": {
+      "head": {
+        "number": "No.",
+        "place": "Lieu",
+        "space": "Espace",
+        "slot": "Créneau",
+        "creation": "Création"
+      },
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "cancel": "Annuler",
+      "delete_helper": "Être sûr de vouloir supprimer cette candidature ?"
+    },
+    "helper": {
+      "start": "Il est encore possible de déposer {{num}} candidature,",
+      "starts": "Il est encore possible de déposer {{num}} candidatures,",
+      "end": " avant le {{date}}.",
+      "cta": "Voir les espaces partenaires",
+      "closed_start": "La période de candidature au dispositif {{title}} est maintenant clôturée.",
+      "closed_end": "La décision de chaque lieu sera connue d’ici au {{date}}. En cas de sélection, le lieu prendra contact directement avec vous hors de cette plateforme.",
+      "full_start": "Votre candidature est déposée pour le dispositif.",
+      "full_starts": "Vos candidatures sont déposées pour le dispositif.",
+      "full_end": "Vous pouvez changer d'avis et revoir vos choix d'ici le {{end_applications_date}}. Une fois cette date passée, les lieux partenaires recevront l'ensemble des candidatures et leurs décisions seront connues d'ici au {{end_preselections_date}}. En cas de sélection, le lieu prendra contact directement avec vous par email. Merci pour votre participation."
+    },
+    "delete_error": "Une erreur est survenue lors de la suppression de votre candidature",
+    "delete_success": "Votre candidature a bien été supprimée",
+    "detail": {
+      "back": "Retour",
+      "cancel": "Annuler cette candidature",
+      "save": "Enregistrer les modifications",
+      "saving": "Enregistrement en cours",
+      "saved": "Vos modifications ont bien été enregistrées",
+      "error_saved": "Une erreur est survenue lors de l'enregistrement de vos modifications"
+    }
+  },
+  "place": {
+    "title": "Candidatures – ",
+    "title_single_tag": "Dispositif {{title}}",
+    "table": {
+      "head": {
+        "number": "No.",
+        "artist": "Artiste",
+        "email": "Email",
+        "creation": "Nom de la création"
+      },
+      "buttons": {
+        "details": "Ouvrir"
+      }
+    },
+    "search": "Recherche",
+    "download": "Télécharger",
+    "helper": {
+      "preselection_start": "Établissez votre présélection avant le {{date}}.",
+      "no_preselection": {
+        "singular": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir 1 candidature",
+        "plural": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir {{applications_max}} candidatures"
+      },
+      "missing_preselections": "Il est recommandé d'ajouter {{num}} candidatures supplémentaires.",
+      "missing_preselection": "Il est recommandé d'ajouter {{num}} candidature supplémentaire.",
+      "confirm_preselection": "Vous avez pré-sélectionné {{num}} candidatures.",
+      "confirm_preselections": "Vous avez pré-sélectionné {{num}} candidatures.",
+      "confirm_cta": "Confirmer et transmettre la pré-selection à StudioD",
+      "validated": "Votre pré-sélection a bien été prise en compte pour ce créneau ! Pensez à le faire pour tous vos créneaux.",
+      "open_applications_start": "La période de candidatures pour le dispositif {{title}} est en cours :",
+      "open_applications_end": "vous pouvez consulter un aperçu des candidatures durant cette période mais ne pourrez consulter et télécharger les dossiers qu’au terme de celle-ci.",
+      "closed_campaign": "Cet appel a projet est clôturé, la page désormais est en lecture seule.",
+      "confirm_success": "Vos pré-sélections ont bien été transmises à StudioD"
+    },
+    "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",
+    "no_applications": "Aucune candidature déposée pour ce créneau pour le moment.",
+    "no_applications_past": "Aucune candidature n'a été déposée pour ce créneau.",
+    "detail": {
+      "title": "Candidature n°{{id}}",
+      "header": {
+        "slot": "Créneau",
+        "space": "Espace",
+        "company": "Compagnie",
+        "place": "Lieu"
+      },
+      "right_panel": {
+        "phone": "Tél :",
+        "email": "Email :",
+        "siret": "SIRET :",
+        "ape": "APE :",
+        "insurance_name": "Assurance :",
+        "insurance_number": "N° assurance :",
+        "license": "Licence(s) :"
+      },
+      "download_pdf": "Télécharger le pdf",
+      "downloading_pdf": "Création du pdf",
+      "preselect": "Marquer comme sélectionnée",
+      "deselect": "Annuler la sélection",
+      "error": "Une erreur est survenue",
+      "preselected_success": "Cette candidature a bien été pré-sélectionnée",
+      "deselected_success": "Cette candidature a bien été dé-sélectionnée",
+      "confirmed_helper_start": "Votre pré-sélection a bien été prise en compte pour ce créneau, il ne vous est plus possible de la modifier.",
+      "confirmed_helper_cta": "Contactez l’Atelier de Paris",
+      "confirmed_helper_end": "pour toute question."
+    }
+  }
+}

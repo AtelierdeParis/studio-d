@@ -585,6 +585,27 @@
                 "message": {
                   "type": "string"
                 },
+                "campaign": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
+                "exclude_days": {
+                  "type": "object"
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -741,6 +762,18 @@
                     "type": "string"
                   }
                 },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -881,6 +914,18 @@
                   }
                 },
                 "placeDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"

@@ -14,6 +14,7 @@ import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import SigninModal from '~components/Signin/SigninModal'
 import { useSession } from 'next-auth/client'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const MenuItem = ({ href, text }) => {
   return (
@@ -26,12 +27,19 @@ const MenuItem = ({ href, text }) => {
 const FooterMenu = () => {
   const [session, loading] = useSession()
   const { t } = useTranslation()
+  const { currentCampaign } = useCampaignContext()
   return (
     <Box>
       <Flex pr={12}>
         <Box>
           <MenuItem href="/" text={t('nav.home')} />
           <MenuItem href={ROUTE_PROJECT} text={t('nav.project')} />
+          {currentCampaign?.article_link && (
+            <MenuItem
+              href={currentCampaign?.article_link}
+              text={t('nav.campaign', { title: currentCampaign?.title })}
+            />
+          )}
           <MenuItem href={ROUTE_PLACES} text={t('nav.places')} />
           <MenuItem href={ROUTE_ACTU} text={t('nav.news')} />
           <MenuItem href={ROUTE_FAQ} text={t('nav.faq')} />
@@ -54,6 +62,12 @@ const FooterMenu = () => {
       <Box>
         <MenuItem href={ROUTE_CGU} text={t('nav.cgu')} />
         <MenuItem href={ROUTE_USE_POLICY} text={t('nav.policy')} />
+        {currentCampaign && currentCampaign?.chart_url && (
+          <MenuItem
+            href={currentCampaign?.chart_url}
+            text={t('nav.campaign_chart', { title: currentCampaign?.title })}
+          />
+        )}
       </Box>
     </Box>
   )

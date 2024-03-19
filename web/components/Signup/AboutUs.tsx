@@ -1,24 +1,44 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useTranslation } from 'next-i18next'
-import { Box, Text, Button, Image, Flex, Divider } from '@chakra-ui/react'
+import { Box, Text, Button, Flex, Divider, VStack } from '@chakra-ui/react'
 import { Target } from '~pages/inscription/[target]'
+import AboutUsElement from '~components/Signup/AboutUsElement'
 
 const list = [
   {
-    img: '/assets/img/signup-icon1.svg',
-    name: 'free',
+    tabName: 'platform',
+    elements: [
+      {
+        img: '/assets/img/signup-icon1.svg',
+        name: 'free',
+      },
+    ],
   },
   {
-    img: '/assets/img/signup-icon2.svg',
-    name: 'reservation',
+    tabName: 'solidarity',
+    elements: [
+      {
+        img: '/assets/img/signup-icon2.svg',
+        name: 'reservation',
+      },
+      {
+        img: '/assets/img/signup-icon3.svg',
+        name: 'message',
+      },
+      {
+        img: '/assets/img/signup-icon4.svg',
+        name: 'confidentiality',
+      },
+    ],
   },
   {
-    img: '/assets/img/signup-icon3.svg',
-    name: 'message',
-  },
-  {
-    img: '/assets/img/signup-icon4.svg',
-    name: 'confidentiality',
+    tabName: 'projects',
+    elements: [
+      {
+        img: '/assets/img/projects.svg',
+        name: 'projects',
+      },
+    ],
   },
 ]
 
@@ -39,35 +59,33 @@ const AboutUs = ({ onClick, target }: IAboutUs) => {
       >
         {t(`about.${target}.description`)}
       </Text>
-      {list.map(({ img, name }) => (
-        <Fragment key={name}>
-          <Divider opacity={0.5} />
-          <Flex
-            px={{ base: 4, md: 9 }}
-            py={8}
-            direction={{ base: 'column', sm: 'row' }}
-          >
-            <Image
-              src={img}
-              alignSelf={{ base: 'center', sm: 'flex-start' }}
-              w="48px"
-              h="48px"
-            />
-            <Box ml={{ base: 0, sm: 10 }} mt={{ base: 4, sm: 0 }}>
-              <Text
-                fontSize={{ base: 'md', md: 'lg' }}
-                fontWeight="500"
-                fontFamily="mabry medium"
-                mb={2}
-              >
-                {t(`about.${target}.${name}.title`)}
+      <VStack spacing={12}>
+        {list.map(({ tabName, elements }) => (
+          <Box>
+            <Box
+              borderWidth="1px 1px 0px 1px"
+              borderColor="rgba(0,0,0,0.1)"
+              borderRadius="10px 10px 0px 0px"
+              display="inline-block"
+              paddingX={4}
+              paddingY={2}
+            >
+              <Text fontFamily="mabry" color="grayText.1">
+                {t(`about.tabs.${tabName}`)}
               </Text>
-              <Text>{t(`about.${target}.${name}.text`)}</Text>
             </Box>
-          </Flex>
-        </Fragment>
-      ))}
-      <Divider opacity={0.5} />
+            {elements.map(({ name, img }) => (
+              <AboutUsElement
+                key={name}
+                img={img}
+                name={name}
+                target={target}
+              />
+            ))}
+          </Box>
+        ))}
+      </VStack>
+
       <Flex
         mt={{ base: 6, md: 20 }}
         layerStyle="blueBox"

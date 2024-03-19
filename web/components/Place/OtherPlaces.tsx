@@ -5,6 +5,7 @@ import Arrow from 'public/assets/img/arrow-bottom.svg'
 import { useUser } from '~hooks/useUser'
 import PlaceGrid from '~components/Place/PlaceGrid'
 import { useRouter } from 'next/router'
+import { usePlaces } from '~hooks/usePlaces'
 
 interface Props {
   userId: string
@@ -14,13 +15,18 @@ const OtherPlaces = ({ userId }: Props) => {
   const router = useRouter()
   const { t } = useTranslation('place')
   const { data: user } = useUser(userId)
+  const { tab, id } = router?.query
 
-  const places = useMemo(() => {
-    if (!user?.espaces || user?.espaces.length === 0) return null
-    return user?.espaces.filter(
-      (place) => place.slug !== router.query.id && place.published,
-    )
-  }, [user?.espaces, router.query.placeId])
+  const { data: places } = usePlaces(
+    {
+      published_eq: true,
+      users_permissions_user: userId,
+      slug_ne: id,
+      _limit: 20,
+      _sort: 'dispoAsc',
+    },
+    'otherPlaces',
+  )
 
   if (!places || places.length === 0) return null
 
@@ -34,7 +40,7 @@ const OtherPlaces = ({ userId }: Props) => {
           {t('detail.otherPlaces', { name: user?.structureName })}
         </Text>
       </Flex>
-      <PlaceGrid places={places} />
+      <PlaceGrid places={places} gridMode={tab ? 'solidarity' : null} />
     </Box>
   )
 }

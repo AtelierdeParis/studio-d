@@ -100,7 +100,7 @@ module.exports = {
 
     const user = await strapi
       .query("user", "users-permissions")
-      .findOne({ id }, ["espaces", "espaces.city", "espaces.images"]);
+      .findOne({ id }, ["espaces", "espaces.city", "espaces.images","companyApplications"]);
     return sanitizeUser(user);
   },
   checkPassword(ctx) {

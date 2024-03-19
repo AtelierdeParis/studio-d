@@ -61,8 +61,8 @@
       "default": false
     },
     "disponibilities": {
-      "collection": "disponibility",
-      "via": "message"
+      "via": "message",
+      "collection": "disponibility"
     }
   }
 }

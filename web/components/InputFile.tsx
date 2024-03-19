@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import {
   Flex,
   Text,
@@ -7,7 +7,6 @@ import {
   Box,
   Spacer,
   useBreakpointValue,
-  Circle,
 } from '@chakra-ui/react'
 import Add from 'public/assets/img/add-circle.svg'
 import Attachment from 'public/assets/img/attachment.svg'
@@ -18,6 +17,8 @@ import { Control, useController } from 'react-hook-form'
 interface IInputFile {
   control: Control
   place: Espace
+  name?: string
+  label?: ReactNode
 }
 
 const acceptableTypes = [
@@ -28,21 +29,21 @@ const acceptableTypes = [
   'application/pdf',
 ]
 
-const InputFile = ({ control, place }: IInputFile) => {
+const InputFile = ({ control, place, name = 'Files', label }: IInputFile) => {
   const { t } = useTranslation('place')
   const isMobile = useBreakpointValue({ base: true, sm: false })
   const ref = useRef(null)
 
   const { field: removeField } = useController({
-    name: 'removedFiles',
+    name: 'removed' + name,
     control,
     defaultValue: [],
   })
 
   const { field } = useController({
-    name: 'files',
+    name: name?.toLowerCase(),
     control,
-    defaultValue: place?.files || [],
+    defaultValue: place?.[name.toLowerCase()] || [],
   })
 
   const onChange = (event) => {
@@ -50,7 +51,9 @@ const InputFile = ({ control, place }: IInputFile) => {
       const newFiles = (Array.from(
         event.target.files,
       ) as File[]).filter((file) => acceptableTypes.includes(file.type))
-      if (newFiles.length > 0) field.onChange([...field.value, ...newFiles])
+      if (newFiles.length > 0) {
+        field.onChange([...field.value, ...newFiles])
+      }
     }
   }
 
@@ -78,7 +81,7 @@ const InputFile = ({ control, place }: IInputFile) => {
         mb={{ base: 0, md: 4 }}
         pr={2.5}
       >
-        <Text>{t('form.filesLabel')}</Text>
+        <Text>{label || t('form.filesLabel')}</Text>
         <Box pos="relative" cursor="pointer" overflow="hidden" role="group">
           <Button
             pos="relative"
@@ -184,16 +187,6 @@ const InputFile = ({ control, place }: IInputFile) => {
                     w={{ base: '100%', lg: '20rem' }}
                   />
                 </Box>
-                {/* <Circle
-                    size="15px"
-                    border="1px solid"
-                    borderColor="black"
-                    fontSize="22px"
-                    onClick={() => deleteFile(index, file?.id)}
-                    cursor="pointer"
-                  >
-                    -
-                  </Circle> */}
 
                 <Button
                   ml={{ base: 3, md: 0 }}

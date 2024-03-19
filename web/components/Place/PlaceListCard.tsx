@@ -13,15 +13,24 @@ import { ROUTE_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
 import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
+import { format } from '~utils/date'
+import CampaignTag from '~components/Campaign/CampaignTag'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import useCampaignDispo from '~hooks/useCampaignDispo'
 
 interface Props {
   place: Espace
   setFocus: (idPlace: string) => void
+  listMode?: 'solidarity' | 'campaign'
 }
 
-const PlaceCard = ({ place, setFocus }: Props) => {
+const PlaceCard = ({ place, setFocus, listMode }: Props) => {
   const { t } = useTranslation('place')
+  const { currentCampaign } = useCampaignContext()
+  const { campaignDispos } = useCampaignDispo(place?.disponibilities)
 
+  const hasCampaignDispo =
+    currentCampaign?.mode === 'applications' && !!campaignDispos?.length
   return (
     <LinkBox
       w="100%"
@@ -62,6 +71,11 @@ const PlaceCard = ({ place, setFocus }: Props) => {
           </Flex>
           <Box pl={5} flex={1}>
             <Box>
+              <CampaignTag
+                mode={listMode}
+                disponibilitiesIds={campaignDispos?.map((d) => d.id)}
+                hasCampaignDispo={hasCampaignDispo}
+              />
               <Text fontFamily="mabry medium" isTruncated>
                 {place.name}
               </Text>
@@ -77,6 +91,27 @@ const PlaceCard = ({ place, setFocus }: Props) => {
               <Text>{`${place.surface}m²`}</Text>
               <Text color="gray.500">{t('card.dim')}</Text>
               <Text>{`${place.roomLength} x ${place.width} m`}</Text>
+              {listMode === 'campaign' && (
+                <>
+                  <Text color="gray.500" pr={9}>
+                    {t('card.dates')}
+                  </Text>
+                  <Box>
+                    {place?.disponibilities
+                      ?.filter(
+                        (d) =>
+                          d.campaign?.toString() ===
+                          currentCampaign?.id?.toString(),
+                      )
+                      .map((el) => (
+                        <Text>
+                          {`${format(el.start, 'dd/MM')} ${t('card.to')}
+                      ${format(el.end, 'dd/MM')}`}
+                        </Text>
+                      ))}
+                  </Box>
+                </>
+              )}
             </SimpleGrid>
           </Box>
         </Flex>

@@ -1,22 +1,41 @@
 {
-    "title": "Plateforme solidaire de mise\nà disposition de studios de danse",
-    "search": {
-        "where": {
-            "label": "Où cherchez-vous ?",
-            "placeholder": "Renseignez une ville..."
-        },
-        "when": {
-            "label": "Sur quelle période ?",
-            "placeholder": "Cliquer pour choisir des dates"
-        },
-        "btn": "Rechercher"
+  "title": "Plateforme solidaire de mise\nà disposition de studios de danse",
+  "search": {
+    "where": {
+      "label": "Où cherchez-vous ?",
+      "placeholder": "Renseignez une ville..."
     },
-    "places": {
-        "title": "Prochains créneaux disponibles",
-        "btn": "Parcourir tous les espaces"
+    "when": {
+      "label": "Sur quelle période ?",
+      "placeholder": "Cliquer pour choisir des dates"
     },
-    "news": {
-        "title": "Les actus de la communauté",
-        "btn": "Toutes les actus"
+    "btn": "Rechercher"
+  },
+  "places": {
+    "title": "Prochains créneaux StudioD disponibles",
+    "btn": "Parcourir tous les espaces de StudioD",
+    "campaign": {
+      "title": "StudioD {{title}} ",
+      "cta": "Parcourir tous les espaces partenaires de StudioD {{title}}"
     }
+  },
+  "news": {
+    "title": "Les actus de la communauté",
+    "btn": "Toutes les actus"
+  },
+  "campaign": {
+    "title": "StudioD {{title}}",
+    "insert": {
+      "disponibilities": {
+        "title": "Inscrivez vos espaces !",
+        "subtitle": "La période d'inscription de vos espaces se clôture le {{date}}.",
+        "cta": "Mes espaces"
+      },
+      "applications": {
+        "title": "L'appel à projet est ouvert !",
+        "subtitle": "Candidatez avant le {{date}}.",
+        "cta": "Parcourir"
+      }
+    }
+  }
 }

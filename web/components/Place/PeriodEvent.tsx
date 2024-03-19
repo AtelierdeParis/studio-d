@@ -9,6 +9,7 @@ interface Props {
   isMonth: boolean
   start: Date
   end: Date
+  isCampaignEvent?: boolean
 }
 
 const stylePeriodMonth = {
@@ -23,7 +24,7 @@ const styleLastDay = {
   right: 'auto',
 }
 
-const PeriodEvent = ({ isMonth, start, end }: Props) => {
+const PeriodEvent = ({ isMonth, start, end, isCampaignEvent }: Props) => {
   const { t } = useTranslation('place')
   const nbDays = useMemo(() => differenceInDays(end, start) + 1, [start, end])
   const isLastDay = useMemo(() => isSunday(start), [start])
@@ -50,9 +51,13 @@ const PeriodEvent = ({ isMonth, start, end }: Props) => {
       <Box color={status === 'selected' ? 'blue.500' : 'black'}>
         {`${formattedStart} - ${formattedEnd}`}
       </Box>
-      <Box color="grayText.1">
-        {t(`schedule.${isLastDay ? 'nbDays' : 'nbDays()'}`, { nb: nbDays })}
-      </Box>
+      {!isCampaignEvent && (
+        <Box color="grayText.1">
+          {t(`schedule.${isLastDay ? 'nbDays' : 'nbDays()'}`, {
+            nb: nbDays,
+          })}
+        </Box>
+      )}
     </Stack>
   )
 }

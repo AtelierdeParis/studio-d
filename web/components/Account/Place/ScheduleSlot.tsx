@@ -4,6 +4,7 @@ import { ScheduleEventWhen } from '~@types/schedule-event.d'
 import isSameDay from 'date-fns/isSameDay'
 import ScheduleContext from '~components/Account/Place/ScheduleContext'
 import PeriodEvent from '~components/Place/PeriodEvent'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const styleSelected = {
   border: '1px dashed',
@@ -50,8 +51,15 @@ const getStyle = (status) => {
   }
 }
 
-const Event = ({ status = null, when = null, range = null, id = null }) => {
+const Event = ({
+  status = null,
+  range = null,
+  id = null,
+  isCampaignEvent = false,
+  isCampaignMode = false,
+}) => {
   const { setToDelete, eventsIdToDelete, place } = useContext(ScheduleContext)
+  const { currentCampaign } = useCampaignContext()
   const isPeriod = useMemo(() => {
     if (!range) return null
     return !isSameDay(range.start, range.end)
@@ -62,6 +70,15 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
     id,
   ])
 
+  const isFromOtherTab =
+    (isCampaignMode && !isCampaignEvent) || (!isCampaignMode && isCampaignEvent)
+  const isClosedDispoMode =
+    isCampaignMode &&
+    isCampaignEvent &&
+    currentCampaign.mode !== 'disponibilities'
+
+  const isDisabled = isFromOtherTab || isClosedDispoMode
+
   return (
     <Box
       className="scheduleEvent"
@@ -70,8 +87,9 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       borderWidth={{ base: '1px', sm: '2px' }}
       w="100%"
       borderRadius="md"
-      cursor={id && 'pointer'}
+      cursor={isDisabled ? 'not-allowed' : id ? 'pointer' : undefined}
       onClick={() => {
+        if (isDisabled) return
         if (!id) return setToDelete([])
         const dispo = place.disponibilities.find((dispo) => dispo.id === id)
         if (!dispo) return
@@ -103,8 +121,16 @@ const Event = ({ status = null, when = null, range = null, id = null }) => {
       }}
       borderColor={isSelected ? 'blue.500' : 'transparent'}
       {...getStyle(status)}
+      opacity={isFromOtherTab ? 0.6 : 1}
     >
-      {isPeriod && <PeriodEvent isMonth start={range.start} end={range.end} />}
+      {isPeriod && (
+        <PeriodEvent
+          isMonth
+          start={range.start}
+          end={range.end}
+          isCampaignEvent={isCampaignEvent}
+        />
+      )}
     </Box>
   )
 }
@@ -143,6 +169,9 @@ interface Props {
   status?: 'selected' | 'available'
   hasEventSameDay?: boolean
   range: { start: Date; end: Date }
+  isCampaignEvent?: boolean
+  isCampaignMode?: boolean
+  day: Date
 }
 
 const ScheduleSlot = (props: Props) => {

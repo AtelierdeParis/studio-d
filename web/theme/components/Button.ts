@@ -71,6 +71,45 @@ const Button = {
         borderColor: 'black',
       },
     },
+    blueFill: {
+      bgColor: 'blue.500',
+      justifyContent: 'flex-start',
+      color: 'white',
+      whiteSpace: 'pre-line',
+      h: '40px',
+      minW: 0,
+      _hover: {
+        backgroundColor: 'blue.400',
+      },
+    },
+    campaign: {
+      justifyContent: 'flex-start',
+      bgColor: 'campaign.primary',
+      color: 'white',
+      whiteSpace: 'pre-line',
+      h: '40px',
+      _hover: {
+        bgColor: 'campaign.dark',
+      },
+    },
+    grayLine: {
+      justifyContent: 'flex-start',
+      bgColor: 'white',
+      color: '#626782',
+      borderRadius: '4px',
+      border: '1px solid rgba(98, 103, 130, 0.6)',
+      _hover: {
+        bgColor: 'gray.100',
+      },
+    },
+    unSelected: {
+      borderColor: 'black',
+      px: 0,
+      pb: 0.5,
+      h: 'auto',
+      borderRadius: 0,
+      minW: 0,
+    },
   },
   sizes: {
     md: {

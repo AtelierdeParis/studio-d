@@ -19,6 +19,7 @@ import Pin from 'public/assets/img/pin-outline.svg'
 import { useTranslation } from 'next-i18next'
 import { useFormContext } from 'react-hook-form'
 import { SurfaceOptions, HeightOptions } from '~utils/search'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 
 const selectProps = {
   variant: 'unstyled',
@@ -26,7 +27,13 @@ const selectProps = {
   pl: 3,
 }
 
-const PlaceSearch = ({ onSubmit }) => {
+const PlaceSearch = ({
+  onSubmit,
+  isCampaignTab,
+}: {
+  onSubmit: any
+  isCampaignTab?: boolean
+}) => {
   const theme = useTheme()
   const [isLoading, setLoading] = useState(false)
   const [hasMoreFilters, setMoreFilter] = useState(false)
@@ -34,21 +41,33 @@ const PlaceSearch = ({ onSubmit }) => {
   const form = useFormContext()
   const isMobile = useBreakpointValue({ base: true, lg: false })
   const city = form.watch('city')
+  const { currentCampaign } = useCampaignContext()
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      style={isCampaignTab ? { width: '100%' } : {}}
+    >
       <Flex
-        bgColor="blue.100"
+        bgColor={isCampaignTab ? 'campaign.light' : 'blue.100'}
         px={{ base: 3, md: 5 }}
         py={{ base: 4, md: 6 }}
-        borderRadius="md"
+        borderRadius={isCampaignTab ? '4px!important' : 'md'}
+        borderTopLeftRadius={currentCampaign ? 0 : 'md'}
         position="relative"
         zIndex={100}
         mb={{ base: 0, sm: 10 }}
-        mt={6}
         direction="column"
+        mt={currentCampaign ? 0 : 6}
+        height={isCampaignTab ? '100%' : 'auto'}
       >
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} rowGap={0} w="100%">
+        <SimpleGrid
+          columns={
+            isCampaignTab ? { base: 1, md: 3 } : { base: 1, md: 2, lg: 4 }
+          }
+          rowGap={0}
+          w="100%"
+        >
           <Flex
             alignItems="flex-start"
             direction={{ base: 'column', md: 'row' }}
@@ -91,42 +110,50 @@ const PlaceSearch = ({ onSubmit }) => {
                 </Flex>
               )}
             </Flex>
+
             <Divider
               orientation="vertical"
               mx={3.5}
               opacity={0.5}
-              display={{ base: 'none', sm: 'none', md: 'block' }}
+              display={
+                !isCampaignTab ? { base: 'none', sm: 'none', md: 'block' } : {}
+              }
             />
+
             <Divider
               orientation="horizontal"
               my={4}
               opacity={0.5}
-              display={{ base: 'block', md: 'none' }}
+              display={!isCampaignTab ? { base: 'block', md: 'none' } : 'none'}
             />
           </Flex>
-          <Flex alignItems="flex-start" pos="relative">
-            <Flex w="100%">
-              <Box pt={0.5}>
-                <Calendar stroke={theme.colors.blue['500']} />
-              </Box>
-              <Box pl={3.5} flex={1}>
-                <InputDateRange
-                  label={t('search.when.label')}
-                  control={form.control}
-                  placeholder={t('search.when.placeholder')}
-                />
-              </Box>
+          {!isCampaignTab && (
+            <Flex alignItems="flex-start" pos="relative">
+              <Flex w="100%">
+                <Box pt={0.5}>
+                  <Calendar stroke={theme.colors.blue['500']} />
+                </Box>
+                <Box pl={3.5} flex={1}>
+                  <InputDateRange
+                    label={t('search.when.label')}
+                    control={form.control}
+                    placeholder={t('search.when.placeholder')}
+                  />
+                </Box>
+              </Flex>
+              <Divider
+                orientation="vertical"
+                mx={3.5}
+                opacity={0.5}
+                display={{ base: 'none', lg: 'block' }}
+              />
             </Flex>
-            <Divider
-              orientation="vertical"
-              mx={3.5}
-              opacity={0.5}
-              display={{ base: 'none', lg: 'block' }}
-            />
-          </Flex>
+          )}
           <Flex
             alignItems="flex-start"
-            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+            display={
+              isMobile && !hasMoreFilters && !isCampaignTab ? 'none' : 'flex'
+            }
           >
             <Box flex={1} pt={{ base: 6, md: 0 }}>
               <FormField labelStyle={{ mb: 0 }}>
@@ -197,7 +224,9 @@ const PlaceSearch = ({ onSubmit }) => {
           </Flex>
           <Flex
             alignItems="flex-start"
-            display={isMobile && !hasMoreFilters ? 'none' : 'flex'}
+            display={
+              isMobile && !hasMoreFilters && !isCampaignTab ? 'none' : 'flex'
+            }
           >
             <Box flex={1}>
               <Divider
@@ -261,8 +290,8 @@ const PlaceSearch = ({ onSubmit }) => {
             </Button>
             <Button
               type="submit"
-              colorScheme="blue"
               size="lg"
+              variant={isCampaignTab ? 'campaign' : 'blueFill'}
               // isDisabled={isDisabled}
               isLoading={isLoading}
             >

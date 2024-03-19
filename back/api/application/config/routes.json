@@ -1,0 +1,70 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/applications/me",
+      "handler": "application.getMyApplications",
+      "config": {
+        "policies": ["global::is-authenticated"],
+        "operationId": "getMyApplications",
+        "description": "Get applications related to current user"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/applications",
+      "handler": "application.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/applications/count",
+      "handler": "application.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/applications/:id",
+      "handler": "application.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/applications",
+      "handler": "application.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/applications/:id",
+      "handler": "application.update",
+      "config": {
+        "policies": ["can-update"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/applications/:id",
+      "handler": "application.delete",
+      "config": {
+        "policies": ["is-concerned"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/applications/confirmed/:campaignId",
+      "handler": "application.getConfirmedApplications",
+      "config": {
+        "policies": ["is-admin"]
+      }
+    }
+  ]
+}

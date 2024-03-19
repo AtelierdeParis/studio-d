@@ -16,6 +16,9 @@ import dynamic from 'next/dynamic'
 import { useTranslation } from 'next-i18next'
 import MigrationMessage from '~components/MigrationMessage'
 import { NextSeo } from 'next-seo'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import CampaignPlaceSchedule from '~components/Campaign/Places/Admin/CampaignSchedule'
+import CampaignFileUpload from '~components/Campaign/Places/Admin/CampaignFileUpload'
 
 const PlaceSchedule = dynamic(
   () => import('~components/Account/Place/PlaceSchedule'),
@@ -30,6 +33,7 @@ interface Props {
 }
 
 const EditPlace = ({ slug }: Props) => {
+  const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
   const { query, asPath } = useRouter()
   const { data: place, isLoading } = usePlace(slug)
@@ -77,6 +81,12 @@ const EditPlace = ({ slug }: Props) => {
             <TabPanel px={0}>
               <PlaceSchedule place={place} />
             </TabPanel>
+            {currentCampaign && (
+              <TabPanel px={0}>
+                <CampaignPlaceSchedule place={place} />
+                <CampaignFileUpload place={place} />
+              </TabPanel>
+            )}
           </TabPanels>
         </Tabs>
       </Box>

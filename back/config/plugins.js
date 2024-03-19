@@ -1,14 +1,14 @@
 module.exports = ({ env }) => ({
   email: {
-    provider: "nodemailer",
+    provider: 'nodemailer',
     providerOptions: {
-      host: env("SMTP_HOST", "localhost"),
-      port: env("SMTP_PORT", 25),
+      host: env('SMTP_HOST', 'localhost'),
+      port: env('SMTP_PORT', 25),
       auth:
-        env("SMTP_USERNAME", null) && env("SMTP_PASSWORD", null)
+        env('SMTP_USERNAME', null) && env('SMTP_PASSWORD', null)
           ? {
-              user: env("SMTP_USERNAME"),
-              pass: env("SMTP_PASSWORD"),
+              user: env('SMTP_USERNAME'),
+              pass: env('SMTP_PASSWORD'),
             }
           : undefined,
       ignoreTLS: true,
@@ -19,7 +19,7 @@ module.exports = ({ env }) => ({
     },
   },
   upload: {
-    provider: "do",
+    provider: 'do',
     providerOptions: {
       key: process.env.DO_SPACE_ACCESS_KEY,
       secret: process.env.DO_SPACE_SECRET_KEY,
@@ -29,4 +29,4 @@ module.exports = ({ env }) => ({
       cdn: process.env.DO_SPACE_CDN,
     },
   },
-});
+})

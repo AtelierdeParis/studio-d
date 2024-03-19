@@ -1457,6 +1457,18 @@
                 "deleted": {
                   "type": "boolean"
                 },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaign_files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -1560,6 +1572,188 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "duration",
+                "disponibility_start",
+                "disponibility_end",
+                "application_start",
+                "application_end",
+                "preselection_start",
+                "preselection_end",
+                "disponibilities_max"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "duration": {
+                  "type": "integer"
+                },
+                "disponibility_start": {
+                  "type": "string"
+                },
+                "disponibility_end": {
+                  "type": "string"
+                },
+                "application_start": {
+                  "type": "string"
+                },
+                "application_end": {
+                  "type": "string"
+                },
+                "preselection_start": {
+                  "type": "string"
+                },
+                "preselection_end": {
+                  "type": "string"
+                },
+                "reminder_days": {
+                  "type": "integer"
+                },
+                "disponibilities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "disponibilities_max": {
+                  "type": "integer"
+                },
+                "campaign_start": {
+                  "type": "string"
+                },
+                "campaign_end": {
+                  "type": "string"
+                },
+                "users_permissions_users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "applications_max": {
+                  "type": "integer"
+                },
+                "article_link": {
+                  "type": "string"
+                },
+                "eligibility": {
+                  "type": "string"
+                },
+                "chart_url": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "preselections_max": {
+                  "type": "integer"
+                },
+                "is_active": {
+                  "type": "boolean"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "companyApplications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
                 },
                 "created_by": {
                   "type": "string"
@@ -1704,6 +1898,18 @@
             }
           },
           "placeDispositifs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "companyApplications": {
             "type": "array",
             "items": {
               "type": "string"

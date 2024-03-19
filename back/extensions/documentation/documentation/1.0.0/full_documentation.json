@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/18/2022 4:56:52 PM"
+    "x-generation-date": "03/18/2024 6:34:37 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -554,6 +554,778 @@
             }
           }
         ]
+      }
+    },
+    "/applications/me": {
+      "get": {
+        "deprecated": false,
+        "description": "Get applications related to current user",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ],
+        "operationId": "getMyApplications"
+      }
+    },
+    "/applications": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewApplication"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/applications/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": []
+      }
+    },
+    "/applications/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Application"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewApplication"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/applications/confirmed/{campaignId}": {
+      "get": {
+        "deprecated": false,
+        "description": "Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Application"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden - User is not a super admin",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Campaign not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Application"
+        ],
+        "parameters": [
+          {
+            "name": "campaignId",
+            "in": "path",
+            "description": "ID of the campaign",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getConfirmedApplicationsByCampaign"
       }
     },
     "/bookings/me/{bookingType}": {
@@ -1225,6 +1997,517 @@
           }
         ],
         "operationId": "removeDispos"
+      }
+    },
+    "/campaigns": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Campaign"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ]
+      },
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Campaign"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCampaign"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/campaigns/count": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "parameters": []
+      }
+    },
+    "/campaigns/{id}": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Campaign"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "deprecated": false,
+        "description": "Update a record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Campaign"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewCampaign"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "deprecated": false,
+        "description": "Delete a record",
+        "responses": {
+          "200": {
+            "description": "deletes a single record based on the ID supplied",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Campaign"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/cities": {
@@ -2828,6 +4111,85 @@
         }
       }
     },
+    "/disponibilities/{id}/campaign/{campaignId}/confirm": {
+      "post": {
+        "deprecated": false,
+        "description": "Confirm a campaign for a disponibility",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Disponibility"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input, object invalid"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Disponibility not found"
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Confirm Campaign",
+        "tags": [
+          "Disponibility"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Disponibility"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Disponibility ID"
+          },
+          {
+            "in": "path",
+            "name": "campaignId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "Campaign ID"
+          }
+        ]
+      }
+    },
     "/dispositifs": {
       "get": {
         "deprecated": false,
@@ -3392,7 +4754,144 @@
         "tags": [
           "Espace"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "_limit",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results possible",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_sort",
+            "in": "query",
+            "required": false,
+            "description": "Sort according to a specific field.",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_start",
+            "in": "query",
+            "required": false,
+            "description": "Skip a specific number of entries (especially useful for pagination)",
+            "schema": {
+              "type": "integer"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "=",
+            "in": "query",
+            "required": false,
+            "description": "Get entries that matches exactly your input",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_ne",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are not equals to something",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lt",
+            "in": "query",
+            "required": false,
+            "description": "Get record that are lower than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_lte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are lower than or equal to a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gt",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_gte",
+            "in": "query",
+            "required": false,
+            "description": "Get records that are greater than  or equal a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_contains",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_containss",
+            "in": "query",
+            "required": false,
+            "description": "Get records that contains (case sensitive) a value",
+            "schema": {
+              "type": "string"
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_in",
+            "in": "query",
+            "required": false,
+            "description": "Get records that matches any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          },
+          {
+            "name": "_nin",
+            "in": "query",
+            "required": false,
+            "description": "Get records that doesn't match any value in the array of values",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "deprecated": false
+          }
+        ],
         "operationId": "myPlaces"
       }
     },
@@ -9570,6 +11069,689 @@
           }
         }
       },
+      "Application": {
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "disponibility": {
+            "required": [
+              "id",
+              "start",
+              "end",
+              "type",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "when": {
+                "type": "string",
+                "enum": [
+                  "morning",
+                  "afternoon",
+                  "full"
+                ]
+              },
+              "start": {
+                "type": "string"
+              },
+              "end": {
+                "type": "string"
+              },
+              "espace": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "punctual",
+                  "day",
+                  "period"
+                ]
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "available",
+                  "booked",
+                  "pending",
+                  "past",
+                  "canceled",
+                  "removed"
+                ]
+              },
+              "booking": {
+                "type": "string"
+              },
+              "dispositif": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "campaign": {
+                "type": "string"
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "staff": {
+                "type": "object"
+              },
+              "accomodation": {
+                "type": "integer"
+              },
+              "scene_grid": {
+                "type": "boolean"
+              },
+              "exclude_days": {
+                "type": "object"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "creation_dancers": {
+            "type": "integer"
+          },
+          "creation_title": {
+            "type": "string"
+          },
+          "creation_file": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "creation_summary": {
+            "type": "string"
+          },
+          "creation_partnerships": {
+            "type": "string"
+          },
+          "creation_techical_requirements": {
+            "type": "string"
+          },
+          "creation_accomodation": {
+            "type": "boolean"
+          },
+          "eligible": {
+            "type": "boolean"
+          },
+          "already_supported": {
+            "type": "boolean"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "references": {
+            "type": "object"
+          },
+          "campaign": {
+            "required": [
+              "id",
+              "duration",
+              "disponibility_start",
+              "disponibility_end",
+              "application_start",
+              "application_end",
+              "preselection_start",
+              "preselection_end",
+              "disponibilities_max"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "integer"
+              },
+              "disponibility_start": {
+                "type": "string"
+              },
+              "disponibility_end": {
+                "type": "string"
+              },
+              "application_start": {
+                "type": "string"
+              },
+              "application_end": {
+                "type": "string"
+              },
+              "preselection_start": {
+                "type": "string"
+              },
+              "preselection_end": {
+                "type": "string"
+              },
+              "reminder_days": {
+                "type": "integer"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "disponibilities_max": {
+                "type": "integer"
+              },
+              "campaign_start": {
+                "type": "string"
+              },
+              "campaign_end": {
+                "type": "string"
+              },
+              "users_permissions_users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "applications_max": {
+                "type": "integer"
+              },
+              "article_link": {
+                "type": "string"
+              },
+              "eligibility": {
+                "type": "string"
+              },
+              "chart_url": {
+                "type": "string"
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preselections_max": {
+                "type": "integer"
+              },
+              "is_active": {
+                "type": "boolean"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "company": {
+            "required": [
+              "id",
+              "email",
+              "username",
+              "firstname",
+              "lastname",
+              "structureName",
+              "address",
+              "zipCode",
+              "city",
+              "country",
+              "siret",
+              "ape",
+              "phone",
+              "license",
+              "type"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "accepted": {
+                "type": "boolean"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "structureName": {
+                "type": "string"
+              },
+              "socialReason": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "zipCode": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "siret": {
+                "type": "string"
+              },
+              "ape": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "license": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "legalRepresentative": {
+                "type": "string"
+              },
+              "statusRepresentative": {
+                "type": "string"
+              },
+              "insuranceNumber": {
+                "type": "string"
+              },
+              "insuranceName": {
+                "type": "string"
+              },
+              "choreographer": {
+                "type": "string"
+              },
+              "espaces": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "company",
+                  "place"
+                ]
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "companyDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "placeDispositifs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "campaigns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "companyApplications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "espace": {
+            "required": [
+              "id",
+              "name",
+              "surface",
+              "roomLength",
+              "width",
+              "height",
+              "mirror",
+              "danceBar",
+              "accomodation",
+              "technicalStaff",
+              "floor",
+              "address",
+              "country",
+              "latitude"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "surface": {
+                "type": "number"
+              },
+              "roomLength": {
+                "type": "number"
+              },
+              "width": {
+                "type": "number"
+              },
+              "height": {
+                "type": "number"
+              },
+              "mirror": {
+                "type": "boolean"
+              },
+              "danceBar": {
+                "type": "boolean"
+              },
+              "accomodation": {
+                "type": "boolean"
+              },
+              "technicalStaff": {
+                "type": "boolean"
+              },
+              "floor": {
+                "type": "string",
+                "enum": [
+                  "plancherDanse",
+                  "parquetTraditionnel",
+                  "other",
+                  "todefine"
+                ]
+              },
+              "otherFloor": {
+                "type": "string"
+              },
+              "about": {
+                "type": "string"
+              },
+              "details": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "images": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scheduleDetails": {
+                "type": "string"
+              },
+              "filledUntil": {
+                "type": "string"
+              },
+              "published": {
+                "type": "boolean"
+              },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "country": {
+                "type": "string"
+              },
+              "external_id": {
+                "type": "integer"
+              },
+              "danceCarpet": {
+                "type": "string",
+                "enum": [
+                  "true",
+                  "false",
+                  "possible"
+                ]
+              },
+              "slug": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "latitude": {
+                "type": "number"
+              },
+              "longitude": {
+                "type": "number"
+              },
+              "deleted": {
+                "type": "boolean"
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "campaign_files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewApplication": {
+        "properties": {
+          "disponibility": {
+            "type": "string"
+          },
+          "creation_dancers": {
+            "type": "integer"
+          },
+          "creation_title": {
+            "type": "string"
+          },
+          "creation_summary": {
+            "type": "string"
+          },
+          "creation_partnerships": {
+            "type": "string"
+          },
+          "creation_techical_requirements": {
+            "type": "string"
+          },
+          "creation_accomodation": {
+            "type": "boolean"
+          },
+          "eligible": {
+            "type": "boolean"
+          },
+          "already_supported": {
+            "type": "boolean"
+          },
+          "cv": {
+            "type": "string"
+          },
+          "references": {
+            "type": "object"
+          },
+          "campaign": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "espace": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "preselected",
+              "confirmed"
+            ]
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
       "Booking": {
         "required": [
           "id"
@@ -9652,6 +11834,526 @@
           },
           "company": {
             "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
+          }
+        }
+      },
+      "Campaign": {
+        "required": [
+          "id",
+          "duration",
+          "disponibility_start",
+          "disponibility_end",
+          "application_start",
+          "application_end",
+          "preselection_start",
+          "preselection_end",
+          "disponibilities_max"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer"
+          },
+          "disponibility_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "disponibility_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "application_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "application_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "preselection_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "preselection_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "reminder_days": {
+            "type": "integer"
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "start",
+                "end",
+                "type",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "when": {
+                  "type": "string",
+                  "enum": [
+                    "morning",
+                    "afternoon",
+                    "full"
+                  ]
+                },
+                "start": {
+                  "type": "string"
+                },
+                "end": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "punctual",
+                    "day",
+                    "period"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "available",
+                    "booked",
+                    "pending",
+                    "past",
+                    "canceled",
+                    "removed"
+                  ]
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "dispositif": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
+                "exclude_days": {
+                  "type": "object"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "users_permissions_users": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "email",
+                "username",
+                "firstname",
+                "lastname",
+                "structureName",
+                "address",
+                "zipCode",
+                "city",
+                "country",
+                "siret",
+                "ape",
+                "phone",
+                "license",
+                "type"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmationToken": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "accepted": {
+                  "type": "boolean"
+                },
+                "firstname": {
+                  "type": "string"
+                },
+                "lastname": {
+                  "type": "string"
+                },
+                "structureName": {
+                  "type": "string"
+                },
+                "socialReason": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "zipCode": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "country": {
+                  "type": "string"
+                },
+                "siret": {
+                  "type": "string"
+                },
+                "ape": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "license": {
+                  "type": "string"
+                },
+                "website": {
+                  "type": "string"
+                },
+                "legalRepresentative": {
+                  "type": "string"
+                },
+                "statusRepresentative": {
+                  "type": "string"
+                },
+                "insuranceNumber": {
+                  "type": "string"
+                },
+                "insuranceName": {
+                  "type": "string"
+                },
+                "choreographer": {
+                  "type": "string"
+                },
+                "espaces": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "company",
+                    "place"
+                  ]
+                },
+                "external_id": {
+                  "type": "integer"
+                },
+                "companyDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "placeDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "applications_max": {
+            "type": "integer"
+          },
+          "article_link": {
+            "type": "string"
+          },
+          "eligibility": {
+            "type": "string"
+          },
+          "chart_url": {
+            "type": "string"
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "preselections_max": {
+            "type": "integer"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "NewCampaign": {
+        "required": [
+          "duration",
+          "disponibility_start",
+          "disponibility_end",
+          "application_start",
+          "application_end",
+          "preselection_start",
+          "preselection_end",
+          "disponibilities_max"
+        ],
+        "properties": {
+          "duration": {
+            "type": "integer"
+          },
+          "disponibility_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "disponibility_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "application_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "application_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "preselection_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "preselection_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "reminder_days": {
+            "type": "integer"
+          },
+          "disponibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "disponibilities_max": {
+            "type": "integer"
+          },
+          "campaign_start": {
+            "type": "string",
+            "format": "date"
+          },
+          "campaign_end": {
+            "type": "string",
+            "format": "date"
+          },
+          "users_permissions_users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "applications_max": {
+            "type": "integer"
+          },
+          "article_link": {
+            "type": "string"
+          },
+          "eligibility": {
+            "type": "string"
+          },
+          "chart_url": {
+            "type": "string"
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "preselections_max": {
+            "type": "integer"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "published_at": {
+            "type": "string",
+            "format": "date-time"
           },
           "created_by": {
             "type": "string"
@@ -9809,6 +12511,18 @@
                 },
                 "deleted": {
                   "type": "boolean"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaign_files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 "created_by": {
                   "type": "string"
@@ -10070,6 +12784,18 @@
               "deleted": {
                 "type": "boolean"
               },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "campaign_files": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -10255,6 +12981,197 @@
               }
             }
           },
+          "campaign": {
+            "required": [
+              "id",
+              "duration",
+              "disponibility_start",
+              "disponibility_end",
+              "application_start",
+              "application_end",
+              "preselection_start",
+              "preselection_end",
+              "disponibilities_max"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "duration": {
+                "type": "integer"
+              },
+              "disponibility_start": {
+                "type": "string"
+              },
+              "disponibility_end": {
+                "type": "string"
+              },
+              "application_start": {
+                "type": "string"
+              },
+              "application_end": {
+                "type": "string"
+              },
+              "preselection_start": {
+                "type": "string"
+              },
+              "preselection_end": {
+                "type": "string"
+              },
+              "reminder_days": {
+                "type": "integer"
+              },
+              "disponibilities": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "disponibilities_max": {
+                "type": "integer"
+              },
+              "campaign_start": {
+                "type": "string"
+              },
+              "campaign_end": {
+                "type": "string"
+              },
+              "users_permissions_users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "applications_max": {
+                "type": "integer"
+              },
+              "article_link": {
+                "type": "string"
+              },
+              "eligibility": {
+                "type": "string"
+              },
+              "chart_url": {
+                "type": "string"
+              },
+              "applications": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "preselections_max": {
+                "type": "integer"
+              },
+              "is_active": {
+                "type": "boolean"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "disponibility": {
+                  "type": "string"
+                },
+                "creation_dancers": {
+                  "type": "integer"
+                },
+                "creation_title": {
+                  "type": "string"
+                },
+                "creation_file": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "creation_summary": {
+                  "type": "string"
+                },
+                "creation_partnerships": {
+                  "type": "string"
+                },
+                "creation_techical_requirements": {
+                  "type": "string"
+                },
+                "creation_accomodation": {
+                  "type": "boolean"
+                },
+                "eligible": {
+                  "type": "boolean"
+                },
+                "already_supported": {
+                  "type": "boolean"
+                },
+                "cv": {
+                  "type": "string"
+                },
+                "references": {
+                  "type": "object"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "company": {
+                  "type": "string"
+                },
+                "espace": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "preselected",
+                    "confirmed"
+                  ]
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
+          },
+          "exclude_days": {
+            "type": "object"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -10316,6 +13233,27 @@
           },
           "message": {
             "type": "string"
+          },
+          "campaign": {
+            "type": "string"
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "staff": {
+            "type": "object"
+          },
+          "accomodation": {
+            "type": "integer"
+          },
+          "scene_grid": {
+            "type": "boolean"
+          },
+          "exclude_days": {
+            "type": "object"
           },
           "published_at": {
             "type": "string",
@@ -10399,6 +13337,27 @@
                 },
                 "message": {
                   "type": "string"
+                },
+                "campaign": {
+                  "type": "string"
+                },
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "staff": {
+                  "type": "object"
+                },
+                "accomodation": {
+                  "type": "integer"
+                },
+                "scene_grid": {
+                  "type": "boolean"
+                },
+                "exclude_days": {
+                  "type": "object"
                 },
                 "published_at": {
                   "type": "string"
@@ -10556,6 +13515,18 @@
                     "type": "string"
                   }
                 },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -10696,6 +13667,18 @@
                   }
                 },
                 "placeDispositifs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -10881,6 +13864,76 @@
               "false",
               "possible"
             ]
+          },
+          "campaign_files": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "alternativeText": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -11004,6 +14057,12 @@
           "deleted": {
             "type": "boolean",
             "default": false
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"
@@ -11713,6 +14772,18 @@
                     "type": "string"
                   }
                 },
+                "campaigns": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "companyApplications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -12081,7 +15152,13 @@
       "name": "Actuality"
     },
     {
+      "name": "Application"
+    },
+    {
       "name": "Booking"
+    },
+    {
+      "name": "Campaign"
     },
     {
       "name": "City"

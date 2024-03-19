@@ -150,6 +150,22 @@
     "deleted": {
       "type": "boolean",
       "default": false
+    },
+    "applications": {
+      "via": "espace",
+      "collection": "application"
+    },
+    "campaign_files": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

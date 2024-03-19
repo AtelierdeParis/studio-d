@@ -21,6 +21,8 @@ export const createScheduleEventObj = ({
   status = 'selected',
   id = null,
   hasEventSameDay = false,
+  isCampaignEvent = false,
+  ...props
 }): ScheduleEvent => {
   return {
     start: new Date(start),
@@ -31,6 +33,8 @@ export const createScheduleEventObj = ({
       status,
       type,
       hasEventSameDay,
+      isCampaignEvent,
+      ...props,
     },
   }
 }
@@ -103,6 +107,8 @@ export const createOldEvents = (
         status: dispo.status,
         type: dispo.type,
         hasEventSameDay: checkIfEventSameDay(dispo, array),
+        isCampaignEvent: Boolean(dispo?.campaign),
+        exclude_days: dispo?.exclude_days as string[],
       })
     })
 }
@@ -176,6 +182,8 @@ export const createNewEvents = (form, oldEventsDate = [], isError = false) => {
         createScheduleEventObj({
           start,
           end,
+          isCampaignEvent: form.isCampaignEvent,
+          exclude_days: form.exclude_days,
         }),
       )
     }
