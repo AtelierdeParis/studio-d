@@ -24,8 +24,8 @@ module.exports = {
 
     await strapi.plugins["email"].services.email.sendTemplatedEmail(
       {
-        to: "gesnault@premieroctet.com",
-        from: entity.from,
+        from: process.env.EMAIL_SENDER,
+        to: process.env.EMAIL_SENDER,
       },
       template,
       {

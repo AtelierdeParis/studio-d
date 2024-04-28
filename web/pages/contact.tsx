@@ -1,29 +1,28 @@
-import React, { useState } from 'react'
-import { SSRConfig } from 'next-i18next'
-import { GetServerSideProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import {
-  Text,
-  Input,
-  Textarea,
   Button,
   Container,
-  Heading,
-  VStack,
   Flex,
+  Heading,
+  Input,
+  Text,
+  Textarea,
+  VStack,
 } from '@chakra-ui/react'
-import { useTranslation } from 'next-i18next'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import { GetServerSideProps } from 'next'
+import { SSRConfig, useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { NextSeo } from 'next-seo'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { client } from '~api/client-api'
 import FormField from '~components/FormField'
 import MessageSent from '~components/MessageSent'
-import useToast from '~hooks/useToast'
 import { ROUTE_CONTACT } from '~constants'
+import useToast from '~hooks/useToast'
 import { Page } from '~typings/api'
-import { client } from '~api/client-api'
 import { getPage } from '~utils/page'
-import { NextSeo } from 'next-seo'
 
 const Contact = ({ page }: { page?: Page }) => {
   const { errorToast } = useToast()
