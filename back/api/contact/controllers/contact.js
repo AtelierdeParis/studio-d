@@ -11,7 +11,7 @@ const template = {
   html: `
     <h1>Bonjour,</h1>
     
-    <p>Vous avez reçu un nouveau message de la part de <%= name %></p>
+    <p>Vous avez reçu un nouveau message de la part de <%= name %> (<%= from %>)</p>
     <p>Contenu du message:</p>
     <p><%= message %></p>
     `,
@@ -31,6 +31,7 @@ module.exports = {
       {
         message: entity.message,
         name: entity.name,
+        from: entity.from
       }
     );
 
