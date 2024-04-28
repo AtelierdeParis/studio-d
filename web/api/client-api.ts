@@ -12,6 +12,5 @@ export const client = new Api({
         Authorization: `Bearer ${session.user.jwt}`,
       },
     }
-  }
+  },
 })
-
