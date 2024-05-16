@@ -1,15 +1,11 @@
 import { Button, HStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import { useRouter } from 'next/router'
 import { useContext, useEffect, useState } from 'react'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
 
-const CampaignDetailTabs = ({
-  hasSolidarityDispo,
-}: {
-  hasSolidarityDispo: boolean
-}) => {
+const CampaignDetailTabs = () => {
   const { currentCampaign } = useCampaignContext()
   const { t } = useTranslation('place')
   const router = useRouter()
@@ -38,17 +34,15 @@ const CampaignDetailTabs = ({
       borderRadius="18px"
       padding={2}
     >
-      {hasSolidarityDispo && (
-        <Button
-          height="auto"
-          variant={isCampaignTab ? 'unSelected' : 'blueFill'}
-          onClick={() => handleTabClick('0')}
-          padding="9px 15px 9px 15px"
-          borderRadius="12px"
-        >
-          {t('detail.campaign.solidarity_slot')}
-        </Button>
-      )}
+      <Button
+        height="auto"
+        variant={isCampaignTab ? 'unSelected' : 'blueFill'}
+        onClick={() => handleTabClick('0')}
+        padding="9px 15px 9px 15px"
+        borderRadius="12px"
+      >
+        {t('detail.campaign.solidarity_slot')}
+      </Button>
       <Button
         height="auto"
         variant={isCampaignTab ? 'campaign' : 'unSelected'}
