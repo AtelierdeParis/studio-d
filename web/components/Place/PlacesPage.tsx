@@ -1,34 +1,32 @@
-import React, { useRef, useState, useMemo, useEffect } from 'react'
 import {
+  Box,
+  Button,
+  ButtonGroup,
   Container,
   Flex,
   Select,
-  Button,
-  Text,
-  ButtonGroup,
-  useBreakpointValue,
   Stack,
-  Box,
+  Text,
+  useBreakpointValue,
 } from '@chakra-ui/react'
-import PlaceSearch from '~components/Place/PlaceSearch'
-import { useInfinitePlaces } from '~hooks/useInfinitePlaces'
-import { useScrollBottom } from '~hooks/useScrollBottom'
+import { useTranslation } from 'next-i18next'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
+import Arrow from 'public/assets/img/arrow-bottom.svg'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useQueryClient } from 'react-query'
+import PlacesListCampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import MobileMap from '~components/Place/MobileMap'
+import NoResult from '~components/Place/NoResult'
 import PlaceGrid from '~components/Place/PlaceGrid'
 import PlaceList from '~components/Place/PlaceList'
-import { formatSearch } from '~utils/search'
-import Arrow from 'public/assets/img/arrow-bottom.svg'
-import { useTranslation } from 'next-i18next'
-import { FormProvider, useForm } from 'react-hook-form'
-import { SortOptions } from '~utils/search'
-import { useQueryClient } from 'react-query'
-import NoResult from '~components/Place/NoResult'
-import MobileMap from '~components/Place/MobileMap'
-import { useRouter } from 'next/router'
-import { NextSeo } from 'next-seo'
-import { formatSearchToQuery } from '~utils/search'
+import PlaceSearch from '~components/Place/PlaceSearch'
 import { ROUTE_PLACES } from '~constants'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
-import PlacesListCampaignHelper from '~components/Campaign/Places/PlacesListCampaignHelper'
+import { useInfinitePlaces } from '~hooks/useInfinitePlaces'
+import { useScrollBottom } from '~hooks/useScrollBottom'
+import { SortOptions, formatSearch, formatSearchToQuery } from '~utils/search'
 
 const styleSelected = {
   color: 'blue.500',
@@ -77,7 +75,7 @@ const PlacesPage = () => {
     isFetching,
   } = useInfinitePlaces(
     {
-      _limit: isGridView ? 12 : 6,
+      _limit: 48,
       ...searchParams,
     },
     isCampaignTab ? 'campaignPlaces' : 'solidarityPlaces',
