@@ -1,4 +1,4 @@
-import { VStack, Flex, Box, Text, Stack, Button, Link } from '@chakra-ui/react'
+import { Box, Button, Flex, Link, Stack, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Calendar from 'public/assets/img/calendar.svg'
 import CampaignApplicationScheduleItem from '~components/Campaign/Places/Application/CampaignApplicationScheduleItem'
@@ -6,7 +6,6 @@ import LockedApplications from '~components/Campaign/Places/Application/LockedAp
 import useCampaignContext from '~components/Campaign/useCampaignContext'
 import MarkdownRenderer from '~components/MarkdownRenderer'
 import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
-import { useCurrentUser } from '~hooks/useCurrentUser'
 import { Disponibility } from '~typings/api'
 
 const CampaignApplicationSchedule = ({
@@ -86,7 +85,7 @@ const CampaignApplicationSchedule = ({
             <Button
               variant="blueFill"
               as={Link}
-              href={currentCampaign?.article_link ?? ''}
+              href={`/${currentCampaign?.article_link}`}
             >
               {t('detail.campaign.more')}
             </Button>
