@@ -1,13 +1,11 @@
-import React from 'react'
-import { Text, Box, Flex, Button, AspectRatio, LinkBox } from '@chakra-ui/react'
-import LinkOverlay from '~components/LinkOverlay'
-import Image from '~components/Image'
-import Link from '~components/Link'
-import { format } from '~utils/date'
-import { ROUTE_ACTU_DETAIL } from '~constants'
-import { Actuality } from '~typings/api'
+import { AspectRatio, Box, Button, Flex, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import removeMd from 'remove-markdown'
+import Image from '~components/Image'
+import Link from '~components/Link'
+import { ROUTE_ACTU_DETAIL } from '~constants'
+import { Actuality } from '~typings/api'
+import { format } from '~utils/date'
 
 interface IActuCard {
   actu: Actuality
@@ -15,6 +13,7 @@ interface IActuCard {
 
 const ActuCard = ({ actu }: IActuCard) => {
   const { t } = useTranslation('actuality')
+  console.log({ lol: actu?.image.formats })
   return (
     <Link
       _hover={{
@@ -28,7 +27,7 @@ const ActuCard = ({ actu }: IActuCard) => {
       <AspectRatio w="100%" maxH="300px" ratio={16 / 9} overflow="hidden">
         <Image
           // @ts-ignore
-          src={actu?.image.formats.thumbnail.url || actu?.image?.url}
+          src={actu?.image.formats.large.url || actu?.image?.url}
           objectFit="cover"
           transition="transform ease-in-out 200ms"
           _groupHover={{ transform: 'scale(1.05)' }}

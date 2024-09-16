@@ -107,7 +107,6 @@ const PlacesCampaignTabs = () => {
           display={{ base: 'none', xl: 'inherit' }}
         />
       </HStack>
-
       <TabPanels>
         <TabPanel padding={0}>
           <PlacesPage />

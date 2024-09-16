@@ -3,6 +3,7 @@ const withFonts = require('next-fonts');
 const withTM = require('next-transpile-modules')([
   '@fullcalendar/common',
   '@fullcalendar/daygrid',
+  '@fullcalendar/core',
 ])
 
 module.exports = withFonts(withTM({

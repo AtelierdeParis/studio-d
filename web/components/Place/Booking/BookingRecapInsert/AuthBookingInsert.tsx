@@ -1,9 +1,8 @@
-import React from 'react'
-import { Button, Text, Box, ButtonGroup } from '@chakra-ui/react'
-import Link from '~components/Link'
-import { ROUTE_SIGNUP } from '~constants'
-import SigninModal from '~components/Signin/SigninModal'
+import { Box, Button, ButtonGroup, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
+import Link from '~components/Link'
+import SigninModal from '~components/Signin/SigninModal'
+import { ROUTE_SIGNUP } from '~constants'
 
 const AuthBookingInsert = ({
   nbSelected,
