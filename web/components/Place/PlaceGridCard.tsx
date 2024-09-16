@@ -1,29 +1,28 @@
-import React from 'react'
 import {
-  Box,
-  Flex,
-  Text,
-  Divider,
   AspectRatio,
+  Box,
+  Divider,
+  Flex,
   LinkBox,
+  Text,
 } from '@chakra-ui/react'
-import { Espace } from '~typings/api'
-import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
-import { ROUTE_PLACE_DETAIL } from '~constants'
+import addWeeks from 'date-fns/addWeeks'
 import { useTranslation } from 'next-i18next'
+import { DisponibilityStatus } from '~@types/disponibility.d'
+import CampaignTag from '~components/Campaign/CampaignTag'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
 import FallbackImage from '~components/FallbackImage'
 import LinkOverlay from '~components/LinkOverlay'
+import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
 import Tag from '~components/Tag'
-import { DisponibilityStatus } from '~@types/disponibility.d'
-import { SearchQuery } from '~utils/search'
-import useDispoInRange from '~hooks/useDispoInRange'
-import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
-import addWeeks from 'date-fns/addWeeks'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
-import { format } from '~utils/date'
-import CampaignTag from '~components/Campaign/CampaignTag'
+import { ROUTE_PLACE_DETAIL } from '~constants'
 import useCampaignDispo from '~hooks/useCampaignDispo'
 import { useCurrentUser } from '~hooks/useCurrentUser'
+import useDispoInRange from '~hooks/useDispoInRange'
+import useNbDispoPerWeek from '~hooks/useNbDispoPerWeek'
+import { Espace } from '~typings/api'
+import { format } from '~utils/date'
+import { SearchQuery } from '~utils/search'
 
 interface Props {
   place: Espace
@@ -36,28 +35,44 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
   const { applications } = useCurrentUser()
   const { t } = useTranslation('place')
 
+  const filteredDisponibilities =
+    place?.disponibilities?.filter((item) => {
+      if (gridMode === 'campaign') {
+        return Boolean(item.campaign)
+      }
+
+      return item.campaign === null
+    }) ?? []
+
   const disposInRange = useDispoInRange(
-    place?.disponibilities,
+    filteredDisponibilities,
     searchParams?.['disponibilities.start_gte'],
     searchParams?.['disponibilities.end_lte'],
   )
 
   const disposThisWeek = useNbDispoPerWeek(
     new Date(),
-    disposInRange || place?.disponibilities,
-  )
-  const disposNextWeek = useNbDispoPerWeek(
-    addWeeks(new Date(), 1),
-    disposInRange || place?.disponibilities,
+    disposInRange || filteredDisponibilities,
   )
 
-  const { campaignDisposNum, campaignDispos } = useCampaignDispo(
-    place?.disponibilities,
+  const disposNextWeek = useNbDispoPerWeek(
+    addWeeks(new Date(), 1),
+    disposInRange || filteredDisponibilities,
   )
+
+  const {
+    campaignDisposNum,
+    campaignDispos,
+    solidarityDispos,
+    solidarityDisposNum,
+  } = useCampaignDispo(place?.disponibilities)
+
   const hasCampaignDispo =
     currentCampaign?.mode === 'applications' && !!campaignDisposNum
 
-  if (!place) return null
+  if (!place) {
+    return null
+  }
 
   return (
     <LinkBox>
@@ -120,7 +135,7 @@ const PlaceGridCard = ({ place, searchParams, gridMode }: Props) => {
                 {place?.users_permissions_user?.structureName}
               </Text>
             </Box>
-            {place?.disponibilities?.length === 0 && gridMode !== 'campaign' && (
+            {filteredDisponibilities?.length === 0 && gridMode !== 'campaign' && (
               <Tag
                 status={DisponibilityStatus.PAST}
                 alignSelf="flex-start"

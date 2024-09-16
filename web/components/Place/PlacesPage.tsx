@@ -81,7 +81,10 @@ const PlacesPage = () => {
     isCampaignTab ? 'campaignPlaces' : 'solidarityPlaces',
     !campaignLoading,
   )
-  const nbPlaces = useMemo(() => places?.pages?.flat().length, [
+
+  const filteredPlaces = places?.pages?.flat() ?? []
+
+  const nbPlaces = useMemo(() => filteredPlaces.length, [
     places?.pages,
     searchParams,
   ])
@@ -142,11 +145,11 @@ const PlacesPage = () => {
             <PlaceSearch onSubmit={onSubmit} isCampaignTab={isCampaignTab} />
           </Box>
         )}
-        {!isLoading && !isFetching && places?.pages?.flat().length === 0 ? (
+        {!isLoading && !isFetching && filteredPlaces.length === 0 ? (
           <NoResult />
         ) : (
           <>
-            <MobileMap places={places?.pages?.flat()} />
+            <MobileMap places={filteredPlaces} />
             <Flex justifyContent="space-between" pb={4} alignItems="center">
               <Flex alignItems="center">
                 {nbPlaces > 0 && (
@@ -249,7 +252,7 @@ const PlacesPage = () => {
             {isGridView ? (
               <PlaceGrid
                 searchParams={searchParams}
-                places={places?.pages?.flat()}
+                places={filteredPlaces}
                 isFetching={isFetching}
                 isLoading={isLoading}
                 gridRef={ref}
@@ -263,7 +266,7 @@ const PlacesPage = () => {
               />
             ) : (
               <PlaceList
-                places={places?.pages?.flat()}
+                places={filteredPlaces}
                 isFetching={isFetching}
                 isLoading={isLoading}
                 listRef={ref}

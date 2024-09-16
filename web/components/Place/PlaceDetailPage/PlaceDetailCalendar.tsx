@@ -1,8 +1,8 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
-import BookingScheduleContainer from '~components/Place/Booking/BookingScheduleContainer'
-import Calendar from 'public/assets/img/calendar.svg'
-import { Espace } from '~typings/api'
 import { useTranslation } from 'next-i18next'
+import Calendar from 'public/assets/img/calendar.svg'
+import BookingScheduleContainer from '~components/Place/Booking/BookingScheduleContainer'
+import { Espace } from '~typings/api'
 
 const PlaceDetailCalendar = ({ place }: { place: Espace }) => {
   const { t } = useTranslation('place')
@@ -17,7 +17,6 @@ const PlaceDetailCalendar = ({ place }: { place: Espace }) => {
           {t('detail.calendar')}
         </Text>
       </Flex>
-
       <BookingScheduleContainer place={place} />
     </>
   )

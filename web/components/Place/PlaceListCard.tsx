@@ -1,22 +1,21 @@
-import React from 'react'
 import {
+  AspectRatio,
   Box,
   Flex,
-  Text,
-  AspectRatio,
   LinkBox,
   SimpleGrid,
+  Text,
 } from '@chakra-ui/react'
-import { Espace } from '~typings/api'
-import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
-import { ROUTE_PLACE_DETAIL } from '~constants'
 import { useTranslation } from 'next-i18next'
-import FallbackImage from '~components/FallbackImage'
-import LinkOverlay from '~components/LinkOverlay'
-import { format } from '~utils/date'
 import CampaignTag from '~components/Campaign/CampaignTag'
 import useCampaignContext from '~components/Campaign/useCampaignContext'
+import FallbackImage from '~components/FallbackImage'
+import LinkOverlay from '~components/LinkOverlay'
+import PlaceCardCarousel from '~components/Place/PlaceCardCarousel'
+import { ROUTE_PLACE_DETAIL } from '~constants'
 import useCampaignDispo from '~hooks/useCampaignDispo'
+import { Espace } from '~typings/api'
+import { format } from '~utils/date'
 
 interface Props {
   place: Espace
