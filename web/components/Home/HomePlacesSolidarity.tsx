@@ -1,21 +1,20 @@
-import React from 'react'
 import {
-  Flex,
   Box,
-  Text,
   Button,
-  useBreakpointValue,
+  Flex,
   HStack,
   Stack,
+  Text,
+  useBreakpointValue,
 } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import Arrow from 'public/assets/img/arrow-bottom.svg'
-import { usePlaces } from '~hooks/usePlaces'
-import PlaceGrid from '~components/Place/PlaceGrid'
-import Link from '~components/Link'
-import { ROUTE_PLACES } from '~constants'
-import useCampaignContext from '~components/Campaign/useCampaignContext'
 import HomeHelperSolidarity from '~components/Campaign/HomeHelperSolidarity'
+import useCampaignContext from '~components/Campaign/useCampaignContext'
+import Link from '~components/Link'
+import PlaceGrid from '~components/Place/PlaceGrid'
+import { ROUTE_PLACES } from '~constants'
+import { usePlaces } from '~hooks/usePlaces'
 
 const HomePlacesSolidarity = () => {
   const isLgOrSm = useBreakpointValue({

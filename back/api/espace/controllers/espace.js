@@ -9,6 +9,12 @@ const isToday = require("date-fns/isToday");
  * to customize this controller
  */
 
+const filterUserAttributes = (users_permissions_user) => {
+  const { id, structureName, email, phone, website, blocked } = users_permissions_user
+
+  return { id, structureName, email, phone, website, blocked }
+}
+
 const populate = [
   "disponibilities",
   "disponibilities.booking",
@@ -23,7 +29,7 @@ const populate = [
 
 module.exports = {
   async myPlaces(ctx) {
-    const {query}=ctx.request;
+    const { query } = ctx.request;
     const { id } = ctx.state.user;
     return strapi.query("espace").find(
       {
@@ -38,6 +44,8 @@ module.exports = {
   async find(ctx) {
     const { _sort, perimeter, ...query } = ctx.query;
     const isSortOnDisponibility = ["dispoAsc", "nbDispoDesc"].includes(_sort);
+    const isCampaignMode = Boolean(query['disponibilities.campaign'])
+
 
     if (perimeter && query["city.name_eq"]) {
       const placesInPerimeter =
@@ -50,7 +58,6 @@ module.exports = {
         delete query["city.name_eq"];
       }
     }
-
 
     let places = await strapi.services.espace
       .find(
@@ -81,8 +88,11 @@ module.exports = {
         );
 
       return place;
-    });
+    }).map(p => ({ ...p, users_permissions_user: filterUserAttributes(p.users_permissions_user) }))
 
+    const filterDispo = (disponibilities) => disponibilities?.filter(d => {
+      return isCampaignMode ? d.campaign !== null : d.campaign === null
+    })
 
     if (isSortOnDisponibility) {
       if (_sort === "nbDispoDesc") {
@@ -92,19 +102,22 @@ module.exports = {
       } else if (_sort === "dispoAsc") {
         return places.sort((a, b) => {
           const dateFirst =
-            a.disponibilities.length > 0
-              ? min(a.disponibilities.map(({ start }) => new Date(start)))
+            filterDispo(a.disponibilities).length > 0
+              ? min(filterDispo(a.disponibilities).map(({ start }) => new Date(start)))
               : new Date("3000-01-01");
+
+
           const dateSecond =
-            b.disponibilities.length > 0
-              ? min(b.disponibilities.map(({ start }) => new Date(start)))
+            filterDispo(b.disponibilities).length > 0
+              ? min(filterDispo(b.disponibilities).map(({ start }) => new Date(start)))
               : new Date("3000-01-01");
 
           return dateFirst - dateSecond;
         });
       }
     }
-    return places;
+
+    return places
   },
   async update(ctx) {
     const { id } = ctx.params;
@@ -112,13 +125,13 @@ module.exports = {
     let entity;
     if (ctx.is("multipart")) {
       const { data, files, campaign_files } = parseMultipartData(ctx);
-      entity = await strapi.services.espace.update({ id }, data, {files, campaign_files});
+      entity = await strapi.services.espace.update({ id }, data, { files, campaign_files });
     } else {
-      const { files,campaign_files, ...body } = ctx.request.body;
-      await Promise.all([files, campaign_files].map(async(fileList)=>{
+      const { files, campaign_files, ...body } = ctx.request.body;
+      await Promise.all([files, campaign_files].map(async (fileList) => {
         if (fileList && fileList.length > 0) {
           await Promise.all(
-            fileList.map(async(file) => {
+            fileList.map(async (file) => {
               await strapi.plugins["upload"].services.upload.updateFileInfo(file.id, {
                 caption: file.caption,
               });

@@ -1,8 +1,8 @@
-import React, { useMemo, useState } from 'react'
-import { Box, VStack, Flex } from '@chakra-ui/react'
+import { Box, Flex, VStack } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import Loading from '~components/Loading'
+import { useMemo, useState } from 'react'
 import Loader from '~components/Loader'
+import Loading from '~components/Loading'
 import PlaceListCard from '~components/Place/PlaceListCard'
 import PlaceListCardSkeleton from '~components/Place/PlaceListCardSkeleton'
 const Map = dynamic(() => import('~components/Map'), { ssr: false })

@@ -1,12 +1,11 @@
-import React, { useMemo, useContext } from 'react'
-import { Flex, Text, Box } from '@chakra-ui/react'
-import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
+import { Flex } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { useCurrentUser } from '~hooks/useCurrentUser'
+import { useContext, useMemo } from 'react'
 import AuthBookingInsert from '~components/Place/Booking/BookingRecapInsert/AuthBookingInsert'
 import ConfirmBookingInsert from '~components/Place/Booking/BookingRecapInsert/ConfirmBookingInsert'
-import { is } from 'date-fns/locale'
 import NotConfirmedBookingInsert from '~components/Place/Booking/BookingRecapInsert/NotConfirmedBookingInsert'
+import BookingScheduleContext from '~components/Place/Booking/BookingScheduleContext'
+import { useCurrentUser } from '~hooks/useCurrentUser'
 
 const BookingRecap = ({ isCampaignMode }: { isCampaignMode?: boolean }) => {
   const { t } = useTranslation('place')

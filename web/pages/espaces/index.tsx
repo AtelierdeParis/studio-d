@@ -1,6 +1,5 @@
-import React from 'react'
-import { SSRConfig } from 'next-i18next'
 import { GetServerSideProps } from 'next'
+import { SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import useCampaignContext from '~components/Campaign/useCampaignContext'

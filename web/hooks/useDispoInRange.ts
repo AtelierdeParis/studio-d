@@ -1,8 +1,8 @@
-import { useMemo } from 'react'
-import { Disponibility } from '~typings/api'
-import isSameDay from 'date-fns/isSameDay'
 import isAfter from 'date-fns/isAfter'
 import isBefore from 'date-fns/isBefore'
+import isSameDay from 'date-fns/isSameDay'
+import { useMemo } from 'react'
+import { Disponibility } from '~typings/api'
 
 const useDispoInRange = (
   disponibilities: Disponibility[] = [],
