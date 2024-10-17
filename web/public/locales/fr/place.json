@@ -170,8 +170,8 @@
     },
     "nbPlace": "{{nb}} espace inscrit",
     "nbPlaces": "{{nb}} espaces inscrits",
-    "nbPlacesWithDispo": "{{nb}} espace a des disponibilités",
-    "nbPlacesWithDispos": "{{nb}} espaces ont des disponibilités",
+    "nbPlacesWithDispo": "{{nb}} espace correspond à votre recherche",
+    "nbPlacesWithDispos": "{{nb}} espaces correspondent à votre recherche",
     "nbCampaignPlaceWithDispo": "{{nb}} espace partenaire de l'appel à projet",
     "nbCampaignPlacesWithDispos": "{{nb}} espaces partenaires de l'appel à projet",
     "where": {
