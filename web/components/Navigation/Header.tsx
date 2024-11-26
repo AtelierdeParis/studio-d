@@ -112,7 +112,7 @@ const Header = ({ colorMode }: Props) => {
           <NavButton href={ROUTE_PROJECT} text={t('nav.project')} />
           {currentCampaign && currentCampaign?.article_link && (
             <NavButton
-              href={`/${currentCampaign.article_link.replace(/^\//, '')}`}
+              href={`/${currentCampaign?.article_link.replace(/^\//, '')}`}
               text={t('nav.campaign', { title: currentCampaign?.title })}
             />
           )}
