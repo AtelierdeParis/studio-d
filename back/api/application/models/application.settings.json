@@ -25,11 +25,7 @@
     "creation_file": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
+      "allowedTypes": ["images", "files", "videos"],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
@@ -63,9 +59,9 @@
       "model": "campaign"
     },
     "company": {
+      "via": "companyApplications",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "companyApplications"
+      "model": "user"
     },
     "espace": {
       "via": "applications",
@@ -73,10 +69,7 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": [
-        "preselected",
-        "confirmed"
-      ]
+      "enum": ["preselected", "confirmed"]
     }
   }
 }

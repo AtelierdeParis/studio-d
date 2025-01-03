@@ -67,9 +67,9 @@
       "type": "date"
     },
     "users_permissions_users": {
+      "via": "campaigns",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "campaigns",
       "dominant": true
     },
     "applications_max": {

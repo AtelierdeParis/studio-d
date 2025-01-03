@@ -47,6 +47,22 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/notifications/update",
+      "handler": "actuality.updateNotifications",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/notifications/info",
+      "handler": "actuality.infoNotifications",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -4,13 +4,10 @@ const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">s
 const signatureAdmin = `Bonne journée`;
 
 const getFooter = (type) => {
-  return `Vous recevez cet email car vous êtes inscrit·e en tant que ${
-    type === "place" ? "lieu" : "compagnie"
-  } sur la plateforme <a href="${
-    process.env.FRONT_URL
-  }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${
-    process.env.FRONT_URL
-  }/contact">nous contacter</a>`;
+  return `Vous recevez cet email car vous êtes inscrit·e en tant que ${type === "place" ? "lieu" : "compagnie"
+    } sur la plateforme <a href="${process.env.FRONT_URL
+    }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${process.env.FRONT_URL
+    }/contact">nous contacter</a>`;
 };
 const sendEmail = async (
   options = {},
@@ -29,12 +26,14 @@ const sendEmail = async (
     }
   );
 
-  if (!entity)
+  if (!entity) {
     return console.log("Template not found", "id", template.templateId);
+  }
+
 
   await strapi.plugins["email-designer"].services.email
     .sendTemplatedEmail(
-      options,
+      { ...options, to: process.env.EMAIL_TEST ? process.env.EMAIL_TEST.split(',') : options.to },
       {
         ...template,
         templateId: entity.id,

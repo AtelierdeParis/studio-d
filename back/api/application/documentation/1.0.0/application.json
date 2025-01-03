@@ -51,9 +51,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": []
       }
     },
@@ -107,9 +105,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": [
           {
             "name": "_limit",
@@ -295,9 +291,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -362,9 +356,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": []
       }
     },
@@ -415,9 +407,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": [
           {
             "name": "id",
@@ -477,9 +467,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "requestBody": {
           "description": "",
           "required": true,
@@ -551,9 +539,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": [
           {
             "name": "id",
@@ -619,9 +605,7 @@
           }
         },
         "summary": "",
-        "tags": [
-          "Application"
-        ],
+        "tags": ["Application"],
         "parameters": [
           {
             "name": "campaignId",
@@ -640,32 +624,20 @@
   "components": {
     "schemas": {
       "Application": {
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "properties": {
           "id": {
             "type": "string"
           },
           "disponibility": {
-            "required": [
-              "id",
-              "start",
-              "end",
-              "type",
-              "status"
-            ],
+            "required": ["id", "start", "end", "type", "status"],
             "properties": {
               "id": {
                 "type": "string"
               },
               "when": {
                 "type": "string",
-                "enum": [
-                  "morning",
-                  "afternoon",
-                  "full"
-                ]
+                "enum": ["morning", "afternoon", "full"]
               },
               "start": {
                 "type": "string"
@@ -678,11 +650,7 @@
               },
               "type": {
                 "type": "string",
-                "enum": [
-                  "punctual",
-                  "day",
-                  "period"
-                ]
+                "enum": ["punctual", "day", "period"]
               },
               "status": {
                 "type": "string",
@@ -1052,10 +1020,7 @@
               },
               "type": {
                 "type": "string",
-                "enum": [
-                  "company",
-                  "place"
-                ]
+                "enum": ["company", "place"]
               },
               "external_id": {
                 "type": "integer"
@@ -1083,6 +1048,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "hasSubscribeActualityEmail": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -1205,11 +1173,7 @@
               },
               "danceCarpet": {
                 "type": "string",
-                "enum": [
-                  "true",
-                  "false",
-                  "possible"
-                ]
+                "enum": ["true", "false", "possible"]
               },
               "slug": {
                 "type": "string"
@@ -1248,10 +1212,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "preselected",
-              "confirmed"
-            ]
+            "enum": ["preselected", "confirmed"]
           },
           "published_at": {
             "type": "string",
@@ -1305,10 +1266,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "preselected",
-              "confirmed"
-            ]
+            "enum": ["preselected", "confirmed"]
           },
           "published_at": {
             "type": "string",

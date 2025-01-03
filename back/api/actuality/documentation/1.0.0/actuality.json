@@ -510,6 +510,134 @@
           }
         ]
       }
+    },
+    "/notifications/update": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Actuality"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/info": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Actuality"
+        ],
+        "parameters": []
+      }
     }
   },
   "components": {
@@ -601,6 +729,23 @@
           "slug": {
             "type": "string"
           },
+          "notification_email_subject": {
+            "type": "string"
+          },
+          "notification_email_message": {
+            "type": "string"
+          },
+          "notification_email_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_broadcast_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_test": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -620,6 +765,23 @@
             "type": "string"
           },
           "slug": {
+            "type": "string"
+          },
+          "notification_email_subject": {
+            "type": "string"
+          },
+          "notification_email_message": {
+            "type": "string"
+          },
+          "notification_email_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_broadcast_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_test": {
             "type": "string"
           },
           "published_at": {

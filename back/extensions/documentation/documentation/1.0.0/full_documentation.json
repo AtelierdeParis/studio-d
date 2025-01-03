@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "04/28/2024 6:17:11 PM"
+    "x-generation-date": "01/03/2025 5:07:33 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -554,6 +554,134 @@
             }
           }
         ]
+      }
+    },
+    "/notifications/update": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new record",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Actuality"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/info": {
+      "get": {
+        "deprecated": false,
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Actuality"
+        ],
+        "parameters": []
       }
     },
     "/applications/me": {
@@ -10609,6 +10737,23 @@
           "slug": {
             "type": "string"
           },
+          "notification_email_subject": {
+            "type": "string"
+          },
+          "notification_email_message": {
+            "type": "string"
+          },
+          "notification_email_sent_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_broadcast_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "notification_email_test": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -11065,6 +11210,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "hasSubscribeActualityEmail": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -11697,6 +11845,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "hasSubscribeActualityEmail": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"
@@ -13079,6 +13230,9 @@
                     "type": "string"
                   }
                 },
+                "hasSubscribeActualityEmail": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -13235,6 +13389,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "hasSubscribeActualityEmail": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"
@@ -14335,6 +14492,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "hasSubscribeActualityEmail": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"

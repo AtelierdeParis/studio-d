@@ -27,15 +27,15 @@
       "type": "date"
     },
     "places": {
+      "via": "placeDispositifs",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "placeDispositifs",
       "dominant": true
     },
     "companies": {
+      "via": "companyDispositifs",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "companyDispositifs",
       "dominant": true
     }
   }

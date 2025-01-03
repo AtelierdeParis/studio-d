@@ -1,8 +1,53 @@
 'use strict';
+const removeMd = require('remove-markdown')
+const showdown = require('showdown');
+const CryptoJS = require('crypto-js');
 
 /**
  * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-services)
  * to customize this service
  */
 
-module.exports = {};
+const validateEmail = (email) => {
+    return String(email)
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+};
+
+module.exports = {
+    async sendActualityEmails(actuality, emails) {
+        const converter = new showdown.Converter();
+        const date = new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+        const image = await strapi.query('file', 'upload').findOne({ id: actuality.image });
+
+        const token = CryptoJS.AES.encrypt(
+            actuality.notification_email_test,
+            process.env.HASH_EMAIL_NOTIFICATION,
+        ).toString()
+
+        for (const email of emails) {
+            if (validateEmail(email)) {
+                await strapi.plugins['email'].services.email.sendEmail(
+                    {
+                        to: email,
+                    },
+                    {
+                        templateId: 'actuality-notification',
+                        subject: actuality.notification_email_subject,
+                    },
+                    {
+                        actuality_title: actuality.title,
+                        actuality_date: date,
+                        actuality_image: image.formats.medium.url,
+                        actuality_description: removeMd(actuality.content).split(' ').slice(0, 35).join(' ') + '...',
+                        actuality_link: `${process.env.FRONT_URL}/actualites/${actuality.slug}`,
+                        notification_link: `${process.env.FRONT_URL}/notifications?token=${token}`,
+                        email_message: actuality.notification_email_message ? converter.makeHtml(actuality.notification_email_message) : null,
+                    }
+                )
+            }
+        }
+    },
+};
