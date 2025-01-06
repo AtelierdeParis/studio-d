@@ -1763,6 +1763,10 @@
                 }
               }
             }
+          },
+          "hasSubscribeActualityEmail": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -1914,6 +1918,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "hasSubscribeActualityEmail": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

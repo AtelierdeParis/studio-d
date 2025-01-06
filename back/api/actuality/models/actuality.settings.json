@@ -26,12 +26,28 @@
         "images"
       ],
       "plugin": "upload",
-      "required": true
+      "required": true,
+      "pluginOptions": {}
     },
     "slug": {
       "type": "string",
       "required": false,
       "unique": true
+    },
+    "notification_email_subject": {
+      "type": "string"
+    },
+    "notification_email_message": {
+      "type": "richtext"
+    },
+    "notification_email_sent_at": {
+      "type": "datetime"
+    },
+    "notification_email_broadcast_date": {
+      "type": "datetime"
+    },
+    "notification_email_test": {
+      "type": "email"
     }
   }
 }

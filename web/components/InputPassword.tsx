@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
-import { InputGroup, Input, InputRightElement } from '@chakra-ui/react'
-import Eye from 'public/assets/img/eye.svg'
+import {
+  Input,
+  InputGroup,
+  InputProps,
+  InputRightElement,
+} from '@chakra-ui/react'
 import EyeClosed from 'public/assets/img/eye-closed.svg'
+import Eye from 'public/assets/img/eye.svg'
+import React, { useState } from 'react'
 
 interface Props {
   register?: () => void
@@ -17,7 +22,8 @@ const InputPassword = ({
   placeholder,
   name = 'password',
   onChange = null,
-}: Props) => {
+  ...props
+}: Props & InputProps) => {
   const [isVisible, setVisible] = useState(false)
 
   return (
@@ -28,6 +34,7 @@ const InputPassword = ({
         ref={inputRef || register}
         placeholder={placeholder}
         onChange={onChange}
+        {...props}
       />
       <InputRightElement
         cursor="pointer"

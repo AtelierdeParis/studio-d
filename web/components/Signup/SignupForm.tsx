@@ -1,30 +1,30 @@
-import React, { useState } from 'react'
-import { useTranslation, Trans } from 'next-i18next'
 import {
-  VStack,
   Box,
+  Button,
+  Checkbox,
+  Divider,
+  Flex,
+  FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Stack,
   Text,
-  Divider,
-  Button,
-  Flex,
-  Checkbox,
-  InputRightElement,
-  InputGroup,
-  FormLabel,
+  VStack,
 } from '@chakra-ui/react'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Trans, useTranslation } from 'next-i18next'
+import Letter from 'public/assets/img/letter.svg'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { client } from '~api/client-api'
 import FormField from '~components/FormField'
 import InputPassword from '~components/InputPassword'
 import Link from '~components/Link'
 import { ROUTE_CGU } from '~constants'
-import { Target } from '~pages/inscription/[target]'
 import useToast from '~hooks/useToast'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { client } from '~api/client-api'
-import Letter from 'public/assets/img/letter.svg'
+import { Target } from '~pages/inscription/[target]'
 
 const getSchema = (target: Target) => {
   const schema = {
@@ -350,30 +350,46 @@ const SignupForm = ({ target, onSuccess }: Props) => {
           py={{ base: 6, md: 10 }}
           color="grayText.1"
         >
-          <Flex alignItems="flex-start">
-            <Checkbox
-              id="condition"
-              name="acceptCondition"
-              ref={register}
-              size="lg"
-              borderColor="grayText.1"
-            />
-            <Box whiteSpace="pre-line" pl={5}>
-              <FormLabel
-                htmlFor="condition"
-                m="0"
-                fontSize={{ base: 'sm', md: 'md' }}
-              >
-                <Trans
-                  i18nKey="signup:form.condition"
-                  components={{
-                    a: <Link href={ROUTE_CGU} textDecoration="underline" />,
-                  }}
-                />
-              </FormLabel>
-              <Text mt={4}>{t('form.condition2')}</Text>
-            </Box>
-          </Flex>
+          <VStack spacing={4} alignItems="flex-start">
+            <Flex alignItems="flex-start">
+              <Checkbox
+                id="condition"
+                name="acceptCondition"
+                ref={register}
+                size="lg"
+                borderColor="grayText.1"
+              />
+              <Box whiteSpace="pre-line" pl={5}>
+                <FormLabel
+                  htmlFor="condition"
+                  m="0"
+                  fontSize={{ base: 'sm', md: 'md' }}
+                >
+                  <Trans
+                    i18nKey="signup:form.condition"
+                    components={{
+                      a: <Link href={ROUTE_CGU} textDecoration="underline" />,
+                    }}
+                  />
+                </FormLabel>
+              </Box>
+            </Flex>
+            <Flex alignItems="flex-start">
+              <Checkbox
+                id="hasSubscribeActualityEmail"
+                name="hasSubscribeActualityEmail"
+                ref={register}
+                size="lg"
+                borderColor="grayText.1"
+              />
+              <Box whiteSpace="pre-line" pl={5}>
+                <FormLabel htmlFor="hasSubscribeActualityEmail">
+                  {t('form.hasSubscribeActualityEmail')}
+                </FormLabel>
+              </Box>
+            </Flex>
+            <Text mt={4}>{t('form.condition2')}</Text>
+          </VStack>
           <Flex justifyContent="center">
             <Button
               colorScheme="blue"

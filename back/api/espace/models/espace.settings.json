@@ -93,9 +93,9 @@
       "pluginOptions": {}
     },
     "users_permissions_user": {
+      "via": "espaces",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "espaces"
+      "model": "user"
     },
     "disponibilities": {
       "via": "espace",

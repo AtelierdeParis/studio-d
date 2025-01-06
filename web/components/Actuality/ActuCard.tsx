@@ -13,7 +13,7 @@ interface IActuCard {
 
 const ActuCard = ({ actu }: IActuCard) => {
   const { t } = useTranslation('actuality')
-  console.log({ lol: actu?.image.formats })
+
   return (
     <Link
       _hover={{

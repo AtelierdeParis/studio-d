@@ -1,39 +1,39 @@
-import React, { useState, useEffect } from 'react'
-import { SSRConfig } from 'next-i18next'
-import { GetServerSideProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import FormField from '~components/FormField'
-import InputPassword from '~components/InputPassword'
-import AskPasswordModal from '~components/Account/AskPasswordModal'
-import { useTranslation } from 'next-i18next'
 import {
   Box,
+  Button,
+  Checkbox,
+  Flex,
+  FormLabel,
   Input,
   InputGroup,
-  Text,
   InputRightElement,
-  Flex,
   Spacer,
-  Button,
-  VStack,
   Stack,
+  Text,
+  VStack,
 } from '@chakra-ui/react'
-import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { GetServerSideProps } from 'next'
+import { SSRConfig, useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 import Letter from 'public/assets/img/letter.svg'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useQueryClient } from 'react-query'
+import * as yup from 'yup'
 import { client } from '~api/client-api'
-import { NewUsersPermissionsUser } from '~typings/api'
+import AskPasswordModal from '~components/Account/AskPasswordModal'
+import FormField from '~components/FormField'
+import InputPassword from '~components/InputPassword'
+import Loading from '~components/Loading'
+import MigrationMessage from '~components/MigrationMessage'
+import { ROUTE_ACCOUNT, ROUTE_ACCOUNT_PLACES } from '~constants'
 import useToast from '~hooks/useToast'
 import { useUserIsComplete } from '~hooks/useUserIsComplete'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { UsersPermissionsUser } from '~typings/api'
+import { NewUsersPermissionsUser, UsersPermissionsUser } from '~typings/api'
 import { requireAuth } from '~utils/auth'
-import MigrationMessage from '~components/MigrationMessage'
-import Loading from '~components/Loading'
-import { ROUTE_ACCOUNT_PLACES, ROUTE_ACCOUNT } from '~constants'
-import { useQueryClient } from 'react-query'
-import { useRouter } from 'next/router'
-import { NextSeo } from 'next-seo'
 
 interface Props {
   user: UsersPermissionsUser
@@ -133,6 +133,7 @@ const AccountInformation = ({ user }: Props) => {
   const [isLoading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const router = useRouter()
+
   const {
     register,
     errors,
@@ -157,7 +158,12 @@ const AccountInformation = ({ user }: Props) => {
 
   const save = (data) => {
     const filteredData = Object.keys(data).reduce((total, current) => {
-      if (Boolean(data[current])) total[current] = data[current]
+      if (current === 'hasSubscribeActualityEmail') {
+        total[current] = data[current]
+      } else if (Boolean(data[current])) {
+        total[current] = data[current]
+      }
+
       return total
     }, {})
     setLoading(true)
@@ -243,6 +249,7 @@ const AccountInformation = ({ user }: Props) => {
                     <InputPassword
                       register={register}
                       placeholder={t('information.password.placeholder')}
+                      autoComplete="new-password"
                     />
                   </FormField>
                 )}
@@ -487,6 +494,25 @@ const AccountInformation = ({ user }: Props) => {
                 )}
               </Stack>
             </VStack>
+          </Box>
+          <Box my={14}>
+            <Text textStyle="groupLabel">
+              {t('information.notifications.title')}
+            </Text>
+            <Flex alignItems="flex-start" ml={2.5}>
+              <Checkbox
+                id="hasSubscribeActualityEmail"
+                name="hasSubscribeActualityEmail"
+                ref={register}
+                size="lg"
+                borderColor="grayText.1"
+              />
+              <Box pl={3}>
+                <FormLabel htmlFor="hasSubscribeActualityEmail">
+                  {t('information.notifications.label_notif_actuality')}
+                </FormLabel>
+              </Box>
+            </Flex>
           </Box>
           {/* {user?.confirmed && !user?.blocked && (
           <Box my={14}>

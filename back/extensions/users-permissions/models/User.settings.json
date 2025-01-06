@@ -159,6 +159,10 @@
     "companyApplications": {
       "via": "company",
       "collection": "application"
+    },
+    "hasSubscribeActualityEmail": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

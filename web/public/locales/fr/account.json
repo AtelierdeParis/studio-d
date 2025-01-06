@@ -88,6 +88,13 @@
       "label": "Ville"
     },
     "info": "Mes informations",
+    "notifications": {
+      "title": "Actus StudioD",
+      "label_notif_actuality": "Je souhaite recevoir les actualités de StudioD",
+      "setting_title": "Gérer mes notifications",
+      "setting_save": "Sauvegarder",
+      "success": "Vos préférences ont été sauvegardées"
+    },
     "desactivate": {
       "title": "Désactivation",
       "btn": "Désactiver le compte"

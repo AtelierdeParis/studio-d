@@ -926,6 +926,9 @@
                   "type": "string"
                 }
               },
+              "hasSubscribeActualityEmail": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },

@@ -15,6 +15,7 @@ module.exports = {
       "SELECT place, company FROM messages WHERE hasbeenread = false AND notified = false AND status = 'message' AND  created_at < (NOW() + INTERVAL '5 minute') GROUP BY place, company"
     );
 
+
     if (messages.rows.length > 0) {
       messages.rows.map(async (row) => {
         const { place, company } = row;
@@ -57,6 +58,41 @@ module.exports = {
           }
         );
       });
+    }
+  },
+  "* * * * *": async () => {
+    const knex = strapi.connections.default;
+    const actualities = await strapi.query("actuality").find({
+      notification_email_broadcast_date_null: false,
+      notification_email_broadcast_date_lte: new Date(),
+      notification_email_sent_at_null: true,
+    });
+
+    const users = await knex.raw(`
+  SELECT * FROM "users-permissions_user"
+  LEFT JOIN place 
+  ON place.users_permissions_user = "users-permissions_user".id
+  WHERE "hasSubscribeActualityEmail" = true
+  AND "accepted" = true
+  AND (
+    (type = 'company') OR
+    (type = 'place' AND place.id IS NOT NULL)
+  )
+`);
+
+
+    for (const actuality of actualities) {
+      try {
+
+        await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, users.rows.map(user => user.email));
+      } catch (error) {
+        console.log("Error sending actuality email", error);
+      }
+
+      await strapi.query("actuality").update(
+        { id: actuality.id }, {
+        notification_email_sent_at: new Date(),
+      },);
     }
   },
 };
