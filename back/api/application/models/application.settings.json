@@ -25,7 +25,11 @@
     "creation_file": {
       "collection": "file",
       "via": "related",
-      "allowedTypes": ["images", "files", "videos"],
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
@@ -69,7 +73,11 @@
     },
     "status": {
       "type": "enumeration",
-      "enum": ["preselected", "confirmed"]
+      "enum": [
+        "preselected",
+        "confirmed",
+        "validated"
+      ]
     }
   }
 }

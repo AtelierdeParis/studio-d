@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "01/03/2025 5:07:33 PM"
+    "x-generation-date": "01/07/2025 5:47:41 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -11054,6 +11054,9 @@
               "is_active": {
                 "type": "boolean"
               },
+              "confirmation_notification_date": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -11380,7 +11383,8 @@
             "type": "string",
             "enum": [
               "preselected",
-              "confirmed"
+              "confirmed",
+              "validated"
             ]
           },
           "published_at": {
@@ -11437,7 +11441,8 @@
             "type": "string",
             "enum": [
               "preselected",
-              "confirmed"
+              "confirmed",
+              "validated"
             ]
           },
           "published_at": {
@@ -11932,7 +11937,8 @@
                   "type": "string",
                   "enum": [
                     "preselected",
-                    "confirmed"
+                    "confirmed",
+                    "validated"
                   ]
                 },
                 "published_at": {
@@ -11952,6 +11958,10 @@
           },
           "is_active": {
             "type": "boolean"
+          },
+          "confirmation_notification_date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
@@ -12053,6 +12063,10 @@
           },
           "is_active": {
             "type": "boolean"
+          },
+          "confirmation_notification_date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
@@ -12775,6 +12789,9 @@
               "is_active": {
                 "type": "boolean"
               },
+              "confirmation_notification_date": {
+                "type": "string"
+              },
               "published_at": {
                 "type": "string"
               },
@@ -12848,7 +12865,8 @@
                   "type": "string",
                   "enum": [
                     "preselected",
-                    "confirmed"
+                    "confirmed",
+                    "validated"
                   ]
                 },
                 "published_at": {

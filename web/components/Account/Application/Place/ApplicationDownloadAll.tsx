@@ -26,7 +26,7 @@ const ApplicationDownloadAll = () => {
       <Button
         as="a"
         href={`/api/pdfs/all/${applications?.[0]?.disponibility.id}`}
-        target='_blank'
+        target="_blank"
         colorScheme={selectedCampaign?.mode === 'closed' ? 'gray' : 'blue'}
         backgroundColor={
           selectedCampaign?.mode === 'closed' ? 'gray.700' : undefined

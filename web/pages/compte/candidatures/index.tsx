@@ -1,15 +1,13 @@
-import React from 'react'
-import { SSRConfig } from 'next-i18next'
-import { GetServerSideProps } from 'next'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { requireAuth } from '~utils/auth'
-import { NextSeo } from 'next-seo'
-import { useTranslation } from 'next-i18next'
 import { Box } from '@chakra-ui/react'
-import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesAdminCampaignHelper'
+import { GetServerSideProps } from 'next'
+import { SSRConfig, useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { NextSeo } from 'next-seo'
 import CampaignSelector from '~components/Account/Application/Place/CampaignSelector/CampaignSelector'
 import DisponibilitiesSelector from '~components/Account/Application/Place/DisponibilitiesSelector/DisponibilitiesSelector'
+import PlacesAdminCampaignHelper from '~components/Campaign/Places/Admin/PlacesAdminCampaignHelper'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
+import { requireAuth } from '~utils/auth'
 
 const PlaceApplications = () => {
   const { t } = useTranslation('application')

@@ -1218,7 +1218,8 @@
                   "type": "string",
                   "enum": [
                     "preselected",
-                    "confirmed"
+                    "confirmed",
+                    "validated"
                   ]
                 },
                 "published_at": {

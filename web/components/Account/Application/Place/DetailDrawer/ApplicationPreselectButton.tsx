@@ -1,15 +1,15 @@
 import { Box, Button, Text, VStack } from '@chakra-ui/react'
-import { Application } from '~typings/api'
-import ApplicationSelected from 'public/assets/img/applicationSelected.svg'
 import { useTranslation } from 'next-i18next'
-import { client } from '~api/client-api'
-import useToast from '~hooks/useToast'
-import { useQueryClient } from 'react-query'
 import { useRouter } from 'next/router'
-import RemoveIcon from '~public/assets/icons/RemoveIcon'
+import ApplicationSelected from 'public/assets/img/applicationSelected.svg'
+import { useQueryClient } from 'react-query'
+import { client } from '~api/client-api'
 import Link from '~components/Link'
 import { ROUTE_CONTACT } from '~constants'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
+import useToast from '~hooks/useToast'
+import RemoveIcon from '~public/assets/icons/RemoveIcon'
+import { Application } from '~typings/api'
 
 const ApplicationPreselectButton = ({
   application,

@@ -903,7 +903,8 @@
                   "type": "string",
                   "enum": [
                     "preselected",
-                    "confirmed"
+                    "confirmed",
+                    "validated"
                   ]
                 },
                 "published_at": {
@@ -923,6 +924,10 @@
           },
           "is_active": {
             "type": "boolean"
+          },
+          "confirmation_notification_date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
@@ -1024,6 +1029,10 @@
           },
           "is_active": {
             "type": "boolean"
+          },
+          "confirmation_notification_date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",
