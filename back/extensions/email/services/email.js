@@ -4,6 +4,11 @@ const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">s
 const signatureAdmin = `Bonne journée`;
 
 const getFooter = (type) => {
+  if (type === "actuality") {
+    return `Vous recevez cet email car vous êtes inscrit·e aux actualités de <a href="${process.env.FRONT_URL
+      }">studiod-danse.fr</a>.`;
+  }
+
   return `Vous recevez cet email car vous êtes inscrit·e en tant que ${type === "place" ? "lieu" : "compagnie"
     } sur la plateforme <a href="${process.env.FRONT_URL
     }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${process.env.FRONT_URL

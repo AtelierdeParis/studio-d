@@ -66,6 +66,7 @@ module.exports = {
       notification_email_broadcast_date_null: false,
       notification_email_broadcast_date_lte: new Date(),
       notification_email_sent_at_null: true,
+      published_at_null: false,
     });
 
     const users = await knex.raw(`
@@ -80,9 +81,7 @@ module.exports = {
   )
 `);
 
-
     for (const actuality of actualities) {
-
       try {
         const emails = [...new Set(users.rows.map(user => user.email))]
 

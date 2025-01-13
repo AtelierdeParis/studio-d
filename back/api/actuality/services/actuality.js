@@ -18,11 +18,9 @@ const validateEmail = (email) => {
 
 module.exports = {
     async sendActualityEmails(actuality, emails) {
-        const converter = new showdown.Converter();
         const date = new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
         const image = await strapi.query('file', 'upload').findOne({ id: actuality.image });
-
-
+        const converter = new showdown.Converter();
 
         for (const email of emails) {
             if (validateEmail(email)) {
@@ -46,7 +44,8 @@ module.exports = {
                         actuality_description: removeMd(actuality.content).split(' ').slice(0, 35).join(' ') + '...',
                         actuality_link: `${process.env.FRONT_URL}/actualites/${actuality.slug}`,
                         notification_link: `${process.env.FRONT_URL}/notifications?token=${encodeURIComponent(token)}`,
-                        email_message: actuality.notification_email_message ? converter.makeHtml(actuality.notification_email_message) : null,
+                        email_message: actuality.notification_email_message ? converter.makeHtml(actuality.notification_email_message).replace(/\n/g, '<br/>') : null,
+                        user_type: "actuality",
                     }
                 )
             }
