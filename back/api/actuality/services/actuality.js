@@ -22,13 +22,15 @@ module.exports = {
         const date = new Date().toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
         const image = await strapi.query('file', 'upload').findOne({ id: actuality.image });
 
-        const token = CryptoJS.AES.encrypt(
-            actuality.notification_email_test,
-            process.env.HASH_EMAIL_NOTIFICATION,
-        ).toString()
+
 
         for (const email of emails) {
             if (validateEmail(email)) {
+                const token = CryptoJS.AES.encrypt(
+                    email,
+                    process.env.HASH_EMAIL_NOTIFICATION,
+                ).toString()
+
                 await strapi.plugins['email'].services.email.sendEmail(
                     {
                         to: email,

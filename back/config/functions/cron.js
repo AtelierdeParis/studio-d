@@ -82,11 +82,12 @@ module.exports = {
 
 
     for (const actuality of actualities) {
-      try {
 
+      try {
+        console.log(`Sending actuality ${actuality.id} email to ${users.rows.length} users`)
         await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, users.rows.map(user => user.email));
       } catch (error) {
-        console.log("Error sending actuality email", error);
+        console.log(`Error sending actuality ${actuality.id} email`, error);
       }
 
       await strapi.query("actuality").update(
