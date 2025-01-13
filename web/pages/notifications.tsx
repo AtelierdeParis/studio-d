@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps<SSRConfig> = async ({
 
   try {
     const decryptedEmail = CryptoJS.AES.decrypt(
-      token,
+      decodeURIComponent(token as string),
       process.env.HASH_EMAIL_NOTIFICATION,
     ).toString(CryptoJS.enc.Utf8)
 

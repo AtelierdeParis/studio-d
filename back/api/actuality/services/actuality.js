@@ -43,7 +43,7 @@ module.exports = {
                         actuality_image: image.formats.medium.url,
                         actuality_description: removeMd(actuality.content).split(' ').slice(0, 35).join(' ') + '...',
                         actuality_link: `${process.env.FRONT_URL}/actualites/${actuality.slug}`,
-                        notification_link: `${process.env.FRONT_URL}/notifications?token=${token}`,
+                        notification_link: `${process.env.FRONT_URL}/notifications?token=${encodeURIComponent(token)}`,
                         email_message: actuality.notification_email_message ? converter.makeHtml(actuality.notification_email_message) : null,
                     }
                 )
