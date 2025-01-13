@@ -84,8 +84,10 @@ module.exports = {
     for (const actuality of actualities) {
 
       try {
-        console.log(`Sending actuality ${actuality.id} email to ${users.rows.length} users`)
-        await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, users.rows.map(user => user.email));
+        const emails = [...new Set(users.rows.map(user => user.email))]
+
+        console.log(`Sending actuality ${actuality.id} email to ${emails.length} users`)
+        await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, emails);
       } catch (error) {
         console.log(`Error sending actuality ${actuality.id} email`, error);
       }
