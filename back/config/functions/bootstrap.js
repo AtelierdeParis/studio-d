@@ -14,20 +14,9 @@ const cron = require('node-cron')
  */
 
 const everyNightAt2AM = '0 2 * * *'
-const testCron = '*/15 * * * * *'
 const cronSchedule = process.env.CRON_SCHEDULE || everyNightAt2AM
 
-const isBugsnagEnabled =
-  process.env.NODE_ENV !== 'development' && !process.env.CI
-
 module.exports = () => {
-  if (false) {
-    Bugsnag.start({
-      apiKey: process.env.BUGSNAG_API_KEY,
-      plugins: [BugsnagPluginKoa],
-    })
-  }
-
   // Every night check for campaigns emails to send
   cron.schedule(cronSchedule, async () => {
     const activeCampaigns = await strapi.services.campaign.find({
@@ -39,7 +28,7 @@ module.exports = () => {
     yesterday.setDate(yesterday.getDate() - 1)
 
     activeCampaigns.map(async (campaign) => {
-      // APPLICATIONS END
+      // Application end
       if (campaign?.application_end) {
         if (
           new Date(campaign.application_end).toDateString() ===
@@ -56,7 +45,7 @@ module.exports = () => {
         }
       }
 
-      // PRESLECTIONS REMINDER
+      // Preselection reminder
       if (Boolean(campaign?.preselection_end && campaign?.reminder_days)) {
         const preselectionsReminderDate = new Date(campaign.preselection_end)
         preselectionsReminderDate.setDate(
@@ -75,7 +64,7 @@ module.exports = () => {
         }
       }
 
-      // PRESELECTIONS END
+      // Preselection end
       if (Boolean(campaign?.preselection_end)) {
         const preselectionsEndDate = new Date(campaign.preselection_end)
 
@@ -92,6 +81,10 @@ module.exports = () => {
           )
         }
       }
+
+      // Selection notification
+      await strapi.services.campaign.sendEspacePreselectionEmail(campaign.id)
     })
   })
 }
+

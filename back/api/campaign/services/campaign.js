@@ -44,15 +44,13 @@ module.exports = {
         },
         {
           templateId: 'place-preselections-reminder',
-          subject: `Il vous reste ${campaign?.reminder_days} ${
-            campaign?.reminder_days > 1 ? 'jours' : 'jour'
-          } pour compléter votre pré-sélection`,
+          subject: `Il vous reste ${campaign?.reminder_days} ${campaign?.reminder_days > 1 ? 'jours' : 'jour'
+            } pour compléter votre pré-sélection`,
         },
         {
           missing_selections: place_missing_selections,
-          reminder_days: `${campaign?.reminder_days} ${
-            campaign?.reminder_days > 1 ? 'jours' : 'jour'
-          }`,
+          reminder_days: `${campaign?.reminder_days} ${campaign?.reminder_days > 1 ? 'jours' : 'jour'
+            }`,
           url_btn: `${process.env.FRONT_URL}/compte/candidatures?campaign=${campaign.id}`,
         },
       )
@@ -103,6 +101,7 @@ module.exports = {
         },
         ['applications', 'espace'],
       )
+
     // If place is campaign participan but has 0 disponibilities don't include it in mailing campaigin
     if (!place_campaign_disponibilities?.length) return null
 
@@ -110,7 +109,7 @@ module.exports = {
       .filter(
         (d) =>
           d?.applications?.length &&
-          !d?.applications?.some((a) => a.status === 'confirmed'),
+          !d?.applications?.some((a) => a.status === 'validated'),
       )
       .map((disponibility) => ({
         espace_name: disponibility?.espace?.name,
@@ -139,4 +138,186 @@ module.exports = {
       true,
     )
   },
+  async sendEspacePreselectionEmail(campaignId) {
+    const campaign = await strapi.services.campaign.findOne({ id: campaignId })
+    const today = new Date()
+
+    if (Boolean(campaign?.confirmation_notification_date)) {
+      const selectionNotificationDate = new Date(campaign.confirmation_notification_date)
+
+      if (selectionNotificationDate.toDateString() === today.toDateString()) {
+        const admins = await strapi.query('user', 'admin').find({})
+        const adminsEmails = admins.map(admin => admin.email)
+        const placesMap = {}
+
+        for (const application of campaign.applications) {
+          const espace = await strapi.services.espace.findOne({ id: application.espace })
+          const disponibility = await strapi.services.disponibility.findOne({ id: application.disponibility })
+          const company = await strapi.query('user', 'users-permissions').findOne({ id: application.company });
+
+          const userId = espace.users_permissions_user.id
+
+          if (!placesMap[userId]) {
+            placesMap[userId] = {
+              id: espace.users_permissions_user.id,
+              name: `${espace.users_permissions_user.firstname} ${espace.users_permissions_user.lastname}`,
+              structureName: espace.users_permissions_user.structureName,
+              address: `${espace.users_permissions_user.address}, ${espace.users_permissions_user.zipCode} ${espace.users_permissions_user.city}`,
+              email: espace.users_permissions_user.email,
+              phone: espace.users_permissions_user.phone,
+              espaces: {}
+            }
+          }
+
+          if (!placesMap[userId].espaces[espace.id]) {
+            placesMap[userId].espaces[espace.id] = {
+              name: espace.name,
+              disponibilities: []
+            }
+          }
+
+          placesMap[userId].espaces[espace.id].disponibilities.push({
+            company: company.structureName,
+            company_id: company.id,
+            name: `${company.firstname} ${company.lastname}`,
+            creationTitle: application.creation_title,
+            is_validated: application.status === 'validated',
+            start: new Date(disponibility.start).toLocaleDateString('fr-FR'),
+            end: new Date(disponibility.end).toLocaleDateString('fr-FR'),
+          })
+        }
+
+        const placeIds = Object.keys(placesMap)
+
+        for (const id of placeIds) {
+          const place = await placesMap[id]
+          const hasDisponibilitiesValidated = Object.values(place.espaces).some(espace => espace.disponibilities.some(d => d.is_validated))
+
+          if (hasDisponibilitiesValidated) {
+            await strapi.plugins['email'].services.email.sendEmail(
+              {
+                to: [place.email, ...adminsEmails],
+              },
+              {
+                templateId: 'confirmation-preselection-place',
+              },
+              {
+                user_name: place.name,
+                campaign_name: campaign.title,
+                espaces: Object.values(place.espaces).map(espace => ({
+                  ...espace,
+                  disponibilities: espace.disponibilities.filter(d => d.is_validated)
+                })),
+                user_type: 'place',
+              },
+            )
+          }
+        }
+
+        const companiesMap = {}
+
+        Object.values(placesMap).forEach(place => {
+          Object.values(place.espaces).forEach(espace => {
+            espace.disponibilities.forEach(disponibility => {
+              if (!companiesMap[disponibility.company_id]) {
+                companiesMap[disponibility.company_id] = {
+                  name: disponibility.name,
+                  id: disponibility.company_id,
+                  company: disponibility.company,
+                  disponibilities: []
+                }
+              }
+
+              companiesMap[disponibility.company_id].disponibilities.push({
+                place_id: place.id,
+                place_name: place.name,
+                place_structure_name: place.structureName,
+                place_address: place.address,
+                place_phone: place.phone,
+                contact_email: place.email,
+                espace_name: espace.name,
+                contact_name: place.name,
+                company_id: disponibility.company_id,
+                creation_title: disponibility.creationTitle,
+                is_validated: disponibility.is_validated,
+                start: disponibility.start,
+                end: disponibility.end
+              })
+            })
+          })
+        })
+
+        const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
+
+        for (const company of companiesWithAllRefused) {
+          await strapi.plugins['email'].services.email.sendEmail(
+            {
+              to: [company.email],
+            }, {
+            templateId: 'refusal-preselection-company',
+          },
+            {
+              user_name: company.name,
+              campaign_name: campaign.title,
+              user_type: 'company',
+              multiple_disponibilities: company.disponibilities.length > 1,
+            },
+          )
+        }
+
+        const companiesWithOnlyOneValidated = Object.values(companiesMap).filter(company => company.disponibilities.length === 1 && company.disponibilities[0].is_validated)
+
+        for (const company of companiesWithOnlyOneValidated) {
+          const disponibility = company.disponibilities[0]
+
+          await strapi.plugins['email'].services.email.sendEmail(
+            {
+              to: [company.email],
+            }, {
+            templateId: 'confirmation-one-preselection-company',
+          },
+            {
+              user_name: company.name,
+              campaign_name: campaign.title,
+              structure_name: disponibility.place_structure_name,
+              structure_contact_name: disponibility.contact_name,
+              structure_address: disponibility.place_address,
+              structure_phone: disponibility.place_phone,
+              structure_contact_email: disponibility.contact_email,
+              place_name: disponibility.espace_name,
+              start: disponibility.start,
+              end: disponibility.end,
+              creation_title: disponibility.creation_title,
+              user_type: 'company',
+            },
+          )
+        }
+
+        const companiesWithMultipleApplication = Object.values(companiesMap).filter(company => company.disponibilities.length > 1 && company.disponibilities.some(d => d.is_validated))
+
+        for (const company of companiesWithMultipleApplication) {
+          const placesIds = [...new Set(company.disponibilities.filter(d => d.is_validated).map(d => d.place_id))]
+          const disponibilities = company.disponibilities.filter(d => d.is_validated)
+          const places = Object.values(placesMap).filter(place => placesIds.includes(place.id))
+
+          await strapi.plugins['email'].services.email.sendEmail(
+            {
+              to: [company.email],
+            },
+            {
+              templateId: 'confirmation-preselection-compaign',
+            },
+            {
+              user_name: company.name,
+              campaign_name: campaign.title,
+              disponibilities,
+              places,
+              multiple_places: places.length > 1,
+              user_type: 'company',
+            },
+          )
+        }
+      }
+    }
+  }
 }

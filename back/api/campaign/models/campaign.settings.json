@@ -93,6 +93,9 @@
     },
     "is_active": {
       "type": "boolean"
+    },
+    "confirmation_notification_date": {
+      "type": "date"
     }
   }
 }

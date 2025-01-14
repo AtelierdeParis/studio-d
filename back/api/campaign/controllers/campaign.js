@@ -5,4 +5,11 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+    async sendEspacePreselectionEmail(ctx) {
+        const campaign = await strapi.services.campaign.findOne({ id: ctx.params.id })
+        await strapi.services.campaign.sendEspacePreselectionEmail(campaign.id)
+
+        return ctx.send({ success: true })
+    }
+};

@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/campaigns/:id/send-espace-preselections-email",
+      "handler": "campaign.sendEspacePreselectionEmail",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

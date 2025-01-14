@@ -1,6 +1,6 @@
 "use strict";
-const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">studiod-danse.fr</a>`;
 
+const signature = `L'équipe de StudioD<br/><a href="${process.env.FRONT_URL}">studiod-danse.fr</a>`;
 const signatureAdmin = `Bonne journée`;
 
 const getFooter = (type) => {
@@ -14,6 +14,7 @@ const getFooter = (type) => {
     }">studiod-danse.fr</a>. En cas de souci, n'hésitez pas à <a href="${process.env.FRONT_URL
     }/contact">nous contacter</a>`;
 };
+
 const sendEmail = async (
   options = {},
   template = {},
