@@ -83,35 +83,8 @@ module.exports = () => {
       }
 
       // Selection notification
-      if (Boolean(campaign?.confirmation_notification_date)) {
-        const selectionNotificationDate = new Date(campaign.confirmation_notification_date)
-        const applicationsMap = {}
-
-        for (const application of campaign.applications) {
-          const espace = await strapi.services.espace.findOne({ id: application.espace })
-
-          if (application.status === 'confirmed') {
-            console.log('send accepted email to company ', application.company)
-            console.log('send accepted email to lieu ', espace.users_permissions_user.structureName, espace.users_permissions_user.email)
-            console.log('send accepted email to AdP')
-          } else {
-            console.log('send email refused to company ', application.company)
-          }
-        }
-
-
-        if (selectionNotificationDate.toDateString() === today.toDateString()) {
-          await strapi.services.campaign.sendAdminPreselectionsEmail(campaign)
-          Promise.all(
-            campaign.users_permissions_users.map(async (user) => {
-              await strapi.services.campaign.sendPreselectionsEnd(
-                campaign,
-                user,
-              )
-            }),
-          )
-        }
-      }
+      await strapi.services.campaign.sendEspacePreselectionEmail(campaign.id)
     })
   })
 }
+
