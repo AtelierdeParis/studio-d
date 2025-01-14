@@ -200,7 +200,6 @@ module.exports = {
               },
               {
                 templateId: 'confirmation-preselection-place',
-                subject: `Vos pré-selections ont été validées`,
               },
               {
                 user_name: place.name,
@@ -248,8 +247,6 @@ module.exports = {
           })
         })
 
-        // console.log({ companiesMap: JSON.stringify(companiesMap), placesMap: JSON.stringify(placesMap) })
-
         const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
 
         for (const company of companiesWithAllRefused) {
@@ -258,7 +255,6 @@ module.exports = {
               to: [company.email],
             }, {
             templateId: 'refusal-preselection-company',
-            subject: `Vos pré-selections ont été refusées`,
           },
             {
               user_name: company.name,
@@ -279,7 +275,6 @@ module.exports = {
               to: [company.email],
             }, {
             templateId: 'confirmation-one-preselection-company',
-            subject: `Votre pré-selection a été validée`,
           },
             {
               user_name: company.name,
