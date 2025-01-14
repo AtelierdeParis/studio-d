@@ -9,6 +9,9 @@ const withTM = require('next-transpile-modules')([
 module.exports = withFonts(withTM({
   i18n,
   inlineFontLimit: 300000, // 300ko
+  api: {
+    responseLimit: false,
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
