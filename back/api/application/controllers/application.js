@@ -45,13 +45,11 @@ module.exports = {
         )
       })
   },
-  async getConfirmedApplications(ctx) {
-    const { campaignId } = ctx.params
-
+  async getApplicationsByCampaign(ctx) {
+    const { campaignId, } = ctx.params
     const applications = await strapi.services.application.find(
       {
         campaign: campaignId,
-        status: 'confirmed',
       },
       [
         'disponibility.espace',

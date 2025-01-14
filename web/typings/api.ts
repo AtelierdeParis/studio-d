@@ -1475,7 +1475,7 @@ export namespace Applications {
    * @description Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user
    * @tags Application
    * @name GetConfirmedApplicationsByCampaign
-   * @request GET:/applications/confirmed/{campaignId}
+   * @request GET:/applications/campaigns/{campaignId}
    * @secure
    */
   export namespace GetConfirmedApplicationsByCampaign {
@@ -3806,15 +3806,15 @@ export class Api<
      *
      * @tags Application
      * @name GetConfirmedApplicationsByCampaign
-     * @request GET:/applications/confirmed/{campaignId}
+     * @request GET:/applications/campaigns/{campaignId}
      * @secure
      */
-    getConfirmedApplicationsByCampaign: (
+    getApplicationsByCampaign: (
       campaignId: string,
       params: RequestParams = {},
     ) =>
       this.request<Application[], Error>({
-        path: `/applications/confirmed/${campaignId}`,
+        path: `/applications/campaigns/${campaignId}`,
         method: 'GET',
         secure: true,
         format: 'json',

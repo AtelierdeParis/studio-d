@@ -192,11 +192,11 @@
         ]
       }
     },
-    "/applications/confirmed/{campaignId}": {
+    "/applications/campaigns/{campaignId}": {
       "get": {
         "deprecated": false,
         "description": "Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user",
-        "operationId": "getConfirmedApplicationsByCampaign",
+        "operationId": "getApplicationsByCampaign",
         "parameters": [
           {
             "name": "campaignId",
