@@ -8,7 +8,7 @@ const ApplicationInfo = ({ application }: { application: Application }) => {
     <View style={styles.container}>
       <ApplicationSection
         //   @ts-expect-error
-        label={`Avez-vous déjà été soutenu·e par ${application?.disponibility?.espace?.users_permissions_user.structureName}?`}
+        label={`Avez-vous déjà été soutenu·e par ${application?.disponibility?.espace?.users_permissions_user?.structureName}?`}
       >
         {Boolean(application?.already_supported) ? 'Oui' : 'Non'}
       </ApplicationSection>

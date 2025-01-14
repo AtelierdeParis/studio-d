@@ -90,11 +90,15 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
     })
 
     const websiteCell = row.getCell(11)
-    websiteCell.value = {
-      text: application.company.website,
-      hyperlink: application.company.website,
+
+    if (application.company.website) {
+      websiteCell.value = {
+        text: application.company.website,
+        hyperlink: application.company.website,
+      }
+      websiteCell.font = { color: { argb: 'FF0000FF' }, underline: true }
     }
-    websiteCell.font = { color: { argb: 'FF0000FF' }, underline: true }
+
     websiteCell.alignment = { vertical: 'top', horizontal: 'left' }
   })
 
@@ -157,6 +161,7 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
         ).toLocaleString('fr-FR', { month: 'long' })}`,
         applications: [
           {
+            id: application.id,
             title: application.creation_title,
             name: `${application.creation_title} - ${application.company.choreographer} (${application.company.structureName})`,
             email: application.company.email,
@@ -168,6 +173,7 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
       placesMap[place.id].espaces[espace.id].disponibilities[
         application.disponibility.id
       ].applications.push({
+        id: application.id,
         title: application.creation_title,
         name: `${application.creation_title} - ${application.company.choreographer} (${application.company.structureName})`,
         email: application.company.email,
