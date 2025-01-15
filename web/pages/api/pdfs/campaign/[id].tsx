@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { renderToStream } from '@react-pdf/renderer'
 import AdmZip from 'adm-zip'
+import crypto from 'crypto'
 import ExcelJS from 'exceljs'
 import { getSession } from 'next-auth/client'
 import { client } from '~api/client-api'
@@ -21,6 +22,31 @@ const generateColor = () => {
   const blue = randomComponent()
 
   return `${alpha}${red}${green}${blue}`.toUpperCase()
+}
+
+const getApplicationLink = (applicationId: string) => {
+  return `${process.env.NEXT_PUBLIC_BACK_URL}/admin/plugins/content-manager/collectionType/application::application.application/${applicationId}`
+}
+
+const getCheckSum = (application: Application) => {
+  const shasum = crypto.createHash('sha1')
+  shasum.update(
+    [
+      application.creation_title,
+      application.company.choreographer,
+      application.company.email,
+      application.creation_dancers,
+      application.creation_partnerships,
+      application.creation_techical_requirements,
+      application.company.structureName,
+      application.company.city,
+      application.company.website,
+    ].join('|'),
+  )
+
+  const checksum = shasum.digest('hex')
+
+  return checksum
 }
 
 const buildApplicationsSpreadsheet = async (applications: Application[]) => {
@@ -58,7 +84,20 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
     worksheet.getColumn(index + 1).width = 30
   })
 
-  applications.forEach((application) => {
+  let currentChecksum = null
+  let checksumStartRow = 2 // First data row (after header)
+
+  applications.forEach((application, index) => {
+    const checkSum = getCheckSum(application)
+
+    const range = `${new Date(
+      application.disponibility.start,
+    ).getDate()} - ${new Date(
+      application.disponibility.end,
+    ).getDate()} ${new Date(
+      application.disponibility.end,
+    ).toLocaleString('fr-FR', { month: 'long' })}`
+
     const row = worksheet.addRow([
       application.creation_title,
       application.company.choreographer,
@@ -74,11 +113,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
       `${
         application.disponibility.espace.users_permissions_user.structureName // @ts-ignore
       } - ${application.espace.name}`,
-      `${new Date(application.disponibility.start).getDate()} - ${new Date(
-        application.disponibility.end,
-      ).getDate()} ${new Date(
-        application.disponibility.end,
-      ).toLocaleString('fr-FR', { month: 'long' })}`,
+      range,
     ])
 
     row.eachCell((cell) => {
@@ -88,6 +123,13 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
         wrapText: true,
       }
     })
+
+    const applicationCell = row.getCell(13)
+
+    applicationCell.value = {
+      text: range,
+      hyperlink: getApplicationLink(application.id),
+    }
 
     const websiteCell = row.getCell(11)
 
@@ -100,12 +142,32 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
     }
 
     websiteCell.alignment = { vertical: 'top', horizontal: 'left' }
+
+    if (currentChecksum && currentChecksum !== checkSum) {
+      if (checksumStartRow < index + 1) {
+        for (let col = 1; col <= 11; col++) {
+          worksheet.mergeCells(checksumStartRow, col, index + 1, col)
+        }
+      }
+      checksumStartRow = index + 2
+    }
+
+    currentChecksum = checkSum
   })
+
+  if (checksumStartRow < applications.length + 1) {
+    for (let col = 1; col <= 11; col++) {
+      worksheet.mergeCells(checksumStartRow, col, applications.length + 1, col)
+    }
+  }
 
   return await workbook.xlsx.writeBuffer()
 }
 
-const buildSummarySpreadsheet = async (applications: Application[]) => {
+const buildSummarySpreadsheet = async (
+  applications: Application[],
+  withAllApplications: boolean,
+) => {
   const placesMap = {}
   const colorsMap = {}
   const applicationsCounter = {}
@@ -189,7 +251,7 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
     'Lieux',
     `Nom de l'espace`,
     `Créneaux proposés`,
-    `Sélection finale`,
+    withAllApplications ? `Candidatures` : `Sélection finale`,
     `Communication`,
     `Contact`,
   ]
@@ -233,7 +295,7 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
 
           applicationCell.value = {
             text: application.name,
-            hyperlink: `${process.env.NEXT_PUBLIC_BACK_URL}/admin/plugins/content-manager/collectionType/application::application.application/${application.id}`,
+            hyperlink: getApplicationLink(application.id),
           }
 
           applicationCell.font = {
@@ -294,7 +356,7 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
 const SelectedCampaignApplications = async (req, res) => {
   const { id: campaignId, all } = req.query
   const session = await getSession({ req })
-  const allApplications = all === 'true'
+  const withAllApplications = all === 'true'
 
   // If the session is not defined, refuse access
   if (!session) {
@@ -314,7 +376,7 @@ const SelectedCampaignApplications = async (req, res) => {
       },
     })
 
-    const filteredApplications = allApplications
+    const filteredApplications = withAllApplications
       ? applications
       : applications.filter((application) => application.status === 'validated')
 
@@ -395,6 +457,7 @@ const SelectedCampaignApplications = async (req, res) => {
 
     const summarySpreadsheetBuffer = await buildSummarySpreadsheet(
       filteredApplications,
+      withAllApplications,
     )
 
     await zip.addFile(`candidatures.xlsx`, applicationsSpreadsheetBuffer)
