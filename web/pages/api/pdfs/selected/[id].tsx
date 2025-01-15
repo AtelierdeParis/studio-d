@@ -204,18 +204,22 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
     worksheet.getColumn(index + 1).width = 30
   })
 
+  let placeRowPosition = 2
+  let espaceRowPosition = 2
+  let disponibilityRowPosition = 2
+
+  let placesCount = 0
+  let espaceCount = 0
+  let disponibilityCount = 0
+
   Object.values(placesMap).forEach((place) => {
-    let startRowPlace = worksheet.rowCount + 1
-    let startRowEspace = worksheet.rowCount + 1
-    let startRowDisponibility = worksheet.rowCount + 1
-
-    let previousPlace = null
-    let previousEspace = null
-    let previousDisponibility = null
-
     Object.values(place.espaces).forEach((espace) => {
       Object.values(espace.disponibilities).forEach((disponibility) => {
         Object.values(disponibility.applications).forEach((application) => {
+          placesCount++
+          espaceCount++
+          disponibilityCount++
+
           const row = worksheet.addRow([
             place.structureName,
             espace.name,
@@ -250,33 +254,38 @@ const buildSummarySpreadsheet = async (applications: Application[]) => {
             horizontal: 'left',
             wrapText: true,
           }
-
-          if (previousPlace === place.structureName) {
-            worksheet.mergeCells(`A${startRowPlace}:A${worksheet.rowCount}`)
-          } else {
-            startRowPlace = worksheet.rowCount
-          }
-
-          if (previousEspace === espace.name) {
-            worksheet.mergeCells(`B${startRowEspace}:B${worksheet.rowCount}`)
-          } else {
-            startRowEspace = worksheet.rowCount
-          }
-
-          if (previousDisponibility === disponibility.range) {
-            worksheet.mergeCells(
-              `C${startRowDisponibility}:C${worksheet.rowCount}`,
-            )
-          } else {
-            startRowDisponibility = worksheet.rowCount
-          }
-
-          previousPlace = place.structureName
-          previousEspace = espace.name
-          previousDisponibility = disponibility.range
         })
+
+        if (disponibilityCount > 1) {
+          worksheet.mergeCells(
+            `C${disponibilityRowPosition}:C${
+              disponibilityRowPosition + (disponibilityCount - 1)
+            }`,
+          )
+        }
+
+        disponibilityRowPosition = disponibilityRowPosition + disponibilityCount
+        disponibilityCount = 0
       })
+
+      if (espaceCount > 1) {
+        worksheet.mergeCells(
+          `B${espaceRowPosition}:B${espaceRowPosition + (espaceCount - 1)}`,
+        )
+      }
+
+      espaceRowPosition = espaceRowPosition + espaceCount
+      espaceCount = 0
     })
+
+    if (placesCount > 1) {
+      worksheet.mergeCells(
+        `A${placeRowPosition}:A${placeRowPosition + (placesCount - 1)}`,
+      )
+    }
+
+    placeRowPosition = placeRowPosition + placesCount
+    placesCount = 0
   })
 
   return await workbook.xlsx.writeBuffer()
