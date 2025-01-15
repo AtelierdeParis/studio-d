@@ -378,7 +378,11 @@ const SelectedCampaignApplications = async (req, res) => {
 
     const filteredApplications = withAllApplications
       ? applications
-      : applications.filter((application) => application.status === 'validated')
+      : applications.filter(
+          (application) =>
+            application.status === 'confirmed' ||
+            application.status === 'validated',
+        )
 
     // Group by place
     const groupedApplications = filteredApplications.reduce(
