@@ -11,6 +11,9 @@
     "draftAndPublish": true
   },
   "attributes": {
+    "button_export": {
+      "type": "campaign-export-link"
+    },
     "duration": {
       "type": "integer",
       "required": true,

@@ -1600,6 +1600,9 @@
                 "id": {
                   "type": "string"
                 },
+                "button_export": {
+                  "type": "campaign-export-link"
+                },
                 "duration": {
                   "type": "integer"
                 },

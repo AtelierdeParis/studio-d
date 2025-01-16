@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/campaigns/:id/redirect-to-export",
+      "handler": "campaign.redirectToExport",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
