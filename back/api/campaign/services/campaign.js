@@ -133,7 +133,7 @@ module.exports = {
       },
       {
         campaing_title: campaign.title,
-        url_btn: `${process.env.FRONT_URL}/api/pdfs/selected/${campaign.id}`,
+        url_btn: `${process.env.FRONT_URL}/api/pdfs/campaign/${campaign.id}`,
       },
       true,
     )
@@ -204,10 +204,14 @@ module.exports = {
               {
                 user_name: place.name,
                 campaign_name: campaign.title,
-                espaces: Object.values(place.espaces).map(espace => ({
-                  ...espace,
-                  disponibilities: espace.disponibilities.filter(d => d.is_validated)
-                })),
+                espaces: Object.values(place.espaces)
+                  .filter(espace => {
+                    return espace.disponibilities && espace.disponibilities.length > 0
+                  })
+                  .map(espace => ({
+                    ...espace,
+                    disponibilities: espace.disponibilities.filter(d => d.is_validated)
+                  })),
                 user_type: 'place',
               },
             )

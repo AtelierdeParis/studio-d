@@ -12,6 +12,13 @@ module.exports = {
 
         return ctx.send({ success: true })
     },
+    async sendAdminPreselectionsEmail(ctx) {
+        const campaign = await strapi.services.campaign.findOne({ id: ctx.params.id })
+        await strapi.services.campaign.sendAdminPreselectionsEmail(campaign)
+
+
+        return ctx.send({ success: true })
+    },
     async redirectToExport(ctx) {
         const campaign = await strapi.services.campaign.findOne({ id: ctx.params.id })
         const all = ctx.query.all === "true"

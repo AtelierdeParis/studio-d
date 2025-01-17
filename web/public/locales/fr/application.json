@@ -90,6 +90,7 @@
         "insurance_number": "N° assurance :",
         "license": "Licence(s) :"
       },
+      "preselected_count": "Trois autres lieux ou plus ont déjà préselectionné cette candidature.",
       "download_pdf": "Télécharger le pdf",
       "downloading_pdf": "Création du pdf",
       "preselect": "Marquer comme sélectionnée",

@@ -44,6 +44,15 @@ export interface NewActuality {
   title: string
   content: string
   slug?: string
+  notification_email_subject?: string
+  notification_email_message?: string
+
+  /** @format date-time */
+  notification_email_sent_at?: string
+
+  /** @format date-time */
+  notification_email_broadcast_date?: string
+  notification_email_test?: string
 
   /** @format date-time */
   published_at?: string
@@ -106,6 +115,7 @@ export interface Application {
   references?: object
   campaign?: {
     id: string
+    button_export?: string
     duration: number
     disponibility_start: string
     disponibility_end: string
@@ -128,6 +138,7 @@ export interface Application {
     applications?: string[]
     preselections_max?: number
     is_active?: boolean
+    confirmation_notification_date?: string
     published_at?: string
     created_by?: string
     updated_by?: string
@@ -169,6 +180,7 @@ export interface Application {
     placeDispositifs?: string[]
     campaigns?: string[]
     companyApplications?: string[]
+    hasSubscribeActualityEmail?: boolean
     created_by?: string
     updated_by?: string
   }
@@ -209,7 +221,7 @@ export interface Application {
     created_by?: string
     updated_by?: string
   }
-  status?: 'preselected' | 'confirmed'
+  status?: 'preselected' | 'confirmed' | 'validated'
 
   /** @format date-time */
   published_at?: string
@@ -230,7 +242,7 @@ export interface NewApplication {
   campaign?: string
   company?: string
   espace?: string
-  status?: 'preselected' | 'confirmed'
+  status?: 'preselected' | 'confirmed' | 'validated'
 
   /** @format date-time */
   published_at?: string
@@ -277,6 +289,7 @@ export interface NewBooking {
 
 export interface Campaign {
   id: string
+  button_export?: string
   duration: number
 
   /** @format date */
@@ -364,6 +377,7 @@ export interface Campaign {
     placeDispositifs?: string[]
     campaigns?: string[]
     companyApplications?: string[]
+    hasSubscribeActualityEmail?: boolean
     created_by?: string
     updated_by?: string
   }[]
@@ -388,7 +402,7 @@ export interface Campaign {
     campaign?: string
     company?: string
     espace?: string
-    status?: 'preselected' | 'confirmed'
+    status?: 'preselected' | 'confirmed' | 'validated'
     published_at?: string
     created_by?: string
     updated_by?: string
@@ -396,11 +410,15 @@ export interface Campaign {
   preselections_max?: number
   is_active?: boolean
 
+  /** @format date */
+  confirmation_notification_date?: string
+
   /** @format date-time */
   published_at?: string
 }
 
 export interface NewCampaign {
+  button_export?: string
   duration: number
 
   /** @format date */
@@ -439,6 +457,9 @@ export interface NewCampaign {
   applications?: string[]
   preselections_max?: number
   is_active?: boolean
+
+  /** @format date */
+  confirmation_notification_date?: string
 
   /** @format date-time */
   published_at?: string
@@ -620,6 +641,7 @@ export interface Disponibility {
   }
   campaign?: {
     id: string
+    button_export?: string
     duration: number
     disponibility_start: string
     disponibility_end: string
@@ -642,6 +664,7 @@ export interface Disponibility {
     applications?: string[]
     preselections_max?: number
     is_active?: boolean
+    confirmation_notification_date?: string
     published_at?: string
     created_by?: string
     updated_by?: string
@@ -663,7 +686,7 @@ export interface Disponibility {
     campaign?: string
     company?: string
     espace?: string
-    status?: 'preselected' | 'confirmed'
+    status?: 'preselected' | 'confirmed' | 'validated'
     published_at?: string
     created_by?: string
     updated_by?: string
@@ -769,6 +792,7 @@ export interface Dispositif {
     placeDispositifs?: string[]
     campaigns?: string[]
     companyApplications?: string[]
+    hasSubscribeActualityEmail?: boolean
     created_by?: string
     updated_by?: string
   }[]
@@ -809,6 +833,7 @@ export interface Dispositif {
     placeDispositifs?: string[]
     campaigns?: string[]
     companyApplications?: string[]
+    hasSubscribeActualityEmail?: boolean
     created_by?: string
     updated_by?: string
   }[]
@@ -1141,6 +1166,7 @@ export interface UsersPermissionsRole {
     placeDispositifs?: string[]
     campaigns?: string[]
     companyApplications?: string[]
+    hasSubscribeActualityEmail?: boolean
     created_by?: string
     updated_by?: string
   }[]
@@ -1198,7 +1224,6 @@ export interface UsersPermissionsUser {
   bookings?: Booking[]
   placeDispositifs?: Dispositif[]
   companyDispositifs?: Dispositif[]
-  hasSubscribeActualityEmail?: boolean
 }
 
 export interface NewUsersPermissionsUser {
@@ -1344,6 +1369,65 @@ export namespace Actualities {
   }
 }
 
+export namespace Notifications {
+  /**
+   * @description Create a new record
+   * @tags Actuality
+   * @name UpdateCreate
+   * @request POST:/notifications/update
+   * @secure
+   */
+  export namespace UpdateCreate {
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = { foo?: string }
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
+  }
+  /**
+   * No description
+   * @tags Actuality
+   * @name InfoList
+   * @request GET:/notifications/info
+   * @secure
+   */
+  export namespace InfoList {
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
+  }
+  /**
+   * @description Create a new record
+   * @tags Message
+   * @name ToggleNotif
+   * @request POST:/notifications/toggle
+   * @secure
+   */
+  export namespace ToggleNotif {
+    export type RequestParams = {}
+    export type RequestQuery = {}
+    export type RequestBody = ReadNotif
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
+  }
+  /**
+   * No description
+   * @tags Message
+   * @name MyNotifications
+   * @request GET:/notifications/me
+   * @secure
+   */
+  export namespace MyNotifications {
+    export type RequestParams = {}
+    export type RequestQuery = { id?: string }
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = NotifCount
+  }
+}
+
 export namespace Applications {
   /**
    * @description Get applications related to current user
@@ -1474,16 +1558,30 @@ export namespace Applications {
   /**
    * @description Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user
    * @tags Application
-   * @name GetConfirmedApplicationsByCampaign
+   * @name GetApplicationsByCampaign
    * @request GET:/applications/campaigns/{campaignId}
    * @secure
    */
-  export namespace GetConfirmedApplicationsByCampaign {
+  export namespace GetApplicationsByCampaign {
     export type RequestParams = { campaignId: string }
     export type RequestQuery = {}
     export type RequestBody = never
     export type RequestHeaders = {}
     export type ResponseBody = Application[]
+  }
+  /**
+   * @description Get the number of preselected applications for a specific application
+   * @tags Application
+   * @name PreselectedCountDetail
+   * @request GET:/applications/preselected/{id}/count
+   * @secure
+   */
+  export namespace PreselectedCountDetail {
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
   }
 }
 
@@ -1715,6 +1813,34 @@ export namespace Campaigns {
     export type RequestHeaders = {}
     export type ResponseBody = number
   }
+  /**
+   * No description
+   * @tags Campaign
+   * @name SendEspacePreselectionsEmailDetail
+   * @request GET:/campaigns/{id}/send-espace-preselections-email
+   * @secure
+   */
+  export namespace SendEspacePreselectionsEmailDetail {
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
+  }
+  /**
+   * No description
+   * @tags Campaign
+   * @name RedirectToExportDetail
+   * @request GET:/campaigns/{id}/redirect-to-export
+   * @secure
+   */
+  export namespace RedirectToExportDetail {
+    export type RequestParams = { id: string }
+    export type RequestQuery = {}
+    export type RequestBody = never
+    export type RequestHeaders = {}
+    export type ResponseBody = { foo?: string }
+  }
 }
 
 export namespace Cities {
@@ -1820,34 +1946,6 @@ export namespace Cities {
 
 export namespace Contacts {
   /**
-   * No description
-   * @tags Contact
-   * @name ContactsList
-   * @request GET:/contacts
-   * @secure
-   */
-  export namespace ContactsList {
-    export type RequestParams = {}
-    export type RequestQuery = {
-      _limit?: number
-      _sort?: string
-      _start?: number
-      '='?: string
-      _ne?: string
-      _lt?: string
-      _lte?: string
-      _gt?: string
-      _gte?: string
-      _contains?: string
-      _containss?: string
-      _in?: string[]
-      _nin?: string[]
-    }
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = Contact[]
-  }
-  /**
    * @description Create a new record
    * @tags Contact
    * @name ContactsCreate
@@ -1860,62 +1958,6 @@ export namespace Contacts {
     export type RequestBody = NewContact
     export type RequestHeaders = {}
     export type ResponseBody = Contact
-  }
-  /**
-   * No description
-   * @tags Contact
-   * @name CountList
-   * @request GET:/contacts/count
-   * @secure
-   */
-  export namespace CountList {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = { count?: number }
-  }
-  /**
-   * No description
-   * @tags Contact
-   * @name ContactsDetail
-   * @request GET:/contacts/{id}
-   * @secure
-   */
-  export namespace ContactsDetail {
-    export type RequestParams = { id: string }
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = Contact
-  }
-  /**
-   * @description Update a record
-   * @tags Contact
-   * @name ContactsUpdate
-   * @request PUT:/contacts/{id}
-   * @secure
-   */
-  export namespace ContactsUpdate {
-    export type RequestParams = { id: string }
-    export type RequestQuery = {}
-    export type RequestBody = NewContact
-    export type RequestHeaders = {}
-    export type ResponseBody = Contact
-  }
-  /**
-   * @description Delete a record
-   * @tags Contact
-   * @name ContactsDelete
-   * @request DELETE:/contacts/{id}
-   * @secure
-   */
-  export namespace ContactsDelete {
-    export type RequestParams = { id: string }
-    export type RequestQuery = {}
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = number
   }
 }
 
@@ -2658,37 +2700,6 @@ export namespace Conversation {
     export type RequestBody = never
     export type RequestHeaders = {}
     export type ResponseBody = Message[]
-  }
-}
-
-export namespace Notifications {
-  /**
-   * @description Create a new record
-   * @tags Message
-   * @name ToggleNotif
-   * @request POST:/notifications/toggle
-   * @secure
-   */
-  export namespace ToggleNotif {
-    export type RequestParams = {}
-    export type RequestQuery = {}
-    export type RequestBody = ReadNotif
-    export type RequestHeaders = {}
-    export type ResponseBody = { foo?: string }
-  }
-  /**
-   * No description
-   * @tags Message
-   * @name MyNotifications
-   * @request GET:/notifications/me
-   * @secure
-   */
-  export namespace MyNotifications {
-    export type RequestParams = {}
-    export type RequestQuery = { id?: string }
-    export type RequestBody = never
-    export type RequestHeaders = {}
-    export type ResponseBody = NotifCount
   }
 }
 
@@ -3637,6 +3648,80 @@ export class Api<
         ...params,
       }),
   }
+  notifications = {
+    /**
+     * @description Create a new record
+     *
+     * @tags Actuality
+     * @name UpdateCreate
+     * @request POST:/notifications/update
+     * @secure
+     */
+    updateCreate: (data: { foo?: string }, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/notifications/update`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Actuality
+     * @name InfoList
+     * @request GET:/notifications/info
+     * @secure
+     */
+    infoList: (params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/notifications/info`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * @description Create a new record
+     *
+     * @tags Message
+     * @name ToggleNotif
+     * @request POST:/notifications/toggle
+     * @secure
+     */
+    toggleNotif: (data: ReadNotif, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/notifications/toggle`,
+        method: 'POST',
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Message
+     * @name MyNotifications
+     * @request GET:/notifications/me
+     * @secure
+     */
+    myNotifications: (query?: { id?: string }, params: RequestParams = {}) =>
+      this.request<NotifCount, Error>({
+        path: `/notifications/me`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+  }
   applications = {
     /**
      * @description Get applications related to current user
@@ -3805,7 +3890,7 @@ export class Api<
      * @description Get confirmed applications related to a specific campaign, grouped by disponibility.espace.users_permissions_user
      *
      * @tags Application
-     * @name GetConfirmedApplicationsByCampaign
+     * @name GetApplicationsByCampaign
      * @request GET:/applications/campaigns/{campaignId}
      * @secure
      */
@@ -3815,6 +3900,23 @@ export class Api<
     ) =>
       this.request<Application[], Error>({
         path: `/applications/campaigns/${campaignId}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * @description Get the number of preselected applications for a specific application
+     *
+     * @tags Application
+     * @name PreselectedCountDetail
+     * @request GET:/applications/preselected/{id}/count
+     * @secure
+     */
+    preselectedCountDetail: (id: string, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/applications/preselected/${id}/count`,
         method: 'GET',
         secure: true,
         format: 'json',
@@ -4121,6 +4223,43 @@ export class Api<
         format: 'json',
         ...params,
       }),
+
+    /**
+     * No description
+     *
+     * @tags Campaign
+     * @name SendEspacePreselectionsEmailDetail
+     * @request GET:/campaigns/{id}/send-espace-preselections-email
+     * @secure
+     */
+    sendEspacePreselectionsEmailDetail: (
+      id: string,
+      params: RequestParams = {},
+    ) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/campaigns/${id}/send-espace-preselections-email`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Campaign
+     * @name RedirectToExportDetail
+     * @request GET:/campaigns/{id}/redirect-to-export
+     * @secure
+     */
+    redirectToExportDetail: (id: string, params: RequestParams = {}) =>
+      this.request<{ foo?: string }, Error>({
+        path: `/campaigns/${id}/redirect-to-export`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params,
+      }),
   }
   cities = {
     /**
@@ -4249,41 +4388,6 @@ export class Api<
   }
   contacts = {
     /**
-     * No description
-     *
-     * @tags Contact
-     * @name ContactsList
-     * @request GET:/contacts
-     * @secure
-     */
-    contactsList: (
-      query?: {
-        _limit?: number
-        _sort?: string
-        _start?: number
-        '='?: string
-        _ne?: string
-        _lt?: string
-        _lte?: string
-        _gt?: string
-        _gte?: string
-        _contains?: string
-        _containss?: string
-        _in?: string[]
-        _nin?: string[]
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Contact[], Error>({
-        path: `/contacts`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
      * @description Create a new record
      *
      * @tags Contact
@@ -4298,80 +4402,6 @@ export class Api<
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Contact
-     * @name CountList
-     * @request GET:/contacts/count
-     * @secure
-     */
-    countList: (params: RequestParams = {}) =>
-      this.request<{ count?: number }, Error>({
-        path: `/contacts/count`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Contact
-     * @name ContactsDetail
-     * @request GET:/contacts/{id}
-     * @secure
-     */
-    contactsDetail: (id: string, params: RequestParams = {}) =>
-      this.request<Contact, Error>({
-        path: `/contacts/${id}`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * @description Update a record
-     *
-     * @tags Contact
-     * @name ContactsUpdate
-     * @request PUT:/contacts/{id}
-     * @secure
-     */
-    contactsUpdate: (
-      id: string,
-      data: NewContact,
-      params: RequestParams = {},
-    ) =>
-      this.request<Contact, Error>({
-        path: `/contacts/${id}`,
-        method: 'PUT',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * @description Delete a record
-     *
-     * @tags Contact
-     * @name ContactsDelete
-     * @request DELETE:/contacts/{id}
-     * @secure
-     */
-    contactsDelete: (id: string, params: RequestParams = {}) =>
-      this.request<number, Error>({
-        path: `/contacts/${id}`,
-        method: 'DELETE',
-        secure: true,
         format: 'json',
         ...params,
       }),
@@ -5317,44 +5347,6 @@ export class Api<
     ) =>
       this.request<Message[], Error>({
         path: `/conversation/${id}`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params,
-      }),
-  }
-  notifications = {
-    /**
-     * @description Create a new record
-     *
-     * @tags Message
-     * @name ToggleNotif
-     * @request POST:/notifications/toggle
-     * @secure
-     */
-    toggleNotif: (data: ReadNotif, params: RequestParams = {}) =>
-      this.request<{ foo?: string }, Error>({
-        path: `/notifications/toggle`,
-        method: 'POST',
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: 'json',
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Message
-     * @name MyNotifications
-     * @request GET:/notifications/me
-     * @secure
-     */
-    myNotifications: (query?: { id?: string }, params: RequestParams = {}) =>
-      this.request<NotifCount, Error>({
-        path: `/notifications/me`,
         method: 'GET',
         query: query,
         secure: true,
