@@ -298,7 +298,7 @@ const buildSummarySpreadsheet = async (
 
           const applicationCell = row.getCell(4)
 
-          if (application.status === 'validated' && withAllApplications) {
+          if (application.status === 'validated') {
             row.eachCell((cell) => {
               cell.font = { bold: true }
             })
