@@ -90,13 +90,13 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
   applications.forEach((application, index) => {
     const checkSum = getCheckSum(application)
 
-    const range = `${new Date(
-      application.disponibility.start,
-    ).getDate()} - ${new Date(
-      application.disponibility.end,
-    ).getDate()} ${new Date(
-      application.disponibility.end,
-    ).toLocaleString('fr-FR', { month: 'long' })}`
+    const range = application.disponibility
+      ? `${new Date(application.disponibility.start).getDate()} - ${new Date(
+          application.disponibility.end,
+        ).getDate()} ${new Date(
+          application.disponibility.end,
+        ).toLocaleString('fr-FR', { month: 'long' })}`
+      : '-'
 
     const row = worksheet.addRow([
       application.creation_title,
@@ -110,9 +110,9 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
       application.company.city,
       '',
       application.company.website,
-      `${
-        application.disponibility.espace.users_permissions_user.structureName // @ts-ignore
-      } - ${application.espace.name}`,
+      application.disponibility?.espace?.users_permissions_user
+        ? `${application.disponibility.espace.users_permissions_user.structureName} - ${application.espace.name}`
+        : '-',
       range,
     ])
 
@@ -181,10 +181,13 @@ const buildSummarySpreadsheet = async (
   }
 
   for (const application of applications) {
-    const place = application.disponibility.espace // @ts-ignore
-      .users_permissions_user as UsersPermissionsUser
+    // Skip applications without disponibility or espace
+    if (!application.disponibility?.espace?.users_permissions_user) {
+      continue
+    }
 
-    // @ts-ignore
+    const place = application.disponibility.espace
+      .users_permissions_user as UsersPermissionsUser
     const espace = application.disponibility.espace as Espace
 
     if (!colorsMap[application.creation_title]) {
@@ -387,15 +390,18 @@ const SelectedCampaignApplications = async (req, res) => {
     // Group by place
     const groupedApplications = filteredApplications.reduce(
       (grouped, application) => {
-        //@ts-expect-error
-        const user = application.disponibility.espace.users_permissions_user
-
-        if (!grouped[user?.id]) {
-          grouped[user?.id] = []
+        if (!application.disponibility?.espace?.users_permissions_user?.id) {
+          return grouped
         }
 
-        grouped[user?.id].push(application)
+        const userId =
+          application.disponibility.espace.users_permissions_user.id
 
+        if (!grouped[userId]) {
+          grouped[userId] = []
+        }
+
+        grouped[userId].push(application)
         return grouped
       },
       {},
@@ -472,7 +478,7 @@ const SelectedCampaignApplications = async (req, res) => {
   } catch (error) {
     console.error(error)
     res
-      .status(500)
+      .status(401)
       .json({ error: 'An error occurred while fetching applications.' })
     return
   }

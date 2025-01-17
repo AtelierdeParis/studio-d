@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next'
 import { Fragment } from 'react'
 import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationDownloadButton'
 import ApplicationStatusIcon from '~components/Account/Application/Place/ApplicationStatusIcon'
+import ApplicationCountAlert from '~components/Account/Application/Place/DetailDrawer/ApplicationCountAlert'
 import Cell from '~components/Account/Booking/Cell'
 import Link from '~components/Link'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
@@ -48,6 +49,7 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
       {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
         <Cell cursor="default">
           <HStack spacing={2}>
+            <ApplicationCountAlert applicationId={application?.id} onlyIcon />
             <ApplicationDownloadButton application={application} />
             <Button
               px={2}

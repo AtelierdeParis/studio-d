@@ -63,4 +63,19 @@ module.exports = {
 
     return applications
   },
+  async getPreselectedApplicationsCount(ctx) {
+    const { id } = ctx.params
+    const applications = await strapi.services.application.find(
+      {
+        id,
+        status: ['validated', 'confirmed'],
+      },
+      [
+        'id',
+      ],
+    )
+
+
+    return { count: applications?.length || 0 }
+  },
 }

@@ -1,9 +1,10 @@
-import { VStack, Divider, Button, Text } from '@chakra-ui/react'
+import { Button, Divider, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
+import ApplicationCountAlert from '~components/Account/Application/Place/DetailDrawer/ApplicationCountAlert'
 
-import ApplicationPreselectButton from '~components/Account/Application/Place/DetailDrawer/ApplicationPreselectButton'
 import ApplicationDetailInfos from '~components/Account/Application/Place/DetailDrawer/ApplicationDetailInfos'
+import ApplicationPreselectButton from '~components/Account/Application/Place/DetailDrawer/ApplicationPreselectButton'
 import { Application } from '~typings/api'
 
 const ApplicationRightPanel = ({
@@ -49,7 +50,7 @@ const ApplicationRightPanel = ({
           canPreselect={canPreselect}
         />
       </VStack>
-
+      <ApplicationCountAlert applicationId={application.id} />
       <Divider />
       {/* @ts-expect-error */}
       <ApplicationDetailInfos company={application?.company} />

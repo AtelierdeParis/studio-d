@@ -65,6 +65,16 @@
       "config": {
         "policies": ["is-admin"]
       }
+    },
+    {
+      "method": "GET",
+      "path": "/applications/preselected/:id/count",
+      "handler": "application.getPreselectedApplicationsCount",
+      "config": {
+        "policies": [],
+        "operationId": "getPreselectedApplicationsCount",
+        "description": "Get the number of preselected applications for a specific application"
+      }
     }
   ]
 }
