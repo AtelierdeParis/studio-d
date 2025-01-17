@@ -146,8 +146,6 @@ module.exports = {
       const selectionNotificationDate = new Date(campaign.confirmation_notification_date)
 
       if (selectionNotificationDate.toDateString() === today.toDateString()) {
-        const admins = await strapi.query('user', 'admin').find({})
-        const adminsEmails = admins.map(admin => admin.email)
         const placesMap = {}
 
         for (const application of campaign.applications) {
@@ -248,7 +246,7 @@ module.exports = {
             const companies = Object.values(companiesMap).filter(company => companiesIds.includes(company.id))
             await strapi.plugins['email'].services.email.sendEmail(
               {
-                to: [place.email, ...adminsEmails],
+                to: [place.email, process.env.EMAIL_RECIPIENT],
               },
               {
                 templateId: 'confirmation-preselection-place',
