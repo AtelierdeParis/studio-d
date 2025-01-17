@@ -180,40 +180,14 @@ module.exports = {
             company: company.structureName,
             company_id: company.id,
             name: `${company.firstname} ${company.lastname}`,
+            phone: company.phone,
+            email: company.email,
+            address: `${company.address}, ${company.zipCode} ${company.city}`,
             creationTitle: application.creation_title,
             is_validated: application.status === 'validated',
             start: new Date(disponibility.start).toLocaleDateString('fr-FR'),
             end: new Date(disponibility.end).toLocaleDateString('fr-FR'),
           })
-        }
-
-        const placeIds = Object.keys(placesMap)
-
-        for (const id of placeIds) {
-          const place = await placesMap[id]
-          const hasDisponibilitiesValidated = Object.values(place.espaces).some(espace => espace.disponibilities.some(d => d.is_validated))
-
-          if (hasDisponibilitiesValidated) {
-            await strapi.plugins['email'].services.email.sendEmail(
-              {
-                to: [place.email, ...adminsEmails],
-              },
-              {
-                templateId: 'confirmation-preselection-place',
-              },
-              {
-                user_name: place.name,
-                campaign_name: campaign.title,
-                espaces: Object.values(place.espaces)
-                  .filter(espace => espace.disponibilities.some(d => d.is_validated))
-                  .map(espace => ({
-                    ...espace,
-                    disponibilities: espace.disponibilities.filter(d => d.is_validated)
-                  })),
-                user_type: 'place',
-              },
-            )
-          }
         }
 
         const companiesMap = {}
@@ -226,6 +200,9 @@ module.exports = {
                   name: disponibility.name,
                   id: disponibility.company_id,
                   company: disponibility.company,
+                  phone: disponibility.phone,
+                  email: disponibility.email,
+                  address: disponibility.address,
                   disponibilities: []
                 }
               }
@@ -248,6 +225,51 @@ module.exports = {
             })
           })
         })
+
+        const placeIds = Object.keys(placesMap)
+
+        for (const id of placeIds) {
+          const place = await placesMap[id]
+          const hasDisponibilitiesValidated = Object.values(place.espaces).some(espace => espace.disponibilities.some(d => d.is_validated))
+
+          const companiesIds = []
+          let disponibilitiesCount = 0
+          Object.values(place.espaces).forEach(espace => {
+            espace.disponibilities.forEach(disponibility => {
+              if (disponibility.is_validated) {
+                companiesIds.push(disponibility.company_id)
+              }
+
+              disponibilitiesCount++
+            })
+          })
+
+          if (hasDisponibilitiesValidated) {
+            const companies = Object.values(companiesMap).filter(company => companiesIds.includes(company.id))
+            await strapi.plugins['email'].services.email.sendEmail(
+              {
+                to: [place.email, ...adminsEmails],
+              },
+              {
+                templateId: 'confirmation-preselection-place',
+              },
+              {
+                user_name: place.name,
+                campaign_name: campaign.title,
+                espaces: Object.values(place.espaces)
+                  .filter(espace => espace.disponibilities.some(d => d.is_validated))
+                  .map(espace => ({
+                    ...espace,
+                    disponibilities: espace.disponibilities.filter(d => d.is_validated)
+                  })),
+                companies: companies,
+                multiple_companies: companies.length > 1,
+                multiple_disponibilities: disponibilitiesCount > 1,
+                user_type: 'place',
+              },
+            )
+          }
+        }
 
         const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
 
@@ -315,6 +337,8 @@ module.exports = {
               disponibilities,
               places,
               multiple_places: places.length > 1,
+              has_multiple_disponibilities: disponibilities.length > 1,
+              has_refused_disponibilities: company.disponibilities.some(d => !d.is_validated),
               user_type: 'company',
             },
           )
