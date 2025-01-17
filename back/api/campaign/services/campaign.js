@@ -205,9 +205,7 @@ module.exports = {
                 user_name: place.name,
                 campaign_name: campaign.title,
                 espaces: Object.values(place.espaces)
-                  .filter(espace => {
-                    return espace.disponibilities && espace.disponibilities.length > 0
-                  })
+                  .filter(espace => espace.disponibilities.some(d => d.is_validated))
                   .map(espace => ({
                     ...espace,
                     disponibilities: espace.disponibilities.filter(d => d.is_validated)
