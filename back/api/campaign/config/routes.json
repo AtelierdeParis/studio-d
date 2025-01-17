@@ -58,6 +58,14 @@
     },
     {
       "method": "GET",
+      "path": "/campaigns/:id/send-admin-preselections-email",
+      "handler": "campaign.sendAdminPreselectionsEmail",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/campaigns/:id/redirect-to-export",
       "handler": "campaign.redirectToExport",
       "config": {

@@ -231,6 +231,7 @@ const buildSummarySpreadsheet = async (
             name: `${application.creation_title} - ${application.company.choreographer} (${application.company.structureName})`,
             email: application.company.email,
             color: colorsMap[application.creation_title],
+            status: application.status,
           },
         ],
       }
@@ -243,6 +244,7 @@ const buildSummarySpreadsheet = async (
         name: `${application.creation_title} - ${application.company.choreographer} (${application.company.structureName})`,
         email: application.company.email,
         color: colorsMap[application.creation_title],
+        status: application.status,
       })
     }
   }
@@ -295,6 +297,12 @@ const buildSummarySpreadsheet = async (
           ])
 
           const applicationCell = row.getCell(4)
+
+          if (application.status === 'validated' && withAllApplications) {
+            row.eachCell((cell) => {
+              cell.font = { bold: true }
+            })
+          }
 
           applicationCell.value = {
             text: application.name,
@@ -470,9 +478,12 @@ const SelectedCampaignApplications = async (req, res) => {
       withAllApplications,
     )
 
-    await zip.addFile(`candidatures.xlsx`, applicationsSpreadsheetBuffer)
     await zip.addFile(
-      `recap-${all ? 'complet' : 'preselection'}.xlsx`,
+      `${campaign?.title} candidatures.xlsx`,
+      applicationsSpreadsheetBuffer,
+    )
+    await zip.addFile(
+      `${campaign?.title} récap ${all ? 'complet' : 'présélection'}.xlsx`,
       summarySpreadsheetBuffer,
     )
   } catch (error) {

@@ -15,7 +15,6 @@ const CampaignExportLink = (props) => {
                         padding: "3px 10px",
                         borderRadius: 4,
                         border: "1px solid #4945FF",
-                        cursor: "pointer",
                     }}
                 >
                     <option value="preselection">Pré-sélectionnées</option>
@@ -31,7 +30,6 @@ const CampaignExportLink = (props) => {
                         borderRadius: 4,
                         backgroundColor: "#4945FF",
                         border: "1px solid #4945FF",
-                        cursor: "pointer",
                         textDecoration: "none",
                         display: "inline-block"
                     }}
@@ -39,8 +37,13 @@ const CampaignExportLink = (props) => {
                     Exporter
                 </a>
             </div>
+            <div style={{ marginTop: 4, color: "grey", lineHeight: "14px" }}>
+                <small>
+                    Attention : pensez à vous connecter sur StudioD avec votre compte admin avant de lancer l'export.
+                </small>
+            </div>
             <hr style={{ marginBottom: 10 }} />
-        </div>
+        </div >
     );
 };
 
