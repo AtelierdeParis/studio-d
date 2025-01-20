@@ -66,7 +66,6 @@ module.exports = {
       notification_email_broadcast_date_null: false,
       notification_email_broadcast_date_lte: new Date(),
       notification_email_sent_at_null: true,
-      published_at_null: false,
     });
 
     const users = await knex.raw(`
@@ -80,21 +79,35 @@ module.exports = {
     (type = 'place' AND place.id IS NOT NULL)
   )
 `);
-
     for (const actuality of actualities) {
       try {
-        const emails = [...new Set(users.rows.map(user => user.email))]
+        if (!actuality.published_at) {
+          throw new Error('not_published');
+        }
 
+        const emails = [...new Set(users.rows.map(user => user.email))]
         console.log(`Sending actuality ${actuality.id} email to ${emails.length} users`)
+
         await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, emails);
+        await strapi.query("actuality").update(
+          { id: actuality.id }, {
+          notification_email_sent_at: new Date(),
+        });
       } catch (error) {
         console.log(`Error sending actuality ${actuality.id} email`, error);
-      }
+        let errorType = "unknown"
 
-      await strapi.query("actuality").update(
-        { id: actuality.id }, {
-        notification_email_sent_at: new Date(),
-      },);
+        if (error.message === 'not_published') {
+          errorType = 'not_published'
+        }
+
+        await strapi.services.actuality.sendActualityErrorEmail(actuality, process.env.EMAIL_RECIPIENT, errorType);
+        await strapi.query("actuality").update(
+          { id: actuality.id }, {
+          notification_email_broadcast_date: null,
+          notification_email_sent_at: null,
+        })
+      }
     }
-  },
+  }
 };
