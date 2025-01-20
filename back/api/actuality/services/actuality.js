@@ -18,12 +18,6 @@ const validateEmail = (email) => {
 
 module.exports = {
     async sendActualityErrorEmail(actuality, email, error) {
-        let errorMessage = `Une erreur est survenue lors de la publication de l'actualité "${actuality.title}". Merci de vérifier les informations de l'actualité et réessayer.`
-
-        if (error === 'not_published') {
-            errorMessage = `Les notificiations concernant l'actualité "${actuality.title}" n'ont pas été envoyées car elle est encore en brouillon et ce malgré le fait que la date de publication soit passée. Merci de la publier pour pouvoir envoyer les notifications.`
-        }
-
         await strapi.plugins['email'].services.email.sendEmail(
             {
                 to: email,
@@ -32,7 +26,8 @@ module.exports = {
                 templateId: 'actuality-error',
             },
             {
-                actuality_error: errorMessage,
+                not_published_error: error === 'not_published',
+                actuality_title: actuality.title,
                 actuality_url: `${process.env.BASE_URL}/admin/plugins/content-manager/collectionType/application::actuality.actuality/${actuality.id}`,
             }
         )
