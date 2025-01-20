@@ -36,6 +36,7 @@ const sendEmail = async (
     return console.log("Template not found", "id", template.templateId);
   }
 
+  const emailsDebug = process.env.EMAIL_TEST ? ' - Original emails : ' + options.to : '';
 
   await strapi.plugins["email-designer"].services.email
     .sendTemplatedEmail(
@@ -46,7 +47,7 @@ const sendEmail = async (
       },
       {
         signature: isAdmin ? signatureAdmin : signature,
-        footer: data.user_type ? getFooter(data.user_type) : "",
+        footer: data.user_type ? getFooter(data.user_type) + emailsDebug : emailsDebug,
         url_site: process.env.FRONT_URL,
         ...data,
       }
