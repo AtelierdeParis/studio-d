@@ -1,9 +1,9 @@
 // @ts-nocheck
 import { renderToStream } from '@react-pdf/renderer'
-import AdmZip from 'adm-zip'
 import crypto from 'crypto'
 import ExcelJS from 'exceljs'
 import { getSession } from 'next-auth/client'
+import yazl from 'yazl'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
 import { Application, Espace, UsersPermissionsUser } from '~typings/api'
@@ -375,7 +375,7 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  const zip = new AdmZip()
+  const zip = new yazl.ZipFile()
   const { data: campaign } = await client.campaigns.campaignsDetail(campaignId)
 
   try {
@@ -451,19 +451,20 @@ const SelectedCampaignApplications = async (req, res) => {
         const subFolder = `${application?.espace?.name} - ${disponibilityLabel} - ${refLabel} - ${structureName}`
 
         const streamBuffer = await getBufferFromStream(stream)
-        await zip.addFile(
+        await zip.addBuffer(
+          Buffer.from(streamBuffer),
           `${name}/${subFolder}/${refLabel} - Candidature.pdf`,
-          streamBuffer,
         )
 
         if (application?.creation_file?.[0]?.url) {
+          console.log(application?.creation_file?.[0]?.url)
           const creationFile = await fetch(application?.creation_file?.[0]?.url)
           // @ts-ignore
           const creationFileArrayBuffer = await creationFile.buffer()
 
-          await zip.addFile(
+          await zip.addBuffer(
+            Buffer.from(creationFileArrayBuffer),
             `${name}/${subFolder}/${refLabel} - Dossier artistique.pdf`,
-            creationFileArrayBuffer,
           )
         }
       }
@@ -478,13 +479,16 @@ const SelectedCampaignApplications = async (req, res) => {
       withAllApplications,
     )
 
-    await zip.addFile(
-      `${campaign?.title} candidatures.xlsx`,
+    console.log('Adding candidatures.xlsx')
+    await zip.addBuffer(
       applicationsSpreadsheetBuffer,
+      `${campaign?.title} candidatures.xlsx`,
     )
-    await zip.addFile(
-      `${campaign?.title} récap ${all ? 'complet' : 'présélection'}.xlsx`,
+
+    console.log('Adding récap.xlsx')
+    await zip.addBuffer(
       summarySpreadsheetBuffer,
+      `${campaign?.title} récap ${all ? 'complet' : 'présélection'}.xlsx`,
     )
   } catch (error) {
     console.error(error)
@@ -494,14 +498,22 @@ const SelectedCampaignApplications = async (req, res) => {
     return
   }
 
-  const zipBuffer = zip.toBuffer()
+  console.log('Adding zip')
 
   res.setHeader('Content-Type', 'application/zip')
   res.setHeader(
     'Content-Disposition',
     'attachment; filename=' + formatCampaignZipName(campaign),
   )
-  res.send(zipBuffer)
+
+  zip.end()
+
+  const zipStream = zip.outputStream
+  zipStream.pipe(res)
+
+  return new Promise((resolve) => {
+    zipStream.on('end', resolve)
+  })
 }
 
 export default SelectedCampaignApplications

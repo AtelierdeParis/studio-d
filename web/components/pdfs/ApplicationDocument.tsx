@@ -1,4 +1,4 @@
-import { Document, Font, Page, Text, View } from '@react-pdf/renderer'
+import { Document, Page, Text, View } from '@react-pdf/renderer'
 import ApplicationCreation from '~components/pdfs/ApplicationCreation'
 
 import ApplicationHeader from '~components/pdfs/ApplicationHeader'
@@ -28,8 +28,9 @@ const ApplicationDocument = ({ application }: { application: Application }) => {
         <View style={styles.container}>
           {creations?.map((reference, i) => (
             <ApplicationReference
-              reference={reference}
+              key={i}
               index={i}
+              reference={reference}
               referencesTotal={creations.length}
             />
           ))}
