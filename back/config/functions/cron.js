@@ -81,11 +81,18 @@ module.exports = {
 `);
     for (const actuality of actualities) {
       try {
+        const writerEmail = actuality.updated_by ? actuality.updated_by.email : actuality.created_by ? actuality.created_by.email : null
+
         if (!actuality.published_at) {
           throw new Error('not_published');
         }
 
         const emails = [...new Set(users.rows.map(user => user.email))]
+
+        if (writerEmail) {
+          emails.push(writerEmail)
+        }
+
         console.log(`Sending actuality ${actuality.id} email to ${emails.length} users`)
 
         await strapi.services.actuality.sendActualityEmails({ ...actuality, image: actuality.image.id }, emails);
