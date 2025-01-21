@@ -1,8 +1,8 @@
 import { Box, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { format } from '~utils/date'
 import PreselectionsWarning from 'public/assets/img/preselectionsWarning.svg'
 import useSelectedCampaign from '~hooks/useSelectedCampaign'
+import { format } from '~utils/date'
 
 const MissingSelections = () => {
   const { t } = useTranslation('application')
@@ -23,7 +23,7 @@ const MissingSelections = () => {
                   preselection_end_date: format(
                     selectedCampaign?.preselection_end,
                   ),
-                  applications_max: selectedCampaign?.applications_max,
+                  preselections_max: selectedCampaign?.preselections_max,
                 },
               )}
             </Text>
