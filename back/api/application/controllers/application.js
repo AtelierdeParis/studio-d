@@ -68,14 +68,33 @@ module.exports = {
     const applications = await strapi.services.application.find(
       {
         id,
-        status: ['validated', 'confirmed'],
       },
       [
         'id',
+        'creation_title',
+        'company',
       ],
     )
 
+    const application = applications.length > 0 ? applications[0] : null
 
-    return { count: applications?.length || 0 }
+    if (!application) {
+      return { count: 0 }
+    }
+
+    const applicationsCount = await strapi.services.application.find(
+      {
+        creation_title: application.creation_title,
+        company: application.company.id,
+        status_in: ['validated', 'confirmed'],
+      },
+      [
+        'id',
+        'creation_title',
+        'company',
+      ],
+    )
+
+    return { count: applicationsCount?.length || 0 }
   },
 }
