@@ -67,6 +67,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
     'Site web',
     'Espace - Candidature',
     'Créneau - Candidature',
+    'Statut - Candidature',
   ]
 
   const headerRow = worksheet.addRow(headers)
@@ -114,6 +115,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
         ? `${application.disponibility.espace.users_permissions_user.structureName} - ${application.espace.name}`
         : '-',
       range,
+      application.status,
     ])
 
     row.eachCell((cell) => {
@@ -257,6 +259,7 @@ const buildSummarySpreadsheet = async (
     `Nom de l'espace`,
     `Créneaux proposés`,
     withAllApplications ? `Candidatures` : `Sélection finale`,
+    `Référence candidature`,
     `Communication`,
     `Contact`,
   ]
@@ -287,11 +290,16 @@ const buildSummarySpreadsheet = async (
           espaceCount++
           disponibilityCount++
 
+          const counterApplications = applicationsCounter[application.title]
+
           const row = worksheet.addRow([
             place.structureName,
             espace.name,
             disponibility.range,
-            application.name,
+            `${application.name}${
+              counterApplications > 1 ? ` - ${counterApplications}` : ''
+            }`,
+            `Ref. ${application.id}`,
             '',
             application.email,
           ])
@@ -305,7 +313,9 @@ const buildSummarySpreadsheet = async (
           }
 
           applicationCell.value = {
-            text: application.name,
+            text: `${application.name}${
+              counterApplications > 1 ? ` - ${counterApplications}` : ''
+            }`,
             hyperlink: getApplicationLink(application.id),
           }
 
@@ -314,7 +324,7 @@ const buildSummarySpreadsheet = async (
             italic: true,
           }
 
-          if (applicationsCounter[application.title] > 1) {
+          if (counterApplications > 1) {
             applicationCell.fill = {
               type: 'pattern',
               pattern: 'solid',

@@ -73,6 +73,7 @@
     "no_places": "Aucun de vos espaces ne propose de créneau pour ce dispositif",
     "no_applications": "Aucune candidature déposée pour ce créneau pour le moment.",
     "no_applications_past": "Aucune candidature n'a été déposée pour ce créneau.",
+    "preselected_limit_reached": "Vous avez atteint la limite de candidatures à pré-sélectionner, annuler la sélection de l'une de ces candidatures afin de pouvoir sélectionner celle-ci.",
     "detail": {
       "title": "Candidature n°{{id}}",
       "header": {

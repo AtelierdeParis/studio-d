@@ -1,6 +1,6 @@
 import { Box, HStack, Text } from '@chakra-ui/react'
-import PreselectionsValidated from 'public/assets/img/preselectionsValidated.svg'
 import { useTranslation } from 'next-i18next'
+import PreselectionsValidated from 'public/assets/img/preselectionsValidated.svg'
 
 const ValidatedSelections = () => {
   const { t } = useTranslation('application')

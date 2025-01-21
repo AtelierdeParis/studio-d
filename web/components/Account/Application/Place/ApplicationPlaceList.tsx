@@ -50,6 +50,13 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
     (application) => application?.status === 'preselected',
   )
 
+  const validatedApplications = applications?.filter(
+    (application) => application?.status === 'confirmed',
+  ).length
+
+  const hasValidatedApplications =
+    selectedCampaign?.mode === 'preselections' && validatedApplications > 0
+
   const filteredList = useMemo(
     () =>
       list.filter((application) => {
@@ -139,6 +146,7 @@ const ApplicationPlaceList = ({ applications = [] }: Props) => {
         isOpen={isOpen}
         onClose={onClose}
         application={selectedApplication}
+        hasValidatedApplications={hasValidatedApplications}
         canPreselect={
           preselectedApplications?.length <
             selectedCampaign?.preselections_max &&

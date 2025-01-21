@@ -14,9 +14,11 @@ import { Application } from '~typings/api'
 const ApplicationPreselectButton = ({
   application,
   canPreselect,
+  hasValidatedApplications,
 }: {
   application: Application
   canPreselect: boolean
+  hasValidatedApplications: boolean
 }) => {
   const { t } = useTranslation('application')
   const { errorToast, successToast } = useToast()
@@ -82,32 +84,44 @@ const ApplicationPreselectButton = ({
       )}
 
       {application?.status === null && (
-        <Button
-          isFullWidth
-          borderRadius={0}
-          leftIcon={<ApplicationSelected />}
-          display="flex"
-          justifyContent={'flex-start'}
-          p={3}
-          backgroundColor={'rgba(110, 174, 127, 0.25)'}
-          color="black"
-          _hover={{
-            backgroundColor: 'rgba(110, 174, 127, 0.4)',
-          }}
-          _active={{
-            backgroundColor: 'rgba(110, 174, 127, 0.6)',
-          }}
-          height="auto!important"
-          onClick={() => {
-            handleStatusChange('preselected')
-          }}
-          isDisabled={!canPreselect || application?.status === 'confirmed'}
-        >
-          <Text pl={1}>{t('place.detail.preselect')}</Text>
-        </Button>
+        <>
+          <Button
+            isFullWidth
+            borderRadius={0}
+            leftIcon={<ApplicationSelected />}
+            display="flex"
+            justifyContent={'flex-start'}
+            p={3}
+            backgroundColor={'rgba(110, 174, 127, 0.25)'}
+            color="black"
+            _hover={{
+              backgroundColor: 'rgba(110, 174, 127, 0.4)',
+            }}
+            _active={{
+              backgroundColor: 'rgba(110, 174, 127, 0.6)',
+            }}
+            height="auto!important"
+            onClick={() => {
+              handleStatusChange('preselected')
+            }}
+            isDisabled={
+              !canPreselect ||
+              application?.status === 'confirmed' ||
+              hasValidatedApplications
+            }
+          >
+            <Text pl={1}>{t('place.detail.preselect')}</Text>
+          </Button>
+
+          {!canPreselect && (
+            <Text pl={1} color="gray.500">
+              {t('place.preselected_limit_reached')}
+            </Text>
+          )}
+        </>
       )}
 
-      {application?.status === 'confirmed' && (
+      {(application?.status === 'confirmed' || hasValidatedApplications) && (
         <Box color="gray.500">
           <Text as="span">{t('place.detail.confirmed_helper_start')}</Text>
           <Text

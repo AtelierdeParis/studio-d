@@ -26,11 +26,13 @@ const ApplicationDetailDrawer = ({
   onClose,
   application,
   canPreselect,
+  hasValidatedApplications,
 }: {
   isOpen: boolean
   onClose: () => void
   application: Application
   canPreselect: boolean
+  hasValidatedApplications: boolean
 }) => {
   const { t } = useTranslation('application')
   const { id } = application ?? {}
@@ -110,6 +112,7 @@ const ApplicationDetailDrawer = ({
                   canPreselect={canPreselect}
                   handleDownload={handleDownload}
                   isDownloading={isDownloading}
+                  hasValidatedApplications={hasValidatedApplications}
                 />
               </GridItem>
             </Grid>

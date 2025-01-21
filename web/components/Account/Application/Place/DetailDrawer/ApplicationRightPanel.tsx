@@ -12,11 +12,13 @@ const ApplicationRightPanel = ({
   canPreselect,
   handleDownload,
   isDownloading,
+  hasValidatedApplications,
 }: {
   application: Application
   canPreselect: boolean
   handleDownload: () => void
   isDownloading?: boolean
+  hasValidatedApplications: boolean
 }) => {
   const { t } = useTranslation('application')
 
@@ -48,6 +50,7 @@ const ApplicationRightPanel = ({
         <ApplicationPreselectButton
           application={application}
           canPreselect={canPreselect}
+          hasValidatedApplications={hasValidatedApplications}
         />
       </VStack>
       <ApplicationCountAlert applicationId={application.id} />

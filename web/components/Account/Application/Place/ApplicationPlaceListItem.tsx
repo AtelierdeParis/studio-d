@@ -48,7 +48,7 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
       </Cell>
       {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
         <Cell cursor="default">
-          <HStack spacing={2}>
+          <HStack spacing={2} width="100%" justifyContent="flex-end">
             <ApplicationCountAlert applicationId={application?.id} onlyIcon />
             <ApplicationDownloadButton application={application} />
             <Button
