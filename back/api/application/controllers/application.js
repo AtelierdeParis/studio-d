@@ -50,6 +50,7 @@ module.exports = {
     const applications = await strapi.services.application.find(
       {
         campaign: campaignId,
+        _limit: -1
       },
       [
         'disponibility.espace',
@@ -68,6 +69,7 @@ module.exports = {
     const applications = await strapi.services.application.find(
       {
         id,
+        _limit: -1
       },
       [
         'id',
