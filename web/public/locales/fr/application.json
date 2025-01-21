@@ -56,8 +56,8 @@
     "helper": {
       "preselection_start": "Établissez votre présélection avant le {{date}}.",
       "no_preselection": {
-        "singular": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir 1 candidature",
-        "plural": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir {{preselections_max}} candidatures"
+        "singular": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir 1 candidature.",
+        "plural": "Établissez votre présélection avant le {{preselection_end_date}}. Il est recommandé de choisir {{preselections_max}} candidatures."
       },
       "missing_preselections": "Il est recommandé d'ajouter {{num}} candidatures supplémentaires.",
       "missing_preselection": "Il est recommandé d'ajouter {{num}} candidature supplémentaire.",
