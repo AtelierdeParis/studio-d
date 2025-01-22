@@ -1,4 +1,4 @@
-import { Button, Divider, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Divider, Text, VStack } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import ApplicationDownload from 'public/assets/img/applicationDownload.svg'
 import ApplicationCountAlert from '~components/Account/Application/Place/DetailDrawer/ApplicationCountAlert'
@@ -53,7 +53,9 @@ const ApplicationRightPanel = ({
           hasValidatedApplications={hasValidatedApplications}
         />
       </VStack>
-      <ApplicationCountAlert applicationId={application.id} />
+      <Box pl="0.5rem">
+        <ApplicationCountAlert applicationId={application.id} />
+      </Box>
       <Divider />
       {/* @ts-expect-error */}
       <ApplicationDetailInfos company={application?.company} />

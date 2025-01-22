@@ -1,4 +1,4 @@
-import { Button, HStack, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Text } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { Fragment } from 'react'
 import ApplicationDownloadButton from '~components/Account/Application/Place/ApplicationDownloadButton'
@@ -49,7 +49,9 @@ const ApplicationPlaceListItem = ({ application, onSelect }: Props) => {
       {['preselections', 'closed']?.includes(selectedCampaign?.mode) && (
         <Cell cursor="default">
           <HStack spacing={2} width="100%" justifyContent="flex-end">
-            <ApplicationCountAlert applicationId={application?.id} onlyIcon />
+            <Box marginRight="1rem">
+              <ApplicationCountAlert applicationId={application?.id} onlyIcon />
+            </Box>
             <ApplicationDownloadButton application={application} />
             <Button
               px={2}

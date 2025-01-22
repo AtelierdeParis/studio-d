@@ -30,7 +30,7 @@ const ApplicationCountAlert = ({
           isDisabled={!onlyIcon}
           label={t('place.detail.preselected_count')}
         >
-          <Box color="gray.400">
+          <Box color="gray.400" opacity={0.7}>
             <Warning />
           </Box>
         </Tooltip>
