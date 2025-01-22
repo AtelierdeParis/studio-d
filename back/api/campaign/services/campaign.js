@@ -249,6 +249,7 @@ module.exports = {
                 to: [place.email, process.env.EMAIL_RECIPIENT],
               },
               {
+                subject: `Phase d'étude des pré-sélections clôturée`,
                 templateId: 'confirmation-preselection-place',
               },
               {
@@ -278,6 +279,7 @@ module.exports = {
             {
               to: [company.email],
             }, {
+            subject: `Votre candidature a été sélectionnée`,
             templateId: 'confirmation-one-preselection-company',
           },
             {
@@ -303,12 +305,14 @@ module.exports = {
           const placesIds = [...new Set(company.disponibilities.filter(d => d.is_validated).map(d => d.place_id))]
           const disponibilities = company.disponibilities.filter(d => d.is_validated)
           const places = Object.values(placesMap).filter(place => placesIds.includes(place.id))
+          const has_multiple_disponibilities = disponibilities.length > 1
 
           await strapi.plugins['email'].services.email.sendEmail(
             {
               to: [company.email],
             },
             {
+              subject: has_multiple_disponibilities ? `Vos candidatures ont été sélectionnées` : `Votre candidature a été sélectionnée`,
               templateId: 'confirmation-preselection-compaign',
             },
             {
@@ -317,7 +321,7 @@ module.exports = {
               disponibilities,
               places,
               multiple_places: places.length > 1,
-              has_multiple_disponibilities: disponibilities.length > 1,
+              has_multiple_disponibilities,
               has_refused_disponibilities: company.disponibilities.some(d => !d.is_validated),
               user_type: 'company',
             },
@@ -327,17 +331,20 @@ module.exports = {
         const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
 
         for (const company of companiesWithAllRefused) {
+          const multiple_disponibilities = company.disponibilities.length > 1
+
           await strapi.plugins['email'].services.email.sendEmail(
             {
               to: [company.email],
             }, {
             templateId: 'refusal-preselection-company',
+            subject: multiple_disponibilities ? `Vos candidatures n'ont pas été sélectionnées` : `Votre candidature n'a pas été sélectionnée`,
           },
             {
               user_name: company.name,
               campaign_name: campaign.title,
               user_type: 'company',
-              multiple_disponibilities: company.disponibilities.length > 1,
+              multiple_disponibilities,
             },
           )
         }

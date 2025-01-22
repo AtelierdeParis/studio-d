@@ -55,6 +55,10 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
   const workbook = new ExcelJS.Workbook()
   const worksheet = workbook.addWorksheet('Détail cie')
 
+  const orderedApplications = applications.sort((a, b) =>
+    a.creation_title.localeCompare(b.creation_title),
+  )
+
   const headers = [
     'Création en cours',
     'Chorégraphe',
@@ -70,6 +74,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
     'Espace - Candidature',
     'Créneau - Candidature',
     'Statut - Candidature',
+    'Réf - Candidature',
   ]
 
   const headerRow = worksheet.addRow(headers)
@@ -90,7 +95,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
   let currentChecksum = null
   let checksumStartRow = 2 // First data row (after header)
 
-  applications.forEach((application, index) => {
+  orderedApplications.forEach((application, index) => {
     const checkSum = getCheckSum(application)
 
     const range = application.disponibility
@@ -118,6 +123,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
         : '-',
       range,
       application.status,
+      `Ref. ${application.id}`,
     ])
 
     row.eachCell((cell) => {
