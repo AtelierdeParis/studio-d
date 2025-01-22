@@ -10,6 +10,8 @@ import { Application, Espace, UsersPermissionsUser } from '~typings/api'
 import { format } from '~utils/date'
 import { formatCampaignZipName, getBufferFromStream } from '~utils/pdf'
 
+const MAX_ARTISTIC_FILES_THRESHOLD = 120
+
 const generateColor = () => {
   const randomComponent = () =>
     Math.floor(Math.random() * 128 + 128)
@@ -405,6 +407,12 @@ const SelectedCampaignApplications = async (req, res) => {
             application.status === 'validated',
         )
 
+    const artisticFilesCount = filteredApplications.filter(
+      (application) => application.creation_file?.[0]?.url,
+    ).length
+
+    console.log('Artistic files count:', artisticFilesCount)
+
     // Group by place
     const groupedApplications = filteredApplications.reduce(
       (grouped, application) => {
@@ -467,15 +475,32 @@ const SelectedCampaignApplications = async (req, res) => {
         )
 
         if (application?.creation_file?.[0]?.url) {
-          console.log(application?.creation_file?.[0]?.url)
-          const creationFile = await fetch(application?.creation_file?.[0]?.url)
-          // @ts-ignore
-          const creationFileArrayBuffer = await creationFile.buffer()
+          if (artisticFilesCount > MAX_ARTISTIC_FILES_THRESHOLD) {
+            const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+              <head><title>${application?.creation_title}</title></head>
+              <body style="margin:0;padding:0;overflow:hidden">
+                <embed src="${application?.creation_file?.[0]?.url}" type="application/pdf" style="width:100%;height:100vh;">
+              </body>
+            </html>
+          `
 
-          await zip.addBuffer(
-            Buffer.from(creationFileArrayBuffer),
-            `${name}/${subFolder}/${refLabel} - Dossier artistique.pdf`,
-          )
+            await zip.addBuffer(
+              htmlContent,
+              `${name}/${subFolder}/${refLabel} - Dossier artistique.html`,
+            )
+          } else {
+            const creationFile = await fetch(
+              application?.creation_file?.[0]?.url,
+            )
+            // @ts-ignore
+            const creationFileArrayBuffer = await creationFile.buffer()
+            await zip.addBuffer(
+              Buffer.from(creationFileArrayBuffer),
+              `${name}/${subFolder}/${refLabel} - Dossier artistique.pdf`,
+            )
+          }
         }
       }
     }
