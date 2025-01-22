@@ -139,18 +139,19 @@ module.exports = {
     )
   },
   async sendEspacePreselectionEmail(campaignId) {
-    const campaign = await strapi.services.campaign.findOne({ id: campaignId })
+    const campaign = await strapi.services.campaign.findOne({ id: campaignId }, ['applications.espace.users_permissions_user', 'applications.company'])
     const today = new Date()
 
     if (Boolean(campaign?.confirmation_notification_date)) {
       const selectionNotificationDate = new Date(campaign.confirmation_notification_date)
+
       if (selectionNotificationDate.toDateString() === today.toDateString()) {
         const placesMap = {}
 
         for (const application of campaign.applications) {
-          const espace = await strapi.services.espace.findOne({ id: application.espace })
+          const espace = application.espace
+          const company = application.company
           const disponibility = await strapi.services.disponibility.findOne({ id: application.disponibility })
-          const company = await strapi.query('user', 'users-permissions').findOne({ id: application.company });
 
           const userId = espace.users_permissions_user.id
 
@@ -268,24 +269,6 @@ module.exports = {
           }
         }
 
-        const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
-
-        for (const company of companiesWithAllRefused) {
-          await strapi.plugins['email'].services.email.sendEmail(
-            {
-              to: [company.email],
-            }, {
-            templateId: 'refusal-preselection-company',
-          },
-            {
-              user_name: company.name,
-              campaign_name: campaign.title,
-              user_type: 'company',
-              multiple_disponibilities: company.disponibilities.length > 1,
-            },
-          )
-        }
-
         const companiesWithOnlyOneValidated = Object.values(companiesMap).filter(company => company.disponibilities.length === 1 && company.disponibilities[0].is_validated)
 
         for (const company of companiesWithOnlyOneValidated) {
@@ -340,6 +323,30 @@ module.exports = {
             },
           )
         }
+
+        const companiesWithAllRefused = Object.values(companiesMap).filter(company => company.disponibilities.every(d => !d.is_validated))
+
+        for (const company of companiesWithAllRefused) {
+          await strapi.plugins['email'].services.email.sendEmail(
+            {
+              to: [company.email],
+            }, {
+            templateId: 'refusal-preselection-company',
+          },
+            {
+              user_name: company.name,
+              campaign_name: campaign.title,
+              user_type: 'company',
+              multiple_disponibilities: company.disponibilities.length > 1,
+            },
+          )
+        }
+
+        console.log('sendEspacePreselectionEmail - Emails sent', {
+          refused: companiesWithAllRefused.length,
+          one_validated: companiesWithOnlyOneValidated.length,
+          multiple_validated: companiesWithMultipleApplication.length,
+        })
       }
     }
   }

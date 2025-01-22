@@ -21,11 +21,6 @@ const sendEmail = async (
   data = {},
   isAdmin = false
 ) => {
-  if (template.templateId !== 'confirmation-preselection-place') {
-    console.log(`skipping ${template.templateId}`)
-    return
-  }
-
   if (!template.templateId) {
     console.log("No template id given");
     return;
