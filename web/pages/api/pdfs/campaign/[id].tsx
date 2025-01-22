@@ -111,7 +111,7 @@ const buildApplicationsSpreadsheet = async (applications: Application[]) => {
       application.creation_techical_requirements,
       application.company.structureName,
       application.company.city,
-      '',
+      application.references?.length || 0,
       application.company.website,
       application.disponibility?.espace?.users_permissions_user
         ? `${application.disponibility.espace.users_permissions_user.structureName} - ${application.espace.name}`
