@@ -144,7 +144,6 @@ module.exports = {
 
     if (Boolean(campaign?.confirmation_notification_date)) {
       const selectionNotificationDate = new Date(campaign.confirmation_notification_date)
-
       if (selectionNotificationDate.toDateString() === today.toDateString()) {
         const placesMap = {}
 
