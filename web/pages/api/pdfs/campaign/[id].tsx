@@ -485,13 +485,12 @@ const SelectedCampaignApplications = async (req, res) => {
             const htmlContent = `
             <!DOCTYPE html>
             <html>
-              <head><title>${application?.creation_title}</title></head>
+              <head><title>Ref ${application.id} - Dossier artistique</title></head>
               <body style="margin:0;padding:0;overflow:hidden">
                 <embed src="${application?.creation_file?.[0]?.url}" type="application/pdf" style="width:100%;height:100vh;">
               </body>
             </html>
           `
-
             await zip.addBuffer(
               htmlContent,
               `${name}/${subFolder}/${refLabel} - Dossier artistique.html`,
