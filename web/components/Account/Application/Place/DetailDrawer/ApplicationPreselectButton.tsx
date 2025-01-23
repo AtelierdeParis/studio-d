@@ -113,7 +113,7 @@ const ApplicationPreselectButton = ({
             <Text pl={1}>{t('place.detail.preselect')}</Text>
           </Button>
 
-          {(!canPreselect || selectedCampaign?.mode === 'closed') && (
+          {!canPreselect && selectedCampaign?.mode !== 'closed' && (
             <Text pl={1} color="gray.500">
               {t('place.preselected_limit_reached')}
             </Text>

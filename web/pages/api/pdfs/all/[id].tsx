@@ -1,7 +1,7 @@
 // @ts-ignore
 import { renderToStream } from '@react-pdf/renderer'
-import AdmZip from 'adm-zip'
 import { getSession } from 'next-auth/client'
+import yazl from 'yazl'
 import { client } from '~api/client-api'
 import ApplicationDocument from '~components/pdfs/ApplicationDocument'
 import { formatDisponibilityZipName, getBufferFromStream } from '~utils/pdf'
@@ -29,7 +29,7 @@ const MultipleApplication = async (req, res) => {
   )
 
   const disponibility = applications?.[0]?.disponibility
-  const zip = new AdmZip()
+  const zip = new yazl.ZipFile()
 
   for (const application of applications) {
     const refLabel = `Ref. ${application.id}`
@@ -37,22 +37,24 @@ const MultipleApplication = async (req, res) => {
     const stream = await renderToStream(
       <ApplicationDocument application={application} />,
     )
+
     const streamBuffer = await getBufferFromStream(stream)
-    await zip.addFile(`${name}/${refLabel} - Candidature.pdf`, streamBuffer)
+    await zip.addBuffer(
+      Buffer.from(streamBuffer),
+      `${name}/${refLabel} - Candidature.pdf`,
+    )
 
     if (application?.creation_file?.[0]?.url) {
       const creationFile = await fetch(application?.creation_file?.[0]?.url)
 
       // @ts-ignore
       const creationFileArrayBuffer = await creationFile.buffer()
-      await zip.addFile(
+      await zip.addBuffer(
+        Buffer.from(creationFileArrayBuffer),
         `${name}/${refLabel} - Dossier artistique.pdf`,
-        creationFileArrayBuffer,
       )
     }
   }
-
-  const zipBuffer = zip.toBuffer()
 
   res.setHeader('Content-Type', 'application/zip')
   res.setHeader(
@@ -60,7 +62,15 @@ const MultipleApplication = async (req, res) => {
     // @ts-expect-error
     'attachment; filename=' + formatDisponibilityZipName(disponibility),
   )
-  res.send(zipBuffer)
+
+  zip.end()
+
+  const zipStream = zip.outputStream
+  zipStream.pipe(res)
+
+  return new Promise((resolve) => {
+    zipStream.on('end', resolve)
+  })
 }
 
 export default MultipleApplication
