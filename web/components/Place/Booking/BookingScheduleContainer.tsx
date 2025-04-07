@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Text,
-  useBreakpointValue,
-} from '@chakra-ui/react'
+import { Box, Button, Flex, Text, useBreakpointValue } from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
 import { useEffect, useMemo, useState } from 'react'
 import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
@@ -44,13 +37,7 @@ const BookingScheduleContainer = ({ place }: Props) => {
       px={{ base: 4, lg: 6 }}
       py={6}
       borderRadius="sm"
-      pos="relative"
     >
-      {events.length === 0 && (
-        <Center position="absolute" zIndex={100} bg="whiteAlpha.800" inset={0}>
-          <Text textStyle="h2">{t('list.noDisponibility')}</Text>
-        </Center>
-      )}
       <Flex
         justifyContent="space-between"
         pb={{ base: 6, lg: 14 }}
