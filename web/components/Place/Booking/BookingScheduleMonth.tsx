@@ -1,14 +1,15 @@
+import { Box, Flex, useBreakpointValue } from '@chakra-ui/react'
 import FullCalendar, { createPlugin } from '@fullcalendar/react'
-import React, { useRef } from 'react'
+import frLocale from '@fullcalendar/core/locales/fr'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import frLocale from '@fullcalendar/core/locales/fr'
-import { Box, Flex, useBreakpointValue } from '@chakra-ui/react'
-import { Espace } from '~typings/api'
-import BookingScheduleSlot from '~components/Place/Booking/BookingScheduleSlot'
-import { ScheduleEvent } from '~@types/schedule-event.d'
 import addMonths from 'date-fns/addMonths'
 import isSameDay from 'date-fns/isSameDay'
+import { useRef } from 'react'
+import { ScheduleEvent } from '~@types/schedule-event.d'
+import BookingScheduleSlot from '~components/Place/Booking/BookingScheduleSlot'
+import { Espace } from '~typings/api'
+import BookingFilledUntil from '~components/Place/Booking/BookingFilledUntil'
 
 const view = createPlugin({
   views: {
@@ -123,6 +124,7 @@ const BookingScheduleMonth = ({ place, events }: Props) => {
           />
         )}
       </Flex>
+      <BookingFilledUntil isMonthlyView place={place} />
     </Flex>
   )
 }
