@@ -42,7 +42,7 @@ module.exports = {
     );
   },
   async find(ctx) {
-    const { _sort, perimeter, ...query } = ctx.query;
+    const { _sort, _limit, perimeter, ...query } = ctx.query;
     const isSortOnDisponibility = ["dispoAsc", "nbDispoDesc"].includes(_sort);
     const isCampaignMode = Boolean(query['disponibilities.campaign'])
 
@@ -59,11 +59,14 @@ module.exports = {
       }
     }
 
+    const limit = isSortOnDisponibility ? 100 : _limit
+
     let places = await strapi.services.espace
       .find(
         {
           ...query,
           ...(_sort && !isSortOnDisponibility ? { _sort } : {}),
+          _limit: limit
         },
         populate
       )

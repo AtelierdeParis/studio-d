@@ -1,10 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import { Box, Flex, Button, Text, useBreakpointValue } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Text,
+  useBreakpointValue,
+} from '@chakra-ui/react'
 import { useTranslation } from 'next-i18next'
-import { Espace } from '~typings/api'
-import BookingScheduleWeek from '~components/Place/Booking/BookingScheduleWeek'
-import BookingScheduleMonth from '~components/Place/Booking/BookingScheduleMonth'
+import { useEffect, useMemo, useState } from 'react'
 import BookingRecap from '~components/Place/Booking/BookingRecapInsert/BookingRecap'
+import BookingScheduleMonth from '~components/Place/Booking/BookingScheduleMonth'
+import BookingScheduleWeek from '~components/Place/Booking/BookingScheduleWeek'
+import { Espace } from '~typings/api'
 import { createOldEvents } from '~utils/schedule'
 
 const styleSelected = {
@@ -25,7 +32,9 @@ const BookingScheduleContainer = ({ place }: Props) => {
     [place?.disponibilities],
   )
   useEffect(() => {
-    if (isMobile) setMonthView(true)
+    if (isMobile) {
+      setMonthView(true)
+    }
   }, [isMobile])
 
   return (
@@ -35,7 +44,13 @@ const BookingScheduleContainer = ({ place }: Props) => {
       px={{ base: 4, lg: 6 }}
       py={6}
       borderRadius="sm"
+      pos="relative"
     >
+      {events.length === 0 && (
+        <Center position="absolute" zIndex={100} bg="whiteAlpha.800" inset={0}>
+          <Text textStyle="h2">{t('list.noDisponibility')}</Text>
+        </Center>
+      )}
       <Flex
         justifyContent="space-between"
         pb={{ base: 6, lg: 14 }}
