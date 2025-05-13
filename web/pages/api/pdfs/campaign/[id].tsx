@@ -482,6 +482,8 @@ const SelectedCampaignApplications = async (req, res) => {
 
         if (application?.creation_file?.[0]?.url) {
           if (artisticFilesCount > MAX_ARTISTIC_FILES_THRESHOLD) {
+            console.log('Creating html file for ref', refLabel)
+
             const htmlContent = `
             <!DOCTYPE html>
             <html>
