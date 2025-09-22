@@ -27,7 +27,7 @@ const ActuCard = ({ actu }: IActuCard) => {
       <AspectRatio w="100%" maxH="300px" ratio={16 / 9} overflow="hidden">
         <Image
           // @ts-ignore
-          src={actu?.image.formats.large.url || actu?.image?.url}
+          src={actu?.image?.formats?.large?.url || actu?.image?.url}
           objectFit="cover"
           transition="transform ease-in-out 200ms"
           _groupHover={{ transform: 'scale(1.05)' }}
